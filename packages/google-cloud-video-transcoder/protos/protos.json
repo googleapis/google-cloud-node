@@ -1,0 +1,2697 @@
+{
+  "nested": {
+    "google": {
+      "nested": {
+        "cloud": {
+          "nested": {
+            "video": {
+              "nested": {
+                "transcoder": {
+                  "nested": {
+                    "v1": {
+                      "options": {
+                        "go_package": "google.golang.org/genproto/googleapis/cloud/video/transcoder/v1;transcoder",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "ServicesProto",
+                        "java_package": "com.google.cloud.video.transcoder.v1",
+                        "csharp_namespace": "Google.Cloud.Video.Transcoder.V1",
+                        "php_namespace": "Google\\Cloud\\Video\\Transcoder\\V1",
+                        "ruby_package": "Google::Cloud::Video::Transcoder::V1"
+                      },
+                      "nested": {
+                        "Job": {
+                          "options": {
+                            "(google.api.resource).type": "transcoder.googleapis.com/Job",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/jobs/{job}"
+                          },
+                          "oneofs": {
+                            "jobConfig": {
+                              "oneof": [
+                                "templateId",
+                                "config"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "inputUri": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY"
+                              }
+                            },
+                            "outputUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY"
+                              }
+                            },
+                            "templateId": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY"
+                              }
+                            },
+                            "config": {
+                              "type": "JobConfig",
+                              "id": 5
+                            },
+                            "state": {
+                              "type": "ProcessingState",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "endTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "ttlAfterCompletionDays": {
+                              "type": "int32",
+                              "id": 15
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 16
+                            },
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 17,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ProcessingState": {
+                              "values": {
+                                "PROCESSING_STATE_UNSPECIFIED": 0,
+                                "PENDING": 1,
+                                "RUNNING": 2,
+                                "SUCCEEDED": 3,
+                                "FAILED": 4
+                              }
+                            }
+                          }
+                        },
+                        "JobTemplate": {
+                          "options": {
+                            "(google.api.resource).type": "transcoder.googleapis.com/JobTemplate",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/jobTemplates/{job_template}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "config": {
+                              "type": "JobConfig",
+                              "id": 2
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "JobConfig": {
+                          "fields": {
+                            "inputs": {
+                              "rule": "repeated",
+                              "type": "Input",
+                              "id": 1
+                            },
+                            "editList": {
+                              "rule": "repeated",
+                              "type": "EditAtom",
+                              "id": 2
+                            },
+                            "elementaryStreams": {
+                              "rule": "repeated",
+                              "type": "ElementaryStream",
+                              "id": 3
+                            },
+                            "muxStreams": {
+                              "rule": "repeated",
+                              "type": "MuxStream",
+                              "id": 4
+                            },
+                            "manifests": {
+                              "rule": "repeated",
+                              "type": "Manifest",
+                              "id": 5
+                            },
+                            "output": {
+                              "type": "Output",
+                              "id": 6
+                            },
+                            "adBreaks": {
+                              "rule": "repeated",
+                              "type": "AdBreak",
+                              "id": 7
+                            },
+                            "pubsubDestination": {
+                              "type": "PubsubDestination",
+                              "id": 8
+                            },
+                            "spriteSheets": {
+                              "rule": "repeated",
+                              "type": "SpriteSheet",
+                              "id": 9
+                            },
+                            "overlays": {
+                              "rule": "repeated",
+                              "type": "Overlay",
+                              "id": 10
+                            }
+                          }
+                        },
+                        "Input": {
+                          "fields": {
+                            "key": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "uri": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "preprocessingConfig": {
+                              "type": "PreprocessingConfig",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "Output": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "EditAtom": {
+                          "fields": {
+                            "key": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "inputs": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "endTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 3
+                            },
+                            "startTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "AdBreak": {
+                          "fields": {
+                            "startTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ElementaryStream": {
+                          "oneofs": {
+                            "elementaryStream": {
+                              "oneof": [
+                                "videoStream",
+                                "audioStream",
+                                "textStream"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "key": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "videoStream": {
+                              "type": "VideoStream",
+                              "id": 1
+                            },
+                            "audioStream": {
+                              "type": "AudioStream",
+                              "id": 2
+                            },
+                            "textStream": {
+                              "type": "TextStream",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "MuxStream": {
+                          "fields": {
+                            "key": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "fileName": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "container": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "elementaryStreams": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
+                            },
+                            "segmentSettings": {
+                              "type": "SegmentSettings",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "Manifest": {
+                          "fields": {
+                            "fileName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "type": {
+                              "type": "ManifestType",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "muxStreams": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ManifestType": {
+                              "values": {
+                                "MANIFEST_TYPE_UNSPECIFIED": 0,
+                                "HLS": 1,
+                                "DASH": 2
+                              }
+                            }
+                          }
+                        },
+                        "PubsubDestination": {
+                          "fields": {
+                            "topic": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "SpriteSheet": {
+                          "oneofs": {
+                            "extractionStrategy": {
+                              "oneof": [
+                                "totalCount",
+                                "interval"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "format": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "filePrefix": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "spriteWidthPixels": {
+                              "type": "int32",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "spriteHeightPixels": {
+                              "type": "int32",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "columnCount": {
+                              "type": "int32",
+                              "id": 5
+                            },
+                            "rowCount": {
+                              "type": "int32",
+                              "id": 6
+                            },
+                            "startTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 7
+                            },
+                            "endTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 8
+                            },
+                            "totalCount": {
+                              "type": "int32",
+                              "id": 9
+                            },
+                            "interval": {
+                              "type": "google.protobuf.Duration",
+                              "id": 10
+                            },
+                            "quality": {
+                              "type": "int32",
+                              "id": 11
+                            }
+                          }
+                        },
+                        "Overlay": {
+                          "fields": {
+                            "image": {
+                              "type": "Image",
+                              "id": 1
+                            },
+                            "animations": {
+                              "rule": "repeated",
+                              "type": "Animation",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "NormalizedCoordinate": {
+                              "fields": {
+                                "x": {
+                                  "type": "double",
+                                  "id": 1
+                                },
+                                "y": {
+                                  "type": "double",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "Image": {
+                              "fields": {
+                                "uri": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "resolution": {
+                                  "type": "NormalizedCoordinate",
+                                  "id": 2
+                                },
+                                "alpha": {
+                                  "type": "double",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "AnimationStatic": {
+                              "fields": {
+                                "xy": {
+                                  "type": "NormalizedCoordinate",
+                                  "id": 1
+                                },
+                                "startTimeOffset": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "FadeType": {
+                              "values": {
+                                "FADE_TYPE_UNSPECIFIED": 0,
+                                "FADE_IN": 1,
+                                "FADE_OUT": 2
+                              }
+                            },
+                            "AnimationFade": {
+                              "fields": {
+                                "fadeType": {
+                                  "type": "FadeType",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "xy": {
+                                  "type": "NormalizedCoordinate",
+                                  "id": 2
+                                },
+                                "startTimeOffset": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 3
+                                },
+                                "endTimeOffset": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "AnimationEnd": {
+                              "fields": {
+                                "startTimeOffset": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "Animation": {
+                              "oneofs": {
+                                "animationType": {
+                                  "oneof": [
+                                    "animationStatic",
+                                    "animationFade",
+                                    "animationEnd"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "animationStatic": {
+                                  "type": "AnimationStatic",
+                                  "id": 1
+                                },
+                                "animationFade": {
+                                  "type": "AnimationFade",
+                                  "id": 2
+                                },
+                                "animationEnd": {
+                                  "type": "AnimationEnd",
+                                  "id": 3
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "PreprocessingConfig": {
+                          "fields": {
+                            "color": {
+                              "type": "Color",
+                              "id": 1
+                            },
+                            "denoise": {
+                              "type": "Denoise",
+                              "id": 2
+                            },
+                            "deblock": {
+                              "type": "Deblock",
+                              "id": 3
+                            },
+                            "audio": {
+                              "type": "Audio",
+                              "id": 4
+                            },
+                            "crop": {
+                              "type": "Crop",
+                              "id": 5
+                            },
+                            "pad": {
+                              "type": "Pad",
+                              "id": 6
+                            },
+                            "deinterlace": {
+                              "type": "Deinterlace",
+                              "id": 7
+                            }
+                          },
+                          "nested": {
+                            "Color": {
+                              "fields": {
+                                "saturation": {
+                                  "type": "double",
+                                  "id": 1
+                                },
+                                "contrast": {
+                                  "type": "double",
+                                  "id": 2
+                                },
+                                "brightness": {
+                                  "type": "double",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "Denoise": {
+                              "fields": {
+                                "strength": {
+                                  "type": "double",
+                                  "id": 1
+                                },
+                                "tune": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "Deblock": {
+                              "fields": {
+                                "strength": {
+                                  "type": "double",
+                                  "id": 1
+                                },
+                                "enabled": {
+                                  "type": "bool",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "Audio": {
+                              "fields": {
+                                "lufs": {
+                                  "type": "double",
+                                  "id": 1
+                                },
+                                "highBoost": {
+                                  "type": "bool",
+                                  "id": 2
+                                },
+                                "lowBoost": {
+                                  "type": "bool",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "Crop": {
+                              "fields": {
+                                "topPixels": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "bottomPixels": {
+                                  "type": "int32",
+                                  "id": 2
+                                },
+                                "leftPixels": {
+                                  "type": "int32",
+                                  "id": 3
+                                },
+                                "rightPixels": {
+                                  "type": "int32",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "Pad": {
+                              "fields": {
+                                "topPixels": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "bottomPixels": {
+                                  "type": "int32",
+                                  "id": 2
+                                },
+                                "leftPixels": {
+                                  "type": "int32",
+                                  "id": 3
+                                },
+                                "rightPixels": {
+                                  "type": "int32",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "Deinterlace": {
+                              "oneofs": {
+                                "deinterlacingFilter": {
+                                  "oneof": [
+                                    "yadif",
+                                    "bwdif"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "yadif": {
+                                  "type": "YadifConfig",
+                                  "id": 1
+                                },
+                                "bwdif": {
+                                  "type": "BwdifConfig",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "YadifConfig": {
+                                  "fields": {
+                                    "mode": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "disableSpatialInterlacing": {
+                                      "type": "bool",
+                                      "id": 2
+                                    },
+                                    "parity": {
+                                      "type": "string",
+                                      "id": 3
+                                    },
+                                    "deinterlaceAllFrames": {
+                                      "type": "bool",
+                                      "id": 4
+                                    }
+                                  }
+                                },
+                                "BwdifConfig": {
+                                  "fields": {
+                                    "mode": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "parity": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "deinterlaceAllFrames": {
+                                      "type": "bool",
+                                      "id": 3
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "VideoStream": {
+                          "oneofs": {
+                            "codecSettings": {
+                              "oneof": [
+                                "h264",
+                                "h265",
+                                "vp9"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "h264": {
+                              "type": "H264CodecSettings",
+                              "id": 1
+                            },
+                            "h265": {
+                              "type": "H265CodecSettings",
+                              "id": 2
+                            },
+                            "vp9": {
+                              "type": "Vp9CodecSettings",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "H264CodecSettings": {
+                              "oneofs": {
+                                "gopMode": {
+                                  "oneof": [
+                                    "gopFrameCount",
+                                    "gopDuration"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "widthPixels": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "heightPixels": {
+                                  "type": "int32",
+                                  "id": 2
+                                },
+                                "frameRate": {
+                                  "type": "double",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "bitrateBps": {
+                                  "type": "int32",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "pixelFormat": {
+                                  "type": "string",
+                                  "id": 5
+                                },
+                                "rateControlMode": {
+                                  "type": "string",
+                                  "id": 6
+                                },
+                                "crfLevel": {
+                                  "type": "int32",
+                                  "id": 7
+                                },
+                                "allowOpenGop": {
+                                  "type": "bool",
+                                  "id": 8
+                                },
+                                "gopFrameCount": {
+                                  "type": "int32",
+                                  "id": 9
+                                },
+                                "gopDuration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 10
+                                },
+                                "enableTwoPass": {
+                                  "type": "bool",
+                                  "id": 11
+                                },
+                                "vbvSizeBits": {
+                                  "type": "int32",
+                                  "id": 12
+                                },
+                                "vbvFullnessBits": {
+                                  "type": "int32",
+                                  "id": 13
+                                },
+                                "entropyCoder": {
+                                  "type": "string",
+                                  "id": 14
+                                },
+                                "bPyramid": {
+                                  "type": "bool",
+                                  "id": 15
+                                },
+                                "bFrameCount": {
+                                  "type": "int32",
+                                  "id": 16
+                                },
+                                "aqStrength": {
+                                  "type": "double",
+                                  "id": 17
+                                },
+                                "profile": {
+                                  "type": "string",
+                                  "id": 18
+                                },
+                                "tune": {
+                                  "type": "string",
+                                  "id": 19
+                                },
+                                "preset": {
+                                  "type": "string",
+                                  "id": 20
+                                }
+                              }
+                            },
+                            "H265CodecSettings": {
+                              "oneofs": {
+                                "gopMode": {
+                                  "oneof": [
+                                    "gopFrameCount",
+                                    "gopDuration"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "widthPixels": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "heightPixels": {
+                                  "type": "int32",
+                                  "id": 2
+                                },
+                                "frameRate": {
+                                  "type": "double",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "bitrateBps": {
+                                  "type": "int32",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "pixelFormat": {
+                                  "type": "string",
+                                  "id": 5
+                                },
+                                "rateControlMode": {
+                                  "type": "string",
+                                  "id": 6
+                                },
+                                "crfLevel": {
+                                  "type": "int32",
+                                  "id": 7
+                                },
+                                "allowOpenGop": {
+                                  "type": "bool",
+                                  "id": 8
+                                },
+                                "gopFrameCount": {
+                                  "type": "int32",
+                                  "id": 9
+                                },
+                                "gopDuration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 10
+                                },
+                                "enableTwoPass": {
+                                  "type": "bool",
+                                  "id": 11
+                                },
+                                "vbvSizeBits": {
+                                  "type": "int32",
+                                  "id": 12
+                                },
+                                "vbvFullnessBits": {
+                                  "type": "int32",
+                                  "id": 13
+                                },
+                                "bPyramid": {
+                                  "type": "bool",
+                                  "id": 14
+                                },
+                                "bFrameCount": {
+                                  "type": "int32",
+                                  "id": 15
+                                },
+                                "aqStrength": {
+                                  "type": "double",
+                                  "id": 16
+                                },
+                                "profile": {
+                                  "type": "string",
+                                  "id": 17
+                                },
+                                "tune": {
+                                  "type": "string",
+                                  "id": 18
+                                },
+                                "preset": {
+                                  "type": "string",
+                                  "id": 19
+                                }
+                              }
+                            },
+                            "Vp9CodecSettings": {
+                              "oneofs": {
+                                "gopMode": {
+                                  "oneof": [
+                                    "gopFrameCount",
+                                    "gopDuration"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "widthPixels": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "heightPixels": {
+                                  "type": "int32",
+                                  "id": 2
+                                },
+                                "frameRate": {
+                                  "type": "double",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "bitrateBps": {
+                                  "type": "int32",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "pixelFormat": {
+                                  "type": "string",
+                                  "id": 5
+                                },
+                                "rateControlMode": {
+                                  "type": "string",
+                                  "id": 6
+                                },
+                                "crfLevel": {
+                                  "type": "int32",
+                                  "id": 7
+                                },
+                                "gopFrameCount": {
+                                  "type": "int32",
+                                  "id": 8
+                                },
+                                "gopDuration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 9
+                                },
+                                "profile": {
+                                  "type": "string",
+                                  "id": 10
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "AudioStream": {
+                          "fields": {
+                            "codec": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "bitrateBps": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "channelCount": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "channelLayout": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
+                            },
+                            "mapping": {
+                              "rule": "repeated",
+                              "type": "AudioMapping",
+                              "id": 5
+                            },
+                            "sampleRateHertz": {
+                              "type": "int32",
+                              "id": 6
+                            }
+                          },
+                          "nested": {
+                            "AudioMapping": {
+                              "fields": {
+                                "atomKey": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "inputKey": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "inputTrack": {
+                                  "type": "int32",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "inputChannel": {
+                                  "type": "int32",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "outputChannel": {
+                                  "type": "int32",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "gainDb": {
+                                  "type": "double",
+                                  "id": 6
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "TextStream": {
+                          "fields": {
+                            "codec": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "mapping": {
+                              "rule": "repeated",
+                              "type": "TextMapping",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "TextMapping": {
+                              "fields": {
+                                "atomKey": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "inputKey": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "inputTrack": {
+                                  "type": "int32",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "SegmentSettings": {
+                          "fields": {
+                            "segmentDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1
+                            },
+                            "individualSegments": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "TranscoderService": {
+                          "options": {
+                            "(google.api.default_host)": "transcoder.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                          },
+                          "methods": {
+                            "CreateJob": {
+                              "requestType": "CreateJobRequest",
+                              "responseType": "Job",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/jobs",
+                                "(google.api.http).body": "job",
+                                "(google.api.method_signature)": "parent,job"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/jobs",
+                                    "body": "job"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,job"
+                                }
+                              ]
+                            },
+                            "ListJobs": {
+                              "requestType": "ListJobsRequest",
+                              "responseType": "ListJobsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/jobs",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/jobs"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetJob": {
+                              "requestType": "GetJobRequest",
+                              "responseType": "Job",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/jobs/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/jobs/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "DeleteJob": {
+                              "requestType": "DeleteJobRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/jobs/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/jobs/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateJobTemplate": {
+                              "requestType": "CreateJobTemplateRequest",
+                              "responseType": "JobTemplate",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/jobTemplates",
+                                "(google.api.http).body": "job_template",
+                                "(google.api.method_signature)": "parent,job_template,job_template_id"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/jobTemplates",
+                                    "body": "job_template"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,job_template,job_template_id"
+                                }
+                              ]
+                            },
+                            "ListJobTemplates": {
+                              "requestType": "ListJobTemplatesRequest",
+                              "responseType": "ListJobTemplatesResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/jobTemplates",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/jobTemplates"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetJobTemplate": {
+                              "requestType": "GetJobTemplateRequest",
+                              "responseType": "JobTemplate",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/jobTemplates/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/jobTemplates/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "DeleteJobTemplate": {
+                              "requestType": "DeleteJobTemplateRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/jobTemplates/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/jobTemplates/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "CreateJobRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "job": {
+                              "type": "Job",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ListJobsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "GetJobRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "transcoder.googleapis.com/Job"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteJobRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "transcoder.googleapis.com/Job"
+                              }
+                            },
+                            "allowMissing": {
+                              "type": "bool",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ListJobsResponse": {
+                          "fields": {
+                            "jobs": {
+                              "rule": "repeated",
+                              "type": "Job",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "CreateJobTemplateRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "jobTemplate": {
+                              "type": "JobTemplate",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "jobTemplateId": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ListJobTemplatesRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "GetJobTemplateRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "transcoder.googleapis.com/JobTemplate"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteJobTemplateRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "transcoder.googleapis.com/JobTemplate"
+                              }
+                            },
+                            "allowMissing": {
+                              "type": "bool",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ListJobTemplatesResponse": {
+                          "fields": {
+                            "jobTemplates": {
+                              "rule": "repeated",
+                              "type": "JobTemplate",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "api": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "java_multiple_files": true,
+            "java_outer_classname": "ClientProto",
+            "java_package": "com.google.api",
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            }
+          }
+        },
+        "protobuf": {
+          "options": {
+            "go_package": "google.golang.org/protobuf/types/descriptorpb",
+            "java_package": "com.google.protobuf",
+            "java_outer_classname": "DescriptorProtos",
+            "csharp_namespace": "Google.Protobuf.Reflection",
+            "objc_class_prefix": "GPB",
+            "cc_enable_arenas": true,
+            "optimize_for": "SPEED"
+          },
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "publicDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weakDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "messageType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "sourceCodeInfo": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                },
+                "edition": {
+                  "type": "string",
+                  "id": 13
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nestedType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extensionRange": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneofDecl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "options": {
+                      "type": "ExtensionRangeOptions",
+                      "id": 3
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "ExtensionRangeOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "typeName": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "defaultValue": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneofIndex": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "jsonName": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                },
+                "proto3Optional": {
+                  "type": "bool",
+                  "id": 17
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "EnumReservedRange",
+                  "id": 4
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "EnumReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "inputType": {
+                  "type": "string",
+                  "id": 2
+                },
+                "outputType": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "clientStreaming": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "serverStreaming": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "default": false
+                  }
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "javaPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "javaOuterClassname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "javaMultipleFiles": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenerateEqualsAndHash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "javaStringCheckUtf8": {
+                  "type": "bool",
+                  "id": 27,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "optimizeFor": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "goPackage": {
+                  "type": "string",
+                  "id": 11
+                },
+                "ccGenericServices": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenericServices": {
+                  "type": "bool",
+                  "id": 17,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "pyGenericServices": {
+                  "type": "bool",
+                  "id": 18,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "phpGenericServices": {
+                  "type": "bool",
+                  "id": 42,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "ccEnableArenas": {
+                  "type": "bool",
+                  "id": 31,
+                  "options": {
+                    "default": true
+                  }
+                },
+                "objcClassPrefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharpNamespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "swiftPrefix": {
+                  "type": "string",
+                  "id": 39
+                },
+                "phpClassPrefix": {
+                  "type": "string",
+                  "id": 40
+                },
+                "phpNamespace": {
+                  "type": "string",
+                  "id": 41
+                },
+                "phpMetadataNamespace": {
+                  "type": "string",
+                  "id": 44
+                },
+                "rubyPackage": {
+                  "type": "string",
+                  "id": 45
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "messageSetWireFormat": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "noStandardDescriptorAccessor": {
+                  "type": "bool",
+                  "id": 2,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "mapEntry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  6,
+                  6
+                ],
+                [
+                  8,
+                  8
+                ],
+                [
+                  9,
+                  9
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "unverifiedLazy": {
+                  "type": "bool",
+                  "id": 15,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allowAlias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  5,
+                  5
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "idempotencyLevel": {
+                  "type": "IdempotencyLevel",
+                  "id": 34,
+                  "options": {
+                    "default": "IDEMPOTENCY_UNKNOWN"
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "nested": {
+                "IdempotencyLevel": {
+                  "values": {
+                    "IDEMPOTENCY_UNKNOWN": 0,
+                    "NO_SIDE_EFFECTS": 1,
+                    "IDEMPOTENT": 2
+                  }
+                }
+              }
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifierValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positiveIntValue": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negativeIntValue": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "doubleValue": {
+                  "type": "double",
+                  "id": 6
+                },
+                "stringValue": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregateValue": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "namePart": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "isExtension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leadingComments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailingComments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leadingDetachedComments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "sourceFile": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    },
+                    "semantic": {
+                      "type": "Semantic",
+                      "id": 5
+                    }
+                  },
+                  "nested": {
+                    "Semantic": {
+                      "values": {
+                        "NONE": 0,
+                        "SET": 1,
+                        "ALIAS": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
