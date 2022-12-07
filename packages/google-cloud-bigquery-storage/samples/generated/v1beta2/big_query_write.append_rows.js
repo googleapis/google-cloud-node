@@ -21,7 +21,7 @@
 'use strict';
 
 function main(writeStream) {
-  // [START bigquerystorage_v1_generated_BigQueryWrite_AppendRows_async]
+  // [START bigquerystorage_v1beta2_generated_BigQueryWrite_AppendRows_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,14 +29,11 @@ function main(writeStream) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The write_stream identifies the target of the append operation, and only
-   *  needs to be specified as part of the first request on the gRPC connection.
-   *  If provided for subsequent requests, it must match the value of the first
-   *  request.
-   *  For explicitly created write streams, the format is:
-   *  * `projects/{project}/datasets/{dataset}/tables/{table}/streams/{id}`
-   *  For the special default stream, the format is:
-   *  * `projects/{project}/datasets/{dataset}/tables/{table}/streams/_default`.
+   *  Required. The stream that is the target of the append operation. This value must be
+   *  specified for the initial request. If subsequent requests specify the
+   *  stream name, it must equal to the value provided in the first request.
+   *  To write to the _default stream, populate this field with a string in the
+   *  format `projects/{project}/datasets/{dataset}/tables/{table}/_default`.
    */
   // const writeStream = 'abc123'
   /**
@@ -55,26 +52,9 @@ function main(writeStream) {
    *  respected.
    */
   // const traceId = 'abc123'
-  /**
-   *  A map to indicate how to interpret missing value for some fields. Missing
-   *  values are fields present in user schema but missing in rows. The key is
-   *  the field name. The value is the interpretation of missing values for the
-   *  field.
-   *  For example, a map {'foo': NULL_VALUE, 'bar': DEFAULT_VALUE} means all
-   *  missing values in field foo are interpreted as NULL, all missing values in
-   *  field bar are interpreted as the default value of field bar in table
-   *  schema.
-   *  If a field is not in this map and has missing values, the missing values
-   *  in this field are interpreted as NULL.
-   *  This field only applies to the current request, it won't affect other
-   *  requests on the connection.
-   *  Currently, field name can only be top-level column name, can't be a struct
-   *  field path like 'foo.bar'.
-   */
-  // const missingValueInterpretations = 1234
 
   // Imports the Storage library
-  const {BigQueryWriteClient} = require('@google-cloud/bigquery-storage').v1;
+  const {BigQueryWriteClient} = require('storage').v1beta2;
 
   // Instantiates a client
   const storageClient = new BigQueryWriteClient();
@@ -95,7 +75,7 @@ function main(writeStream) {
   }
 
   callAppendRows();
-  // [END bigquerystorage_v1_generated_BigQueryWrite_AppendRows_async]
+  // [END bigquerystorage_v1beta2_generated_BigQueryWrite_AppendRows_async]
 }
 
 process.on('unhandledRejection', err => {
