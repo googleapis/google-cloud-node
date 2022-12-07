@@ -2636,6 +2636,10 @@
                             "fontSize": {
                               "type": "FontSize",
                               "id": 7
+                            },
+                            "fontFamily": {
+                              "type": "string",
+                              "id": 8
                             }
                           },
                           "nested": {
@@ -2726,9 +2730,16 @@
                               "type": "DetectedBarcode",
                               "id": 15
                             },
+                            "imageQualityScores": {
+                              "type": "ImageQualityScores",
+                              "id": 17
+                            },
                             "provenance": {
                               "type": "Provenance",
-                              "id": 16
+                              "id": 16,
+                              "options": {
+                                "deprecated": true
+                              }
                             }
                           },
                           "nested": {
@@ -2832,7 +2843,10 @@
                                 },
                                 "provenance": {
                                   "type": "Provenance",
-                                  "id": 3
+                                  "id": 3,
+                                  "options": {
+                                    "deprecated": true
+                                  }
                                 }
                               }
                             },
@@ -2849,7 +2863,10 @@
                                 },
                                 "provenance": {
                                   "type": "Provenance",
-                                  "id": 3
+                                  "id": 3,
+                                  "options": {
+                                    "deprecated": true
+                                  }
                                 }
                               }
                             },
@@ -2866,7 +2883,10 @@
                                 },
                                 "provenance": {
                                   "type": "Provenance",
-                                  "id": 3
+                                  "id": 3,
+                                  "options": {
+                                    "deprecated": true
+                                  }
                                 }
                               }
                             },
@@ -2887,7 +2907,10 @@
                                 },
                                 "provenance": {
                                   "type": "Provenance",
-                                  "id": 4
+                                  "id": 4,
+                                  "options": {
+                                    "deprecated": true
+                                  }
                                 }
                               },
                               "nested": {
@@ -2961,6 +2984,10 @@
                                   "rule": "repeated",
                                   "type": "DetectedLanguage",
                                   "id": 4
+                                },
+                                "provenance": {
+                                  "type": "Provenance",
+                                  "id": 5
                                 }
                               },
                               "nested": {
@@ -3055,6 +3082,33 @@
                                 "confidence": {
                                   "type": "float",
                                   "id": 2
+                                }
+                              }
+                            },
+                            "ImageQualityScores": {
+                              "fields": {
+                                "qualityScore": {
+                                  "type": "float",
+                                  "id": 1
+                                },
+                                "detectedDefects": {
+                                  "rule": "repeated",
+                                  "type": "DetectedDefect",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "DetectedDefect": {
+                                  "fields": {
+                                    "type": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "confidence": {
+                                      "type": "float",
+                                      "id": 2
+                                    }
+                                  }
                                 }
                               }
                             }
@@ -3432,7 +3486,10 @@
                             "provenance": {
                               "rule": "repeated",
                               "type": "Provenance",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "deprecated": true
+                              }
                             }
                           }
                         }
