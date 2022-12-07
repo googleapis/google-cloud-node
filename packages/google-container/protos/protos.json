@@ -5798,6 +5798,13 @@
                   }
                 },
                 "NodeConfig": {
+                  "oneofs": {
+                    "_fastSocket": {
+                      "oneof": [
+                        "fastSocket"
+                      ]
+                    }
+                  },
                   "fields": {
                     "machineType": {
                       "type": "string",
@@ -5916,6 +5923,13 @@
                     "confidentialNodes": {
                       "type": "ConfidentialNodes",
                       "id": 35
+                    },
+                    "fastSocket": {
+                      "type": "FastSocket",
+                      "id": 36,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     },
                     "resourceLabels": {
                       "keyType": "string",
@@ -7719,6 +7733,10 @@
                     "gvnic": {
                       "type": "VirtualNIC",
                       "id": 29
+                    },
+                    "fastSocket": {
+                      "type": "FastSocket",
+                      "id": 31
                     },
                     "loggingConfig": {
                       "type": "NodePoolLoggingConfig",
@@ -9928,6 +9946,14 @@
                   }
                 },
                 "VirtualNIC": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
+                "FastSocket": {
                   "fields": {
                     "enabled": {
                       "type": "bool",

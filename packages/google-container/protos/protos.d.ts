@@ -19499,6 +19499,9 @@ export namespace google {
                 /** NodeConfig confidentialNodes */
                 confidentialNodes?: (google.container.v1beta1.IConfidentialNodes|null);
 
+                /** NodeConfig fastSocket */
+                fastSocket?: (google.container.v1beta1.IFastSocket|null);
+
                 /** NodeConfig resourceLabels */
                 resourceLabels?: ({ [k: string]: string }|null);
 
@@ -19599,11 +19602,17 @@ export namespace google {
                 /** NodeConfig confidentialNodes. */
                 public confidentialNodes?: (google.container.v1beta1.IConfidentialNodes|null);
 
+                /** NodeConfig fastSocket. */
+                public fastSocket?: (google.container.v1beta1.IFastSocket|null);
+
                 /** NodeConfig resourceLabels. */
                 public resourceLabels: { [k: string]: string };
 
                 /** NodeConfig loggingConfig. */
                 public loggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
+
+                /** NodeConfig _fastSocket. */
+                public _fastSocket?: "fastSocket";
 
                 /**
                  * Creates a new NodeConfig instance using the specified properties.
@@ -26243,6 +26252,9 @@ export namespace google {
                 /** UpdateNodePoolRequest gvnic */
                 gvnic?: (google.container.v1beta1.IVirtualNIC|null);
 
+                /** UpdateNodePoolRequest fastSocket */
+                fastSocket?: (google.container.v1beta1.IFastSocket|null);
+
                 /** UpdateNodePoolRequest loggingConfig */
                 loggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
 
@@ -26315,6 +26327,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest gvnic. */
                 public gvnic?: (google.container.v1beta1.IVirtualNIC|null);
+
+                /** UpdateNodePoolRequest fastSocket. */
+                public fastSocket?: (google.container.v1beta1.IFastSocket|null);
 
                 /** UpdateNodePoolRequest loggingConfig. */
                 public loggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
@@ -36115,6 +36130,103 @@ export namespace google {
 
                 /**
                  * Gets the default type url for VirtualNIC
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FastSocket. */
+            interface IFastSocket {
+
+                /** FastSocket enabled */
+                enabled?: (boolean|null);
+            }
+
+            /** Represents a FastSocket. */
+            class FastSocket implements IFastSocket {
+
+                /**
+                 * Constructs a new FastSocket.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IFastSocket);
+
+                /** FastSocket enabled. */
+                public enabled: boolean;
+
+                /**
+                 * Creates a new FastSocket instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FastSocket instance
+                 */
+                public static create(properties?: google.container.v1beta1.IFastSocket): google.container.v1beta1.FastSocket;
+
+                /**
+                 * Encodes the specified FastSocket message. Does not implicitly {@link google.container.v1beta1.FastSocket.verify|verify} messages.
+                 * @param message FastSocket message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IFastSocket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FastSocket message, length delimited. Does not implicitly {@link google.container.v1beta1.FastSocket.verify|verify} messages.
+                 * @param message FastSocket message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IFastSocket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FastSocket message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FastSocket
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.FastSocket;
+
+                /**
+                 * Decodes a FastSocket message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FastSocket
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.FastSocket;
+
+                /**
+                 * Verifies a FastSocket message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FastSocket message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FastSocket
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.FastSocket;
+
+                /**
+                 * Creates a plain object from a FastSocket message. Also converts values to other types if specified.
+                 * @param message FastSocket
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.FastSocket, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FastSocket to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FastSocket
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */

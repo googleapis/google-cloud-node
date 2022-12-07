@@ -119,6 +119,9 @@ export class ClusterManagerClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -835,6 +838,8 @@ export class ClusterManagerClient {
    *   All the nodes in the node pool will be Confidential VM once enabled.
    * @param {google.container.v1beta1.VirtualNIC} request.gvnic
    *   Enable or disable gvnic on the node pool.
+   * @param {google.container.v1beta1.FastSocket} request.fastSocket
+   *   Enable or disable NCCL fast socket for the node pool.
    * @param {google.container.v1beta1.NodePoolLoggingConfig} request.loggingConfig
    *   Logging configuration.
    * @param {google.container.v1beta1.ResourceLabels} request.resourceLabels
