@@ -25,6 +25,8 @@ import type {
   ClientOptions,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -59,6 +61,7 @@ export class DataTransferServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   dataTransferServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -120,6 +123,9 @@ export class DataTransferServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -152,6 +158,10 @@ export class DataTransferServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -488,33 +498,44 @@ export class DataTransferServiceClient {
    *   Required. Data transfer configuration to create.
    * @param {string} request.authorizationCode
    *   Optional OAuth2 authorization code to use with this transfer configuration.
-   *   This is required if new credentials are needed, as indicated by
-   *   `CheckValidCreds`.
-   *   In order to obtain authorization_code, please make a
-   *   request to
-   *   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=<datatransferapiclientid>&scope=<data_source_scopes>&redirect_uri=<redirect_uri>
+   *   This is required only if `transferConfig.dataSourceId` is 'youtube_channel'
+   *   and new credentials are needed, as indicated by `CheckValidCreds`. In order
+   *   to obtain authorization_code, make a request to the following URL:
+   *   <pre class="prettyprint" suppresswarning="true">
+   *   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+   *   </pre>
+   *   * The <var>client_id</var> is the OAuth client_id of the a data source as
+   *   returned by ListDataSources method.
+   *   * <var>data_source_scopes</var> are the scopes returned by ListDataSources
+   *   method.
    *
-   *   * client_id should be OAuth client_id of BigQuery DTS API for the given
-   *     data source returned by ListDataSources method.
-   *   * data_source_scopes are the scopes returned by ListDataSources method.
-   *   * redirect_uri is an optional parameter. If not specified, then
-   *     authorization code is posted to the opener of authorization flow window.
-   *     Otherwise it will be sent to the redirect uri. A special value of
-   *     urn:ietf:wg:oauth:2.0:oob means that authorization code should be
-   *     returned in the title bar of the browser, with the page text prompting
-   *     the user to copy the code and paste it in the application.
+   *   Note that this should not be set when `service_account_name` is used to
+   *   create the transfer config.
    * @param {string} request.versionInfo
-   *   Optional version info. If users want to find a very recent access token,
-   *   that is, immediately after approving access, users have to set the
-   *   version_info claim in the token request. To obtain the version_info, users
-   *   must use the "none+gsession" response type. which be return a
-   *   version_info back in the authorization response which be be put in a JWT
-   *   claim in the token request.
+   *   Optional version info. This is required only if
+   *   `transferConfig.dataSourceId` is not 'youtube_channel' and new credentials
+   *   are needed, as indicated by `CheckValidCreds`. In order to obtain version
+   *   info, make a request to the following URL:
+   *   <pre class="prettyprint" suppresswarning="true">
+   *   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+   *   </pre>
+   *   * The <var>client_id</var> is the OAuth client_id of the a data source as
+   *   returned by ListDataSources method.
+   *   * <var>data_source_scopes</var> are the scopes returned by ListDataSources
+   *   method.
+   *
+   *   Note that this should not be set when `service_account_name` is used to
+   *   create the transfer config.
    * @param {string} request.serviceAccountName
-   *   Optional service account name. If this field is set, transfer config will
-   *   be created with this service account credentials. It requires that
-   *   requesting user calling this API has permissions to act as this service
+   *   Optional service account name. If this field is set, the transfer config
+   *   will be created with this service account's credentials. It requires that
+   *   the requesting user calling this API has permissions to act as this service
    *   account.
+   *
+   *   Note that not all data sources support service account credentials when
+   *   creating a transfer config. For the latest list of data sources, read about
+   *   [using service
+   *   accounts](https://cloud.google.com/bigquery-transfer/docs/use-service-accounts).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -615,36 +636,46 @@ export class DataTransferServiceClient {
    *   Required. Data transfer configuration to create.
    * @param {string} request.authorizationCode
    *   Optional OAuth2 authorization code to use with this transfer configuration.
-   *   If it is provided, the transfer configuration will be associated with the
-   *   authorizing user.
-   *   In order to obtain authorization_code, please make a
-   *   request to
-   *   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=<datatransferapiclientid>&scope=<data_source_scopes>&redirect_uri=<redirect_uri>
+   *   This is required only if `transferConfig.dataSourceId` is 'youtube_channel'
+   *   and new credentials are needed, as indicated by `CheckValidCreds`. In order
+   *   to obtain authorization_code, make a request to the following URL:
+   *   <pre class="prettyprint" suppresswarning="true">
+   *   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+   *   </pre>
+   *   * The <var>client_id</var> is the OAuth client_id of the a data source as
+   *   returned by ListDataSources method.
+   *   * <var>data_source_scopes</var> are the scopes returned by ListDataSources
+   *   method.
    *
-   *   * client_id should be OAuth client_id of BigQuery DTS API for the given
-   *     data source returned by ListDataSources method.
-   *   * data_source_scopes are the scopes returned by ListDataSources method.
-   *   * redirect_uri is an optional parameter. If not specified, then
-   *     authorization code is posted to the opener of authorization flow window.
-   *     Otherwise it will be sent to the redirect uri. A special value of
-   *     urn:ietf:wg:oauth:2.0:oob means that authorization code should be
-   *     returned in the title bar of the browser, with the page text prompting
-   *     the user to copy the code and paste it in the application.
+   *   Note that this should not be set when `service_account_name` is used to
+   *   update the transfer config.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Required list of fields to be updated in this request.
    * @param {string} request.versionInfo
-   *   Optional version info. If users want to find a very recent access token,
-   *   that is, immediately after approving access, users have to set the
-   *   version_info claim in the token request. To obtain the version_info, users
-   *   must use the "none+gsession" response type. which be return a
-   *   version_info back in the authorization response which be be put in a JWT
-   *   claim in the token request.
+   *   Optional version info. This is required only if
+   *   `transferConfig.dataSourceId` is not 'youtube_channel' and new credentials
+   *   are needed, as indicated by `CheckValidCreds`. In order to obtain version
+   *   info, make a request to the following URL:
+   *   <pre class="prettyprint" suppresswarning="true">
+   *   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+   *   </pre>
+   *   * The <var>client_id</var> is the OAuth client_id of the a data source as
+   *   returned by ListDataSources method.
+   *   * <var>data_source_scopes</var> are the scopes returned by ListDataSources
+   *   method.
+   *
+   *   Note that this should not be set when `service_account_name` is used to
+   *   update the transfer config.
    * @param {string} request.serviceAccountName
-   *   Optional service account name. If this field is set and
-   *   "service_account_name" is set in update_mask, transfer config will be
-   *   updated to use this service account credentials. It requires that
-   *   requesting user calling this API has permissions to act as this service
+   *   Optional service account name. If this field is set, the transfer config
+   *   will be created with this service account's credentials. It requires that
+   *   the requesting user calling this API has permissions to act as this service
    *   account.
+   *
+   *   Note that not all data sources support service account credentials when
+   *   creating a transfer config. For the latest list of data sources, read about
+   *   [using service
+   *   accounts](https://cloud.google.com/bigquery-transfer/docs/use-service-accounts).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1461,16 +1492,17 @@ export class DataTransferServiceClient {
   /**
    * Enroll data sources in a user project. This allows users to create transfer
    * configurations for these data sources. They will also appear in the
-   * ListDataSources RPC and as such, will appear in the BigQuery UI
-   * 'https://bigquery.cloud.google.com' (and the documents can be found at
-   * https://cloud.google.com/bigquery/bigquery-web-ui and
-   * https://cloud.google.com/bigquery/docs/working-with-transfers).
+   * ListDataSources RPC and as such, will appear in the
+   * [BigQuery UI](https://console.cloud.google.com/bigquery), and the documents
+   * can be found in the public guide for
+   * [BigQuery Web UI](https://cloud.google.com/bigquery/bigquery-web-ui) and
+   * [Data Transfer
+   * Service](https://cloud.google.com/bigquery/docs/working-with-transfers).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the project resource in the form:
-   *   `projects/{project_id}`
+   *   The name of the project resource in the form: `projects/{project_id}`
    * @param {string[]} request.dataSourceIds
    *   Data sources that are enrolled. It is required to provide at least one
    *   data source id.
@@ -1573,7 +1605,7 @@ export class DataTransferServiceClient {
    * @param {string} request.parent
    *   Required. The BigQuery project id for which data sources should be returned.
    *   Must be in the form: `projects/{project_id}` or
-   *   `projects/{project_id}/locations/{location_id}
+   *   `projects/{project_id}/locations/{location_id}`
    * @param {string} request.pageToken
    *   Pagination token, which can be used to request a specific page
    *   of `ListDataSourcesRequest` list results. For multiple-page
@@ -1677,7 +1709,7 @@ export class DataTransferServiceClient {
    * @param {string} request.parent
    *   Required. The BigQuery project id for which data sources should be returned.
    *   Must be in the form: `projects/{project_id}` or
-   *   `projects/{project_id}/locations/{location_id}
+   *   `projects/{project_id}/locations/{location_id}`
    * @param {string} request.pageToken
    *   Pagination token, which can be used to request a specific page
    *   of `ListDataSourcesRequest` list results. For multiple-page
@@ -1729,7 +1761,7 @@ export class DataTransferServiceClient {
    * @param {string} request.parent
    *   Required. The BigQuery project id for which data sources should be returned.
    *   Must be in the form: `projects/{project_id}` or
-   *   `projects/{project_id}/locations/{location_id}
+   *   `projects/{project_id}/locations/{location_id}`
    * @param {string} request.pageToken
    *   Pagination token, which can be used to request a specific page
    *   of `ListDataSourcesRequest` list results. For multiple-page
@@ -1779,7 +1811,7 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The BigQuery project id for which data sources
+   *   Required. The BigQuery project id for which transfer configs
    *   should be returned: `projects/{project_id}` or
    *   `projects/{project_id}/locations/{location_id}`
    * @param {string[]} request.dataSourceIds
@@ -1885,7 +1917,7 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The BigQuery project id for which data sources
+   *   Required. The BigQuery project id for which transfer configs
    *   should be returned: `projects/{project_id}` or
    *   `projects/{project_id}/locations/{location_id}`
    * @param {string[]} request.dataSourceIds
@@ -1939,7 +1971,7 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The BigQuery project id for which data sources
+   *   Required. The BigQuery project id for which transfer configs
    *   should be returned: `projects/{project_id}` or
    *   `projects/{project_id}/locations/{location_id}`
    * @param {string[]} request.dataSourceIds
@@ -2424,6 +2456,86 @@ export class DataTransferServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.datatransfer.v1.ITransferMessage>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Location]{@link google.cloud.location.Location}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Location]{@link google.cloud.location.Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -2824,6 +2936,7 @@ export class DataTransferServiceClient {
       return this.dataTransferServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
       });
     }
     return Promise.resolve();
