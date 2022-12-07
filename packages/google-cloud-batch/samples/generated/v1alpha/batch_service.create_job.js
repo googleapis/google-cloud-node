@@ -35,8 +35,9 @@ function main(parent, job) {
   // const parent = 'abc123'
   /**
    *  ID used to uniquely identify the Job within its parent scope.
-   *  This field should contain at most 63 characters.
-   *  Only alphanumeric characters or '-' are accepted.
+   *  This field should contain at most 63 characters and must start with
+   *  lowercase characters.
+   *  Only lowercase characters, numbers and '-' are accepted.
    *  The '-' character cannot be the first or the last one.
    *  A system generated ID will be used if the field is not set.
    *  The job.name field in the request will be ignored and the created resource

@@ -29,8 +29,7 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The name of the project resource in the form:
-   *  `projects/{project_id}`
+   *  The name of the project resource in the form: `projects/{project_id}`
    */
   // const name = 'abc123'
   /**

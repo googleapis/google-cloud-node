@@ -30,7 +30,8 @@ function main(updateMask, node) {
    */
   /**
    *  Required. Mask of fields from Node Tpu.Node  to update.
-   *  Supported fields: None.
+   *  Supported fields: description, tags, labels, metadata,
+   *  network_config.enable_external_ips.
    */
   // const updateMask = {}
   /**
