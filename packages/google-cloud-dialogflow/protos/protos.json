@@ -1700,6 +1700,10 @@
                         "allowCancellation": {
                           "type": "bool",
                           "id": 8
+                        },
+                        "cxCurrentPage": {
+                          "type": "string",
+                          "id": 11
                         }
                       },
                       "nested": {
@@ -11040,6 +11044,10 @@
                         "allowCancellation": {
                           "type": "bool",
                           "id": 8
+                        },
+                        "cxCurrentPage": {
+                          "type": "string",
+                          "id": 11
                         }
                       },
                       "nested": {

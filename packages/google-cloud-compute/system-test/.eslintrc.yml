@@ -1,0 +1,7 @@
+---
+env:
+  mocha: true
+rules:
+  node/no-unsupported-features/es-syntax: off
+  node/no-unsupported-features/node-builtins: off
+  no-console: off

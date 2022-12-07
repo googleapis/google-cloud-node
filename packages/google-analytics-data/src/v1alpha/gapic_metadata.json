@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.analytics.data.v1alpha",
+  "libraryPackage": "@google-cloud/data",
+  "services": {
+    "AlphaAnalyticsData": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AlphaAnalyticsDataClient",
+          "rpcs": {
+            "RunFunnelReport": {
+              "methods": [
+                "runFunnelReport"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AlphaAnalyticsDataClient",
+          "rpcs": {
+            "RunFunnelReport": {
+              "methods": [
+                "runFunnelReport"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
