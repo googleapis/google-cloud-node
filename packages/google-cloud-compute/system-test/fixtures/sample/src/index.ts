@@ -48,6 +48,7 @@ import {
   LicensesClient,
   MachineImagesClient,
   MachineTypesClient,
+  NetworkAttachmentsClient,
   NetworkEdgeSecurityServicesClient,
   NetworkEndpointGroupsClient,
   NetworkFirewallPoliciesClient,
@@ -214,6 +215,9 @@ function doStuffWithMachineImagesClient(client: MachineImagesClient) {
   client.close();
 }
 function doStuffWithMachineTypesClient(client: MachineTypesClient) {
+  client.close();
+}
+function doStuffWithNetworkAttachmentsClient(client: NetworkAttachmentsClient) {
   client.close();
 }
 function doStuffWithNetworkEdgeSecurityServicesClient(
@@ -522,6 +526,9 @@ function main() {
   // check that the client instance can be created
   const machineTypesClient = new MachineTypesClient();
   doStuffWithMachineTypesClient(machineTypesClient);
+  // check that the client instance can be created
+  const networkAttachmentsClient = new NetworkAttachmentsClient();
+  doStuffWithNetworkAttachmentsClient(networkAttachmentsClient);
   // check that the client instance can be created
   const networkEdgeSecurityServicesClient =
     new NetworkEdgeSecurityServicesClient();
