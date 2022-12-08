@@ -88,6 +88,7 @@ for subdir in ${subdirs[@]}; do
                     echo "change detected in ${d}"
                     should_test=true
                 fi
+            fi
         else
             # If GIT_DIFF_ARG is empty, run all the tests.
             should_test=true
