@@ -67,7 +67,7 @@ subdirs=(
 )
 
 RETVAL=0
-tests_with_credentials = ("packages/google-analytics-admin" "packages/google-area120-tables" "packages/google-analytics-data" "packages/google-iam-credentials")
+tests_with_credentials=("packages/google-analytics-admin" "packages/google-area120-tables" "packages/google-analytics-data" "packages/google-iam-credentials")
 
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
