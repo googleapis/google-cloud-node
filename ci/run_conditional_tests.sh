@@ -84,7 +84,7 @@ for subdir in ${subdirs[@]}; do
                 if [ "${tests_with_credentials[*]}" =~ "${d}" ] && [-n "${GOOGLE_APPLICATION_CREDENTIALS}"]; then
                     echo "change detected in ${d}"
                     should_test=true
-                elif [ !"${tests_with_credentials[*]}" =~ "${d}"] && [! -n "${GOOGLE_APPLICATION_CREDENTIALS}"]
+                elif [ !"${tests_with_credentials[*]}" =~ "${d}"] && [! -n "${GOOGLE_APPLICATION_CREDENTIALS}"]; then
                     echo "change detected in ${d}"
                     should_test=true
                 fi
