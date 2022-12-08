@@ -67,7 +67,7 @@
     "@types/sinon": "^10.0.0",
     "c8": "^7.0.0",
     "codecov": "^3.0.2",
-    "google-auth-library": "^6.0.0",
+    "google-auth-library": "^8.0.0",
     "gts": "^3.1.0",
     "http2spy": "^2.0.0",
     "jsdoc": "^4.0.0",
