@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(billingAccount) {
-  // [START cloudbilling_v1_generated_CloudBilling_CreateBillingAccount_async]
+function main(parent, readSession) {
+  // [START bigquerystorage_v1beta2_generated_BigQueryRead_CreateReadSession_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,32 +29,45 @@ function main(billingAccount) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The billing account resource to create.
-   *  Currently CreateBillingAccount only supports subaccount creation, so
-   *  any created billing accounts must be under a provided parent billing
-   *  account.
+   *  Required. The request project that owns the session, in the form of
+   *  `projects/{project_id}`.
    */
-  // const billingAccount = {}
+  // const parent = 'abc123'
+  /**
+   *  Required. Session to be created.
+   */
+  // const readSession = {}
+  /**
+   *  Max initial number of streams. If unset or zero, the server will
+   *  provide a value of streams so as to produce reasonable throughput. Must be
+   *  non-negative. The number of streams may be lower than the requested number,
+   *  depending on the amount parallelism that is reasonable for the table. Error
+   *  will be returned if the max count is greater than the current system
+   *  max limit of 1,000.
+   *  Streams must be read starting from offset 0.
+   */
+  // const maxStreamCount = 1234
 
-  // Imports the Billing library
-  const {CloudBillingClient} = require('@google-cloud/billing').v1;
+  // Imports the Storage library
+  const {BigQueryReadClient} = require('storage').v1beta2;
 
   // Instantiates a client
-  const billingClient = new CloudBillingClient();
+  const storageClient = new BigQueryReadClient();
 
-  async function callCreateBillingAccount() {
+  async function callCreateReadSession() {
     // Construct request
     const request = {
-      billingAccount,
+      parent,
+      readSession,
     };
 
     // Run request
-    const response = await billingClient.createBillingAccount(request);
+    const response = await storageClient.createReadSession(request);
     console.log(response);
   }
 
-  callCreateBillingAccount();
-  // [END cloudbilling_v1_generated_CloudBilling_CreateBillingAccount_async]
+  callCreateReadSession();
+  // [END bigquerystorage_v1beta2_generated_BigQueryRead_CreateReadSession_async]
 }
 
 process.on('unhandledRejection', err => {
