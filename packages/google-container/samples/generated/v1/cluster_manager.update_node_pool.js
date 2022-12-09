@@ -110,6 +110,10 @@ function main(nodeVersion, imageType) {
    */
   // const gvnic = {}
   /**
+   *  Enable or disable NCCL fast socket for the node pool.
+   */
+  // const fastSocket = {}
+  /**
    *  Logging configuration.
    */
   // const loggingConfig = {}
