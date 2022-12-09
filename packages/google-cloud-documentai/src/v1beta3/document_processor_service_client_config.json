@@ -46,6 +46,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "TrainProcessorVersion": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetProcessorVersion": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -89,6 +93,18 @@
         "ReviewDocument": {
           "timeout_millis": 120000,
           "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "EvaluateProcessorVersion": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetEvaluation": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListEvaluations": {
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
       }
