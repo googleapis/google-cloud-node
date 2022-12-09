@@ -61,6 +61,34 @@ describe('sample transformation', () => {
 
     snapshot(sOut[0].contents);
   });
+
+  it('correctly adds use strict when the sample has a licence block', async () => {
+    const fixture = await loadFixture('listSchemas.ts');
+
+    const sIn = samples.fromArray([
+      {
+        filename: 'listSchemas.ts',
+        contents: fixture,
+      },
+    ]);
+
+    const sOut = await samples.toArray(samples.transformSamples(sIn));
+    assert.strictEqual(sOut[0].contents.includes('use strict'), true);
+  });
+
+  it('correctly adds use strict when the sample has no blank lines', async () => {
+    const fixture = await loadFixture('noBlankLines.ts');
+
+    const sIn = samples.fromArray([
+      {
+        filename: 'listSchemas.ts',
+        contents: fixture,
+      },
+    ]);
+
+    const sOut = await samples.toArray(samples.transformSamples(sIn));
+    assert.strictEqual(sOut[0].contents.includes('use strict'), true);
+  });
 });
 
 describe('command line option', () => {

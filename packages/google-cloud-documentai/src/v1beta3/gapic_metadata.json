@@ -35,9 +35,19 @@
                 "createProcessor"
               ]
             },
+            "GetEvaluation": {
+              "methods": [
+                "getEvaluation"
+              ]
+            },
             "BatchProcessDocuments": {
               "methods": [
                 "batchProcessDocuments"
+              ]
+            },
+            "TrainProcessorVersion": {
+              "methods": [
+                "trainProcessorVersion"
               ]
             },
             "DeleteProcessorVersion": {
@@ -80,6 +90,11 @@
                 "reviewDocument"
               ]
             },
+            "EvaluateProcessorVersion": {
+              "methods": [
+                "evaluateProcessorVersion"
+              ]
+            },
             "ListProcessorTypes": {
               "methods": [
                 "listProcessorTypes",
@@ -99,6 +114,13 @@
                 "listProcessorVersions",
                 "listProcessorVersionsStream",
                 "listProcessorVersionsAsync"
+              ]
+            },
+            "ListEvaluations": {
+              "methods": [
+                "listEvaluations",
+                "listEvaluationsStream",
+                "listEvaluationsAsync"
               ]
             }
           }
@@ -131,9 +153,19 @@
                 "createProcessor"
               ]
             },
+            "GetEvaluation": {
+              "methods": [
+                "getEvaluation"
+              ]
+            },
             "BatchProcessDocuments": {
               "methods": [
                 "batchProcessDocuments"
+              ]
+            },
+            "TrainProcessorVersion": {
+              "methods": [
+                "trainProcessorVersion"
               ]
             },
             "DeleteProcessorVersion": {
@@ -176,6 +208,11 @@
                 "reviewDocument"
               ]
             },
+            "EvaluateProcessorVersion": {
+              "methods": [
+                "evaluateProcessorVersion"
+              ]
+            },
             "ListProcessorTypes": {
               "methods": [
                 "listProcessorTypes",
@@ -195,6 +232,13 @@
                 "listProcessorVersions",
                 "listProcessorVersionsStream",
                 "listProcessorVersionsAsync"
+              ]
+            },
+            "ListEvaluations": {
+              "methods": [
+                "listEvaluations",
+                "listEvaluationsStream",
+                "listEvaluationsAsync"
               ]
             }
           }

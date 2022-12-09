@@ -55,6 +55,23 @@ function main(writeStream) {
    *  respected.
    */
   // const traceId = 'abc123'
+  /**
+   *  A map to indicate how to interpret missing value for some fields. Missing
+   *  values are fields present in user schema but missing in rows. The key is
+   *  the field name. The value is the interpretation of missing values for the
+   *  field.
+   *  For example, a map {'foo': NULL_VALUE, 'bar': DEFAULT_VALUE} means all
+   *  missing values in field foo are interpreted as NULL, all missing values in
+   *  field bar are interpreted as the default value of field bar in table
+   *  schema.
+   *  If a field is not in this map and has missing values, the missing values
+   *  in this field are interpreted as NULL.
+   *  This field only applies to the current request, it won't affect other
+   *  requests on the connection.
+   *  Currently, field name can only be top-level column name, can't be a struct
+   *  field path like 'foo.bar'.
+   */
+  // const missingValueInterpretations = 1234
 
   // Imports the Storage library
   const {BigQueryWriteClient} = require('@google-cloud/bigquery-storage').v1;

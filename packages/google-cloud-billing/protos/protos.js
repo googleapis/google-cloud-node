@@ -3466,6 +3466,7 @@
                          * @property {Array.<string>|null} [serviceRegions] Sku serviceRegions
                          * @property {Array.<google.cloud.billing.v1.IPricingInfo>|null} [pricingInfo] Sku pricingInfo
                          * @property {string|null} [serviceProviderName] Sku serviceProviderName
+                         * @property {google.cloud.billing.v1.IGeoTaxonomy|null} [geoTaxonomy] Sku geoTaxonomy
                          */
     
                         /**
@@ -3542,6 +3543,14 @@
                         Sku.prototype.serviceProviderName = "";
     
                         /**
+                         * Sku geoTaxonomy.
+                         * @member {google.cloud.billing.v1.IGeoTaxonomy|null|undefined} geoTaxonomy
+                         * @memberof google.cloud.billing.v1.Sku
+                         * @instance
+                         */
+                        Sku.prototype.geoTaxonomy = null;
+    
+                        /**
                          * Creates a new Sku instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.billing.v1.Sku
@@ -3581,6 +3590,8 @@
                                     $root.google.cloud.billing.v1.PricingInfo.encode(message.pricingInfo[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.serviceProviderName != null && Object.hasOwnProperty.call(message, "serviceProviderName"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.serviceProviderName);
+                            if (message.geoTaxonomy != null && Object.hasOwnProperty.call(message, "geoTaxonomy"))
+                                $root.google.cloud.billing.v1.GeoTaxonomy.encode(message.geoTaxonomy, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -3645,6 +3656,10 @@
                                     }
                                 case 7: {
                                         message.serviceProviderName = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.geoTaxonomy = $root.google.cloud.billing.v1.GeoTaxonomy.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -3715,6 +3730,11 @@
                             if (message.serviceProviderName != null && message.hasOwnProperty("serviceProviderName"))
                                 if (!$util.isString(message.serviceProviderName))
                                     return "serviceProviderName: string expected";
+                            if (message.geoTaxonomy != null && message.hasOwnProperty("geoTaxonomy")) {
+                                var error = $root.google.cloud.billing.v1.GeoTaxonomy.verify(message.geoTaxonomy);
+                                if (error)
+                                    return "geoTaxonomy." + error;
+                            }
                             return null;
                         };
     
@@ -3760,6 +3780,11 @@
                             }
                             if (object.serviceProviderName != null)
                                 message.serviceProviderName = String(object.serviceProviderName);
+                            if (object.geoTaxonomy != null) {
+                                if (typeof object.geoTaxonomy !== "object")
+                                    throw TypeError(".google.cloud.billing.v1.Sku.geoTaxonomy: object expected");
+                                message.geoTaxonomy = $root.google.cloud.billing.v1.GeoTaxonomy.fromObject(object.geoTaxonomy);
+                            }
                             return message;
                         };
     
@@ -3786,6 +3811,7 @@
                                 object.description = "";
                                 object.category = null;
                                 object.serviceProviderName = "";
+                                object.geoTaxonomy = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -3807,6 +3833,8 @@
                             }
                             if (message.serviceProviderName != null && message.hasOwnProperty("serviceProviderName"))
                                 object.serviceProviderName = message.serviceProviderName;
+                            if (message.geoTaxonomy != null && message.hasOwnProperty("geoTaxonomy"))
+                                object.geoTaxonomy = $root.google.cloud.billing.v1.GeoTaxonomy.toObject(message.geoTaxonomy, options);
                             return object;
                         };
     
@@ -4430,12 +4458,12 @@
                          * @memberof google.cloud.billing.v1
                          * @interface IPricingExpression
                          * @property {string|null} [usageUnit] PricingExpression usageUnit
+                         * @property {number|null} [displayQuantity] PricingExpression displayQuantity
+                         * @property {Array.<google.cloud.billing.v1.PricingExpression.ITierRate>|null} [tieredRates] PricingExpression tieredRates
                          * @property {string|null} [usageUnitDescription] PricingExpression usageUnitDescription
                          * @property {string|null} [baseUnit] PricingExpression baseUnit
                          * @property {string|null} [baseUnitDescription] PricingExpression baseUnitDescription
                          * @property {number|null} [baseUnitConversionFactor] PricingExpression baseUnitConversionFactor
-                         * @property {number|null} [displayQuantity] PricingExpression displayQuantity
-                         * @property {Array.<google.cloud.billing.v1.PricingExpression.ITierRate>|null} [tieredRates] PricingExpression tieredRates
                          */
     
                         /**
@@ -4461,6 +4489,22 @@
                          * @instance
                          */
                         PricingExpression.prototype.usageUnit = "";
+    
+                        /**
+                         * PricingExpression displayQuantity.
+                         * @member {number} displayQuantity
+                         * @memberof google.cloud.billing.v1.PricingExpression
+                         * @instance
+                         */
+                        PricingExpression.prototype.displayQuantity = 0;
+    
+                        /**
+                         * PricingExpression tieredRates.
+                         * @member {Array.<google.cloud.billing.v1.PricingExpression.ITierRate>} tieredRates
+                         * @memberof google.cloud.billing.v1.PricingExpression
+                         * @instance
+                         */
+                        PricingExpression.prototype.tieredRates = $util.emptyArray;
     
                         /**
                          * PricingExpression usageUnitDescription.
@@ -4493,22 +4537,6 @@
                          * @instance
                          */
                         PricingExpression.prototype.baseUnitConversionFactor = 0;
-    
-                        /**
-                         * PricingExpression displayQuantity.
-                         * @member {number} displayQuantity
-                         * @memberof google.cloud.billing.v1.PricingExpression
-                         * @instance
-                         */
-                        PricingExpression.prototype.displayQuantity = 0;
-    
-                        /**
-                         * PricingExpression tieredRates.
-                         * @member {Array.<google.cloud.billing.v1.PricingExpression.ITierRate>} tieredRates
-                         * @memberof google.cloud.billing.v1.PricingExpression
-                         * @instance
-                         */
-                        PricingExpression.prototype.tieredRates = $util.emptyArray;
     
                         /**
                          * Creates a new PricingExpression instance using the specified properties.
@@ -4587,6 +4615,16 @@
                                         message.usageUnit = reader.string();
                                         break;
                                     }
+                                case 2: {
+                                        message.displayQuantity = reader.double();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.tieredRates && message.tieredRates.length))
+                                            message.tieredRates = [];
+                                        message.tieredRates.push($root.google.cloud.billing.v1.PricingExpression.TierRate.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 case 4: {
                                         message.usageUnitDescription = reader.string();
                                         break;
@@ -4601,16 +4639,6 @@
                                     }
                                 case 7: {
                                         message.baseUnitConversionFactor = reader.double();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.displayQuantity = reader.double();
-                                        break;
-                                    }
-                                case 3: {
-                                        if (!(message.tieredRates && message.tieredRates.length))
-                                            message.tieredRates = [];
-                                        message.tieredRates.push($root.google.cloud.billing.v1.PricingExpression.TierRate.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -4651,18 +4679,6 @@
                             if (message.usageUnit != null && message.hasOwnProperty("usageUnit"))
                                 if (!$util.isString(message.usageUnit))
                                     return "usageUnit: string expected";
-                            if (message.usageUnitDescription != null && message.hasOwnProperty("usageUnitDescription"))
-                                if (!$util.isString(message.usageUnitDescription))
-                                    return "usageUnitDescription: string expected";
-                            if (message.baseUnit != null && message.hasOwnProperty("baseUnit"))
-                                if (!$util.isString(message.baseUnit))
-                                    return "baseUnit: string expected";
-                            if (message.baseUnitDescription != null && message.hasOwnProperty("baseUnitDescription"))
-                                if (!$util.isString(message.baseUnitDescription))
-                                    return "baseUnitDescription: string expected";
-                            if (message.baseUnitConversionFactor != null && message.hasOwnProperty("baseUnitConversionFactor"))
-                                if (typeof message.baseUnitConversionFactor !== "number")
-                                    return "baseUnitConversionFactor: number expected";
                             if (message.displayQuantity != null && message.hasOwnProperty("displayQuantity"))
                                 if (typeof message.displayQuantity !== "number")
                                     return "displayQuantity: number expected";
@@ -4675,6 +4691,18 @@
                                         return "tieredRates." + error;
                                 }
                             }
+                            if (message.usageUnitDescription != null && message.hasOwnProperty("usageUnitDescription"))
+                                if (!$util.isString(message.usageUnitDescription))
+                                    return "usageUnitDescription: string expected";
+                            if (message.baseUnit != null && message.hasOwnProperty("baseUnit"))
+                                if (!$util.isString(message.baseUnit))
+                                    return "baseUnit: string expected";
+                            if (message.baseUnitDescription != null && message.hasOwnProperty("baseUnitDescription"))
+                                if (!$util.isString(message.baseUnitDescription))
+                                    return "baseUnitDescription: string expected";
+                            if (message.baseUnitConversionFactor != null && message.hasOwnProperty("baseUnitConversionFactor"))
+                                if (typeof message.baseUnitConversionFactor !== "number")
+                                    return "baseUnitConversionFactor: number expected";
                             return null;
                         };
     
@@ -4692,14 +4720,6 @@
                             var message = new $root.google.cloud.billing.v1.PricingExpression();
                             if (object.usageUnit != null)
                                 message.usageUnit = String(object.usageUnit);
-                            if (object.usageUnitDescription != null)
-                                message.usageUnitDescription = String(object.usageUnitDescription);
-                            if (object.baseUnit != null)
-                                message.baseUnit = String(object.baseUnit);
-                            if (object.baseUnitDescription != null)
-                                message.baseUnitDescription = String(object.baseUnitDescription);
-                            if (object.baseUnitConversionFactor != null)
-                                message.baseUnitConversionFactor = Number(object.baseUnitConversionFactor);
                             if (object.displayQuantity != null)
                                 message.displayQuantity = Number(object.displayQuantity);
                             if (object.tieredRates) {
@@ -4712,6 +4732,14 @@
                                     message.tieredRates[i] = $root.google.cloud.billing.v1.PricingExpression.TierRate.fromObject(object.tieredRates[i]);
                                 }
                             }
+                            if (object.usageUnitDescription != null)
+                                message.usageUnitDescription = String(object.usageUnitDescription);
+                            if (object.baseUnit != null)
+                                message.baseUnit = String(object.baseUnit);
+                            if (object.baseUnitDescription != null)
+                                message.baseUnitDescription = String(object.baseUnitDescription);
+                            if (object.baseUnitConversionFactor != null)
+                                message.baseUnitConversionFactor = Number(object.baseUnitConversionFactor);
                             return message;
                         };
     
@@ -5347,6 +5375,296 @@
                         })();
     
                         return AggregationInfo;
+                    })();
+    
+                    v1.GeoTaxonomy = (function() {
+    
+                        /**
+                         * Properties of a GeoTaxonomy.
+                         * @memberof google.cloud.billing.v1
+                         * @interface IGeoTaxonomy
+                         * @property {google.cloud.billing.v1.GeoTaxonomy.Type|null} [type] GeoTaxonomy type
+                         * @property {Array.<string>|null} [regions] GeoTaxonomy regions
+                         */
+    
+                        /**
+                         * Constructs a new GeoTaxonomy.
+                         * @memberof google.cloud.billing.v1
+                         * @classdesc Represents a GeoTaxonomy.
+                         * @implements IGeoTaxonomy
+                         * @constructor
+                         * @param {google.cloud.billing.v1.IGeoTaxonomy=} [properties] Properties to set
+                         */
+                        function GeoTaxonomy(properties) {
+                            this.regions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GeoTaxonomy type.
+                         * @member {google.cloud.billing.v1.GeoTaxonomy.Type} type
+                         * @memberof google.cloud.billing.v1.GeoTaxonomy
+                         * @instance
+                         */
+                        GeoTaxonomy.prototype.type = 0;
+    
+                        /**
+                         * GeoTaxonomy regions.
+                         * @member {Array.<string>} regions
+                         * @memberof google.cloud.billing.v1.GeoTaxonomy
+                         * @instance
+                         */
+                        GeoTaxonomy.prototype.regions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new GeoTaxonomy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.billing.v1.GeoTaxonomy
+                         * @static
+                         * @param {google.cloud.billing.v1.IGeoTaxonomy=} [properties] Properties to set
+                         * @returns {google.cloud.billing.v1.GeoTaxonomy} GeoTaxonomy instance
+                         */
+                        GeoTaxonomy.create = function create(properties) {
+                            return new GeoTaxonomy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GeoTaxonomy message. Does not implicitly {@link google.cloud.billing.v1.GeoTaxonomy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.billing.v1.GeoTaxonomy
+                         * @static
+                         * @param {google.cloud.billing.v1.IGeoTaxonomy} message GeoTaxonomy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GeoTaxonomy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                            if (message.regions != null && message.regions.length)
+                                for (var i = 0; i < message.regions.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.regions[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GeoTaxonomy message, length delimited. Does not implicitly {@link google.cloud.billing.v1.GeoTaxonomy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.billing.v1.GeoTaxonomy
+                         * @static
+                         * @param {google.cloud.billing.v1.IGeoTaxonomy} message GeoTaxonomy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GeoTaxonomy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GeoTaxonomy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.billing.v1.GeoTaxonomy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.billing.v1.GeoTaxonomy} GeoTaxonomy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GeoTaxonomy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.v1.GeoTaxonomy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.regions && message.regions.length))
+                                            message.regions = [];
+                                        message.regions.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GeoTaxonomy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.billing.v1.GeoTaxonomy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.billing.v1.GeoTaxonomy} GeoTaxonomy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GeoTaxonomy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GeoTaxonomy message.
+                         * @function verify
+                         * @memberof google.cloud.billing.v1.GeoTaxonomy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GeoTaxonomy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.regions != null && message.hasOwnProperty("regions")) {
+                                if (!Array.isArray(message.regions))
+                                    return "regions: array expected";
+                                for (var i = 0; i < message.regions.length; ++i)
+                                    if (!$util.isString(message.regions[i]))
+                                        return "regions: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GeoTaxonomy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.billing.v1.GeoTaxonomy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.billing.v1.GeoTaxonomy} GeoTaxonomy
+                         */
+                        GeoTaxonomy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.billing.v1.GeoTaxonomy)
+                                return object;
+                            var message = new $root.google.cloud.billing.v1.GeoTaxonomy();
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "GLOBAL":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "REGIONAL":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "MULTI_REGIONAL":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            }
+                            if (object.regions) {
+                                if (!Array.isArray(object.regions))
+                                    throw TypeError(".google.cloud.billing.v1.GeoTaxonomy.regions: array expected");
+                                message.regions = [];
+                                for (var i = 0; i < object.regions.length; ++i)
+                                    message.regions[i] = String(object.regions[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GeoTaxonomy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.billing.v1.GeoTaxonomy
+                         * @static
+                         * @param {google.cloud.billing.v1.GeoTaxonomy} message GeoTaxonomy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GeoTaxonomy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.regions = [];
+                            if (options.defaults)
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.billing.v1.GeoTaxonomy.Type[message.type] === undefined ? message.type : $root.google.cloud.billing.v1.GeoTaxonomy.Type[message.type] : message.type;
+                            if (message.regions && message.regions.length) {
+                                object.regions = [];
+                                for (var j = 0; j < message.regions.length; ++j)
+                                    object.regions[j] = message.regions[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GeoTaxonomy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.billing.v1.GeoTaxonomy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GeoTaxonomy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GeoTaxonomy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.billing.v1.GeoTaxonomy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GeoTaxonomy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.billing.v1.GeoTaxonomy";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.billing.v1.GeoTaxonomy.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} GLOBAL=1 GLOBAL value
+                         * @property {number} REGIONAL=2 REGIONAL value
+                         * @property {number} MULTI_REGIONAL=3 MULTI_REGIONAL value
+                         */
+                        GeoTaxonomy.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GLOBAL"] = 1;
+                            values[valuesById[2] = "REGIONAL"] = 2;
+                            values[valuesById[3] = "MULTI_REGIONAL"] = 3;
+                            return values;
+                        })();
+    
+                        return GeoTaxonomy;
                     })();
     
                     v1.ListServicesRequest = (function() {
