@@ -17,6 +17,7 @@
   * [Cloud_memcache.delete_instance](#cloud_memcache.delete_instance)
   * [Cloud_memcache.get_instance](#cloud_memcache.get_instance)
   * [Cloud_memcache.list_instances](#cloud_memcache.list_instances)
+  * [Cloud_memcache.reschedule_maintenance](#cloud_memcache.reschedule_maintenance)
   * [Cloud_memcache.update_instance](#cloud_memcache.update_instance)
   * [Cloud_memcache.update_parameters](#cloud_memcache.update_parameters)
   * [Cloud_memcache.apply_parameters](#cloud_memcache.apply_parameters)
@@ -25,6 +26,7 @@
   * [Cloud_memcache.delete_instance](#cloud_memcache.delete_instance)
   * [Cloud_memcache.get_instance](#cloud_memcache.get_instance)
   * [Cloud_memcache.list_instances](#cloud_memcache.list_instances)
+  * [Cloud_memcache.reschedule_maintenance](#cloud_memcache.reschedule_maintenance)
   * [Cloud_memcache.update_instance](#cloud_memcache.update_instance)
   * [Cloud_memcache.update_parameters](#cloud_memcache.update_parameters)
   * [Quickstart](#quickstart)
@@ -123,6 +125,23 @@ __Usage:__
 
 
 `node packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.list_instances.js`
+
+
+-----
+
+
+
+
+### Cloud_memcache.reschedule_maintenance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.reschedule_maintenance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.reschedule_maintenance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.reschedule_maintenance.js`
 
 
 -----
@@ -259,6 +278,23 @@ __Usage:__
 
 
 `node packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.list_instances.js`
+
+
+-----
+
+
+
+
+### Cloud_memcache.reschedule_maintenance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.reschedule_maintenance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.reschedule_maintenance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.reschedule_maintenance.js`
 
 
 -----

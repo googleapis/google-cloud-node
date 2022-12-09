@@ -329,6 +329,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache|rescheduleMaintenance}.
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @typedef RescheduleMaintenanceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls RescheduleMaintenance.
+                         * @function rescheduleMaintenance
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.IRescheduleMaintenanceRequest} request RescheduleMaintenanceRequest message or plain object
+                         * @param {google.cloud.memcache.v1.CloudMemcache.RescheduleMaintenanceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudMemcache.prototype.rescheduleMaintenance = function rescheduleMaintenance(request, callback) {
+                            return this.rpcCall(rescheduleMaintenance, $root.google.cloud.memcache.v1.RescheduleMaintenanceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "RescheduleMaintenance" });
+    
+                        /**
+                         * Calls RescheduleMaintenance.
+                         * @function rescheduleMaintenance
+                         * @memberof google.cloud.memcache.v1.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1.IRescheduleMaintenanceRequest} request RescheduleMaintenanceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return CloudMemcache;
                     })();
     
@@ -354,6 +387,8 @@
                          * @property {string|null} [memcacheFullVersion] Instance memcacheFullVersion
                          * @property {Array.<google.cloud.memcache.v1.Instance.IInstanceMessage>|null} [instanceMessages] Instance instanceMessages
                          * @property {string|null} [discoveryEndpoint] Instance discoveryEndpoint
+                         * @property {google.cloud.memcache.v1.IMaintenancePolicy|null} [maintenancePolicy] Instance maintenancePolicy
+                         * @property {google.cloud.memcache.v1.IMaintenanceSchedule|null} [maintenanceSchedule] Instance maintenanceSchedule
                          */
     
                         /**
@@ -504,6 +539,22 @@
                         Instance.prototype.discoveryEndpoint = "";
     
                         /**
+                         * Instance maintenancePolicy.
+                         * @member {google.cloud.memcache.v1.IMaintenancePolicy|null|undefined} maintenancePolicy
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.maintenancePolicy = null;
+    
+                        /**
+                         * Instance maintenanceSchedule.
+                         * @member {google.cloud.memcache.v1.IMaintenanceSchedule|null|undefined} maintenanceSchedule
+                         * @memberof google.cloud.memcache.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.maintenanceSchedule = null;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.memcache.v1.Instance
@@ -563,6 +614,10 @@
                                     $root.google.cloud.memcache.v1.Instance.InstanceMessage.encode(message.instanceMessages[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             if (message.discoveryEndpoint != null && Object.hasOwnProperty.call(message, "discoveryEndpoint"))
                                 writer.uint32(/* id 20, wireType 2 =*/162).string(message.discoveryEndpoint);
+                            if (message.maintenancePolicy != null && Object.hasOwnProperty.call(message, "maintenancePolicy"))
+                                $root.google.cloud.memcache.v1.MaintenancePolicy.encode(message.maintenancePolicy, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.maintenanceSchedule != null && Object.hasOwnProperty.call(message, "maintenanceSchedule"))
+                                $root.google.cloud.memcache.v1.MaintenanceSchedule.encode(message.maintenanceSchedule, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             return writer;
                         };
     
@@ -686,6 +741,14 @@
                                         message.discoveryEndpoint = reader.string();
                                         break;
                                     }
+                                case 21: {
+                                        message.maintenancePolicy = $root.google.cloud.memcache.v1.MaintenancePolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 22: {
+                                        message.maintenanceSchedule = $root.google.cloud.memcache.v1.MaintenanceSchedule.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -792,6 +855,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                 case 4:
                                 case 5:
                                     break;
@@ -811,6 +875,16 @@
                             if (message.discoveryEndpoint != null && message.hasOwnProperty("discoveryEndpoint"))
                                 if (!$util.isString(message.discoveryEndpoint))
                                     return "discoveryEndpoint: string expected";
+                            if (message.maintenancePolicy != null && message.hasOwnProperty("maintenancePolicy")) {
+                                var error = $root.google.cloud.memcache.v1.MaintenancePolicy.verify(message.maintenancePolicy);
+                                if (error)
+                                    return "maintenancePolicy." + error;
+                            }
+                            if (message.maintenanceSchedule != null && message.hasOwnProperty("maintenanceSchedule")) {
+                                var error = $root.google.cloud.memcache.v1.MaintenanceSchedule.verify(message.maintenanceSchedule);
+                                if (error)
+                                    return "maintenanceSchedule." + error;
+                            }
                             return null;
                         };
     
@@ -913,6 +987,10 @@
                             case 2:
                                 message.state = 2;
                                 break;
+                            case "UPDATING":
+                            case 3:
+                                message.state = 3;
+                                break;
                             case "DELETING":
                             case 4:
                                 message.state = 4;
@@ -936,6 +1014,16 @@
                             }
                             if (object.discoveryEndpoint != null)
                                 message.discoveryEndpoint = String(object.discoveryEndpoint);
+                            if (object.maintenancePolicy != null) {
+                                if (typeof object.maintenancePolicy !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.Instance.maintenancePolicy: object expected");
+                                message.maintenancePolicy = $root.google.cloud.memcache.v1.MaintenancePolicy.fromObject(object.maintenancePolicy);
+                            }
+                            if (object.maintenanceSchedule != null) {
+                                if (typeof object.maintenanceSchedule !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.Instance.maintenanceSchedule: object expected");
+                                message.maintenanceSchedule = $root.google.cloud.memcache.v1.MaintenanceSchedule.fromObject(object.maintenanceSchedule);
+                            }
                             return message;
                         };
     
@@ -972,6 +1060,8 @@
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.memcacheFullVersion = "";
                                 object.discoveryEndpoint = "";
+                                object.maintenancePolicy = null;
+                                object.maintenanceSchedule = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1018,6 +1108,10 @@
                             }
                             if (message.discoveryEndpoint != null && message.hasOwnProperty("discoveryEndpoint"))
                                 object.discoveryEndpoint = message.discoveryEndpoint;
+                            if (message.maintenancePolicy != null && message.hasOwnProperty("maintenancePolicy"))
+                                object.maintenancePolicy = $root.google.cloud.memcache.v1.MaintenancePolicy.toObject(message.maintenancePolicy, options);
+                            if (message.maintenanceSchedule != null && message.hasOwnProperty("maintenanceSchedule"))
+                                object.maintenanceSchedule = $root.google.cloud.memcache.v1.MaintenanceSchedule.toObject(message.maintenanceSchedule, options);
                             return object;
                         };
     
@@ -1046,6 +1140,28 @@
                             }
                             return typeUrlPrefix + "/google.cloud.memcache.v1.Instance";
                         };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.memcache.v1.Instance.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} READY=2 READY value
+                         * @property {number} UPDATING=3 UPDATING value
+                         * @property {number} DELETING=4 DELETING value
+                         * @property {number} PERFORMING_MAINTENANCE=5 PERFORMING_MAINTENANCE value
+                         */
+                        Instance.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "READY"] = 2;
+                            values[valuesById[3] = "UPDATING"] = 3;
+                            values[valuesById[4] = "DELETING"] = 4;
+                            values[valuesById[5] = "PERFORMING_MAINTENANCE"] = 5;
+                            return values;
+                        })();
     
                         Instance.NodeConfig = (function() {
     
@@ -1912,27 +2028,1188 @@
                             return InstanceMessage;
                         })();
     
+                        return Instance;
+                    })();
+    
+                    v1.MaintenancePolicy = (function() {
+    
                         /**
-                         * State enum.
-                         * @name google.cloud.memcache.v1.Instance.State
-                         * @enum {number}
-                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                         * @property {number} CREATING=1 CREATING value
-                         * @property {number} READY=2 READY value
-                         * @property {number} DELETING=4 DELETING value
-                         * @property {number} PERFORMING_MAINTENANCE=5 PERFORMING_MAINTENANCE value
+                         * Properties of a MaintenancePolicy.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IMaintenancePolicy
+                         * @property {google.protobuf.ITimestamp|null} [createTime] MaintenancePolicy createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] MaintenancePolicy updateTime
+                         * @property {string|null} [description] MaintenancePolicy description
+                         * @property {Array.<google.cloud.memcache.v1.IWeeklyMaintenanceWindow>|null} [weeklyMaintenanceWindow] MaintenancePolicy weeklyMaintenanceWindow
                          */
-                        Instance.State = (function() {
+    
+                        /**
+                         * Constructs a new MaintenancePolicy.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents a MaintenancePolicy.
+                         * @implements IMaintenancePolicy
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IMaintenancePolicy=} [properties] Properties to set
+                         */
+                        function MaintenancePolicy(properties) {
+                            this.weeklyMaintenanceWindow = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaintenancePolicy createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.memcache.v1.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.createTime = null;
+    
+                        /**
+                         * MaintenancePolicy updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.memcache.v1.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.updateTime = null;
+    
+                        /**
+                         * MaintenancePolicy description.
+                         * @member {string} description
+                         * @memberof google.cloud.memcache.v1.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.description = "";
+    
+                        /**
+                         * MaintenancePolicy weeklyMaintenanceWindow.
+                         * @member {Array.<google.cloud.memcache.v1.IWeeklyMaintenanceWindow>} weeklyMaintenanceWindow
+                         * @memberof google.cloud.memcache.v1.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.weeklyMaintenanceWindow = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MaintenancePolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.memcache.v1.IMaintenancePolicy=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.MaintenancePolicy} MaintenancePolicy instance
+                         */
+                        MaintenancePolicy.create = function create(properties) {
+                            return new MaintenancePolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenancePolicy message. Does not implicitly {@link google.cloud.memcache.v1.MaintenancePolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.memcache.v1.IMaintenancePolicy} message MaintenancePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenancePolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.weeklyMaintenanceWindow != null && message.weeklyMaintenanceWindow.length)
+                                for (var i = 0; i < message.weeklyMaintenanceWindow.length; ++i)
+                                    $root.google.cloud.memcache.v1.WeeklyMaintenanceWindow.encode(message.weeklyMaintenanceWindow[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenancePolicy message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.MaintenancePolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.memcache.v1.IMaintenancePolicy} message MaintenancePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenancePolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaintenancePolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.MaintenancePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.MaintenancePolicy} MaintenancePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenancePolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.MaintenancePolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.weeklyMaintenanceWindow && message.weeklyMaintenanceWindow.length))
+                                            message.weeklyMaintenanceWindow = [];
+                                        message.weeklyMaintenanceWindow.push($root.google.cloud.memcache.v1.WeeklyMaintenanceWindow.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaintenancePolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.MaintenancePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.MaintenancePolicy} MaintenancePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenancePolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaintenancePolicy message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.MaintenancePolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaintenancePolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.weeklyMaintenanceWindow != null && message.hasOwnProperty("weeklyMaintenanceWindow")) {
+                                if (!Array.isArray(message.weeklyMaintenanceWindow))
+                                    return "weeklyMaintenanceWindow: array expected";
+                                for (var i = 0; i < message.weeklyMaintenanceWindow.length; ++i) {
+                                    var error = $root.google.cloud.memcache.v1.WeeklyMaintenanceWindow.verify(message.weeklyMaintenanceWindow[i]);
+                                    if (error)
+                                        return "weeklyMaintenanceWindow." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaintenancePolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.MaintenancePolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.MaintenancePolicy} MaintenancePolicy
+                         */
+                        MaintenancePolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.MaintenancePolicy)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.MaintenancePolicy();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.MaintenancePolicy.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.MaintenancePolicy.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.weeklyMaintenanceWindow) {
+                                if (!Array.isArray(object.weeklyMaintenanceWindow))
+                                    throw TypeError(".google.cloud.memcache.v1.MaintenancePolicy.weeklyMaintenanceWindow: array expected");
+                                message.weeklyMaintenanceWindow = [];
+                                for (var i = 0; i < object.weeklyMaintenanceWindow.length; ++i) {
+                                    if (typeof object.weeklyMaintenanceWindow[i] !== "object")
+                                        throw TypeError(".google.cloud.memcache.v1.MaintenancePolicy.weeklyMaintenanceWindow: object expected");
+                                    message.weeklyMaintenanceWindow[i] = $root.google.cloud.memcache.v1.WeeklyMaintenanceWindow.fromObject(object.weeklyMaintenanceWindow[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaintenancePolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.memcache.v1.MaintenancePolicy} message MaintenancePolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaintenancePolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.weeklyMaintenanceWindow = [];
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.weeklyMaintenanceWindow && message.weeklyMaintenanceWindow.length) {
+                                object.weeklyMaintenanceWindow = [];
+                                for (var j = 0; j < message.weeklyMaintenanceWindow.length; ++j)
+                                    object.weeklyMaintenanceWindow[j] = $root.google.cloud.memcache.v1.WeeklyMaintenanceWindow.toObject(message.weeklyMaintenanceWindow[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaintenancePolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.MaintenancePolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaintenancePolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MaintenancePolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memcache.v1.MaintenancePolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaintenancePolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memcache.v1.MaintenancePolicy";
+                        };
+    
+                        return MaintenancePolicy;
+                    })();
+    
+                    v1.WeeklyMaintenanceWindow = (function() {
+    
+                        /**
+                         * Properties of a WeeklyMaintenanceWindow.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IWeeklyMaintenanceWindow
+                         * @property {google.type.DayOfWeek|null} [day] WeeklyMaintenanceWindow day
+                         * @property {google.type.ITimeOfDay|null} [startTime] WeeklyMaintenanceWindow startTime
+                         * @property {google.protobuf.IDuration|null} [duration] WeeklyMaintenanceWindow duration
+                         */
+    
+                        /**
+                         * Constructs a new WeeklyMaintenanceWindow.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents a WeeklyMaintenanceWindow.
+                         * @implements IWeeklyMaintenanceWindow
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IWeeklyMaintenanceWindow=} [properties] Properties to set
+                         */
+                        function WeeklyMaintenanceWindow(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WeeklyMaintenanceWindow day.
+                         * @member {google.type.DayOfWeek} day
+                         * @memberof google.cloud.memcache.v1.WeeklyMaintenanceWindow
+                         * @instance
+                         */
+                        WeeklyMaintenanceWindow.prototype.day = 0;
+    
+                        /**
+                         * WeeklyMaintenanceWindow startTime.
+                         * @member {google.type.ITimeOfDay|null|undefined} startTime
+                         * @memberof google.cloud.memcache.v1.WeeklyMaintenanceWindow
+                         * @instance
+                         */
+                        WeeklyMaintenanceWindow.prototype.startTime = null;
+    
+                        /**
+                         * WeeklyMaintenanceWindow duration.
+                         * @member {google.protobuf.IDuration|null|undefined} duration
+                         * @memberof google.cloud.memcache.v1.WeeklyMaintenanceWindow
+                         * @instance
+                         */
+                        WeeklyMaintenanceWindow.prototype.duration = null;
+    
+                        /**
+                         * Creates a new WeeklyMaintenanceWindow instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.memcache.v1.IWeeklyMaintenanceWindow=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow instance
+                         */
+                        WeeklyMaintenanceWindow.create = function create(properties) {
+                            return new WeeklyMaintenanceWindow(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WeeklyMaintenanceWindow message. Does not implicitly {@link google.cloud.memcache.v1.WeeklyMaintenanceWindow.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.memcache.v1.IWeeklyMaintenanceWindow} message WeeklyMaintenanceWindow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WeeklyMaintenanceWindow.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.day);
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.type.TimeOfDay.encode(message.startTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+                                $root.google.protobuf.Duration.encode(message.duration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WeeklyMaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.WeeklyMaintenanceWindow.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.memcache.v1.IWeeklyMaintenanceWindow} message WeeklyMaintenanceWindow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WeeklyMaintenanceWindow.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WeeklyMaintenanceWindow.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.WeeklyMaintenanceWindow();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.day = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.startTime = $root.google.type.TimeOfDay.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WeeklyMaintenanceWindow.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WeeklyMaintenanceWindow message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WeeklyMaintenanceWindow.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.day != null && message.hasOwnProperty("day"))
+                                switch (message.day) {
+                                default:
+                                    return "day: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.type.TimeOfDay.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.duration != null && message.hasOwnProperty("duration")) {
+                                var error = $root.google.protobuf.Duration.verify(message.duration);
+                                if (error)
+                                    return "duration." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WeeklyMaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow
+                         */
+                        WeeklyMaintenanceWindow.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.WeeklyMaintenanceWindow)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.WeeklyMaintenanceWindow();
+                            switch (object.day) {
+                            default:
+                                if (typeof object.day === "number") {
+                                    message.day = object.day;
+                                    break;
+                                }
+                                break;
+                            case "DAY_OF_WEEK_UNSPECIFIED":
+                            case 0:
+                                message.day = 0;
+                                break;
+                            case "MONDAY":
+                            case 1:
+                                message.day = 1;
+                                break;
+                            case "TUESDAY":
+                            case 2:
+                                message.day = 2;
+                                break;
+                            case "WEDNESDAY":
+                            case 3:
+                                message.day = 3;
+                                break;
+                            case "THURSDAY":
+                            case 4:
+                                message.day = 4;
+                                break;
+                            case "FRIDAY":
+                            case 5:
+                                message.day = 5;
+                                break;
+                            case "SATURDAY":
+                            case 6:
+                                message.day = 6;
+                                break;
+                            case "SUNDAY":
+                            case 7:
+                                message.day = 7;
+                                break;
+                            }
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.WeeklyMaintenanceWindow.startTime: object expected");
+                                message.startTime = $root.google.type.TimeOfDay.fromObject(object.startTime);
+                            }
+                            if (object.duration != null) {
+                                if (typeof object.duration !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.WeeklyMaintenanceWindow.duration: object expected");
+                                message.duration = $root.google.protobuf.Duration.fromObject(object.duration);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WeeklyMaintenanceWindow message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.memcache.v1.WeeklyMaintenanceWindow} message WeeklyMaintenanceWindow
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WeeklyMaintenanceWindow.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.day = options.enums === String ? "DAY_OF_WEEK_UNSPECIFIED" : 0;
+                                object.startTime = null;
+                                object.duration = null;
+                            }
+                            if (message.day != null && message.hasOwnProperty("day"))
+                                object.day = options.enums === String ? $root.google.type.DayOfWeek[message.day] === undefined ? message.day : $root.google.type.DayOfWeek[message.day] : message.day;
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.type.TimeOfDay.toObject(message.startTime, options);
+                            if (message.duration != null && message.hasOwnProperty("duration"))
+                                object.duration = $root.google.protobuf.Duration.toObject(message.duration, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WeeklyMaintenanceWindow to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.WeeklyMaintenanceWindow
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WeeklyMaintenanceWindow.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WeeklyMaintenanceWindow
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memcache.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WeeklyMaintenanceWindow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memcache.v1.WeeklyMaintenanceWindow";
+                        };
+    
+                        return WeeklyMaintenanceWindow;
+                    })();
+    
+                    v1.MaintenanceSchedule = (function() {
+    
+                        /**
+                         * Properties of a MaintenanceSchedule.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IMaintenanceSchedule
+                         * @property {google.protobuf.ITimestamp|null} [startTime] MaintenanceSchedule startTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] MaintenanceSchedule endTime
+                         * @property {google.protobuf.ITimestamp|null} [scheduleDeadlineTime] MaintenanceSchedule scheduleDeadlineTime
+                         */
+    
+                        /**
+                         * Constructs a new MaintenanceSchedule.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents a MaintenanceSchedule.
+                         * @implements IMaintenanceSchedule
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IMaintenanceSchedule=} [properties] Properties to set
+                         */
+                        function MaintenanceSchedule(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaintenanceSchedule startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.memcache.v1.MaintenanceSchedule
+                         * @instance
+                         */
+                        MaintenanceSchedule.prototype.startTime = null;
+    
+                        /**
+                         * MaintenanceSchedule endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.memcache.v1.MaintenanceSchedule
+                         * @instance
+                         */
+                        MaintenanceSchedule.prototype.endTime = null;
+    
+                        /**
+                         * MaintenanceSchedule scheduleDeadlineTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} scheduleDeadlineTime
+                         * @memberof google.cloud.memcache.v1.MaintenanceSchedule
+                         * @instance
+                         */
+                        MaintenanceSchedule.prototype.scheduleDeadlineTime = null;
+    
+                        /**
+                         * Creates a new MaintenanceSchedule instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.memcache.v1.IMaintenanceSchedule=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.MaintenanceSchedule} MaintenanceSchedule instance
+                         */
+                        MaintenanceSchedule.create = function create(properties) {
+                            return new MaintenanceSchedule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenanceSchedule message. Does not implicitly {@link google.cloud.memcache.v1.MaintenanceSchedule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.memcache.v1.IMaintenanceSchedule} message MaintenanceSchedule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenanceSchedule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.scheduleDeadlineTime != null && Object.hasOwnProperty.call(message, "scheduleDeadlineTime"))
+                                $root.google.protobuf.Timestamp.encode(message.scheduleDeadlineTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenanceSchedule message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.MaintenanceSchedule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.memcache.v1.IMaintenanceSchedule} message MaintenanceSchedule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenanceSchedule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaintenanceSchedule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.MaintenanceSchedule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.MaintenanceSchedule} MaintenanceSchedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenanceSchedule.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.MaintenanceSchedule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.scheduleDeadlineTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaintenanceSchedule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.MaintenanceSchedule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.MaintenanceSchedule} MaintenanceSchedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenanceSchedule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaintenanceSchedule message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.MaintenanceSchedule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaintenanceSchedule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.scheduleDeadlineTime != null && message.hasOwnProperty("scheduleDeadlineTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.scheduleDeadlineTime);
+                                if (error)
+                                    return "scheduleDeadlineTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaintenanceSchedule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.MaintenanceSchedule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.MaintenanceSchedule} MaintenanceSchedule
+                         */
+                        MaintenanceSchedule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.MaintenanceSchedule)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.MaintenanceSchedule();
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.MaintenanceSchedule.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.MaintenanceSchedule.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.scheduleDeadlineTime != null) {
+                                if (typeof object.scheduleDeadlineTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.MaintenanceSchedule.scheduleDeadlineTime: object expected");
+                                message.scheduleDeadlineTime = $root.google.protobuf.Timestamp.fromObject(object.scheduleDeadlineTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaintenanceSchedule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.memcache.v1.MaintenanceSchedule} message MaintenanceSchedule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaintenanceSchedule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startTime = null;
+                                object.endTime = null;
+                                object.scheduleDeadlineTime = null;
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.scheduleDeadlineTime != null && message.hasOwnProperty("scheduleDeadlineTime"))
+                                object.scheduleDeadlineTime = $root.google.protobuf.Timestamp.toObject(message.scheduleDeadlineTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaintenanceSchedule to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.MaintenanceSchedule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaintenanceSchedule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MaintenanceSchedule
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memcache.v1.MaintenanceSchedule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaintenanceSchedule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memcache.v1.MaintenanceSchedule";
+                        };
+    
+                        return MaintenanceSchedule;
+                    })();
+    
+                    v1.RescheduleMaintenanceRequest = (function() {
+    
+                        /**
+                         * Properties of a RescheduleMaintenanceRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IRescheduleMaintenanceRequest
+                         * @property {string|null} [instance] RescheduleMaintenanceRequest instance
+                         * @property {google.cloud.memcache.v1.RescheduleMaintenanceRequest.RescheduleType|null} [rescheduleType] RescheduleMaintenanceRequest rescheduleType
+                         * @property {google.protobuf.ITimestamp|null} [scheduleTime] RescheduleMaintenanceRequest scheduleTime
+                         */
+    
+                        /**
+                         * Constructs a new RescheduleMaintenanceRequest.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents a RescheduleMaintenanceRequest.
+                         * @implements IRescheduleMaintenanceRequest
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IRescheduleMaintenanceRequest=} [properties] Properties to set
+                         */
+                        function RescheduleMaintenanceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RescheduleMaintenanceRequest instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.memcache.v1.RescheduleMaintenanceRequest
+                         * @instance
+                         */
+                        RescheduleMaintenanceRequest.prototype.instance = "";
+    
+                        /**
+                         * RescheduleMaintenanceRequest rescheduleType.
+                         * @member {google.cloud.memcache.v1.RescheduleMaintenanceRequest.RescheduleType} rescheduleType
+                         * @memberof google.cloud.memcache.v1.RescheduleMaintenanceRequest
+                         * @instance
+                         */
+                        RescheduleMaintenanceRequest.prototype.rescheduleType = 0;
+    
+                        /**
+                         * RescheduleMaintenanceRequest scheduleTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} scheduleTime
+                         * @memberof google.cloud.memcache.v1.RescheduleMaintenanceRequest
+                         * @instance
+                         */
+                        RescheduleMaintenanceRequest.prototype.scheduleTime = null;
+    
+                        /**
+                         * Creates a new RescheduleMaintenanceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IRescheduleMaintenanceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest instance
+                         */
+                        RescheduleMaintenanceRequest.create = function create(properties) {
+                            return new RescheduleMaintenanceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RescheduleMaintenanceRequest message. Does not implicitly {@link google.cloud.memcache.v1.RescheduleMaintenanceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IRescheduleMaintenanceRequest} message RescheduleMaintenanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RescheduleMaintenanceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.instance);
+                            if (message.rescheduleType != null && Object.hasOwnProperty.call(message, "rescheduleType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.rescheduleType);
+                            if (message.scheduleTime != null && Object.hasOwnProperty.call(message, "scheduleTime"))
+                                $root.google.protobuf.Timestamp.encode(message.scheduleTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RescheduleMaintenanceRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.RescheduleMaintenanceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.IRescheduleMaintenanceRequest} message RescheduleMaintenanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RescheduleMaintenanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RescheduleMaintenanceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.RescheduleMaintenanceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instance = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rescheduleType = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.scheduleTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RescheduleMaintenanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RescheduleMaintenanceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RescheduleMaintenanceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
+                            if (message.rescheduleType != null && message.hasOwnProperty("rescheduleType"))
+                                switch (message.rescheduleType) {
+                                default:
+                                    return "rescheduleType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.scheduleTime);
+                                if (error)
+                                    return "scheduleTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RescheduleMaintenanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest
+                         */
+                        RescheduleMaintenanceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.RescheduleMaintenanceRequest)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.RescheduleMaintenanceRequest();
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
+                            switch (object.rescheduleType) {
+                            default:
+                                if (typeof object.rescheduleType === "number") {
+                                    message.rescheduleType = object.rescheduleType;
+                                    break;
+                                }
+                                break;
+                            case "RESCHEDULE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.rescheduleType = 0;
+                                break;
+                            case "IMMEDIATE":
+                            case 1:
+                                message.rescheduleType = 1;
+                                break;
+                            case "NEXT_AVAILABLE_WINDOW":
+                            case 2:
+                                message.rescheduleType = 2;
+                                break;
+                            case "SPECIFIC_TIME":
+                            case 3:
+                                message.rescheduleType = 3;
+                                break;
+                            }
+                            if (object.scheduleTime != null) {
+                                if (typeof object.scheduleTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.RescheduleMaintenanceRequest.scheduleTime: object expected");
+                                message.scheduleTime = $root.google.protobuf.Timestamp.fromObject(object.scheduleTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RescheduleMaintenanceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1.RescheduleMaintenanceRequest} message RescheduleMaintenanceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RescheduleMaintenanceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.instance = "";
+                                object.rescheduleType = options.enums === String ? "RESCHEDULE_TYPE_UNSPECIFIED" : 0;
+                                object.scheduleTime = null;
+                            }
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
+                            if (message.rescheduleType != null && message.hasOwnProperty("rescheduleType"))
+                                object.rescheduleType = options.enums === String ? $root.google.cloud.memcache.v1.RescheduleMaintenanceRequest.RescheduleType[message.rescheduleType] === undefined ? message.rescheduleType : $root.google.cloud.memcache.v1.RescheduleMaintenanceRequest.RescheduleType[message.rescheduleType] : message.rescheduleType;
+                            if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime"))
+                                object.scheduleTime = $root.google.protobuf.Timestamp.toObject(message.scheduleTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RescheduleMaintenanceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.RescheduleMaintenanceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RescheduleMaintenanceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RescheduleMaintenanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memcache.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RescheduleMaintenanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memcache.v1.RescheduleMaintenanceRequest";
+                        };
+    
+                        /**
+                         * RescheduleType enum.
+                         * @name google.cloud.memcache.v1.RescheduleMaintenanceRequest.RescheduleType
+                         * @enum {number}
+                         * @property {number} RESCHEDULE_TYPE_UNSPECIFIED=0 RESCHEDULE_TYPE_UNSPECIFIED value
+                         * @property {number} IMMEDIATE=1 IMMEDIATE value
+                         * @property {number} NEXT_AVAILABLE_WINDOW=2 NEXT_AVAILABLE_WINDOW value
+                         * @property {number} SPECIFIC_TIME=3 SPECIFIC_TIME value
+                         */
+                        RescheduleMaintenanceRequest.RescheduleType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "CREATING"] = 1;
-                            values[valuesById[2] = "READY"] = 2;
-                            values[valuesById[4] = "DELETING"] = 4;
-                            values[valuesById[5] = "PERFORMING_MAINTENANCE"] = 5;
+                            values[valuesById[0] = "RESCHEDULE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IMMEDIATE"] = 1;
+                            values[valuesById[2] = "NEXT_AVAILABLE_WINDOW"] = 2;
+                            values[valuesById[3] = "SPECIFIC_TIME"] = 3;
                             return values;
                         })();
     
-                        return Instance;
+                        return RescheduleMaintenanceRequest;
                     })();
     
                     v1.ListInstancesRequest = (function() {
@@ -3944,6 +5221,20 @@
                         return UpdateParametersRequest;
                     })();
     
+                    /**
+                     * MemcacheVersion enum.
+                     * @name google.cloud.memcache.v1.MemcacheVersion
+                     * @enum {number}
+                     * @property {number} MEMCACHE_VERSION_UNSPECIFIED=0 MEMCACHE_VERSION_UNSPECIFIED value
+                     * @property {number} MEMCACHE_1_5=1 MEMCACHE_1_5 value
+                     */
+                    v1.MemcacheVersion = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MEMCACHE_VERSION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MEMCACHE_1_5"] = 1;
+                        return values;
+                    })();
+    
                     v1.MemcacheParameters = (function() {
     
                         /**
@@ -4558,18 +5849,424 @@
                         return OperationMetadata;
                     })();
     
-                    /**
-                     * MemcacheVersion enum.
-                     * @name google.cloud.memcache.v1.MemcacheVersion
-                     * @enum {number}
-                     * @property {number} MEMCACHE_VERSION_UNSPECIFIED=0 MEMCACHE_VERSION_UNSPECIFIED value
-                     * @property {number} MEMCACHE_1_5=1 MEMCACHE_1_5 value
-                     */
-                    v1.MemcacheVersion = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "MEMCACHE_VERSION_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "MEMCACHE_1_5"] = 1;
-                        return values;
+                    v1.LocationMetadata = (function() {
+    
+                        /**
+                         * Properties of a LocationMetadata.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface ILocationMetadata
+                         * @property {Object.<string,google.cloud.memcache.v1.IZoneMetadata>|null} [availableZones] LocationMetadata availableZones
+                         */
+    
+                        /**
+                         * Constructs a new LocationMetadata.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents a LocationMetadata.
+                         * @implements ILocationMetadata
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.ILocationMetadata=} [properties] Properties to set
+                         */
+                        function LocationMetadata(properties) {
+                            this.availableZones = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LocationMetadata availableZones.
+                         * @member {Object.<string,google.cloud.memcache.v1.IZoneMetadata>} availableZones
+                         * @memberof google.cloud.memcache.v1.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.availableZones = $util.emptyObject;
+    
+                        /**
+                         * Creates a new LocationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.memcache.v1.ILocationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.LocationMetadata} LocationMetadata instance
+                         */
+                        LocationMetadata.create = function create(properties) {
+                            return new LocationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.memcache.v1.LocationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.memcache.v1.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.availableZones != null && Object.hasOwnProperty.call(message, "availableZones"))
+                                for (var keys = Object.keys(message.availableZones), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.memcache.v1.ZoneMetadata.encode(message.availableZones[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.LocationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.memcache.v1.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.LocationMetadata(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (message.availableZones === $util.emptyObject)
+                                            message.availableZones = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.memcache.v1.ZoneMetadata.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.availableZones[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LocationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LocationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.availableZones != null && message.hasOwnProperty("availableZones")) {
+                                if (!$util.isObject(message.availableZones))
+                                    return "availableZones: object expected";
+                                var key = Object.keys(message.availableZones);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.memcache.v1.ZoneMetadata.verify(message.availableZones[key[i]]);
+                                    if (error)
+                                        return "availableZones." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.LocationMetadata} LocationMetadata
+                         */
+                        LocationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.LocationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1.LocationMetadata();
+                            if (object.availableZones) {
+                                if (typeof object.availableZones !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1.LocationMetadata.availableZones: object expected");
+                                message.availableZones = {};
+                                for (var keys = Object.keys(object.availableZones), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.availableZones[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.memcache.v1.LocationMetadata.availableZones: object expected");
+                                    message.availableZones[keys[i]] = $root.google.cloud.memcache.v1.ZoneMetadata.fromObject(object.availableZones[keys[i]]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.memcache.v1.LocationMetadata} message LocationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LocationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.availableZones = {};
+                            var keys2;
+                            if (message.availableZones && (keys2 = Object.keys(message.availableZones)).length) {
+                                object.availableZones = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.availableZones[keys2[j]] = $root.google.cloud.memcache.v1.ZoneMetadata.toObject(message.availableZones[keys2[j]], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LocationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.LocationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LocationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LocationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memcache.v1.LocationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memcache.v1.LocationMetadata";
+                        };
+    
+                        return LocationMetadata;
+                    })();
+    
+                    v1.ZoneMetadata = (function() {
+    
+                        /**
+                         * Properties of a ZoneMetadata.
+                         * @memberof google.cloud.memcache.v1
+                         * @interface IZoneMetadata
+                         */
+    
+                        /**
+                         * Constructs a new ZoneMetadata.
+                         * @memberof google.cloud.memcache.v1
+                         * @classdesc Represents a ZoneMetadata.
+                         * @implements IZoneMetadata
+                         * @constructor
+                         * @param {google.cloud.memcache.v1.IZoneMetadata=} [properties] Properties to set
+                         */
+                        function ZoneMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ZoneMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1.ZoneMetadata
+                         * @static
+                         * @param {google.cloud.memcache.v1.IZoneMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1.ZoneMetadata} ZoneMetadata instance
+                         */
+                        ZoneMetadata.create = function create(properties) {
+                            return new ZoneMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ZoneMetadata message. Does not implicitly {@link google.cloud.memcache.v1.ZoneMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1.ZoneMetadata
+                         * @static
+                         * @param {google.cloud.memcache.v1.IZoneMetadata} message ZoneMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ZoneMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ZoneMetadata message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.ZoneMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1.ZoneMetadata
+                         * @static
+                         * @param {google.cloud.memcache.v1.IZoneMetadata} message ZoneMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ZoneMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ZoneMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1.ZoneMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1.ZoneMetadata} ZoneMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ZoneMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1.ZoneMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ZoneMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1.ZoneMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1.ZoneMetadata} ZoneMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ZoneMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ZoneMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1.ZoneMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ZoneMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ZoneMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1.ZoneMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1.ZoneMetadata} ZoneMetadata
+                         */
+                        ZoneMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1.ZoneMetadata)
+                                return object;
+                            return new $root.google.cloud.memcache.v1.ZoneMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from a ZoneMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1.ZoneMetadata
+                         * @static
+                         * @param {google.cloud.memcache.v1.ZoneMetadata} message ZoneMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ZoneMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ZoneMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1.ZoneMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ZoneMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ZoneMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memcache.v1.ZoneMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ZoneMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memcache.v1.ZoneMetadata";
+                        };
+    
+                        return ZoneMetadata;
                     })();
     
                     return v1;
@@ -4880,6 +6577,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.memcache.v1beta2.CloudMemcache|rescheduleMaintenance}.
+                         * @memberof google.cloud.memcache.v1beta2.CloudMemcache
+                         * @typedef RescheduleMaintenanceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls RescheduleMaintenance.
+                         * @function rescheduleMaintenance
+                         * @memberof google.cloud.memcache.v1beta2.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1beta2.IRescheduleMaintenanceRequest} request RescheduleMaintenanceRequest message or plain object
+                         * @param {google.cloud.memcache.v1beta2.CloudMemcache.RescheduleMaintenanceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudMemcache.prototype.rescheduleMaintenance = function rescheduleMaintenance(request, callback) {
+                            return this.rpcCall(rescheduleMaintenance, $root.google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "RescheduleMaintenance" });
+    
+                        /**
+                         * Calls RescheduleMaintenance.
+                         * @function rescheduleMaintenance
+                         * @memberof google.cloud.memcache.v1beta2.CloudMemcache
+                         * @instance
+                         * @param {google.cloud.memcache.v1beta2.IRescheduleMaintenanceRequest} request RescheduleMaintenanceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return CloudMemcache;
                     })();
     
@@ -4906,6 +6636,8 @@
                          * @property {Array.<google.cloud.memcache.v1beta2.Instance.IInstanceMessage>|null} [instanceMessages] Instance instanceMessages
                          * @property {string|null} [discoveryEndpoint] Instance discoveryEndpoint
                          * @property {boolean|null} [updateAvailable] Instance updateAvailable
+                         * @property {google.cloud.memcache.v1beta2.IMaintenancePolicy|null} [maintenancePolicy] Instance maintenancePolicy
+                         * @property {google.cloud.memcache.v1beta2.IMaintenanceSchedule|null} [maintenanceSchedule] Instance maintenanceSchedule
                          */
     
                         /**
@@ -5064,6 +6796,22 @@
                         Instance.prototype.updateAvailable = false;
     
                         /**
+                         * Instance maintenancePolicy.
+                         * @member {google.cloud.memcache.v1beta2.IMaintenancePolicy|null|undefined} maintenancePolicy
+                         * @memberof google.cloud.memcache.v1beta2.Instance
+                         * @instance
+                         */
+                        Instance.prototype.maintenancePolicy = null;
+    
+                        /**
+                         * Instance maintenanceSchedule.
+                         * @member {google.cloud.memcache.v1beta2.IMaintenanceSchedule|null|undefined} maintenanceSchedule
+                         * @memberof google.cloud.memcache.v1beta2.Instance
+                         * @instance
+                         */
+                        Instance.prototype.maintenanceSchedule = null;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.memcache.v1beta2.Instance
@@ -5125,6 +6873,10 @@
                                 writer.uint32(/* id 20, wireType 2 =*/162).string(message.discoveryEndpoint);
                             if (message.updateAvailable != null && Object.hasOwnProperty.call(message, "updateAvailable"))
                                 writer.uint32(/* id 21, wireType 0 =*/168).bool(message.updateAvailable);
+                            if (message.maintenancePolicy != null && Object.hasOwnProperty.call(message, "maintenancePolicy"))
+                                $root.google.cloud.memcache.v1beta2.MaintenancePolicy.encode(message.maintenancePolicy, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                            if (message.maintenanceSchedule != null && Object.hasOwnProperty.call(message, "maintenanceSchedule"))
+                                $root.google.cloud.memcache.v1beta2.MaintenanceSchedule.encode(message.maintenanceSchedule, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                             return writer;
                         };
     
@@ -5252,6 +7004,14 @@
                                         message.updateAvailable = reader.bool();
                                         break;
                                     }
+                                case 22: {
+                                        message.maintenancePolicy = $root.google.cloud.memcache.v1beta2.MaintenancePolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 23: {
+                                        message.maintenanceSchedule = $root.google.cloud.memcache.v1beta2.MaintenanceSchedule.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5358,6 +7118,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                 case 4:
                                 case 5:
                                     break;
@@ -5380,6 +7141,16 @@
                             if (message.updateAvailable != null && message.hasOwnProperty("updateAvailable"))
                                 if (typeof message.updateAvailable !== "boolean")
                                     return "updateAvailable: boolean expected";
+                            if (message.maintenancePolicy != null && message.hasOwnProperty("maintenancePolicy")) {
+                                var error = $root.google.cloud.memcache.v1beta2.MaintenancePolicy.verify(message.maintenancePolicy);
+                                if (error)
+                                    return "maintenancePolicy." + error;
+                            }
+                            if (message.maintenanceSchedule != null && message.hasOwnProperty("maintenanceSchedule")) {
+                                var error = $root.google.cloud.memcache.v1beta2.MaintenanceSchedule.verify(message.maintenanceSchedule);
+                                if (error)
+                                    return "maintenanceSchedule." + error;
+                            }
                             return null;
                         };
     
@@ -5482,6 +7253,10 @@
                             case 2:
                                 message.state = 2;
                                 break;
+                            case "UPDATING":
+                            case 3:
+                                message.state = 3;
+                                break;
                             case "DELETING":
                             case 4:
                                 message.state = 4;
@@ -5507,6 +7282,16 @@
                                 message.discoveryEndpoint = String(object.discoveryEndpoint);
                             if (object.updateAvailable != null)
                                 message.updateAvailable = Boolean(object.updateAvailable);
+                            if (object.maintenancePolicy != null) {
+                                if (typeof object.maintenancePolicy !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1beta2.Instance.maintenancePolicy: object expected");
+                                message.maintenancePolicy = $root.google.cloud.memcache.v1beta2.MaintenancePolicy.fromObject(object.maintenancePolicy);
+                            }
+                            if (object.maintenanceSchedule != null) {
+                                if (typeof object.maintenanceSchedule !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1beta2.Instance.maintenanceSchedule: object expected");
+                                message.maintenanceSchedule = $root.google.cloud.memcache.v1beta2.MaintenanceSchedule.fromObject(object.maintenanceSchedule);
+                            }
                             return message;
                         };
     
@@ -5544,6 +7329,8 @@
                                 object.memcacheFullVersion = "";
                                 object.discoveryEndpoint = "";
                                 object.updateAvailable = false;
+                                object.maintenancePolicy = null;
+                                object.maintenanceSchedule = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5592,6 +7379,10 @@
                                 object.discoveryEndpoint = message.discoveryEndpoint;
                             if (message.updateAvailable != null && message.hasOwnProperty("updateAvailable"))
                                 object.updateAvailable = message.updateAvailable;
+                            if (message.maintenancePolicy != null && message.hasOwnProperty("maintenancePolicy"))
+                                object.maintenancePolicy = $root.google.cloud.memcache.v1beta2.MaintenancePolicy.toObject(message.maintenancePolicy, options);
+                            if (message.maintenanceSchedule != null && message.hasOwnProperty("maintenanceSchedule"))
+                                object.maintenanceSchedule = $root.google.cloud.memcache.v1beta2.MaintenanceSchedule.toObject(message.maintenanceSchedule, options);
                             return object;
                         };
     
@@ -5620,6 +7411,28 @@
                             }
                             return typeUrlPrefix + "/google.cloud.memcache.v1beta2.Instance";
                         };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.memcache.v1beta2.Instance.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} READY=2 READY value
+                         * @property {number} UPDATING=3 UPDATING value
+                         * @property {number} DELETING=4 DELETING value
+                         * @property {number} PERFORMING_MAINTENANCE=5 PERFORMING_MAINTENANCE value
+                         */
+                        Instance.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "READY"] = 2;
+                            values[valuesById[3] = "UPDATING"] = 3;
+                            values[valuesById[4] = "DELETING"] = 4;
+                            values[valuesById[5] = "PERFORMING_MAINTENANCE"] = 5;
+                            return values;
+                        })();
     
                         Instance.NodeConfig = (function() {
     
@@ -6509,27 +8322,886 @@
                             return InstanceMessage;
                         })();
     
-                        /**
-                         * State enum.
-                         * @name google.cloud.memcache.v1beta2.Instance.State
-                         * @enum {number}
-                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                         * @property {number} CREATING=1 CREATING value
-                         * @property {number} READY=2 READY value
-                         * @property {number} DELETING=4 DELETING value
-                         * @property {number} PERFORMING_MAINTENANCE=5 PERFORMING_MAINTENANCE value
-                         */
-                        Instance.State = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "CREATING"] = 1;
-                            values[valuesById[2] = "READY"] = 2;
-                            values[valuesById[4] = "DELETING"] = 4;
-                            values[valuesById[5] = "PERFORMING_MAINTENANCE"] = 5;
-                            return values;
-                        })();
-    
                         return Instance;
+                    })();
+    
+                    v1beta2.MaintenancePolicy = (function() {
+    
+                        /**
+                         * Properties of a MaintenancePolicy.
+                         * @memberof google.cloud.memcache.v1beta2
+                         * @interface IMaintenancePolicy
+                         * @property {google.protobuf.ITimestamp|null} [createTime] MaintenancePolicy createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] MaintenancePolicy updateTime
+                         * @property {string|null} [description] MaintenancePolicy description
+                         * @property {Array.<google.cloud.memcache.v1beta2.IWeeklyMaintenanceWindow>|null} [weeklyMaintenanceWindow] MaintenancePolicy weeklyMaintenanceWindow
+                         */
+    
+                        /**
+                         * Constructs a new MaintenancePolicy.
+                         * @memberof google.cloud.memcache.v1beta2
+                         * @classdesc Represents a MaintenancePolicy.
+                         * @implements IMaintenancePolicy
+                         * @constructor
+                         * @param {google.cloud.memcache.v1beta2.IMaintenancePolicy=} [properties] Properties to set
+                         */
+                        function MaintenancePolicy(properties) {
+                            this.weeklyMaintenanceWindow = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaintenancePolicy createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.memcache.v1beta2.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.createTime = null;
+    
+                        /**
+                         * MaintenancePolicy updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.memcache.v1beta2.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.updateTime = null;
+    
+                        /**
+                         * MaintenancePolicy description.
+                         * @member {string} description
+                         * @memberof google.cloud.memcache.v1beta2.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.description = "";
+    
+                        /**
+                         * MaintenancePolicy weeklyMaintenanceWindow.
+                         * @member {Array.<google.cloud.memcache.v1beta2.IWeeklyMaintenanceWindow>} weeklyMaintenanceWindow
+                         * @memberof google.cloud.memcache.v1beta2.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.weeklyMaintenanceWindow = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MaintenancePolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1beta2.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IMaintenancePolicy=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1beta2.MaintenancePolicy} MaintenancePolicy instance
+                         */
+                        MaintenancePolicy.create = function create(properties) {
+                            return new MaintenancePolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenancePolicy message. Does not implicitly {@link google.cloud.memcache.v1beta2.MaintenancePolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1beta2.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IMaintenancePolicy} message MaintenancePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenancePolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.weeklyMaintenanceWindow != null && message.weeklyMaintenanceWindow.length)
+                                for (var i = 0; i < message.weeklyMaintenanceWindow.length; ++i)
+                                    $root.google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow.encode(message.weeklyMaintenanceWindow[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenancePolicy message, length delimited. Does not implicitly {@link google.cloud.memcache.v1beta2.MaintenancePolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1beta2.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IMaintenancePolicy} message MaintenancePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenancePolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaintenancePolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1beta2.MaintenancePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1beta2.MaintenancePolicy} MaintenancePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenancePolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1beta2.MaintenancePolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.weeklyMaintenanceWindow && message.weeklyMaintenanceWindow.length))
+                                            message.weeklyMaintenanceWindow = [];
+                                        message.weeklyMaintenanceWindow.push($root.google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaintenancePolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1beta2.MaintenancePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1beta2.MaintenancePolicy} MaintenancePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenancePolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaintenancePolicy message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1beta2.MaintenancePolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaintenancePolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.weeklyMaintenanceWindow != null && message.hasOwnProperty("weeklyMaintenanceWindow")) {
+                                if (!Array.isArray(message.weeklyMaintenanceWindow))
+                                    return "weeklyMaintenanceWindow: array expected";
+                                for (var i = 0; i < message.weeklyMaintenanceWindow.length; ++i) {
+                                    var error = $root.google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow.verify(message.weeklyMaintenanceWindow[i]);
+                                    if (error)
+                                        return "weeklyMaintenanceWindow." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaintenancePolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1beta2.MaintenancePolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1beta2.MaintenancePolicy} MaintenancePolicy
+                         */
+                        MaintenancePolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1beta2.MaintenancePolicy)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1beta2.MaintenancePolicy();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1beta2.MaintenancePolicy.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1beta2.MaintenancePolicy.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.weeklyMaintenanceWindow) {
+                                if (!Array.isArray(object.weeklyMaintenanceWindow))
+                                    throw TypeError(".google.cloud.memcache.v1beta2.MaintenancePolicy.weeklyMaintenanceWindow: array expected");
+                                message.weeklyMaintenanceWindow = [];
+                                for (var i = 0; i < object.weeklyMaintenanceWindow.length; ++i) {
+                                    if (typeof object.weeklyMaintenanceWindow[i] !== "object")
+                                        throw TypeError(".google.cloud.memcache.v1beta2.MaintenancePolicy.weeklyMaintenanceWindow: object expected");
+                                    message.weeklyMaintenanceWindow[i] = $root.google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow.fromObject(object.weeklyMaintenanceWindow[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaintenancePolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1beta2.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.MaintenancePolicy} message MaintenancePolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaintenancePolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.weeklyMaintenanceWindow = [];
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.weeklyMaintenanceWindow && message.weeklyMaintenanceWindow.length) {
+                                object.weeklyMaintenanceWindow = [];
+                                for (var j = 0; j < message.weeklyMaintenanceWindow.length; ++j)
+                                    object.weeklyMaintenanceWindow[j] = $root.google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow.toObject(message.weeklyMaintenanceWindow[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaintenancePolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1beta2.MaintenancePolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaintenancePolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MaintenancePolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memcache.v1beta2.MaintenancePolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaintenancePolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memcache.v1beta2.MaintenancePolicy";
+                        };
+    
+                        return MaintenancePolicy;
+                    })();
+    
+                    v1beta2.WeeklyMaintenanceWindow = (function() {
+    
+                        /**
+                         * Properties of a WeeklyMaintenanceWindow.
+                         * @memberof google.cloud.memcache.v1beta2
+                         * @interface IWeeklyMaintenanceWindow
+                         * @property {google.type.DayOfWeek|null} [day] WeeklyMaintenanceWindow day
+                         * @property {google.type.ITimeOfDay|null} [startTime] WeeklyMaintenanceWindow startTime
+                         * @property {google.protobuf.IDuration|null} [duration] WeeklyMaintenanceWindow duration
+                         */
+    
+                        /**
+                         * Constructs a new WeeklyMaintenanceWindow.
+                         * @memberof google.cloud.memcache.v1beta2
+                         * @classdesc Represents a WeeklyMaintenanceWindow.
+                         * @implements IWeeklyMaintenanceWindow
+                         * @constructor
+                         * @param {google.cloud.memcache.v1beta2.IWeeklyMaintenanceWindow=} [properties] Properties to set
+                         */
+                        function WeeklyMaintenanceWindow(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WeeklyMaintenanceWindow day.
+                         * @member {google.type.DayOfWeek} day
+                         * @memberof google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow
+                         * @instance
+                         */
+                        WeeklyMaintenanceWindow.prototype.day = 0;
+    
+                        /**
+                         * WeeklyMaintenanceWindow startTime.
+                         * @member {google.type.ITimeOfDay|null|undefined} startTime
+                         * @memberof google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow
+                         * @instance
+                         */
+                        WeeklyMaintenanceWindow.prototype.startTime = null;
+    
+                        /**
+                         * WeeklyMaintenanceWindow duration.
+                         * @member {google.protobuf.IDuration|null|undefined} duration
+                         * @memberof google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow
+                         * @instance
+                         */
+                        WeeklyMaintenanceWindow.prototype.duration = null;
+    
+                        /**
+                         * Creates a new WeeklyMaintenanceWindow instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IWeeklyMaintenanceWindow=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow instance
+                         */
+                        WeeklyMaintenanceWindow.create = function create(properties) {
+                            return new WeeklyMaintenanceWindow(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WeeklyMaintenanceWindow message. Does not implicitly {@link google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IWeeklyMaintenanceWindow} message WeeklyMaintenanceWindow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WeeklyMaintenanceWindow.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.day);
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.type.TimeOfDay.encode(message.startTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+                                $root.google.protobuf.Duration.encode(message.duration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WeeklyMaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IWeeklyMaintenanceWindow} message WeeklyMaintenanceWindow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WeeklyMaintenanceWindow.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WeeklyMaintenanceWindow.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.day = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.startTime = $root.google.type.TimeOfDay.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WeeklyMaintenanceWindow.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WeeklyMaintenanceWindow message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WeeklyMaintenanceWindow.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.day != null && message.hasOwnProperty("day"))
+                                switch (message.day) {
+                                default:
+                                    return "day: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.type.TimeOfDay.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.duration != null && message.hasOwnProperty("duration")) {
+                                var error = $root.google.protobuf.Duration.verify(message.duration);
+                                if (error)
+                                    return "duration." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WeeklyMaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow
+                         */
+                        WeeklyMaintenanceWindow.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow();
+                            switch (object.day) {
+                            default:
+                                if (typeof object.day === "number") {
+                                    message.day = object.day;
+                                    break;
+                                }
+                                break;
+                            case "DAY_OF_WEEK_UNSPECIFIED":
+                            case 0:
+                                message.day = 0;
+                                break;
+                            case "MONDAY":
+                            case 1:
+                                message.day = 1;
+                                break;
+                            case "TUESDAY":
+                            case 2:
+                                message.day = 2;
+                                break;
+                            case "WEDNESDAY":
+                            case 3:
+                                message.day = 3;
+                                break;
+                            case "THURSDAY":
+                            case 4:
+                                message.day = 4;
+                                break;
+                            case "FRIDAY":
+                            case 5:
+                                message.day = 5;
+                                break;
+                            case "SATURDAY":
+                            case 6:
+                                message.day = 6;
+                                break;
+                            case "SUNDAY":
+                            case 7:
+                                message.day = 7;
+                                break;
+                            }
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow.startTime: object expected");
+                                message.startTime = $root.google.type.TimeOfDay.fromObject(object.startTime);
+                            }
+                            if (object.duration != null) {
+                                if (typeof object.duration !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow.duration: object expected");
+                                message.duration = $root.google.protobuf.Duration.fromObject(object.duration);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WeeklyMaintenanceWindow message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow} message WeeklyMaintenanceWindow
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WeeklyMaintenanceWindow.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.day = options.enums === String ? "DAY_OF_WEEK_UNSPECIFIED" : 0;
+                                object.startTime = null;
+                                object.duration = null;
+                            }
+                            if (message.day != null && message.hasOwnProperty("day"))
+                                object.day = options.enums === String ? $root.google.type.DayOfWeek[message.day] === undefined ? message.day : $root.google.type.DayOfWeek[message.day] : message.day;
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.type.TimeOfDay.toObject(message.startTime, options);
+                            if (message.duration != null && message.hasOwnProperty("duration"))
+                                object.duration = $root.google.protobuf.Duration.toObject(message.duration, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WeeklyMaintenanceWindow to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WeeklyMaintenanceWindow.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WeeklyMaintenanceWindow
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WeeklyMaintenanceWindow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow";
+                        };
+    
+                        return WeeklyMaintenanceWindow;
+                    })();
+    
+                    v1beta2.MaintenanceSchedule = (function() {
+    
+                        /**
+                         * Properties of a MaintenanceSchedule.
+                         * @memberof google.cloud.memcache.v1beta2
+                         * @interface IMaintenanceSchedule
+                         * @property {google.protobuf.ITimestamp|null} [startTime] MaintenanceSchedule startTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] MaintenanceSchedule endTime
+                         * @property {google.protobuf.ITimestamp|null} [scheduleDeadlineTime] MaintenanceSchedule scheduleDeadlineTime
+                         */
+    
+                        /**
+                         * Constructs a new MaintenanceSchedule.
+                         * @memberof google.cloud.memcache.v1beta2
+                         * @classdesc Represents a MaintenanceSchedule.
+                         * @implements IMaintenanceSchedule
+                         * @constructor
+                         * @param {google.cloud.memcache.v1beta2.IMaintenanceSchedule=} [properties] Properties to set
+                         */
+                        function MaintenanceSchedule(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaintenanceSchedule startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.memcache.v1beta2.MaintenanceSchedule
+                         * @instance
+                         */
+                        MaintenanceSchedule.prototype.startTime = null;
+    
+                        /**
+                         * MaintenanceSchedule endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.memcache.v1beta2.MaintenanceSchedule
+                         * @instance
+                         */
+                        MaintenanceSchedule.prototype.endTime = null;
+    
+                        /**
+                         * MaintenanceSchedule scheduleDeadlineTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} scheduleDeadlineTime
+                         * @memberof google.cloud.memcache.v1beta2.MaintenanceSchedule
+                         * @instance
+                         */
+                        MaintenanceSchedule.prototype.scheduleDeadlineTime = null;
+    
+                        /**
+                         * Creates a new MaintenanceSchedule instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1beta2.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IMaintenanceSchedule=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1beta2.MaintenanceSchedule} MaintenanceSchedule instance
+                         */
+                        MaintenanceSchedule.create = function create(properties) {
+                            return new MaintenanceSchedule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenanceSchedule message. Does not implicitly {@link google.cloud.memcache.v1beta2.MaintenanceSchedule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1beta2.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IMaintenanceSchedule} message MaintenanceSchedule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenanceSchedule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.scheduleDeadlineTime != null && Object.hasOwnProperty.call(message, "scheduleDeadlineTime"))
+                                $root.google.protobuf.Timestamp.encode(message.scheduleDeadlineTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenanceSchedule message, length delimited. Does not implicitly {@link google.cloud.memcache.v1beta2.MaintenanceSchedule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1beta2.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IMaintenanceSchedule} message MaintenanceSchedule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenanceSchedule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaintenanceSchedule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1beta2.MaintenanceSchedule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1beta2.MaintenanceSchedule} MaintenanceSchedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenanceSchedule.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1beta2.MaintenanceSchedule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.scheduleDeadlineTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaintenanceSchedule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1beta2.MaintenanceSchedule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1beta2.MaintenanceSchedule} MaintenanceSchedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenanceSchedule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaintenanceSchedule message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1beta2.MaintenanceSchedule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaintenanceSchedule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.scheduleDeadlineTime != null && message.hasOwnProperty("scheduleDeadlineTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.scheduleDeadlineTime);
+                                if (error)
+                                    return "scheduleDeadlineTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaintenanceSchedule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1beta2.MaintenanceSchedule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1beta2.MaintenanceSchedule} MaintenanceSchedule
+                         */
+                        MaintenanceSchedule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1beta2.MaintenanceSchedule)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1beta2.MaintenanceSchedule();
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1beta2.MaintenanceSchedule.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1beta2.MaintenanceSchedule.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.scheduleDeadlineTime != null) {
+                                if (typeof object.scheduleDeadlineTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1beta2.MaintenanceSchedule.scheduleDeadlineTime: object expected");
+                                message.scheduleDeadlineTime = $root.google.protobuf.Timestamp.fromObject(object.scheduleDeadlineTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaintenanceSchedule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1beta2.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.MaintenanceSchedule} message MaintenanceSchedule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaintenanceSchedule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startTime = null;
+                                object.endTime = null;
+                                object.scheduleDeadlineTime = null;
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.scheduleDeadlineTime != null && message.hasOwnProperty("scheduleDeadlineTime"))
+                                object.scheduleDeadlineTime = $root.google.protobuf.Timestamp.toObject(message.scheduleDeadlineTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaintenanceSchedule to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1beta2.MaintenanceSchedule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaintenanceSchedule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MaintenanceSchedule
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memcache.v1beta2.MaintenanceSchedule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaintenanceSchedule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memcache.v1beta2.MaintenanceSchedule";
+                        };
+    
+                        return MaintenanceSchedule;
                     })();
     
                     v1beta2.ListInstancesRequest = (function() {
@@ -8014,6 +10686,308 @@
                         return DeleteInstanceRequest;
                     })();
     
+                    v1beta2.RescheduleMaintenanceRequest = (function() {
+    
+                        /**
+                         * Properties of a RescheduleMaintenanceRequest.
+                         * @memberof google.cloud.memcache.v1beta2
+                         * @interface IRescheduleMaintenanceRequest
+                         * @property {string|null} [instance] RescheduleMaintenanceRequest instance
+                         * @property {google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.RescheduleType|null} [rescheduleType] RescheduleMaintenanceRequest rescheduleType
+                         * @property {google.protobuf.ITimestamp|null} [scheduleTime] RescheduleMaintenanceRequest scheduleTime
+                         */
+    
+                        /**
+                         * Constructs a new RescheduleMaintenanceRequest.
+                         * @memberof google.cloud.memcache.v1beta2
+                         * @classdesc Represents a RescheduleMaintenanceRequest.
+                         * @implements IRescheduleMaintenanceRequest
+                         * @constructor
+                         * @param {google.cloud.memcache.v1beta2.IRescheduleMaintenanceRequest=} [properties] Properties to set
+                         */
+                        function RescheduleMaintenanceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RescheduleMaintenanceRequest instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest
+                         * @instance
+                         */
+                        RescheduleMaintenanceRequest.prototype.instance = "";
+    
+                        /**
+                         * RescheduleMaintenanceRequest rescheduleType.
+                         * @member {google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.RescheduleType} rescheduleType
+                         * @memberof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest
+                         * @instance
+                         */
+                        RescheduleMaintenanceRequest.prototype.rescheduleType = 0;
+    
+                        /**
+                         * RescheduleMaintenanceRequest scheduleTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} scheduleTime
+                         * @memberof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest
+                         * @instance
+                         */
+                        RescheduleMaintenanceRequest.prototype.scheduleTime = null;
+    
+                        /**
+                         * Creates a new RescheduleMaintenanceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IRescheduleMaintenanceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest instance
+                         */
+                        RescheduleMaintenanceRequest.create = function create(properties) {
+                            return new RescheduleMaintenanceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RescheduleMaintenanceRequest message. Does not implicitly {@link google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IRescheduleMaintenanceRequest} message RescheduleMaintenanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RescheduleMaintenanceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.instance);
+                            if (message.rescheduleType != null && Object.hasOwnProperty.call(message, "rescheduleType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.rescheduleType);
+                            if (message.scheduleTime != null && Object.hasOwnProperty.call(message, "scheduleTime"))
+                                $root.google.protobuf.Timestamp.encode(message.scheduleTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RescheduleMaintenanceRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.IRescheduleMaintenanceRequest} message RescheduleMaintenanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RescheduleMaintenanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RescheduleMaintenanceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instance = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rescheduleType = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.scheduleTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RescheduleMaintenanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RescheduleMaintenanceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RescheduleMaintenanceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
+                            if (message.rescheduleType != null && message.hasOwnProperty("rescheduleType"))
+                                switch (message.rescheduleType) {
+                                default:
+                                    return "rescheduleType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.scheduleTime);
+                                if (error)
+                                    return "scheduleTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RescheduleMaintenanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest
+                         */
+                        RescheduleMaintenanceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest)
+                                return object;
+                            var message = new $root.google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest();
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
+                            switch (object.rescheduleType) {
+                            default:
+                                if (typeof object.rescheduleType === "number") {
+                                    message.rescheduleType = object.rescheduleType;
+                                    break;
+                                }
+                                break;
+                            case "RESCHEDULE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.rescheduleType = 0;
+                                break;
+                            case "IMMEDIATE":
+                            case 1:
+                                message.rescheduleType = 1;
+                                break;
+                            case "NEXT_AVAILABLE_WINDOW":
+                            case 2:
+                                message.rescheduleType = 2;
+                                break;
+                            case "SPECIFIC_TIME":
+                            case 3:
+                                message.rescheduleType = 3;
+                                break;
+                            }
+                            if (object.scheduleTime != null) {
+                                if (typeof object.scheduleTime !== "object")
+                                    throw TypeError(".google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.scheduleTime: object expected");
+                                message.scheduleTime = $root.google.protobuf.Timestamp.fromObject(object.scheduleTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RescheduleMaintenanceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest} message RescheduleMaintenanceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RescheduleMaintenanceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.instance = "";
+                                object.rescheduleType = options.enums === String ? "RESCHEDULE_TYPE_UNSPECIFIED" : 0;
+                                object.scheduleTime = null;
+                            }
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
+                            if (message.rescheduleType != null && message.hasOwnProperty("rescheduleType"))
+                                object.rescheduleType = options.enums === String ? $root.google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.RescheduleType[message.rescheduleType] === undefined ? message.rescheduleType : $root.google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.RescheduleType[message.rescheduleType] : message.rescheduleType;
+                            if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime"))
+                                object.scheduleTime = $root.google.protobuf.Timestamp.toObject(message.scheduleTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RescheduleMaintenanceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RescheduleMaintenanceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RescheduleMaintenanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RescheduleMaintenanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest";
+                        };
+    
+                        /**
+                         * RescheduleType enum.
+                         * @name google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.RescheduleType
+                         * @enum {number}
+                         * @property {number} RESCHEDULE_TYPE_UNSPECIFIED=0 RESCHEDULE_TYPE_UNSPECIFIED value
+                         * @property {number} IMMEDIATE=1 IMMEDIATE value
+                         * @property {number} NEXT_AVAILABLE_WINDOW=2 NEXT_AVAILABLE_WINDOW value
+                         * @property {number} SPECIFIC_TIME=3 SPECIFIC_TIME value
+                         */
+                        RescheduleMaintenanceRequest.RescheduleType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RESCHEDULE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IMMEDIATE"] = 1;
+                            values[valuesById[2] = "NEXT_AVAILABLE_WINDOW"] = 2;
+                            values[valuesById[3] = "SPECIFIC_TIME"] = 3;
+                            return values;
+                        })();
+    
+                        return RescheduleMaintenanceRequest;
+                    })();
+    
                     v1beta2.ApplyParametersRequest = (function() {
     
                         /**
@@ -8808,6 +11782,20 @@
                         return ApplySoftwareUpdateRequest;
                     })();
     
+                    /**
+                     * MemcacheVersion enum.
+                     * @name google.cloud.memcache.v1beta2.MemcacheVersion
+                     * @enum {number}
+                     * @property {number} MEMCACHE_VERSION_UNSPECIFIED=0 MEMCACHE_VERSION_UNSPECIFIED value
+                     * @property {number} MEMCACHE_1_5=1 MEMCACHE_1_5 value
+                     */
+                    v1beta2.MemcacheVersion = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MEMCACHE_VERSION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MEMCACHE_1_5"] = 1;
+                        return values;
+                    })();
+    
                     v1beta2.MemcacheParameters = (function() {
     
                         /**
@@ -9420,20 +12408,6 @@
                         };
     
                         return OperationMetadata;
-                    })();
-    
-                    /**
-                     * MemcacheVersion enum.
-                     * @name google.cloud.memcache.v1beta2.MemcacheVersion
-                     * @enum {number}
-                     * @property {number} MEMCACHE_VERSION_UNSPECIFIED=0 MEMCACHE_VERSION_UNSPECIFIED value
-                     * @property {number} MEMCACHE_1_5=1 MEMCACHE_1_5 value
-                     */
-                    v1beta2.MemcacheVersion = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "MEMCACHE_VERSION_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "MEMCACHE_1_5"] = 1;
-                        return values;
                     })();
     
                     v1beta2.LocationMetadata = (function() {
@@ -24495,6 +27469,317 @@
             })();
     
             return rpc;
+        })();
+    
+        google.type = (function() {
+    
+            /**
+             * Namespace type.
+             * @memberof google
+             * @namespace
+             */
+            var type = {};
+    
+            /**
+             * DayOfWeek enum.
+             * @name google.type.DayOfWeek
+             * @enum {number}
+             * @property {number} DAY_OF_WEEK_UNSPECIFIED=0 DAY_OF_WEEK_UNSPECIFIED value
+             * @property {number} MONDAY=1 MONDAY value
+             * @property {number} TUESDAY=2 TUESDAY value
+             * @property {number} WEDNESDAY=3 WEDNESDAY value
+             * @property {number} THURSDAY=4 THURSDAY value
+             * @property {number} FRIDAY=5 FRIDAY value
+             * @property {number} SATURDAY=6 SATURDAY value
+             * @property {number} SUNDAY=7 SUNDAY value
+             */
+            type.DayOfWeek = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "DAY_OF_WEEK_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "MONDAY"] = 1;
+                values[valuesById[2] = "TUESDAY"] = 2;
+                values[valuesById[3] = "WEDNESDAY"] = 3;
+                values[valuesById[4] = "THURSDAY"] = 4;
+                values[valuesById[5] = "FRIDAY"] = 5;
+                values[valuesById[6] = "SATURDAY"] = 6;
+                values[valuesById[7] = "SUNDAY"] = 7;
+                return values;
+            })();
+    
+            type.TimeOfDay = (function() {
+    
+                /**
+                 * Properties of a TimeOfDay.
+                 * @memberof google.type
+                 * @interface ITimeOfDay
+                 * @property {number|null} [hours] TimeOfDay hours
+                 * @property {number|null} [minutes] TimeOfDay minutes
+                 * @property {number|null} [seconds] TimeOfDay seconds
+                 * @property {number|null} [nanos] TimeOfDay nanos
+                 */
+    
+                /**
+                 * Constructs a new TimeOfDay.
+                 * @memberof google.type
+                 * @classdesc Represents a TimeOfDay.
+                 * @implements ITimeOfDay
+                 * @constructor
+                 * @param {google.type.ITimeOfDay=} [properties] Properties to set
+                 */
+                function TimeOfDay(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TimeOfDay hours.
+                 * @member {number} hours
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.hours = 0;
+    
+                /**
+                 * TimeOfDay minutes.
+                 * @member {number} minutes
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.minutes = 0;
+    
+                /**
+                 * TimeOfDay seconds.
+                 * @member {number} seconds
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.seconds = 0;
+    
+                /**
+                 * TimeOfDay nanos.
+                 * @member {number} nanos
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new TimeOfDay instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay=} [properties] Properties to set
+                 * @returns {google.type.TimeOfDay} TimeOfDay instance
+                 */
+                TimeOfDay.create = function create(properties) {
+                    return new TimeOfDay(properties);
+                };
+    
+                /**
+                 * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay} message TimeOfDay message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeOfDay.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.hours != null && Object.hasOwnProperty.call(message, "hours"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.hours);
+                    if (message.minutes != null && Object.hasOwnProperty.call(message, "minutes"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minutes);
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay} message TimeOfDay message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeOfDay.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TimeOfDay message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeOfDay.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.TimeOfDay();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.hours = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.minutes = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.seconds = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeOfDay.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TimeOfDay message.
+                 * @function verify
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TimeOfDay.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        if (!$util.isInteger(message.hours))
+                            return "hours: integer expected";
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        if (!$util.isInteger(message.minutes))
+                            return "minutes: integer expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds))
+                            return "seconds: integer expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 */
+                TimeOfDay.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.TimeOfDay)
+                        return object;
+                    var message = new $root.google.type.TimeOfDay();
+                    if (object.hours != null)
+                        message.hours = object.hours | 0;
+                    if (object.minutes != null)
+                        message.minutes = object.minutes | 0;
+                    if (object.seconds != null)
+                        message.seconds = object.seconds | 0;
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.TimeOfDay} message TimeOfDay
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TimeOfDay.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.hours = 0;
+                        object.minutes = 0;
+                        object.seconds = 0;
+                        object.nanos = 0;
+                    }
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        object.hours = message.hours;
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        object.minutes = message.minutes;
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        object.seconds = message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TimeOfDay to JSON.
+                 * @function toJSON
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TimeOfDay.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for TimeOfDay
+                 * @function getTypeUrl
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                TimeOfDay.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.TimeOfDay";
+                };
+    
+                return TimeOfDay;
+            })();
+    
+            return type;
         })();
     
         return google;

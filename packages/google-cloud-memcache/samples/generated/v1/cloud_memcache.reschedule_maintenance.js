@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START memcache_v1_generated_CloudMemcache_ListInstances_async]
+function main(instance, rescheduleType) {
+  // [START memcache_v1_generated_CloudMemcache_RescheduleMaintenance_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,33 +29,21 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the instance location using the form:
-   *      `projects/{project_id}/locations/{location_id}`
-   *  where `location_id` refers to a GCP region
+   *  Required. Memcache instance resource name using the form:
+   *      `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+   *  where `location_id` refers to a GCP region.
    */
-  // const parent = 'abc123'
+  // const instance = 'abc123'
   /**
-   *  The maximum number of items to return.
-   *  If not specified, a default value of 1000 will be used by the service.
-   *  Regardless of the `page_size` value, the response may include a partial
-   *  list and a caller should only rely on response's
-   *  `next_page_token` google.cloud.memcache.v1.ListInstancesResponse.next_page_token 
-   *  to determine if there are more instances left to be queried.
+   *  Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as well.
    */
-  // const pageSize = 1234
+  // const rescheduleType = {}
   /**
-   *  The `next_page_token` value returned from a previous List request, if any.
+   *  Timestamp when the maintenance shall be rescheduled to if
+   *  reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for
+   *  example `2012-11-15T16:19:00.094Z`.
    */
-  // const pageToken = 'abc123'
-  /**
-   *  List filter. For example, exclude all Memcached instances with name as
-   *  my-instance by specifying `"name != my-instance"`.
-   */
-  // const filter = 'abc123'
-  /**
-   *  Sort results. Supported values are "name", "name desc" or "" (unsorted).
-   */
-  // const orderBy = 'abc123'
+  // const scheduleTime = {}
 
   // Imports the Memcache library
   const {CloudMemcacheClient} = require('@google-cloud/memcache').v1;
@@ -63,21 +51,21 @@ function main(parent) {
   // Instantiates a client
   const memcacheClient = new CloudMemcacheClient();
 
-  async function callListInstances() {
+  async function callRescheduleMaintenance() {
     // Construct request
     const request = {
-      parent,
+      instance,
+      rescheduleType,
     };
 
     // Run request
-    const iterable = await memcacheClient.listInstancesAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const [operation] = await memcacheClient.rescheduleMaintenance(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListInstances();
-  // [END memcache_v1_generated_CloudMemcache_ListInstances_async]
+  callRescheduleMaintenance();
+  // [END memcache_v1_generated_CloudMemcache_RescheduleMaintenance_async]
 }
 
 process.on('unhandledRejection', err => {
