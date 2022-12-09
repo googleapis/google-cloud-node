@@ -130,8 +130,11 @@ export class DocumentProcessorServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
-    // If scopes are unset in options set scopes.
-    if (!('scopes' in opts)) {
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
+    // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
+    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -158,6 +161,10 @@ export class DocumentProcessorServiceClient {
     // Set defaultServicePath on the auth object.
     this.auth.defaultServicePath = staticMembers.servicePath;
 
+    // Set the default scopes in auth client if needed.
+    if (servicePath === staticMembers.servicePath) {
+      this.auth.defaultScopes = staticMembers.scopes;
+    }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
@@ -185,6 +192,9 @@ export class DocumentProcessorServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      evaluationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processor_version}/evaluations/{evaluation}'
+      ),
       humanReviewConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/processors/{processor}/humanReviewConfig'
       ),
@@ -223,6 +233,11 @@ export class DocumentProcessorServiceClient {
         'pageToken',
         'nextPageToken',
         'processorVersions'
+      ),
+      listEvaluations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'evaluations'
       ),
     };
 
@@ -285,6 +300,12 @@ export class DocumentProcessorServiceClient {
     const batchProcessDocumentsMetadata = protoFilesRoot.lookup(
       '.google.cloud.documentai.v1beta3.BatchProcessMetadata'
     ) as gax.protobuf.Type;
+    const trainProcessorVersionResponse = protoFilesRoot.lookup(
+      '.google.cloud.documentai.v1beta3.TrainProcessorVersionResponse'
+    ) as gax.protobuf.Type;
+    const trainProcessorVersionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.documentai.v1beta3.TrainProcessorVersionMetadata'
+    ) as gax.protobuf.Type;
     const deleteProcessorVersionResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -333,6 +354,12 @@ export class DocumentProcessorServiceClient {
     const reviewDocumentMetadata = protoFilesRoot.lookup(
       '.google.cloud.documentai.v1beta3.ReviewDocumentOperationMetadata'
     ) as gax.protobuf.Type;
+    const evaluateProcessorVersionResponse = protoFilesRoot.lookup(
+      '.google.cloud.documentai.v1beta3.EvaluateProcessorVersionResponse'
+    ) as gax.protobuf.Type;
+    const evaluateProcessorVersionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.documentai.v1beta3.EvaluateProcessorVersionMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       batchProcessDocuments: new this._gaxModule.LongrunningDescriptor(
@@ -341,6 +368,13 @@ export class DocumentProcessorServiceClient {
           batchProcessDocumentsResponse
         ),
         batchProcessDocumentsMetadata.decode.bind(batchProcessDocumentsMetadata)
+      ),
+      trainProcessorVersion: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        trainProcessorVersionResponse.decode.bind(
+          trainProcessorVersionResponse
+        ),
+        trainProcessorVersionMetadata.decode.bind(trainProcessorVersionMetadata)
       ),
       deleteProcessorVersion: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -397,6 +431,15 @@ export class DocumentProcessorServiceClient {
         this.operationsClient,
         reviewDocumentResponse.decode.bind(reviewDocumentResponse),
         reviewDocumentMetadata.decode.bind(reviewDocumentMetadata)
+      ),
+      evaluateProcessorVersion: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        evaluateProcessorVersionResponse.decode.bind(
+          evaluateProcessorVersionResponse
+        ),
+        evaluateProcessorVersionMetadata.decode.bind(
+          evaluateProcessorVersionMetadata
+        )
       ),
     };
 
@@ -457,6 +500,7 @@ export class DocumentProcessorServiceClient {
       'listProcessorTypes',
       'listProcessors',
       'getProcessor',
+      'trainProcessorVersion',
       'getProcessorVersion',
       'listProcessorVersions',
       'deleteProcessorVersion',
@@ -468,6 +512,9 @@ export class DocumentProcessorServiceClient {
       'disableProcessor',
       'setDefaultProcessorVersion',
       'reviewDocument',
+      'evaluateProcessorVersion',
+      'getEvaluation',
+      'listEvaluations',
     ];
     for (const methodName of documentProcessorServiceStubMethods) {
       const callPromise = this.documentProcessorServiceStub.then(
@@ -577,6 +624,8 @@ export class DocumentProcessorServiceClient {
    *   false.
    * @param {google.protobuf.FieldMask} request.fieldMask
    *   Specifies which fields to include in ProcessResponse's document.
+   *   Only supports top level document and pages field so it must be in the form
+   *   of `{document_field_name}` or `pages.{page_field_name}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1045,6 +1094,98 @@ export class DocumentProcessorServiceClient {
     this.initialize();
     return this.innerApiCalls.createProcessor(request, options, callback);
   }
+  /**
+   * Retrieves a specific evaluation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the {@link google.cloud.documentai.v1beta3.Evaluation|Evaluation} to get.
+   *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}/evaluations/{evaluation}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Evaluation]{@link google.cloud.documentai.v1beta3.Evaluation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.get_evaluation.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_GetEvaluation_async
+   */
+  getEvaluation(
+    request?: protos.google.cloud.documentai.v1beta3.IGetEvaluationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.documentai.v1beta3.IEvaluation,
+      protos.google.cloud.documentai.v1beta3.IGetEvaluationRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getEvaluation(
+    request: protos.google.cloud.documentai.v1beta3.IGetEvaluationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.documentai.v1beta3.IEvaluation,
+      | protos.google.cloud.documentai.v1beta3.IGetEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEvaluation(
+    request: protos.google.cloud.documentai.v1beta3.IGetEvaluationRequest,
+    callback: Callback<
+      protos.google.cloud.documentai.v1beta3.IEvaluation,
+      | protos.google.cloud.documentai.v1beta3.IGetEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEvaluation(
+    request?: protos.google.cloud.documentai.v1beta3.IGetEvaluationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.documentai.v1beta3.IEvaluation,
+          | protos.google.cloud.documentai.v1beta3.IGetEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.documentai.v1beta3.IEvaluation,
+      | protos.google.cloud.documentai.v1beta3.IGetEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.documentai.v1beta3.IEvaluation,
+      protos.google.cloud.documentai.v1beta3.IGetEvaluationRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getEvaluation(request, options, callback);
+  }
 
   /**
    * LRO endpoint to batch process many documents. The output is written
@@ -1198,6 +1339,157 @@ export class DocumentProcessorServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.documentai.v1beta3.BatchProcessResponse,
       protos.google.cloud.documentai.v1beta3.BatchProcessMetadata
+    >;
+  }
+  /**
+   * Trains a new processor version.
+   * Operation metadata is returned as
+   * cloud_documentai_core.TrainProcessorVersionMetadata.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project, location and processor) to create the new version for.
+   *   Format: `projects/{project}/locations/{location}/processors/{processor}`.
+   * @param {google.cloud.documentai.v1beta3.ProcessorVersion} request.processorVersion
+   *   Required. The processor version to be created.
+   * @param {google.cloud.documentai.v1beta3.DocumentSchema} [request.documentSchema]
+   *   Optional. The schema the processor version will be trained with.
+   * @param {google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.InputData} [request.inputData]
+   *   Optional. The input data used to train the `ProcessorVersion`.
+   * @param {string} [request.baseProcessorVersion]
+   *   Optional. The processor version to use as a base for training. This processor version
+   *   must be a child of `parent`. Format:
+   *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.train_processor_version.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_TrainProcessorVersion_async
+   */
+  trainProcessorVersion(
+    request?: protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionResponse,
+        protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  trainProcessorVersion(
+    request: protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionResponse,
+        protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  trainProcessorVersion(
+    request: protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionResponse,
+        protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  trainProcessorVersion(
+    request?: protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionResponse,
+            protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionResponse,
+        protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionResponse,
+        protos.google.cloud.documentai.v1beta3.ITrainProcessorVersionMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.trainProcessorVersion(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `trainProcessorVersion()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.train_processor_version.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_TrainProcessorVersion_async
+   */
+  async checkTrainProcessorVersionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.documentai.v1beta3.TrainProcessorVersionResponse,
+      protos.google.cloud.documentai.v1beta3.TrainProcessorVersionMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.trainProcessorVersion,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.documentai.v1beta3.TrainProcessorVersionResponse,
+      protos.google.cloud.documentai.v1beta3.TrainProcessorVersionMetadata
     >;
   }
   /**
@@ -2341,6 +2633,153 @@ export class DocumentProcessorServiceClient {
     >;
   }
   /**
+   * Evaluates a ProcessorVersion against annotated documents, producing an
+   * Evaluation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.processorVersion
+   *   Required. The resource name of the {@link google.cloud.documentai.v1beta3.ProcessorVersion|ProcessorVersion} to evaluate.
+   *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
+   * @param {google.cloud.documentai.v1beta3.BatchDocumentsInputConfig} [request.evaluationDocuments]
+   *   Optional. The documents used in the evaluation. If unspecified, use the processor's
+   *   dataset as evaluation input.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.evaluate_processor_version.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_EvaluateProcessorVersion_async
+   */
+  evaluateProcessorVersion(
+    request?: protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionResponse,
+        protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  evaluateProcessorVersion(
+    request: protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionResponse,
+        protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  evaluateProcessorVersion(
+    request: protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionResponse,
+        protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  evaluateProcessorVersion(
+    request?: protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionResponse,
+            protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionResponse,
+        protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionResponse,
+        protos.google.cloud.documentai.v1beta3.IEvaluateProcessorVersionMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        processor_version: request.processorVersion ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.evaluateProcessorVersion(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `evaluateProcessorVersion()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.evaluate_processor_version.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_EvaluateProcessorVersion_async
+   */
+  async checkEvaluateProcessorVersionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.documentai.v1beta3.EvaluateProcessorVersionResponse,
+      protos.google.cloud.documentai.v1beta3.EvaluateProcessorVersionMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.evaluateProcessorVersion,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.documentai.v1beta3.EvaluateProcessorVersionResponse,
+      protos.google.cloud.documentai.v1beta3.EvaluateProcessorVersionMetadata
+    >;
+  }
+  /**
    * Lists the processor types that exist.
    *
    * @param {Object} request
@@ -2944,6 +3383,207 @@ export class DocumentProcessorServiceClient {
     ) as AsyncIterable<protos.google.cloud.documentai.v1beta3.IProcessorVersion>;
   }
   /**
+   * Retrieves a set of evaluations for a given processor version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the {@link google.cloud.documentai.v1beta3.ProcessorVersion|ProcessorVersion} to list evaluations for.
+   *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   *   If unspecified, at most 5 evaluations will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListEvaluations` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Evaluation]{@link google.cloud.documentai.v1beta3.Evaluation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEvaluationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listEvaluations(
+    request?: protos.google.cloud.documentai.v1beta3.IListEvaluationsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.documentai.v1beta3.IEvaluation[],
+      protos.google.cloud.documentai.v1beta3.IListEvaluationsRequest | null,
+      protos.google.cloud.documentai.v1beta3.IListEvaluationsResponse
+    ]
+  >;
+  listEvaluations(
+    request: protos.google.cloud.documentai.v1beta3.IListEvaluationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.documentai.v1beta3.IListEvaluationsRequest,
+      | protos.google.cloud.documentai.v1beta3.IListEvaluationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.documentai.v1beta3.IEvaluation
+    >
+  ): void;
+  listEvaluations(
+    request: protos.google.cloud.documentai.v1beta3.IListEvaluationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.documentai.v1beta3.IListEvaluationsRequest,
+      | protos.google.cloud.documentai.v1beta3.IListEvaluationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.documentai.v1beta3.IEvaluation
+    >
+  ): void;
+  listEvaluations(
+    request?: protos.google.cloud.documentai.v1beta3.IListEvaluationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.documentai.v1beta3.IListEvaluationsRequest,
+          | protos.google.cloud.documentai.v1beta3.IListEvaluationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.documentai.v1beta3.IEvaluation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.documentai.v1beta3.IListEvaluationsRequest,
+      | protos.google.cloud.documentai.v1beta3.IListEvaluationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.documentai.v1beta3.IEvaluation
+    >
+  ): Promise<
+    [
+      protos.google.cloud.documentai.v1beta3.IEvaluation[],
+      protos.google.cloud.documentai.v1beta3.IListEvaluationsRequest | null,
+      protos.google.cloud.documentai.v1beta3.IListEvaluationsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listEvaluations(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the {@link google.cloud.documentai.v1beta3.ProcessorVersion|ProcessorVersion} to list evaluations for.
+   *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   *   If unspecified, at most 5 evaluations will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListEvaluations` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Evaluation]{@link google.cloud.documentai.v1beta3.Evaluation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEvaluationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listEvaluationsStream(
+    request?: protos.google.cloud.documentai.v1beta3.IListEvaluationsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listEvaluations'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEvaluations.createStream(
+      this.innerApiCalls.listEvaluations as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listEvaluations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the {@link google.cloud.documentai.v1beta3.ProcessorVersion|ProcessorVersion} to list evaluations for.
+   *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   *   If unspecified, at most 5 evaluations will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListEvaluations` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Evaluation]{@link google.cloud.documentai.v1beta3.Evaluation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.list_evaluations.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_ListEvaluations_async
+   */
+  listEvaluationsAsync(
+    request?: protos.google.cloud.documentai.v1beta3.IListEvaluationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.documentai.v1beta3.IEvaluation> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listEvaluations'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEvaluations.asyncIterate(
+      this.innerApiCalls['listEvaluations'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.documentai.v1beta3.IEvaluation>;
+  }
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -3203,6 +3843,92 @@ export class DocumentProcessorServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified evaluation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} processor
+   * @param {string} processor_version
+   * @param {string} evaluation
+   * @returns {string} Resource name string.
+   */
+  evaluationPath(
+    project: string,
+    location: string,
+    processor: string,
+    processorVersion: string,
+    evaluation: string
+  ) {
+    return this.pathTemplates.evaluationPathTemplate.render({
+      project: project,
+      location: location,
+      processor: processor,
+      processor_version: processorVersion,
+      evaluation: evaluation,
+    });
+  }
+
+  /**
+   * Parse the project from Evaluation resource.
+   *
+   * @param {string} evaluationName
+   *   A fully-qualified path representing Evaluation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEvaluationName(evaluationName: string) {
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Evaluation resource.
+   *
+   * @param {string} evaluationName
+   *   A fully-qualified path representing Evaluation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEvaluationName(evaluationName: string) {
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .location;
+  }
+
+  /**
+   * Parse the processor from Evaluation resource.
+   *
+   * @param {string} evaluationName
+   *   A fully-qualified path representing Evaluation resource.
+   * @returns {string} A string representing the processor.
+   */
+  matchProcessorFromEvaluationName(evaluationName: string) {
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .processor;
+  }
+
+  /**
+   * Parse the processor_version from Evaluation resource.
+   *
+   * @param {string} evaluationName
+   *   A fully-qualified path representing Evaluation resource.
+   * @returns {string} A string representing the processor_version.
+   */
+  matchProcessorVersionFromEvaluationName(evaluationName: string) {
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .processor_version;
+  }
+
+  /**
+   * Parse the evaluation from Evaluation resource.
+   *
+   * @param {string} evaluationName
+   *   A fully-qualified path representing Evaluation resource.
+   * @returns {string} A string representing the evaluation.
+   */
+  matchEvaluationFromEvaluationName(evaluationName: string) {
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .evaluation;
+  }
 
   /**
    * Return a fully-qualified humanReviewConfig resource name string.
