@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, environmentId, environment) {
-  // [START notebooks_v1beta1_generated_NotebookService_CreateEnvironment_async]
+function main(name, diagnosticConfig) {
+  // [START notebooks_v1_generated_ManagedNotebookService_DiagnoseRuntime_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,43 +29,36 @@ function main(parent, environmentId, environment) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Format: `projects/{project_id}/locations/{location}`
+   *  Required. Format:
+   *  `projects/{project_id}/locations/{location}/runtimes/{runtimes_id}`
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Required. User-defined unique ID of this environment. The `environment_id` must
-   *  be 1 to 63 characters long and contain only lowercase letters,
-   *  numeric characters, and dashes. The first character must be a lowercase
-   *  letter and the last character cannot be a dash.
+   *  Required. Defines flags that are used to run the diagnostic tool
    */
-  // const environmentId = 'abc123'
-  /**
-   *  Required. The environment to be created.
-   */
-  // const environment = {}
+  // const diagnosticConfig = {}
 
   // Imports the Notebooks library
-  const {NotebookServiceClient} = require('@google-cloud/notebooks').v1beta1;
+  const {ManagedNotebookServiceClient} = require('@google-cloud/notebooks').v1;
 
   // Instantiates a client
-  const notebooksClient = new NotebookServiceClient();
+  const notebooksClient = new ManagedNotebookServiceClient();
 
-  async function callCreateEnvironment() {
+  async function callDiagnoseRuntime() {
     // Construct request
     const request = {
-      parent,
-      environmentId,
-      environment,
+      name,
+      diagnosticConfig,
     };
 
     // Run request
-    const [operation] = await notebooksClient.createEnvironment(request);
+    const [operation] = await notebooksClient.diagnoseRuntime(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateEnvironment();
-  // [END notebooks_v1beta1_generated_NotebookService_CreateEnvironment_async]
+  callDiagnoseRuntime();
+  // [END notebooks_v1_generated_ManagedNotebookService_DiagnoseRuntime_async]
 }
 
 process.on('unhandledRejection', err => {

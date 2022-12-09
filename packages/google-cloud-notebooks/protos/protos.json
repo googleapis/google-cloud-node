@@ -8,17 +8,56 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "csharp_namespace": "Google.Cloud.Notebooks.V1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/notebooks/v1;notebooks",
                     "java_multiple_files": true,
                     "java_outer_classname": "NotebooksProto",
                     "java_package": "com.google.cloud.notebooks.v1",
+                    "csharp_namespace": "Google.Cloud.Notebooks.V1",
                     "php_namespace": "Google\\Cloud\\Notebooks\\V1",
                     "ruby_package": "Google::Cloud::Notebooks::V1",
                     "(google.api.resource_definition).type": "aiplatform.googleapis.com/Tensorboard",
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/tensorboards/{tensorboard}"
                   },
                   "nested": {
+                    "DiagnosticConfig": {
+                      "fields": {
+                        "gcsBucket": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "relativePath": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "repairFlagEnabled": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "packetCaptureFlagEnabled": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "copyHomeFilesFlagEnabled": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "Environment": {
                       "options": {
                         "(google.api.resource).type": "notebooks.googleapis.com/Environment",
@@ -930,6 +969,34 @@
                             }
                           ]
                         },
+                        "UpdateRuntime": {
+                          "requestType": "UpdateRuntimeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{runtime.name=projects/*/locations/*/runtimes/*}",
+                            "(google.api.http).body": "runtime",
+                            "(google.api.method_signature)": "runtime,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Runtime",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{runtime.name=projects/*/locations/*/runtimes/*}",
+                                "body": "runtime"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "runtime,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Runtime",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteRuntime": {
                           "requestType": "DeleteRuntimeRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1068,6 +1135,34 @@
                             }
                           ]
                         },
+                        "UpgradeRuntime": {
+                          "requestType": "UpgradeRuntimeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/runtimes/*}:upgrade",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Runtime",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/runtimes/*}:upgrade",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Runtime",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ReportRuntimeEvent": {
                           "requestType": "ReportRuntimeEventRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1113,6 +1208,34 @@
                             },
                             {
                               "(google.api.method_signature)": "name,vm_id"
+                            }
+                          ]
+                        },
+                        "DiagnoseRuntime": {
+                          "requestType": "DiagnoseRuntimeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/runtimes/*}:diagnose",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,diagnostic_config",
+                            "(google.longrunning.operation_info).response_type": "Runtime",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/runtimes/*}:diagnose",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,diagnostic_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Runtime",
+                                "metadata_type": "OperationMetadata"
+                              }
                             }
                           ]
                         }
@@ -1282,6 +1405,21 @@
                         }
                       }
                     },
+                    "UpgradeRuntimeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ReportRuntimeEventRequest": {
                       "fields": {
                         "name": {
@@ -1305,6 +1443,28 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        }
+                      }
+                    },
+                    "UpdateRuntimeRequest": {
+                      "fields": {
+                        "runtime": {
+                          "type": "Runtime",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -1338,6 +1498,25 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "DiagnoseRuntimeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Runtime"
+                          }
+                        },
+                        "diagnosticConfig": {
+                          "type": "DiagnosticConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -1448,6 +1627,11 @@
                       },
                       "nested": {
                         "AcceleratorType": {
+                          "valuesOptions": {
+                            "NVIDIA_TESLA_K80": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "ACCELERATOR_TYPE_UNSPECIFIED": 0,
                             "NVIDIA_TESLA_K80": 1,
@@ -1656,6 +1840,16 @@
                           "oneof": [
                             "upgradeable"
                           ]
+                        },
+                        "_disableTerminal": {
+                          "oneof": [
+                            "disableTerminal"
+                          ]
+                        },
+                        "_version": {
+                          "oneof": [
+                            "version"
+                          ]
                         }
                       },
                       "fields": {
@@ -1707,6 +1901,34 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
+                          }
+                        },
+                        "postStartupScriptBehavior": {
+                          "type": "PostStartupScriptBehavior",
+                          "id": 10
+                        },
+                        "disableTerminal": {
+                          "type": "bool",
+                          "id": 11,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PostStartupScriptBehavior": {
+                          "values": {
+                            "POST_STARTUP_SCRIPT_BEHAVIOR_UNSPECIFIED": 0,
+                            "RUN_EVERY_START": 1,
+                            "DOWNLOAD_AND_RUN_EVERY_START": 2
                           }
                         }
                       }
@@ -2401,6 +2623,34 @@
                                 "post": "/v1/{name=projects/*/locations/*/instances/*}:rollback",
                                 "body": "*"
                               }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DiagnoseInstance": {
+                          "requestType": "DiagnoseInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/instances/*}:diagnose",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,diagnostic_config",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:diagnose",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,diagnostic_config"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -3198,6 +3448,25 @@
                         }
                       }
                     },
+                    "DiagnoseInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Instance"
+                          }
+                        },
+                        "diagnosticConfig": {
+                          "type": "DiagnosticConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "ListEnvironmentsResponse": {
                       "fields": {
                         "environments": {
@@ -3480,13 +3749,13 @@
                 },
                 "v1beta1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/notebooks/v1beta1;notebooks",
                     "csharp_namespace": "Google.Cloud.Notebooks.V1Beta1",
-                    "php_namespace": "Google\\Cloud\\Notebooks\\V1beta1",
-                    "ruby_package": "Google::Cloud::Notebooks::V1beta1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/notebooks/v1beta1;notebooks",
                     "java_multiple_files": true,
                     "java_outer_classname": "NotebooksProto",
-                    "java_package": "com.google.cloud.notebooks.v1beta1"
+                    "java_package": "com.google.cloud.notebooks.v1beta1",
+                    "php_namespace": "Google\\Cloud\\Notebooks\\V1beta1",
+                    "ruby_package": "Google::Cloud::Notebooks::V1beta1"
                   },
                   "nested": {
                     "Environment": {
@@ -3578,6 +3847,42 @@
                         "tag": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "ReservationAffinity": {
+                      "fields": {
+                        "consumeReservationType": {
+                          "type": "Type",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "key": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "values": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "NO_RESERVATION": 1,
+                            "ANY_RESERVATION": 2,
+                            "SPECIFIC_RESERVATION": 3
+                          }
                         }
                       }
                     },
@@ -3734,6 +4039,27 @@
                           "type": "string",
                           "id": 22
                         },
+                        "nicType": {
+                          "type": "NicType",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "reservationAffinity": {
+                          "type": "ReservationAffinity",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "canIpForward": {
+                          "type": "bool",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 23,
@@ -3750,18 +4076,6 @@
                         }
                       },
                       "nested": {
-                        "AcceleratorConfig": {
-                          "fields": {
-                            "type": {
-                              "type": "AcceleratorType",
-                              "id": 1
-                            },
-                            "coreCount": {
-                              "type": "int64",
-                              "id": 2
-                            }
-                          }
-                        },
                         "AcceleratorType": {
                           "values": {
                             "ACCELERATOR_TYPE_UNSPECIFIED": 0,
@@ -3777,6 +4091,18 @@
                             "TPU_V3": 7
                           }
                         },
+                        "AcceleratorConfig": {
+                          "fields": {
+                            "type": {
+                              "type": "AcceleratorType",
+                              "id": 1
+                            },
+                            "coreCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
                         "State": {
                           "values": {
                             "STATE_UNSPECIFIED": 0,
@@ -3788,7 +4114,9 @@
                             "DELETED": 6,
                             "UPGRADING": 7,
                             "INITIALIZING": 8,
-                            "REGISTERING": 9
+                            "REGISTERING": 9,
+                            "SUSPENDING": 10,
+                            "SUSPENDED": 11
                           }
                         },
                         "DiskType": {
@@ -3804,6 +4132,13 @@
                             "DISK_ENCRYPTION_UNSPECIFIED": 0,
                             "GMEK": 1,
                             "CMEK": 2
+                          }
+                        },
+                        "NicType": {
+                          "values": {
+                            "UNSPECIFIED_NIC_TYPE": 0,
+                            "VIRTIO_NET": 1,
+                            "GVNIC": 2
                           }
                         }
                       }
@@ -4084,9 +4419,13 @@
                           "requestType": "IsInstanceUpgradeableRequest",
                           "responseType": "IsInstanceUpgradeableResponse",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).get": "/v1beta1/{notebook_instance=projects/*/locations/*/instances/*}:isUpgradeable"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "get": "/v1beta1/{notebook_instance=projects/*/locations/*/instances/*}:isUpgradeable"
@@ -4098,12 +4437,16 @@
                           "requestType": "UpgradeInstanceRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/instances/*}:upgrade",
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "Instance",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta1/{name=projects/*/locations/*/instances/*}:upgrade",
@@ -4122,12 +4465,16 @@
                           "requestType": "UpgradeInstanceInternalRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/instances/*}:upgradeInternal",
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "Instance",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta1/{name=projects/*/locations/*/instances/*}:upgradeInternal",
@@ -4495,6 +4842,10 @@
                         "upgradeInfo": {
                           "type": "string",
                           "id": 3
+                        },
+                        "upgradeImage": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -5796,6 +6147,15 @@
             },
             "Empty": {
               "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
             }
           }
         },
