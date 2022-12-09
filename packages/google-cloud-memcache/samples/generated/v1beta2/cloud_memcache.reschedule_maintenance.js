@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, instanceId, instance) {
-  // [START memcache_v1_generated_CloudMemcache_CreateInstance_async]
+function main(instance, rescheduleType) {
+  // [START memcache_v1beta2_generated_CloudMemcache_RescheduleMaintenance_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,49 +29,43 @@ function main(parent, instanceId, instance) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the instance location using the form:
-   *      `projects/{project_id}/locations/{location_id}`
-   *  where `location_id` refers to a GCP region
+   *  Required. Memcache instance resource name using the form:
+   *      `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+   *  where `location_id` refers to a GCP region.
    */
-  // const parent = 'abc123'
+  // const instance = 'abc123'
   /**
-   *  Required. The logical name of the Memcached instance in the user
-   *  project with the following restrictions:
-   *  * Must contain only lowercase letters, numbers, and hyphens.
-   *  * Must start with a letter.
-   *  * Must be between 1-40 characters.
-   *  * Must end with a number or a letter.
-   *  * Must be unique within the user project / location.
-   *  If any of the above are not met, the API raises an invalid argument error.
+   *  Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as well.
    */
-  // const instanceId = 'abc123'
+  // const rescheduleType = {}
   /**
-   *  Required. A Memcached Instance
+   *  Timestamp when the maintenance shall be rescheduled to if
+   *  reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for
+   *  example `2012-11-15T16:19:00.094Z`.
    */
-  // const instance = {}
+  // const scheduleTime = {}
 
   // Imports the Memcache library
-  const {CloudMemcacheClient} = require('@google-cloud/memcache').v1;
+  const {CloudMemcacheClient} = require('@google-cloud/memcache').v1beta2;
 
   // Instantiates a client
   const memcacheClient = new CloudMemcacheClient();
 
-  async function callCreateInstance() {
+  async function callRescheduleMaintenance() {
     // Construct request
     const request = {
-      parent,
-      instanceId,
       instance,
+      rescheduleType,
     };
 
     // Run request
-    const [operation] = await memcacheClient.createInstance(request);
+    const [operation] = await memcacheClient.rescheduleMaintenance(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateInstance();
-  // [END memcache_v1_generated_CloudMemcache_CreateInstance_async]
+  callRescheduleMaintenance();
+  // [END memcache_v1beta2_generated_CloudMemcache_RescheduleMaintenance_async]
 }
 
 process.on('unhandledRejection', err => {
