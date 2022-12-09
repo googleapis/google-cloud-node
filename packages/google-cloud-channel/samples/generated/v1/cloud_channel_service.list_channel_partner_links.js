@@ -29,22 +29,23 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the reseller account for listing channel partner
-   *  links.
-   *  Parent uses the format: accounts/{account_id}
+   *  Required. The resource name of the reseller account for listing channel
+   *  partner links. Parent uses the format: accounts/{account_id}
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Requested page size. Server might return fewer results than requested.
-   *  If unspecified, server will pick a default size (25).
-   *  The maximum value is 200; the server will coerce values above 200.
+   *  Optional. Requested page size. Server might return fewer results than
+   *  requested. If unspecified, server will pick a default size (25). The
+   *  maximum value is 200; the server will coerce values above 200.
    */
   // const pageSize = 1234
   /**
    *  Optional. A token for a page of results other than the first page.
    *  Obtained using
-   *  ListChannelPartnerLinksResponse.next_page_token google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token  of the previous
-   *  CloudChannelService.ListChannelPartnerLinks google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks  call.
+   *  ListChannelPartnerLinksResponse.next_page_token google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token 
+   *  of the previous
+   *  CloudChannelService.ListChannelPartnerLinks google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks 
+   *  call.
    */
   // const pageToken = 'abc123'
   /**

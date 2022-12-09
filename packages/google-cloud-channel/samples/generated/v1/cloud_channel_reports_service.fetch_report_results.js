@@ -29,15 +29,16 @@ function main(reportJob) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The report job created by CloudChannelReportsService.RunReportJob google.cloud.channel.v1.CloudChannelReportsService.RunReportJob.
+   *  Required. The report job created by
+   *  CloudChannelReportsService.RunReportJob google.cloud.channel.v1.CloudChannelReportsService.RunReportJob.
    *  Report_job uses the format:
    *  accounts/{account_id}/reportJobs/{report_job_id}
    */
   // const reportJob = 'abc123'
   /**
-   *  Optional. Requested page size of the report. The server may return fewer results than
-   *  requested. If you don't specify a page size, the server uses a sensible
-   *  default (may change over time).
+   *  Optional. Requested page size of the report. The server may return fewer
+   *  results than requested. If you don't specify a page size, the server uses a
+   *  sensible default (may change over time).
    *  The maximum value is 30,000; the server will change larger values to
    *  30,000.
    */
@@ -45,8 +46,10 @@ function main(reportJob) {
   /**
    *  Optional. A token that specifies a page of results beyond the first page.
    *  Obtained through
-   *  FetchReportResultsResponse.next_page_token google.cloud.channel.v1.FetchReportResultsResponse.next_page_token  of the previous
-   *  CloudChannelReportsService.FetchReportResults google.cloud.channel.v1.CloudChannelReportsService.FetchReportResults  call.
+   *  FetchReportResultsResponse.next_page_token google.cloud.channel.v1.FetchReportResultsResponse.next_page_token 
+   *  of the previous
+   *  CloudChannelReportsService.FetchReportResults google.cloud.channel.v1.CloudChannelReportsService.FetchReportResults 
+   *  call.
    */
   // const pageToken = 'abc123'
 
