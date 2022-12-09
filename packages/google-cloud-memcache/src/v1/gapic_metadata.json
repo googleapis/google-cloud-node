@@ -40,6 +40,11 @@
                 "applyParameters"
               ]
             },
+            "RescheduleMaintenance": {
+              "methods": [
+                "rescheduleMaintenance"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
@@ -80,6 +85,11 @@
             "ApplyParameters": {
               "methods": [
                 "applyParameters"
+              ]
+            },
+            "RescheduleMaintenance": {
+              "methods": [
+                "rescheduleMaintenance"
               ]
             },
             "ListInstances": {
