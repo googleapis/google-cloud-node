@@ -18,13 +18,14 @@
 
 import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
+import * as v1beta2 from './v1beta2';
 
 const BigQueryReadClient = v1.BigQueryReadClient;
 type BigQueryReadClient = v1.BigQueryReadClient;
 const BigQueryWriteClient = v1.BigQueryWriteClient;
 type BigQueryWriteClient = v1.BigQueryWriteClient;
 
-export {v1, v1beta1, BigQueryReadClient, BigQueryWriteClient};
-export default {v1, v1beta1, BigQueryReadClient, BigQueryWriteClient};
+export {v1, v1beta1, v1beta2, BigQueryReadClient, BigQueryWriteClient};
+export default {v1, v1beta1, v1beta2, BigQueryReadClient, BigQueryWriteClient};
 import * as protos from '../protos/protos';
 export {protos};

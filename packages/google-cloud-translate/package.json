@@ -52,8 +52,8 @@
   },
   "dependencies": {
     "@google-cloud/common": "^4.0.0",
-    "@google-cloud/promisify": "^2.0.0",
     "arrify": "^3.0.0",
+    "@google-cloud/promisify": "^3.0.0",
     "extend": "^3.0.2",
     "google-gax": "^3.5.2",
     "is-html": "^2.0.0"
@@ -67,7 +67,7 @@
     "@types/sinon": "^10.0.0",
     "c8": "^7.0.0",
     "codecov": "^3.0.2",
-    "google-auth-library": "^6.0.0",
+    "google-auth-library": "^8.0.0",
     "gts": "^3.1.0",
     "http2spy": "^2.0.0",
     "jsdoc": "^4.0.0",
