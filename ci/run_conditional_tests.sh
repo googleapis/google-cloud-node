@@ -67,7 +67,7 @@ subdirs=(
 )
 
 RETVAL=0
-tests_with_credentials=("packages/google-analytics-admin" "packages/google-area120-tables" "packages/google-analytics-data" "packages/google-iam-credentials")
+tests_with_credentials=(packages/google-analytics-admin packages/google-area120-tables packages/google-analytics-data packages/google-iam-credentials)
 
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
@@ -81,10 +81,10 @@ for subdir in ${subdirs[@]}; do
             if [[ "${changed}" -eq 0 ]]; then
                 echo "no change detected in ${d}, skipping"
             else
-                if [ "${tests_with_credentials[*]}" =~ "${d}" ] && [-n "${GOOGLE_APPLICATION_CREDENTIALS}"]; then
+                if [[ ${tests_with_credentials[*]} =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
                     echo "change detected in ${d}"
                     should_test=true
-                elif [ !"${tests_with_credentials[*]}" =~ "${d}"] && [! -n "${GOOGLE_APPLICATION_CREDENTIALS}"]; then
+                elif [[ !${tests_with_credentials[*]} =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
                     echo "change detected in ${d}"
                     should_test=true
                 fi
