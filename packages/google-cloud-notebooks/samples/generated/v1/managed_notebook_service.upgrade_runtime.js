@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(account, serviceAccount) {
-  // [START cloudchannel_v1_generated_CloudChannelService_RegisterSubscriber_async]
+function main(name) {
+  // [START notebooks_v1_generated_ManagedNotebookService_UpgradeRuntime_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,35 +29,35 @@ function main(account, serviceAccount) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the account.
+   *  Required. Format:
+   *  `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
    */
-  // const account = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Required. Service account that provides subscriber access to the registered
-   *  topic.
+   *  Idempotent request UUID.
    */
-  // const serviceAccount = 'abc123'
+  // const requestId = 'abc123'
 
-  // Imports the Channel library
-  const {CloudChannelServiceClient} = require('@google-cloud/channel').v1;
+  // Imports the Notebooks library
+  const {ManagedNotebookServiceClient} = require('@google-cloud/notebooks').v1;
 
   // Instantiates a client
-  const channelClient = new CloudChannelServiceClient();
+  const notebooksClient = new ManagedNotebookServiceClient();
 
-  async function callRegisterSubscriber() {
+  async function callUpgradeRuntime() {
     // Construct request
     const request = {
-      account,
-      serviceAccount,
+      name,
     };
 
     // Run request
-    const response = await channelClient.registerSubscriber(request);
+    const [operation] = await notebooksClient.upgradeRuntime(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callRegisterSubscriber();
-  // [END cloudchannel_v1_generated_CloudChannelService_RegisterSubscriber_async]
+  callUpgradeRuntime();
+  // [END notebooks_v1_generated_ManagedNotebookService_UpgradeRuntime_async]
 }
 
 process.on('unhandledRejection', err => {
