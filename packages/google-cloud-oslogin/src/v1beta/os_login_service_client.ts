@@ -121,6 +121,9 @@ export class OsLoginServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -235,6 +238,7 @@ export class OsLoginServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const osLoginServiceStubMethods = [
+      'createSshPublicKey',
       'deletePosixAccount',
       'deleteSshPublicKey',
       'getLoginProfile',
@@ -329,6 +333,99 @@ export class OsLoginServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Create an SSH public key
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The unique ID for the user in format `users/{user}`.
+   * @param {google.cloud.oslogin.common.SshPublicKey} request.sshPublicKey
+   *   Required. The SSH public key and expiration time.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SshPublicKey]{@link google.cloud.oslogin.common.SshPublicKey}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/os_login_service.create_ssh_public_key.js</caption>
+   * region_tag:oslogin_v1beta_generated_OsLoginService_CreateSshPublicKey_async
+   */
+  createSshPublicKey(
+    request?: protos.google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.oslogin.common.ISshPublicKey,
+      protos.google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  createSshPublicKey(
+    request: protos.google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.oslogin.common.ISshPublicKey,
+      | protos.google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createSshPublicKey(
+    request: protos.google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest,
+    callback: Callback<
+      protos.google.cloud.oslogin.common.ISshPublicKey,
+      | protos.google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createSshPublicKey(
+    request?: protos.google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          | protos.google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.oslogin.common.ISshPublicKey,
+      | protos.google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.oslogin.common.ISshPublicKey,
+      protos.google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createSshPublicKey(request, options, callback);
+  }
   /**
    * Deletes a POSIX account.
    *
@@ -527,6 +624,8 @@ export class OsLoginServiceClient {
    *   The project ID of the Google Cloud Platform project.
    * @param {string} request.systemId
    *   A system ID for filtering the results of the request.
+   * @param {google.cloud.oslogin.v1beta.LoginProfileView} request.view
+   *   The view configures whether to retrieve security keys information.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -717,6 +816,8 @@ export class OsLoginServiceClient {
    *   Required. The SSH public key and expiration time.
    * @param {string} request.projectId
    *   The project ID of the Google Cloud Platform project.
+   * @param {google.cloud.oslogin.v1beta.LoginProfileView} request.view
+   *   The view configures whether to retrieve security keys information.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

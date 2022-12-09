@@ -164,6 +164,137 @@ describe('v1beta.OsLoginServiceClient', () => {
     });
   });
 
+  describe('createSshPublicKey', () => {
+    it('invokes createSshPublicKey without error', async () => {
+      const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.oslogin.common.SshPublicKey()
+      );
+      client.innerApiCalls.createSshPublicKey =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createSshPublicKey(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createSshPublicKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSshPublicKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSshPublicKey without error using callback', async () => {
+      const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.oslogin.common.SshPublicKey()
+      );
+      client.innerApiCalls.createSshPublicKey =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createSshPublicKey(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.oslogin.common.ISshPublicKey | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createSshPublicKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSshPublicKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSshPublicKey with error', async () => {
+      const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createSshPublicKey = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createSshPublicKey(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createSshPublicKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSshPublicKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSshPublicKey with closed client', async () => {
+      const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createSshPublicKey(request), expectedError);
+    });
+  });
+
   describe('deletePosixAccount', () => {
     it('invokes deletePosixAccount without error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
