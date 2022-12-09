@@ -900,6 +900,39 @@
                         };
     
                         /**
+                         * Callback as used by {@link google.cloud.oslogin.v1.OsLoginService|createSshPublicKey}.
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @typedef CreateSshPublicKeyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.oslogin.common.SshPublicKey} [response] SshPublicKey
+                         */
+    
+                        /**
+                         * Calls CreateSshPublicKey.
+                         * @function createSshPublicKey
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1.ICreateSshPublicKeyRequest} request CreateSshPublicKeyRequest message or plain object
+                         * @param {google.cloud.oslogin.v1.OsLoginService.CreateSshPublicKeyCallback} callback Node-style callback called with the error, if any, and SshPublicKey
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsLoginService.prototype.createSshPublicKey = function createSshPublicKey(request, callback) {
+                            return this.rpcCall(createSshPublicKey, $root.google.cloud.oslogin.v1.CreateSshPublicKeyRequest, $root.google.cloud.oslogin.common.SshPublicKey, request, callback);
+                        }, "name", { value: "CreateSshPublicKey" });
+    
+                        /**
+                         * Calls CreateSshPublicKey.
+                         * @function createSshPublicKey
+                         * @memberof google.cloud.oslogin.v1.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1.ICreateSshPublicKeyRequest} request CreateSshPublicKeyRequest message or plain object
+                         * @returns {Promise<google.cloud.oslogin.common.SshPublicKey>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.oslogin.v1.OsLoginService|deletePosixAccount}.
                          * @memberof google.cloud.oslogin.v1.OsLoginService
                          * @typedef DeletePosixAccountCallback
@@ -1412,6 +1445,238 @@
                         };
     
                         return LoginProfile;
+                    })();
+    
+                    v1.CreateSshPublicKeyRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSshPublicKeyRequest.
+                         * @memberof google.cloud.oslogin.v1
+                         * @interface ICreateSshPublicKeyRequest
+                         * @property {string|null} [parent] CreateSshPublicKeyRequest parent
+                         * @property {google.cloud.oslogin.common.ISshPublicKey|null} [sshPublicKey] CreateSshPublicKeyRequest sshPublicKey
+                         */
+    
+                        /**
+                         * Constructs a new CreateSshPublicKeyRequest.
+                         * @memberof google.cloud.oslogin.v1
+                         * @classdesc Represents a CreateSshPublicKeyRequest.
+                         * @implements ICreateSshPublicKeyRequest
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1.ICreateSshPublicKeyRequest=} [properties] Properties to set
+                         */
+                        function CreateSshPublicKeyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSshPublicKeyRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.oslogin.v1.CreateSshPublicKeyRequest
+                         * @instance
+                         */
+                        CreateSshPublicKeyRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSshPublicKeyRequest sshPublicKey.
+                         * @member {google.cloud.oslogin.common.ISshPublicKey|null|undefined} sshPublicKey
+                         * @memberof google.cloud.oslogin.v1.CreateSshPublicKeyRequest
+                         * @instance
+                         */
+                        CreateSshPublicKeyRequest.prototype.sshPublicKey = null;
+    
+                        /**
+                         * Creates a new CreateSshPublicKeyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.ICreateSshPublicKeyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1.CreateSshPublicKeyRequest} CreateSshPublicKeyRequest instance
+                         */
+                        CreateSshPublicKeyRequest.create = function create(properties) {
+                            return new CreateSshPublicKeyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1.CreateSshPublicKeyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.ICreateSshPublicKeyRequest} message CreateSshPublicKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSshPublicKeyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.sshPublicKey != null && Object.hasOwnProperty.call(message, "sshPublicKey"))
+                                $root.google.cloud.oslogin.common.SshPublicKey.encode(message.sshPublicKey, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1.CreateSshPublicKeyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.ICreateSshPublicKeyRequest} message CreateSshPublicKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSshPublicKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSshPublicKeyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1.CreateSshPublicKeyRequest} CreateSshPublicKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSshPublicKeyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1.CreateSshPublicKeyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSshPublicKeyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1.CreateSshPublicKeyRequest} CreateSshPublicKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSshPublicKeyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSshPublicKeyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSshPublicKeyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey")) {
+                                var error = $root.google.cloud.oslogin.common.SshPublicKey.verify(message.sshPublicKey);
+                                if (error)
+                                    return "sshPublicKey." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1.CreateSshPublicKeyRequest} CreateSshPublicKeyRequest
+                         */
+                        CreateSshPublicKeyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1.CreateSshPublicKeyRequest)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1.CreateSshPublicKeyRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.sshPublicKey != null) {
+                                if (typeof object.sshPublicKey !== "object")
+                                    throw TypeError(".google.cloud.oslogin.v1.CreateSshPublicKeyRequest.sshPublicKey: object expected");
+                                message.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.fromObject(object.sshPublicKey);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSshPublicKeyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1.CreateSshPublicKeyRequest} message CreateSshPublicKeyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSshPublicKeyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.sshPublicKey = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey"))
+                                object.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.toObject(message.sshPublicKey, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSshPublicKeyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1.CreateSshPublicKeyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSshPublicKeyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSshPublicKeyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.oslogin.v1.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSshPublicKeyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.oslogin.v1.CreateSshPublicKeyRequest";
+                        };
+    
+                        return CreateSshPublicKeyRequest;
                     })();
     
                     v1.DeletePosixAccountRequest = (function() {
@@ -2535,6 +2800,7 @@
                          * @memberof google.cloud.oslogin.v1
                          * @interface IImportSshPublicKeyResponse
                          * @property {google.cloud.oslogin.v1.ILoginProfile|null} [loginProfile] ImportSshPublicKeyResponse loginProfile
+                         * @property {string|null} [details] ImportSshPublicKeyResponse details
                          */
     
                         /**
@@ -2559,6 +2825,14 @@
                          * @instance
                          */
                         ImportSshPublicKeyResponse.prototype.loginProfile = null;
+    
+                        /**
+                         * ImportSshPublicKeyResponse details.
+                         * @member {string} details
+                         * @memberof google.cloud.oslogin.v1.ImportSshPublicKeyResponse
+                         * @instance
+                         */
+                        ImportSshPublicKeyResponse.prototype.details = "";
     
                         /**
                          * Creates a new ImportSshPublicKeyResponse instance using the specified properties.
@@ -2586,6 +2860,8 @@
                                 writer = $Writer.create();
                             if (message.loginProfile != null && Object.hasOwnProperty.call(message, "loginProfile"))
                                 $root.google.cloud.oslogin.v1.LoginProfile.encode(message.loginProfile, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.details);
                             return writer;
                         };
     
@@ -2622,6 +2898,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.loginProfile = $root.google.cloud.oslogin.v1.LoginProfile.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.details = reader.string();
                                         break;
                                     }
                                 default:
@@ -2664,6 +2944,9 @@
                                 if (error)
                                     return "loginProfile." + error;
                             }
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                if (!$util.isString(message.details))
+                                    return "details: string expected";
                             return null;
                         };
     
@@ -2684,6 +2967,8 @@
                                     throw TypeError(".google.cloud.oslogin.v1.ImportSshPublicKeyResponse.loginProfile: object expected");
                                 message.loginProfile = $root.google.cloud.oslogin.v1.LoginProfile.fromObject(object.loginProfile);
                             }
+                            if (object.details != null)
+                                message.details = String(object.details);
                             return message;
                         };
     
@@ -2700,10 +2985,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.loginProfile = null;
+                                object.details = "";
+                            }
                             if (message.loginProfile != null && message.hasOwnProperty("loginProfile"))
                                 object.loginProfile = $root.google.cloud.oslogin.v1.LoginProfile.toObject(message.loginProfile, options);
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                object.details = message.details;
                             return object;
                         };
     
@@ -3041,6 +3330,39 @@
                         };
     
                         /**
+                         * Callback as used by {@link google.cloud.oslogin.v1beta.OsLoginService|createSshPublicKey}.
+                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
+                         * @typedef CreateSshPublicKeyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.oslogin.common.SshPublicKey} [response] SshPublicKey
+                         */
+    
+                        /**
+                         * Calls CreateSshPublicKey.
+                         * @function createSshPublicKey
+                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest} request CreateSshPublicKeyRequest message or plain object
+                         * @param {google.cloud.oslogin.v1beta.OsLoginService.CreateSshPublicKeyCallback} callback Node-style callback called with the error, if any, and SshPublicKey
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsLoginService.prototype.createSshPublicKey = function createSshPublicKey(request, callback) {
+                            return this.rpcCall(createSshPublicKey, $root.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest, $root.google.cloud.oslogin.common.SshPublicKey, request, callback);
+                        }, "name", { value: "CreateSshPublicKey" });
+    
+                        /**
+                         * Calls CreateSshPublicKey.
+                         * @function createSshPublicKey
+                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest} request CreateSshPublicKeyRequest message or plain object
+                         * @returns {Promise<google.cloud.oslogin.common.SshPublicKey>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.oslogin.v1beta.OsLoginService|deletePosixAccount}.
                          * @memberof google.cloud.oslogin.v1beta.OsLoginService
                          * @typedef DeletePosixAccountCallback
@@ -3250,6 +3572,7 @@
                          * @property {string|null} [name] LoginProfile name
                          * @property {Array.<google.cloud.oslogin.common.IPosixAccount>|null} [posixAccounts] LoginProfile posixAccounts
                          * @property {Object.<string,google.cloud.oslogin.common.ISshPublicKey>|null} [sshPublicKeys] LoginProfile sshPublicKeys
+                         * @property {Array.<google.cloud.oslogin.v1beta.ISecurityKey>|null} [securityKeys] LoginProfile securityKeys
                          */
     
                         /**
@@ -3263,6 +3586,7 @@
                         function LoginProfile(properties) {
                             this.posixAccounts = [];
                             this.sshPublicKeys = {};
+                            this.securityKeys = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -3292,6 +3616,14 @@
                          * @instance
                          */
                         LoginProfile.prototype.sshPublicKeys = $util.emptyObject;
+    
+                        /**
+                         * LoginProfile securityKeys.
+                         * @member {Array.<google.cloud.oslogin.v1beta.ISecurityKey>} securityKeys
+                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
+                         * @instance
+                         */
+                        LoginProfile.prototype.securityKeys = $util.emptyArray;
     
                         /**
                          * Creates a new LoginProfile instance using the specified properties.
@@ -3327,6 +3659,9 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.cloud.oslogin.common.SshPublicKey.encode(message.sshPublicKeys[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
+                            if (message.securityKeys != null && message.securityKeys.length)
+                                for (var i = 0; i < message.securityKeys.length; ++i)
+                                    $root.google.cloud.oslogin.v1beta.SecurityKey.encode(message.securityKeys[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -3394,6 +3729,12 @@
                                         message.sshPublicKeys[key] = value;
                                         break;
                                     }
+                                case 5: {
+                                        if (!(message.securityKeys && message.securityKeys.length))
+                                            message.securityKeys = [];
+                                        message.securityKeys.push($root.google.cloud.oslogin.v1beta.SecurityKey.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -3451,6 +3792,15 @@
                                         return "sshPublicKeys." + error;
                                 }
                             }
+                            if (message.securityKeys != null && message.hasOwnProperty("securityKeys")) {
+                                if (!Array.isArray(message.securityKeys))
+                                    return "securityKeys: array expected";
+                                for (var i = 0; i < message.securityKeys.length; ++i) {
+                                    var error = $root.google.cloud.oslogin.v1beta.SecurityKey.verify(message.securityKeys[i]);
+                                    if (error)
+                                        return "securityKeys." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -3488,6 +3838,16 @@
                                     message.sshPublicKeys[keys[i]] = $root.google.cloud.oslogin.common.SshPublicKey.fromObject(object.sshPublicKeys[keys[i]]);
                                 }
                             }
+                            if (object.securityKeys) {
+                                if (!Array.isArray(object.securityKeys))
+                                    throw TypeError(".google.cloud.oslogin.v1beta.LoginProfile.securityKeys: array expected");
+                                message.securityKeys = [];
+                                for (var i = 0; i < object.securityKeys.length; ++i) {
+                                    if (typeof object.securityKeys[i] !== "object")
+                                        throw TypeError(".google.cloud.oslogin.v1beta.LoginProfile.securityKeys: object expected");
+                                    message.securityKeys[i] = $root.google.cloud.oslogin.v1beta.SecurityKey.fromObject(object.securityKeys[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -3504,8 +3864,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.posixAccounts = [];
+                                object.securityKeys = [];
+                            }
                             if (options.objects || options.defaults)
                                 object.sshPublicKeys = {};
                             if (options.defaults)
@@ -3522,6 +3884,11 @@
                                 object.sshPublicKeys = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.sshPublicKeys[keys2[j]] = $root.google.cloud.oslogin.common.SshPublicKey.toObject(message.sshPublicKeys[keys2[j]], options);
+                            }
+                            if (message.securityKeys && message.securityKeys.length) {
+                                object.securityKeys = [];
+                                for (var j = 0; j < message.securityKeys.length; ++j)
+                                    object.securityKeys[j] = $root.google.cloud.oslogin.v1beta.SecurityKey.toObject(message.securityKeys[j], options);
                             }
                             return object;
                         };
@@ -3553,6 +3920,238 @@
                         };
     
                         return LoginProfile;
+                    })();
+    
+                    v1beta.CreateSshPublicKeyRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSshPublicKeyRequest.
+                         * @memberof google.cloud.oslogin.v1beta
+                         * @interface ICreateSshPublicKeyRequest
+                         * @property {string|null} [parent] CreateSshPublicKeyRequest parent
+                         * @property {google.cloud.oslogin.common.ISshPublicKey|null} [sshPublicKey] CreateSshPublicKeyRequest sshPublicKey
+                         */
+    
+                        /**
+                         * Constructs a new CreateSshPublicKeyRequest.
+                         * @memberof google.cloud.oslogin.v1beta
+                         * @classdesc Represents a CreateSshPublicKeyRequest.
+                         * @implements ICreateSshPublicKeyRequest
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest=} [properties] Properties to set
+                         */
+                        function CreateSshPublicKeyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSshPublicKeyRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
+                         * @instance
+                         */
+                        CreateSshPublicKeyRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSshPublicKeyRequest sshPublicKey.
+                         * @member {google.cloud.oslogin.common.ISshPublicKey|null|undefined} sshPublicKey
+                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
+                         * @instance
+                         */
+                        CreateSshPublicKeyRequest.prototype.sshPublicKey = null;
+    
+                        /**
+                         * Creates a new CreateSshPublicKeyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest} CreateSshPublicKeyRequest instance
+                         */
+                        CreateSshPublicKeyRequest.create = function create(properties) {
+                            return new CreateSshPublicKeyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest} message CreateSshPublicKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSshPublicKeyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.sshPublicKey != null && Object.hasOwnProperty.call(message, "sshPublicKey"))
+                                $root.google.cloud.oslogin.common.SshPublicKey.encode(message.sshPublicKey, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest} message CreateSshPublicKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSshPublicKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSshPublicKeyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest} CreateSshPublicKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSshPublicKeyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSshPublicKeyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest} CreateSshPublicKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSshPublicKeyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSshPublicKeyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSshPublicKeyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey")) {
+                                var error = $root.google.cloud.oslogin.common.SshPublicKey.verify(message.sshPublicKey);
+                                if (error)
+                                    return "sshPublicKey." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest} CreateSshPublicKeyRequest
+                         */
+                        CreateSshPublicKeyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.sshPublicKey != null) {
+                                if (typeof object.sshPublicKey !== "object")
+                                    throw TypeError(".google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest.sshPublicKey: object expected");
+                                message.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.fromObject(object.sshPublicKey);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSshPublicKeyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest} message CreateSshPublicKeyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSshPublicKeyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.sshPublicKey = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey"))
+                                object.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.toObject(message.sshPublicKey, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSshPublicKeyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSshPublicKeyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSshPublicKeyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSshPublicKeyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest";
+                        };
+    
+                        return CreateSshPublicKeyRequest;
                     })();
     
                     v1beta.DeletePosixAccountRequest = (function() {
@@ -3970,6 +4569,7 @@
                          * @property {string|null} [name] GetLoginProfileRequest name
                          * @property {string|null} [projectId] GetLoginProfileRequest projectId
                          * @property {string|null} [systemId] GetLoginProfileRequest systemId
+                         * @property {google.cloud.oslogin.v1beta.LoginProfileView|null} [view] GetLoginProfileRequest view
                          */
     
                         /**
@@ -4012,6 +4612,14 @@
                         GetLoginProfileRequest.prototype.systemId = "";
     
                         /**
+                         * GetLoginProfileRequest view.
+                         * @member {google.cloud.oslogin.v1beta.LoginProfileView} view
+                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
+                         * @instance
+                         */
+                        GetLoginProfileRequest.prototype.view = 0;
+    
+                        /**
                          * Creates a new GetLoginProfileRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
@@ -4041,6 +4649,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.projectId);
                             if (message.systemId != null && Object.hasOwnProperty.call(message, "systemId"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.systemId);
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.view);
                             return writer;
                         };
     
@@ -4087,6 +4697,10 @@
                                         message.systemId = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.view = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4131,6 +4745,15 @@
                             if (message.systemId != null && message.hasOwnProperty("systemId"))
                                 if (!$util.isString(message.systemId))
                                     return "systemId: string expected";
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -4152,6 +4775,26 @@
                                 message.projectId = String(object.projectId);
                             if (object.systemId != null)
                                 message.systemId = String(object.systemId);
+                            switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
+                            case "LOGIN_PROFILE_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "BASIC":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "SECURITY_KEY":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -4172,6 +4815,7 @@
                                 object.name = "";
                                 object.projectId = "";
                                 object.systemId = "";
+                                object.view = options.enums === String ? "LOGIN_PROFILE_VIEW_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4179,6 +4823,8 @@
                                 object.projectId = message.projectId;
                             if (message.systemId != null && message.hasOwnProperty("systemId"))
                                 object.systemId = message.systemId;
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.cloud.oslogin.v1beta.LoginProfileView[message.view] === undefined ? message.view : $root.google.cloud.oslogin.v1beta.LoginProfileView[message.view] : message.view;
                             return object;
                         };
     
@@ -4423,6 +5069,7 @@
                          * @property {string|null} [parent] ImportSshPublicKeyRequest parent
                          * @property {google.cloud.oslogin.common.ISshPublicKey|null} [sshPublicKey] ImportSshPublicKeyRequest sshPublicKey
                          * @property {string|null} [projectId] ImportSshPublicKeyRequest projectId
+                         * @property {google.cloud.oslogin.v1beta.LoginProfileView|null} [view] ImportSshPublicKeyRequest view
                          */
     
                         /**
@@ -4465,6 +5112,14 @@
                         ImportSshPublicKeyRequest.prototype.projectId = "";
     
                         /**
+                         * ImportSshPublicKeyRequest view.
+                         * @member {google.cloud.oslogin.v1beta.LoginProfileView} view
+                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
+                         * @instance
+                         */
+                        ImportSshPublicKeyRequest.prototype.view = 0;
+    
+                        /**
                          * Creates a new ImportSshPublicKeyRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest
@@ -4494,6 +5149,8 @@
                                 $root.google.cloud.oslogin.common.SshPublicKey.encode(message.sshPublicKey, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.projectId);
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.view);
                             return writer;
                         };
     
@@ -4538,6 +5195,10 @@
                                     }
                                 case 3: {
                                         message.projectId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.view = reader.int32();
                                         break;
                                     }
                                 default:
@@ -4586,6 +5247,15 @@
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 if (!$util.isString(message.projectId))
                                     return "projectId: string expected";
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -4610,6 +5280,26 @@
                             }
                             if (object.projectId != null)
                                 message.projectId = String(object.projectId);
+                            switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
+                            case "LOGIN_PROFILE_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "BASIC":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "SECURITY_KEY":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -4630,6 +5320,7 @@
                                 object.parent = "";
                                 object.sshPublicKey = null;
                                 object.projectId = "";
+                                object.view = options.enums === String ? "LOGIN_PROFILE_VIEW_UNSPECIFIED" : 0;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -4637,6 +5328,8 @@
                                 object.sshPublicKey = $root.google.cloud.oslogin.common.SshPublicKey.toObject(message.sshPublicKey, options);
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 object.projectId = message.projectId;
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.cloud.oslogin.v1beta.LoginProfileView[message.view] === undefined ? message.view : $root.google.cloud.oslogin.v1beta.LoginProfileView[message.view] : message.view;
                             return object;
                         };
     
@@ -4676,6 +5369,7 @@
                          * @memberof google.cloud.oslogin.v1beta
                          * @interface IImportSshPublicKeyResponse
                          * @property {google.cloud.oslogin.v1beta.ILoginProfile|null} [loginProfile] ImportSshPublicKeyResponse loginProfile
+                         * @property {string|null} [details] ImportSshPublicKeyResponse details
                          */
     
                         /**
@@ -4700,6 +5394,14 @@
                          * @instance
                          */
                         ImportSshPublicKeyResponse.prototype.loginProfile = null;
+    
+                        /**
+                         * ImportSshPublicKeyResponse details.
+                         * @member {string} details
+                         * @memberof google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse
+                         * @instance
+                         */
+                        ImportSshPublicKeyResponse.prototype.details = "";
     
                         /**
                          * Creates a new ImportSshPublicKeyResponse instance using the specified properties.
@@ -4727,6 +5429,8 @@
                                 writer = $Writer.create();
                             if (message.loginProfile != null && Object.hasOwnProperty.call(message, "loginProfile"))
                                 $root.google.cloud.oslogin.v1beta.LoginProfile.encode(message.loginProfile, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.details);
                             return writer;
                         };
     
@@ -4763,6 +5467,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.loginProfile = $root.google.cloud.oslogin.v1beta.LoginProfile.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.details = reader.string();
                                         break;
                                     }
                                 default:
@@ -4805,6 +5513,9 @@
                                 if (error)
                                     return "loginProfile." + error;
                             }
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                if (!$util.isString(message.details))
+                                    return "details: string expected";
                             return null;
                         };
     
@@ -4825,6 +5536,8 @@
                                     throw TypeError(".google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse.loginProfile: object expected");
                                 message.loginProfile = $root.google.cloud.oslogin.v1beta.LoginProfile.fromObject(object.loginProfile);
                             }
+                            if (object.details != null)
+                                message.details = String(object.details);
                             return message;
                         };
     
@@ -4841,10 +5554,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.loginProfile = null;
+                                object.details = "";
+                            }
                             if (message.loginProfile != null && message.hasOwnProperty("loginProfile"))
                                 object.loginProfile = $root.google.cloud.oslogin.v1beta.LoginProfile.toObject(message.loginProfile, options);
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                object.details = message.details;
                             return object;
                         };
     
@@ -5135,6 +5852,738 @@
                         };
     
                         return UpdateSshPublicKeyRequest;
+                    })();
+    
+                    v1beta.SecurityKey = (function() {
+    
+                        /**
+                         * Properties of a SecurityKey.
+                         * @memberof google.cloud.oslogin.v1beta
+                         * @interface ISecurityKey
+                         * @property {string|null} [publicKey] SecurityKey publicKey
+                         * @property {string|null} [privateKey] SecurityKey privateKey
+                         * @property {google.cloud.oslogin.v1beta.IUniversalTwoFactor|null} [universalTwoFactor] SecurityKey universalTwoFactor
+                         * @property {google.cloud.oslogin.v1beta.IWebAuthn|null} [webAuthn] SecurityKey webAuthn
+                         */
+    
+                        /**
+                         * Constructs a new SecurityKey.
+                         * @memberof google.cloud.oslogin.v1beta
+                         * @classdesc Represents a SecurityKey.
+                         * @implements ISecurityKey
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1beta.ISecurityKey=} [properties] Properties to set
+                         */
+                        function SecurityKey(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SecurityKey publicKey.
+                         * @member {string} publicKey
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @instance
+                         */
+                        SecurityKey.prototype.publicKey = "";
+    
+                        /**
+                         * SecurityKey privateKey.
+                         * @member {string} privateKey
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @instance
+                         */
+                        SecurityKey.prototype.privateKey = "";
+    
+                        /**
+                         * SecurityKey universalTwoFactor.
+                         * @member {google.cloud.oslogin.v1beta.IUniversalTwoFactor|null|undefined} universalTwoFactor
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @instance
+                         */
+                        SecurityKey.prototype.universalTwoFactor = null;
+    
+                        /**
+                         * SecurityKey webAuthn.
+                         * @member {google.cloud.oslogin.v1beta.IWebAuthn|null|undefined} webAuthn
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @instance
+                         */
+                        SecurityKey.prototype.webAuthn = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * SecurityKey protocolType.
+                         * @member {"universalTwoFactor"|"webAuthn"|undefined} protocolType
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @instance
+                         */
+                        Object.defineProperty(SecurityKey.prototype, "protocolType", {
+                            get: $util.oneOfGetter($oneOfFields = ["universalTwoFactor", "webAuthn"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new SecurityKey instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.ISecurityKey=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1beta.SecurityKey} SecurityKey instance
+                         */
+                        SecurityKey.create = function create(properties) {
+                            return new SecurityKey(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SecurityKey message. Does not implicitly {@link google.cloud.oslogin.v1beta.SecurityKey.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.ISecurityKey} message SecurityKey message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecurityKey.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.publicKey != null && Object.hasOwnProperty.call(message, "publicKey"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.publicKey);
+                            if (message.privateKey != null && Object.hasOwnProperty.call(message, "privateKey"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.privateKey);
+                            if (message.universalTwoFactor != null && Object.hasOwnProperty.call(message, "universalTwoFactor"))
+                                $root.google.cloud.oslogin.v1beta.UniversalTwoFactor.encode(message.universalTwoFactor, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.webAuthn != null && Object.hasOwnProperty.call(message, "webAuthn"))
+                                $root.google.cloud.oslogin.v1beta.WebAuthn.encode(message.webAuthn, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SecurityKey message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.SecurityKey.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.ISecurityKey} message SecurityKey message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecurityKey.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SecurityKey message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1beta.SecurityKey} SecurityKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecurityKey.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.SecurityKey();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.publicKey = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.privateKey = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.universalTwoFactor = $root.google.cloud.oslogin.v1beta.UniversalTwoFactor.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.webAuthn = $root.google.cloud.oslogin.v1beta.WebAuthn.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SecurityKey message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1beta.SecurityKey} SecurityKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecurityKey.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SecurityKey message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SecurityKey.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.publicKey != null && message.hasOwnProperty("publicKey"))
+                                if (!$util.isString(message.publicKey))
+                                    return "publicKey: string expected";
+                            if (message.privateKey != null && message.hasOwnProperty("privateKey"))
+                                if (!$util.isString(message.privateKey))
+                                    return "privateKey: string expected";
+                            if (message.universalTwoFactor != null && message.hasOwnProperty("universalTwoFactor")) {
+                                properties.protocolType = 1;
+                                {
+                                    var error = $root.google.cloud.oslogin.v1beta.UniversalTwoFactor.verify(message.universalTwoFactor);
+                                    if (error)
+                                        return "universalTwoFactor." + error;
+                                }
+                            }
+                            if (message.webAuthn != null && message.hasOwnProperty("webAuthn")) {
+                                if (properties.protocolType === 1)
+                                    return "protocolType: multiple values";
+                                properties.protocolType = 1;
+                                {
+                                    var error = $root.google.cloud.oslogin.v1beta.WebAuthn.verify(message.webAuthn);
+                                    if (error)
+                                        return "webAuthn." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SecurityKey message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1beta.SecurityKey} SecurityKey
+                         */
+                        SecurityKey.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1beta.SecurityKey)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1beta.SecurityKey();
+                            if (object.publicKey != null)
+                                message.publicKey = String(object.publicKey);
+                            if (object.privateKey != null)
+                                message.privateKey = String(object.privateKey);
+                            if (object.universalTwoFactor != null) {
+                                if (typeof object.universalTwoFactor !== "object")
+                                    throw TypeError(".google.cloud.oslogin.v1beta.SecurityKey.universalTwoFactor: object expected");
+                                message.universalTwoFactor = $root.google.cloud.oslogin.v1beta.UniversalTwoFactor.fromObject(object.universalTwoFactor);
+                            }
+                            if (object.webAuthn != null) {
+                                if (typeof object.webAuthn !== "object")
+                                    throw TypeError(".google.cloud.oslogin.v1beta.SecurityKey.webAuthn: object expected");
+                                message.webAuthn = $root.google.cloud.oslogin.v1beta.WebAuthn.fromObject(object.webAuthn);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SecurityKey message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.SecurityKey} message SecurityKey
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SecurityKey.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.publicKey = "";
+                                object.privateKey = "";
+                            }
+                            if (message.publicKey != null && message.hasOwnProperty("publicKey"))
+                                object.publicKey = message.publicKey;
+                            if (message.privateKey != null && message.hasOwnProperty("privateKey"))
+                                object.privateKey = message.privateKey;
+                            if (message.universalTwoFactor != null && message.hasOwnProperty("universalTwoFactor")) {
+                                object.universalTwoFactor = $root.google.cloud.oslogin.v1beta.UniversalTwoFactor.toObject(message.universalTwoFactor, options);
+                                if (options.oneofs)
+                                    object.protocolType = "universalTwoFactor";
+                            }
+                            if (message.webAuthn != null && message.hasOwnProperty("webAuthn")) {
+                                object.webAuthn = $root.google.cloud.oslogin.v1beta.WebAuthn.toObject(message.webAuthn, options);
+                                if (options.oneofs)
+                                    object.protocolType = "webAuthn";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SecurityKey to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SecurityKey.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SecurityKey
+                         * @function getTypeUrl
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SecurityKey.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.SecurityKey";
+                        };
+    
+                        return SecurityKey;
+                    })();
+    
+                    v1beta.UniversalTwoFactor = (function() {
+    
+                        /**
+                         * Properties of an UniversalTwoFactor.
+                         * @memberof google.cloud.oslogin.v1beta
+                         * @interface IUniversalTwoFactor
+                         * @property {string|null} [appId] UniversalTwoFactor appId
+                         */
+    
+                        /**
+                         * Constructs a new UniversalTwoFactor.
+                         * @memberof google.cloud.oslogin.v1beta
+                         * @classdesc Represents an UniversalTwoFactor.
+                         * @implements IUniversalTwoFactor
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1beta.IUniversalTwoFactor=} [properties] Properties to set
+                         */
+                        function UniversalTwoFactor(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UniversalTwoFactor appId.
+                         * @member {string} appId
+                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
+                         * @instance
+                         */
+                        UniversalTwoFactor.prototype.appId = "";
+    
+                        /**
+                         * Creates a new UniversalTwoFactor instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.IUniversalTwoFactor=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1beta.UniversalTwoFactor} UniversalTwoFactor instance
+                         */
+                        UniversalTwoFactor.create = function create(properties) {
+                            return new UniversalTwoFactor(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UniversalTwoFactor message. Does not implicitly {@link google.cloud.oslogin.v1beta.UniversalTwoFactor.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.IUniversalTwoFactor} message UniversalTwoFactor message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UniversalTwoFactor.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.appId != null && Object.hasOwnProperty.call(message, "appId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.appId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UniversalTwoFactor message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.UniversalTwoFactor.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.IUniversalTwoFactor} message UniversalTwoFactor message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UniversalTwoFactor.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UniversalTwoFactor message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1beta.UniversalTwoFactor} UniversalTwoFactor
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UniversalTwoFactor.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.UniversalTwoFactor();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.appId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UniversalTwoFactor message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1beta.UniversalTwoFactor} UniversalTwoFactor
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UniversalTwoFactor.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UniversalTwoFactor message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UniversalTwoFactor.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.appId != null && message.hasOwnProperty("appId"))
+                                if (!$util.isString(message.appId))
+                                    return "appId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UniversalTwoFactor message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1beta.UniversalTwoFactor} UniversalTwoFactor
+                         */
+                        UniversalTwoFactor.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1beta.UniversalTwoFactor)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1beta.UniversalTwoFactor();
+                            if (object.appId != null)
+                                message.appId = String(object.appId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UniversalTwoFactor message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.UniversalTwoFactor} message UniversalTwoFactor
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UniversalTwoFactor.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.appId = "";
+                            if (message.appId != null && message.hasOwnProperty("appId"))
+                                object.appId = message.appId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UniversalTwoFactor to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UniversalTwoFactor.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UniversalTwoFactor
+                         * @function getTypeUrl
+                         * @memberof google.cloud.oslogin.v1beta.UniversalTwoFactor
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UniversalTwoFactor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.UniversalTwoFactor";
+                        };
+    
+                        return UniversalTwoFactor;
+                    })();
+    
+                    v1beta.WebAuthn = (function() {
+    
+                        /**
+                         * Properties of a WebAuthn.
+                         * @memberof google.cloud.oslogin.v1beta
+                         * @interface IWebAuthn
+                         * @property {string|null} [rpId] WebAuthn rpId
+                         */
+    
+                        /**
+                         * Constructs a new WebAuthn.
+                         * @memberof google.cloud.oslogin.v1beta
+                         * @classdesc Represents a WebAuthn.
+                         * @implements IWebAuthn
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1beta.IWebAuthn=} [properties] Properties to set
+                         */
+                        function WebAuthn(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WebAuthn rpId.
+                         * @member {string} rpId
+                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
+                         * @instance
+                         */
+                        WebAuthn.prototype.rpId = "";
+    
+                        /**
+                         * Creates a new WebAuthn instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.IWebAuthn=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1beta.WebAuthn} WebAuthn instance
+                         */
+                        WebAuthn.create = function create(properties) {
+                            return new WebAuthn(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WebAuthn message. Does not implicitly {@link google.cloud.oslogin.v1beta.WebAuthn.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.IWebAuthn} message WebAuthn message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WebAuthn.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.rpId != null && Object.hasOwnProperty.call(message, "rpId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.rpId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WebAuthn message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.WebAuthn.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.IWebAuthn} message WebAuthn message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WebAuthn.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WebAuthn message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1beta.WebAuthn} WebAuthn
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WebAuthn.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.WebAuthn();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.rpId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WebAuthn message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1beta.WebAuthn} WebAuthn
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WebAuthn.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WebAuthn message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WebAuthn.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.rpId != null && message.hasOwnProperty("rpId"))
+                                if (!$util.isString(message.rpId))
+                                    return "rpId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WebAuthn message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1beta.WebAuthn} WebAuthn
+                         */
+                        WebAuthn.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1beta.WebAuthn)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1beta.WebAuthn();
+                            if (object.rpId != null)
+                                message.rpId = String(object.rpId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WebAuthn message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.WebAuthn} message WebAuthn
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WebAuthn.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.rpId = "";
+                            if (message.rpId != null && message.hasOwnProperty("rpId"))
+                                object.rpId = message.rpId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WebAuthn to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WebAuthn.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WebAuthn
+                         * @function getTypeUrl
+                         * @memberof google.cloud.oslogin.v1beta.WebAuthn
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WebAuthn.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.WebAuthn";
+                        };
+    
+                        return WebAuthn;
+                    })();
+    
+                    /**
+                     * LoginProfileView enum.
+                     * @name google.cloud.oslogin.v1beta.LoginProfileView
+                     * @enum {number}
+                     * @property {number} LOGIN_PROFILE_VIEW_UNSPECIFIED=0 LOGIN_PROFILE_VIEW_UNSPECIFIED value
+                     * @property {number} BASIC=1 BASIC value
+                     * @property {number} SECURITY_KEY=2 SECURITY_KEY value
+                     */
+                    v1beta.LoginProfileView = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LOGIN_PROFILE_VIEW_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "BASIC"] = 1;
+                        values[valuesById[2] = "SECURITY_KEY"] = 2;
+                        return values;
                     })();
     
                     return v1beta;

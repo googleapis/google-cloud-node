@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(sshPublicKey) {
-  // [START oslogin_v1beta_generated_OsLoginService_ImportSshPublicKey_async]
+function main(parent, sshPublicKey) {
+  // [START oslogin_v1_generated_OsLoginService_CreateSshPublicKey_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,34 @@ function main(sshPublicKey) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The unique ID for the user in format `users/{user}`.
+   *  Required. The unique ID for the user in format `users/{user}`.
    */
   // const parent = 'abc123'
   /**
    *  Required. The SSH public key and expiration time.
    */
   // const sshPublicKey = {}
-  /**
-   *  The project ID of the Google Cloud Platform project.
-   */
-  // const projectId = 'abc123'
-  /**
-   *  The view configures whether to retrieve security keys information.
-   */
-  // const view = {}
 
   // Imports the Oslogin library
-  const {OsLoginServiceClient} = require('@google-cloud/os-login').v1beta;
+  const {OsLoginServiceClient} = require('@google-cloud/os-login').v1;
 
   // Instantiates a client
   const osloginClient = new OsLoginServiceClient();
 
-  async function callImportSshPublicKey() {
+  async function callCreateSshPublicKey() {
     // Construct request
     const request = {
+      parent,
       sshPublicKey,
     };
 
     // Run request
-    const response = await osloginClient.importSshPublicKey(request);
+    const response = await osloginClient.createSshPublicKey(request);
     console.log(response);
   }
 
-  callImportSshPublicKey();
-  // [END oslogin_v1beta_generated_OsLoginService_ImportSshPublicKey_async]
+  callCreateSshPublicKey();
+  // [END oslogin_v1_generated_OsLoginService_CreateSshPublicKey_async]
 }
 
 process.on('unhandledRejection', err => {
