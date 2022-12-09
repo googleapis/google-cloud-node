@@ -31,7 +31,7 @@ function main(billingAccount) {
   /**
    *  Required. The billing account resource to create.
    *  Currently CreateBillingAccount only supports subaccount creation, so
-   *  any created billing accounts must be under a provided master billing
+   *  any created billing accounts must be under a provided parent billing
    *  account.
    */
   // const billingAccount = {}

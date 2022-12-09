@@ -206,7 +206,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 97,
                     "type": "FULL"
                 }
             ],
@@ -230,6 +230,10 @@
                     {
                         "name": "trace_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "missing_value_interpretations",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.cloud.bigquery.storage.v1.AppendRowsResponse",

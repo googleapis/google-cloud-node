@@ -632,6 +632,7 @@
                          * @property {Array.<google.cloud.lifesciences.v2beta.IAction>|null} [actions] Pipeline actions
                          * @property {google.cloud.lifesciences.v2beta.IResources|null} [resources] Pipeline resources
                          * @property {Object.<string,string>|null} [environment] Pipeline environment
+                         * @property {google.cloud.lifesciences.v2beta.ISecret|null} [encryptedEnvironment] Pipeline encryptedEnvironment
                          * @property {google.protobuf.IDuration|null} [timeout] Pipeline timeout
                          */
     
@@ -677,6 +678,14 @@
                         Pipeline.prototype.environment = $util.emptyObject;
     
                         /**
+                         * Pipeline encryptedEnvironment.
+                         * @member {google.cloud.lifesciences.v2beta.ISecret|null|undefined} encryptedEnvironment
+                         * @memberof google.cloud.lifesciences.v2beta.Pipeline
+                         * @instance
+                         */
+                        Pipeline.prototype.encryptedEnvironment = null;
+    
+                        /**
                          * Pipeline timeout.
                          * @member {google.protobuf.IDuration|null|undefined} timeout
                          * @memberof google.cloud.lifesciences.v2beta.Pipeline
@@ -718,6 +727,8 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.environment[keys[i]]).ldelim();
                             if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout"))
                                 $root.google.protobuf.Duration.encode(message.timeout, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.encryptedEnvironment != null && Object.hasOwnProperty.call(message, "encryptedEnvironment"))
+                                $root.google.cloud.lifesciences.v2beta.Secret.encode(message.encryptedEnvironment, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -785,6 +796,10 @@
                                         message.environment[key] = value;
                                         break;
                                     }
+                                case 5: {
+                                        message.encryptedEnvironment = $root.google.cloud.lifesciences.v2beta.Secret.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 4: {
                                         message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                         break;
@@ -846,6 +861,11 @@
                                     if (!$util.isString(message.environment[key[i]]))
                                         return "environment: string{k:string} expected";
                             }
+                            if (message.encryptedEnvironment != null && message.hasOwnProperty("encryptedEnvironment")) {
+                                var error = $root.google.cloud.lifesciences.v2beta.Secret.verify(message.encryptedEnvironment);
+                                if (error)
+                                    return "encryptedEnvironment." + error;
+                            }
                             if (message.timeout != null && message.hasOwnProperty("timeout")) {
                                 var error = $root.google.protobuf.Duration.verify(message.timeout);
                                 if (error)
@@ -888,6 +908,11 @@
                                 for (var keys = Object.keys(object.environment), i = 0; i < keys.length; ++i)
                                     message.environment[keys[i]] = String(object.environment[keys[i]]);
                             }
+                            if (object.encryptedEnvironment != null) {
+                                if (typeof object.encryptedEnvironment !== "object")
+                                    throw TypeError(".google.cloud.lifesciences.v2beta.Pipeline.encryptedEnvironment: object expected");
+                                message.encryptedEnvironment = $root.google.cloud.lifesciences.v2beta.Secret.fromObject(object.encryptedEnvironment);
+                            }
                             if (object.timeout != null) {
                                 if (typeof object.timeout !== "object")
                                     throw TypeError(".google.cloud.lifesciences.v2beta.Pipeline.timeout: object expected");
@@ -916,6 +941,7 @@
                             if (options.defaults) {
                                 object.resources = null;
                                 object.timeout = null;
+                                object.encryptedEnvironment = null;
                             }
                             if (message.actions && message.actions.length) {
                                 object.actions = [];
@@ -932,6 +958,8 @@
                             }
                             if (message.timeout != null && message.hasOwnProperty("timeout"))
                                 object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options);
+                            if (message.encryptedEnvironment != null && message.hasOwnProperty("encryptedEnvironment"))
+                                object.encryptedEnvironment = $root.google.cloud.lifesciences.v2beta.Secret.toObject(message.encryptedEnvironment, options);
                             return object;
                         };
     
@@ -975,6 +1003,7 @@
                          * @property {Array.<string>|null} [commands] Action commands
                          * @property {string|null} [entrypoint] Action entrypoint
                          * @property {Object.<string,string>|null} [environment] Action environment
+                         * @property {google.cloud.lifesciences.v2beta.ISecret|null} [encryptedEnvironment] Action encryptedEnvironment
                          * @property {string|null} [pidNamespace] Action pidNamespace
                          * @property {Object.<string,number>|null} [portMappings] Action portMappings
                          * @property {Array.<google.cloud.lifesciences.v2beta.IMount>|null} [mounts] Action mounts
@@ -1050,6 +1079,14 @@
                          * @instance
                          */
                         Action.prototype.environment = $util.emptyObject;
+    
+                        /**
+                         * Action encryptedEnvironment.
+                         * @member {google.cloud.lifesciences.v2beta.ISecret|null|undefined} encryptedEnvironment
+                         * @memberof google.cloud.lifesciences.v2beta.Action
+                         * @instance
+                         */
+                        Action.prototype.encryptedEnvironment = null;
     
                         /**
                          * Action pidNamespace.
@@ -1230,6 +1267,8 @@
                                 writer.uint32(/* id 19, wireType 0 =*/152).bool(message.disableStandardErrorCapture);
                             if (message.blockExternalNetwork != null && Object.hasOwnProperty.call(message, "blockExternalNetwork"))
                                 writer.uint32(/* id 20, wireType 0 =*/160).bool(message.blockExternalNetwork);
+                            if (message.encryptedEnvironment != null && Object.hasOwnProperty.call(message, "encryptedEnvironment"))
+                                $root.google.cloud.lifesciences.v2beta.Secret.encode(message.encryptedEnvironment, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             return writer;
                         };
     
@@ -1303,6 +1342,10 @@
                                             }
                                         }
                                         message.environment[key] = value;
+                                        break;
+                                    }
+                                case 21: {
+                                        message.encryptedEnvironment = $root.google.cloud.lifesciences.v2beta.Secret.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 6: {
@@ -1460,6 +1503,11 @@
                                     if (!$util.isString(message.environment[key[i]]))
                                         return "environment: string{k:string} expected";
                             }
+                            if (message.encryptedEnvironment != null && message.hasOwnProperty("encryptedEnvironment")) {
+                                var error = $root.google.cloud.lifesciences.v2beta.Secret.verify(message.encryptedEnvironment);
+                                if (error)
+                                    return "encryptedEnvironment." + error;
+                            }
                             if (message.pidNamespace != null && message.hasOwnProperty("pidNamespace"))
                                 if (!$util.isString(message.pidNamespace))
                                     return "pidNamespace: string expected";
@@ -1560,6 +1608,11 @@
                                 for (var keys = Object.keys(object.environment), i = 0; i < keys.length; ++i)
                                     message.environment[keys[i]] = String(object.environment[keys[i]]);
                             }
+                            if (object.encryptedEnvironment != null) {
+                                if (typeof object.encryptedEnvironment !== "object")
+                                    throw TypeError(".google.cloud.lifesciences.v2beta.Action.encryptedEnvironment: object expected");
+                                message.encryptedEnvironment = $root.google.cloud.lifesciences.v2beta.Secret.fromObject(object.encryptedEnvironment);
+                            }
                             if (object.pidNamespace != null)
                                 message.pidNamespace = String(object.pidNamespace);
                             if (object.portMappings) {
@@ -1652,6 +1705,7 @@
                                 object.disableImagePrefetch = false;
                                 object.disableStandardErrorCapture = false;
                                 object.blockExternalNetwork = false;
+                                object.encryptedEnvironment = null;
                             }
                             if (message.containerName != null && message.hasOwnProperty("containerName"))
                                 object.containerName = message.containerName;
@@ -1707,6 +1761,8 @@
                                 object.disableStandardErrorCapture = message.disableStandardErrorCapture;
                             if (message.blockExternalNetwork != null && message.hasOwnProperty("blockExternalNetwork"))
                                 object.blockExternalNetwork = message.blockExternalNetwork;
+                            if (message.encryptedEnvironment != null && message.hasOwnProperty("encryptedEnvironment"))
+                                object.encryptedEnvironment = $root.google.cloud.lifesciences.v2beta.Secret.toObject(message.encryptedEnvironment, options);
                             return object;
                         };
     
@@ -2524,6 +2580,7 @@
                          * @property {boolean|null} [enableStackdriverMonitoring] VirtualMachine enableStackdriverMonitoring
                          * @property {Array.<string>|null} [dockerCacheImages] VirtualMachine dockerCacheImages
                          * @property {Array.<google.cloud.lifesciences.v2beta.IVolume>|null} [volumes] VirtualMachine volumes
+                         * @property {string|null} [reservation] VirtualMachine reservation
                          */
     
                         /**
@@ -2659,6 +2716,14 @@
                         VirtualMachine.prototype.volumes = $util.emptyArray;
     
                         /**
+                         * VirtualMachine reservation.
+                         * @member {string} reservation
+                         * @memberof google.cloud.lifesciences.v2beta.VirtualMachine
+                         * @instance
+                         */
+                        VirtualMachine.prototype.reservation = "";
+    
+                        /**
                          * Creates a new VirtualMachine instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.lifesciences.v2beta.VirtualMachine
@@ -2715,6 +2780,8 @@
                             if (message.volumes != null && message.volumes.length)
                                 for (var i = 0; i < message.volumes.length; ++i)
                                     $root.google.cloud.lifesciences.v2beta.Volume.encode(message.volumes[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.reservation != null && Object.hasOwnProperty.call(message, "reservation"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.reservation);
                             return writer;
                         };
     
@@ -2832,6 +2899,10 @@
                                         message.volumes.push($root.google.cloud.lifesciences.v2beta.Volume.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 15: {
+                                        message.reservation = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2940,6 +3011,9 @@
                                         return "volumes." + error;
                                 }
                             }
+                            if (message.reservation != null && message.hasOwnProperty("reservation"))
+                                if (!$util.isString(message.reservation))
+                                    return "reservation: string expected";
                             return null;
                         };
     
@@ -3023,6 +3097,8 @@
                                     message.volumes[i] = $root.google.cloud.lifesciences.v2beta.Volume.fromObject(object.volumes[i]);
                                 }
                             }
+                            if (object.reservation != null)
+                                message.reservation = String(object.reservation);
                             return message;
                         };
     
@@ -3057,6 +3133,7 @@
                                 object.bootImage = "";
                                 object.nvidiaDriverVersion = "";
                                 object.enableStackdriverMonitoring = false;
+                                object.reservation = "";
                             }
                             if (message.machineType != null && message.hasOwnProperty("machineType"))
                                 object.machineType = message.machineType;
@@ -3102,6 +3179,8 @@
                                 for (var j = 0; j < message.volumes.length; ++j)
                                     object.volumes[j] = $root.google.cloud.lifesciences.v2beta.Volume.toObject(message.volumes[j], options);
                             }
+                            if (message.reservation != null && message.hasOwnProperty("reservation"))
+                                object.reservation = message.reservation;
                             return object;
                         };
     
