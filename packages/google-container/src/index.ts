@@ -17,11 +17,12 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v1beta1 from './v1beta1';
 
 const ClusterManagerClient = v1.ClusterManagerClient;
 type ClusterManagerClient = v1.ClusterManagerClient;
 
-export {v1, ClusterManagerClient};
-export default {v1, ClusterManagerClient};
+export {v1, v1beta1, ClusterManagerClient};
+export default {v1, v1beta1, ClusterManagerClient};
 import * as protos from '../protos/protos';
 export {protos};
