@@ -44,12 +44,12 @@ import * as gapicConfig from './client_connector_services_service_client_config.
 const version = require('../../../package.json').version;
 
 /**
- *  ## API Overview
+ *  API Overview:
  *
  *  The `beyondcorp.googleapis.com` service implements the Google Cloud
  *  BeyondCorp API.
  *
- *  ## Data Model
+ *  Data Model:
  *
  *  The ClientConnectorServicesService exposes the following resources:
  *
