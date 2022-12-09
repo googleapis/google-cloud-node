@@ -56,9 +56,10 @@ function main(domain, cloudIdentityId, parent, overwriteIfExists) {
    */
   // const overwriteIfExists = true
   /**
-   *  Optional. Cloud Identity ID of a channel partner who will be the direct reseller for
-   *  the customer's order. This field is required for 2-tier transfer scenarios
-   *  and can be provided via the request Parent binding as well.
+   *  Optional. Cloud Identity ID of a channel partner who will be the direct
+   *  reseller for the customer's order. This field is required for 2-tier
+   *  transfer scenarios and can be provided via the request Parent binding as
+   *  well.
    */
   // const channelPartnerId = 'abc123'
   /**
