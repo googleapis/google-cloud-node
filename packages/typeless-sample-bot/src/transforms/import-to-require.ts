@@ -12,16 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Reference notes:
-// https://lihautan.com/step-by-step-guide-for-writing-a-babel-transformation/
-// https://lihautan.com/babel-ast-explorer/
-// https://github.com/esamattis/babel-plugin-ts-optchain/blob/master/packages/babel-plugin-ts-optchain/src/plugin.ts
-
 import * as Babel from '@babel/types';
 import {NodePath, Visitor} from '@babel/traverse';
-
-type NodePathArray = NodePath<Babel.Node>[];
-type NodePathSingle = NodePath<Babel.Node>;
+import {NodePathArray, NodePathSingle, VisitorPlugin} from './babel';
 
 function getArray(path: NodePathSingle, subPathName: string): NodePathArray {
   return path.get(subPathName) as NodePathArray;
@@ -100,10 +93,6 @@ function wildcardImport(path: NodePathSingle) {
     path.node
   );
   path.replaceWith(replacement);
-}
-
-interface VisitorPlugin {
-  visitor: Visitor<unknown>;
 }
 
 export default function importToRequire(): VisitorPlugin {
