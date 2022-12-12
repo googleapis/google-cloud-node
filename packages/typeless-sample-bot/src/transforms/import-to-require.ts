@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as Babel from '@babel/types';
-import {NodePath, Visitor} from '@babel/traverse';
+import {NodePath} from '@babel/traverse';
 import {NodePathArray, NodePathSingle, VisitorPlugin} from './babel';
 
 function getArray(path: NodePathSingle, subPathName: string): NodePathArray {

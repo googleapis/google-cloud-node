@@ -15,7 +15,6 @@
 import * as Babel from '@babel/types';
 import {NodePathSingle, VisitorPlugin} from './babel';
 
-
 // Because null coalescing is still a proposal in many versions of Node,
 // go ahead and convert it to plain ||. It should work in TypeScript.
 export default function nullCoalescing(): VisitorPlugin {
@@ -24,7 +23,9 @@ export default function nullCoalescing(): VisitorPlugin {
       LogicalExpression(path: NodePathSingle) {
         const node = path.node as Babel.LogicalExpression;
         if (node.operator === '??') {
-          path.replaceWith(Babel.logicalExpression('||', node.left, node.right));
+          path.replaceWith(
+            Babel.logicalExpression('||', node.left, node.right)
+          );
         }
       },
     },
