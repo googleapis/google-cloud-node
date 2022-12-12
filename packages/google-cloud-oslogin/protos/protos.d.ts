@@ -330,6 +330,20 @@ export namespace google {
                     public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): OsLoginService;
 
                     /**
+                     * Calls CreateSshPublicKey.
+                     * @param request CreateSshPublicKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SshPublicKey
+                     */
+                    public createSshPublicKey(request: google.cloud.oslogin.v1.ICreateSshPublicKeyRequest, callback: google.cloud.oslogin.v1.OsLoginService.CreateSshPublicKeyCallback): void;
+
+                    /**
+                     * Calls CreateSshPublicKey.
+                     * @param request CreateSshPublicKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSshPublicKey(request: google.cloud.oslogin.v1.ICreateSshPublicKeyRequest): Promise<google.cloud.oslogin.common.SshPublicKey>;
+
+                    /**
                      * Calls DeletePosixAccount.
                      * @param request DeletePosixAccountRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Empty
@@ -415,6 +429,13 @@ export namespace google {
                 }
 
                 namespace OsLoginService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.oslogin.v1.OsLoginService|createSshPublicKey}.
+                     * @param error Error, if any
+                     * @param [response] SshPublicKey
+                     */
+                    type CreateSshPublicKeyCallback = (error: (Error|null), response?: google.cloud.oslogin.common.SshPublicKey) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.oslogin.v1.OsLoginService|deletePosixAccount}.
@@ -562,6 +583,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for LoginProfile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSshPublicKeyRequest. */
+                interface ICreateSshPublicKeyRequest {
+
+                    /** CreateSshPublicKeyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSshPublicKeyRequest sshPublicKey */
+                    sshPublicKey?: (google.cloud.oslogin.common.ISshPublicKey|null);
+                }
+
+                /** Represents a CreateSshPublicKeyRequest. */
+                class CreateSshPublicKeyRequest implements ICreateSshPublicKeyRequest {
+
+                    /**
+                     * Constructs a new CreateSshPublicKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oslogin.v1.ICreateSshPublicKeyRequest);
+
+                    /** CreateSshPublicKeyRequest parent. */
+                    public parent: string;
+
+                    /** CreateSshPublicKeyRequest sshPublicKey. */
+                    public sshPublicKey?: (google.cloud.oslogin.common.ISshPublicKey|null);
+
+                    /**
+                     * Creates a new CreateSshPublicKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSshPublicKeyRequest instance
+                     */
+                    public static create(properties?: google.cloud.oslogin.v1.ICreateSshPublicKeyRequest): google.cloud.oslogin.v1.CreateSshPublicKeyRequest;
+
+                    /**
+                     * Encodes the specified CreateSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1.CreateSshPublicKeyRequest.verify|verify} messages.
+                     * @param message CreateSshPublicKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oslogin.v1.ICreateSshPublicKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1.CreateSshPublicKeyRequest.verify|verify} messages.
+                     * @param message CreateSshPublicKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oslogin.v1.ICreateSshPublicKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSshPublicKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSshPublicKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oslogin.v1.CreateSshPublicKeyRequest;
+
+                    /**
+                     * Decodes a CreateSshPublicKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSshPublicKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oslogin.v1.CreateSshPublicKeyRequest;
+
+                    /**
+                     * Verifies a CreateSshPublicKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSshPublicKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oslogin.v1.CreateSshPublicKeyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSshPublicKeyRequest message. Also converts values to other types if specified.
+                     * @param message CreateSshPublicKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oslogin.v1.CreateSshPublicKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSshPublicKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSshPublicKeyRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -1082,6 +1206,9 @@ export namespace google {
 
                     /** ImportSshPublicKeyResponse loginProfile */
                     loginProfile?: (google.cloud.oslogin.v1.ILoginProfile|null);
+
+                    /** ImportSshPublicKeyResponse details */
+                    details?: (string|null);
                 }
 
                 /** Represents an ImportSshPublicKeyResponse. */
@@ -1095,6 +1222,9 @@ export namespace google {
 
                     /** ImportSshPublicKeyResponse loginProfile. */
                     public loginProfile?: (google.cloud.oslogin.v1.ILoginProfile|null);
+
+                    /** ImportSshPublicKeyResponse details. */
+                    public details: string;
 
                     /**
                      * Creates a new ImportSshPublicKeyResponse instance using the specified properties.
@@ -1308,6 +1438,20 @@ export namespace google {
                     public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): OsLoginService;
 
                     /**
+                     * Calls CreateSshPublicKey.
+                     * @param request CreateSshPublicKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SshPublicKey
+                     */
+                    public createSshPublicKey(request: google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest, callback: google.cloud.oslogin.v1beta.OsLoginService.CreateSshPublicKeyCallback): void;
+
+                    /**
+                     * Calls CreateSshPublicKey.
+                     * @param request CreateSshPublicKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSshPublicKey(request: google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest): Promise<google.cloud.oslogin.common.SshPublicKey>;
+
+                    /**
                      * Calls DeletePosixAccount.
                      * @param request DeletePosixAccountRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Empty
@@ -1395,6 +1539,13 @@ export namespace google {
                 namespace OsLoginService {
 
                     /**
+                     * Callback as used by {@link google.cloud.oslogin.v1beta.OsLoginService|createSshPublicKey}.
+                     * @param error Error, if any
+                     * @param [response] SshPublicKey
+                     */
+                    type CreateSshPublicKeyCallback = (error: (Error|null), response?: google.cloud.oslogin.common.SshPublicKey) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.oslogin.v1beta.OsLoginService|deletePosixAccount}.
                      * @param error Error, if any
                      * @param [response] Empty
@@ -1448,6 +1599,9 @@ export namespace google {
 
                     /** LoginProfile sshPublicKeys */
                     sshPublicKeys?: ({ [k: string]: google.cloud.oslogin.common.ISshPublicKey }|null);
+
+                    /** LoginProfile securityKeys */
+                    securityKeys?: (google.cloud.oslogin.v1beta.ISecurityKey[]|null);
                 }
 
                 /** Represents a LoginProfile. */
@@ -1467,6 +1621,9 @@ export namespace google {
 
                     /** LoginProfile sshPublicKeys. */
                     public sshPublicKeys: { [k: string]: google.cloud.oslogin.common.ISshPublicKey };
+
+                    /** LoginProfile securityKeys. */
+                    public securityKeys: google.cloud.oslogin.v1beta.ISecurityKey[];
 
                     /**
                      * Creates a new LoginProfile instance using the specified properties.
@@ -1540,6 +1697,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for LoginProfile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSshPublicKeyRequest. */
+                interface ICreateSshPublicKeyRequest {
+
+                    /** CreateSshPublicKeyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSshPublicKeyRequest sshPublicKey */
+                    sshPublicKey?: (google.cloud.oslogin.common.ISshPublicKey|null);
+                }
+
+                /** Represents a CreateSshPublicKeyRequest. */
+                class CreateSshPublicKeyRequest implements ICreateSshPublicKeyRequest {
+
+                    /**
+                     * Constructs a new CreateSshPublicKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest);
+
+                    /** CreateSshPublicKeyRequest parent. */
+                    public parent: string;
+
+                    /** CreateSshPublicKeyRequest sshPublicKey. */
+                    public sshPublicKey?: (google.cloud.oslogin.common.ISshPublicKey|null);
+
+                    /**
+                     * Creates a new CreateSshPublicKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSshPublicKeyRequest instance
+                     */
+                    public static create(properties?: google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest): google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest;
+
+                    /**
+                     * Encodes the specified CreateSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest.verify|verify} messages.
+                     * @param message CreateSshPublicKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest.verify|verify} messages.
+                     * @param message CreateSshPublicKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oslogin.v1beta.ICreateSshPublicKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSshPublicKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSshPublicKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest;
+
+                    /**
+                     * Decodes a CreateSshPublicKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSshPublicKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest;
+
+                    /**
+                     * Verifies a CreateSshPublicKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSshPublicKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSshPublicKeyRequest message. Also converts values to other types if specified.
+                     * @param message CreateSshPublicKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oslogin.v1beta.CreateSshPublicKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSshPublicKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSshPublicKeyRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -1751,6 +2011,9 @@ export namespace google {
 
                     /** GetLoginProfileRequest systemId */
                     systemId?: (string|null);
+
+                    /** GetLoginProfileRequest view */
+                    view?: (google.cloud.oslogin.v1beta.LoginProfileView|keyof typeof google.cloud.oslogin.v1beta.LoginProfileView|null);
                 }
 
                 /** Represents a GetLoginProfileRequest. */
@@ -1770,6 +2033,9 @@ export namespace google {
 
                     /** GetLoginProfileRequest systemId. */
                     public systemId: string;
+
+                    /** GetLoginProfileRequest view. */
+                    public view: (google.cloud.oslogin.v1beta.LoginProfileView|keyof typeof google.cloud.oslogin.v1beta.LoginProfileView);
 
                     /**
                      * Creates a new GetLoginProfileRequest instance using the specified properties.
@@ -1957,6 +2223,9 @@ export namespace google {
 
                     /** ImportSshPublicKeyRequest projectId */
                     projectId?: (string|null);
+
+                    /** ImportSshPublicKeyRequest view */
+                    view?: (google.cloud.oslogin.v1beta.LoginProfileView|keyof typeof google.cloud.oslogin.v1beta.LoginProfileView|null);
                 }
 
                 /** Represents an ImportSshPublicKeyRequest. */
@@ -1976,6 +2245,9 @@ export namespace google {
 
                     /** ImportSshPublicKeyRequest projectId. */
                     public projectId: string;
+
+                    /** ImportSshPublicKeyRequest view. */
+                    public view: (google.cloud.oslogin.v1beta.LoginProfileView|keyof typeof google.cloud.oslogin.v1beta.LoginProfileView);
 
                     /**
                      * Creates a new ImportSshPublicKeyRequest instance using the specified properties.
@@ -2060,6 +2332,9 @@ export namespace google {
 
                     /** ImportSshPublicKeyResponse loginProfile */
                     loginProfile?: (google.cloud.oslogin.v1beta.ILoginProfile|null);
+
+                    /** ImportSshPublicKeyResponse details */
+                    details?: (string|null);
                 }
 
                 /** Represents an ImportSshPublicKeyResponse. */
@@ -2073,6 +2348,9 @@ export namespace google {
 
                     /** ImportSshPublicKeyResponse loginProfile. */
                     public loginProfile?: (google.cloud.oslogin.v1beta.ILoginProfile|null);
+
+                    /** ImportSshPublicKeyResponse details. */
+                    public details: string;
 
                     /**
                      * Creates a new ImportSshPublicKeyResponse instance using the specified properties.
@@ -2259,6 +2537,325 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SecurityKey. */
+                interface ISecurityKey {
+
+                    /** SecurityKey publicKey */
+                    publicKey?: (string|null);
+
+                    /** SecurityKey privateKey */
+                    privateKey?: (string|null);
+
+                    /** SecurityKey universalTwoFactor */
+                    universalTwoFactor?: (google.cloud.oslogin.v1beta.IUniversalTwoFactor|null);
+
+                    /** SecurityKey webAuthn */
+                    webAuthn?: (google.cloud.oslogin.v1beta.IWebAuthn|null);
+                }
+
+                /** Represents a SecurityKey. */
+                class SecurityKey implements ISecurityKey {
+
+                    /**
+                     * Constructs a new SecurityKey.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oslogin.v1beta.ISecurityKey);
+
+                    /** SecurityKey publicKey. */
+                    public publicKey: string;
+
+                    /** SecurityKey privateKey. */
+                    public privateKey: string;
+
+                    /** SecurityKey universalTwoFactor. */
+                    public universalTwoFactor?: (google.cloud.oslogin.v1beta.IUniversalTwoFactor|null);
+
+                    /** SecurityKey webAuthn. */
+                    public webAuthn?: (google.cloud.oslogin.v1beta.IWebAuthn|null);
+
+                    /** SecurityKey protocolType. */
+                    public protocolType?: ("universalTwoFactor"|"webAuthn");
+
+                    /**
+                     * Creates a new SecurityKey instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecurityKey instance
+                     */
+                    public static create(properties?: google.cloud.oslogin.v1beta.ISecurityKey): google.cloud.oslogin.v1beta.SecurityKey;
+
+                    /**
+                     * Encodes the specified SecurityKey message. Does not implicitly {@link google.cloud.oslogin.v1beta.SecurityKey.verify|verify} messages.
+                     * @param message SecurityKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oslogin.v1beta.ISecurityKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecurityKey message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.SecurityKey.verify|verify} messages.
+                     * @param message SecurityKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oslogin.v1beta.ISecurityKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecurityKey message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecurityKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oslogin.v1beta.SecurityKey;
+
+                    /**
+                     * Decodes a SecurityKey message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecurityKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oslogin.v1beta.SecurityKey;
+
+                    /**
+                     * Verifies a SecurityKey message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecurityKey message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecurityKey
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oslogin.v1beta.SecurityKey;
+
+                    /**
+                     * Creates a plain object from a SecurityKey message. Also converts values to other types if specified.
+                     * @param message SecurityKey
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oslogin.v1beta.SecurityKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecurityKey to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SecurityKey
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UniversalTwoFactor. */
+                interface IUniversalTwoFactor {
+
+                    /** UniversalTwoFactor appId */
+                    appId?: (string|null);
+                }
+
+                /** Represents an UniversalTwoFactor. */
+                class UniversalTwoFactor implements IUniversalTwoFactor {
+
+                    /**
+                     * Constructs a new UniversalTwoFactor.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oslogin.v1beta.IUniversalTwoFactor);
+
+                    /** UniversalTwoFactor appId. */
+                    public appId: string;
+
+                    /**
+                     * Creates a new UniversalTwoFactor instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UniversalTwoFactor instance
+                     */
+                    public static create(properties?: google.cloud.oslogin.v1beta.IUniversalTwoFactor): google.cloud.oslogin.v1beta.UniversalTwoFactor;
+
+                    /**
+                     * Encodes the specified UniversalTwoFactor message. Does not implicitly {@link google.cloud.oslogin.v1beta.UniversalTwoFactor.verify|verify} messages.
+                     * @param message UniversalTwoFactor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oslogin.v1beta.IUniversalTwoFactor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UniversalTwoFactor message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.UniversalTwoFactor.verify|verify} messages.
+                     * @param message UniversalTwoFactor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oslogin.v1beta.IUniversalTwoFactor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UniversalTwoFactor message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UniversalTwoFactor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oslogin.v1beta.UniversalTwoFactor;
+
+                    /**
+                     * Decodes an UniversalTwoFactor message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UniversalTwoFactor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oslogin.v1beta.UniversalTwoFactor;
+
+                    /**
+                     * Verifies an UniversalTwoFactor message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UniversalTwoFactor message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UniversalTwoFactor
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oslogin.v1beta.UniversalTwoFactor;
+
+                    /**
+                     * Creates a plain object from an UniversalTwoFactor message. Also converts values to other types if specified.
+                     * @param message UniversalTwoFactor
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oslogin.v1beta.UniversalTwoFactor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UniversalTwoFactor to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UniversalTwoFactor
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a WebAuthn. */
+                interface IWebAuthn {
+
+                    /** WebAuthn rpId */
+                    rpId?: (string|null);
+                }
+
+                /** Represents a WebAuthn. */
+                class WebAuthn implements IWebAuthn {
+
+                    /**
+                     * Constructs a new WebAuthn.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oslogin.v1beta.IWebAuthn);
+
+                    /** WebAuthn rpId. */
+                    public rpId: string;
+
+                    /**
+                     * Creates a new WebAuthn instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WebAuthn instance
+                     */
+                    public static create(properties?: google.cloud.oslogin.v1beta.IWebAuthn): google.cloud.oslogin.v1beta.WebAuthn;
+
+                    /**
+                     * Encodes the specified WebAuthn message. Does not implicitly {@link google.cloud.oslogin.v1beta.WebAuthn.verify|verify} messages.
+                     * @param message WebAuthn message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oslogin.v1beta.IWebAuthn, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WebAuthn message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.WebAuthn.verify|verify} messages.
+                     * @param message WebAuthn message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oslogin.v1beta.IWebAuthn, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WebAuthn message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WebAuthn
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oslogin.v1beta.WebAuthn;
+
+                    /**
+                     * Decodes a WebAuthn message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WebAuthn
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oslogin.v1beta.WebAuthn;
+
+                    /**
+                     * Verifies a WebAuthn message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WebAuthn message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WebAuthn
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oslogin.v1beta.WebAuthn;
+
+                    /**
+                     * Creates a plain object from a WebAuthn message. Also converts values to other types if specified.
+                     * @param message WebAuthn
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oslogin.v1beta.WebAuthn, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WebAuthn to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WebAuthn
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** LoginProfileView enum. */
+                enum LoginProfileView {
+                    LOGIN_PROFILE_VIEW_UNSPECIFIED = 0,
+                    BASIC = 1,
+                    SECURITY_KEY = 2
                 }
             }
         }

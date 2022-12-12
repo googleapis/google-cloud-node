@@ -33,7 +33,8 @@ function main(account, serviceAccount) {
    */
   // const account = 'abc123'
   /**
-   *  Required. Service account that provides subscriber access to the registered topic.
+   *  Required. Service account that provides subscriber access to the registered
+   *  topic.
    */
   // const serviceAccount = 'abc123'
 
