@@ -125,6 +125,9 @@ export class ContentServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -1140,12 +1143,12 @@ export class ContentServiceClient {
    *   Required. The resource name of the parent lake:
    *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of content to return. The service may return fewer than
-   *   this value. If unspecified, at most 10 content will be returned. The
+   *   Optional. Maximum number of content to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 content will be returned. The
    *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListContent` call. Provide this
-   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListContent` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListContent` must match the call that provided the page
    *   token.
    * @param {string} [request.filter]
@@ -1248,12 +1251,12 @@ export class ContentServiceClient {
    *   Required. The resource name of the parent lake:
    *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of content to return. The service may return fewer than
-   *   this value. If unspecified, at most 10 content will be returned. The
+   *   Optional. Maximum number of content to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 content will be returned. The
    *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListContent` call. Provide this
-   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListContent` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListContent` must match the call that provided the page
    *   token.
    * @param {string} [request.filter]
@@ -1310,12 +1313,12 @@ export class ContentServiceClient {
    *   Required. The resource name of the parent lake:
    *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of content to return. The service may return fewer than
-   *   this value. If unspecified, at most 10 content will be returned. The
+   *   Optional. Maximum number of content to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 content will be returned. The
    *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListContent` call. Provide this
-   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListContent` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListContent` must match the call that provided the page
    *   token.
    * @param {string} [request.filter]
