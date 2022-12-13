@@ -34,9 +34,7 @@ go version
 # Ensure a newer version of Go is used so it is compatible with newer libraries.
 # The current Go version in the VM is 1.18.4, however we explicitly set it to
 # pin the Go dependency to v1.18.4 for consistency.
-retry sudo apt-get install -y wget
-
-wget https://go.dev/dl/go1.18.4.linux-amd64.tar.gz
+retry curl -LO https://go.dev/dl/go1.18.4.linux-amd64.tar.gz
 sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.4.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 
