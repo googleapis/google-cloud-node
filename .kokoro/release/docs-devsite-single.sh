@@ -25,4 +25,4 @@ export MONO_REPO_CWD=$PWD
 
 npm install --no-save @google-cloud/cloud-rad@0.4.13-experimental
 # publish docs to devsite
-npx @google-cloud/cloud-rad@0.4.13-experimental . cloud-rad
+. ./node_modules/.bin/cloud-rad cloud-rad
