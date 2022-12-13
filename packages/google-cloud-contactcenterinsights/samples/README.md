@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Contact_center_insights.bulk_analyze_conversations](#contact_center_insights.bulk_analyze_conversations)
   * [Contact_center_insights.calculate_issue_model_stats](#contact_center_insights.calculate_issue_model_stats)
   * [Contact_center_insights.calculate_stats](#contact_center_insights.calculate_stats)
   * [Contact_center_insights.create_analysis](#contact_center_insights.create_analysis)
@@ -21,6 +22,7 @@
   * [Contact_center_insights.create_view](#contact_center_insights.create_view)
   * [Contact_center_insights.delete_analysis](#contact_center_insights.delete_analysis)
   * [Contact_center_insights.delete_conversation](#contact_center_insights.delete_conversation)
+  * [Contact_center_insights.delete_issue](#contact_center_insights.delete_issue)
   * [Contact_center_insights.delete_issue_model](#contact_center_insights.delete_issue_model)
   * [Contact_center_insights.delete_phrase_matcher](#contact_center_insights.delete_phrase_matcher)
   * [Contact_center_insights.delete_view](#contact_center_insights.delete_view)
@@ -33,6 +35,7 @@
   * [Contact_center_insights.get_phrase_matcher](#contact_center_insights.get_phrase_matcher)
   * [Contact_center_insights.get_settings](#contact_center_insights.get_settings)
   * [Contact_center_insights.get_view](#contact_center_insights.get_view)
+  * [Contact_center_insights.ingest_conversations](#contact_center_insights.ingest_conversations)
   * [Contact_center_insights.list_analyses](#contact_center_insights.list_analyses)
   * [Contact_center_insights.list_conversations](#contact_center_insights.list_conversations)
   * [Contact_center_insights.list_issue_models](#contact_center_insights.list_issue_models)
@@ -61,6 +64,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Contact_center_insights.bulk_analyze_conversations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_analyze_conversations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_analyze_conversations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.bulk_analyze_conversations.js`
+
+
+-----
+
 
 
 
@@ -210,6 +230,23 @@ __Usage:__
 
 
 `node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_conversation.js`
+
+
+-----
+
+
+
+
+### Contact_center_insights.delete_issue
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_issue.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_issue.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.delete_issue.js`
 
 
 -----
@@ -414,6 +451,23 @@ __Usage:__
 
 
 `node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_view.js`
+
+
+-----
+
+
+
+
+### Contact_center_insights.ingest_conversations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.ingest_conversations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.ingest_conversations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.ingest_conversations.js`
 
 
 -----
