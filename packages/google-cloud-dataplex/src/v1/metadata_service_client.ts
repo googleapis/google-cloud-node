@@ -126,6 +126,9 @@ export class MetadataServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -682,8 +685,8 @@ export class MetadataServiceClient {
    *   Required. The resource name of the entity:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
    * @param {string} request.etag
-   *   Required. The etag associated with the entity, which can be retrieved with a
-   *   {@link |GetEntity} request.
+   *   Required. The etag associated with the entity, which can be retrieved with
+   *   a {@link |GetEntity} request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1143,17 +1146,18 @@ export class MetadataServiceClient {
    * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
    *   Required. Specify the entity view to make a partial list request.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of entities to return. The service may return fewer than
-   *   this value. If unspecified, 100 entities will be returned by default. The
-   *   maximum value is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of entities to return. The service may return
+   *   fewer than this value. If unspecified, 100 entities will be returned by
+   *   default. The maximum value is 500; larger values will will be truncated to
+   *   500.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListEntities` call. Provide
    *   this to retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListEntities` must match the call that provided the
    *   page token.
    * @param {string} [request.filter]
-   *   Optional. The following filter parameters can be added to the URL to limit the
-   *   entities returned by the API:
+   *   Optional. The following filter parameters can be added to the URL to limit
+   *   the entities returned by the API:
    *
    *   - Entity ID: ?filter="id=entityID"
    *   - Asset ID: ?filter="asset=assetID"
@@ -1252,17 +1256,18 @@ export class MetadataServiceClient {
    * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
    *   Required. Specify the entity view to make a partial list request.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of entities to return. The service may return fewer than
-   *   this value. If unspecified, 100 entities will be returned by default. The
-   *   maximum value is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of entities to return. The service may return
+   *   fewer than this value. If unspecified, 100 entities will be returned by
+   *   default. The maximum value is 500; larger values will will be truncated to
+   *   500.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListEntities` call. Provide
    *   this to retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListEntities` must match the call that provided the
    *   page token.
    * @param {string} [request.filter]
-   *   Optional. The following filter parameters can be added to the URL to limit the
-   *   entities returned by the API:
+   *   Optional. The following filter parameters can be added to the URL to limit
+   *   the entities returned by the API:
    *
    *   - Entity ID: ?filter="id=entityID"
    *   - Asset ID: ?filter="asset=assetID"
@@ -1315,17 +1320,18 @@ export class MetadataServiceClient {
    * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
    *   Required. Specify the entity view to make a partial list request.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of entities to return. The service may return fewer than
-   *   this value. If unspecified, 100 entities will be returned by default. The
-   *   maximum value is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of entities to return. The service may return
+   *   fewer than this value. If unspecified, 100 entities will be returned by
+   *   default. The maximum value is 500; larger values will will be truncated to
+   *   500.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListEntities` call. Provide
    *   this to retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListEntities` must match the call that provided the
    *   page token.
    * @param {string} [request.filter]
-   *   Optional. The following filter parameters can be added to the URL to limit the
-   *   entities returned by the API:
+   *   Optional. The following filter parameters can be added to the URL to limit
+   *   the entities returned by the API:
    *
    *   - Entity ID: ?filter="id=entityID"
    *   - Asset ID: ?filter="asset=assetID"
@@ -1375,17 +1381,18 @@ export class MetadataServiceClient {
    *   Required. The resource name of the parent entity:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of partitions to return. The service may return fewer than
-   *   this value. If unspecified, 100 partitions will be returned by default. The
-   *   maximum page size is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of partitions to return. The service may return
+   *   fewer than this value. If unspecified, 100 partitions will be returned by
+   *   default. The maximum page size is 500; larger values will will be truncated
+   *   to 500.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListPartitions` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListPartitions` must match the call that provided the
-   *   page token.
+   *   Optional. Page token received from a previous `ListPartitions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListPartitions` must match the call that provided
+   *   the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key value pair
-   *   expression. Supported operators and syntax:
+   *   Optional. Filter the partitions returned to the caller using a key value
+   *   pair expression. Supported operators and syntax:
    *
    *   - logic operators: AND, OR
    *   - comparison operators: <, >, >=, <= ,=, !=
@@ -1499,17 +1506,18 @@ export class MetadataServiceClient {
    *   Required. The resource name of the parent entity:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of partitions to return. The service may return fewer than
-   *   this value. If unspecified, 100 partitions will be returned by default. The
-   *   maximum page size is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of partitions to return. The service may return
+   *   fewer than this value. If unspecified, 100 partitions will be returned by
+   *   default. The maximum page size is 500; larger values will will be truncated
+   *   to 500.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListPartitions` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListPartitions` must match the call that provided the
-   *   page token.
+   *   Optional. Page token received from a previous `ListPartitions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListPartitions` must match the call that provided
+   *   the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key value pair
-   *   expression. Supported operators and syntax:
+   *   Optional. Filter the partitions returned to the caller using a key value
+   *   pair expression. Supported operators and syntax:
    *
    *   - logic operators: AND, OR
    *   - comparison operators: <, >, >=, <= ,=, !=
@@ -1571,17 +1579,18 @@ export class MetadataServiceClient {
    *   Required. The resource name of the parent entity:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of partitions to return. The service may return fewer than
-   *   this value. If unspecified, 100 partitions will be returned by default. The
-   *   maximum page size is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of partitions to return. The service may return
+   *   fewer than this value. If unspecified, 100 partitions will be returned by
+   *   default. The maximum page size is 500; larger values will will be truncated
+   *   to 500.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListPartitions` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListPartitions` must match the call that provided the
-   *   page token.
+   *   Optional. Page token received from a previous `ListPartitions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListPartitions` must match the call that provided
+   *   the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key value pair
-   *   expression. Supported operators and syntax:
+   *   Optional. Filter the partitions returned to the caller using a key value
+   *   pair expression. Supported operators and syntax:
    *
    *   - logic operators: AND, OR
    *   - comparison operators: <, >, >=, <= ,=, !=

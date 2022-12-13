@@ -15,7 +15,7 @@
   "dependencies": {
     "@google-cloud/documentai": "^6.1.0",
     "@google-cloud/storage": "^6.0.0",
-    "p-queue": "^6.6.2",
+    "p-queue": "^7.0.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

@@ -45,6 +45,11 @@
                 "applySoftwareUpdate"
               ]
             },
+            "RescheduleMaintenance": {
+              "methods": [
+                "rescheduleMaintenance"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
@@ -90,6 +95,11 @@
             "ApplySoftwareUpdate": {
               "methods": [
                 "applySoftwareUpdate"
+              ]
+            },
+            "RescheduleMaintenance": {
+              "methods": [
+                "rescheduleMaintenance"
               ]
             },
             "ListInstances": {

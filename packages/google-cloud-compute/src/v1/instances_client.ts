@@ -4406,6 +4406,8 @@ export class InstancesClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {boolean} request.discardLocalSsd
+   *   If true, discard the contents of any attached localSSD partitions. Default value is false.
    * @param {string} request.instance
    *   Name of the instance resource to stop.
    * @param {string} request.project
@@ -4524,6 +4526,8 @@ export class InstancesClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {boolean} request.discardLocalSsd
+   *   If true, discard the contents of any attached localSSD partitions. Default value is false.
    * @param {string} request.instance
    *   Name of the instance resource to suspend.
    * @param {string} request.project

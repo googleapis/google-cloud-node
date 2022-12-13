@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/notebooks/v1/diagnostic_config.proto",
   "../../protos/google/cloud/notebooks/v1/environment.proto",
   "../../protos/google/cloud/notebooks/v1/event.proto",
   "../../protos/google/cloud/notebooks/v1/execution.proto",

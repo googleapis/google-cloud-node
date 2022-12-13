@@ -118,6 +118,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "DiagnoseInstance": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "UpgradeInstanceInternal": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",

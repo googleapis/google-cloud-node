@@ -272,6 +272,14 @@
   * [Machine_types.aggregated_list](#machine_types.aggregated_list)
   * [Machine_types.get](#machine_types.get)
   * [Machine_types.list](#machine_types.list)
+  * [Network_attachments.aggregated_list](#network_attachments.aggregated_list)
+  * [Network_attachments.delete](#network_attachments.delete)
+  * [Network_attachments.get](#network_attachments.get)
+  * [Network_attachments.get_iam_policy](#network_attachments.get_iam_policy)
+  * [Network_attachments.insert](#network_attachments.insert)
+  * [Network_attachments.list](#network_attachments.list)
+  * [Network_attachments.set_iam_policy](#network_attachments.set_iam_policy)
+  * [Network_attachments.test_iam_permissions](#network_attachments.test_iam_permissions)
   * [Network_edge_security_services.aggregated_list](#network_edge_security_services.aggregated_list)
   * [Network_edge_security_services.delete](#network_edge_security_services.delete)
   * [Network_edge_security_services.get](#network_edge_security_services.get)
@@ -5118,6 +5126,142 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/machine_types.list.js`
+
+
+-----
+
+
+
+
+### Network_attachments.aggregated_list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_attachments.aggregated_list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_attachments.aggregated_list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_attachments.aggregated_list.js`
+
+
+-----
+
+
+
+
+### Network_attachments.delete
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_attachments.delete.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_attachments.delete.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_attachments.delete.js`
+
+
+-----
+
+
+
+
+### Network_attachments.get
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_attachments.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_attachments.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_attachments.get.js`
+
+
+-----
+
+
+
+
+### Network_attachments.get_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_attachments.get_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_attachments.get_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_attachments.get_iam_policy.js`
+
+
+-----
+
+
+
+
+### Network_attachments.insert
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_attachments.insert.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_attachments.insert.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_attachments.insert.js`
+
+
+-----
+
+
+
+
+### Network_attachments.list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_attachments.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_attachments.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_attachments.list.js`
+
+
+-----
+
+
+
+
+### Network_attachments.set_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_attachments.set_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_attachments.set_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_attachments.set_iam_policy.js`
+
+
+-----
+
+
+
+
+### Network_attachments.test_iam_permissions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_attachments.test_iam_permissions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_attachments.test_iam_permissions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_attachments.test_iam_permissions.js`
 
 
 -----

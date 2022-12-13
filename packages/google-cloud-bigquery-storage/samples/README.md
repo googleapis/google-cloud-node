@@ -26,6 +26,15 @@
   * [Big_query_storage.finalize_stream](#big_query_storage.finalize_stream)
   * [Big_query_storage.read_rows](#big_query_storage.read_rows)
   * [Big_query_storage.split_read_stream](#big_query_storage.split_read_stream)
+  * [Big_query_read.create_read_session](#big_query_read.create_read_session)
+  * [Big_query_read.read_rows](#big_query_read.read_rows)
+  * [Big_query_read.split_read_stream](#big_query_read.split_read_stream)
+  * [Big_query_write.append_rows](#big_query_write.append_rows)
+  * [Big_query_write.batch_commit_write_streams](#big_query_write.batch_commit_write_streams)
+  * [Big_query_write.create_write_stream](#big_query_write.create_write_stream)
+  * [Big_query_write.finalize_write_stream](#big_query_write.finalize_write_stream)
+  * [Big_query_write.flush_rows](#big_query_write.flush_rows)
+  * [Big_query_write.get_write_stream](#big_query_write.get_write_stream)
   * [BigQuery Storage Quickstart](#bigquery-storage-quickstart)
   * [Quickstart](#quickstart)
 
@@ -275,6 +284,159 @@ __Usage:__
 
 
 `node packages/google-cloud-bigquery-storage/samples/generated/v1beta1/big_query_storage.split_read_stream.js`
+
+
+-----
+
+
+
+
+### Big_query_read.create_read_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_read.create_read_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_read.create_read_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_read.create_read_session.js`
+
+
+-----
+
+
+
+
+### Big_query_read.read_rows
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_read.read_rows.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_read.read_rows.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_read.read_rows.js`
+
+
+-----
+
+
+
+
+### Big_query_read.split_read_stream
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_read.split_read_stream.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_read.split_read_stream.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_read.split_read_stream.js`
+
+
+-----
+
+
+
+
+### Big_query_write.append_rows
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.append_rows.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.append_rows.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.append_rows.js`
+
+
+-----
+
+
+
+
+### Big_query_write.batch_commit_write_streams
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.batch_commit_write_streams.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.batch_commit_write_streams.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.batch_commit_write_streams.js`
+
+
+-----
+
+
+
+
+### Big_query_write.create_write_stream
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.create_write_stream.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.create_write_stream.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.create_write_stream.js`
+
+
+-----
+
+
+
+
+### Big_query_write.finalize_write_stream
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.finalize_write_stream.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.finalize_write_stream.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.finalize_write_stream.js`
+
+
+-----
+
+
+
+
+### Big_query_write.flush_rows
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.flush_rows.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.flush_rows.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.flush_rows.js`
+
+
+-----
+
+
+
+
+### Big_query_write.get_write_stream
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.get_write_stream.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.get_write_stream.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-storage/samples/generated/v1beta2/big_query_write.get_write_stream.js`
 
 
 -----

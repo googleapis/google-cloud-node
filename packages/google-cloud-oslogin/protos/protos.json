@@ -129,9 +129,29 @@
                     "OsLoginService": {
                       "options": {
                         "(google.api.default_host)": "oslogin.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/compute.readonly"
                       },
                       "methods": {
+                        "CreateSshPublicKey": {
+                          "requestType": "CreateSshPublicKeyRequest",
+                          "responseType": "google.cloud.oslogin.common.SshPublicKey",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=users/*}/sshPublicKeys",
+                            "(google.api.http).body": "ssh_public_key",
+                            "(google.api.method_signature)": "parent,ssh_public_key"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=users/*}/sshPublicKeys",
+                                "body": "ssh_public_key"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,ssh_public_key"
+                            }
+                          ]
+                        },
                         "DeletePosixAccount": {
                           "requestType": "DeletePosixAccountRequest",
                           "responseType": "google.protobuf.Empty",
@@ -273,6 +293,25 @@
                         }
                       }
                     },
+                    "CreateSshPublicKeyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "oslogin.googleapis.com/SshPublicKey"
+                          }
+                        },
+                        "sshPublicKey": {
+                          "type": "google.cloud.oslogin.common.SshPublicKey",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "DeletePosixAccountRequest": {
                       "fields": {
                         "name": {
@@ -357,6 +396,10 @@
                         "loginProfile": {
                           "type": "LoginProfile",
                           "id": 1
+                        },
+                        "details": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -402,6 +445,26 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/compute.readonly"
                       },
                       "methods": {
+                        "CreateSshPublicKey": {
+                          "requestType": "CreateSshPublicKeyRequest",
+                          "responseType": "google.cloud.oslogin.common.SshPublicKey",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=users/*}/sshPublicKeys",
+                            "(google.api.http).body": "ssh_public_key",
+                            "(google.api.method_signature)": "parent,ssh_public_key"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=users/*}/sshPublicKeys",
+                                "body": "ssh_public_key"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,ssh_public_key"
+                            }
+                          ]
+                        },
                         "DeletePosixAccount": {
                           "requestType": "DeletePosixAccountRequest",
                           "responseType": "google.protobuf.Empty",
@@ -540,6 +603,30 @@
                           "keyType": "string",
                           "type": "google.cloud.oslogin.common.SshPublicKey",
                           "id": 3
+                        },
+                        "securityKeys": {
+                          "rule": "repeated",
+                          "type": "SecurityKey",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "CreateSshPublicKeyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "oslogin.googleapis.com/SshPublicKey"
+                          }
+                        },
+                        "sshPublicKey": {
+                          "type": "google.cloud.oslogin.common.SshPublicKey",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -584,6 +671,10 @@
                         "systemId": {
                           "type": "string",
                           "id": 3
+                        },
+                        "view": {
+                          "type": "LoginProfileView",
+                          "id": 4
                         }
                       }
                     },
@@ -618,6 +709,10 @@
                         "projectId": {
                           "type": "string",
                           "id": 3
+                        },
+                        "view": {
+                          "type": "LoginProfileView",
+                          "id": 4
                         }
                       }
                     },
@@ -626,6 +721,10 @@
                         "loginProfile": {
                           "type": "LoginProfile",
                           "id": 1
+                        },
+                        "details": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -650,6 +749,57 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 3
                         }
+                      }
+                    },
+                    "SecurityKey": {
+                      "oneofs": {
+                        "protocolType": {
+                          "oneof": [
+                            "universalTwoFactor",
+                            "webAuthn"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "publicKey": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "privateKey": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "universalTwoFactor": {
+                          "type": "UniversalTwoFactor",
+                          "id": 3
+                        },
+                        "webAuthn": {
+                          "type": "WebAuthn",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "UniversalTwoFactor": {
+                      "fields": {
+                        "appId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "WebAuthn": {
+                      "fields": {
+                        "rpId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LoginProfileView": {
+                      "values": {
+                        "LOGIN_PROFILE_VIEW_UNSPECIFIED": 0,
+                        "BASIC": 1,
+                        "SECURITY_KEY": 2
                       }
                     }
                   }

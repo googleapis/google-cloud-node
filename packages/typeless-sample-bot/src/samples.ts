@@ -21,7 +21,9 @@ import {readFile, writeFile} from 'fs/promises';
 import babel from '@babel/core';
 import path from 'node:path';
 import {typescript as presetTypescript} from './preset-loader.js';
-import importToRequire from './import-to-require.js';
+import importToRequire from './transforms/import-to-require.js';
+import nullCoalescing from './transforms/null-coalescing.js';
+import {addComments} from './transforms/add-comments.js';
 
 // Converts an async iterable into an array of the same type.
 export async function toArray<T>(iterable: AsyncIterable<T>): Promise<T[]> {
@@ -83,7 +85,7 @@ export async function* filterByContents(
 // the transform process.
 const babelConfig = {
   presets: [[presetTypescript, {}]],
-  plugins: [[importToRequire]],
+  plugins: [[importToRequire], [nullCoalescing]],
   parserOpts: {} as babel.ParserOptions,
   generatorOpts: {
     // Ensures that Babel keeps newlines so that comments end up
@@ -100,9 +102,11 @@ export async function* transformSamples(
   for await (const s of samples) {
     const config = Object.assign({}, babelConfig, {filename: s.filename});
     const transformed = await babel.transformAsync(s.contents, config);
+    let contents = transformed?.code || '';
+    contents = addComments(contents);
     yield {
       filename: s.filename.replace(/\.ts$/g, '.js'),
-      contents: transformed?.code || '',
+      contents,
     };
   }
 }
