@@ -23,7 +23,7 @@ npm install
 # passes on current working directory for cloud rad
 export MONO_REPO_CWD=$PWD
 
-npm install @google-cloud/cloud-rad@0.4.11-experimental
+npm install @google-cloud/cloud-rad@0.4.12-experimental
 # publish docs to devsite
 echo $PWD
-npx @google-cloud/cloud-rad@0.4.11-experimental . cloud-rad
+npx @google-cloud/cloud-rad@0.4.12-experimental . cloud-rad
