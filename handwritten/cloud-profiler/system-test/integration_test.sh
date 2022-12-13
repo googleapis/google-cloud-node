@@ -16,6 +16,8 @@ set -x
 
 cd $(dirname $0)/..
 
+git config --global --add safe.directory /tmpfs/src/github/cloud-profiler-nodejs
+
 SERVICE_KEY="${KOKORO_KEYSTORE_DIR}/72935_cloud-profiler-e2e-service-account-key"
 COMMIT=$(git rev-parse HEAD)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
@@ -27,22 +29,24 @@ export GOOGLE_APPLICATION_CREDENTIALS="${SERVICE_KEY}"
 # Run test.
 cd "system-test"
 
+go version
+
 # Ensure a newer version of Go is used so it is compatible with newer libraries.
-# Here we install v1.17.7 which is the current version as of when this code
-# was written, following instructions from https://go.dev/doc/manage-install.
-# Go modules might not be on for previous versions of Go, so we also have to
-# enable the module system explicitly.
-export GO111MODULE=on
-go install golang.org/dl/go1.17.7
-go1.17.7 download
+# The current Go version in the VM is 1.18.4, however we explicitly set it to
+# pin the Go dependency to v1.18.4 for consistency.
+retry sudo apt-get install -y wget
+
+wget https://go.dev/dl/go1.18.4.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.4.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin
 
 # Initializing go modules allows our dependencies to install versions of their
 # dependencies specified by their go.mod files. This reduces the likelihood of
 # dependencies breaking this test.
-go1.17.7 version
-go1.17.7 mod init e2e
-retry go1.17.7 get cloud.google.com/go/profiler/proftest@HEAD
-retry go1.17.7 test -c -tags=integration .
+go version
+go mod init e2e
+retry go get cloud.google.com/go/profiler/proftest@HEAD
+retry go test -c -tags=integration .
 
 if [ "$KOKORO_GITHUB_PULL_REQUEST_NUMBER" = "" ]; then
   ./e2e.test -commit="$COMMIT" -branch="$BRANCH" -repo="$REPO" -run_backoff_test=true

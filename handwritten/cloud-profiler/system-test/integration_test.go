@@ -40,7 +40,7 @@ var (
 	pr             = flag.Int("pr", 0, "git pull request to test")
 	runBackoffTest = flag.Bool("run_backoff_test", false, "Enables the backoff integration test. This integration test requires over 45 mins to run, so it is not run by default.")
 
-	runID             = strings.Replace(time.Now().Format("2006-01-02-15-04-05.000000-0700"), ".", "-", -1)
+	runID             = strings.ToLower(strings.Replace(time.Now().Format("2006-01-02-15-04-05.000000-MST"), ".", "-", -1))
 	benchFinishString = "benchmark application(s) complete"
 	errorString       = "failed to set up or run the benchmark"
 )
