@@ -71,7 +71,8 @@ function main(origin, destination) {
    */
   // const departureTime = {}
   /**
-   *  Optional. Specifies whether to calculate alternate routes in addition to the route.
+   *  Optional. Specifies whether to calculate alternate routes in addition to
+   *  the route.
    */
   // const computeAlternativeRoutes = true
   /**
@@ -97,12 +98,11 @@ function main(origin, destination) {
    */
   // const units = {}
   /**
-   *  Optional. Specifies what reference routes to calculate as part of the request in
-   *  addition to the default route.
-   *  A reference route is a route with a different route calculation objective
-   *  than the default route. For example an FUEL_EFFICIENT reference route
-   *  calculation takes into account various parameters that would generate an
-   *  optimal fuel efficient route.
+   *  Optional. Specifies what reference routes to calculate as part of the
+   *  request in addition to the default route. A reference route is a route with
+   *  a different route calculation objective than the default route. For example
+   *  an FUEL_EFFICIENT reference route calculation takes into account various
+   *  parameters that would generate an optimal fuel efficient route.
    */
   // const requestedReferenceRoutes = 1234
 
