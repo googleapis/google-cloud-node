@@ -125,6 +125,9 @@ export class WorkflowTemplateServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -182,6 +185,9 @@ export class WorkflowTemplateServiceClient {
     this.pathTemplates = {
       batchPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batches/{batch}'
+      ),
+      nodeGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{node_group}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
@@ -1607,6 +1613,76 @@ export class WorkflowTemplateServiceClient {
    */
   matchBatchFromBatchName(batchName: string) {
     return this.pathTemplates.batchPathTemplate.match(batchName).batch;
+  }
+
+  /**
+   * Return a fully-qualified nodeGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} region
+   * @param {string} cluster
+   * @param {string} node_group
+   * @returns {string} Resource name string.
+   */
+  nodeGroupPath(
+    project: string,
+    region: string,
+    cluster: string,
+    nodeGroup: string
+  ) {
+    return this.pathTemplates.nodeGroupPathTemplate.render({
+      project: project,
+      region: region,
+      cluster: cluster,
+      node_group: nodeGroup,
+    });
+  }
+
+  /**
+   * Parse the project from NodeGroup resource.
+   *
+   * @param {string} nodeGroupName
+   *   A fully-qualified path representing NodeGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNodeGroupName(nodeGroupName: string) {
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
+      .project;
+  }
+
+  /**
+   * Parse the region from NodeGroup resource.
+   *
+   * @param {string} nodeGroupName
+   *   A fully-qualified path representing NodeGroup resource.
+   * @returns {string} A string representing the region.
+   */
+  matchRegionFromNodeGroupName(nodeGroupName: string) {
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName).region;
+  }
+
+  /**
+   * Parse the cluster from NodeGroup resource.
+   *
+   * @param {string} nodeGroupName
+   *   A fully-qualified path representing NodeGroup resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromNodeGroupName(nodeGroupName: string) {
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
+      .cluster;
+  }
+
+  /**
+   * Parse the node_group from NodeGroup resource.
+   *
+   * @param {string} nodeGroupName
+   *   A fully-qualified path representing NodeGroup resource.
+   * @returns {string} A string representing the node_group.
+   */
+  matchNodeGroupFromNodeGroupName(nodeGroupName: string) {
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
+      .node_group;
   }
 
   /**
