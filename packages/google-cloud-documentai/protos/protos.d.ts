@@ -26078,6 +26078,9 @@ export namespace google {
 
                         /** GcsOutputConfig fieldMask */
                         fieldMask?: (google.protobuf.IFieldMask|null);
+
+                        /** GcsOutputConfig shardingConfig */
+                        shardingConfig?: (google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig|null);
                     }
 
                     /** Represents a GcsOutputConfig. */
@@ -26094,6 +26097,9 @@ export namespace google {
 
                         /** GcsOutputConfig fieldMask. */
                         public fieldMask?: (google.protobuf.IFieldMask|null);
+
+                        /** GcsOutputConfig shardingConfig. */
+                        public shardingConfig?: (google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig|null);
 
                         /**
                          * Creates a new GcsOutputConfig instance using the specified properties.
@@ -26171,6 +26177,112 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace GcsOutputConfig {
+
+                        /** Properties of a ShardingConfig. */
+                        interface IShardingConfig {
+
+                            /** ShardingConfig pagesPerShard */
+                            pagesPerShard?: (number|null);
+
+                            /** ShardingConfig pagesOverlap */
+                            pagesOverlap?: (number|null);
+                        }
+
+                        /** Represents a ShardingConfig. */
+                        class ShardingConfig implements IShardingConfig {
+
+                            /**
+                             * Constructs a new ShardingConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig);
+
+                            /** ShardingConfig pagesPerShard. */
+                            public pagesPerShard: number;
+
+                            /** ShardingConfig pagesOverlap. */
+                            public pagesOverlap: number;
+
+                            /**
+                             * Creates a new ShardingConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ShardingConfig instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig;
+
+                            /**
+                             * Encodes the specified ShardingConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig.verify|verify} messages.
+                             * @param message ShardingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ShardingConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig.verify|verify} messages.
+                             * @param message ShardingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.IShardingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ShardingConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ShardingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig;
+
+                            /**
+                             * Decodes a ShardingConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ShardingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig;
+
+                            /**
+                             * Verifies a ShardingConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ShardingConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ShardingConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig;
+
+                            /**
+                             * Creates a plain object from a ShardingConfig message. Also converts values to other types if specified.
+                             * @param message ShardingConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta3.DocumentOutputConfig.GcsOutputConfig.ShardingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ShardingConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ShardingConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
                 }
 
