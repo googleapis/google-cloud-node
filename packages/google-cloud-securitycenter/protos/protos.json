@@ -57,6 +57,10 @@
                           "rule": "repeated",
                           "type": "ServiceAccountDelegationInfo",
                           "id": 9
+                        },
+                        "userName": {
+                          "type": "string",
+                          "id": 11
                         }
                       }
                     },
