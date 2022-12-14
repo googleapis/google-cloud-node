@@ -824,6 +824,13 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             },
+                            "estimatedRowCount": {
+                              "type": "int64",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
                             "traceId": {
                               "type": "string",
                               "id": 13,
