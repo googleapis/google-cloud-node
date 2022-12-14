@@ -29,12 +29,15 @@ function main(processor, defaultProcessorVersion) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Processor google.cloud.documentai.v1beta3.Processor  to change default version.
+   *  Required. The resource name of the
+   *  Processor google.cloud.documentai.v1beta3.Processor  to change default
+   *  version.
    */
   // const processor = 'abc123'
   /**
-   *  Required. The resource name of child ProcessorVersion google.cloud.documentai.v1beta3.ProcessorVersion  to use as default.
-   *  Format:
+   *  Required. The resource name of child
+   *  ProcessorVersion google.cloud.documentai.v1beta3.ProcessorVersion  to use
+   *  as default. Format:
    *  `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{version}`
    */
   // const defaultProcessorVersion = 'abc123'
