@@ -26,6 +26,8 @@ const ClusterControllerClient = v1.ClusterControllerClient;
 type ClusterControllerClient = v1.ClusterControllerClient;
 const JobControllerClient = v1.JobControllerClient;
 type JobControllerClient = v1.JobControllerClient;
+const NodeGroupControllerClient = v1.NodeGroupControllerClient;
+type NodeGroupControllerClient = v1.NodeGroupControllerClient;
 const WorkflowTemplateServiceClient = v1.WorkflowTemplateServiceClient;
 type WorkflowTemplateServiceClient = v1.WorkflowTemplateServiceClient;
 
@@ -35,6 +37,7 @@ export {
   BatchControllerClient,
   ClusterControllerClient,
   JobControllerClient,
+  NodeGroupControllerClient,
   WorkflowTemplateServiceClient,
 };
 export default {
@@ -43,6 +46,7 @@ export default {
   BatchControllerClient,
   ClusterControllerClient,
   JobControllerClient,
+  NodeGroupControllerClient,
   WorkflowTemplateServiceClient,
 };
 import * as protos from '../protos/protos';
