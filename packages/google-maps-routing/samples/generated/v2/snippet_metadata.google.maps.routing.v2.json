@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 127,
+                    "end": 125,
                     "type": "FULL"
                 }
             ],
@@ -110,7 +110,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 88,
+                    "end": 87,
                     "type": "FULL"
                 }
             ],
