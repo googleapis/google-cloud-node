@@ -73,7 +73,10 @@
                         "textStyles": {
                           "rule": "repeated",
                           "type": "Style",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "pages": {
                           "rule": "repeated",
@@ -2449,6 +2452,11 @@
                         "launchStage": {
                           "type": "google.api.LaunchStage",
                           "id": 8
+                        },
+                        "sampleDocumentUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9
                         }
                       },
                       "nested": {

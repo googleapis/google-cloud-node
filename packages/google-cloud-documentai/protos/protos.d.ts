@@ -11188,6 +11188,9 @@ export namespace google {
 
                     /** ProcessorType launchStage */
                     launchStage?: (google.api.LaunchStage|keyof typeof google.api.LaunchStage|null);
+
+                    /** ProcessorType sampleDocumentUris */
+                    sampleDocumentUris?: (string[]|null);
                 }
 
                 /** Represents a ProcessorType. */
@@ -11216,6 +11219,9 @@ export namespace google {
 
                     /** ProcessorType launchStage. */
                     public launchStage: (google.api.LaunchStage|keyof typeof google.api.LaunchStage);
+
+                    /** ProcessorType sampleDocumentUris. */
+                    public sampleDocumentUris: string[];
 
                     /**
                      * Creates a new ProcessorType instance using the specified properties.
