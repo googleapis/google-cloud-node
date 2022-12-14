@@ -675,8 +675,8 @@ export class BigQueryWriteClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Parent table that all the streams should belong to, in the form of
-   *   `projects/{project}/datasets/{dataset}/tables/{table}`.
+   *   Required. Parent table that all the streams should belong to, in the form
+   *   of `projects/{project}/datasets/{dataset}/tables/{table}`.
    * @param {string[]} request.writeStreams
    *   Required. The group of streams that will be committed atomically.
    * @param {object} [options]
