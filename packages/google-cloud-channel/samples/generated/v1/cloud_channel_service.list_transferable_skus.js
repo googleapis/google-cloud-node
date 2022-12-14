@@ -54,9 +54,10 @@ function main(parent) {
   /**
    *  A token for a page of results other than the first page.
    *  Obtained using
-   *  ListTransferableSkusResponse.next_page_token google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token  of the previous
-   *  CloudChannelService.ListTransferableSkus google.cloud.channel.v1.CloudChannelService.ListTransferableSkus  call.
-   *  Optional.
+   *  ListTransferableSkusResponse.next_page_token google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token 
+   *  of the previous
+   *  CloudChannelService.ListTransferableSkus google.cloud.channel.v1.CloudChannelService.ListTransferableSkus 
+   *  call. Optional.
    */
   // const pageToken = 'abc123'
   /**

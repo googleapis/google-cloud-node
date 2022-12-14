@@ -25,6 +25,11 @@
                 "createRuntime"
               ]
             },
+            "UpdateRuntime": {
+              "methods": [
+                "updateRuntime"
+              ]
+            },
             "DeleteRuntime": {
               "methods": [
                 "deleteRuntime"
@@ -50,9 +55,19 @@
                 "resetRuntime"
               ]
             },
+            "UpgradeRuntime": {
+              "methods": [
+                "upgradeRuntime"
+              ]
+            },
             "ReportRuntimeEvent": {
               "methods": [
                 "reportRuntimeEvent"
+              ]
+            },
+            "DiagnoseRuntime": {
+              "methods": [
+                "diagnoseRuntime"
               ]
             },
             "ListRuntimes": {
@@ -82,6 +97,11 @@
                 "createRuntime"
               ]
             },
+            "UpdateRuntime": {
+              "methods": [
+                "updateRuntime"
+              ]
+            },
             "DeleteRuntime": {
               "methods": [
                 "deleteRuntime"
@@ -107,9 +127,19 @@
                 "resetRuntime"
               ]
             },
+            "UpgradeRuntime": {
+              "methods": [
+                "upgradeRuntime"
+              ]
+            },
             "ReportRuntimeEvent": {
               "methods": [
                 "reportRuntimeEvent"
+              ]
+            },
+            "DiagnoseRuntime": {
+              "methods": [
+                "diagnoseRuntime"
               ]
             },
             "ListRuntimes": {
@@ -231,6 +261,11 @@
             "RollbackInstance": {
               "methods": [
                 "rollbackInstance"
+              ]
+            },
+            "DiagnoseInstance": {
+              "methods": [
+                "diagnoseInstance"
               ]
             },
             "UpgradeInstanceInternal": {
@@ -409,6 +444,11 @@
             "RollbackInstance": {
               "methods": [
                 "rollbackInstance"
+              ]
+            },
+            "DiagnoseInstance": {
+              "methods": [
+                "diagnoseInstance"
               ]
             },
             "UpgradeInstanceInternal": {

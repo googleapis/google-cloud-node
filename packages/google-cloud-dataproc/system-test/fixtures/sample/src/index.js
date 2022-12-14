@@ -25,6 +25,7 @@ function main() {
   const batchControllerClient = new dataproc.BatchControllerClient();
   const clusterControllerClient = new dataproc.ClusterControllerClient();
   const jobControllerClient = new dataproc.JobControllerClient();
+  const nodeGroupControllerClient = new dataproc.NodeGroupControllerClient();
   const workflowTemplateServiceClient =
     new dataproc.WorkflowTemplateServiceClient();
 }

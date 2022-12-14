@@ -34,15 +34,14 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of accounts to return. The service might return fewer
-   *  than this value.
-   *  If unspecified, at most 50 accounts are returned.
-   *  The maximum value is 1000; values above 1000 are coerced to 1000.
+   *  Optional. The maximum number of accounts to return. The service might
+   *  return fewer than this value. If unspecified, at most 50 accounts are
+   *  returned. The maximum value is 1000; values above 1000 are coerced to 1000.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
-   *  call.
+   *  Optional. A page token, received from a previous
+   *  `ListRelatedAccountGroupMemberships` call.
    *  When paginating, all other parameters provided to
    *  `ListRelatedAccountGroupMemberships` must match the call that provided the
    *  page token.

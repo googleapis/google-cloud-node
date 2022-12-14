@@ -40,6 +40,10 @@ function main(name) {
    *  A system ID for filtering the results of the request.
    */
   // const systemId = 'abc123'
+  /**
+   *  The view configures whether to retrieve security keys information.
+   */
+  // const view = {}
 
   // Imports the Oslogin library
   const {OsLoginServiceClient} = require('@google-cloud/os-login').v1beta;

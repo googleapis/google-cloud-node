@@ -317,6 +317,50 @@
         }
       }
     },
+    "NodeGroupController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NodeGroupControllerClient",
+          "rpcs": {
+            "GetNodeGroup": {
+              "methods": [
+                "getNodeGroup"
+              ]
+            },
+            "CreateNodeGroup": {
+              "methods": [
+                "createNodeGroup"
+              ]
+            },
+            "ResizeNodeGroup": {
+              "methods": [
+                "resizeNodeGroup"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NodeGroupControllerClient",
+          "rpcs": {
+            "GetNodeGroup": {
+              "methods": [
+                "getNodeGroup"
+              ]
+            },
+            "CreateNodeGroup": {
+              "methods": [
+                "createNodeGroup"
+              ]
+            },
+            "ResizeNodeGroup": {
+              "methods": [
+                "resizeNodeGroup"
+              ]
+            }
+          }
+        }
+      }
+    },
     "WorkflowTemplateService": {
       "clients": {
         "grpc": {

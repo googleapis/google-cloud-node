@@ -38,6 +38,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "UpdateRuntime": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteRuntime": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -63,6 +68,11 @@
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
+        "UpgradeRuntime": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
+        },
         "ReportRuntimeEvent": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -71,6 +81,11 @@
         "RefreshRuntimeTokenInternal": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
+        },
+        "DiagnoseRuntime": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
       }
