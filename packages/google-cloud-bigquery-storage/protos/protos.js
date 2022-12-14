@@ -8014,6 +8014,7 @@
                              * @property {google.cloud.bigquery.storage.v1.ReadSession.ITableReadOptions|null} [readOptions] ReadSession readOptions
                              * @property {Array.<google.cloud.bigquery.storage.v1.IReadStream>|null} [streams] ReadSession streams
                              * @property {number|Long|null} [estimatedTotalBytesScanned] ReadSession estimatedTotalBytesScanned
+                             * @property {number|Long|null} [estimatedRowCount] ReadSession estimatedRowCount
                              * @property {string|null} [traceId] ReadSession traceId
                              */
     
@@ -8114,6 +8115,14 @@
                             ReadSession.prototype.estimatedTotalBytesScanned = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                             /**
+                             * ReadSession estimatedRowCount.
+                             * @member {number|Long} estimatedRowCount
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @instance
+                             */
+                            ReadSession.prototype.estimatedRowCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
                              * ReadSession traceId.
                              * @member {string} traceId
                              * @memberof google.cloud.bigquery.storage.v1.ReadSession
@@ -8182,6 +8191,8 @@
                                     writer.uint32(/* id 12, wireType 0 =*/96).int64(message.estimatedTotalBytesScanned);
                                 if (message.traceId != null && Object.hasOwnProperty.call(message, "traceId"))
                                     writer.uint32(/* id 13, wireType 2 =*/106).string(message.traceId);
+                                if (message.estimatedRowCount != null && Object.hasOwnProperty.call(message, "estimatedRowCount"))
+                                    writer.uint32(/* id 14, wireType 0 =*/112).int64(message.estimatedRowCount);
                                 return writer;
                             };
     
@@ -8256,6 +8267,10 @@
                                         }
                                     case 12: {
                                             message.estimatedTotalBytesScanned = reader.int64();
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.estimatedRowCount = reader.int64();
                                             break;
                                         }
                                     case 13: {
@@ -8358,6 +8373,9 @@
                                 if (message.estimatedTotalBytesScanned != null && message.hasOwnProperty("estimatedTotalBytesScanned"))
                                     if (!$util.isInteger(message.estimatedTotalBytesScanned) && !(message.estimatedTotalBytesScanned && $util.isInteger(message.estimatedTotalBytesScanned.low) && $util.isInteger(message.estimatedTotalBytesScanned.high)))
                                         return "estimatedTotalBytesScanned: integer|Long expected";
+                                if (message.estimatedRowCount != null && message.hasOwnProperty("estimatedRowCount"))
+                                    if (!$util.isInteger(message.estimatedRowCount) && !(message.estimatedRowCount && $util.isInteger(message.estimatedRowCount.low) && $util.isInteger(message.estimatedRowCount.high)))
+                                        return "estimatedRowCount: integer|Long expected";
                                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                                     if (!$util.isString(message.traceId))
                                         return "traceId: string expected";
@@ -8444,6 +8462,15 @@
                                         message.estimatedTotalBytesScanned = object.estimatedTotalBytesScanned;
                                     else if (typeof object.estimatedTotalBytesScanned === "object")
                                         message.estimatedTotalBytesScanned = new $util.LongBits(object.estimatedTotalBytesScanned.low >>> 0, object.estimatedTotalBytesScanned.high >>> 0).toNumber();
+                                if (object.estimatedRowCount != null)
+                                    if ($util.Long)
+                                        (message.estimatedRowCount = $util.Long.fromValue(object.estimatedRowCount)).unsigned = false;
+                                    else if (typeof object.estimatedRowCount === "string")
+                                        message.estimatedRowCount = parseInt(object.estimatedRowCount, 10);
+                                    else if (typeof object.estimatedRowCount === "number")
+                                        message.estimatedRowCount = object.estimatedRowCount;
+                                    else if (typeof object.estimatedRowCount === "object")
+                                        message.estimatedRowCount = new $util.LongBits(object.estimatedRowCount.low >>> 0, object.estimatedRowCount.high >>> 0).toNumber();
                                 if (object.traceId != null)
                                     message.traceId = String(object.traceId);
                                 return message;
@@ -8477,6 +8504,11 @@
                                     } else
                                         object.estimatedTotalBytesScanned = options.longs === String ? "0" : 0;
                                     object.traceId = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.estimatedRowCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.estimatedRowCount = options.longs === String ? "0" : 0;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -8512,6 +8544,11 @@
                                         object.estimatedTotalBytesScanned = options.longs === String ? $util.Long.prototype.toString.call(message.estimatedTotalBytesScanned) : options.longs === Number ? new $util.LongBits(message.estimatedTotalBytesScanned.low >>> 0, message.estimatedTotalBytesScanned.high >>> 0).toNumber() : message.estimatedTotalBytesScanned;
                                 if (message.traceId != null && message.hasOwnProperty("traceId"))
                                     object.traceId = message.traceId;
+                                if (message.estimatedRowCount != null && message.hasOwnProperty("estimatedRowCount"))
+                                    if (typeof message.estimatedRowCount === "number")
+                                        object.estimatedRowCount = options.longs === String ? String(message.estimatedRowCount) : message.estimatedRowCount;
+                                    else
+                                        object.estimatedRowCount = options.longs === String ? $util.Long.prototype.toString.call(message.estimatedRowCount) : options.longs === Number ? new $util.LongBits(message.estimatedRowCount.low >>> 0, message.estimatedRowCount.high >>> 0).toNumber() : message.estimatedRowCount;
                                 return object;
                             };
     

@@ -1,8 +1,0 @@
-[
-  "../../protos/google/cloud/bigquery/storage/v1beta2/arrow.proto",
-  "../../protos/google/cloud/bigquery/storage/v1beta2/avro.proto",
-  "../../protos/google/cloud/bigquery/storage/v1beta2/protobuf.proto",
-  "../../protos/google/cloud/bigquery/storage/v1beta2/storage.proto",
-  "../../protos/google/cloud/bigquery/storage/v1beta2/stream.proto",
-  "../../protos/google/cloud/bigquery/storage/v1beta2/table.proto"
-]
