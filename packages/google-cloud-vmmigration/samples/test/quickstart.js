@@ -17,6 +17,7 @@
 
 'use strict';
 
+const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {before, describe, it} = require('mocha');
@@ -36,9 +37,12 @@ describe('Quickstart', () => {
   });
 
   it('should run quickstart', async () => {
-    // Should have 0 exit code, and therefore not throw:
-    execSync(`node ./quickstart.js projects/${projectId}/locations/global`, {
-      cwd,
-    });
+    const output = execSync(
+      `node ./quickstart.js projects/${projectId}/locations/global`,
+      {
+        cwd,
+      }
+    );
+    assert(output !== null);
   });
 });
