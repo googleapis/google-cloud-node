@@ -1,0 +1,6 @@
+[
+  "../../protos/google/cloud/osconfig/agentendpoint/v1beta/agentendpoint.proto",
+  "../../protos/google/cloud/osconfig/agentendpoint/v1beta/guest_policies.proto",
+  "../../protos/google/cloud/osconfig/agentendpoint/v1beta/patch_jobs.proto",
+  "../../protos/google/cloud/osconfig/agentendpoint/v1beta/tasks.proto"
+]

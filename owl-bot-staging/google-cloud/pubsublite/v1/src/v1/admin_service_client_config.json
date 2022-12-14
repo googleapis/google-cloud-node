@@ -1,0 +1,128 @@
+{
+  "interfaces": {
+    "google.cloud.pubsublite.v1.AdminService": {
+      "retry_codes": {
+        "non_idempotent": [],
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ],
+        "unknown_deadline_exceeded_aborted_internal_unavailable": [
+          "UNKNOWN",
+          "DEADLINE_EXCEEDED",
+          "ABORTED",
+          "INTERNAL",
+          "UNAVAILABLE"
+        ]
+      },
+      "retry_params": {
+        "default": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        }
+      },
+      "methods": {
+        "CreateTopic": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "GetTopic": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "GetTopicPartitions": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "ListTopics": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "UpdateTopic": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "DeleteTopic": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "ListTopicSubscriptions": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "CreateSubscription": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "GetSubscription": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "ListSubscriptions": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "UpdateSubscription": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "DeleteSubscription": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "SeekSubscription": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "CreateReservation": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "GetReservation": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "ListReservations": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "UpdateReservation": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "DeleteReservation": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        },
+        "ListReservationTopics": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unknown_deadline_exceeded_aborted_internal_unavailable",
+          "retry_params_name": "default"
+        }
+      }
+    }
+  }
+}
