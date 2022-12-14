@@ -55,6 +55,9 @@ export namespace google {
 
                     /** Access serviceAccountDelegationInfo */
                     serviceAccountDelegationInfo?: (google.cloud.securitycenter.v1.IServiceAccountDelegationInfo[]|null);
+
+                    /** Access userName */
+                    userName?: (string|null);
                 }
 
                 /** Represents an Access. */
@@ -92,6 +95,9 @@ export namespace google {
 
                     /** Access serviceAccountDelegationInfo. */
                     public serviceAccountDelegationInfo: google.cloud.securitycenter.v1.IServiceAccountDelegationInfo[];
+
+                    /** Access userName. */
+                    public userName: string;
 
                     /**
                      * Creates a new Access instance using the specified properties.
