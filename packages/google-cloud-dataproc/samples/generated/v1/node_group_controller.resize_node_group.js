@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(projectId, region, cluster) {
-  // [START dataproc_v1_generated_ClusterController_CreateCluster_async]
+function main(name, size) {
+  // [START dataproc_v1_generated_NodeGroupController_ResizeNodeGroup_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,58 +29,66 @@ function main(projectId, region, cluster) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The ID of the Google Cloud Platform project that the cluster
-   *  belongs to.
+   *  Required. The name of the node group to resize.
+   *  Format:
+   *  `projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{nodeGroup}`
    */
-  // const projectId = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Required. The Dataproc region in which to handle the request.
+   *  Required. The number of running instances for the node group to maintain.
+   *  The group adds or removes instances to maintain the number of instances
+   *  specified by this parameter.
    */
-  // const region = 'us-central1'
-  /**
-   *  Required. The cluster to create.
-   */
-  // const cluster = {}
+  // const size = 1234
   /**
    *  Optional. A unique ID used to identify the request. If the server receives
    *  two
-   *  CreateClusterRequest (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateClusterRequest)s
-   *  with the same id, then the second request will be ignored and the
+   *  ResizeNodeGroupRequest (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.ResizeNodeGroupRequests)
+   *  with the same ID, the second request is ignored and the
    *  first google.longrunning.Operation google.longrunning.Operation  created
    *  and stored in the backend is returned.
-   *  It is recommended to always set this value to a
+   *  Recommendation: Set this value to a
    *  UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).
    *  The ID must contain only letters (a-z, A-Z), numbers (0-9),
    *  underscores (_), and hyphens (-). The maximum length is 40 characters.
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. Failure action when primary worker creation fails.
+   *  Optional. Timeout for graceful YARN decommissioning. Graceful
+   *  decommissioning 
+   *  (https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/scaling-clusters#graceful_decommissioning)
+   *  allows the removal of nodes from the Compute Engine node group
+   *  without interrupting jobs in progress. This timeout specifies how long to
+   *  wait for jobs in progress to finish before forcefully removing nodes (and
+   *  potentially interrupting jobs). Default timeout is 0 (for forceful
+   *  decommission), and the maximum allowed timeout is 1 day. (see JSON
+   *  representation of
+   *  Duration (https://developers.google.com/protocol-buffers/docs/proto3#json)).
+   *  Only supported on Dataproc image versions 1.2 and higher.
    */
-  // const actionOnFailedPrimaryWorkers = {}
+  // const gracefulDecommissionTimeout = {}
 
   // Imports the Dataproc library
-  const {ClusterControllerClient} = require('@google-cloud/dataproc').v1;
+  const {NodeGroupControllerClient} = require('@google-cloud/dataproc').v1;
 
   // Instantiates a client
-  const dataprocClient = new ClusterControllerClient();
+  const dataprocClient = new NodeGroupControllerClient();
 
-  async function callCreateCluster() {
+  async function callResizeNodeGroup() {
     // Construct request
     const request = {
-      projectId,
-      region,
-      cluster,
+      name,
+      size,
     };
 
     // Run request
-    const [operation] = await dataprocClient.createCluster(request);
+    const [operation] = await dataprocClient.resizeNodeGroup(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateCluster();
-  // [END dataproc_v1_generated_ClusterController_CreateCluster_async]
+  callResizeNodeGroup();
+  // [END dataproc_v1_generated_NodeGroupController_ResizeNodeGroup_async]
 }
 
 process.on('unhandledRejection', err => {

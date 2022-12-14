@@ -21,11 +21,9 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as autoscalingpolicyserviceModule from '../src';
+import * as nodegroupcontrollerModule from '../src';
 
-import {PassThrough} from 'stream';
-
-import {protobuf} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -66,135 +64,107 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
 ) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-    }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
-    }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
-}
-
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
   };
-  return sinon.stub().returns(asyncIterable);
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
 }
 
-describe('v1.AutoscalingPolicyServiceClient', () => {
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
+}
+
+describe('v1.NodeGroupControllerClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
       const servicePath =
-        autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient
-          .servicePath;
+        nodegroupcontrollerModule.v1.NodeGroupControllerClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
       const apiEndpoint =
-        autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient
-          .apiEndpoint;
+        nodegroupcontrollerModule.v1.NodeGroupControllerClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port =
-        autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient.port;
+      const port = nodegroupcontrollerModule.v1.NodeGroupControllerClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient();
+        new nodegroupcontrollerModule.v1.NodeGroupControllerClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           fallback: true,
-        });
+        }
+      );
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
-      assert.strictEqual(client.autoscalingPolicyServiceStub, undefined);
+        }
+      );
+      assert.strictEqual(client.nodeGroupControllerStub, undefined);
       await client.initialize();
-      assert(client.autoscalingPolicyServiceStub);
+      assert(client.nodeGroupControllerStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
-      assert(client.autoscalingPolicyServiceStub);
+      assert(client.nodeGroupControllerStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
-      assert.strictEqual(client.autoscalingPolicyServiceStub, undefined);
+        }
+      );
+      assert.strictEqual(client.nodeGroupControllerStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -202,11 +172,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -215,11 +186,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -237,925 +209,553 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     });
   });
 
-  describe('createAutoscalingPolicy', () => {
-    it('invokes createAutoscalingPolicy without error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+  describe('getNodeGroup', () => {
+    it('invokes getNodeGroup without error', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-      );
-      client.innerApiCalls.createAutoscalingPolicy =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createAutoscalingPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAutoscalingPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAutoscalingPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAutoscalingPolicy without error using callback', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-      );
-      client.innerApiCalls.createAutoscalingPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createAutoscalingPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataproc.v1.IAutoscalingPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAutoscalingPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAutoscalingPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAutoscalingPolicy with error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAutoscalingPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createAutoscalingPolicy(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createAutoscalingPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAutoscalingPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAutoscalingPolicy with closed client', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.createAutoscalingPolicy(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('updateAutoscalingPolicy', () => {
-    it('invokes updateAutoscalingPolicy without error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
-      );
-      request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest',
-        ['policy', 'name']
-      );
-      request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-      );
-      client.innerApiCalls.updateAutoscalingPolicy =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateAutoscalingPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAutoscalingPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAutoscalingPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAutoscalingPolicy without error using callback', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
-      );
-      request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest',
-        ['policy', 'name']
-      );
-      request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-      );
-      client.innerApiCalls.updateAutoscalingPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAutoscalingPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataproc.v1.IAutoscalingPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAutoscalingPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAutoscalingPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAutoscalingPolicy with error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
-      );
-      request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest',
-        ['policy', 'name']
-      );
-      request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAutoscalingPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateAutoscalingPolicy(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateAutoscalingPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAutoscalingPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAutoscalingPolicy with closed client', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
-      );
-      request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest',
-        ['policy', 'name']
-      );
-      request.policy.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.updateAutoscalingPolicy(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getAutoscalingPolicy', () => {
-    it('invokes getAutoscalingPolicy without error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-      );
-      client.innerApiCalls.getAutoscalingPolicy =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getAutoscalingPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAutoscalingPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAutoscalingPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAutoscalingPolicy without error using callback', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-      );
-      client.innerApiCalls.getAutoscalingPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAutoscalingPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataproc.v1.IAutoscalingPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAutoscalingPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAutoscalingPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAutoscalingPolicy with error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAutoscalingPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getAutoscalingPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAutoscalingPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAutoscalingPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAutoscalingPolicy with closed client', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getAutoscalingPolicy(request), expectedError);
-    });
-  });
-
-  describe('deleteAutoscalingPolicy', () => {
-    it('invokes deleteAutoscalingPolicy without error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteAutoscalingPolicy =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteAutoscalingPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAutoscalingPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAutoscalingPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAutoscalingPolicy without error using callback', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteAutoscalingPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteAutoscalingPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAutoscalingPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAutoscalingPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAutoscalingPolicy with error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAutoscalingPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteAutoscalingPolicy(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteAutoscalingPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAutoscalingPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAutoscalingPolicy with closed client', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.deleteAutoscalingPolicy(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('listAutoscalingPolicies', () => {
-    it('invokes listAutoscalingPolicies without error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-      ];
-      client.innerApiCalls.listAutoscalingPolicies =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listAutoscalingPolicies(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAutoscalingPolicies as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAutoscalingPolicies as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAutoscalingPolicies without error using callback', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-      ];
-      client.innerApiCalls.listAutoscalingPolicies =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAutoscalingPolicies(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataproc.v1.IAutoscalingPolicy[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAutoscalingPolicies as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAutoscalingPolicies as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAutoscalingPolicies with error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAutoscalingPolicies = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listAutoscalingPolicies(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listAutoscalingPolicies as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAutoscalingPolicies as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAutoscalingPoliciesStream without error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-      ];
-      client.descriptors.page.listAutoscalingPolicies.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAutoscalingPoliciesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataproc.v1.AutoscalingPolicy[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataproc.v1.AutoscalingPolicy) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAutoscalingPolicies, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes listAutoscalingPoliciesStream with error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAutoscalingPolicies.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAutoscalingPoliciesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataproc.v1.AutoscalingPolicy[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataproc.v1.AutoscalingPolicy) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAutoscalingPolicies, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listAutoscalingPolicies without error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-      ];
-      client.descriptors.page.listAutoscalingPolicies.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dataproc.v1.IAutoscalingPolicy[] =
-        [];
-      const iterable = client.listAutoscalingPoliciesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listAutoscalingPolicies with error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAutoscalingPolicies.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAutoscalingPoliciesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataproc.v1.IAutoscalingPolicy[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
         }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.GetNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetNodeGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.NodeGroup()
+      );
+      client.innerApiCalls.getNodeGroup = stubSimpleCall(expectedResponse);
+      const [response] = await client.getNodeGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getNodeGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNodeGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNodeGroup without error using callback', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.GetNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetNodeGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.NodeGroup()
+      );
+      client.innerApiCalls.getNodeGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getNodeGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dataproc.v1.INodeGroup | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
       });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getNodeGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNodeGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNodeGroup with error', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
       );
-      assert(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.GetNodeGroupRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetNodeGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getNodeGroup = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getNodeGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getNodeGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNodeGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNodeGroup with closed client', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.GetNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetNodeGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getNodeGroup(request), expectedError);
+    });
+  });
+
+  describe('createNodeGroup', () => {
+    it('invokes createNodeGroup without error', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.CreateNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateNodeGroupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createNodeGroup =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createNodeGroup(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createNodeGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createNodeGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createNodeGroup without error using callback', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.CreateNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateNodeGroupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createNodeGroup =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createNodeGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.dataproc.v1.INodeGroup,
+              protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.dataproc.v1.INodeGroup,
+        protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createNodeGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createNodeGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createNodeGroup with call error', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.CreateNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateNodeGroupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createNodeGroup = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createNodeGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createNodeGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createNodeGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createNodeGroup with LRO error', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.CreateNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateNodeGroupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createNodeGroup = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createNodeGroup(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createNodeGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createNodeGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateNodeGroupProgress without error', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateNodeGroupProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateNodeGroupProgress with error', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateNodeGroupProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('resizeNodeGroup', () => {
+    it('invokes resizeNodeGroup without error', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.ResizeNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ResizeNodeGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.resizeNodeGroup =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.resizeNodeGroup(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.resizeNodeGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resizeNodeGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resizeNodeGroup without error using callback', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.ResizeNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ResizeNodeGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.resizeNodeGroup =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.resizeNodeGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.dataproc.v1.INodeGroup,
+              protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.dataproc.v1.INodeGroup,
+        protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.resizeNodeGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resizeNodeGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resizeNodeGroup with call error', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.ResizeNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ResizeNodeGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.resizeNodeGroup = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.resizeNodeGroup(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.resizeNodeGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resizeNodeGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resizeNodeGroup with LRO error', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.ResizeNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ResizeNodeGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.resizeNodeGroup = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.resizeNodeGroup(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.resizeNodeGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resizeNodeGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkResizeNodeGroupProgress without error', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkResizeNodeGroupProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkResizeNodeGroupProgress with error', async () => {
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkResizeNodeGroupProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
@@ -1167,11 +767,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         location: 'locationValue',
         batch: 'batchValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.batchPathTemplate.render = sinon
         .stub()
@@ -1225,50 +826,66 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
     });
 
-    describe('location', () => {
-      const fakePath = '/rendered/path/location';
+    describe('clusterRegion', () => {
+      const fakePath = '/rendered/path/clusterRegion';
       const expectedParameters = {
         project: 'projectValue',
-        location: 'locationValue',
+        region: 'regionValue',
+        cluster: 'clusterValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
+      client.pathTemplates.clusterRegionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
+      client.pathTemplates.clusterRegionPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
+      it('clusterRegionPath', () => {
+        const result = client.clusterRegionPath(
+          'projectValue',
+          'regionValue',
+          'clusterValue'
+        );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+          (client.pathTemplates.clusterRegionPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
+      it('matchProjectFromClusterRegionName', () => {
+        const result = client.matchProjectFromClusterRegionName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+          (client.pathTemplates.clusterRegionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
+      it('matchRegionFromClusterRegionName', () => {
+        const result = client.matchRegionFromClusterRegionName(fakePath);
+        assert.strictEqual(result, 'regionValue');
         assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+          (client.pathTemplates.clusterRegionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchClusterFromClusterRegionName', () => {
+        const result = client.matchClusterFromClusterRegionName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.clusterRegionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1283,11 +900,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         cluster: 'clusterValue',
         node_group: 'nodeGroupValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.nodeGroupPathTemplate.render = sinon
         .stub()
@@ -1357,11 +975,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -1398,11 +1017,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         location: 'locationValue',
         autoscaling_policy: 'autoscalingPolicyValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1480,11 +1100,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         location: 'locationValue',
         workflow_template: 'workflowTemplateValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1560,11 +1181,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         region: 'regionValue',
         autoscaling_policy: 'autoscalingPolicyValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1640,11 +1262,12 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         region: 'regionValue',
         workflow_template: 'workflowTemplateValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1707,6 +1330,57 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
             client.pathTemplates.projectRegionWorkflowTemplatePathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('region', () => {
+      const fakePath = '/rendered/path/region';
+      const expectedParameters = {
+        project: 'projectValue',
+        region: 'regionValue',
+      };
+      const client = new nodegroupcontrollerModule.v1.NodeGroupControllerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.regionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.regionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('regionPath', () => {
+        const result = client.regionPath('projectValue', 'regionValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.regionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRegionName', () => {
+        const result = client.matchProjectFromRegionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.regionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRegionFromRegionName', () => {
+        const result = client.matchRegionFromRegionName(fakePath);
+        assert.strictEqual(result, 'regionValue');
+        assert(
+          (client.pathTemplates.regionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
