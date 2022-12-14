@@ -29,8 +29,8 @@ function main(parent, writeStreams) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Parent table that all the streams should belong to, in the form of
-   *  `projects/{project}/datasets/{dataset}/tables/{table}`.
+   *  Required. Parent table that all the streams should belong to, in the form
+   *  of `projects/{project}/datasets/{dataset}/tables/{table}`.
    */
   // const parent = 'abc123'
   /**
