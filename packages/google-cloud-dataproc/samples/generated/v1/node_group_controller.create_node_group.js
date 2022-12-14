@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(projectId, region, clusterName) {
-  // [START dataproc_v1_generated_ClusterController_DeleteCluster_async]
+function main(parent, nodeGroup) {
+  // [START dataproc_v1_generated_NodeGroupController_CreateNodeGroup_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,29 @@ function main(projectId, region, clusterName) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The ID of the Google Cloud Platform project that the cluster
-   *  belongs to.
+   *  Required. The parent resource where this node group will be created.
+   *  Format: `projects/{project}/regions/{region}/clusters/{cluster}`
    */
-  // const projectId = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Required. The Dataproc region in which to handle the request.
+   *  Required. The node group to create.
    */
-  // const region = 'us-central1'
+  // const nodeGroup = {}
   /**
-   *  Required. The cluster name.
+   *  Optional. An optional node group ID. Generated if not specified.
+   *  The ID must contain only letters (a-z, A-Z), numbers (0-9),
+   *  underscores (_), and hyphens (-). Cannot begin or end with underscore
+   *  or hyphen. Must consist of from 3 to 33 characters.
    */
-  // const clusterName = 'abc123'
+  // const nodeGroupId = 'abc123'
   /**
-   *  Optional. Specifying the `cluster_uuid` means the RPC should fail
-   *  (with error NOT_FOUND) if cluster with specified UUID does not exist.
-   */
-  // const clusterUuid = 'abc123'
-  /**
-   *  Optional. A unique ID used to identify the request. If the server
-   *  receives two
-   *  DeleteClusterRequest (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteClusterRequest)s
-   *  with the same id, then the second request will be ignored and the
+   *  Optional. A unique ID used to identify the request. If the server receives
+   *  two
+   *  CreateNodeGroupRequest (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateNodeGroupRequests)
+   *  with the same ID, the second request is ignored and the
    *  first google.longrunning.Operation google.longrunning.Operation  created
    *  and stored in the backend is returned.
-   *  It is recommended to always set this value to a
+   *  Recommendation: Set this value to a
    *  UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).
    *  The ID must contain only letters (a-z, A-Z), numbers (0-9),
    *  underscores (_), and hyphens (-). The maximum length is 40 characters.
@@ -61,27 +59,26 @@ function main(projectId, region, clusterName) {
   // const requestId = 'abc123'
 
   // Imports the Dataproc library
-  const {ClusterControllerClient} = require('@google-cloud/dataproc').v1;
+  const {NodeGroupControllerClient} = require('@google-cloud/dataproc').v1;
 
   // Instantiates a client
-  const dataprocClient = new ClusterControllerClient();
+  const dataprocClient = new NodeGroupControllerClient();
 
-  async function callDeleteCluster() {
+  async function callCreateNodeGroup() {
     // Construct request
     const request = {
-      projectId,
-      region,
-      clusterName,
+      parent,
+      nodeGroup,
     };
 
     // Run request
-    const [operation] = await dataprocClient.deleteCluster(request);
+    const [operation] = await dataprocClient.createNodeGroup(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteCluster();
-  // [END dataproc_v1_generated_ClusterController_DeleteCluster_async]
+  callCreateNodeGroup();
+  // [END dataproc_v1_generated_NodeGroupController_CreateNodeGroup_async]
 }
 
 process.on('unhandledRejection', err => {

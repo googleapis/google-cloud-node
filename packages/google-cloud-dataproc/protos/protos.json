@@ -12,8 +12,8 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "WorkflowTemplatesProto",
                     "java_package": "com.google.cloud.dataproc.v1",
-                    "(google.api.resource_definition).type": "metastore.googleapis.com/Service",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/services/{service}"
+                    "(google.api.resource_definition).type": "dataproc.googleapis.com/ClusterRegion",
+                    "(google.api.resource_definition).pattern": "projects/{project}/regions/{region}/clusters/{cluster}"
                   },
                   "nested": {
                     "AutoscalingPolicyService": {
@@ -1665,6 +1665,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "auxiliaryNodeGroups": {
+                          "rule": "repeated",
+                          "type": "AuxiliaryNodeGroup",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2051,6 +2059,67 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AuxiliaryNodeGroup": {
+                      "fields": {
+                        "nodeGroup": {
+                          "type": "NodeGroup",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "nodeGroupId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "NodeGroup": {
+                      "options": {
+                        "(google.api.resource).type": "dataproc.googleapis.com/NodeGroup",
+                        "(google.api.resource).pattern": "projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{node_group}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "roles": {
+                          "rule": "repeated",
+                          "type": "Role",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "nodeGroupConfig": {
+                          "type": "InstanceGroupConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Role": {
+                          "values": {
+                            "ROLE_UNSPECIFIED": 0,
+                            "DRIVER": 1
                           }
                         }
                       }
@@ -3718,6 +3787,31 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "driverSchedulingConfig": {
+                          "type": "DriverSchedulingConfig",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DriverSchedulingConfig": {
+                      "fields": {
+                        "memoryMb": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "vcores": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -3998,6 +4092,165 @@
                         }
                       }
                     },
+                    "NodeGroupController": {
+                      "options": {
+                        "(google.api.default_host)": "dataproc.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateNodeGroup": {
+                          "requestType": "CreateNodeGroupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/regions/*/clusters/*}/nodeGroups",
+                            "(google.api.http).body": "node_group",
+                            "(google.api.method_signature)": "parent,node_group,node_group_id",
+                            "(google.longrunning.operation_info).response_type": "NodeGroup",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1.NodeGroupOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/regions/*/clusters/*}/nodeGroups",
+                                "body": "node_group"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,node_group,node_group_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "NodeGroup",
+                                "metadata_type": "google.cloud.dataproc.v1.NodeGroupOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ResizeNodeGroup": {
+                          "requestType": "ResizeNodeGroupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/regions/*/clusters/*/nodeGroups/*}:resize",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,size",
+                            "(google.longrunning.operation_info).response_type": "NodeGroup",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.dataproc.v1.NodeGroupOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/regions/*/clusters/*/nodeGroups/*}:resize",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,size"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "NodeGroup",
+                                "metadata_type": "google.cloud.dataproc.v1.NodeGroupOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetNodeGroup": {
+                          "requestType": "GetNodeGroupRequest",
+                          "responseType": "NodeGroup",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/regions/*/clusters/*/nodeGroups/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/regions/*/clusters/*/nodeGroups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateNodeGroupRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "dataproc.googleapis.com/NodeGroup"
+                          }
+                        },
+                        "nodeGroup": {
+                          "type": "NodeGroup",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "nodeGroupId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ResizeNodeGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "size": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "gracefulDecommissionTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetNodeGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataproc.googleapis.com/NodeGroup"
+                          }
+                        }
+                      }
+                    },
                     "BatchOperationMetadata": {
                       "fields": {
                         "batch": {
@@ -4145,6 +4398,77 @@
                           "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "NodeGroupOperationMetadata": {
+                      "fields": {
+                        "nodeGroupId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "clusterUuid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "status": {
+                          "type": "ClusterOperationStatus",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "statusHistory": {
+                          "rule": "repeated",
+                          "type": "ClusterOperationStatus",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "operationType": {
+                          "type": "NodeGroupOperationType",
+                          "id": 5
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "warnings": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "NodeGroupOperationType": {
+                          "values": {
+                            "NODE_GROUP_OPERATION_TYPE_UNSPECIFIED": 0,
+                            "CREATE": 1,
+                            "UPDATE": 2,
+                            "DELETE": 3,
+                            "RESIZE": 4
                           }
                         }
                       }
