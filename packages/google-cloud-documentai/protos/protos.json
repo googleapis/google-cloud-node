@@ -1137,6 +1137,24 @@
                             "fieldMask": {
                               "type": "google.protobuf.FieldMask",
                               "id": 2
+                            },
+                            "shardingConfig": {
+                              "type": "ShardingConfig",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "ShardingConfig": {
+                              "fields": {
+                                "pagesPerShard": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "pagesOverlap": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
                             }
                           }
                         }
@@ -5396,6 +5414,24 @@
                             "fieldMask": {
                               "type": "google.protobuf.FieldMask",
                               "id": 2
+                            },
+                            "shardingConfig": {
+                              "type": "ShardingConfig",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "ShardingConfig": {
+                              "fields": {
+                                "pagesPerShard": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "pagesOverlap": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
                             }
                           }
                         }

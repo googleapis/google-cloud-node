@@ -45,6 +45,9 @@ async function deleteSchema(schemaNameOrId: string) {
 }
 // [END pubsub_delete_schema]
 
+const someValue: number | undefined = undefined;
+const coalesced = someValue ?? 5;
+
 function main(schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID') {
   deleteSchema(schemaNameOrId).catch(err => {
     console.error(err.message);
