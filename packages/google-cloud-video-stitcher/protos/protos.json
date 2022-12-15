@@ -111,7 +111,8 @@
                             "cdnKeyConfig": {
                               "oneof": [
                                 "googleCdnKey",
-                                "akamaiCdnKey"
+                                "akamaiCdnKey",
+                                "mediaCdnKey"
                               ]
                             }
                           },
@@ -123,6 +124,10 @@
                             "akamaiCdnKey": {
                               "type": "AkamaiCdnKey",
                               "id": 6
+                            },
+                            "mediaCdnKey": {
+                              "type": "MediaCdnKey",
+                              "id": 8
                             },
                             "name": {
                               "type": "string",
@@ -157,6 +162,21 @@
                               "options": {
                                 "(google.api.field_behavior)": "INPUT_ONLY"
                               }
+                            }
+                          }
+                        },
+                        "MediaCdnKey": {
+                          "fields": {
+                            "privateKey": {
+                              "type": "bytes",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY"
+                              }
+                            },
+                            "keyName": {
+                              "type": "string",
+                              "id": 2
                             }
                           }
                         },

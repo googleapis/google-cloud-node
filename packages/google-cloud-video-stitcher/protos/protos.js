@@ -1376,6 +1376,7 @@
                              * @interface ICdnKey
                              * @property {google.cloud.video.stitcher.v1.IGoogleCdnKey|null} [googleCdnKey] CdnKey googleCdnKey
                              * @property {google.cloud.video.stitcher.v1.IAkamaiCdnKey|null} [akamaiCdnKey] CdnKey akamaiCdnKey
+                             * @property {google.cloud.video.stitcher.v1.IMediaCdnKey|null} [mediaCdnKey] CdnKey mediaCdnKey
                              * @property {string|null} [name] CdnKey name
                              * @property {string|null} [hostname] CdnKey hostname
                              */
@@ -1412,6 +1413,14 @@
                             CdnKey.prototype.akamaiCdnKey = null;
     
                             /**
+                             * CdnKey mediaCdnKey.
+                             * @member {google.cloud.video.stitcher.v1.IMediaCdnKey|null|undefined} mediaCdnKey
+                             * @memberof google.cloud.video.stitcher.v1.CdnKey
+                             * @instance
+                             */
+                            CdnKey.prototype.mediaCdnKey = null;
+    
+                            /**
                              * CdnKey name.
                              * @member {string} name
                              * @memberof google.cloud.video.stitcher.v1.CdnKey
@@ -1432,12 +1441,12 @@
     
                             /**
                              * CdnKey cdnKeyConfig.
-                             * @member {"googleCdnKey"|"akamaiCdnKey"|undefined} cdnKeyConfig
+                             * @member {"googleCdnKey"|"akamaiCdnKey"|"mediaCdnKey"|undefined} cdnKeyConfig
                              * @memberof google.cloud.video.stitcher.v1.CdnKey
                              * @instance
                              */
                             Object.defineProperty(CdnKey.prototype, "cdnKeyConfig", {
-                                get: $util.oneOfGetter($oneOfFields = ["googleCdnKey", "akamaiCdnKey"]),
+                                get: $util.oneOfGetter($oneOfFields = ["googleCdnKey", "akamaiCdnKey", "mediaCdnKey"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -1473,6 +1482,8 @@
                                     $root.google.cloud.video.stitcher.v1.GoogleCdnKey.encode(message.googleCdnKey, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 if (message.akamaiCdnKey != null && Object.hasOwnProperty.call(message, "akamaiCdnKey"))
                                     $root.google.cloud.video.stitcher.v1.AkamaiCdnKey.encode(message.akamaiCdnKey, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.mediaCdnKey != null && Object.hasOwnProperty.call(message, "mediaCdnKey"))
+                                    $root.google.cloud.video.stitcher.v1.MediaCdnKey.encode(message.mediaCdnKey, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1513,6 +1524,10 @@
                                         }
                                     case 6: {
                                             message.akamaiCdnKey = $root.google.cloud.video.stitcher.v1.AkamaiCdnKey.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.mediaCdnKey = $root.google.cloud.video.stitcher.v1.MediaCdnKey.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 1: {
@@ -1577,6 +1592,16 @@
                                             return "akamaiCdnKey." + error;
                                     }
                                 }
+                                if (message.mediaCdnKey != null && message.hasOwnProperty("mediaCdnKey")) {
+                                    if (properties.cdnKeyConfig === 1)
+                                        return "cdnKeyConfig: multiple values";
+                                    properties.cdnKeyConfig = 1;
+                                    {
+                                        var error = $root.google.cloud.video.stitcher.v1.MediaCdnKey.verify(message.mediaCdnKey);
+                                        if (error)
+                                            return "mediaCdnKey." + error;
+                                    }
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
@@ -1607,6 +1632,11 @@
                                     if (typeof object.akamaiCdnKey !== "object")
                                         throw TypeError(".google.cloud.video.stitcher.v1.CdnKey.akamaiCdnKey: object expected");
                                     message.akamaiCdnKey = $root.google.cloud.video.stitcher.v1.AkamaiCdnKey.fromObject(object.akamaiCdnKey);
+                                }
+                                if (object.mediaCdnKey != null) {
+                                    if (typeof object.mediaCdnKey !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.CdnKey.mediaCdnKey: object expected");
+                                    message.mediaCdnKey = $root.google.cloud.video.stitcher.v1.MediaCdnKey.fromObject(object.mediaCdnKey);
                                 }
                                 if (object.name != null)
                                     message.name = String(object.name);
@@ -1645,6 +1675,11 @@
                                     object.akamaiCdnKey = $root.google.cloud.video.stitcher.v1.AkamaiCdnKey.toObject(message.akamaiCdnKey, options);
                                     if (options.oneofs)
                                         object.cdnKeyConfig = "akamaiCdnKey";
+                                }
+                                if (message.mediaCdnKey != null && message.hasOwnProperty("mediaCdnKey")) {
+                                    object.mediaCdnKey = $root.google.cloud.video.stitcher.v1.MediaCdnKey.toObject(message.mediaCdnKey, options);
+                                    if (options.oneofs)
+                                        object.cdnKeyConfig = "mediaCdnKey";
                                 }
                                 return object;
                             };
@@ -2124,6 +2159,242 @@
                             };
     
                             return AkamaiCdnKey;
+                        })();
+    
+                        v1.MediaCdnKey = (function() {
+    
+                            /**
+                             * Properties of a MediaCdnKey.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IMediaCdnKey
+                             * @property {Uint8Array|null} [privateKey] MediaCdnKey privateKey
+                             * @property {string|null} [keyName] MediaCdnKey keyName
+                             */
+    
+                            /**
+                             * Constructs a new MediaCdnKey.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a MediaCdnKey.
+                             * @implements IMediaCdnKey
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IMediaCdnKey=} [properties] Properties to set
+                             */
+                            function MediaCdnKey(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MediaCdnKey privateKey.
+                             * @member {Uint8Array} privateKey
+                             * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                             * @instance
+                             */
+                            MediaCdnKey.prototype.privateKey = $util.newBuffer([]);
+    
+                            /**
+                             * MediaCdnKey keyName.
+                             * @member {string} keyName
+                             * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                             * @instance
+                             */
+                            MediaCdnKey.prototype.keyName = "";
+    
+                            /**
+                             * Creates a new MediaCdnKey instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IMediaCdnKey=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.MediaCdnKey} MediaCdnKey instance
+                             */
+                            MediaCdnKey.create = function create(properties) {
+                                return new MediaCdnKey(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MediaCdnKey message. Does not implicitly {@link google.cloud.video.stitcher.v1.MediaCdnKey.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IMediaCdnKey} message MediaCdnKey message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MediaCdnKey.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.privateKey != null && Object.hasOwnProperty.call(message, "privateKey"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.privateKey);
+                                if (message.keyName != null && Object.hasOwnProperty.call(message, "keyName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.keyName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MediaCdnKey message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.MediaCdnKey.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IMediaCdnKey} message MediaCdnKey message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MediaCdnKey.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MediaCdnKey message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.MediaCdnKey} MediaCdnKey
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MediaCdnKey.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.MediaCdnKey();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.privateKey = reader.bytes();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.keyName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MediaCdnKey message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.MediaCdnKey} MediaCdnKey
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MediaCdnKey.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MediaCdnKey message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MediaCdnKey.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.privateKey != null && message.hasOwnProperty("privateKey"))
+                                    if (!(message.privateKey && typeof message.privateKey.length === "number" || $util.isString(message.privateKey)))
+                                        return "privateKey: buffer expected";
+                                if (message.keyName != null && message.hasOwnProperty("keyName"))
+                                    if (!$util.isString(message.keyName))
+                                        return "keyName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MediaCdnKey message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.MediaCdnKey} MediaCdnKey
+                             */
+                            MediaCdnKey.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.MediaCdnKey)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.MediaCdnKey();
+                                if (object.privateKey != null)
+                                    if (typeof object.privateKey === "string")
+                                        $util.base64.decode(object.privateKey, message.privateKey = $util.newBuffer($util.base64.length(object.privateKey)), 0);
+                                    else if (object.privateKey.length >= 0)
+                                        message.privateKey = object.privateKey;
+                                if (object.keyName != null)
+                                    message.keyName = String(object.keyName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MediaCdnKey message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.MediaCdnKey} message MediaCdnKey
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MediaCdnKey.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    if (options.bytes === String)
+                                        object.privateKey = "";
+                                    else {
+                                        object.privateKey = [];
+                                        if (options.bytes !== Array)
+                                            object.privateKey = $util.newBuffer(object.privateKey);
+                                    }
+                                    object.keyName = "";
+                                }
+                                if (message.privateKey != null && message.hasOwnProperty("privateKey"))
+                                    object.privateKey = options.bytes === String ? $util.base64.encode(message.privateKey, 0, message.privateKey.length) : options.bytes === Array ? Array.prototype.slice.call(message.privateKey) : message.privateKey;
+                                if (message.keyName != null && message.hasOwnProperty("keyName"))
+                                    object.keyName = message.keyName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MediaCdnKey to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MediaCdnKey.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MediaCdnKey
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MediaCdnKey.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.MediaCdnKey";
+                            };
+    
+                            return MediaCdnKey;
                         })();
     
                         v1.CompanionAds = (function() {
