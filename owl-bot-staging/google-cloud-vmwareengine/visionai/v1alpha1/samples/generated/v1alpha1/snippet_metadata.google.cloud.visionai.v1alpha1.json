@@ -1,0 +1,4139 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-visionai",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.visionai.v1alpha1",
+        "version": "v1alpha1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_ListApplications_async",
+      "title": "AppPlatform listApplications Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Applications in a given project and location.",
+      "canonical": true,
+      "file": "app_platform.list_applications.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListApplications",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.ListApplications",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListApplicationsResponse",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "ListApplications",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.ListApplications",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_GetApplication_async",
+      "title": "AppPlatform getApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Application.",
+      "canonical": true,
+      "file": "app_platform.get_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetApplication",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.GetApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Application",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "GetApplication",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.GetApplication",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_CreateApplication_async",
+      "title": "AppPlatform createApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Application in a given project and location.",
+      "canonical": true,
+      "file": "app_platform.create_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateApplication",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.CreateApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "application_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "application",
+            "type": ".google.cloud.visionai.v1alpha1.Application"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "CreateApplication",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.CreateApplication",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_UpdateApplication_async",
+      "title": "AppPlatform updateApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Application.",
+      "canonical": true,
+      "file": "app_platform.update_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateApplication",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.UpdateApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "application",
+            "type": ".google.cloud.visionai.v1alpha1.Application"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "UpdateApplication",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.UpdateApplication",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_DeleteApplication_async",
+      "title": "AppPlatform deleteApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Application.",
+      "canonical": true,
+      "file": "app_platform.delete_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteApplication",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.DeleteApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "DeleteApplication",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.DeleteApplication",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_DeployApplication_async",
+      "title": "AppPlatform deployApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deploys a single Application.",
+      "canonical": true,
+      "file": "app_platform.deploy_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeployApplication",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.DeployApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "enable_monitoring",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "DeployApplication",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.DeployApplication",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_UndeployApplication_async",
+      "title": "AppPlatform undeployApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Undeploys a single Application.",
+      "canonical": true,
+      "file": "app_platform.undeploy_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UndeployApplication",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.UndeployApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "UndeployApplication",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.UndeployApplication",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_AddApplicationStreamInput_async",
+      "title": "AppPlatform addApplicationStreamInput Sample",
+      "origin": "API_DEFINITION",
+      "description": " Adds target stream input to the Application. If the Application is deployed, the corresponding new Application instance will be created. If the stream has already been in the Application, the RPC will fail.",
+      "canonical": true,
+      "file": "app_platform.add_application_stream_input.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AddApplicationStreamInput",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.AddApplicationStreamInput",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "application_stream_inputs",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "AddApplicationStreamInput",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.AddApplicationStreamInput",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_RemoveApplicationStreamInput_async",
+      "title": "AppPlatform removeApplicationStreamInput Sample",
+      "origin": "API_DEFINITION",
+      "description": " Remove target stream input to the Application, if the Application is deployed, the corresponding instance based will be deleted. If the stream is not in the Application, the RPC will fail.",
+      "canonical": true,
+      "file": "app_platform.remove_application_stream_input.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RemoveApplicationStreamInput",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.RemoveApplicationStreamInput",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "target_stream_inputs",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "RemoveApplicationStreamInput",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.RemoveApplicationStreamInput",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_UpdateApplicationStreamInput_async",
+      "title": "AppPlatform updateApplicationStreamInput Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update target stream input to the Application, if the Application is deployed, the corresponding instance based will be deployed. For CreateOrUpdate behavior, set allow_missing to true.",
+      "canonical": true,
+      "file": "app_platform.update_application_stream_input.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateApplicationStreamInput",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.UpdateApplicationStreamInput",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "application_stream_inputs",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "UpdateApplicationStreamInput",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.UpdateApplicationStreamInput",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_ListInstances_async",
+      "title": "AppPlatform listInstances Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Instances in a given project and location.",
+      "canonical": true,
+      "file": "app_platform.list_instances.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListInstances",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.ListInstances",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListInstancesResponse",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "ListInstances",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.ListInstances",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_GetInstance_async",
+      "title": "AppPlatform getInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Instance.",
+      "canonical": true,
+      "file": "app_platform.get_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetInstance",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.GetInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Instance",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "GetInstance",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.GetInstance",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_CreateApplicationInstances_async",
+      "title": "AppPlatform createApplicationInstances Sample",
+      "origin": "API_DEFINITION",
+      "description": " Adds target stream input to the Application. If the Application is deployed, the corresponding new Application instance will be created. If the stream has already been in the Application, the RPC will fail.",
+      "canonical": true,
+      "file": "app_platform.create_application_instances.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateApplicationInstances",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.CreateApplicationInstances",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "application_instances",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "CreateApplicationInstances",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.CreateApplicationInstances",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_DeleteApplicationInstances_async",
+      "title": "AppPlatform deleteApplicationInstances Sample",
+      "origin": "API_DEFINITION",
+      "description": " Remove target stream input to the Application, if the Application is deployed, the corresponding instance based will be deleted. If the stream is not in the Application, the RPC will fail.",
+      "canonical": true,
+      "file": "app_platform.delete_application_instances.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteApplicationInstances",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.DeleteApplicationInstances",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "instance_ids",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "DeleteApplicationInstances",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.DeleteApplicationInstances",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_UpdateApplicationInstances_async",
+      "title": "AppPlatform updateApplicationInstances Sample",
+      "origin": "API_DEFINITION",
+      "description": " Adds target stream input to the Application. If the Application is deployed, the corresponding new Application instance will be created. If the stream has already been in the Application, the RPC will fail.",
+      "canonical": true,
+      "file": "app_platform.update_application_instances.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateApplicationInstances",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.UpdateApplicationInstances",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "application_instances",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "UpdateApplicationInstances",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.UpdateApplicationInstances",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_ListDrafts_async",
+      "title": "AppPlatform listDrafts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Drafts in a given project and location.",
+      "canonical": true,
+      "file": "app_platform.list_drafts.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDrafts",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.ListDrafts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListDraftsResponse",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "ListDrafts",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.ListDrafts",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_GetDraft_async",
+      "title": "AppPlatform getDraft Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Draft.",
+      "canonical": true,
+      "file": "app_platform.get_draft.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDraft",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.GetDraft",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Draft",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "GetDraft",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.GetDraft",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_CreateDraft_async",
+      "title": "AppPlatform createDraft Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Draft in a given project and location.",
+      "canonical": true,
+      "file": "app_platform.create_draft.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDraft",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.CreateDraft",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "draft_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "draft",
+            "type": ".google.cloud.visionai.v1alpha1.Draft"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "CreateDraft",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.CreateDraft",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_UpdateDraft_async",
+      "title": "AppPlatform updateDraft Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Draft.",
+      "canonical": true,
+      "file": "app_platform.update_draft.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDraft",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.UpdateDraft",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "draft",
+            "type": ".google.cloud.visionai.v1alpha1.Draft"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "UpdateDraft",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.UpdateDraft",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_DeleteDraft_async",
+      "title": "AppPlatform deleteDraft Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Draft.",
+      "canonical": true,
+      "file": "app_platform.delete_draft.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDraft",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.DeleteDraft",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "DeleteDraft",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.DeleteDraft",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_ListProcessors_async",
+      "title": "AppPlatform listProcessors Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Processors in a given project and location.",
+      "canonical": true,
+      "file": "app_platform.list_processors.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListProcessors",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.ListProcessors",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListProcessorsResponse",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "ListProcessors",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.ListProcessors",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_ListPrebuiltProcessors_async",
+      "title": "AppPlatform listPrebuiltProcessors Sample",
+      "origin": "API_DEFINITION",
+      "description": " ListPrebuiltProcessors is a custom pass-through verb that Lists Prebuilt Processors.",
+      "canonical": true,
+      "file": "app_platform.list_prebuilt_processors.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPrebuiltProcessors",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.ListPrebuiltProcessors",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListPrebuiltProcessorsResponse",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "ListPrebuiltProcessors",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.ListPrebuiltProcessors",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_GetProcessor_async",
+      "title": "AppPlatform getProcessor Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Processor.",
+      "canonical": true,
+      "file": "app_platform.get_processor.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetProcessor",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.GetProcessor",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Processor",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "GetProcessor",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.GetProcessor",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_CreateProcessor_async",
+      "title": "AppPlatform createProcessor Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Processor in a given project and location.",
+      "canonical": true,
+      "file": "app_platform.create_processor.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateProcessor",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.CreateProcessor",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "processor_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "processor",
+            "type": ".google.cloud.visionai.v1alpha1.Processor"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "CreateProcessor",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.CreateProcessor",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_UpdateProcessor_async",
+      "title": "AppPlatform updateProcessor Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Processor.",
+      "canonical": true,
+      "file": "app_platform.update_processor.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateProcessor",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.UpdateProcessor",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "processor",
+            "type": ".google.cloud.visionai.v1alpha1.Processor"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "UpdateProcessor",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.UpdateProcessor",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_AppPlatform_DeleteProcessor_async",
+      "title": "AppPlatform deleteProcessor Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Processor.",
+      "canonical": true,
+      "file": "app_platform.delete_processor.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteProcessor",
+        "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.DeleteProcessor",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppPlatformClient",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatformClient"
+        },
+        "method": {
+          "shortName": "DeleteProcessor",
+          "fullName": "google.cloud.visionai.v1alpha1.AppPlatform.DeleteProcessor",
+          "service": {
+            "shortName": "AppPlatform",
+            "fullName": "google.cloud.visionai.v1alpha1.AppPlatform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_LiveVideoAnalytics_ListAnalyses_async",
+      "title": "AppPlatform listAnalyses Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Analyses in a given project and location.",
+      "canonical": true,
+      "file": "live_video_analytics.list_analyses.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAnalyses",
+        "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics.ListAnalyses",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListAnalysesResponse",
+        "client": {
+          "shortName": "LiveVideoAnalyticsClient",
+          "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalyticsClient"
+        },
+        "method": {
+          "shortName": "ListAnalyses",
+          "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics.ListAnalyses",
+          "service": {
+            "shortName": "LiveVideoAnalytics",
+            "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_LiveVideoAnalytics_GetAnalysis_async",
+      "title": "AppPlatform getAnalysis Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Analysis.",
+      "canonical": true,
+      "file": "live_video_analytics.get_analysis.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAnalysis",
+        "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics.GetAnalysis",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Analysis",
+        "client": {
+          "shortName": "LiveVideoAnalyticsClient",
+          "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalyticsClient"
+        },
+        "method": {
+          "shortName": "GetAnalysis",
+          "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics.GetAnalysis",
+          "service": {
+            "shortName": "LiveVideoAnalytics",
+            "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_LiveVideoAnalytics_CreateAnalysis_async",
+      "title": "AppPlatform createAnalysis Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Analysis in a given project and location.",
+      "canonical": true,
+      "file": "live_video_analytics.create_analysis.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAnalysis",
+        "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics.CreateAnalysis",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "analysis_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "analysis",
+            "type": ".google.cloud.visionai.v1alpha1.Analysis"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LiveVideoAnalyticsClient",
+          "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalyticsClient"
+        },
+        "method": {
+          "shortName": "CreateAnalysis",
+          "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics.CreateAnalysis",
+          "service": {
+            "shortName": "LiveVideoAnalytics",
+            "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_LiveVideoAnalytics_UpdateAnalysis_async",
+      "title": "AppPlatform updateAnalysis Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Analysis.",
+      "canonical": true,
+      "file": "live_video_analytics.update_analysis.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAnalysis",
+        "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics.UpdateAnalysis",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "analysis",
+            "type": ".google.cloud.visionai.v1alpha1.Analysis"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LiveVideoAnalyticsClient",
+          "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalyticsClient"
+        },
+        "method": {
+          "shortName": "UpdateAnalysis",
+          "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics.UpdateAnalysis",
+          "service": {
+            "shortName": "LiveVideoAnalytics",
+            "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_LiveVideoAnalytics_DeleteAnalysis_async",
+      "title": "AppPlatform deleteAnalysis Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Analysis.",
+      "canonical": true,
+      "file": "live_video_analytics.delete_analysis.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAnalysis",
+        "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics.DeleteAnalysis",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LiveVideoAnalyticsClient",
+          "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalyticsClient"
+        },
+        "method": {
+          "shortName": "DeleteAnalysis",
+          "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics.DeleteAnalysis",
+          "service": {
+            "shortName": "LiveVideoAnalytics",
+            "fullName": "google.cloud.visionai.v1alpha1.LiveVideoAnalytics"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamingService_SendPackets_async",
+      "title": "AppPlatform sendPackets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Send packets to the series.",
+      "canonical": true,
+      "file": "streaming_service.send_packets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SendPackets",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamingService.SendPackets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "packet",
+            "type": ".google.cloud.visionai.v1alpha1.Packet"
+          },
+          {
+            "name": "metadata",
+            "type": ".google.cloud.visionai.v1alpha1.RequestMetadata"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.SendPacketsResponse",
+        "client": {
+          "shortName": "StreamingServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamingServiceClient"
+        },
+        "method": {
+          "shortName": "SendPackets",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamingService.SendPackets",
+          "service": {
+            "shortName": "StreamingService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamingService_ReceivePackets_async",
+      "title": "AppPlatform receivePackets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Receive packets from the series.",
+      "canonical": true,
+      "file": "streaming_service.receive_packets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReceivePackets",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamingService.ReceivePackets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "setup_request",
+            "type": ".google.cloud.visionai.v1alpha1.ReceivePacketsRequest.SetupRequest"
+          },
+          {
+            "name": "commit_request",
+            "type": ".google.cloud.visionai.v1alpha1.CommitRequest"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ReceivePacketsResponse",
+        "client": {
+          "shortName": "StreamingServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamingServiceClient"
+        },
+        "method": {
+          "shortName": "ReceivePackets",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamingService.ReceivePackets",
+          "service": {
+            "shortName": "StreamingService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamingService_ReceiveEvents_async",
+      "title": "AppPlatform receiveEvents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Receive events given the stream name.",
+      "canonical": true,
+      "file": "streaming_service.receive_events.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReceiveEvents",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamingService.ReceiveEvents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "setup_request",
+            "type": ".google.cloud.visionai.v1alpha1.ReceiveEventsRequest.SetupRequest"
+          },
+          {
+            "name": "commit_request",
+            "type": ".google.cloud.visionai.v1alpha1.CommitRequest"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ReceiveEventsResponse",
+        "client": {
+          "shortName": "StreamingServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamingServiceClient"
+        },
+        "method": {
+          "shortName": "ReceiveEvents",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamingService.ReceiveEvents",
+          "service": {
+            "shortName": "StreamingService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamingService_AcquireLease_async",
+      "title": "AppPlatform acquireLease Sample",
+      "origin": "API_DEFINITION",
+      "description": " AcquireLease acquires a lease.",
+      "canonical": true,
+      "file": "streaming_service.acquire_lease.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AcquireLease",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamingService.AcquireLease",
+        "async": true,
+        "parameters": [
+          {
+            "name": "series",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "owner",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "term",
+            "type": ".google.protobuf.Duration"
+          },
+          {
+            "name": "lease_type",
+            "type": ".google.cloud.visionai.v1alpha1.LeaseType"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Lease",
+        "client": {
+          "shortName": "StreamingServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamingServiceClient"
+        },
+        "method": {
+          "shortName": "AcquireLease",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamingService.AcquireLease",
+          "service": {
+            "shortName": "StreamingService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamingService_RenewLease_async",
+      "title": "AppPlatform renewLease Sample",
+      "origin": "API_DEFINITION",
+      "description": " RenewLease renews a lease.",
+      "canonical": true,
+      "file": "streaming_service.renew_lease.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RenewLease",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamingService.RenewLease",
+        "async": true,
+        "parameters": [
+          {
+            "name": "id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "series",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "owner",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "term",
+            "type": ".google.protobuf.Duration"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Lease",
+        "client": {
+          "shortName": "StreamingServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamingServiceClient"
+        },
+        "method": {
+          "shortName": "RenewLease",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamingService.RenewLease",
+          "service": {
+            "shortName": "StreamingService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamingService_ReleaseLease_async",
+      "title": "AppPlatform releaseLease Sample",
+      "origin": "API_DEFINITION",
+      "description": " RleaseLease releases a lease.",
+      "canonical": true,
+      "file": "streaming_service.release_lease.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReleaseLease",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamingService.ReleaseLease",
+        "async": true,
+        "parameters": [
+          {
+            "name": "id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "series",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "owner",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ReleaseLeaseResponse",
+        "client": {
+          "shortName": "StreamingServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamingServiceClient"
+        },
+        "method": {
+          "shortName": "ReleaseLease",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamingService.ReleaseLease",
+          "service": {
+            "shortName": "StreamingService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_ListClusters_async",
+      "title": "AppPlatform listClusters Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Clusters in a given project and location.",
+      "canonical": true,
+      "file": "streams_service.list_clusters.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListClusters",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.ListClusters",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListClustersResponse",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "ListClusters",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.ListClusters",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_GetCluster_async",
+      "title": "AppPlatform getCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Cluster.",
+      "canonical": true,
+      "file": "streams_service.get_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCluster",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.GetCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Cluster",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "GetCluster",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.GetCluster",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_CreateCluster_async",
+      "title": "AppPlatform createCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Cluster in a given project and location.",
+      "canonical": true,
+      "file": "streams_service.create_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCluster",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.CreateCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster",
+            "type": ".google.cloud.visionai.v1alpha1.Cluster"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "CreateCluster",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.CreateCluster",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_UpdateCluster_async",
+      "title": "AppPlatform updateCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Cluster.",
+      "canonical": true,
+      "file": "streams_service.update_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCluster",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.UpdateCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "cluster",
+            "type": ".google.cloud.visionai.v1alpha1.Cluster"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateCluster",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.UpdateCluster",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_DeleteCluster_async",
+      "title": "AppPlatform deleteCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Cluster.",
+      "canonical": true,
+      "file": "streams_service.delete_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteCluster",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.DeleteCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteCluster",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.DeleteCluster",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_ListStreams_async",
+      "title": "AppPlatform listStreams Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Streams in a given project and location.",
+      "canonical": true,
+      "file": "streams_service.list_streams.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListStreams",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.ListStreams",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListStreamsResponse",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "ListStreams",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.ListStreams",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_GetStream_async",
+      "title": "AppPlatform getStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Stream.",
+      "canonical": true,
+      "file": "streams_service.get_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetStream",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.GetStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Stream",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "GetStream",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.GetStream",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_CreateStream_async",
+      "title": "AppPlatform createStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Stream in a given project and location.",
+      "canonical": true,
+      "file": "streams_service.create_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateStream",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.CreateStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "stream_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "stream",
+            "type": ".google.cloud.visionai.v1alpha1.Stream"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "CreateStream",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.CreateStream",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_UpdateStream_async",
+      "title": "AppPlatform updateStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Stream.",
+      "canonical": true,
+      "file": "streams_service.update_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateStream",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.UpdateStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "stream",
+            "type": ".google.cloud.visionai.v1alpha1.Stream"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateStream",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.UpdateStream",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_DeleteStream_async",
+      "title": "AppPlatform deleteStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Stream.",
+      "canonical": true,
+      "file": "streams_service.delete_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteStream",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.DeleteStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteStream",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.DeleteStream",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_GenerateStreamHlsToken_async",
+      "title": "AppPlatform generateStreamHlsToken Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generate the JWT auth token required to get the stream HLS contents.",
+      "canonical": true,
+      "file": "streams_service.generate_stream_hls_token.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateStreamHlsToken",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.GenerateStreamHlsToken",
+        "async": true,
+        "parameters": [
+          {
+            "name": "stream",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.GenerateStreamHlsTokenResponse",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "GenerateStreamHlsToken",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.GenerateStreamHlsToken",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_ListEvents_async",
+      "title": "AppPlatform listEvents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Events in a given project and location.",
+      "canonical": true,
+      "file": "streams_service.list_events.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEvents",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.ListEvents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListEventsResponse",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "ListEvents",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.ListEvents",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_GetEvent_async",
+      "title": "AppPlatform getEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Event.",
+      "canonical": true,
+      "file": "streams_service.get_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEvent",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.GetEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Event",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "GetEvent",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.GetEvent",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_CreateEvent_async",
+      "title": "AppPlatform createEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Event in a given project and location.",
+      "canonical": true,
+      "file": "streams_service.create_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateEvent",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.CreateEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "event_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "event",
+            "type": ".google.cloud.visionai.v1alpha1.Event"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "CreateEvent",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.CreateEvent",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_UpdateEvent_async",
+      "title": "AppPlatform updateEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Event.",
+      "canonical": true,
+      "file": "streams_service.update_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateEvent",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.UpdateEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "event",
+            "type": ".google.cloud.visionai.v1alpha1.Event"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateEvent",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.UpdateEvent",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_DeleteEvent_async",
+      "title": "AppPlatform deleteEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Event.",
+      "canonical": true,
+      "file": "streams_service.delete_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteEvent",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.DeleteEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteEvent",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.DeleteEvent",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_ListSeries_async",
+      "title": "AppPlatform listSeries Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Series in a given project and location.",
+      "canonical": true,
+      "file": "streams_service.list_series.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSeries",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.ListSeries",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListSeriesResponse",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "ListSeries",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.ListSeries",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_GetSeries_async",
+      "title": "AppPlatform getSeries Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Series.",
+      "canonical": true,
+      "file": "streams_service.get_series.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSeries",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.GetSeries",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Series",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "GetSeries",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.GetSeries",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_CreateSeries_async",
+      "title": "AppPlatform createSeries Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Series in a given project and location.",
+      "canonical": true,
+      "file": "streams_service.create_series.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSeries",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.CreateSeries",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "series_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "series",
+            "type": ".google.cloud.visionai.v1alpha1.Series"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "CreateSeries",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.CreateSeries",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_UpdateSeries_async",
+      "title": "AppPlatform updateSeries Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Event.",
+      "canonical": true,
+      "file": "streams_service.update_series.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSeries",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.UpdateSeries",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "series",
+            "type": ".google.cloud.visionai.v1alpha1.Series"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateSeries",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.UpdateSeries",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_DeleteSeries_async",
+      "title": "AppPlatform deleteSeries Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Series.",
+      "canonical": true,
+      "file": "streams_service.delete_series.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSeries",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.DeleteSeries",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteSeries",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.DeleteSeries",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_StreamsService_MaterializeChannel_async",
+      "title": "AppPlatform materializeChannel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Materialize a channel.",
+      "canonical": true,
+      "file": "streams_service.materialize_channel.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "MaterializeChannel",
+        "fullName": "google.cloud.visionai.v1alpha1.StreamsService.MaterializeChannel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "channel_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "channel",
+            "type": ".google.cloud.visionai.v1alpha1.Channel"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StreamsServiceClient",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsServiceClient"
+        },
+        "method": {
+          "shortName": "MaterializeChannel",
+          "fullName": "google.cloud.visionai.v1alpha1.StreamsService.MaterializeChannel",
+          "service": {
+            "shortName": "StreamsService",
+            "fullName": "google.cloud.visionai.v1alpha1.StreamsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_CreateAsset_async",
+      "title": "AppPlatform createAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an asset inside corpus.",
+      "canonical": true,
+      "file": "warehouse.create_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAsset",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.CreateAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "asset",
+            "type": ".google.cloud.visionai.v1alpha1.Asset"
+          },
+          {
+            "name": "asset_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Asset",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "CreateAsset",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.CreateAsset",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_UpdateAsset_async",
+      "title": "AppPlatform updateAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an asset inside corpus.",
+      "canonical": true,
+      "file": "warehouse.update_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAsset",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.UpdateAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "asset",
+            "type": ".google.cloud.visionai.v1alpha1.Asset"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Asset",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "UpdateAsset",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.UpdateAsset",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_GetAsset_async",
+      "title": "AppPlatform getAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Reads an asset inside corpus.",
+      "canonical": true,
+      "file": "warehouse.get_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAsset",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.GetAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Asset",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "GetAsset",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.GetAsset",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_ListAssets_async",
+      "title": "AppPlatform listAssets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists an list of assets inside corpus.",
+      "canonical": true,
+      "file": "warehouse.list_assets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAssets",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.ListAssets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListAssetsResponse",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "ListAssets",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.ListAssets",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_DeleteAsset_async",
+      "title": "AppPlatform deleteAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes asset inside corpus.",
+      "canonical": true,
+      "file": "warehouse.delete_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAsset",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.DeleteAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "DeleteAsset",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.DeleteAsset",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_CreateCorpus_async",
+      "title": "AppPlatform createCorpus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a corpus inside a project.",
+      "canonical": true,
+      "file": "warehouse.create_corpus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCorpus",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.CreateCorpus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "corpus",
+            "type": ".google.cloud.visionai.v1alpha1.Corpus"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "CreateCorpus",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.CreateCorpus",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_GetCorpus_async",
+      "title": "AppPlatform getCorpus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets corpus details inside a project.",
+      "canonical": true,
+      "file": "warehouse.get_corpus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCorpus",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.GetCorpus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Corpus",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "GetCorpus",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.GetCorpus",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_UpdateCorpus_async",
+      "title": "AppPlatform updateCorpus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a corpus in a project.",
+      "canonical": true,
+      "file": "warehouse.update_corpus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCorpus",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.UpdateCorpus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "corpus",
+            "type": ".google.cloud.visionai.v1alpha1.Corpus"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Corpus",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "UpdateCorpus",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.UpdateCorpus",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_ListCorpora_async",
+      "title": "AppPlatform listCorpora Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all corpora in a project.",
+      "canonical": true,
+      "file": "warehouse.list_corpora.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCorpora",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.ListCorpora",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListCorporaResponse",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "ListCorpora",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.ListCorpora",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_DeleteCorpus_async",
+      "title": "AppPlatform deleteCorpus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a corpus only if its empty. Returns empty response.",
+      "canonical": true,
+      "file": "warehouse.delete_corpus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteCorpus",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.DeleteCorpus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "DeleteCorpus",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.DeleteCorpus",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_CreateDataSchema_async",
+      "title": "AppPlatform createDataSchema Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates data schema inside corpus.",
+      "canonical": true,
+      "file": "warehouse.create_data_schema.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDataSchema",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.CreateDataSchema",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "data_schema",
+            "type": ".google.cloud.visionai.v1alpha1.DataSchema"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.DataSchema",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "CreateDataSchema",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.CreateDataSchema",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_UpdateDataSchema_async",
+      "title": "AppPlatform updateDataSchema Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates data schema inside corpus.",
+      "canonical": true,
+      "file": "warehouse.update_data_schema.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDataSchema",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.UpdateDataSchema",
+        "async": true,
+        "parameters": [
+          {
+            "name": "data_schema",
+            "type": ".google.cloud.visionai.v1alpha1.DataSchema"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.DataSchema",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "UpdateDataSchema",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.UpdateDataSchema",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_GetDataSchema_async",
+      "title": "AppPlatform getDataSchema Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets data schema inside corpus.",
+      "canonical": true,
+      "file": "warehouse.get_data_schema.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataSchema",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.GetDataSchema",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.DataSchema",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "GetDataSchema",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.GetDataSchema",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_DeleteDataSchema_async",
+      "title": "AppPlatform deleteDataSchema Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes data schema inside corpus.",
+      "canonical": true,
+      "file": "warehouse.delete_data_schema.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDataSchema",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.DeleteDataSchema",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "DeleteDataSchema",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.DeleteDataSchema",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_ListDataSchemas_async",
+      "title": "AppPlatform listDataSchemas Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists a list of data schemas inside corpus.",
+      "canonical": true,
+      "file": "warehouse.list_data_schemas.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDataSchemas",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.ListDataSchemas",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListDataSchemasResponse",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "ListDataSchemas",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.ListDataSchemas",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_CreateAnnotation_async",
+      "title": "AppPlatform createAnnotation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates annotation inside asset.",
+      "canonical": true,
+      "file": "warehouse.create_annotation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAnnotation",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.CreateAnnotation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "annotation",
+            "type": ".google.cloud.visionai.v1alpha1.Annotation"
+          },
+          {
+            "name": "annotation_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Annotation",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "CreateAnnotation",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.CreateAnnotation",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_GetAnnotation_async",
+      "title": "AppPlatform getAnnotation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Reads annotation inside asset.",
+      "canonical": true,
+      "file": "warehouse.get_annotation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAnnotation",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.GetAnnotation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Annotation",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "GetAnnotation",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.GetAnnotation",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_ListAnnotations_async",
+      "title": "AppPlatform listAnnotations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists a list of annotations inside asset.",
+      "canonical": true,
+      "file": "warehouse.list_annotations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAnnotations",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.ListAnnotations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListAnnotationsResponse",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "ListAnnotations",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.ListAnnotations",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_UpdateAnnotation_async",
+      "title": "AppPlatform updateAnnotation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates annotation inside asset.",
+      "canonical": true,
+      "file": "warehouse.update_annotation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAnnotation",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.UpdateAnnotation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "annotation",
+            "type": ".google.cloud.visionai.v1alpha1.Annotation"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.Annotation",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "UpdateAnnotation",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.UpdateAnnotation",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_DeleteAnnotation_async",
+      "title": "AppPlatform deleteAnnotation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes annotation inside asset.",
+      "canonical": true,
+      "file": "warehouse.delete_annotation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAnnotation",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.DeleteAnnotation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "DeleteAnnotation",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.DeleteAnnotation",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_IngestAsset_async",
+      "title": "AppPlatform ingestAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Ingests data for the asset. It is not allowed to ingest a data chunk which is already expired according to TTL. This method is only available via the gRPC API (not HTTP since bi-directional streaming is not supported via HTTP).",
+      "canonical": true,
+      "file": "warehouse.ingest_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "IngestAsset",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.IngestAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "config",
+            "type": ".google.cloud.visionai.v1alpha1.IngestAssetRequest.Config"
+          },
+          {
+            "name": "time_indexed_data",
+            "type": ".google.cloud.visionai.v1alpha1.IngestAssetRequest.TimeIndexedData"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.IngestAssetResponse",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "IngestAsset",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.IngestAsset",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_ClipAsset_async",
+      "title": "AppPlatform clipAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generates clips for downloading. The api takes in a time range, and generates a clip of the first content available after start_time and before end_time, which may overflow beyond these bounds. Returned clips are truncated if the total size of the clips are larger than 100MB.",
+      "canonical": true,
+      "file": "warehouse.clip_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ClipAsset",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.ClipAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "temporal_partition",
+            "type": ".google.cloud.visionai.v1alpha1.Partition.TemporalPartition"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ClipAssetResponse",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "ClipAsset",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.ClipAsset",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_GenerateHlsUri_async",
+      "title": "AppPlatform generateHlsUri Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generates a uri for an HLS manifest. The api takes in a collection of time ranges, and generates a URI for an HLS manifest that covers all the requested time ranges.",
+      "canonical": true,
+      "file": "warehouse.generate_hls_uri.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateHlsUri",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.GenerateHlsUri",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "temporal_partitions",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.GenerateHlsUriResponse",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "GenerateHlsUri",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.GenerateHlsUri",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_CreateSearchConfig_async",
+      "title": "AppPlatform createSearchConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a search configuration inside a corpus. Please follow the rules below to create a valid CreateSearchConfigRequest. --- General Rules --- 1. Request.search_config_id must not be associated with an existing    SearchConfig. 2. Request must contain at least one non-empty search_criteria_property or    facet_property. 3. mapped_fields must not be empty, and must map to existing UGA keys. 4. All mapped_fields must be of the same type. 5. All mapped_fields must share the same granularity. 6. All mapped_fields must share the same semantic SearchConfig match    options. For property-specific rules, please reference the comments for FacetProperty and SearchCriteriaProperty.",
+      "canonical": true,
+      "file": "warehouse.create_search_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSearchConfig",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.CreateSearchConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "search_config",
+            "type": ".google.cloud.visionai.v1alpha1.SearchConfig"
+          },
+          {
+            "name": "search_config_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.SearchConfig",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "CreateSearchConfig",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.CreateSearchConfig",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_UpdateSearchConfig_async",
+      "title": "AppPlatform updateSearchConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a search configuration inside a corpus. Please follow the rules below to create a valid UpdateSearchConfigRequest. --- General Rules --- 1. Request.search_configuration.name must already exist. 2. Request must contain at least one non-empty search_criteria_property or facet_property. 3. mapped_fields must not be empty, and must map to existing UGA keys. 4. All mapped_fields must be of the same type. 5. All mapped_fields must share the same granularity. 6. All mapped_fields must share the same semantic SearchConfig match    options. For property-specific rules, please reference the comments for FacetProperty and SearchCriteriaProperty.",
+      "canonical": true,
+      "file": "warehouse.update_search_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSearchConfig",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.UpdateSearchConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "search_config",
+            "type": ".google.cloud.visionai.v1alpha1.SearchConfig"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.SearchConfig",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "UpdateSearchConfig",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.UpdateSearchConfig",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_GetSearchConfig_async",
+      "title": "AppPlatform getSearchConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a search configuration inside a corpus.",
+      "canonical": true,
+      "file": "warehouse.get_search_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSearchConfig",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.GetSearchConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.SearchConfig",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "GetSearchConfig",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.GetSearchConfig",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_DeleteSearchConfig_async",
+      "title": "AppPlatform deleteSearchConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a search configuration inside a corpus. For a DeleteSearchConfigRequest to be valid, Request.search_configuration.name must already exist.",
+      "canonical": true,
+      "file": "warehouse.delete_search_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSearchConfig",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.DeleteSearchConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "DeleteSearchConfig",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.DeleteSearchConfig",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_ListSearchConfigs_async",
+      "title": "AppPlatform listSearchConfigs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all search configurations inside a corpus.",
+      "canonical": true,
+      "file": "warehouse.list_search_configs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSearchConfigs",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.ListSearchConfigs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.ListSearchConfigsResponse",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "ListSearchConfigs",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.ListSearchConfigs",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "visionai_v1alpha1_generated_Warehouse_SearchAssets_async",
+      "title": "AppPlatform searchAssets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Search media asset.",
+      "canonical": true,
+      "file": "warehouse.search_assets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 91,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchAssets",
+        "fullName": "google.cloud.visionai.v1alpha1.Warehouse.SearchAssets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "corpus",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "content_time_ranges",
+            "type": ".google.cloud.visionai.v1alpha1.DateTimeRangeArray"
+          },
+          {
+            "name": "criteria",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "facet_selections",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "result_annotation_keys",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.cloud.visionai.v1alpha1.SearchAssetsResponse",
+        "client": {
+          "shortName": "WarehouseClient",
+          "fullName": "google.cloud.visionai.v1alpha1.WarehouseClient"
+        },
+        "method": {
+          "shortName": "SearchAssets",
+          "fullName": "google.cloud.visionai.v1alpha1.Warehouse.SearchAssets",
+          "service": {
+            "shortName": "Warehouse",
+            "fullName": "google.cloud.visionai.v1alpha1.Warehouse"
+          }
+        }
+      }
+    }
+  ]
+}

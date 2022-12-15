@@ -1,0 +1,156 @@
+{
+  "interfaces": {
+    "google.cloud.visionai.v1.Warehouse": {
+      "retry_codes": {
+        "non_idempotent": [],
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ]
+      },
+      "retry_params": {
+        "default": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        },
+        "44183339c3ec233f7d8e740ee644b7ceb1a77fc3": {
+          "initial_retry_delay_millis": 1000,
+          "retry_delay_multiplier": 2.5,
+          "max_retry_delay_millis": 120000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        }
+      },
+      "methods": {
+        "CreateAsset": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "44183339c3ec233f7d8e740ee644b7ceb1a77fc3"
+        },
+        "UpdateAsset": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetAsset": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListAssets": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteAsset": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateCorpus": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "44183339c3ec233f7d8e740ee644b7ceb1a77fc3"
+        },
+        "GetCorpus": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateCorpus": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListCorpora": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteCorpus": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateDataSchema": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "44183339c3ec233f7d8e740ee644b7ceb1a77fc3"
+        },
+        "UpdateDataSchema": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetDataSchema": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteDataSchema": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListDataSchemas": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateAnnotation": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "44183339c3ec233f7d8e740ee644b7ceb1a77fc3"
+        },
+        "GetAnnotation": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListAnnotations": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateAnnotation": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteAnnotation": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "IngestAsset": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "44183339c3ec233f7d8e740ee644b7ceb1a77fc3"
+        },
+        "ClipAsset": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GenerateHlsUri": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateSearchConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateSearchConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetSearchConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteSearchConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListSearchConfigs": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "SearchAssets": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        }
+      }
+    }
+  }
+}
