@@ -30,7 +30,7 @@ function main(servingConfig, controlId) {
    */
   /**
    *  Required. The source ServingConfig resource name . Format:
-   *  projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}
+   *  `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
    */
   // const servingConfig = 'abc123'
   /**
