@@ -1,0 +1,97 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.timeseriesinsights.v1",
+  "libraryPackage": "@google-cloud/timeseriesinsights",
+  "services": {
+    "TimeseriesInsightsController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TimeseriesInsightsControllerClient",
+          "rpcs": {
+            "CreateDataSet": {
+              "methods": [
+                "createDataSet"
+              ]
+            },
+            "DeleteDataSet": {
+              "methods": [
+                "deleteDataSet"
+              ]
+            },
+            "AppendEvents": {
+              "methods": [
+                "appendEvents"
+              ]
+            },
+            "QueryDataSet": {
+              "methods": [
+                "queryDataSet"
+              ]
+            },
+            "EvaluateSlice": {
+              "methods": [
+                "evaluateSlice"
+              ]
+            },
+            "EvaluateTimeseries": {
+              "methods": [
+                "evaluateTimeseries"
+              ]
+            },
+            "ListDataSets": {
+              "methods": [
+                "listDataSets",
+                "listDataSetsStream",
+                "listDataSetsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TimeseriesInsightsControllerClient",
+          "rpcs": {
+            "CreateDataSet": {
+              "methods": [
+                "createDataSet"
+              ]
+            },
+            "DeleteDataSet": {
+              "methods": [
+                "deleteDataSet"
+              ]
+            },
+            "AppendEvents": {
+              "methods": [
+                "appendEvents"
+              ]
+            },
+            "QueryDataSet": {
+              "methods": [
+                "queryDataSet"
+              ]
+            },
+            "EvaluateSlice": {
+              "methods": [
+                "evaluateSlice"
+              ]
+            },
+            "EvaluateTimeseries": {
+              "methods": [
+                "evaluateTimeseries"
+              ]
+            },
+            "ListDataSets": {
+              "methods": [
+                "listDataSets",
+                "listDataSetsStream",
+                "listDataSetsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,331 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-agentendpoint",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.osconfig.agentendpoint.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "osconfig_v1beta_generated_AgentEndpointService_ReceiveTaskNotification_async",
+      "title": "AgentEndpointService receiveTaskNotification Sample",
+      "origin": "API_DEFINITION",
+      "description": " Stream established by client to receive Task notifications.",
+      "canonical": true,
+      "file": "agent_endpoint_service.receive_task_notification.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReceiveTaskNotification",
+        "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService.ReceiveTaskNotification",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instance_id_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "agent_version",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.agentendpoint.v1beta.ReceiveTaskNotificationResponse",
+        "client": {
+          "shortName": "AgentEndpointServiceClient",
+          "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointServiceClient"
+        },
+        "method": {
+          "shortName": "ReceiveTaskNotification",
+          "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService.ReceiveTaskNotification",
+          "service": {
+            "shortName": "AgentEndpointService",
+            "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_AgentEndpointService_StartNextTask_async",
+      "title": "AgentEndpointService startNextTask Sample",
+      "origin": "API_DEFINITION",
+      "description": " Signals the start of a task execution and returns the task info.",
+      "canonical": true,
+      "file": "agent_endpoint_service.start_next_task.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StartNextTask",
+        "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService.StartNextTask",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instance_id_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.agentendpoint.v1beta.StartNextTaskResponse",
+        "client": {
+          "shortName": "AgentEndpointServiceClient",
+          "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointServiceClient"
+        },
+        "method": {
+          "shortName": "StartNextTask",
+          "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService.StartNextTask",
+          "service": {
+            "shortName": "AgentEndpointService",
+            "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_AgentEndpointService_ReportTaskProgress_async",
+      "title": "AgentEndpointService reportTaskProgress Sample",
+      "origin": "API_DEFINITION",
+      "description": " Signals an intermediary progress checkpoint in task execution.",
+      "canonical": true,
+      "file": "agent_endpoint_service.report_task_progress.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReportTaskProgress",
+        "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService.ReportTaskProgress",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instance_id_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "task_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "task_type",
+            "type": ".google.cloud.osconfig.agentendpoint.v1beta.TaskType"
+          },
+          {
+            "name": "apply_patches_task_progress",
+            "type": ".google.cloud.osconfig.agentendpoint.v1beta.ApplyPatchesTaskProgress"
+          },
+          {
+            "name": "exec_step_task_progress",
+            "type": ".google.cloud.osconfig.agentendpoint.v1beta.ExecStepTaskProgress"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.agentendpoint.v1beta.ReportTaskProgressResponse",
+        "client": {
+          "shortName": "AgentEndpointServiceClient",
+          "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointServiceClient"
+        },
+        "method": {
+          "shortName": "ReportTaskProgress",
+          "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService.ReportTaskProgress",
+          "service": {
+            "shortName": "AgentEndpointService",
+            "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_AgentEndpointService_ReportTaskComplete_async",
+      "title": "AgentEndpointService reportTaskComplete Sample",
+      "origin": "API_DEFINITION",
+      "description": " Signals that the task execution is complete and optionally returns the next task.",
+      "canonical": true,
+      "file": "agent_endpoint_service.report_task_complete.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReportTaskComplete",
+        "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService.ReportTaskComplete",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instance_id_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "task_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "task_type",
+            "type": ".google.cloud.osconfig.agentendpoint.v1beta.TaskType"
+          },
+          {
+            "name": "error_message",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "apply_patches_task_output",
+            "type": ".google.cloud.osconfig.agentendpoint.v1beta.ApplyPatchesTaskOutput"
+          },
+          {
+            "name": "exec_step_task_output",
+            "type": ".google.cloud.osconfig.agentendpoint.v1beta.ExecStepTaskOutput"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.agentendpoint.v1beta.ReportTaskCompleteResponse",
+        "client": {
+          "shortName": "AgentEndpointServiceClient",
+          "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointServiceClient"
+        },
+        "method": {
+          "shortName": "ReportTaskComplete",
+          "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService.ReportTaskComplete",
+          "service": {
+            "shortName": "AgentEndpointService",
+            "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_AgentEndpointService_LookupEffectiveGuestPolicy_async",
+      "title": "AgentEndpointService lookupEffectiveGuestPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lookup the effective guest policy that applies to a VM instance. This lookup merges all policies that are assigned to the instance ancestry.",
+      "canonical": true,
+      "file": "agent_endpoint_service.lookup_effective_guest_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LookupEffectiveGuestPolicy",
+        "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService.LookupEffectiveGuestPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instance_id_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "os_short_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "os_version",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "os_architecture",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.agentendpoint.v1beta.EffectiveGuestPolicy",
+        "client": {
+          "shortName": "AgentEndpointServiceClient",
+          "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointServiceClient"
+        },
+        "method": {
+          "shortName": "LookupEffectiveGuestPolicy",
+          "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService.LookupEffectiveGuestPolicy",
+          "service": {
+            "shortName": "AgentEndpointService",
+            "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_AgentEndpointService_RegisterAgent_async",
+      "title": "AgentEndpointService registerAgent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Registers the agent running on the VM.",
+      "canonical": true,
+      "file": "agent_endpoint_service.register_agent.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 87,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RegisterAgent",
+        "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService.RegisterAgent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instance_id_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "agent_version",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "supported_capabilities",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "os_long_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "os_short_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "os_version",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "os_architecture",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.agentendpoint.v1beta.RegisterAgentResponse",
+        "client": {
+          "shortName": "AgentEndpointServiceClient",
+          "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointServiceClient"
+        },
+        "method": {
+          "shortName": "RegisterAgent",
+          "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService.RegisterAgent",
+          "service": {
+            "shortName": "AgentEndpointService",
+            "fullName": "google.cloud.osconfig.agentendpoint.v1beta.AgentEndpointService"
+          }
+        }
+      }
+    }
+  ]
+}

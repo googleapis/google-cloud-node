@@ -1,0 +1,374 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.pubsublite.v1",
+  "libraryPackage": "@google-cloud/pubsublite",
+  "services": {
+    "AdminService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AdminServiceClient",
+          "rpcs": {
+            "CreateTopic": {
+              "methods": [
+                "createTopic"
+              ]
+            },
+            "GetTopic": {
+              "methods": [
+                "getTopic"
+              ]
+            },
+            "GetTopicPartitions": {
+              "methods": [
+                "getTopicPartitions"
+              ]
+            },
+            "UpdateTopic": {
+              "methods": [
+                "updateTopic"
+              ]
+            },
+            "DeleteTopic": {
+              "methods": [
+                "deleteTopic"
+              ]
+            },
+            "CreateSubscription": {
+              "methods": [
+                "createSubscription"
+              ]
+            },
+            "GetSubscription": {
+              "methods": [
+                "getSubscription"
+              ]
+            },
+            "UpdateSubscription": {
+              "methods": [
+                "updateSubscription"
+              ]
+            },
+            "DeleteSubscription": {
+              "methods": [
+                "deleteSubscription"
+              ]
+            },
+            "CreateReservation": {
+              "methods": [
+                "createReservation"
+              ]
+            },
+            "GetReservation": {
+              "methods": [
+                "getReservation"
+              ]
+            },
+            "UpdateReservation": {
+              "methods": [
+                "updateReservation"
+              ]
+            },
+            "DeleteReservation": {
+              "methods": [
+                "deleteReservation"
+              ]
+            },
+            "SeekSubscription": {
+              "methods": [
+                "seekSubscription"
+              ]
+            },
+            "ListTopics": {
+              "methods": [
+                "listTopics",
+                "listTopicsStream",
+                "listTopicsAsync"
+              ]
+            },
+            "ListTopicSubscriptions": {
+              "methods": [
+                "listTopicSubscriptions",
+                "listTopicSubscriptionsStream",
+                "listTopicSubscriptionsAsync"
+              ]
+            },
+            "ListSubscriptions": {
+              "methods": [
+                "listSubscriptions",
+                "listSubscriptionsStream",
+                "listSubscriptionsAsync"
+              ]
+            },
+            "ListReservations": {
+              "methods": [
+                "listReservations",
+                "listReservationsStream",
+                "listReservationsAsync"
+              ]
+            },
+            "ListReservationTopics": {
+              "methods": [
+                "listReservationTopics",
+                "listReservationTopicsStream",
+                "listReservationTopicsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AdminServiceClient",
+          "rpcs": {
+            "CreateTopic": {
+              "methods": [
+                "createTopic"
+              ]
+            },
+            "GetTopic": {
+              "methods": [
+                "getTopic"
+              ]
+            },
+            "GetTopicPartitions": {
+              "methods": [
+                "getTopicPartitions"
+              ]
+            },
+            "UpdateTopic": {
+              "methods": [
+                "updateTopic"
+              ]
+            },
+            "DeleteTopic": {
+              "methods": [
+                "deleteTopic"
+              ]
+            },
+            "CreateSubscription": {
+              "methods": [
+                "createSubscription"
+              ]
+            },
+            "GetSubscription": {
+              "methods": [
+                "getSubscription"
+              ]
+            },
+            "UpdateSubscription": {
+              "methods": [
+                "updateSubscription"
+              ]
+            },
+            "DeleteSubscription": {
+              "methods": [
+                "deleteSubscription"
+              ]
+            },
+            "CreateReservation": {
+              "methods": [
+                "createReservation"
+              ]
+            },
+            "GetReservation": {
+              "methods": [
+                "getReservation"
+              ]
+            },
+            "UpdateReservation": {
+              "methods": [
+                "updateReservation"
+              ]
+            },
+            "DeleteReservation": {
+              "methods": [
+                "deleteReservation"
+              ]
+            },
+            "SeekSubscription": {
+              "methods": [
+                "seekSubscription"
+              ]
+            },
+            "ListTopics": {
+              "methods": [
+                "listTopics",
+                "listTopicsStream",
+                "listTopicsAsync"
+              ]
+            },
+            "ListTopicSubscriptions": {
+              "methods": [
+                "listTopicSubscriptions",
+                "listTopicSubscriptionsStream",
+                "listTopicSubscriptionsAsync"
+              ]
+            },
+            "ListSubscriptions": {
+              "methods": [
+                "listSubscriptions",
+                "listSubscriptionsStream",
+                "listSubscriptionsAsync"
+              ]
+            },
+            "ListReservations": {
+              "methods": [
+                "listReservations",
+                "listReservationsStream",
+                "listReservationsAsync"
+              ]
+            },
+            "ListReservationTopics": {
+              "methods": [
+                "listReservationTopics",
+                "listReservationTopicsStream",
+                "listReservationTopicsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CursorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CursorServiceClient",
+          "rpcs": {
+            "CommitCursor": {
+              "methods": [
+                "commitCursor"
+              ]
+            },
+            "StreamingCommitCursor": {
+              "methods": [
+                "streamingCommitCursor"
+              ]
+            },
+            "ListPartitionCursors": {
+              "methods": [
+                "listPartitionCursors",
+                "listPartitionCursorsStream",
+                "listPartitionCursorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CursorServiceClient",
+          "rpcs": {
+            "CommitCursor": {
+              "methods": [
+                "commitCursor"
+              ]
+            },
+            "ListPartitionCursors": {
+              "methods": [
+                "listPartitionCursors",
+                "listPartitionCursorsStream",
+                "listPartitionCursorsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PartitionAssignmentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PartitionAssignmentServiceClient",
+          "rpcs": {
+            "AssignPartitions": {
+              "methods": [
+                "assignPartitions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PartitionAssignmentServiceClient",
+          "rpcs": {}
+        }
+      }
+    },
+    "PublisherService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PublisherServiceClient",
+          "rpcs": {
+            "Publish": {
+              "methods": [
+                "publish"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PublisherServiceClient",
+          "rpcs": {}
+        }
+      }
+    },
+    "SubscriberService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SubscriberServiceClient",
+          "rpcs": {
+            "Subscribe": {
+              "methods": [
+                "subscribe"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SubscriberServiceClient",
+          "rpcs": {}
+        }
+      }
+    },
+    "TopicStatsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TopicStatsServiceClient",
+          "rpcs": {
+            "ComputeMessageStats": {
+              "methods": [
+                "computeMessageStats"
+              ]
+            },
+            "ComputeHeadCursor": {
+              "methods": [
+                "computeHeadCursor"
+              ]
+            },
+            "ComputeTimeCursor": {
+              "methods": [
+                "computeTimeCursor"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TopicStatsServiceClient",
+          "rpcs": {
+            "ComputeMessageStats": {
+              "methods": [
+                "computeMessageStats"
+              ]
+            },
+            "ComputeHeadCursor": {
+              "methods": [
+                "computeHeadCursor"
+              ]
+            },
+            "ComputeTimeCursor": {
+              "methods": [
+                "computeTimeCursor"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

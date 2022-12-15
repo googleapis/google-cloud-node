@@ -1,0 +1,231 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.recommendationengine.v1beta1",
+  "libraryPackage": "recommendationengine",
+  "services": {
+    "CatalogService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CatalogServiceClient",
+          "rpcs": {
+            "CreateCatalogItem": {
+              "methods": [
+                "createCatalogItem"
+              ]
+            },
+            "GetCatalogItem": {
+              "methods": [
+                "getCatalogItem"
+              ]
+            },
+            "UpdateCatalogItem": {
+              "methods": [
+                "updateCatalogItem"
+              ]
+            },
+            "DeleteCatalogItem": {
+              "methods": [
+                "deleteCatalogItem"
+              ]
+            },
+            "ImportCatalogItems": {
+              "methods": [
+                "importCatalogItems"
+              ]
+            },
+            "ListCatalogItems": {
+              "methods": [
+                "listCatalogItems",
+                "listCatalogItemsStream",
+                "listCatalogItemsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CatalogServiceClient",
+          "rpcs": {
+            "CreateCatalogItem": {
+              "methods": [
+                "createCatalogItem"
+              ]
+            },
+            "GetCatalogItem": {
+              "methods": [
+                "getCatalogItem"
+              ]
+            },
+            "UpdateCatalogItem": {
+              "methods": [
+                "updateCatalogItem"
+              ]
+            },
+            "DeleteCatalogItem": {
+              "methods": [
+                "deleteCatalogItem"
+              ]
+            },
+            "ImportCatalogItems": {
+              "methods": [
+                "importCatalogItems"
+              ]
+            },
+            "ListCatalogItems": {
+              "methods": [
+                "listCatalogItems",
+                "listCatalogItemsStream",
+                "listCatalogItemsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PredictionApiKeyRegistry": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PredictionApiKeyRegistryClient",
+          "rpcs": {
+            "CreatePredictionApiKeyRegistration": {
+              "methods": [
+                "createPredictionApiKeyRegistration"
+              ]
+            },
+            "DeletePredictionApiKeyRegistration": {
+              "methods": [
+                "deletePredictionApiKeyRegistration"
+              ]
+            },
+            "ListPredictionApiKeyRegistrations": {
+              "methods": [
+                "listPredictionApiKeyRegistrations",
+                "listPredictionApiKeyRegistrationsStream",
+                "listPredictionApiKeyRegistrationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PredictionApiKeyRegistryClient",
+          "rpcs": {
+            "CreatePredictionApiKeyRegistration": {
+              "methods": [
+                "createPredictionApiKeyRegistration"
+              ]
+            },
+            "DeletePredictionApiKeyRegistration": {
+              "methods": [
+                "deletePredictionApiKeyRegistration"
+              ]
+            },
+            "ListPredictionApiKeyRegistrations": {
+              "methods": [
+                "listPredictionApiKeyRegistrations",
+                "listPredictionApiKeyRegistrationsStream",
+                "listPredictionApiKeyRegistrationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PredictionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PredictionServiceClient",
+          "rpcs": {
+            "Predict": {
+              "methods": [
+                "predict",
+                "predictStream",
+                "predictAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PredictionServiceClient",
+          "rpcs": {
+            "Predict": {
+              "methods": [
+                "predict",
+                "predictStream",
+                "predictAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "UserEventService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "UserEventServiceClient",
+          "rpcs": {
+            "WriteUserEvent": {
+              "methods": [
+                "writeUserEvent"
+              ]
+            },
+            "CollectUserEvent": {
+              "methods": [
+                "collectUserEvent"
+              ]
+            },
+            "PurgeUserEvents": {
+              "methods": [
+                "purgeUserEvents"
+              ]
+            },
+            "ImportUserEvents": {
+              "methods": [
+                "importUserEvents"
+              ]
+            },
+            "ListUserEvents": {
+              "methods": [
+                "listUserEvents",
+                "listUserEventsStream",
+                "listUserEventsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "UserEventServiceClient",
+          "rpcs": {
+            "WriteUserEvent": {
+              "methods": [
+                "writeUserEvent"
+              ]
+            },
+            "CollectUserEvent": {
+              "methods": [
+                "collectUserEvent"
+              ]
+            },
+            "PurgeUserEvents": {
+              "methods": [
+                "purgeUserEvents"
+              ]
+            },
+            "ImportUserEvents": {
+              "methods": [
+                "importUserEvents"
+              ]
+            },
+            "ListUserEvents": {
+              "methods": [
+                "listUserEvents",
+                "listUserEventsStream",
+                "listUserEventsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

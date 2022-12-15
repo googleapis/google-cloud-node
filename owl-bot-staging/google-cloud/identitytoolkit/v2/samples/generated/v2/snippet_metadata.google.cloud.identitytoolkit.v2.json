@@ -1,0 +1,263 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-identitytoolkit",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.identitytoolkit.v2",
+        "version": "v2"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "identitytoolkit_v2_generated_AccountManagementService_FinalizeMfaEnrollment_async",
+      "title": "AccountManagementService finalizeMfaEnrollment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Finishes enrolling a second factor for the user.",
+      "canonical": true,
+      "file": "account_management_service.finalize_mfa_enrollment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FinalizeMfaEnrollment",
+        "fullName": "google.cloud.identitytoolkit.v2.AccountManagementService.FinalizeMfaEnrollment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "id_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "display_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "phone_verification_info",
+            "type": ".google.cloud.identitytoolkit.v2.FinalizeMfaPhoneRequestInfo"
+          },
+          {
+            "name": "tenant_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.identitytoolkit.v2.FinalizeMfaEnrollmentResponse",
+        "client": {
+          "shortName": "AccountManagementServiceClient",
+          "fullName": "google.cloud.identitytoolkit.v2.AccountManagementServiceClient"
+        },
+        "method": {
+          "shortName": "FinalizeMfaEnrollment",
+          "fullName": "google.cloud.identitytoolkit.v2.AccountManagementService.FinalizeMfaEnrollment",
+          "service": {
+            "shortName": "AccountManagementService",
+            "fullName": "google.cloud.identitytoolkit.v2.AccountManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "identitytoolkit_v2_generated_AccountManagementService_StartMfaEnrollment_async",
+      "title": "AccountManagementService startMfaEnrollment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Step one of the MFA enrollment process. In SMS case, this sends an SMS verification code to the user.",
+      "canonical": true,
+      "file": "account_management_service.start_mfa_enrollment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StartMfaEnrollment",
+        "fullName": "google.cloud.identitytoolkit.v2.AccountManagementService.StartMfaEnrollment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "id_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "phone_enrollment_info",
+            "type": ".google.cloud.identitytoolkit.v2.StartMfaPhoneRequestInfo"
+          },
+          {
+            "name": "tenant_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.identitytoolkit.v2.StartMfaEnrollmentResponse",
+        "client": {
+          "shortName": "AccountManagementServiceClient",
+          "fullName": "google.cloud.identitytoolkit.v2.AccountManagementServiceClient"
+        },
+        "method": {
+          "shortName": "StartMfaEnrollment",
+          "fullName": "google.cloud.identitytoolkit.v2.AccountManagementService.StartMfaEnrollment",
+          "service": {
+            "shortName": "AccountManagementService",
+            "fullName": "google.cloud.identitytoolkit.v2.AccountManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "identitytoolkit_v2_generated_AccountManagementService_WithdrawMfa_async",
+      "title": "AccountManagementService withdrawMfa Sample",
+      "origin": "API_DEFINITION",
+      "description": " Revokes one second factor from the enrolled second factors for an account.",
+      "canonical": true,
+      "file": "account_management_service.withdraw_mfa.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "WithdrawMfa",
+        "fullName": "google.cloud.identitytoolkit.v2.AccountManagementService.WithdrawMfa",
+        "async": true,
+        "parameters": [
+          {
+            "name": "id_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mfa_enrollment_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tenant_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.identitytoolkit.v2.WithdrawMfaResponse",
+        "client": {
+          "shortName": "AccountManagementServiceClient",
+          "fullName": "google.cloud.identitytoolkit.v2.AccountManagementServiceClient"
+        },
+        "method": {
+          "shortName": "WithdrawMfa",
+          "fullName": "google.cloud.identitytoolkit.v2.AccountManagementService.WithdrawMfa",
+          "service": {
+            "shortName": "AccountManagementService",
+            "fullName": "google.cloud.identitytoolkit.v2.AccountManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "identitytoolkit_v2_generated_AuthenticationService_FinalizeMfaSignIn_async",
+      "title": "AccountManagementService finalizeMfaSignIn Sample",
+      "origin": "API_DEFINITION",
+      "description": " Verifies the MFA challenge and performs sign-in",
+      "canonical": true,
+      "file": "authentication_service.finalize_mfa_sign_in.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FinalizeMfaSignIn",
+        "fullName": "google.cloud.identitytoolkit.v2.AuthenticationService.FinalizeMfaSignIn",
+        "async": true,
+        "parameters": [
+          {
+            "name": "mfa_pending_credential",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "phone_verification_info",
+            "type": ".google.cloud.identitytoolkit.v2.FinalizeMfaPhoneRequestInfo"
+          },
+          {
+            "name": "tenant_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.identitytoolkit.v2.FinalizeMfaSignInResponse",
+        "client": {
+          "shortName": "AuthenticationServiceClient",
+          "fullName": "google.cloud.identitytoolkit.v2.AuthenticationServiceClient"
+        },
+        "method": {
+          "shortName": "FinalizeMfaSignIn",
+          "fullName": "google.cloud.identitytoolkit.v2.AuthenticationService.FinalizeMfaSignIn",
+          "service": {
+            "shortName": "AuthenticationService",
+            "fullName": "google.cloud.identitytoolkit.v2.AuthenticationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "identitytoolkit_v2_generated_AuthenticationService_StartMfaSignIn_async",
+      "title": "AccountManagementService startMfaSignIn Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sends the MFA challenge",
+      "canonical": true,
+      "file": "authentication_service.start_mfa_sign_in.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StartMfaSignIn",
+        "fullName": "google.cloud.identitytoolkit.v2.AuthenticationService.StartMfaSignIn",
+        "async": true,
+        "parameters": [
+          {
+            "name": "mfa_pending_credential",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mfa_enrollment_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "phone_sign_in_info",
+            "type": ".google.cloud.identitytoolkit.v2.StartMfaPhoneRequestInfo"
+          },
+          {
+            "name": "tenant_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.identitytoolkit.v2.StartMfaSignInResponse",
+        "client": {
+          "shortName": "AuthenticationServiceClient",
+          "fullName": "google.cloud.identitytoolkit.v2.AuthenticationServiceClient"
+        },
+        "method": {
+          "shortName": "StartMfaSignIn",
+          "fullName": "google.cloud.identitytoolkit.v2.AuthenticationService.StartMfaSignIn",
+          "service": {
+            "shortName": "AuthenticationService",
+            "fullName": "google.cloud.identitytoolkit.v2.AuthenticationService"
+          }
+        }
+      }
+    }
+  ]
+}

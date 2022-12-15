@@ -1,0 +1,73 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.shell.v1",
+  "libraryPackage": "@google-cloud/shell",
+  "services": {
+    "CloudShellService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudShellServiceClient",
+          "rpcs": {
+            "GetEnvironment": {
+              "methods": [
+                "getEnvironment"
+              ]
+            },
+            "StartEnvironment": {
+              "methods": [
+                "startEnvironment"
+              ]
+            },
+            "AuthorizeEnvironment": {
+              "methods": [
+                "authorizeEnvironment"
+              ]
+            },
+            "AddPublicKey": {
+              "methods": [
+                "addPublicKey"
+              ]
+            },
+            "RemovePublicKey": {
+              "methods": [
+                "removePublicKey"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudShellServiceClient",
+          "rpcs": {
+            "GetEnvironment": {
+              "methods": [
+                "getEnvironment"
+              ]
+            },
+            "StartEnvironment": {
+              "methods": [
+                "startEnvironment"
+              ]
+            },
+            "AuthorizeEnvironment": {
+              "methods": [
+                "authorizeEnvironment"
+              ]
+            },
+            "AddPublicKey": {
+              "methods": [
+                "addPublicKey"
+              ]
+            },
+            "RemovePublicKey": {
+              "methods": [
+                "removePublicKey"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
