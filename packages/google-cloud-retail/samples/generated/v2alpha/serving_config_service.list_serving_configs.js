@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The catalog resource name. Format:
-   *  projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
+   *  `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
    */
   // const parent = 'abc123'
   /**

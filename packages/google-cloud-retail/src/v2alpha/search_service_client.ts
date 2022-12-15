@@ -44,7 +44,7 @@ const version = require('../../../package.json').version;
  *  Service for search.
  *
  *  This feature is only available for users who have Retail Search enabled.
- *  Please enable Retail Search on Cloud Console before using this feature.
+ *  Enable Retail Search on Cloud Console before using this feature.
  * @class
  * @memberof v2alpha
  */
@@ -127,6 +127,9 @@ export class SearchServiceClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -239,6 +242,9 @@ export class SearchServiceClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
           additional_bindings: [
+            {
+              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',
+            },
             {
               get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
             },
@@ -399,7 +405,7 @@ export class SearchServiceClient {
    * Performs a search.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -408,7 +414,7 @@ export class SearchServiceClient {
    *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
    *   or the name of the legacy placement resource, such as
    *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
-   *   This field is used to identify the serving configuration name and the set
+   *   This field is used to identify the serving config name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
    *   The branch resource name, such as
@@ -612,7 +618,7 @@ export class SearchServiceClient {
    *   {@link google.cloud.retail.v2alpha.UserEvent.page_categories|UserEvent.page_categories};
    *
    *   To represent full path of category, use '>' sign to separate different
-   *   hierarchies. If '>' is part of the category name, please replace it with
+   *   hierarchies. If '>' is part of the category name, replace it with
    *   other character(s).
    *
    *   Category pages include special pages such as sales or promotions. For
@@ -623,6 +629,15 @@ export class SearchServiceClient {
    *   request triggers both product search and faceted search.
    * @param {google.cloud.retail.v2alpha.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
+   *
+   *   Notice that if both
+   *   {@link google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+   *   and
+   *   {@link google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   are set.
+   *   {@link google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   will override
+   *   {@link google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
    * @param {number[]} request.labels
    *   The labels applied to a resource must meet the following requirements:
    *
@@ -733,7 +748,7 @@ export class SearchServiceClient {
    *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
    *   or the name of the legacy placement resource, such as
    *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
-   *   This field is used to identify the serving configuration name and the set
+   *   This field is used to identify the serving config name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
    *   The branch resource name, such as
@@ -937,7 +952,7 @@ export class SearchServiceClient {
    *   {@link google.cloud.retail.v2alpha.UserEvent.page_categories|UserEvent.page_categories};
    *
    *   To represent full path of category, use '>' sign to separate different
-   *   hierarchies. If '>' is part of the category name, please replace it with
+   *   hierarchies. If '>' is part of the category name, replace it with
    *   other character(s).
    *
    *   Category pages include special pages such as sales or promotions. For
@@ -948,6 +963,15 @@ export class SearchServiceClient {
    *   request triggers both product search and faceted search.
    * @param {google.cloud.retail.v2alpha.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
+   *
+   *   Notice that if both
+   *   {@link google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+   *   and
+   *   {@link google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   are set.
+   *   {@link google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   will override
+   *   {@link google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
    * @param {number[]} request.labels
    *   The labels applied to a resource must meet the following requirements:
    *
@@ -1014,7 +1038,7 @@ export class SearchServiceClient {
    *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
    *   or the name of the legacy placement resource, such as
    *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
-   *   This field is used to identify the serving configuration name and the set
+   *   This field is used to identify the serving config name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
    *   The branch resource name, such as
@@ -1218,7 +1242,7 @@ export class SearchServiceClient {
    *   {@link google.cloud.retail.v2alpha.UserEvent.page_categories|UserEvent.page_categories};
    *
    *   To represent full path of category, use '>' sign to separate different
-   *   hierarchies. If '>' is part of the category name, please replace it with
+   *   hierarchies. If '>' is part of the category name, replace it with
    *   other character(s).
    *
    *   Category pages include special pages such as sales or promotions. For
@@ -1229,6 +1253,15 @@ export class SearchServiceClient {
    *   request triggers both product search and faceted search.
    * @param {google.cloud.retail.v2alpha.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
+   *
+   *   Notice that if both
+   *   {@link google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+   *   and
+   *   {@link google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   are set.
+   *   {@link google.cloud.retail.v2alpha.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   will override
+   *   {@link google.cloud.retail.v2alpha.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
    * @param {number[]} request.labels
    *   The labels applied to a resource must meet the following requirements:
    *
