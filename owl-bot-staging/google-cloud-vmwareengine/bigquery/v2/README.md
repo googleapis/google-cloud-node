@@ -1,1 +1,0 @@
-Bigquery: Nodejs Client
