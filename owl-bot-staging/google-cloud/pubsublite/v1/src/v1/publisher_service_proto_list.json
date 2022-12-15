@@ -1,0 +1,8 @@
+[
+  "../../protos/google/cloud/pubsublite/v1/admin.proto",
+  "../../protos/google/cloud/pubsublite/v1/common.proto",
+  "../../protos/google/cloud/pubsublite/v1/cursor.proto",
+  "../../protos/google/cloud/pubsublite/v1/publisher.proto",
+  "../../protos/google/cloud/pubsublite/v1/subscriber.proto",
+  "../../protos/google/cloud/pubsublite/v1/topic_stats.proto"
+]
