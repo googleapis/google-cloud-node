@@ -2554,7 +2554,10 @@
                         "textStyles": {
                           "rule": "repeated",
                           "type": "Style",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "pages": {
                           "rule": "repeated",
