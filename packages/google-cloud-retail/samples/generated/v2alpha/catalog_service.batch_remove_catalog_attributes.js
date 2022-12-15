@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(writeStream) {
-  // [START bigquerystorage_v1beta2_generated_BigQueryWrite_FlushRows_async]
+function main(attributesConfig, attributeKeys) {
+  // [START retail_v2alpha_generated_CatalogService_BatchRemoveCatalogAttributes_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,34 +29,38 @@ function main(writeStream) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The stream that is the target of the flush operation.
+   *  Required. The attributes config resource shared by all catalog attributes
+   *  being deleted. Format:
+   *  `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig`
    */
-  // const writeStream = 'abc123'
+  // const attributesConfig = 'abc123'
   /**
-   *  Ending offset of the flush operation. Rows before this offset(including
-   *  this offset) will be flushed.
+   *  Required. The attribute name keys of the
+   *  CatalogAttribute google.cloud.retail.v2alpha.CatalogAttribute s to
+   *  delete. A maximum of 1000 catalog attributes can be deleted in a batch.
    */
-  // const offset = {}
+  // const attributeKeys = 'abc123'
 
-  // Imports the Storage library
-  const {BigQueryWriteClient} = require('storage').v1beta2;
+  // Imports the Retail library
+  const {CatalogServiceClient} = require('@google-cloud/retail').v2alpha;
 
   // Instantiates a client
-  const storageClient = new BigQueryWriteClient();
+  const retailClient = new CatalogServiceClient();
 
-  async function callFlushRows() {
+  async function callBatchRemoveCatalogAttributes() {
     // Construct request
     const request = {
-      writeStream,
+      attributesConfig,
+      attributeKeys,
     };
 
     // Run request
-    const response = await storageClient.flushRows(request);
+    const response = await retailClient.batchRemoveCatalogAttributes(request);
     console.log(response);
   }
 
-  callFlushRows();
-  // [END bigquerystorage_v1beta2_generated_BigQueryWrite_FlushRows_async]
+  callBatchRemoveCatalogAttributes();
+  // [END retail_v2alpha_generated_CatalogService_BatchRemoveCatalogAttributes_async]
 }
 
 process.on('unhandledRejection', err => {
