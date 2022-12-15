@@ -1,0 +1,7 @@
+[
+  "../../protos/google/cloud/bigquery/v2/encryption_config.proto",
+  "../../protos/google/cloud/bigquery/v2/model.proto",
+  "../../protos/google/cloud/bigquery/v2/model_reference.proto",
+  "../../protos/google/cloud/bigquery/v2/standard_sql.proto",
+  "../../protos/google/cloud/bigquery/v2/table_reference.proto"
+]

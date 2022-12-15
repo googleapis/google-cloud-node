@@ -1,0 +1,7 @@
+[
+  "../../protos/google/cloud/gkemulticloud/v1/aws_resources.proto",
+  "../../protos/google/cloud/gkemulticloud/v1/aws_service.proto",
+  "../../protos/google/cloud/gkemulticloud/v1/azure_resources.proto",
+  "../../protos/google/cloud/gkemulticloud/v1/azure_service.proto",
+  "../../protos/google/cloud/gkemulticloud/v1/common_resources.proto"
+]

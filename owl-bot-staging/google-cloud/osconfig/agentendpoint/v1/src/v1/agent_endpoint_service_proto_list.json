@@ -1,0 +1,8 @@
+[
+  "../../protos/google/cloud/osconfig/agentendpoint/v1/agentendpoint.proto",
+  "../../protos/google/cloud/osconfig/agentendpoint/v1/config_common.proto",
+  "../../protos/google/cloud/osconfig/agentendpoint/v1/inventory.proto",
+  "../../protos/google/cloud/osconfig/agentendpoint/v1/os_policy.proto",
+  "../../protos/google/cloud/osconfig/agentendpoint/v1/patch_jobs.proto",
+  "../../protos/google/cloud/osconfig/agentendpoint/v1/tasks.proto"
+]
