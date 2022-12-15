@@ -5829,6 +5829,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredNodePoolLoggingConfig */
                 desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
+
+                /** ClusterUpdate desiredStackType */
+                desiredStackType?: (google.container.v1.StackType|keyof typeof google.container.v1.StackType|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -5953,6 +5956,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredNodePoolLoggingConfig. */
                 public desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
+
+                /** ClusterUpdate desiredStackType. */
+                public desiredStackType: (google.container.v1.StackType|keyof typeof google.container.v1.StackType);
 
                 /** ClusterUpdate _desiredEnablePrivateEndpoint. */
                 public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";

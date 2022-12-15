@@ -13,7 +13,7 @@
 // limitations under the License.
 
 function getApiPathWithDashes(apiId) {
-    console.log(apiId.toString().replace(/\.v.*/, '').replace(/\./g, '-'));
+    console.log(apiId.toString().replace(/\.v[0-9].*/, '').replace(/\./g, '-'));
 }
 
 getApiPathWithDashes(process.argv.slice(2));

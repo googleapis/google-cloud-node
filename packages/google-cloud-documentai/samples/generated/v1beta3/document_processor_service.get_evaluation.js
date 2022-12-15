@@ -29,7 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Evaluation google.cloud.documentai.v1beta3.Evaluation  to get.
+   *  Required. The resource name of the
+   *  Evaluation google.cloud.documentai.v1beta3.Evaluation  to get.
    *  `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}/evaluations/{evaluation}`
    */
   // const name = 'abc123'

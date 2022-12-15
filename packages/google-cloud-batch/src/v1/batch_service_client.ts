@@ -131,6 +131,9 @@ export class BatchServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -247,40 +250,16 @@ export class BatchServiceClient {
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
           get: '/v1/{resource=projects/*/locations/*/jobs/*}:getIamPolicy',
-          additional_bindings: [
-            {get: '/v1/{resource=projects/*/locations/*/tasks/*}:getIamPolicy'},
-            {get: '/v1/{resource=projects/*/locations/*/nodes/*}:getIamPolicy'},
-          ],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
           post: '/v1/{resource=projects/*/locations/*/jobs/*}:setIamPolicy',
           body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/tasks/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/nodes/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
           post: '/v1/{resource=projects/*/locations/*/jobs/*}:testIamPermissions',
           body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/tasks/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/nodes/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
         },
         {
           selector: 'google.longrunning.Operations.CancelOperation',

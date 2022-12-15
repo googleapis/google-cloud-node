@@ -73,7 +73,10 @@
                         "textStyles": {
                           "rule": "repeated",
                           "type": "Style",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "pages": {
                           "rule": "repeated",
@@ -1137,6 +1140,24 @@
                             "fieldMask": {
                               "type": "google.protobuf.FieldMask",
                               "id": 2
+                            },
+                            "shardingConfig": {
+                              "type": "ShardingConfig",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "ShardingConfig": {
+                              "fields": {
+                                "pagesPerShard": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "pagesOverlap": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
                             }
                           }
                         }
@@ -2431,6 +2452,11 @@
                         "launchStage": {
                           "type": "google.api.LaunchStage",
                           "id": 8
+                        },
+                        "sampleDocumentUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -4332,7 +4358,10 @@
                         "textStyles": {
                           "rule": "repeated",
                           "type": "Style",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "pages": {
                           "rule": "repeated",
@@ -5396,8 +5425,34 @@
                             "fieldMask": {
                               "type": "google.protobuf.FieldMask",
                               "id": 2
+                            },
+                            "shardingConfig": {
+                              "type": "ShardingConfig",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "ShardingConfig": {
+                              "fields": {
+                                "pagesPerShard": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "pagesOverlap": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
                             }
                           }
+                        }
+                      }
+                    },
+                    "OcrConfig": {
+                      "fields": {
+                        "enableNativePdfParsing": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },
@@ -5897,6 +5952,14 @@
                         }
                       }
                     },
+                    "ProcessOptions": {
+                      "fields": {
+                        "ocrConfig": {
+                          "type": "OcrConfig",
+                          "id": 1
+                        }
+                      }
+                    },
                     "ProcessRequest": {
                       "oneofs": {
                         "source": {
@@ -5937,6 +6000,10 @@
                         "fieldMask": {
                           "type": "google.protobuf.FieldMask",
                           "id": 6
+                        },
+                        "processOptions": {
+                          "type": "ProcessOptions",
+                          "id": 7
                         }
                       }
                     },
@@ -6022,6 +6089,10 @@
                         "skipHumanReview": {
                           "type": "bool",
                           "id": 4
+                        },
+                        "processOptions": {
+                          "type": "ProcessOptions",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -7224,6 +7295,11 @@
                         "launchStage": {
                           "type": "google.api.LaunchStage",
                           "id": 8
+                        },
+                        "sampleDocumentUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9
                         }
                       },
                       "nested": {

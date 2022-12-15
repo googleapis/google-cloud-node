@@ -29,8 +29,9 @@ function main(parent, processorVersion) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent (project, location and processor) to create the new version for.
-   *  Format: `projects/{project}/locations/{location}/processors/{processor}`.
+   *  Required. The parent (project, location and processor) to create the new
+   *  version for. Format:
+   *  `projects/{project}/locations/{location}/processors/{processor}`.
    */
   // const parent = 'abc123'
   /**
@@ -46,8 +47,8 @@ function main(parent, processorVersion) {
    */
   // const inputData = {}
   /**
-   *  Optional. The processor version to use as a base for training. This processor version
-   *  must be a child of `parent`. Format:
+   *  Optional. The processor version to use as a base for training. This
+   *  processor version must be a child of `parent`. Format:
    *  `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`.
    */
   // const baseProcessorVersion = 'abc123'

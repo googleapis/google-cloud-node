@@ -36,6 +36,9 @@
   * [Job_controller.submit_job](#job_controller.submit_job)
   * [Job_controller.submit_job_as_operation](#job_controller.submit_job_as_operation)
   * [Job_controller.update_job](#job_controller.update_job)
+  * [Node_group_controller.create_node_group](#node_group_controller.create_node_group)
+  * [Node_group_controller.get_node_group](#node_group_controller.get_node_group)
+  * [Node_group_controller.resize_node_group](#node_group_controller.resize_node_group)
   * [Workflow_template_service.create_workflow_template](#workflow_template_service.create_workflow_template)
   * [Workflow_template_service.delete_workflow_template](#workflow_template_service.delete_workflow_template)
   * [Workflow_template_service.get_workflow_template](#workflow_template_service.get_workflow_template)
@@ -463,6 +466,57 @@ __Usage:__
 
 
 `node packages/google-cloud-dataproc/samples/generated/v1/job_controller.update_job.js`
+
+
+-----
+
+
+
+
+### Node_group_controller.create_node_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.create_node_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.create_node_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.create_node_group.js`
+
+
+-----
+
+
+
+
+### Node_group_controller.get_node_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.get_node_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.get_node_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.get_node_group.js`
+
+
+-----
+
+
+
+
+### Node_group_controller.resize_node_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.resize_node_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.resize_node_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.resize_node_group.js`
 
 
 -----

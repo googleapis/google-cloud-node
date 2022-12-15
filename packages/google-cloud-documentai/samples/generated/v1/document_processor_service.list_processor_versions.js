@@ -29,8 +29,9 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent (project, location and processor) to list all versions.
-   *  Format: `projects/{project}/locations/{location}/processors/{processor}`
+   *  Required. The parent (project, location and processor) to list all
+   *  versions. Format:
+   *  `projects/{project}/locations/{location}/processors/{processor}`
    */
   // const parent = 'abc123'
   /**
