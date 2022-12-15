@@ -15784,6 +15784,12 @@ export namespace google {
 
                     /** CatalogAttribute recommendationsFilteringOption */
                     recommendationsFilteringOption?: (google.cloud.retail.v2alpha.RecommendationsFilteringOption|keyof typeof google.cloud.retail.v2alpha.RecommendationsFilteringOption|null);
+
+                    /** CatalogAttribute exactSearchableOption */
+                    exactSearchableOption?: (google.cloud.retail.v2alpha.CatalogAttribute.ExactSearchableOption|keyof typeof google.cloud.retail.v2alpha.CatalogAttribute.ExactSearchableOption|null);
+
+                    /** CatalogAttribute retrievableOption */
+                    retrievableOption?: (google.cloud.retail.v2alpha.CatalogAttribute.RetrievableOption|keyof typeof google.cloud.retail.v2alpha.CatalogAttribute.RetrievableOption|null);
                 }
 
                 /** Represents a CatalogAttribute. */
@@ -15815,6 +15821,12 @@ export namespace google {
 
                     /** CatalogAttribute recommendationsFilteringOption. */
                     public recommendationsFilteringOption: (google.cloud.retail.v2alpha.RecommendationsFilteringOption|keyof typeof google.cloud.retail.v2alpha.RecommendationsFilteringOption);
+
+                    /** CatalogAttribute exactSearchableOption. */
+                    public exactSearchableOption: (google.cloud.retail.v2alpha.CatalogAttribute.ExactSearchableOption|keyof typeof google.cloud.retail.v2alpha.CatalogAttribute.ExactSearchableOption);
+
+                    /** CatalogAttribute retrievableOption. */
+                    public retrievableOption: (google.cloud.retail.v2alpha.CatalogAttribute.RetrievableOption|keyof typeof google.cloud.retail.v2alpha.CatalogAttribute.RetrievableOption);
 
                     /**
                      * Creates a new CatalogAttribute instance using the specified properties.
@@ -15922,6 +15934,20 @@ export namespace google {
                         SEARCHABLE_OPTION_UNSPECIFIED = 0,
                         SEARCHABLE_ENABLED = 1,
                         SEARCHABLE_DISABLED = 2
+                    }
+
+                    /** ExactSearchableOption enum. */
+                    enum ExactSearchableOption {
+                        EXACT_SEARCHABLE_OPTION_UNSPECIFIED = 0,
+                        EXACT_SEARCHABLE_ENABLED = 1,
+                        EXACT_SEARCHABLE_DISABLED = 2
+                    }
+
+                    /** RetrievableOption enum. */
+                    enum RetrievableOption {
+                        RETRIEVABLE_OPTION_UNSPECIFIED = 0,
+                        RETRIEVABLE_ENABLED = 1,
+                        RETRIEVABLE_DISABLED = 2
                     }
                 }
 
@@ -16208,6 +16234,9 @@ export namespace google {
 
                     /** MerchantCenterLink languageCode */
                     languageCode?: (string|null);
+
+                    /** MerchantCenterLink feeds */
+                    feeds?: (google.cloud.retail.v2alpha.IMerchantCenterFeedFilter[]|null);
                 }
 
                 /** Represents a MerchantCenterLink. */
@@ -16233,6 +16262,9 @@ export namespace google {
 
                     /** MerchantCenterLink languageCode. */
                     public languageCode: string;
+
+                    /** MerchantCenterLink feeds. */
+                    public feeds: google.cloud.retail.v2alpha.IMerchantCenterFeedFilter[];
 
                     /**
                      * Creates a new MerchantCenterLink instance using the specified properties.
@@ -16306,6 +16338,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for MerchantCenterLink
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MerchantCenterFeedFilter. */
+                interface IMerchantCenterFeedFilter {
+
+                    /** MerchantCenterFeedFilter primaryFeedId */
+                    primaryFeedId?: (number|Long|string|null);
+
+                    /** MerchantCenterFeedFilter primaryFeedName */
+                    primaryFeedName?: (string|null);
+                }
+
+                /** Represents a MerchantCenterFeedFilter. */
+                class MerchantCenterFeedFilter implements IMerchantCenterFeedFilter {
+
+                    /**
+                     * Constructs a new MerchantCenterFeedFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IMerchantCenterFeedFilter);
+
+                    /** MerchantCenterFeedFilter primaryFeedId. */
+                    public primaryFeedId: (number|Long|string);
+
+                    /** MerchantCenterFeedFilter primaryFeedName. */
+                    public primaryFeedName: string;
+
+                    /**
+                     * Creates a new MerchantCenterFeedFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MerchantCenterFeedFilter instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IMerchantCenterFeedFilter): google.cloud.retail.v2alpha.MerchantCenterFeedFilter;
+
+                    /**
+                     * Encodes the specified MerchantCenterFeedFilter message. Does not implicitly {@link google.cloud.retail.v2alpha.MerchantCenterFeedFilter.verify|verify} messages.
+                     * @param message MerchantCenterFeedFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IMerchantCenterFeedFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MerchantCenterFeedFilter message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.MerchantCenterFeedFilter.verify|verify} messages.
+                     * @param message MerchantCenterFeedFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IMerchantCenterFeedFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MerchantCenterFeedFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MerchantCenterFeedFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.MerchantCenterFeedFilter;
+
+                    /**
+                     * Decodes a MerchantCenterFeedFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MerchantCenterFeedFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.MerchantCenterFeedFilter;
+
+                    /**
+                     * Verifies a MerchantCenterFeedFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MerchantCenterFeedFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MerchantCenterFeedFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.MerchantCenterFeedFilter;
+
+                    /**
+                     * Creates a plain object from a MerchantCenterFeedFilter message. Also converts values to other types if specified.
+                     * @param message MerchantCenterFeedFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.MerchantCenterFeedFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MerchantCenterFeedFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MerchantCenterFeedFilter
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -20309,6 +20444,9 @@ export namespace google {
 
                     /** ImportMetadata notificationPubsubTopic */
                     notificationPubsubTopic?: (string|null);
+
+                    /** ImportMetadata transformedUserEventsMetadata */
+                    transformedUserEventsMetadata?: (google.cloud.retail.v2alpha.ITransformedUserEventsMetadata|null);
                 }
 
                 /** Represents an ImportMetadata. */
@@ -20337,6 +20475,9 @@ export namespace google {
 
                     /** ImportMetadata notificationPubsubTopic. */
                     public notificationPubsubTopic: string;
+
+                    /** ImportMetadata transformedUserEventsMetadata. */
+                    public transformedUserEventsMetadata?: (google.cloud.retail.v2alpha.ITransformedUserEventsMetadata|null);
 
                     /**
                      * Creates a new ImportMetadata instance using the specified properties.
@@ -20410,6 +20551,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ImportMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TransformedUserEventsMetadata. */
+                interface ITransformedUserEventsMetadata {
+
+                    /** TransformedUserEventsMetadata sourceEventsCount */
+                    sourceEventsCount?: (number|Long|string|null);
+
+                    /** TransformedUserEventsMetadata transformedEventsCount */
+                    transformedEventsCount?: (number|Long|string|null);
+                }
+
+                /** Represents a TransformedUserEventsMetadata. */
+                class TransformedUserEventsMetadata implements ITransformedUserEventsMetadata {
+
+                    /**
+                     * Constructs a new TransformedUserEventsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.ITransformedUserEventsMetadata);
+
+                    /** TransformedUserEventsMetadata sourceEventsCount. */
+                    public sourceEventsCount: (number|Long|string);
+
+                    /** TransformedUserEventsMetadata transformedEventsCount. */
+                    public transformedEventsCount: (number|Long|string);
+
+                    /**
+                     * Creates a new TransformedUserEventsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransformedUserEventsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.ITransformedUserEventsMetadata): google.cloud.retail.v2alpha.TransformedUserEventsMetadata;
+
+                    /**
+                     * Encodes the specified TransformedUserEventsMetadata message. Does not implicitly {@link google.cloud.retail.v2alpha.TransformedUserEventsMetadata.verify|verify} messages.
+                     * @param message TransformedUserEventsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.ITransformedUserEventsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransformedUserEventsMetadata message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.TransformedUserEventsMetadata.verify|verify} messages.
+                     * @param message TransformedUserEventsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.ITransformedUserEventsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransformedUserEventsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransformedUserEventsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.TransformedUserEventsMetadata;
+
+                    /**
+                     * Decodes a TransformedUserEventsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransformedUserEventsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.TransformedUserEventsMetadata;
+
+                    /**
+                     * Verifies a TransformedUserEventsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransformedUserEventsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransformedUserEventsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.TransformedUserEventsMetadata;
+
+                    /**
+                     * Creates a plain object from a TransformedUserEventsMetadata message. Also converts values to other types if specified.
+                     * @param message TransformedUserEventsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.TransformedUserEventsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransformedUserEventsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransformedUserEventsMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -20929,6 +21173,9 @@ export namespace google {
 
                     /** Product variants */
                     variants?: (google.cloud.retail.v2alpha.IProduct[]|null);
+
+                    /** Product localInventories */
+                    localInventories?: (google.cloud.retail.v2alpha.ILocalInventory[]|null);
                 }
 
                 /** Represents a Product. */
@@ -21038,6 +21285,9 @@ export namespace google {
 
                     /** Product variants. */
                     public variants: google.cloud.retail.v2alpha.IProduct[];
+
+                    /** Product localInventories. */
+                    public localInventories: google.cloud.retail.v2alpha.ILocalInventory[];
 
                     /** Product expiration. */
                     public expiration?: ("expireTime"|"ttl");
@@ -21942,6 +22192,20 @@ export namespace google {
                     public removeCatalogAttribute(request: google.cloud.retail.v2alpha.IRemoveCatalogAttributeRequest): Promise<google.cloud.retail.v2alpha.AttributesConfig>;
 
                     /**
+                     * Calls BatchRemoveCatalogAttributes.
+                     * @param request BatchRemoveCatalogAttributesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchRemoveCatalogAttributesResponse
+                     */
+                    public batchRemoveCatalogAttributes(request: google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest, callback: google.cloud.retail.v2alpha.CatalogService.BatchRemoveCatalogAttributesCallback): void;
+
+                    /**
+                     * Calls BatchRemoveCatalogAttributes.
+                     * @param request BatchRemoveCatalogAttributesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchRemoveCatalogAttributes(request: google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest): Promise<google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesResponse>;
+
+                    /**
                      * Calls ReplaceCatalogAttribute.
                      * @param request ReplaceCatalogAttributeRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and AttributesConfig
@@ -22027,6 +22291,13 @@ export namespace google {
                      * @param [response] AttributesConfig
                      */
                     type RemoveCatalogAttributeCallback = (error: (Error|null), response?: google.cloud.retail.v2alpha.AttributesConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2alpha.CatalogService|batchRemoveCatalogAttributes}.
+                     * @param error Error, if any
+                     * @param [response] BatchRemoveCatalogAttributesResponse
+                     */
+                    type BatchRemoveCatalogAttributesCallback = (error: (Error|null), response?: google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.retail.v2alpha.CatalogService|replaceCatalogAttribute}.
@@ -23278,6 +23549,212 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a BatchRemoveCatalogAttributesRequest. */
+                interface IBatchRemoveCatalogAttributesRequest {
+
+                    /** BatchRemoveCatalogAttributesRequest attributesConfig */
+                    attributesConfig?: (string|null);
+
+                    /** BatchRemoveCatalogAttributesRequest attributeKeys */
+                    attributeKeys?: (string[]|null);
+                }
+
+                /** Represents a BatchRemoveCatalogAttributesRequest. */
+                class BatchRemoveCatalogAttributesRequest implements IBatchRemoveCatalogAttributesRequest {
+
+                    /**
+                     * Constructs a new BatchRemoveCatalogAttributesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest);
+
+                    /** BatchRemoveCatalogAttributesRequest attributesConfig. */
+                    public attributesConfig: string;
+
+                    /** BatchRemoveCatalogAttributesRequest attributeKeys. */
+                    public attributeKeys: string[];
+
+                    /**
+                     * Creates a new BatchRemoveCatalogAttributesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchRemoveCatalogAttributesRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest): google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest;
+
+                    /**
+                     * Encodes the specified BatchRemoveCatalogAttributesRequest message. Does not implicitly {@link google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest.verify|verify} messages.
+                     * @param message BatchRemoveCatalogAttributesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchRemoveCatalogAttributesRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest.verify|verify} messages.
+                     * @param message BatchRemoveCatalogAttributesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchRemoveCatalogAttributesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchRemoveCatalogAttributesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest;
+
+                    /**
+                     * Decodes a BatchRemoveCatalogAttributesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchRemoveCatalogAttributesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest;
+
+                    /**
+                     * Verifies a BatchRemoveCatalogAttributesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchRemoveCatalogAttributesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchRemoveCatalogAttributesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest;
+
+                    /**
+                     * Creates a plain object from a BatchRemoveCatalogAttributesRequest message. Also converts values to other types if specified.
+                     * @param message BatchRemoveCatalogAttributesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchRemoveCatalogAttributesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchRemoveCatalogAttributesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchRemoveCatalogAttributesResponse. */
+                interface IBatchRemoveCatalogAttributesResponse {
+
+                    /** BatchRemoveCatalogAttributesResponse deletedCatalogAttributes */
+                    deletedCatalogAttributes?: (string[]|null);
+
+                    /** BatchRemoveCatalogAttributesResponse resetCatalogAttributes */
+                    resetCatalogAttributes?: (string[]|null);
+                }
+
+                /** Represents a BatchRemoveCatalogAttributesResponse. */
+                class BatchRemoveCatalogAttributesResponse implements IBatchRemoveCatalogAttributesResponse {
+
+                    /**
+                     * Constructs a new BatchRemoveCatalogAttributesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesResponse);
+
+                    /** BatchRemoveCatalogAttributesResponse deletedCatalogAttributes. */
+                    public deletedCatalogAttributes: string[];
+
+                    /** BatchRemoveCatalogAttributesResponse resetCatalogAttributes. */
+                    public resetCatalogAttributes: string[];
+
+                    /**
+                     * Creates a new BatchRemoveCatalogAttributesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchRemoveCatalogAttributesResponse instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesResponse): google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesResponse;
+
+                    /**
+                     * Encodes the specified BatchRemoveCatalogAttributesResponse message. Does not implicitly {@link google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesResponse.verify|verify} messages.
+                     * @param message BatchRemoveCatalogAttributesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchRemoveCatalogAttributesResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesResponse.verify|verify} messages.
+                     * @param message BatchRemoveCatalogAttributesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchRemoveCatalogAttributesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchRemoveCatalogAttributesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesResponse;
+
+                    /**
+                     * Decodes a BatchRemoveCatalogAttributesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchRemoveCatalogAttributesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesResponse;
+
+                    /**
+                     * Verifies a BatchRemoveCatalogAttributesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchRemoveCatalogAttributesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchRemoveCatalogAttributesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesResponse;
+
+                    /**
+                     * Creates a plain object from a BatchRemoveCatalogAttributesResponse message. Also converts values to other types if specified.
+                     * @param message BatchRemoveCatalogAttributesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchRemoveCatalogAttributesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchRemoveCatalogAttributesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ReplaceCatalogAttributeRequest. */
                 interface IReplaceCatalogAttributeRequest {
 
@@ -23476,6 +23953,9 @@ export namespace google {
 
                     /** CompleteQueryRequest maxSuggestions */
                     maxSuggestions?: (number|null);
+
+                    /** CompleteQueryRequest enableAttributeSuggestions */
+                    enableAttributeSuggestions?: (boolean|null);
                 }
 
                 /** Represents a CompleteQueryRequest. */
@@ -23507,6 +23987,9 @@ export namespace google {
 
                     /** CompleteQueryRequest maxSuggestions. */
                     public maxSuggestions: number;
+
+                    /** CompleteQueryRequest enableAttributeSuggestions. */
+                    public enableAttributeSuggestions: boolean;
 
                     /**
                      * Creates a new CompleteQueryRequest instance using the specified properties.
@@ -23597,6 +24080,9 @@ export namespace google {
 
                     /** CompleteQueryResponse recentSearchResults */
                     recentSearchResults?: (google.cloud.retail.v2alpha.CompleteQueryResponse.IRecentSearchResult[]|null);
+
+                    /** CompleteQueryResponse attributeResults */
+                    attributeResults?: ({ [k: string]: google.cloud.retail.v2alpha.CompleteQueryResponse.IAttributeResult }|null);
                 }
 
                 /** Represents a CompleteQueryResponse. */
@@ -23616,6 +24102,9 @@ export namespace google {
 
                     /** CompleteQueryResponse recentSearchResults. */
                     public recentSearchResults: google.cloud.retail.v2alpha.CompleteQueryResponse.IRecentSearchResult[];
+
+                    /** CompleteQueryResponse attributeResults. */
+                    public attributeResults: { [k: string]: google.cloud.retail.v2alpha.CompleteQueryResponse.IAttributeResult };
 
                     /**
                      * Creates a new CompleteQueryResponse instance using the specified properties.
@@ -23891,6 +24380,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for RecentSearchResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AttributeResult. */
+                    interface IAttributeResult {
+
+                        /** AttributeResult suggestions */
+                        suggestions?: (string[]|null);
+                    }
+
+                    /** Represents an AttributeResult. */
+                    class AttributeResult implements IAttributeResult {
+
+                        /**
+                         * Constructs a new AttributeResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2alpha.CompleteQueryResponse.IAttributeResult);
+
+                        /** AttributeResult suggestions. */
+                        public suggestions: string[];
+
+                        /**
+                         * Creates a new AttributeResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AttributeResult instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2alpha.CompleteQueryResponse.IAttributeResult): google.cloud.retail.v2alpha.CompleteQueryResponse.AttributeResult;
+
+                        /**
+                         * Encodes the specified AttributeResult message. Does not implicitly {@link google.cloud.retail.v2alpha.CompleteQueryResponse.AttributeResult.verify|verify} messages.
+                         * @param message AttributeResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2alpha.CompleteQueryResponse.IAttributeResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AttributeResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.CompleteQueryResponse.AttributeResult.verify|verify} messages.
+                         * @param message AttributeResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2alpha.CompleteQueryResponse.IAttributeResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AttributeResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AttributeResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.CompleteQueryResponse.AttributeResult;
+
+                        /**
+                         * Decodes an AttributeResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AttributeResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.CompleteQueryResponse.AttributeResult;
+
+                        /**
+                         * Verifies an AttributeResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AttributeResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AttributeResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.CompleteQueryResponse.AttributeResult;
+
+                        /**
+                         * Creates a plain object from an AttributeResult message. Also converts values to other types if specified.
+                         * @param message AttributeResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2alpha.CompleteQueryResponse.AttributeResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AttributeResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AttributeResult
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -25403,6 +25989,9 @@ export namespace google {
 
                         /** SearchResult variantRollupValues */
                         variantRollupValues?: ({ [k: string]: google.protobuf.IValue }|null);
+
+                        /** SearchResult personalLabels */
+                        personalLabels?: (string[]|null);
                     }
 
                     /** Represents a SearchResult. */
@@ -25428,6 +26017,9 @@ export namespace google {
 
                         /** SearchResult variantRollupValues. */
                         public variantRollupValues: { [k: string]: google.protobuf.IValue };
+
+                        /** SearchResult personalLabels. */
+                        public personalLabels: string[];
 
                         /**
                          * Creates a new SearchResult instance using the specified properties.
@@ -27026,6 +27618,9 @@ export namespace google {
 
                     /** OutputResult bigqueryResult */
                     bigqueryResult?: (google.cloud.retail.v2alpha.IBigQueryOutputResult[]|null);
+
+                    /** OutputResult gcsResult */
+                    gcsResult?: (google.cloud.retail.v2alpha.IGcsOutputResult[]|null);
                 }
 
                 /** Represents an OutputResult. */
@@ -27039,6 +27634,9 @@ export namespace google {
 
                     /** OutputResult bigqueryResult. */
                     public bigqueryResult: google.cloud.retail.v2alpha.IBigQueryOutputResult[];
+
+                    /** OutputResult gcsResult. */
+                    public gcsResult: google.cloud.retail.v2alpha.IGcsOutputResult[];
 
                     /**
                      * Creates a new OutputResult instance using the specified properties.
@@ -27215,6 +27813,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for BigQueryOutputResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GcsOutputResult. */
+                interface IGcsOutputResult {
+
+                    /** GcsOutputResult outputUri */
+                    outputUri?: (string|null);
+                }
+
+                /** Represents a GcsOutputResult. */
+                class GcsOutputResult implements IGcsOutputResult {
+
+                    /**
+                     * Constructs a new GcsOutputResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IGcsOutputResult);
+
+                    /** GcsOutputResult outputUri. */
+                    public outputUri: string;
+
+                    /**
+                     * Creates a new GcsOutputResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsOutputResult instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IGcsOutputResult): google.cloud.retail.v2alpha.GcsOutputResult;
+
+                    /**
+                     * Encodes the specified GcsOutputResult message. Does not implicitly {@link google.cloud.retail.v2alpha.GcsOutputResult.verify|verify} messages.
+                     * @param message GcsOutputResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IGcsOutputResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsOutputResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.GcsOutputResult.verify|verify} messages.
+                     * @param message GcsOutputResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IGcsOutputResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsOutputResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsOutputResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.GcsOutputResult;
+
+                    /**
+                     * Decodes a GcsOutputResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsOutputResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.GcsOutputResult;
+
+                    /**
+                     * Verifies a GcsOutputResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsOutputResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsOutputResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.GcsOutputResult;
+
+                    /**
+                     * Creates a plain object from a GcsOutputResult message. Also converts values to other types if specified.
+                     * @param message GcsOutputResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.GcsOutputResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsOutputResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsOutputResult
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -32637,8 +33332,14 @@ export namespace google {
                     /** ServingConfig diversityLevel */
                     diversityLevel?: (string|null);
 
+                    /** ServingConfig diversityType */
+                    diversityType?: (google.cloud.retail.v2alpha.ServingConfig.DiversityType|keyof typeof google.cloud.retail.v2alpha.ServingConfig.DiversityType|null);
+
                     /** ServingConfig enableCategoryFilterLevel */
                     enableCategoryFilterLevel?: (string|null);
+
+                    /** ServingConfig personalizationSpec */
+                    personalizationSpec?: (google.cloud.retail.v2alpha.SearchRequest.IPersonalizationSpec|null);
 
                     /** ServingConfig solutionTypes */
                     solutionTypes?: (google.cloud.retail.v2alpha.SolutionType[]|null);
@@ -32698,8 +33399,14 @@ export namespace google {
                     /** ServingConfig diversityLevel. */
                     public diversityLevel: string;
 
+                    /** ServingConfig diversityType. */
+                    public diversityType: (google.cloud.retail.v2alpha.ServingConfig.DiversityType|keyof typeof google.cloud.retail.v2alpha.ServingConfig.DiversityType);
+
                     /** ServingConfig enableCategoryFilterLevel. */
                     public enableCategoryFilterLevel: string;
+
+                    /** ServingConfig personalizationSpec. */
+                    public personalizationSpec?: (google.cloud.retail.v2alpha.SearchRequest.IPersonalizationSpec|null);
 
                     /** ServingConfig solutionTypes. */
                     public solutionTypes: google.cloud.retail.v2alpha.SolutionType[];
@@ -32780,6 +33487,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ServingConfig {
+
+                    /** DiversityType enum. */
+                    enum DiversityType {
+                        DIVERSITY_TYPE_UNSPECIFIED = 0,
+                        RULE_BASED_DIVERSITY = 2,
+                        DATA_DRIVEN_DIVERSITY = 3
+                    }
                 }
 
                 /** Represents a ServingConfigService */
@@ -33914,6 +34631,9 @@ export namespace google {
 
                     /** WriteUserEventRequest userEvent */
                     userEvent?: (google.cloud.retail.v2alpha.IUserEvent|null);
+
+                    /** WriteUserEventRequest writeAsync */
+                    writeAsync?: (boolean|null);
                 }
 
                 /** Represents a WriteUserEventRequest. */
@@ -33930,6 +34650,9 @@ export namespace google {
 
                     /** WriteUserEventRequest userEvent. */
                     public userEvent?: (google.cloud.retail.v2alpha.IUserEvent|null);
+
+                    /** WriteUserEventRequest writeAsync. */
+                    public writeAsync: boolean;
 
                     /**
                      * Creates a new WriteUserEventRequest instance using the specified properties.
@@ -34012,6 +34735,9 @@ export namespace google {
                 /** Properties of a CollectUserEventRequest. */
                 interface ICollectUserEventRequest {
 
+                    /** CollectUserEventRequest prebuiltRule */
+                    prebuiltRule?: (string|null);
+
                     /** CollectUserEventRequest parent */
                     parent?: (string|null);
 
@@ -34023,6 +34749,9 @@ export namespace google {
 
                     /** CollectUserEventRequest ets */
                     ets?: (number|Long|string|null);
+
+                    /** CollectUserEventRequest rawJson */
+                    rawJson?: (string|null);
                 }
 
                 /** Represents a CollectUserEventRequest. */
@@ -34033,6 +34762,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.retail.v2alpha.ICollectUserEventRequest);
+
+                    /** CollectUserEventRequest prebuiltRule. */
+                    public prebuiltRule?: (string|null);
 
                     /** CollectUserEventRequest parent. */
                     public parent: string;
@@ -34045,6 +34777,12 @@ export namespace google {
 
                     /** CollectUserEventRequest ets. */
                     public ets: (number|Long|string);
+
+                    /** CollectUserEventRequest rawJson. */
+                    public rawJson: string;
+
+                    /** CollectUserEventRequest conversionRule. */
+                    public conversionRule?: "prebuiltRule";
 
                     /**
                      * Creates a new CollectUserEventRequest instance using the specified properties.

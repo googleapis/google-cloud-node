@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, inputConfig) {
-  // [START retail_v2alpha_generated_CompletionService_ImportCompletionData_async]
+function main(attributesConfig, attributeKeys) {
+  // [START retail_v2alpha_generated_CatalogService_BatchRemoveCatalogAttributes_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,44 +29,38 @@ function main(parent, inputConfig) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The catalog which the suggestions dataset belongs to.
-   *  Format: `projects/1234/locations/global/catalogs/default_catalog`.
+   *  Required. The attributes config resource shared by all catalog attributes
+   *  being deleted. Format:
+   *  `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig`
    */
-  // const parent = 'abc123'
+  // const attributesConfig = 'abc123'
   /**
-   *  Required. The desired input location of the data.
+   *  Required. The attribute name keys of the
+   *  CatalogAttribute google.cloud.retail.v2alpha.CatalogAttribute s to
+   *  delete. A maximum of 1000 catalog attributes can be deleted in a batch.
    */
-  // const inputConfig = {}
-  /**
-   *  Pub/Sub topic for receiving notification. If this field is set,
-   *  when the import is finished, a notification is sent to
-   *  specified Pub/Sub topic. The message data is JSON string of a
-   *  Operation google.longrunning.Operation.
-   *  Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
-   */
-  // const notificationPubsubTopic = 'abc123'
+  // const attributeKeys = 'abc123'
 
   // Imports the Retail library
-  const {CompletionServiceClient} = require('@google-cloud/retail').v2alpha;
+  const {CatalogServiceClient} = require('@google-cloud/retail').v2alpha;
 
   // Instantiates a client
-  const retailClient = new CompletionServiceClient();
+  const retailClient = new CatalogServiceClient();
 
-  async function callImportCompletionData() {
+  async function callBatchRemoveCatalogAttributes() {
     // Construct request
     const request = {
-      parent,
-      inputConfig,
+      attributesConfig,
+      attributeKeys,
     };
 
     // Run request
-    const [operation] = await retailClient.importCompletionData(request);
-    const [response] = await operation.promise();
+    const response = await retailClient.batchRemoveCatalogAttributes(request);
     console.log(response);
   }
 
-  callImportCompletionData();
-  // [END retail_v2alpha_generated_CompletionService_ImportCompletionData_async]
+  callBatchRemoveCatalogAttributes();
+  // [END retail_v2alpha_generated_CatalogService_BatchRemoveCatalogAttributes_async]
 }
 
 process.on('unhandledRejection', err => {
