@@ -25,7 +25,7 @@ export MONO_REPO_CWD=$PWD
 
 echo "$PWD"
 
-npm install --no-save @google-cloud/cloud-rad@0.1.12-debug
+npm install --no-save @google-cloud/cloud-rad@0.1.13-debug
 # publish docs to devsite
 
 ls ./node_modules/.bin
