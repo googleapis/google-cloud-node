@@ -129,7 +129,7 @@ export function getApiPath(apiId: string) {
 }
 
 export function getApiPathWithDashes(apiId: string) {
-  return apiId.replace(/\.v.*/, '').replace(/\./g, '-');
+  return apiId.replace(/\.v[0-9].*/, '').replace(/\./g, '-');
 }
 
 export function getVersion(apiId: string) {
