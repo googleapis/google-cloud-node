@@ -30,7 +30,7 @@ function main(input, audioConfig) {
    */
   /**
    *  The resource states of the request in the form of
-   *  projects/* /locations/* /voices/*.
+   *  `projects/* /locations/* /voices/*`.
    */
   // const parent = 'abc123'
   /**
