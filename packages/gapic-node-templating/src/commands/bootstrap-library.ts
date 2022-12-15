@@ -79,7 +79,7 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
   },
   async handler(argv: CliArgs) {
     const octokit = new Octokit();
-    console.log(`Entering nodejs processing for ${argv['api-id]}`)
+    console.log(`Entering nodejs processing for ${argv['api-id']}`)
     const distributionName = await getDistributionName(
       octokit,
       argv['api-id'],
