@@ -37,11 +37,15 @@ function main(name) {
    */
   // const rawDocument = {}
   /**
-   *  Required. The resource name of the Processor google.cloud.documentai.v1beta3.Processor  or
+   *  Required. The resource name of the
+   *  Processor google.cloud.documentai.v1beta3.Processor  or
    *  ProcessorVersion google.cloud.documentai.v1beta3.ProcessorVersion 
-   *  to use for processing. If a Processor google.cloud.documentai.v1beta3.Processor  is specified, the server will use
-   *  its default version google.cloud.documentai.v1beta3.Processor.default_processor_version. Format:
-   *  `projects/{project}/locations/{location}/processors/{processor}`, or
+   *  to use for processing. If a
+   *  Processor google.cloud.documentai.v1beta3.Processor  is specified, the
+   *  server will use its default
+   *  version google.cloud.documentai.v1beta3.Processor.default_processor_version.
+   *  Format: `projects/{project}/locations/{location}/processors/{processor}`,
+   *  or
    *  `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    */
   // const name = 'abc123'
@@ -60,6 +64,10 @@ function main(name) {
    *  of `{document_field_name}` or `pages.{page_field_name}`.
    */
   // const fieldMask = {}
+  /**
+   *  Inference-time options for the process API
+   */
+  // const processOptions = {}
 
   // Imports the Documentai library
   const {DocumentProcessorServiceClient} = require('@google-cloud/documentai').v1beta3;

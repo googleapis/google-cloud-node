@@ -11188,6 +11188,9 @@ export namespace google {
 
                     /** ProcessorType launchStage */
                     launchStage?: (google.api.LaunchStage|keyof typeof google.api.LaunchStage|null);
+
+                    /** ProcessorType sampleDocumentUris */
+                    sampleDocumentUris?: (string[]|null);
                 }
 
                 /** Represents a ProcessorType. */
@@ -11216,6 +11219,9 @@ export namespace google {
 
                     /** ProcessorType launchStage. */
                     public launchStage: (google.api.LaunchStage|keyof typeof google.api.LaunchStage);
+
+                    /** ProcessorType sampleDocumentUris. */
+                    public sampleDocumentUris: string[];
 
                     /**
                      * Creates a new ProcessorType instance using the specified properties.
@@ -26398,6 +26404,103 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an OcrConfig. */
+                interface IOcrConfig {
+
+                    /** OcrConfig enableNativePdfParsing */
+                    enableNativePdfParsing?: (boolean|null);
+                }
+
+                /** Represents an OcrConfig. */
+                class OcrConfig implements IOcrConfig {
+
+                    /**
+                     * Constructs a new OcrConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IOcrConfig);
+
+                    /** OcrConfig enableNativePdfParsing. */
+                    public enableNativePdfParsing: boolean;
+
+                    /**
+                     * Creates a new OcrConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OcrConfig instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IOcrConfig): google.cloud.documentai.v1beta3.OcrConfig;
+
+                    /**
+                     * Encodes the specified OcrConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.OcrConfig.verify|verify} messages.
+                     * @param message OcrConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IOcrConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OcrConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.OcrConfig.verify|verify} messages.
+                     * @param message OcrConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IOcrConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OcrConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OcrConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.OcrConfig;
+
+                    /**
+                     * Decodes an OcrConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OcrConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.OcrConfig;
+
+                    /**
+                     * Verifies an OcrConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OcrConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OcrConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.OcrConfig;
+
+                    /**
+                     * Creates a plain object from an OcrConfig message. Also converts values to other types if specified.
+                     * @param message OcrConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.OcrConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OcrConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OcrConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a DocumentProcessorService */
                 class DocumentProcessorService extends $protobuf.rpc.Service {
 
@@ -26863,6 +26966,103 @@ export namespace google {
                     type ListEvaluationsCallback = (error: (Error|null), response?: google.cloud.documentai.v1beta3.ListEvaluationsResponse) => void;
                 }
 
+                /** Properties of a ProcessOptions. */
+                interface IProcessOptions {
+
+                    /** ProcessOptions ocrConfig */
+                    ocrConfig?: (google.cloud.documentai.v1beta3.IOcrConfig|null);
+                }
+
+                /** Represents a ProcessOptions. */
+                class ProcessOptions implements IProcessOptions {
+
+                    /**
+                     * Constructs a new ProcessOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IProcessOptions);
+
+                    /** ProcessOptions ocrConfig. */
+                    public ocrConfig?: (google.cloud.documentai.v1beta3.IOcrConfig|null);
+
+                    /**
+                     * Creates a new ProcessOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProcessOptions instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IProcessOptions): google.cloud.documentai.v1beta3.ProcessOptions;
+
+                    /**
+                     * Encodes the specified ProcessOptions message. Does not implicitly {@link google.cloud.documentai.v1beta3.ProcessOptions.verify|verify} messages.
+                     * @param message ProcessOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IProcessOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProcessOptions message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ProcessOptions.verify|verify} messages.
+                     * @param message ProcessOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IProcessOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProcessOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProcessOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ProcessOptions;
+
+                    /**
+                     * Decodes a ProcessOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProcessOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ProcessOptions;
+
+                    /**
+                     * Verifies a ProcessOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProcessOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProcessOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ProcessOptions;
+
+                    /**
+                     * Creates a plain object from a ProcessOptions message. Also converts values to other types if specified.
+                     * @param message ProcessOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.ProcessOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProcessOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProcessOptions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ProcessRequest. */
                 interface IProcessRequest {
 
@@ -26883,6 +27083,9 @@ export namespace google {
 
                     /** ProcessRequest fieldMask */
                     fieldMask?: (google.protobuf.IFieldMask|null);
+
+                    /** ProcessRequest processOptions */
+                    processOptions?: (google.cloud.documentai.v1beta3.IProcessOptions|null);
                 }
 
                 /** Represents a ProcessRequest. */
@@ -26911,6 +27114,9 @@ export namespace google {
 
                     /** ProcessRequest fieldMask. */
                     public fieldMask?: (google.protobuf.IFieldMask|null);
+
+                    /** ProcessRequest processOptions. */
+                    public processOptions?: (google.cloud.documentai.v1beta3.IProcessOptions|null);
 
                     /** ProcessRequest source. */
                     public source?: ("inlineDocument"|"rawDocument");
@@ -27243,6 +27449,9 @@ export namespace google {
 
                     /** BatchProcessRequest skipHumanReview */
                     skipHumanReview?: (boolean|null);
+
+                    /** BatchProcessRequest processOptions */
+                    processOptions?: (google.cloud.documentai.v1beta3.IProcessOptions|null);
                 }
 
                 /** Represents a BatchProcessRequest. */
@@ -27271,6 +27480,9 @@ export namespace google {
 
                     /** BatchProcessRequest skipHumanReview. */
                     public skipHumanReview: boolean;
+
+                    /** BatchProcessRequest processOptions. */
+                    public processOptions?: (google.cloud.documentai.v1beta3.IProcessOptions|null);
 
                     /**
                      * Creates a new BatchProcessRequest instance using the specified properties.
@@ -34203,6 +34415,9 @@ export namespace google {
 
                     /** ProcessorType launchStage */
                     launchStage?: (google.api.LaunchStage|keyof typeof google.api.LaunchStage|null);
+
+                    /** ProcessorType sampleDocumentUris */
+                    sampleDocumentUris?: (string[]|null);
                 }
 
                 /** Represents a ProcessorType. */
@@ -34231,6 +34446,9 @@ export namespace google {
 
                     /** ProcessorType launchStage. */
                     public launchStage: (google.api.LaunchStage|keyof typeof google.api.LaunchStage);
+
+                    /** ProcessorType sampleDocumentUris. */
+                    public sampleDocumentUris: string[];
 
                     /**
                      * Creates a new ProcessorType instance using the specified properties.
