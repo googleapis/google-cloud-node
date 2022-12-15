@@ -29,12 +29,13 @@ function main(model) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The body of the updated Model.
+   *  Required. The body of the updated
+   *  Model google.cloud.retail.v2alpha.Model.
    */
   // const model = {}
   /**
    *  Optional. Indicates which fields in the provided 'model' to
-   *  update. If not set, will by default update all fields.
+   *  update. If not set, by default updates all fields.
    */
   // const updateMask = {}
 
