@@ -21,7 +21,9 @@ npm run compile
 npm link .
 
 cd "${MONO_REPO_PATH}/containers/node-bootstrap-container"
-FOLDER_NAME=$(node /create-folder-name.js $API_ID) || node /create-gh-issue.js
+FOLDER_NAME=$(node /create-folder-name.js "${API_ID}") || node /create-gh-issue.js
+echo "${FOLDER_NAME"}"
+echo "${API_ID}"
 mkdir -p "${MONO_REPO_PATH}/packages/${FOLDER_NAME}" || node /create-gh-issue.js
 node /add-to-well-known-path.js "${INTER_CONTAINER_VARS_PATH}" "${FOLDER_NAME}"
 cd  "${MONO_REPO_PATH}"
