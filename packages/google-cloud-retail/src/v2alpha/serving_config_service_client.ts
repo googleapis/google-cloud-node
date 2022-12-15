@@ -125,6 +125,9 @@ export class ServingConfigServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -233,6 +236,9 @@ export class ServingConfigServiceClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
           additional_bindings: [
+            {
+              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',
+            },
             {
               get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
             },
@@ -517,7 +523,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the ServingConfig to delete. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -722,7 +728,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the ServingConfig to get. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -820,7 +826,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.servingConfig
    *   Required. The source ServingConfig resource name . Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
    * @param {string} request.controlId
    *   Required. The id of the control to apply. Assumed to be in the same catalog
    *   as the serving config - if id is not found a NOT_FOUND error is returned.
@@ -912,7 +918,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.servingConfig
    *   Required. The source ServingConfig resource name . Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
    * @param {string} request.controlId
    *   Required. The id of the control to apply. Assumed to be in the same catalog
    *   as the serving config.
@@ -1008,7 +1014,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The catalog resource name. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are
@@ -1110,7 +1116,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The catalog resource name. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are
@@ -1160,7 +1166,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The catalog resource name. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are

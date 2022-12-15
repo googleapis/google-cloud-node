@@ -56,6 +56,7 @@
   * [User_event_service.rejoin_user_events](#user_event_service.rejoin_user_events)
   * [User_event_service.write_user_event](#user_event_service.write_user_event)
   * [Catalog_service.add_catalog_attribute](#catalog_service.add_catalog_attribute)
+  * [Catalog_service.batch_remove_catalog_attributes](#catalog_service.batch_remove_catalog_attributes)
   * [Catalog_service.get_attributes_config](#catalog_service.get_attributes_config)
   * [Catalog_service.get_completion_config](#catalog_service.get_completion_config)
   * [Catalog_service.get_default_branch](#catalog_service.get_default_branch)
@@ -916,6 +917,23 @@ __Usage:__
 
 
 `node packages/google-cloud-retail/samples/generated/v2alpha/catalog_service.add_catalog_attribute.js`
+
+
+-----
+
+
+
+
+### Catalog_service.batch_remove_catalog_attributes
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/catalog_service.batch_remove_catalog_attributes.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/catalog_service.batch_remove_catalog_attributes.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/catalog_service.batch_remove_catalog_attributes.js`
 
 
 -----
