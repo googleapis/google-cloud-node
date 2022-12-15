@@ -2161,6 +2161,10 @@
                     "desiredNodePoolLoggingConfig": {
                       "type": "NodePoolLoggingConfig",
                       "id": 116
+                    },
+                    "desiredStackType": {
+                      "type": "StackType",
+                      "id": 119
                     }
                   }
                 },
