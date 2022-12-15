@@ -1,0 +1,999 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.visionai.v1alpha1",
+  "libraryPackage": "@google-cloud/visionai",
+  "services": {
+    "AppPlatform": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AppPlatformClient",
+          "rpcs": {
+            "GetApplication": {
+              "methods": [
+                "getApplication"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "GetDraft": {
+              "methods": [
+                "getDraft"
+              ]
+            },
+            "ListPrebuiltProcessors": {
+              "methods": [
+                "listPrebuiltProcessors"
+              ]
+            },
+            "GetProcessor": {
+              "methods": [
+                "getProcessor"
+              ]
+            },
+            "CreateApplication": {
+              "methods": [
+                "createApplication"
+              ]
+            },
+            "UpdateApplication": {
+              "methods": [
+                "updateApplication"
+              ]
+            },
+            "DeleteApplication": {
+              "methods": [
+                "deleteApplication"
+              ]
+            },
+            "DeployApplication": {
+              "methods": [
+                "deployApplication"
+              ]
+            },
+            "UndeployApplication": {
+              "methods": [
+                "undeployApplication"
+              ]
+            },
+            "AddApplicationStreamInput": {
+              "methods": [
+                "addApplicationStreamInput"
+              ]
+            },
+            "RemoveApplicationStreamInput": {
+              "methods": [
+                "removeApplicationStreamInput"
+              ]
+            },
+            "UpdateApplicationStreamInput": {
+              "methods": [
+                "updateApplicationStreamInput"
+              ]
+            },
+            "CreateApplicationInstances": {
+              "methods": [
+                "createApplicationInstances"
+              ]
+            },
+            "DeleteApplicationInstances": {
+              "methods": [
+                "deleteApplicationInstances"
+              ]
+            },
+            "UpdateApplicationInstances": {
+              "methods": [
+                "updateApplicationInstances"
+              ]
+            },
+            "CreateDraft": {
+              "methods": [
+                "createDraft"
+              ]
+            },
+            "UpdateDraft": {
+              "methods": [
+                "updateDraft"
+              ]
+            },
+            "DeleteDraft": {
+              "methods": [
+                "deleteDraft"
+              ]
+            },
+            "CreateProcessor": {
+              "methods": [
+                "createProcessor"
+              ]
+            },
+            "UpdateProcessor": {
+              "methods": [
+                "updateProcessor"
+              ]
+            },
+            "DeleteProcessor": {
+              "methods": [
+                "deleteProcessor"
+              ]
+            },
+            "ListApplications": {
+              "methods": [
+                "listApplications",
+                "listApplicationsStream",
+                "listApplicationsAsync"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "ListDrafts": {
+              "methods": [
+                "listDrafts",
+                "listDraftsStream",
+                "listDraftsAsync"
+              ]
+            },
+            "ListProcessors": {
+              "methods": [
+                "listProcessors",
+                "listProcessorsStream",
+                "listProcessorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AppPlatformClient",
+          "rpcs": {
+            "GetApplication": {
+              "methods": [
+                "getApplication"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "GetDraft": {
+              "methods": [
+                "getDraft"
+              ]
+            },
+            "ListPrebuiltProcessors": {
+              "methods": [
+                "listPrebuiltProcessors"
+              ]
+            },
+            "GetProcessor": {
+              "methods": [
+                "getProcessor"
+              ]
+            },
+            "CreateApplication": {
+              "methods": [
+                "createApplication"
+              ]
+            },
+            "UpdateApplication": {
+              "methods": [
+                "updateApplication"
+              ]
+            },
+            "DeleteApplication": {
+              "methods": [
+                "deleteApplication"
+              ]
+            },
+            "DeployApplication": {
+              "methods": [
+                "deployApplication"
+              ]
+            },
+            "UndeployApplication": {
+              "methods": [
+                "undeployApplication"
+              ]
+            },
+            "AddApplicationStreamInput": {
+              "methods": [
+                "addApplicationStreamInput"
+              ]
+            },
+            "RemoveApplicationStreamInput": {
+              "methods": [
+                "removeApplicationStreamInput"
+              ]
+            },
+            "UpdateApplicationStreamInput": {
+              "methods": [
+                "updateApplicationStreamInput"
+              ]
+            },
+            "CreateApplicationInstances": {
+              "methods": [
+                "createApplicationInstances"
+              ]
+            },
+            "DeleteApplicationInstances": {
+              "methods": [
+                "deleteApplicationInstances"
+              ]
+            },
+            "UpdateApplicationInstances": {
+              "methods": [
+                "updateApplicationInstances"
+              ]
+            },
+            "CreateDraft": {
+              "methods": [
+                "createDraft"
+              ]
+            },
+            "UpdateDraft": {
+              "methods": [
+                "updateDraft"
+              ]
+            },
+            "DeleteDraft": {
+              "methods": [
+                "deleteDraft"
+              ]
+            },
+            "CreateProcessor": {
+              "methods": [
+                "createProcessor"
+              ]
+            },
+            "UpdateProcessor": {
+              "methods": [
+                "updateProcessor"
+              ]
+            },
+            "DeleteProcessor": {
+              "methods": [
+                "deleteProcessor"
+              ]
+            },
+            "ListApplications": {
+              "methods": [
+                "listApplications",
+                "listApplicationsStream",
+                "listApplicationsAsync"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "ListDrafts": {
+              "methods": [
+                "listDrafts",
+                "listDraftsStream",
+                "listDraftsAsync"
+              ]
+            },
+            "ListProcessors": {
+              "methods": [
+                "listProcessors",
+                "listProcessorsStream",
+                "listProcessorsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LiveVideoAnalytics": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LiveVideoAnalyticsClient",
+          "rpcs": {
+            "GetAnalysis": {
+              "methods": [
+                "getAnalysis"
+              ]
+            },
+            "CreateAnalysis": {
+              "methods": [
+                "createAnalysis"
+              ]
+            },
+            "UpdateAnalysis": {
+              "methods": [
+                "updateAnalysis"
+              ]
+            },
+            "DeleteAnalysis": {
+              "methods": [
+                "deleteAnalysis"
+              ]
+            },
+            "ListAnalyses": {
+              "methods": [
+                "listAnalyses",
+                "listAnalysesStream",
+                "listAnalysesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LiveVideoAnalyticsClient",
+          "rpcs": {
+            "GetAnalysis": {
+              "methods": [
+                "getAnalysis"
+              ]
+            },
+            "CreateAnalysis": {
+              "methods": [
+                "createAnalysis"
+              ]
+            },
+            "UpdateAnalysis": {
+              "methods": [
+                "updateAnalysis"
+              ]
+            },
+            "DeleteAnalysis": {
+              "methods": [
+                "deleteAnalysis"
+              ]
+            },
+            "ListAnalyses": {
+              "methods": [
+                "listAnalyses",
+                "listAnalysesStream",
+                "listAnalysesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "StreamingService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "StreamingServiceClient",
+          "rpcs": {
+            "AcquireLease": {
+              "methods": [
+                "acquireLease"
+              ]
+            },
+            "RenewLease": {
+              "methods": [
+                "renewLease"
+              ]
+            },
+            "ReleaseLease": {
+              "methods": [
+                "releaseLease"
+              ]
+            },
+            "SendPackets": {
+              "methods": [
+                "sendPackets"
+              ]
+            },
+            "ReceivePackets": {
+              "methods": [
+                "receivePackets"
+              ]
+            },
+            "ReceiveEvents": {
+              "methods": [
+                "receiveEvents"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "StreamingServiceClient",
+          "rpcs": {
+            "AcquireLease": {
+              "methods": [
+                "acquireLease"
+              ]
+            },
+            "RenewLease": {
+              "methods": [
+                "renewLease"
+              ]
+            },
+            "ReleaseLease": {
+              "methods": [
+                "releaseLease"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "StreamsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "StreamsServiceClient",
+          "rpcs": {
+            "GetCluster": {
+              "methods": [
+                "getCluster"
+              ]
+            },
+            "GetStream": {
+              "methods": [
+                "getStream"
+              ]
+            },
+            "GenerateStreamHlsToken": {
+              "methods": [
+                "generateStreamHlsToken"
+              ]
+            },
+            "GetEvent": {
+              "methods": [
+                "getEvent"
+              ]
+            },
+            "GetSeries": {
+              "methods": [
+                "getSeries"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "createCluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "updateCluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "deleteCluster"
+              ]
+            },
+            "CreateStream": {
+              "methods": [
+                "createStream"
+              ]
+            },
+            "UpdateStream": {
+              "methods": [
+                "updateStream"
+              ]
+            },
+            "DeleteStream": {
+              "methods": [
+                "deleteStream"
+              ]
+            },
+            "CreateEvent": {
+              "methods": [
+                "createEvent"
+              ]
+            },
+            "UpdateEvent": {
+              "methods": [
+                "updateEvent"
+              ]
+            },
+            "DeleteEvent": {
+              "methods": [
+                "deleteEvent"
+              ]
+            },
+            "CreateSeries": {
+              "methods": [
+                "createSeries"
+              ]
+            },
+            "UpdateSeries": {
+              "methods": [
+                "updateSeries"
+              ]
+            },
+            "DeleteSeries": {
+              "methods": [
+                "deleteSeries"
+              ]
+            },
+            "MaterializeChannel": {
+              "methods": [
+                "materializeChannel"
+              ]
+            },
+            "ListClusters": {
+              "methods": [
+                "listClusters",
+                "listClustersStream",
+                "listClustersAsync"
+              ]
+            },
+            "ListStreams": {
+              "methods": [
+                "listStreams",
+                "listStreamsStream",
+                "listStreamsAsync"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "listEvents",
+                "listEventsStream",
+                "listEventsAsync"
+              ]
+            },
+            "ListSeries": {
+              "methods": [
+                "listSeries",
+                "listSeriesStream",
+                "listSeriesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "StreamsServiceClient",
+          "rpcs": {
+            "GetCluster": {
+              "methods": [
+                "getCluster"
+              ]
+            },
+            "GetStream": {
+              "methods": [
+                "getStream"
+              ]
+            },
+            "GenerateStreamHlsToken": {
+              "methods": [
+                "generateStreamHlsToken"
+              ]
+            },
+            "GetEvent": {
+              "methods": [
+                "getEvent"
+              ]
+            },
+            "GetSeries": {
+              "methods": [
+                "getSeries"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "createCluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "updateCluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "deleteCluster"
+              ]
+            },
+            "CreateStream": {
+              "methods": [
+                "createStream"
+              ]
+            },
+            "UpdateStream": {
+              "methods": [
+                "updateStream"
+              ]
+            },
+            "DeleteStream": {
+              "methods": [
+                "deleteStream"
+              ]
+            },
+            "CreateEvent": {
+              "methods": [
+                "createEvent"
+              ]
+            },
+            "UpdateEvent": {
+              "methods": [
+                "updateEvent"
+              ]
+            },
+            "DeleteEvent": {
+              "methods": [
+                "deleteEvent"
+              ]
+            },
+            "CreateSeries": {
+              "methods": [
+                "createSeries"
+              ]
+            },
+            "UpdateSeries": {
+              "methods": [
+                "updateSeries"
+              ]
+            },
+            "DeleteSeries": {
+              "methods": [
+                "deleteSeries"
+              ]
+            },
+            "MaterializeChannel": {
+              "methods": [
+                "materializeChannel"
+              ]
+            },
+            "ListClusters": {
+              "methods": [
+                "listClusters",
+                "listClustersStream",
+                "listClustersAsync"
+              ]
+            },
+            "ListStreams": {
+              "methods": [
+                "listStreams",
+                "listStreamsStream",
+                "listStreamsAsync"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "listEvents",
+                "listEventsStream",
+                "listEventsAsync"
+              ]
+            },
+            "ListSeries": {
+              "methods": [
+                "listSeries",
+                "listSeriesStream",
+                "listSeriesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Warehouse": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "WarehouseClient",
+          "rpcs": {
+            "CreateAsset": {
+              "methods": [
+                "createAsset"
+              ]
+            },
+            "UpdateAsset": {
+              "methods": [
+                "updateAsset"
+              ]
+            },
+            "GetAsset": {
+              "methods": [
+                "getAsset"
+              ]
+            },
+            "GetCorpus": {
+              "methods": [
+                "getCorpus"
+              ]
+            },
+            "UpdateCorpus": {
+              "methods": [
+                "updateCorpus"
+              ]
+            },
+            "DeleteCorpus": {
+              "methods": [
+                "deleteCorpus"
+              ]
+            },
+            "CreateDataSchema": {
+              "methods": [
+                "createDataSchema"
+              ]
+            },
+            "UpdateDataSchema": {
+              "methods": [
+                "updateDataSchema"
+              ]
+            },
+            "GetDataSchema": {
+              "methods": [
+                "getDataSchema"
+              ]
+            },
+            "DeleteDataSchema": {
+              "methods": [
+                "deleteDataSchema"
+              ]
+            },
+            "CreateAnnotation": {
+              "methods": [
+                "createAnnotation"
+              ]
+            },
+            "GetAnnotation": {
+              "methods": [
+                "getAnnotation"
+              ]
+            },
+            "UpdateAnnotation": {
+              "methods": [
+                "updateAnnotation"
+              ]
+            },
+            "DeleteAnnotation": {
+              "methods": [
+                "deleteAnnotation"
+              ]
+            },
+            "ClipAsset": {
+              "methods": [
+                "clipAsset"
+              ]
+            },
+            "GenerateHlsUri": {
+              "methods": [
+                "generateHlsUri"
+              ]
+            },
+            "CreateSearchConfig": {
+              "methods": [
+                "createSearchConfig"
+              ]
+            },
+            "UpdateSearchConfig": {
+              "methods": [
+                "updateSearchConfig"
+              ]
+            },
+            "GetSearchConfig": {
+              "methods": [
+                "getSearchConfig"
+              ]
+            },
+            "DeleteSearchConfig": {
+              "methods": [
+                "deleteSearchConfig"
+              ]
+            },
+            "IngestAsset": {
+              "methods": [
+                "ingestAsset"
+              ]
+            },
+            "DeleteAsset": {
+              "methods": [
+                "deleteAsset"
+              ]
+            },
+            "CreateCorpus": {
+              "methods": [
+                "createCorpus"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
+              ]
+            },
+            "ListCorpora": {
+              "methods": [
+                "listCorpora",
+                "listCorporaStream",
+                "listCorporaAsync"
+              ]
+            },
+            "ListDataSchemas": {
+              "methods": [
+                "listDataSchemas",
+                "listDataSchemasStream",
+                "listDataSchemasAsync"
+              ]
+            },
+            "ListAnnotations": {
+              "methods": [
+                "listAnnotations",
+                "listAnnotationsStream",
+                "listAnnotationsAsync"
+              ]
+            },
+            "ListSearchConfigs": {
+              "methods": [
+                "listSearchConfigs",
+                "listSearchConfigsStream",
+                "listSearchConfigsAsync"
+              ]
+            },
+            "SearchAssets": {
+              "methods": [
+                "searchAssets",
+                "searchAssetsStream",
+                "searchAssetsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "WarehouseClient",
+          "rpcs": {
+            "CreateAsset": {
+              "methods": [
+                "createAsset"
+              ]
+            },
+            "UpdateAsset": {
+              "methods": [
+                "updateAsset"
+              ]
+            },
+            "GetAsset": {
+              "methods": [
+                "getAsset"
+              ]
+            },
+            "GetCorpus": {
+              "methods": [
+                "getCorpus"
+              ]
+            },
+            "UpdateCorpus": {
+              "methods": [
+                "updateCorpus"
+              ]
+            },
+            "DeleteCorpus": {
+              "methods": [
+                "deleteCorpus"
+              ]
+            },
+            "CreateDataSchema": {
+              "methods": [
+                "createDataSchema"
+              ]
+            },
+            "UpdateDataSchema": {
+              "methods": [
+                "updateDataSchema"
+              ]
+            },
+            "GetDataSchema": {
+              "methods": [
+                "getDataSchema"
+              ]
+            },
+            "DeleteDataSchema": {
+              "methods": [
+                "deleteDataSchema"
+              ]
+            },
+            "CreateAnnotation": {
+              "methods": [
+                "createAnnotation"
+              ]
+            },
+            "GetAnnotation": {
+              "methods": [
+                "getAnnotation"
+              ]
+            },
+            "UpdateAnnotation": {
+              "methods": [
+                "updateAnnotation"
+              ]
+            },
+            "DeleteAnnotation": {
+              "methods": [
+                "deleteAnnotation"
+              ]
+            },
+            "ClipAsset": {
+              "methods": [
+                "clipAsset"
+              ]
+            },
+            "GenerateHlsUri": {
+              "methods": [
+                "generateHlsUri"
+              ]
+            },
+            "CreateSearchConfig": {
+              "methods": [
+                "createSearchConfig"
+              ]
+            },
+            "UpdateSearchConfig": {
+              "methods": [
+                "updateSearchConfig"
+              ]
+            },
+            "GetSearchConfig": {
+              "methods": [
+                "getSearchConfig"
+              ]
+            },
+            "DeleteSearchConfig": {
+              "methods": [
+                "deleteSearchConfig"
+              ]
+            },
+            "DeleteAsset": {
+              "methods": [
+                "deleteAsset"
+              ]
+            },
+            "CreateCorpus": {
+              "methods": [
+                "createCorpus"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
+              ]
+            },
+            "ListCorpora": {
+              "methods": [
+                "listCorpora",
+                "listCorporaStream",
+                "listCorporaAsync"
+              ]
+            },
+            "ListDataSchemas": {
+              "methods": [
+                "listDataSchemas",
+                "listDataSchemasStream",
+                "listDataSchemasAsync"
+              ]
+            },
+            "ListAnnotations": {
+              "methods": [
+                "listAnnotations",
+                "listAnnotationsStream",
+                "listAnnotationsAsync"
+              ]
+            },
+            "ListSearchConfigs": {
+              "methods": [
+                "listSearchConfigs",
+                "listSearchConfigsStream",
+                "listSearchConfigsAsync"
+              ]
+            },
+            "SearchAssets": {
+              "methods": [
+                "searchAssets",
+                "searchAssetsStream",
+                "searchAssetsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

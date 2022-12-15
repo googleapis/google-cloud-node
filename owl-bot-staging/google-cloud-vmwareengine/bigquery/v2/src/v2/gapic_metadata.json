@@ -1,0 +1,63 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.bigquery.v2",
+  "libraryPackage": "bigquery",
+  "services": {
+    "ModelService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ModelServiceClient",
+          "rpcs": {
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "listModels"
+              ]
+            },
+            "PatchModel": {
+              "methods": [
+                "patchModel"
+              ]
+            },
+            "DeleteModel": {
+              "methods": [
+                "deleteModel"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ModelServiceClient",
+          "rpcs": {
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "listModels"
+              ]
+            },
+            "PatchModel": {
+              "methods": [
+                "patchModel"
+              ]
+            },
+            "DeleteModel": {
+              "methods": [
+                "deleteModel"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.metastore.v1alpha",
+  "libraryPackage": "@google-cloud/dataproc-metastore",
+  "services": {
+    "DataprocMetastore": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataprocMetastoreClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "GetMetadataImport": {
+              "methods": [
+                "getMetadataImport"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "createService"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "updateService"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "deleteService"
+              ]
+            },
+            "CreateMetadataImport": {
+              "methods": [
+                "createMetadataImport"
+              ]
+            },
+            "UpdateMetadataImport": {
+              "methods": [
+                "updateMetadataImport"
+              ]
+            },
+            "ExportMetadata": {
+              "methods": [
+                "exportMetadata"
+              ]
+            },
+            "RestoreService": {
+              "methods": [
+                "restoreService"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "createBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            },
+            "ListMetadataImports": {
+              "methods": [
+                "listMetadataImports",
+                "listMetadataImportsStream",
+                "listMetadataImportsAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataprocMetastoreClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "GetMetadataImport": {
+              "methods": [
+                "getMetadataImport"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "createService"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "updateService"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "deleteService"
+              ]
+            },
+            "CreateMetadataImport": {
+              "methods": [
+                "createMetadataImport"
+              ]
+            },
+            "UpdateMetadataImport": {
+              "methods": [
+                "updateMetadataImport"
+              ]
+            },
+            "ExportMetadata": {
+              "methods": [
+                "exportMetadata"
+              ]
+            },
+            "RestoreService": {
+              "methods": [
+                "restoreService"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "createBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            },
+            "ListMetadataImports": {
+              "methods": [
+                "listMetadataImports",
+                "listMetadataImportsStream",
+                "listMetadataImportsAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DataprocMetastoreFederation": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataprocMetastoreFederationClient",
+          "rpcs": {
+            "GetFederation": {
+              "methods": [
+                "getFederation"
+              ]
+            },
+            "CreateFederation": {
+              "methods": [
+                "createFederation"
+              ]
+            },
+            "UpdateFederation": {
+              "methods": [
+                "updateFederation"
+              ]
+            },
+            "DeleteFederation": {
+              "methods": [
+                "deleteFederation"
+              ]
+            },
+            "ListFederations": {
+              "methods": [
+                "listFederations",
+                "listFederationsStream",
+                "listFederationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataprocMetastoreFederationClient",
+          "rpcs": {
+            "GetFederation": {
+              "methods": [
+                "getFederation"
+              ]
+            },
+            "CreateFederation": {
+              "methods": [
+                "createFederation"
+              ]
+            },
+            "UpdateFederation": {
+              "methods": [
+                "updateFederation"
+              ]
+            },
+            "DeleteFederation": {
+              "methods": [
+                "deleteFederation"
+              ]
+            },
+            "ListFederations": {
+              "methods": [
+                "listFederations",
+                "listFederationsStream",
+                "listFederationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
