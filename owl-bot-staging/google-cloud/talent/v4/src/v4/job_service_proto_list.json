@@ -1,0 +1,14 @@
+[
+  "../../protos/google/cloud/talent/v4/common.proto",
+  "../../protos/google/cloud/talent/v4/company.proto",
+  "../../protos/google/cloud/talent/v4/company_service.proto",
+  "../../protos/google/cloud/talent/v4/completion_service.proto",
+  "../../protos/google/cloud/talent/v4/event.proto",
+  "../../protos/google/cloud/talent/v4/event_service.proto",
+  "../../protos/google/cloud/talent/v4/filters.proto",
+  "../../protos/google/cloud/talent/v4/histogram.proto",
+  "../../protos/google/cloud/talent/v4/job.proto",
+  "../../protos/google/cloud/talent/v4/job_service.proto",
+  "../../protos/google/cloud/talent/v4/tenant.proto",
+  "../../protos/google/cloud/talent/v4/tenant_service.proto"
+]

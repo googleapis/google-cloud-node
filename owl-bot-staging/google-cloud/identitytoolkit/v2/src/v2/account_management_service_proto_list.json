@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/identitytoolkit/v2/account_management_service.proto",
+  "../../protos/google/cloud/identitytoolkit/v2/authentication_service.proto",
+  "../../protos/google/cloud/identitytoolkit/v2/mfa_info.proto"
+]

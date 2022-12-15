@@ -1,0 +1,155 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.discoveryengine.v1beta",
+  "libraryPackage": "@google-cloud/discoveryengine",
+  "services": {
+    "DocumentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DocumentServiceClient",
+          "rpcs": {
+            "GetDocument": {
+              "methods": [
+                "getDocument"
+              ]
+            },
+            "CreateDocument": {
+              "methods": [
+                "createDocument"
+              ]
+            },
+            "UpdateDocument": {
+              "methods": [
+                "updateDocument"
+              ]
+            },
+            "DeleteDocument": {
+              "methods": [
+                "deleteDocument"
+              ]
+            },
+            "ImportDocuments": {
+              "methods": [
+                "importDocuments"
+              ]
+            },
+            "ListDocuments": {
+              "methods": [
+                "listDocuments",
+                "listDocumentsStream",
+                "listDocumentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DocumentServiceClient",
+          "rpcs": {
+            "GetDocument": {
+              "methods": [
+                "getDocument"
+              ]
+            },
+            "CreateDocument": {
+              "methods": [
+                "createDocument"
+              ]
+            },
+            "UpdateDocument": {
+              "methods": [
+                "updateDocument"
+              ]
+            },
+            "DeleteDocument": {
+              "methods": [
+                "deleteDocument"
+              ]
+            },
+            "ImportDocuments": {
+              "methods": [
+                "importDocuments"
+              ]
+            },
+            "ListDocuments": {
+              "methods": [
+                "listDocuments",
+                "listDocumentsStream",
+                "listDocumentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RecommendationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RecommendationServiceClient",
+          "rpcs": {
+            "Recommend": {
+              "methods": [
+                "recommend"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RecommendationServiceClient",
+          "rpcs": {
+            "Recommend": {
+              "methods": [
+                "recommend"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "UserEventService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "UserEventServiceClient",
+          "rpcs": {
+            "WriteUserEvent": {
+              "methods": [
+                "writeUserEvent"
+              ]
+            },
+            "CollectUserEvent": {
+              "methods": [
+                "collectUserEvent"
+              ]
+            },
+            "ImportUserEvents": {
+              "methods": [
+                "importUserEvents"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "UserEventServiceClient",
+          "rpcs": {
+            "WriteUserEvent": {
+              "methods": [
+                "writeUserEvent"
+              ]
+            },
+            "CollectUserEvent": {
+              "methods": [
+                "collectUserEvent"
+              ]
+            },
+            "ImportUserEvents": {
+              "methods": [
+                "importUserEvents"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
