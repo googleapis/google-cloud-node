@@ -29,13 +29,15 @@ function main(processorVersion) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the ProcessorVersion google.cloud.documentai.v1beta3.ProcessorVersion  to evaluate.
+   *  Required. The resource name of the
+   *  ProcessorVersion google.cloud.documentai.v1beta3.ProcessorVersion  to
+   *  evaluate.
    *  `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    */
   // const processorVersion = 'abc123'
   /**
-   *  Optional. The documents used in the evaluation. If unspecified, use the processor's
-   *  dataset as evaluation input.
+   *  Optional. The documents used in the evaluation. If unspecified, use the
+   *  processor's dataset as evaluation input.
    */
   // const evaluationDocuments = {}
 
