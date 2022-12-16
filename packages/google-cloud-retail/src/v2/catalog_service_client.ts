@@ -737,7 +737,7 @@ export class CatalogServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Full CompletionConfig resource name. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/completionConfig
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/completionConfig`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
