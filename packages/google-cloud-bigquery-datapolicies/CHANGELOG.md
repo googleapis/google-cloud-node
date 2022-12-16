@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-datapolicies-v0.1.2...bigquery-datapolicies-v0.2.0) (2022-12-16)
+
+
+### Features
+
+* Add bigquery datapolicies v1 API ([#3690](https://github.com/googleapis/google-cloud-node/issues/3690)) ([752036e](https://github.com/googleapis/google-cloud-node/commit/752036e6b721808c6a106145fe248282e56fc324))
+
 ## [0.1.2](https://github.com/googleapis/google-cloud-node/compare/bigquery-datapolicies-v0.1.1...bigquery-datapolicies-v0.1.2) (2022-11-10)
 
 

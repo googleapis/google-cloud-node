@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v4.0.4...text-to-speech-v4.1.0) (2022-12-16)
+
+
+### Features
+
+* Add LRS API ([#3702](https://github.com/googleapis/google-cloud-node/issues/3702)) ([21dce32](https://github.com/googleapis/google-cloud-node/commit/21dce32efc1afd7260a3fedd151d409e356e7738))
+* Add LRS API ([#3706](https://github.com/googleapis/google-cloud-node/issues/3706)) ([755fd8a](https://github.com/googleapis/google-cloud-node/commit/755fd8ac98274c65c8972cd73f2869659677bc72))
+
 ## [4.0.4](https://github.com/googleapis/nodejs-text-to-speech/compare/v4.0.3...v4.0.4) (2022-11-09)
 
 

@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v0.1.2...contentwarehouse-v0.2.0) (2022-12-16)
+
+
+### Features
+
+* Added process_options field in ProcessRequest in document_processor_service.proto ([26b5dae](https://github.com/googleapis/google-cloud-node/commit/26b5daec8851edc199f0b85791da722c6d60510f))
+* Added sample_document_uris field in ProcessorType in processor_type.proto ([26b5dae](https://github.com/googleapis/google-cloud-node/commit/26b5daec8851edc199f0b85791da722c6d60510f))
+* Added sharding_config field in DocumentOutputConfig.GcsOutputConfig in document_io.proto ([#3735](https://github.com/googleapis/google-cloud-node/issues/3735)) ([1b3b2b2](https://github.com/googleapis/google-cloud-node/commit/1b3b2b2258b7967c0d5fcf4cb009fc0821d7b862))
+* Added sharding_config field in DocumentOutputConfig.GcsOutputConfig in document_io.proto ([#3751](https://github.com/googleapis/google-cloud-node/issues/3751)) ([26b5dae](https://github.com/googleapis/google-cloud-node/commit/26b5daec8851edc199f0b85791da722c6d60510f))
+
 ## [0.1.2](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v0.1.1...contentwarehouse-v0.1.2) (2022-11-10)
 
 

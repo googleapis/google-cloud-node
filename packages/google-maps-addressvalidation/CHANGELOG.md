@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v0.1.0...addressvalidation-v1.0.0) (2022-12-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove deprecated fields `highrise` and `multi_family`
+
+### Features
+
+* Remove deprecated fields `highrise` and `multi_family` ([bbaa0c0](https://github.com/googleapis/google-cloud-node/commit/bbaa0c03aa7d8621d3861a3c434f19d83f616b2f))
+
 ## 0.1.0 (2022-11-10)
 
 

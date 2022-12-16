@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.1.0...typeless-sample-bot-v1.2.0) (2022-12-16)
+
+
+### Features
+
+* Add comments about generation and 'use strict' to transformed samples ([#3696](https://github.com/googleapis/google-cloud-node/issues/3696)) ([db012f5](https://github.com/googleapis/google-cloud-node/commit/db012f5c356d858243a391d6eaac0c9b0a508e83))
+* Add downconversion from ?? to || ([#3722](https://github.com/googleapis/google-cloud-node/issues/3722)) ([4a0a105](https://github.com/googleapis/google-cloud-node/commit/4a0a10569ee80485b3d5a2fdcd8975fbd998c336))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency recast to ^0.22.0 ([#3745](https://github.com/googleapis/google-cloud-node/issues/3745)) ([a9f6b83](https://github.com/googleapis/google-cloud-node/commit/a9f6b836b3f56602e5c18b1b5bce812507262f7c))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.0.3...typeless-sample-bot-v1.1.0) (2022-11-10)
 
 

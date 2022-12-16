@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v7.0.0...security-center-v7.1.0) (2022-12-16)
+
+
+### Features
+
+* Add kernel_rootkit field to finding's list of attributes ([#3699](https://github.com/googleapis/google-cloud-node/issues/3699)) ([693d417](https://github.com/googleapis/google-cloud-node/commit/693d417cc329728350d5d6ce74abf62b8783dacc))
+* Add user_name field to the finding access ([#3743](https://github.com/googleapis/google-cloud-node/issues/3743)) ([53f9922](https://github.com/googleapis/google-cloud-node/commit/53f9922e177f052a7cc5b07cb3c1c338623b0f6d))
+
 ## [7.0.0](https://github.com/googleapis/nodejs-security-center/compare/v6.3.1...v7.0.0) (2022-11-17)
 
 

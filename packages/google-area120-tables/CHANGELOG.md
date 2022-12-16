@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.3](https://github.com/googleapis/google-cloud-node/compare/area120-tables-v2.1.2...area120-tables-v2.1.3) (2022-12-16)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency google-gax to v3 ([#3626](https://github.com/googleapis/google-cloud-node/issues/3626)) ([bab338f](https://github.com/googleapis/google-cloud-node/commit/bab338f0dd566df02fb3c41ce4af17439126892e))
+
 ## [2.1.2](https://github.com/googleapis/nodejs-area120-tables/compare/v2.1.1...v2.1.2) (2022-11-10)
 
 
