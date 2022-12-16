@@ -429,6 +429,11 @@ export class UserEventServiceClient {
    *   `projects/1234/locations/global/catalogs/default_catalog`.
    * @param {google.cloud.retail.v2beta.UserEvent} request.userEvent
    *   Required. User event to write.
+   * @param {boolean} request.writeAsync
+   *   If set to true, the user event will be written asynchronously after
+   *   validation, and the API will respond without waiting for the write.
+   *   Therefore, silent failures can occur even if the API returns success. In
+   *   case of silent failures, error messages can be found in Stackdriver logs.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -522,6 +527,9 @@ export class UserEventServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.prebuiltRule
+   *   The prebuilt rule name that can convert a specific type of raw_json.
+   *   For example: "default_schema/v1.0"
    * @param {string} request.parent
    *   Required. The parent catalog name, such as
    *   `projects/1234/locations/global/catalogs/default_catalog`.
@@ -537,6 +545,11 @@ export class UserEventServiceClient {
    *   The event timestamp in milliseconds. This prevents browser caching of
    *   otherwise identical get requests. The name is abbreviated to reduce the
    *   payload bytes.
+   * @param {string} request.rawJson
+   *   An arbitrary serialized JSON string that contains necessary information
+   *   that can comprise a user event. When this field is specified, the
+   *   user_event field will be ignored. Note: line-delimited JSON is not
+   *   supported, a single JSON only.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
