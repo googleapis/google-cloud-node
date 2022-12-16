@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/kms-v3.1.0...kms-v3.2.0) (2022-12-16)
+
+
+### Features
+
+* Add SHA-2 import methods ([#3678](https://github.com/googleapis/google-cloud-node/issues/3678)) ([2bdc13c](https://github.com/googleapis/google-cloud-node/commit/2bdc13c92d6818a3a7eb51209a4dbff321855bc6))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-kms/compare/v3.0.1...v3.1.0) (2022-11-11)
 
 

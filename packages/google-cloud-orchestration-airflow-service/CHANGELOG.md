@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v2.1.2...orchestration-airflow-v2.2.0) (2022-12-16)
+
+
+### Features
+
+* Added LoadSnapshot, SaveSnapshot RPCs ([#3692](https://github.com/googleapis/google-cloud-node/issues/3692)) ([c211c31](https://github.com/googleapis/google-cloud-node/commit/c211c3180be88d18d363d420a2d4354eebe5ef6a))
+
 ## [2.1.2](https://github.com/googleapis/nodejs-orchestration-airflow/compare/v2.1.1...v2.1.2) (2022-11-15)
 
 

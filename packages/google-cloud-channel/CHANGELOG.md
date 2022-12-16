@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/channel-v2.2.0...channel-v2.3.0) (2022-12-16)
+
+
+### Features
+
+* Add support for granular repricing configurations via SkuGroups in Cloud Channel Repricing APIs ([#3718](https://github.com/googleapis/google-cloud-node/issues/3718)) ([363067c](https://github.com/googleapis/google-cloud-node/commit/363067cf54df2d3fa2f6afe1bf11506eadac68e3))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency google-gax to v3 ([#3626](https://github.com/googleapis/google-cloud-node/issues/3626)) ([bab338f](https://github.com/googleapis/google-cloud-node/commit/bab338f0dd566df02fb3c41ce4af17439126892e))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-channel/compare/v2.1.0...v2.2.0) (2022-11-11)
 
 

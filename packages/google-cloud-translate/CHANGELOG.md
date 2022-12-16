@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [7.0.5](https://github.com/googleapis/google-cloud-node/compare/translate-v7.0.4...translate-v7.0.5) (2022-12-16)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/promisify to v3 ([#3604](https://github.com/googleapis/google-cloud-node/issues/3604)) ([e8a35f3](https://github.com/googleapis/google-cloud-node/commit/e8a35f36f7956550aea8b29ff15d37ed52fa7ac0))
+
 ## [7.0.4](https://github.com/googleapis/nodejs-translate/compare/v7.0.3...v7.0.4) (2022-11-09)
 
 

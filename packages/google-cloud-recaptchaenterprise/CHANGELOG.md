@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v3.1.1...recaptcha-enterprise-v3.2.0) (2022-12-16)
+
+
+### Features
+
+* Add account_verification field to Assessment for MFA ([#3709](https://github.com/googleapis/google-cloud-node/issues/3709)) ([54a540d](https://github.com/googleapis/google-cloud-node/commit/54a540d06e982dc09f63673fd7e0a04ddcfc95e1))
+
 ## [3.1.1](https://github.com/googleapis/nodejs-recaptcha-enterprise/compare/v3.1.0...v3.1.1) (2022-11-11)
 
 

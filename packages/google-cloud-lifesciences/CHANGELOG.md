@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/life-sciences-v2.1.2...life-sciences-v2.2.0) (2022-12-16)
+
+
+### Features
+
+* Add Pipeline.secret_environment, Action.secret_environment, VirtualMachine.reservation ([cafa199](https://github.com/googleapis/google-cloud-node/commit/cafa199c4cee3c8bce6642c0624df2a6e47b7509))
+* Add Pipeline.secret_environment, Action.secret_environment, VirtualMachine.reservation ([#3634](https://github.com/googleapis/google-cloud-node/issues/3634)) ([cafa199](https://github.com/googleapis/google-cloud-node/commit/cafa199c4cee3c8bce6642c0624df2a6e47b7509))
+
 ## [2.1.2](https://github.com/googleapis/nodejs-life-sciences/compare/v2.1.1...v2.1.2) (2022-11-10)
 
 

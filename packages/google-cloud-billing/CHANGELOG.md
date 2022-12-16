@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/billing-v3.1.3...billing-v3.2.0) (2022-12-16)
+
+
+### Features
+
+* Added Sku.geo_taxonomy ([1d12d89](https://github.com/googleapis/google-cloud-node/commit/1d12d8991b14a86bf624817102c7af10c285b7b7))
+* Added Sku.geo_taxonomy  ([#3637](https://github.com/googleapis/google-cloud-node/issues/3637)) ([1d12d89](https://github.com/googleapis/google-cloud-node/commit/1d12d8991b14a86bf624817102c7af10c285b7b7))
+
+
+### Bug Fixes
+
+* More oauth scopes ([1d12d89](https://github.com/googleapis/google-cloud-node/commit/1d12d8991b14a86bf624817102c7af10c285b7b7))
+
 ## [3.1.3](https://github.com/googleapis/nodejs-billing/compare/v3.1.2...v3.1.3) (2022-11-10)
 
 
