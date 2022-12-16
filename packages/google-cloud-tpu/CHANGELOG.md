@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v2.2.0...tpu-v2.3.0) (2022-12-16)
+
+
+### Features
+
+* Publishing TPU v2 API ([#3701](https://github.com/googleapis/google-cloud-node/issues/3701)) ([4fae12f](https://github.com/googleapis/google-cloud-node/commit/4fae12f3723200d0dce367781a93fdae53237aeb))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-cloud-tpu/compare/v2.1.0...v2.2.0) (2022-11-10)
 
 

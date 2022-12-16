@@ -117,6 +117,9 @@ export class RoutesClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -374,10 +377,8 @@ export class RoutesClient {
    *   Optional. Specifies how to compute the route. The server
    *   attempts to use the selected routing preference to compute the route. If
    *    the routing preference results in an error or an extra long latency, then
-   *   an error is returned. In the future, we might implement a fallback
-   *   mechanism to use a different option when the preferred option does not give
-   *   a valid result. You can specify this option only when the `travel_mode` is
-   *   `DRIVE` or `TWO_WHEELER`, otherwise the request fails.
+   *   an error is returned. You can specify this option only when the
+   *   `travel_mode` is `DRIVE` or `TWO_WHEELER`, otherwise the request fails.
    * @param {google.maps.routing.v2.PolylineQuality} [request.polylineQuality]
    *   Optional. Specifies your preference for the quality of the polyline.
    * @param {google.maps.routing.v2.PolylineEncoding} [request.polylineEncoding]
@@ -387,7 +388,8 @@ export class RoutesClient {
    *   defaults to the time that you made the request. If you set this value to a
    *   time that has already occurred, then the request fails.
    * @param {boolean} [request.computeAlternativeRoutes]
-   *   Optional. Specifies whether to calculate alternate routes in addition to the route.
+   *   Optional. Specifies whether to calculate alternate routes in addition to
+   *   the route.
    * @param {google.maps.routing.v2.RouteModifiers} [request.routeModifiers]
    *   Optional. A set of conditions to satisfy that affect the way routes are
    *   calculated.
@@ -405,12 +407,11 @@ export class RoutesClient {
    *   affected by this value. If you don't provide this value, then the display
    *   units are inferred from the location of the request.
    * @param {number[]} [request.requestedReferenceRoutes]
-   *   Optional. Specifies what reference routes to calculate as part of the request in
-   *   addition to the default route.
-   *   A reference route is a route with a different route calculation objective
-   *   than the default route. For example an FUEL_EFFICIENT reference route
-   *   calculation takes into account various parameters that would generate an
-   *   optimal fuel efficient route.
+   *   Optional. Specifies what reference routes to calculate as part of the
+   *   request in addition to the default route. A reference route is a route with
+   *   a different route calculation objective than the default route. For example
+   *   an FUEL_EFFICIENT reference route calculation takes into account various
+   *   parameters that would generate an optimal fuel efficient route.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -526,8 +527,8 @@ export class RoutesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number[]} request.origins
-   *   Required. Array of origins, which determines the rows of the response matrix.
-   *   Several size restrictions apply to the cardinality of origins and
+   *   Required. Array of origins, which determines the rows of the response
+   *   matrix. Several size restrictions apply to the cardinality of origins and
    *   destinations:
    *
    *   * The number of elements (origins × destinations) must be no greater than
@@ -537,21 +538,20 @@ export class RoutesClient {
    *   * The number of waypoints (origins + destinations) specified as `place_id`
    *   must be no greater than 50.
    * @param {number[]} request.destinations
-   *   Required. Array of destinations, which determines the columns of the response matrix.
+   *   Required. Array of destinations, which determines the columns of the
+   *   response matrix.
    * @param {google.maps.routing.v2.RouteTravelMode} [request.travelMode]
    *   Optional. Specifies the mode of transportation.
    * @param {google.maps.routing.v2.RoutingPreference} [request.routingPreference]
-   *   Optional. Specifies how to compute the route. The server attempts to use the selected
-   *   routing preference to compute the route. If the routing preference results
-   *   in an error or an extra long latency, an error is returned. In the future,
-   *   we might implement a fallback mechanism to use a different option when the
-   *   preferred option does not give a valid result. You can specify this option
-   *   only when the `travel_mode` is `DRIVE` or `TWO_WHEELER`, otherwise the
-   *   request fails.
+   *   Optional. Specifies how to compute the route. The server attempts to use
+   *   the selected routing preference to compute the route. If the routing
+   *   preference results in an error or an extra long latency, an error is
+   *   returned. You can specify this option only when the `travel_mode` is
+   *   `DRIVE` or `TWO_WHEELER`, otherwise the request fails.
    * @param {google.protobuf.Timestamp} [request.departureTime]
-   *   Optional. The departure time. If you don't set this value, this defaults to the time
-   *   that you made the request. If you set this value to a time that has already
-   *   occurred, the request fails.
+   *   Optional. The departure time. If you don't set this value, this defaults to
+   *   the time that you made the request. If you set this value to a time that
+   *   has already occurred, the request fails.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}

@@ -121,6 +121,9 @@ export class RecaptchaEnterpriseServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -480,11 +483,12 @@ export class RecaptchaEnterpriseServiceClient {
    *   Required. The resource name of the Assessment, in the format
    *   "projects/{project}/assessments/{assessment}".
    * @param {google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation} [request.annotation]
-   *   Optional. The annotation that will be assigned to the Event. This field can be left
-   *   empty to provide reasons that apply to an event without concluding whether
-   *   the event is legitimate or fraudulent.
+   *   Optional. The annotation that will be assigned to the Event. This field can
+   *   be left empty to provide reasons that apply to an event without concluding
+   *   whether the event is legitimate or fraudulent.
    * @param {number[]} [request.reasons]
-   *   Optional. Optional reasons for the annotation that will be assigned to the Event.
+   *   Optional. Optional reasons for the annotation that will be assigned to the
+   *   Event.
    * @param {Buffer} [request.hashedAccountId]
    *   Optional. Unique stable hashed user identifier to apply to the assessment.
    *   This is an alternative to setting the hashed_account_id in
@@ -683,8 +687,8 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.key
-   *   Required. The public key name linked to the requested secret key in the format
-   *   "projects/{project}/keys/{key}".
+   *   Required. The public key name linked to the requested secret key in the
+   *   format "projects/{project}/keys/{key}".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -879,8 +883,8 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {google.cloud.recaptchaenterprise.v1.Key} request.key
    *   Required. The key to update.
    * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The mask to control which fields of the key get updated. If the mask is not
-   *   present, all fields will be updated.
+   *   Optional. The mask to control which fields of the key get updated. If the
+   *   mask is not present, all fields will be updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1070,6 +1074,15 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {string} request.name
    *   Required. The name of the key to be migrated, in the format
    *   "projects/{project}/keys/{key}".
+   * @param {boolean} [request.skipBillingCheck]
+   *   Optional. If true, skips the billing check.
+   *   A reCAPTCHA Enterprise key or migrated key behaves differently than a
+   *   reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
+   *   https://cloud.google.com/recaptcha-enterprise/quotas#quota_limit). To avoid
+   *   any disruption of your usage, we check that a billing account is present.
+   *   If your usage of reCAPTCHA is under the free quota, you can safely skip the
+   *   billing check and proceed with the migration. See
+   *   https://cloud.google.com/recaptcha-enterprise/docs/billing-information.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1452,16 +1465,15 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the project to list related account groups from, in the format
-   *   "projects/{project}".
+   *   Required. The name of the project to list related account groups from, in
+   *   the format "projects/{project}".
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of groups to return. The service might return fewer than
-   *   this value.
-   *   If unspecified, at most 50 groups are returned.
-   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   *   Optional. The maximum number of groups to return. The service might return
+   *   fewer than this value. If unspecified, at most 50 groups are returned. The
+   *   maximum value is 1000; values above 1000 are coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Optional. A page token, received from a previous `ListRelatedAccountGroups`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListRelatedAccountGroups` must match the call that provided the page
@@ -1563,16 +1575,15 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the project to list related account groups from, in the format
-   *   "projects/{project}".
+   *   Required. The name of the project to list related account groups from, in
+   *   the format "projects/{project}".
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of groups to return. The service might return fewer than
-   *   this value.
-   *   If unspecified, at most 50 groups are returned.
-   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   *   Optional. The maximum number of groups to return. The service might return
+   *   fewer than this value. If unspecified, at most 50 groups are returned. The
+   *   maximum value is 1000; values above 1000 are coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Optional. A page token, received from a previous `ListRelatedAccountGroups`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListRelatedAccountGroups` must match the call that provided the page
@@ -1618,16 +1629,15 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the project to list related account groups from, in the format
-   *   "projects/{project}".
+   *   Required. The name of the project to list related account groups from, in
+   *   the format "projects/{project}".
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of groups to return. The service might return fewer than
-   *   this value.
-   *   If unspecified, at most 50 groups are returned.
-   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   *   Optional. The maximum number of groups to return. The service might return
+   *   fewer than this value. If unspecified, at most 50 groups are returned. The
+   *   maximum value is 1000; values above 1000 are coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Optional. A page token, received from a previous `ListRelatedAccountGroups`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListRelatedAccountGroups` must match the call that provided the page
@@ -1675,13 +1685,12 @@ export class RecaptchaEnterpriseServiceClient {
    *   Required. The resource name for the related account group in the format
    *   `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of accounts to return. The service might return fewer
-   *   than this value.
-   *   If unspecified, at most 50 accounts are returned.
-   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   *   Optional. The maximum number of accounts to return. The service might
+   *   return fewer than this value. If unspecified, at most 50 accounts are
+   *   returned. The maximum value is 1000; values above 1000 are coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
-   *   call.
+   *   Optional. A page token, received from a previous
+   *   `ListRelatedAccountGroupMemberships` call.
    *
    *   When paginating, all other parameters provided to
    *   `ListRelatedAccountGroupMemberships` must match the call that provided the
@@ -1786,13 +1795,12 @@ export class RecaptchaEnterpriseServiceClient {
    *   Required. The resource name for the related account group in the format
    *   `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of accounts to return. The service might return fewer
-   *   than this value.
-   *   If unspecified, at most 50 accounts are returned.
-   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   *   Optional. The maximum number of accounts to return. The service might
+   *   return fewer than this value. If unspecified, at most 50 accounts are
+   *   returned. The maximum value is 1000; values above 1000 are coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
-   *   call.
+   *   Optional. A page token, received from a previous
+   *   `ListRelatedAccountGroupMemberships` call.
    *
    *   When paginating, all other parameters provided to
    *   `ListRelatedAccountGroupMemberships` must match the call that provided the
@@ -1842,13 +1850,12 @@ export class RecaptchaEnterpriseServiceClient {
    *   Required. The resource name for the related account group in the format
    *   `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of accounts to return. The service might return fewer
-   *   than this value.
-   *   If unspecified, at most 50 accounts are returned.
-   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   *   Optional. The maximum number of accounts to return. The service might
+   *   return fewer than this value. If unspecified, at most 50 accounts are
+   *   returned. The maximum value is 1000; values above 1000 are coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
-   *   call.
+   *   Optional. A page token, received from a previous
+   *   `ListRelatedAccountGroupMemberships` call.
    *
    *   When paginating, all other parameters provided to
    *   `ListRelatedAccountGroupMemberships` must match the call that provided the
@@ -1894,17 +1901,17 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.project
-   *   Required. The name of the project to search related account group memberships from.
-   *   Specify the project name in the following format: "projects/{project}".
+   *   Required. The name of the project to search related account group
+   *   memberships from. Specify the project name in the following format:
+   *   "projects/{project}".
    * @param {Buffer} [request.hashedAccountId]
-   *   Optional. The unique stable hashed user identifier we should search connections to.
-   *   The identifier should correspond to a `hashed_account_id` provided in a
-   *   previous `CreateAssessment` or `AnnotateAssessment` call.
+   *   Optional. The unique stable hashed user identifier we should search
+   *   connections to. The identifier should correspond to a `hashed_account_id`
+   *   provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of groups to return. The service might return fewer than
-   *   this value.
-   *   If unspecified, at most 50 groups are returned.
-   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   *   Optional. The maximum number of groups to return. The service might return
+   *   fewer than this value. If unspecified, at most 50 groups are returned. The
+   *   maximum value is 1000; values above 1000 are coerced to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
    *   `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
@@ -2010,17 +2017,17 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.project
-   *   Required. The name of the project to search related account group memberships from.
-   *   Specify the project name in the following format: "projects/{project}".
+   *   Required. The name of the project to search related account group
+   *   memberships from. Specify the project name in the following format:
+   *   "projects/{project}".
    * @param {Buffer} [request.hashedAccountId]
-   *   Optional. The unique stable hashed user identifier we should search connections to.
-   *   The identifier should correspond to a `hashed_account_id` provided in a
-   *   previous `CreateAssessment` or `AnnotateAssessment` call.
+   *   Optional. The unique stable hashed user identifier we should search
+   *   connections to. The identifier should correspond to a `hashed_account_id`
+   *   provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of groups to return. The service might return fewer than
-   *   this value.
-   *   If unspecified, at most 50 groups are returned.
-   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   *   Optional. The maximum number of groups to return. The service might return
+   *   fewer than this value. If unspecified, at most 50 groups are returned. The
+   *   maximum value is 1000; values above 1000 are coerced to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
    *   `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
@@ -2071,17 +2078,17 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.project
-   *   Required. The name of the project to search related account group memberships from.
-   *   Specify the project name in the following format: "projects/{project}".
+   *   Required. The name of the project to search related account group
+   *   memberships from. Specify the project name in the following format:
+   *   "projects/{project}".
    * @param {Buffer} [request.hashedAccountId]
-   *   Optional. The unique stable hashed user identifier we should search connections to.
-   *   The identifier should correspond to a `hashed_account_id` provided in a
-   *   previous `CreateAssessment` or `AnnotateAssessment` call.
+   *   Optional. The unique stable hashed user identifier we should search
+   *   connections to. The identifier should correspond to a `hashed_account_id`
+   *   provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of groups to return. The service might return fewer than
-   *   this value.
-   *   If unspecified, at most 50 groups are returned.
-   *   The maximum value is 1000; values above 1000 are coerced to 1000.
+   *   Optional. The maximum number of groups to return. The service might return
+   *   fewer than this value. If unspecified, at most 50 groups are returned. The
+   *   maximum value is 1000; values above 1000 are coerced to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
    *   `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the

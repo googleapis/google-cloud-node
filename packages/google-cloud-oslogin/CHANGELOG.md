@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/os-login-v4.0.4...os-login-v4.1.0) (2022-12-16)
+
+
+### Features
+
+* Added CreateSshPublicKey RPC ([0489224](https://github.com/googleapis/google-cloud-node/commit/0489224d93a63c73d1a80c102f118786e6aabd07))
+* Added CreateSshPublicKey RPC  ([#3635](https://github.com/googleapis/google-cloud-node/issues/3635)) ([0489224](https://github.com/googleapis/google-cloud-node/commit/0489224d93a63c73d1a80c102f118786e6aabd07))
+
 ## [4.0.4](https://github.com/googleapis/google-cloud-node/compare/os-login-v4.0.3...os-login-v4.0.4) (2022-11-10)
 
 

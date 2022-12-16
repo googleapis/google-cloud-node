@@ -27,7 +27,6 @@
     "packages/google-cloud-bigquery-datapolicies": {},
     "packages/google-cloud-bigquery-datatransfer": {},
     "packages/google-cloud-bigquery-reservation": {},
-    "packages/google-cloud-bigquery-storage": {},
     "packages/google-cloud-billing": {},
     "packages/google-cloud-billing-budgets": {},
     "packages/google-cloud-binaryauthorization": {},
@@ -122,7 +121,8 @@
     "packages/google-monitoring-dashboard": {},
     "packages/google-storagetransfer": {},
     "packages/grafeas": {},
-    "packages/typeless-sample-bot": {}
+    "packages/typeless-sample-bot": {},
+    "packages/google-cloud-vmwareengine": {}
   },
   "plugins": [
     {

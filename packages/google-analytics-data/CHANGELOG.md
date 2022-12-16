@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.2](https://github.com/googleapis/google-cloud-node/compare/data-v3.1.1...data-v3.1.2) (2022-12-16)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency google-gax to v3 ([#3626](https://github.com/googleapis/google-cloud-node/issues/3626)) ([bab338f](https://github.com/googleapis/google-cloud-node/commit/bab338f0dd566df02fb3c41ce4af17439126892e))
+* **deps:** Update dependency lint to ^0.8.0 ([#3688](https://github.com/googleapis/google-cloud-node/issues/3688)) ([84114b1](https://github.com/googleapis/google-cloud-node/commit/84114b188593b5c4d32cd409bb2e8973042505d4))
+
 ## [3.1.1](https://github.com/googleapis/nodejs-analytics-data/compare/v3.1.0...v3.1.1) (2022-11-10)
 
 

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dataproc",
-        "version": "4.1.1",
+        "version": "4.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -414,7 +414,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 81,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -1207,6 +1207,150 @@
                     "service": {
                         "shortName": "JobController",
                         "fullName": "google.cloud.dataproc.v1.JobController"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataproc_v1_generated_NodeGroupController_CreateNodeGroup_async",
+            "title": "dataproc createNodeGroup Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a node group in a cluster. The returned [Operation.metadata][google.longrunning.Operation.metadata] is [NodeGroupOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#nodegroupoperationmetadata).",
+            "canonical": true,
+            "file": "node_group_controller.create_node_group.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateNodeGroup",
+                "fullName": "google.cloud.dataproc.v1.NodeGroupController.CreateNodeGroup",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "node_group",
+                        "type": ".google.cloud.dataproc.v1.NodeGroup"
+                    },
+                    {
+                        "name": "node_group_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NodeGroupControllerClient",
+                    "fullName": "google.cloud.dataproc.v1.NodeGroupControllerClient"
+                },
+                "method": {
+                    "shortName": "CreateNodeGroup",
+                    "fullName": "google.cloud.dataproc.v1.NodeGroupController.CreateNodeGroup",
+                    "service": {
+                        "shortName": "NodeGroupController",
+                        "fullName": "google.cloud.dataproc.v1.NodeGroupController"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataproc_v1_generated_NodeGroupController_ResizeNodeGroup_async",
+            "title": "dataproc resizeNodeGroup Sample",
+            "origin": "API_DEFINITION",
+            "description": " Resizes a node group in a cluster. The returned [Operation.metadata][google.longrunning.Operation.metadata] is [NodeGroupOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#nodegroupoperationmetadata).",
+            "canonical": true,
+            "file": "node_group_controller.resize_node_group.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 90,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ResizeNodeGroup",
+                "fullName": "google.cloud.dataproc.v1.NodeGroupController.ResizeNodeGroup",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "graceful_decommission_timeout",
+                        "type": ".google.protobuf.Duration"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NodeGroupControllerClient",
+                    "fullName": "google.cloud.dataproc.v1.NodeGroupControllerClient"
+                },
+                "method": {
+                    "shortName": "ResizeNodeGroup",
+                    "fullName": "google.cloud.dataproc.v1.NodeGroupController.ResizeNodeGroup",
+                    "service": {
+                        "shortName": "NodeGroupController",
+                        "fullName": "google.cloud.dataproc.v1.NodeGroupController"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataproc_v1_generated_NodeGroupController_GetNodeGroup_async",
+            "title": "dataproc getNodeGroup Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the resource representation for a node group in a cluster.",
+            "canonical": true,
+            "file": "node_group_controller.get_node_group.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetNodeGroup",
+                "fullName": "google.cloud.dataproc.v1.NodeGroupController.GetNodeGroup",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataproc.v1.NodeGroup",
+                "client": {
+                    "shortName": "NodeGroupControllerClient",
+                    "fullName": "google.cloud.dataproc.v1.NodeGroupControllerClient"
+                },
+                "method": {
+                    "shortName": "GetNodeGroup",
+                    "fullName": "google.cloud.dataproc.v1.NodeGroupController.GetNodeGroup",
+                    "service": {
+                        "shortName": "NodeGroupController",
+                        "fullName": "google.cloud.dataproc.v1.NodeGroupController"
                     }
                 }
             }

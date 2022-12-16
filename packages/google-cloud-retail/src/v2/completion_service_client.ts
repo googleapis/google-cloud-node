@@ -43,7 +43,7 @@ const version = require('../../../package.json').version;
  *  Auto-completion service for retail.
  *
  *  This feature is only available for users who have Retail Search enabled.
- *  Please enable Retail Search on Cloud Console before using this feature.
+ *  Enable Retail Search on Cloud Console before using this feature.
  * @class
  * @memberof v2
  */
@@ -126,6 +126,9 @@ export class CompletionServiceClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -395,7 +398,7 @@ export class CompletionServiceClient {
    * Completes the specified prefix with keyword suggestions.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -427,8 +430,10 @@ export class CompletionServiceClient {
    *   Identifying Languages](https://tools.ietf.org/html/bcp47). The maximum
    *   number of language codes is 3.
    * @param {string} request.deviceType
-   *   The device type context for completion suggestions.
-   *   It is useful to apply different suggestions on different device types, e.g.
+   *   The device type context for completion suggestions. We recommend that you
+   *   leave this field empty.
+   *
+   *   It can apply different suggestions on different device types, e.g.
    *   `DESKTOP`, `MOBILE`. If it is empty, the suggestions are across all device
    *   types.
    *
@@ -550,7 +555,7 @@ export class CompletionServiceClient {
    * are indexed successfully and ready for serving. The process takes hours.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
