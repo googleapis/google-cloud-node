@@ -26,9 +26,11 @@ test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
 
 if [ -n ${_GOOGLE_APPLICATION_CREDENTIALS} ]; then
     echo "WE HAVE CREDENTIALS WITH _"
+fi
 
 if [ -n ${GOOGLE_APPLICATION_CREDENTIALS} ]; then
     echo "WE HAVE CREDENTIALS WITHOUT _"
+fi
 
 if [ ${BUILD_TYPE} == "presubmit" ]; then
     # For presubmit build, we want to know the difference from the
