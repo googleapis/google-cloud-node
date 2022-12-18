@@ -24,12 +24,12 @@ export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
 # A script file for running the test in a sub project.
 test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
 
-if [ -n ${_GOOGLE_APPLICATION_CREDENTIALS} ]; then
-    echo "WE HAVE CREDENTIALS WITH _"
+if [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+    echo "We DO NOT have GOOGLE_APPLICATION_CREDENTIALS"
 fi
 
-if [ -n ${GOOGLE_APPLICATION_CREDENTIALS} ]; then
-    echo "WE HAVE CREDENTIALS WITHOUT _"
+if [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+    echo "We DO have GOOGLE_APPLICATION_CREDENTIALS"
 fi
 
 if [ ${BUILD_TYPE} == "presubmit" ]; then
