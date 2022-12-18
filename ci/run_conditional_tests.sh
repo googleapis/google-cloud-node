@@ -100,10 +100,10 @@ for subdir in ${subdirs[@]}; do
             fi
         else
             # If GIT_DIFF_ARG is empty, run all the tests.
-            if [ "${tests_with_credentials[*]}" =~ "${d}" ] && [ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]; then
+            if [ "${tests_with_credentials[*]}"=~"${d}" ] && [ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]; then
                 echo "run tests with credentials in ${d}"
                 should_test=true
-            elif [ !"${tests_with_credentials[*]}" =~ "${d}" ] && [ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]; then
+            elif [ !"${tests_with_credentials[*]}"=~"${d}" ] && [ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]; then
                 echo "run tests in ${d}"
                 should_test=true
             fi
