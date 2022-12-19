@@ -68,6 +68,8 @@ subdirs=(
 )
 
 RETVAL=0
+# These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo). 
+# When we hit these packages, we will run the "samples with credentials" trigger, which contains the credentials as an env variable
 tests_with_credentials="packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/"
 
 for subdir in ${subdirs[@]}; do
