@@ -32,6 +32,8 @@ if [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
     echo "We DO have GOOGLE_APPLICATION_CREDENTIALS"
 fi
 
+echo "${TEST_TYPE}"
+
 if [ ${BUILD_TYPE} == "presubmit" ]; then
     # For presubmit build, we want to know the difference from the
     # common commit in origin/main.
@@ -102,7 +104,7 @@ for subdir in ${subdirs[@]}; do
             if [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
                 echo "run tests with credentials in ${d}"
                 should_test=true
-            elif [[ "${tests_with_credentials[*]}" !=~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+            elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
                 echo "run tests in ${d}"
                 should_test=true
             fi
