@@ -44,4 +44,6 @@ for NODE_VERSION in ${NODE_VERSIONS[@]}; do
     gcloud beta builds triggers export "samples-continuous-node${NODE_VERSION}" --destination "ci/export/samples-continuous-node${NODE_VERSION}.yaml"
     echo "exporting nightly build for node${NODE_VERSION}"
     gcloud beta builds triggers export "samples-nightly-node${NODE_VERSION}" --destination "ci/export/samples-nightly-node${NODE_VERSION}.yaml"
+    echo "exporting presubmit build for node${NODE_VERSION} with credentials"
+    gcloud beta builds triggers export "samples-presubmit-node${NODE_VERSION}-with-credentials" --destination "ci/export/samples-presubmit-node${NODE_VERSION}-with-credentials.yaml"
 done
