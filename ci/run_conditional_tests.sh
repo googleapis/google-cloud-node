@@ -91,7 +91,10 @@ for subdir in ${subdirs[@]}; do
             if [[ "${changed}" -eq 0 ]]; then
                 echo "no change detected in ${d}, skipping"
             else
-                if [ "${tests_with_credentials[*]}"=~"${d}" ] && [ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]; then
+                if [[ "${TEST_TYPE}" == "system" ]]; then
+                    echo "change detected in ${d} for system test"
+                    should_test=true
+                elif [ "${tests_with_credentials[*]}"=~"${d}" ] && [ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]; then
                     echo "change detected in ${d} in a directory that needs credentials"
                     should_test=true
                 elif [ !"${tests_with_credentials[*]}"=~"${d}" ] && [ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]; then
@@ -100,8 +103,11 @@ for subdir in ${subdirs[@]}; do
                 fi
             fi
         else
+            if [[ "${TEST_TYPE}" == "system" ]]; then
+                echo "run system test for ${d}"
+                should_test=true
             # If GIT_DIFF_ARG is empty, run all the tests.
-            if [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+            elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
                 echo "run tests with credentials in ${d}"
                 should_test=true
             elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
