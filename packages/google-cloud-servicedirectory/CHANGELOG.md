@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.5](https://github.com/googleapis/google-cloud-node/compare/service-directory-v4.0.4...service-directory-v4.0.5) (2022-12-16)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency eslint to v8 ([#3625](https://github.com/googleapis/google-cloud-node/issues/3625)) ([e117ac7](https://github.com/googleapis/google-cloud-node/commit/e117ac7703d97fe41e26691da0eadfdb8d5e3717))
+
 ## [4.0.4](https://github.com/googleapis/nodejs-service-directory/compare/v4.0.3...v4.0.4) (2022-11-10)
 
 

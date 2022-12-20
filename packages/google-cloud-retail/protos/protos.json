@@ -66,6 +66,14 @@
                         "searchableOption": {
                           "type": "SearchableOption",
                           "id": 7
+                        },
+                        "exactSearchableOption": {
+                          "type": "ExactSearchableOption",
+                          "id": 11
+                        },
+                        "retrievableOption": {
+                          "type": "RetrievableOption",
+                          "id": 12
                         }
                       },
                       "nested": {
@@ -95,6 +103,20 @@
                             "SEARCHABLE_OPTION_UNSPECIFIED": 0,
                             "SEARCHABLE_ENABLED": 1,
                             "SEARCHABLE_DISABLED": 2
+                          }
+                        },
+                        "ExactSearchableOption": {
+                          "values": {
+                            "EXACT_SEARCHABLE_OPTION_UNSPECIFIED": 0,
+                            "EXACT_SEARCHABLE_ENABLED": 1,
+                            "EXACT_SEARCHABLE_DISABLED": 2
+                          }
+                        },
+                        "RetrievableOption": {
+                          "values": {
+                            "RETRIEVABLE_OPTION_UNSPECIFIED": 0,
+                            "RETRIEVABLE_ENABLED": 1,
+                            "RETRIEVABLE_DISABLED": 2
                           }
                         }
                       }
@@ -1215,7 +1237,10 @@
                         },
                         "retrievableFields": {
                           "type": "google.protobuf.FieldMask",
-                          "id": 30
+                          "id": 30,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "variants": {
                           "rule": "repeated",
@@ -3505,6 +3530,10 @@
                           "type": "string",
                           "id": 8
                         },
+                        "diversityType": {
+                          "type": "DiversityType",
+                          "id": 20
+                        },
                         "enableCategoryFilterLevel": {
                           "type": "string",
                           "id": 16
@@ -3519,6 +3548,15 @@
                           "id": 19,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DiversityType": {
+                          "values": {
+                            "DIVERSITY_TYPE_UNSPECIFIED": 0,
+                            "RULE_BASED_DIVERSITY": 2,
+                            "DATA_DRIVEN_DIVERSITY": 3
                           }
                         }
                       }
@@ -3932,11 +3970,26 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "writeAsync": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },
                     "CollectUserEventRequest": {
+                      "oneofs": {
+                        "conversionRule": {
+                          "oneof": [
+                            "prebuiltRule"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "prebuiltRule": {
+                          "type": "string",
+                          "id": 6
+                        },
                         "parent": {
                           "type": "string",
                           "id": 1,
@@ -3958,6 +4011,10 @@
                         "ets": {
                           "type": "int64",
                           "id": 4
+                        },
+                        "rawJson": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },

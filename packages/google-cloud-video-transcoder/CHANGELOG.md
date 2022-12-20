@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/video-transcoder-v2.2.3...video-transcoder-v2.3.0) (2022-12-16)
+
+
+### Features
+
+* Add PreprocessingConfig.deinterlace ([#3664](https://github.com/googleapis/google-cloud-node/issues/3664)) ([a63a526](https://github.com/googleapis/google-cloud-node/commit/a63a526fbeb51a352068b90b0be68f8e1bad9e44))
+
 ## [2.2.3](https://github.com/googleapis/nodejs-video-transcoder/compare/v2.2.2...v2.2.3) (2022-11-10)
 
 

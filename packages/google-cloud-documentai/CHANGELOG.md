@@ -1,5 +1,25 @@
 # Changelog
 
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v6.1.0...documentai-v6.2.0) (2022-12-16)
+
+
+### Features
+
+* Added process_options field in ProcessRequest in document_processor_service.proto ([f9fc947](https://github.com/googleapis/google-cloud-node/commit/f9fc947d95179d22d17e0ca722b9cfbcab4699dc))
+* Added process_options field in ProcessRequest in document_processor_service.proto ([f9fc947](https://github.com/googleapis/google-cloud-node/commit/f9fc947d95179d22d17e0ca722b9cfbcab4699dc))
+* Added sample_document_uris field in ProcessorType in processor_type.proto ([f9fc947](https://github.com/googleapis/google-cloud-node/commit/f9fc947d95179d22d17e0ca722b9cfbcab4699dc))
+* Added sample_document_uris field in ProcessorType in processor_type.proto ([f9fc947](https://github.com/googleapis/google-cloud-node/commit/f9fc947d95179d22d17e0ca722b9cfbcab4699dc))
+* Added sharding_config field in DocumentOutputConfig.GcsOutputConfig in document_io.proto ([f9fc947](https://github.com/googleapis/google-cloud-node/commit/f9fc947d95179d22d17e0ca722b9cfbcab4699dc))
+* Added sharding_config field in DocumentOutputConfig.GcsOutputConfig in document_io.proto ([19e9aed](https://github.com/googleapis/google-cloud-node/commit/19e9aedfddebc4319993fc1d3fba4030f436d38c))
+* Added sharding_config field in DocumentOutputConfig.GcsOutputConfig in document_io.proto ([#3734](https://github.com/googleapis/google-cloud-node/issues/3734)) ([19e9aed](https://github.com/googleapis/google-cloud-node/commit/19e9aedfddebc4319993fc1d3fba4030f436d38c))
+* Added sharding_config field in DocumentOutputConfig.GcsOutputConfig in document_io.proto ([#3750](https://github.com/googleapis/google-cloud-node/issues/3750)) ([f9fc947](https://github.com/googleapis/google-cloud-node/commit/f9fc947d95179d22d17e0ca722b9cfbcab4699dc))
+* Added TrainProcessorVersion, EvaluateProcessorVersion, GetEvaluation, and ListEvaluations v1beta3 APIs ([#3632](https://github.com/googleapis/google-cloud-node/issues/3632)) ([999b3d0](https://github.com/googleapis/google-cloud-node/commit/999b3d085c4579a62e1b690ea7583545a6074742))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency p-queue to v7 ([#3628](https://github.com/googleapis/google-cloud-node/issues/3628)) ([e043637](https://github.com/googleapis/google-cloud-node/commit/e043637de795b86038dc6d01d9d6402e1f187b04))
+
 ## [6.1.0](https://github.com/googleapis/nodejs-document-ai/compare/v6.0.0...v6.1.0) (2022-11-11)
 
 

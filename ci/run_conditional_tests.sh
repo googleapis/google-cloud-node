@@ -24,6 +24,7 @@ export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
 # A script file for running the test in a sub project.
 test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
 
+
 if [ ${BUILD_TYPE} == "presubmit" ]; then
     # For presubmit build, we want to know the difference from the
     # common commit in origin/main.
@@ -67,6 +68,9 @@ subdirs=(
 )
 
 RETVAL=0
+# These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo). 
+# When we hit these packages, we will run the "samples with credentials" trigger, which contains the credentials as an env variable
+tests_with_credentials="packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/"
 
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
@@ -80,12 +84,29 @@ for subdir in ${subdirs[@]}; do
             if [[ "${changed}" -eq 0 ]]; then
                 echo "no change detected in ${d}, skipping"
             else
-                echo "change detected in ${d}"
-                should_test=true
+                if [[ "${TEST_TYPE}" == "system" ]]; then
+                    echo "change detected in ${d} for system test"
+                    should_test=true
+                elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                    echo "change detected in ${d} in a directory that needs credentials"
+                    should_test=true
+                elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                    echo "change detected in ${d}"
+                    should_test=true
+                fi
             fi
         else
             # If GIT_DIFF_ARG is empty, run all the tests.
-            should_test=true
+            if [[ "${TEST_TYPE}" == "system" ]]; then
+                echo "run system test for ${d}"
+                should_test=true
+            elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                echo "run tests with credentials in ${d}"
+                should_test=true
+            elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                echo "run tests in ${d}"
+                should_test=true
+            fi
         fi
         if [ "${should_test}" = true ]; then
             echo "running test in ${d}"
