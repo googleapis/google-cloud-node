@@ -29,8 +29,11 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the AzureClient google.cloud.gkemulticloud.v1.AzureClient  resource to describe.
-   *  AzureClient google.cloud.gkemulticloud.v1.AzureClient  names are formatted as
+   *  Required. The name of the
+   *  AzureClient google.cloud.gkemulticloud.v1.AzureClient  resource to
+   *  describe.
+   *  AzureClient google.cloud.gkemulticloud.v1.AzureClient  names are
+   *  formatted as
    *  `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
    *  for more details on Google Cloud resource names.

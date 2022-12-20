@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'AwsClusters',
-    filename: './aws-clusters.js',
+    library: 'AttachedClusters',
+    filename: './attached-clusters.js',
   },
   node: {
     child_process: 'empty',
