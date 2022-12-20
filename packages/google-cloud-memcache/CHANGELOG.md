@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/memcache-v2.1.4...memcache-v2.2.0) (2022-12-16)
+
+
+### Features
+
+* Maintenance schedules ([b47ea92](https://github.com/googleapis/google-cloud-node/commit/b47ea92defd8dd657e1c1e66b3a1afbedf85c3a9))
+
 ## [2.1.4](https://github.com/googleapis/google-cloud-node/compare/memcache-v2.1.3...memcache-v2.1.4) (2022-11-10)
 
 

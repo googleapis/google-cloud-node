@@ -194,6 +194,12 @@ export class MetadataServiceClient {
       contentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/content/{content}'
       ),
+      dataScanPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataScans/{dataScan}'
+      ),
+      dataScanJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataScans/{dataScan}/jobs/{job}'
+      ),
       entityPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}'
       ),
@@ -282,6 +288,18 @@ export class MetadataServiceClient {
             {
               get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',
             },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -305,6 +323,22 @@ export class MetadataServiceClient {
               post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -326,6 +360,22 @@ export class MetadataServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -2049,6 +2099,126 @@ export class MetadataServiceClient {
    */
   matchContentFromContentName(contentName: string) {
     return this.pathTemplates.contentPathTemplate.match(contentName).content;
+  }
+
+  /**
+   * Return a fully-qualified dataScan resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataScan
+   * @returns {string} Resource name string.
+   */
+  dataScanPath(project: string, location: string, dataScan: string) {
+    return this.pathTemplates.dataScanPathTemplate.render({
+      project: project,
+      location: location,
+      dataScan: dataScan,
+    });
+  }
+
+  /**
+   * Parse the project from DataScan resource.
+   *
+   * @param {string} dataScanName
+   *   A fully-qualified path representing DataScan resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataScanName(dataScanName: string) {
+    return this.pathTemplates.dataScanPathTemplate.match(dataScanName).project;
+  }
+
+  /**
+   * Parse the location from DataScan resource.
+   *
+   * @param {string} dataScanName
+   *   A fully-qualified path representing DataScan resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataScanName(dataScanName: string) {
+    return this.pathTemplates.dataScanPathTemplate.match(dataScanName).location;
+  }
+
+  /**
+   * Parse the dataScan from DataScan resource.
+   *
+   * @param {string} dataScanName
+   *   A fully-qualified path representing DataScan resource.
+   * @returns {string} A string representing the dataScan.
+   */
+  matchDataScanFromDataScanName(dataScanName: string) {
+    return this.pathTemplates.dataScanPathTemplate.match(dataScanName).dataScan;
+  }
+
+  /**
+   * Return a fully-qualified dataScanJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataScan
+   * @param {string} job
+   * @returns {string} Resource name string.
+   */
+  dataScanJobPath(
+    project: string,
+    location: string,
+    dataScan: string,
+    job: string
+  ) {
+    return this.pathTemplates.dataScanJobPathTemplate.render({
+      project: project,
+      location: location,
+      dataScan: dataScan,
+      job: job,
+    });
+  }
+
+  /**
+   * Parse the project from DataScanJob resource.
+   *
+   * @param {string} dataScanJobName
+   *   A fully-qualified path representing DataScanJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataScanJobName(dataScanJobName: string) {
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .project;
+  }
+
+  /**
+   * Parse the location from DataScanJob resource.
+   *
+   * @param {string} dataScanJobName
+   *   A fully-qualified path representing DataScanJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataScanJobName(dataScanJobName: string) {
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .location;
+  }
+
+  /**
+   * Parse the dataScan from DataScanJob resource.
+   *
+   * @param {string} dataScanJobName
+   *   A fully-qualified path representing DataScanJob resource.
+   * @returns {string} A string representing the dataScan.
+   */
+  matchDataScanFromDataScanJobName(dataScanJobName: string) {
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .dataScan;
+  }
+
+  /**
+   * Parse the job from DataScanJob resource.
+   *
+   * @param {string} dataScanJobName
+   *   A fully-qualified path representing DataScanJob resource.
+   * @returns {string} A string representing the job.
+   */
+  matchJobFromDataScanJobName(dataScanJobName: string) {
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .job;
   }
 
   /**

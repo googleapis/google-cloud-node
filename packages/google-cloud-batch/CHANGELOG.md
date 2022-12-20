@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.3.2...batch-v0.4.0) (2022-12-16)
+
+
+### Features
+
+* Add InstancePolicy.boot_disk ([61d2740](https://github.com/googleapis/google-cloud-node/commit/61d2740dbd8489c496a55f9ea53b3040b2713e0b))
+* Add InstancePolicy.boot_disk ([#3752](https://github.com/googleapis/google-cloud-node/issues/3752)) ([61d2740](https://github.com/googleapis/google-cloud-node/commit/61d2740dbd8489c496a55f9ea53b3040b2713e0b))
+* Adds named reservation to InstancePolicy  ([#3672](https://github.com/googleapis/google-cloud-node/issues/3672)) ([00975ce](https://github.com/googleapis/google-cloud-node/commit/00975ce0d77d16c037dcad39bcead39c39d61075))
+
+
+### Bug Fixes
+
+* Remove unsupported HTTP bindings for IAMPolicy RPCs ([61d2740](https://github.com/googleapis/google-cloud-node/commit/61d2740dbd8489c496a55f9ea53b3040b2713e0b))
+* Removed unused endpoints for IAM methods ([61d2740](https://github.com/googleapis/google-cloud-node/commit/61d2740dbd8489c496a55f9ea53b3040b2713e0b))
+* ServiceAccount.scopes is no longer deprecated ([61d2740](https://github.com/googleapis/google-cloud-node/commit/61d2740dbd8489c496a55f9ea53b3040b2713e0b))
+
 ## [0.3.2](https://github.com/googleapis/google-cloud-node/compare/batch-v0.3.1...batch-v0.3.2) (2022-11-10)
 
 

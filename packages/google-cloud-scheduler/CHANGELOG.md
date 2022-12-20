@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/scheduler-v3.0.5...scheduler-v3.1.0) (2022-12-16)
+
+
+### Features
+
+* Updated Client Libraries for Cloud Scheduler ([#3738](https://github.com/googleapis/google-cloud-node/issues/3738)) ([fb1e9d6](https://github.com/googleapis/google-cloud-node/commit/fb1e9d6d4ddd0084ee0850bfb16ffc169b8d47a5))
+
 ## [3.0.5](https://github.com/googleapis/nodejs-scheduler/compare/v3.0.4...v3.0.5) (2022-11-10)
 
 

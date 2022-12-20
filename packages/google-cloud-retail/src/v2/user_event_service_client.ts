@@ -426,6 +426,11 @@ export class UserEventServiceClient {
    *   `projects/1234/locations/global/catalogs/default_catalog`.
    * @param {google.cloud.retail.v2.UserEvent} request.userEvent
    *   Required. User event to write.
+   * @param {boolean} request.writeAsync
+   *   If set to true, the user event will be written asynchronously after
+   *   validation, and the API will respond without waiting for the write.
+   *   Therefore, silent failures can occur even if the API returns success. In
+   *   case of silent failures, error messages can be found in Stackdriver logs.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -513,6 +518,9 @@ export class UserEventServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.prebuiltRule
+   *   The prebuilt rule name that can convert a specific type of raw_json.
+   *   For example: "default_schema/v1.0"
    * @param {string} request.parent
    *   Required. The parent catalog name, such as
    *   `projects/1234/locations/global/catalogs/default_catalog`.
@@ -528,6 +536,11 @@ export class UserEventServiceClient {
    *   The event timestamp in milliseconds. This prevents browser caching of
    *   otherwise identical get requests. The name is abbreviated to reduce the
    *   payload bytes.
+   * @param {string} request.rawJson
+   *   An arbitrary serialized JSON string that contains necessary information
+   *   that can comprise a user event. When this field is specified, the
+   *   user_event field will be ignored. Note: line-delimited JSON is not
+   *   supported, a single JSON only.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -928,14 +941,14 @@ export class UserEventServiceClient {
     >;
   }
   /**
-   * Starts a user event rejoin operation with latest product catalog. Events
-   * will not be annotated with detailed product information if product is
-   * missing from the catalog at the time the user event is ingested, and these
-   * events are stored as unjoined events with a limited usage on training and
-   * serving. This method can be used to start a join operation on specified
-   * events with latest version of product catalog. It can also be used to
-   * correct events joined with the wrong product catalog. A rejoin operation
-   * can take hours or days to complete.
+   * Starts a user-event rejoin operation with latest product catalog. Events
+   * are not annotated with detailed product information for products that are
+   * missing from the catalog when the user event is ingested. These
+   * events are stored as unjoined events with limited usage on training and
+   * serving. You can use this method to start a join operation on specified
+   * events with the latest version of product catalog. You can also use this
+   * method to correct events joined with the wrong product catalog. A rejoin
+   * operation can take hours or days to complete.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -945,8 +958,8 @@ export class UserEventServiceClient {
    * @param {google.cloud.retail.v2.RejoinUserEventsRequest.UserEventRejoinScope} request.userEventRejoinScope
    *   The type of the user event rejoin to define the scope and range of the user
    *   events to be rejoined with the latest product catalog. Defaults to
-   *   USER_EVENT_REJOIN_SCOPE_UNSPECIFIED if this field is not set, or set to an
-   *   invalid integer value.
+   *   `USER_EVENT_REJOIN_SCOPE_UNSPECIFIED` if this field is not set, or set to
+   *   an invalid integer value.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

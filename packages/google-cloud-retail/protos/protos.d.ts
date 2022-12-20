@@ -149,6 +149,12 @@ export namespace google {
 
                     /** CatalogAttribute searchableOption */
                     searchableOption?: (google.cloud.retail.v2.CatalogAttribute.SearchableOption|keyof typeof google.cloud.retail.v2.CatalogAttribute.SearchableOption|null);
+
+                    /** CatalogAttribute exactSearchableOption */
+                    exactSearchableOption?: (google.cloud.retail.v2.CatalogAttribute.ExactSearchableOption|keyof typeof google.cloud.retail.v2.CatalogAttribute.ExactSearchableOption|null);
+
+                    /** CatalogAttribute retrievableOption */
+                    retrievableOption?: (google.cloud.retail.v2.CatalogAttribute.RetrievableOption|keyof typeof google.cloud.retail.v2.CatalogAttribute.RetrievableOption|null);
                 }
 
                 /** Represents a CatalogAttribute. */
@@ -177,6 +183,12 @@ export namespace google {
 
                     /** CatalogAttribute searchableOption. */
                     public searchableOption: (google.cloud.retail.v2.CatalogAttribute.SearchableOption|keyof typeof google.cloud.retail.v2.CatalogAttribute.SearchableOption);
+
+                    /** CatalogAttribute exactSearchableOption. */
+                    public exactSearchableOption: (google.cloud.retail.v2.CatalogAttribute.ExactSearchableOption|keyof typeof google.cloud.retail.v2.CatalogAttribute.ExactSearchableOption);
+
+                    /** CatalogAttribute retrievableOption. */
+                    public retrievableOption: (google.cloud.retail.v2.CatalogAttribute.RetrievableOption|keyof typeof google.cloud.retail.v2.CatalogAttribute.RetrievableOption);
 
                     /**
                      * Creates a new CatalogAttribute instance using the specified properties.
@@ -284,6 +296,20 @@ export namespace google {
                         SEARCHABLE_OPTION_UNSPECIFIED = 0,
                         SEARCHABLE_ENABLED = 1,
                         SEARCHABLE_DISABLED = 2
+                    }
+
+                    /** ExactSearchableOption enum. */
+                    enum ExactSearchableOption {
+                        EXACT_SEARCHABLE_OPTION_UNSPECIFIED = 0,
+                        EXACT_SEARCHABLE_ENABLED = 1,
+                        EXACT_SEARCHABLE_DISABLED = 2
+                    }
+
+                    /** RetrievableOption enum. */
+                    enum RetrievableOption {
+                        RETRIEVABLE_OPTION_UNSPECIFIED = 0,
+                        RETRIEVABLE_ENABLED = 1,
+                        RETRIEVABLE_DISABLED = 2
                     }
                 }
 
@@ -13860,6 +13886,9 @@ export namespace google {
                     /** ServingConfig diversityLevel */
                     diversityLevel?: (string|null);
 
+                    /** ServingConfig diversityType */
+                    diversityType?: (google.cloud.retail.v2.ServingConfig.DiversityType|keyof typeof google.cloud.retail.v2.ServingConfig.DiversityType|null);
+
                     /** ServingConfig enableCategoryFilterLevel */
                     enableCategoryFilterLevel?: (string|null);
 
@@ -13923,6 +13952,9 @@ export namespace google {
 
                     /** ServingConfig diversityLevel. */
                     public diversityLevel: string;
+
+                    /** ServingConfig diversityType. */
+                    public diversityType: (google.cloud.retail.v2.ServingConfig.DiversityType|keyof typeof google.cloud.retail.v2.ServingConfig.DiversityType);
 
                     /** ServingConfig enableCategoryFilterLevel. */
                     public enableCategoryFilterLevel: string;
@@ -14009,6 +14041,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ServingConfig {
+
+                    /** DiversityType enum. */
+                    enum DiversityType {
+                        DIVERSITY_TYPE_UNSPECIFIED = 0,
+                        RULE_BASED_DIVERSITY = 2,
+                        DATA_DRIVEN_DIVERSITY = 3
+                    }
                 }
 
                 /** Represents a ServingConfigService */
@@ -15143,6 +15185,9 @@ export namespace google {
 
                     /** WriteUserEventRequest userEvent */
                     userEvent?: (google.cloud.retail.v2.IUserEvent|null);
+
+                    /** WriteUserEventRequest writeAsync */
+                    writeAsync?: (boolean|null);
                 }
 
                 /** Represents a WriteUserEventRequest. */
@@ -15159,6 +15204,9 @@ export namespace google {
 
                     /** WriteUserEventRequest userEvent. */
                     public userEvent?: (google.cloud.retail.v2.IUserEvent|null);
+
+                    /** WriteUserEventRequest writeAsync. */
+                    public writeAsync: boolean;
 
                     /**
                      * Creates a new WriteUserEventRequest instance using the specified properties.
@@ -15241,6 +15289,9 @@ export namespace google {
                 /** Properties of a CollectUserEventRequest. */
                 interface ICollectUserEventRequest {
 
+                    /** CollectUserEventRequest prebuiltRule */
+                    prebuiltRule?: (string|null);
+
                     /** CollectUserEventRequest parent */
                     parent?: (string|null);
 
@@ -15252,6 +15303,9 @@ export namespace google {
 
                     /** CollectUserEventRequest ets */
                     ets?: (number|Long|string|null);
+
+                    /** CollectUserEventRequest rawJson */
+                    rawJson?: (string|null);
                 }
 
                 /** Represents a CollectUserEventRequest. */
@@ -15262,6 +15316,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.retail.v2.ICollectUserEventRequest);
+
+                    /** CollectUserEventRequest prebuiltRule. */
+                    public prebuiltRule?: (string|null);
 
                     /** CollectUserEventRequest parent. */
                     public parent: string;
@@ -15274,6 +15331,12 @@ export namespace google {
 
                     /** CollectUserEventRequest ets. */
                     public ets: (number|Long|string);
+
+                    /** CollectUserEventRequest rawJson. */
+                    public rawJson: string;
+
+                    /** CollectUserEventRequest conversionRule. */
+                    public conversionRule?: "prebuiltRule";
 
                     /**
                      * Creates a new CollectUserEventRequest instance using the specified properties.
