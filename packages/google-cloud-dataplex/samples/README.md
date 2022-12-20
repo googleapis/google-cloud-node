@@ -20,6 +20,14 @@
   * [Content_service.set_iam_policy](#content_service.set_iam_policy)
   * [Content_service.test_iam_permissions](#content_service.test_iam_permissions)
   * [Content_service.update_content](#content_service.update_content)
+  * [Data_scan_service.create_data_scan](#data_scan_service.create_data_scan)
+  * [Data_scan_service.delete_data_scan](#data_scan_service.delete_data_scan)
+  * [Data_scan_service.get_data_scan](#data_scan_service.get_data_scan)
+  * [Data_scan_service.get_data_scan_job](#data_scan_service.get_data_scan_job)
+  * [Data_scan_service.list_data_scan_jobs](#data_scan_service.list_data_scan_jobs)
+  * [Data_scan_service.list_data_scans](#data_scan_service.list_data_scans)
+  * [Data_scan_service.run_data_scan](#data_scan_service.run_data_scan)
+  * [Data_scan_service.update_data_scan](#data_scan_service.update_data_scan)
   * [Dataplex_service.cancel_job](#dataplex_service.cancel_job)
   * [Dataplex_service.create_asset](#dataplex_service.create_asset)
   * [Dataplex_service.create_environment](#dataplex_service.create_environment)
@@ -208,6 +216,142 @@ __Usage:__
 
 
 `node packages/google-cloud-dataplex/samples/generated/v1/content_service.update_content.js`
+
+
+-----
+
+
+
+
+### Data_scan_service.create_data_scan
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.create_data_scan.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.create_data_scan.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.create_data_scan.js`
+
+
+-----
+
+
+
+
+### Data_scan_service.delete_data_scan
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.delete_data_scan.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.delete_data_scan.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.delete_data_scan.js`
+
+
+-----
+
+
+
+
+### Data_scan_service.get_data_scan
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.get_data_scan.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.get_data_scan.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.get_data_scan.js`
+
+
+-----
+
+
+
+
+### Data_scan_service.get_data_scan_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.get_data_scan_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.get_data_scan_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.get_data_scan_job.js`
+
+
+-----
+
+
+
+
+### Data_scan_service.list_data_scan_jobs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.list_data_scan_jobs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.list_data_scan_jobs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.list_data_scan_jobs.js`
+
+
+-----
+
+
+
+
+### Data_scan_service.list_data_scans
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.list_data_scans.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.list_data_scans.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.list_data_scans.js`
+
+
+-----
+
+
+
+
+### Data_scan_service.run_data_scan
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.run_data_scan.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.run_data_scan.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.run_data_scan.js`
+
+
+-----
+
+
+
+
+### Data_scan_service.update_data_scan
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.update_data_scan.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.update_data_scan.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataplex/samples/generated/v1/data_scan_service.update_data_scan.js`
 
 
 -----
