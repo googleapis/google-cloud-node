@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/nodejs-video-stitcher/compare/v0.2.2...v0.3.0) (2022-12-20)
+
+
+### Features
+
+* Add support for Media CDN ([83f1257](https://github.com/googleapis/nodejs-video-stitcher/commit/83f1257b790abc8ef7acedb8e009ef5e94a0c710))
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#40](https://github.com/googleapis/nodejs-video-stitcher/issues/40)) ([effa481](https://github.com/googleapis/nodejs-video-stitcher/commit/effa4814da8b7d81b6c5be6b6e580a683f02c50e))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-video-stitcher/issues/1553)) ([#27](https://github.com/googleapis/nodejs-video-stitcher/issues/27)) ([b7fe723](https://github.com/googleapis/nodejs-video-stitcher/commit/b7fe723d1a2dfb229b69640ca749398805573e56))
+* Preserve default values in x-goog-request-params header ([#32](https://github.com/googleapis/nodejs-video-stitcher/issues/32)) ([28c3214](https://github.com/googleapis/nodejs-video-stitcher/commit/28c32148f4707550c6c6a143c7556560d6b21230))
+* Regenerated protos JS and TS definitions ([#43](https://github.com/googleapis/nodejs-video-stitcher/issues/43)) ([8f7481e](https://github.com/googleapis/nodejs-video-stitcher/commit/8f7481ed1f5fc054abe6430e43570851c39740d0))
+
 ## [0.2.2](https://github.com/googleapis/nodejs-video-stitcher/compare/v0.2.1...v0.2.2) (2022-09-01)
 
 
