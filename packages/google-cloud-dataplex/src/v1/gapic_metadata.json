@@ -477,6 +477,108 @@
         }
       }
     },
+    "DataScanService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataScanServiceClient",
+          "rpcs": {
+            "GetDataScan": {
+              "methods": [
+                "getDataScan"
+              ]
+            },
+            "RunDataScan": {
+              "methods": [
+                "runDataScan"
+              ]
+            },
+            "GetDataScanJob": {
+              "methods": [
+                "getDataScanJob"
+              ]
+            },
+            "CreateDataScan": {
+              "methods": [
+                "createDataScan"
+              ]
+            },
+            "UpdateDataScan": {
+              "methods": [
+                "updateDataScan"
+              ]
+            },
+            "DeleteDataScan": {
+              "methods": [
+                "deleteDataScan"
+              ]
+            },
+            "ListDataScans": {
+              "methods": [
+                "listDataScans",
+                "listDataScansStream",
+                "listDataScansAsync"
+              ]
+            },
+            "ListDataScanJobs": {
+              "methods": [
+                "listDataScanJobs",
+                "listDataScanJobsStream",
+                "listDataScanJobsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataScanServiceClient",
+          "rpcs": {
+            "GetDataScan": {
+              "methods": [
+                "getDataScan"
+              ]
+            },
+            "RunDataScan": {
+              "methods": [
+                "runDataScan"
+              ]
+            },
+            "GetDataScanJob": {
+              "methods": [
+                "getDataScanJob"
+              ]
+            },
+            "CreateDataScan": {
+              "methods": [
+                "createDataScan"
+              ]
+            },
+            "UpdateDataScan": {
+              "methods": [
+                "updateDataScan"
+              ]
+            },
+            "DeleteDataScan": {
+              "methods": [
+                "deleteDataScan"
+              ]
+            },
+            "ListDataScans": {
+              "methods": [
+                "listDataScans",
+                "listDataScansStream",
+                "listDataScansAsync"
+              ]
+            },
+            "ListDataScanJobs": {
+              "methods": [
+                "listDataScanJobs",
+                "listDataScanJobsStream",
+                "listDataScanJobsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MetadataService": {
       "clients": {
         "grpc": {
