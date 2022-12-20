@@ -37,6 +37,13 @@ function main(parent, userEvent) {
    *  Required. User event to write.
    */
   // const userEvent = {}
+  /**
+   *  If set to true, the user event will be written asynchronously after
+   *  validation, and the API will respond without waiting for the write.
+   *  Therefore, silent failures can occur even if the API returns success. In
+   *  case of silent failures, error messages can be found in Stackdriver logs.
+   */
+  // const writeAsync = true
 
   // Imports the Retail library
   const {UserEventServiceClient} = require('@google-cloud/retail').v2beta;
