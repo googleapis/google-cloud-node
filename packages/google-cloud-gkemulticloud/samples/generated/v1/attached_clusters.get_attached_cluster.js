@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START gkemulticloud_v1_generated_AzureClusters_DeleteAzureCluster_async]
+  // [START gkemulticloud_v1_generated_AttachedClusters_GetAttachedCluster_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,55 +29,35 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name the
-   *  AzureCluster google.cloud.gkemulticloud.v1.AzureCluster  to delete.
-   *  `AzureCluster` names are formatted as
-   *  `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
+   *  Required. The name of the
+   *  AttachedCluster google.cloud.gkemulticloud.v1.AttachedCluster  resource
+   *  to describe.
+   *  `AttachedCluster` names are formatted as
+   *  `projects/<project-id>/locations/<region>/attachedClusters/<cluster-id>`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
    *  for more details on GCP resource names.
    */
   // const name = 'abc123'
-  /**
-   *  If set to true, and the
-   *  AzureCluster google.cloud.gkemulticloud.v1.AzureCluster  resource is not
-   *  found, the request will succeed but no action will be taken on the server
-   *  and a completed Operation google.longrunning.Operation  will be returned.
-   *  Useful for idempotent deletion.
-   */
-  // const allowMissing = true
-  /**
-   *  If set, only validate the request, but do not actually delete the resource.
-   */
-  // const validateOnly = true
-  /**
-   *  The current etag of the
-   *  AzureCluster google.cloud.gkemulticloud.v1.AzureCluster.
-   *  Allows clients to perform deletions through optimistic concurrency control.
-   *  If the provided etag does not match the current etag of the cluster,
-   *  the request will fail and an ABORTED error will be returned.
-   */
-  // const etag = 'abc123'
 
   // Imports the Gkemulticloud library
-  const {AzureClustersClient} = require('@google-cloud/gkemulticloud').v1;
+  const {AttachedClustersClient} = require('@google-cloud/gkemulticloud').v1;
 
   // Instantiates a client
-  const gkemulticloudClient = new AzureClustersClient();
+  const gkemulticloudClient = new AttachedClustersClient();
 
-  async function callDeleteAzureCluster() {
+  async function callGetAttachedCluster() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await gkemulticloudClient.deleteAzureCluster(request);
-    const [response] = await operation.promise();
+    const response = await gkemulticloudClient.getAttachedCluster(request);
     console.log(response);
   }
 
-  callDeleteAzureCluster();
-  // [END gkemulticloud_v1_generated_AzureClusters_DeleteAzureCluster_async]
+  callGetAttachedCluster();
+  // [END gkemulticloud_v1_generated_AttachedClusters_GetAttachedCluster_async]
 }
 
 process.on('unhandledRejection', err => {

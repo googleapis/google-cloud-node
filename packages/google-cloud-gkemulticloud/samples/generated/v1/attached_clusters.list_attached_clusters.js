@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, azureClient, azureClientId) {
-  // [START gkemulticloud_v1_generated_AzureClusters_CreateAzureClient_async]
+function main(parent) {
+  // [START gkemulticloud_v1_generated_AttachedClusters_ListAttachedClusters_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,56 +29,50 @@ function main(parent, azureClient, azureClientId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent location where this
-   *  AzureClient google.cloud.gkemulticloud.v1.AzureClient  resource will be
-   *  created.
+   *  Required. The parent location which owns this collection of
+   *  AttachedCluster google.cloud.gkemulticloud.v1.AttachedCluster  resources.
    *  Location names are formatted as `projects/<project-id>/locations/<region>`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
-   *  for more details on Google Cloud resource names.
+   *  for more details on GCP resource names.
    */
   // const parent = 'abc123'
   /**
-   *  Required. The specification of the
-   *  AzureClient google.cloud.gkemulticloud.v1.AzureClient  to create.
+   *  The maximum number of items to return.
+   *  If not specified, a default value of 50 will be used by the service.
+   *  Regardless of the pageSize value, the response can include a partial list
+   *  and a caller should only rely on response's
+   *  nextPageToken google.cloud.gkemulticloud.v1.ListAttachedClustersResponse.next_page_token 
+   *  to determine if there are more instances left to be queried.
    */
-  // const azureClient = {}
+  // const pageSize = 1234
   /**
-   *  Required. A client provided ID the resource. Must be unique within the
-   *  parent resource.
-   *  The provided ID will be part of the
-   *  AzureClient google.cloud.gkemulticloud.v1.AzureClient  resource name
-   *  formatted as
-   *  `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
-   *  Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 63 characters.
+   *  The `nextPageToken` value returned from a previous
+   *  attachedClusters.list google.cloud.gkemulticloud.v1.AttachedClusters.ListAttachedClusters 
+   *  request, if any.
    */
-  // const azureClientId = 'abc123'
-  /**
-   *  If set, only validate the request, but do not actually create the client.
-   */
-  // const validateOnly = true
+  // const pageToken = 'abc123'
 
   // Imports the Gkemulticloud library
-  const {AzureClustersClient} = require('@google-cloud/gkemulticloud').v1;
+  const {AttachedClustersClient} = require('@google-cloud/gkemulticloud').v1;
 
   // Instantiates a client
-  const gkemulticloudClient = new AzureClustersClient();
+  const gkemulticloudClient = new AttachedClustersClient();
 
-  async function callCreateAzureClient() {
+  async function callListAttachedClusters() {
     // Construct request
     const request = {
       parent,
-      azureClient,
-      azureClientId,
     };
 
     // Run request
-    const [operation] = await gkemulticloudClient.createAzureClient(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await gkemulticloudClient.listAttachedClustersAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callCreateAzureClient();
-  // [END gkemulticloud_v1_generated_AzureClusters_CreateAzureClient_async]
+  callListAttachedClusters();
+  // [END gkemulticloud_v1_generated_AttachedClusters_ListAttachedClusters_async]
 }
 
 process.on('unhandledRejection', err => {

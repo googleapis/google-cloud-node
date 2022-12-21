@@ -29,7 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the AzureCluster google.cloud.gkemulticloud.v1.AzureCluster  resource to describe.
+   *  Required. The name of the
+   *  AzureCluster google.cloud.gkemulticloud.v1.AzureCluster  resource to
+   *  describe.
    *  `AzureCluster` names are formatted as
    *  `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)

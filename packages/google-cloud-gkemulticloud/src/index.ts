@@ -18,12 +18,19 @@
 
 import * as v1 from './v1';
 
+const AttachedClustersClient = v1.AttachedClustersClient;
+type AttachedClustersClient = v1.AttachedClustersClient;
 const AwsClustersClient = v1.AwsClustersClient;
 type AwsClustersClient = v1.AwsClustersClient;
 const AzureClustersClient = v1.AzureClustersClient;
 type AzureClustersClient = v1.AzureClustersClient;
 
-export {v1, AwsClustersClient, AzureClustersClient};
-export default {v1, AwsClustersClient, AzureClustersClient};
+export {v1, AttachedClustersClient, AwsClustersClient, AzureClustersClient};
+export default {
+  v1,
+  AttachedClustersClient,
+  AwsClustersClient,
+  AzureClustersClient,
+};
 import * as protos from '../protos/protos';
 export {protos};
