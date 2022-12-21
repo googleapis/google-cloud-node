@@ -327,6 +327,264 @@
                         }
                       }
                     },
+                    "GetIapSettingsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateIapSettingsRequest": {
+                      "fields": {
+                        "iapSettings": {
+                          "type": "IapSettings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "IapSettings": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "accessSettings": {
+                          "type": "AccessSettings",
+                          "id": 5
+                        },
+                        "applicationSettings": {
+                          "type": "ApplicationSettings",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "AccessSettings": {
+                      "fields": {
+                        "gcipSettings": {
+                          "type": "GcipSettings",
+                          "id": 1
+                        },
+                        "corsSettings": {
+                          "type": "CorsSettings",
+                          "id": 2
+                        },
+                        "oauthSettings": {
+                          "type": "OAuthSettings",
+                          "id": 3
+                        },
+                        "reauthSettings": {
+                          "type": "ReauthSettings",
+                          "id": 6
+                        },
+                        "allowedDomainsSettings": {
+                          "type": "AllowedDomainsSettings",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "GcipSettings": {
+                      "fields": {
+                        "tenantIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "loginPageUri": {
+                          "type": "google.protobuf.StringValue",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CorsSettings": {
+                      "fields": {
+                        "allowHttpOptions": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "OAuthSettings": {
+                      "fields": {
+                        "loginHint": {
+                          "type": "google.protobuf.StringValue",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ReauthSettings": {
+                      "fields": {
+                        "method": {
+                          "type": "Method",
+                          "id": 1
+                        },
+                        "maxAge": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        },
+                        "policyType": {
+                          "type": "PolicyType",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Method": {
+                          "valuesOptions": {
+                            "PASSWORD": {
+                              "deprecated": true
+                            }
+                          },
+                          "values": {
+                            "METHOD_UNSPECIFIED": 0,
+                            "LOGIN": 1,
+                            "PASSWORD": 2,
+                            "SECURE_KEY": 3
+                          }
+                        },
+                        "PolicyType": {
+                          "values": {
+                            "POLICY_TYPE_UNSPECIFIED": 0,
+                            "MINIMUM": 1,
+                            "DEFAULT": 2
+                          }
+                        }
+                      }
+                    },
+                    "AllowedDomainsSettings": {
+                      "oneofs": {
+                        "_enable": {
+                          "oneof": [
+                            "enable"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "enable": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "domains": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ApplicationSettings": {
+                      "fields": {
+                        "csmSettings": {
+                          "type": "CsmSettings",
+                          "id": 1
+                        },
+                        "accessDeniedPageSettings": {
+                          "type": "AccessDeniedPageSettings",
+                          "id": 2
+                        },
+                        "cookieDomain": {
+                          "type": "google.protobuf.StringValue",
+                          "id": 3
+                        },
+                        "attributePropagationSettings": {
+                          "type": "AttributePropagationSettings",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "CsmSettings": {
+                      "fields": {
+                        "rctokenAud": {
+                          "type": "google.protobuf.StringValue",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessDeniedPageSettings": {
+                      "oneofs": {
+                        "_remediationTokenGenerationEnabled": {
+                          "oneof": [
+                            "remediationTokenGenerationEnabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "accessDeniedPageUri": {
+                          "type": "google.protobuf.StringValue",
+                          "id": 1
+                        },
+                        "generateTroubleshootingUri": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 2
+                        },
+                        "remediationTokenGenerationEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AttributePropagationSettings": {
+                      "oneofs": {
+                        "_expression": {
+                          "oneof": [
+                            "expression"
+                          ]
+                        },
+                        "_enable": {
+                          "oneof": [
+                            "enable"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "expression": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "outputCredentials": {
+                          "rule": "repeated",
+                          "type": "OutputCredentials",
+                          "id": 2
+                        },
+                        "enable": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "OutputCredentials": {
+                          "values": {
+                            "OUTPUT_CREDENTIALS_UNSPECIFIED": 0,
+                            "HEADER": 1,
+                            "JWT": 2,
+                            "RCTOKEN": 3
+                          }
+                        }
+                      }
+                    },
                     "IdentityAwareProxyOAuthService": {
                       "options": {
                         "(google.api.default_host)": "iap.googleapis.com",
@@ -450,169 +708,6 @@
                               }
                             }
                           ]
-                        }
-                      }
-                    },
-                    "GetIapSettingsRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateIapSettingsRequest": {
-                      "fields": {
-                        "iapSettings": {
-                          "type": "IapSettings",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "IapSettings": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "accessSettings": {
-                          "type": "AccessSettings",
-                          "id": 5
-                        },
-                        "applicationSettings": {
-                          "type": "ApplicationSettings",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "AccessSettings": {
-                      "fields": {
-                        "gcipSettings": {
-                          "type": "GcipSettings",
-                          "id": 1
-                        },
-                        "corsSettings": {
-                          "type": "CorsSettings",
-                          "id": 2
-                        },
-                        "oauthSettings": {
-                          "type": "OAuthSettings",
-                          "id": 3
-                        },
-                        "reauthSettings": {
-                          "type": "ReauthSettings",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "GcipSettings": {
-                      "fields": {
-                        "tenantIds": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1
-                        },
-                        "loginPageUri": {
-                          "type": "google.protobuf.StringValue",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "CorsSettings": {
-                      "fields": {
-                        "allowHttpOptions": {
-                          "type": "google.protobuf.BoolValue",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "OAuthSettings": {
-                      "fields": {
-                        "loginHint": {
-                          "type": "google.protobuf.StringValue",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ReauthSettings": {
-                      "fields": {
-                        "method": {
-                          "type": "Method",
-                          "id": 1
-                        },
-                        "maxAge": {
-                          "type": "google.protobuf.Duration",
-                          "id": 2
-                        },
-                        "policyType": {
-                          "type": "PolicyType",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "Method": {
-                          "values": {
-                            "METHOD_UNSPECIFIED": 0,
-                            "LOGIN": 1,
-                            "PASSWORD": 2,
-                            "SECURE_KEY": 3
-                          }
-                        },
-                        "PolicyType": {
-                          "values": {
-                            "POLICY_TYPE_UNSPECIFIED": 0,
-                            "MINIMUM": 1,
-                            "DEFAULT": 2
-                          }
-                        }
-                      }
-                    },
-                    "ApplicationSettings": {
-                      "fields": {
-                        "csmSettings": {
-                          "type": "CsmSettings",
-                          "id": 1
-                        },
-                        "accessDeniedPageSettings": {
-                          "type": "AccessDeniedPageSettings",
-                          "id": 2
-                        },
-                        "cookieDomain": {
-                          "type": "google.protobuf.StringValue",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "CsmSettings": {
-                      "fields": {
-                        "rctokenAud": {
-                          "type": "google.protobuf.StringValue",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "AccessDeniedPageSettings": {
-                      "fields": {
-                        "accessDeniedPageUri": {
-                          "type": "google.protobuf.StringValue",
-                          "id": 1
-                        },
-                        "generateTroubleshootingUri": {
-                          "type": "google.protobuf.BoolValue",
-                          "id": 2
                         }
                       }
                     },

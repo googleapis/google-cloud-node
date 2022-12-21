@@ -12,6 +12,14 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Attached_clusters.create_attached_cluster](#attached_clusters.create_attached_cluster)
+  * [Attached_clusters.delete_attached_cluster](#attached_clusters.delete_attached_cluster)
+  * [Attached_clusters.generate_attached_cluster_install_manifest](#attached_clusters.generate_attached_cluster_install_manifest)
+  * [Attached_clusters.get_attached_cluster](#attached_clusters.get_attached_cluster)
+  * [Attached_clusters.get_attached_server_config](#attached_clusters.get_attached_server_config)
+  * [Attached_clusters.import_attached_cluster](#attached_clusters.import_attached_cluster)
+  * [Attached_clusters.list_attached_clusters](#attached_clusters.list_attached_clusters)
+  * [Attached_clusters.update_attached_cluster](#attached_clusters.update_attached_cluster)
   * [Aws_clusters.create_aws_cluster](#aws_clusters.create_aws_cluster)
   * [Aws_clusters.create_aws_node_pool](#aws_clusters.create_aws_node_pool)
   * [Aws_clusters.delete_aws_cluster](#aws_clusters.delete_aws_cluster)
@@ -55,6 +63,142 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Attached_clusters.create_attached_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.create_attached_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.create_attached_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.create_attached_cluster.js`
+
+
+-----
+
+
+
+
+### Attached_clusters.delete_attached_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.delete_attached_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.delete_attached_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.delete_attached_cluster.js`
+
+
+-----
+
+
+
+
+### Attached_clusters.generate_attached_cluster_install_manifest
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_install_manifest.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_install_manifest.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_install_manifest.js`
+
+
+-----
+
+
+
+
+### Attached_clusters.get_attached_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_cluster.js`
+
+
+-----
+
+
+
+
+### Attached_clusters.get_attached_server_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_server_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_server_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_server_config.js`
+
+
+-----
+
+
+
+
+### Attached_clusters.import_attached_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.import_attached_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.import_attached_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.import_attached_cluster.js`
+
+
+-----
+
+
+
+
+### Attached_clusters.list_attached_clusters
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.list_attached_clusters.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.list_attached_clusters.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.list_attached_clusters.js`
+
+
+-----
+
+
+
+
+### Attached_clusters.update_attached_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.update_attached_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.update_attached_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.update_attached_cluster.js`
+
+
+-----
+
 
 
 

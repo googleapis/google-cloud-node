@@ -29,7 +29,8 @@ function main(azureNodePool, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The AzureNodePool google.cloud.gkemulticloud.v1.AzureNodePool  resource to update.
+   *  Required. The AzureNodePool google.cloud.gkemulticloud.v1.AzureNodePool 
+   *  resource to update.
    */
   // const azureNodePool = {}
   /**
@@ -44,7 +45,7 @@ function main(azureNodePool, updateMask) {
    *   *   `version`.
    *   *   `autoscaling.min_node_count`.
    *   *   `autoscaling.max_node_count`.
-   *   *   `config.vm_size`.
+   *   *   `config.ssh_config.authorized_key`.
    */
   // const updateMask = {}
 
