@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START metastore_v1alpha_generated_DataprocMetastoreFederation_DeleteFederation_async]
+function main(service, tableName, dbName, destinationDbName) {
+  // [START metastore_v1alpha_generated_DataprocMetastore_MoveTableToDatabase_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,45 +29,47 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The relative resource name of the metastore federation to delete,
-   *  in the following form:
-   *  `projects/{project_number}/locations/{location_id}/federations/{federation_id}`.
+   *  Required. The relative resource name of the metastore service to mutate
+   *  metadata, in the following format:
+   *  `projects/{project_id}/locations/{location_id}/services/{service_id}`.
    */
-  // const name = 'abc123'
+  // const service = 'abc123'
   /**
-   *  Optional. A request ID. Specify a unique request ID to allow the server to
-   *  ignore the request if it has completed. The server will ignore subsequent
-   *  requests that provide a duplicate request ID for at least 60 minutes after
-   *  the first request.
-   *  For example, if an initial request times out, followed by another request
-   *  with the same request ID, the server ignores the second request to prevent
-   *  the creation of duplicate commitments.
-   *  The request ID must be a valid
-   *  UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
-   *  A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+   *  Required. The name of the table to be moved.
    */
-  // const requestId = 'abc123'
+  // const tableName = 'abc123'
+  /**
+   *  Required. The name of the database where the table resides.
+   */
+  // const dbName = 'abc123'
+  /**
+   *  Required. The name of the database where the table should be moved.
+   */
+  // const destinationDbName = 'abc123'
 
   // Imports the Metastore library
-  const {DataprocMetastoreFederationClient} = require('@google-cloud/dataproc-metastore').v1alpha;
+  const {DataprocMetastoreClient} = require('@google-cloud/dataproc-metastore').v1alpha;
 
   // Instantiates a client
-  const metastoreClient = new DataprocMetastoreFederationClient();
+  const metastoreClient = new DataprocMetastoreClient();
 
-  async function callDeleteFederation() {
+  async function callMoveTableToDatabase() {
     // Construct request
     const request = {
-      name,
+      service,
+      tableName,
+      dbName,
+      destinationDbName,
     };
 
     // Run request
-    const [operation] = await metastoreClient.deleteFederation(request);
+    const [operation] = await metastoreClient.moveTableToDatabase(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteFederation();
-  // [END metastore_v1alpha_generated_DataprocMetastoreFederation_DeleteFederation_async]
+  callMoveTableToDatabase();
+  // [END metastore_v1alpha_generated_DataprocMetastore_MoveTableToDatabase_async]
 }
 
 process.on('unhandledRejection', err => {

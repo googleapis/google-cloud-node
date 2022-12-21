@@ -145,6 +145,9 @@ export class DataprocMetastoreClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -407,6 +410,24 @@ export class DataprocMetastoreClient {
     const deleteBackupMetadata = protoFilesRoot.lookup(
       '.google.cloud.metastore.v1beta.OperationMetadata'
     ) as gax.protobuf.Type;
+    const queryMetadataResponse = protoFilesRoot.lookup(
+      '.google.cloud.metastore.v1beta.QueryMetadataResponse'
+    ) as gax.protobuf.Type;
+    const queryMetadataMetadata = protoFilesRoot.lookup(
+      '.google.cloud.metastore.v1beta.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const moveTableToDatabaseResponse = protoFilesRoot.lookup(
+      '.google.cloud.metastore.v1beta.MoveTableToDatabaseResponse'
+    ) as gax.protobuf.Type;
+    const moveTableToDatabaseMetadata = protoFilesRoot.lookup(
+      '.google.cloud.metastore.v1beta.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const alterMetadataResourceLocationResponse = protoFilesRoot.lookup(
+      '.google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse'
+    ) as gax.protobuf.Type;
+    const alterMetadataResourceLocationMetadata = protoFilesRoot.lookup(
+      '.google.cloud.metastore.v1beta.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createService: new this._gaxModule.LongrunningDescriptor(
@@ -453,6 +474,25 @@ export class DataprocMetastoreClient {
         this.operationsClient,
         deleteBackupResponse.decode.bind(deleteBackupResponse),
         deleteBackupMetadata.decode.bind(deleteBackupMetadata)
+      ),
+      queryMetadata: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        queryMetadataResponse.decode.bind(queryMetadataResponse),
+        queryMetadataMetadata.decode.bind(queryMetadataMetadata)
+      ),
+      moveTableToDatabase: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        moveTableToDatabaseResponse.decode.bind(moveTableToDatabaseResponse),
+        moveTableToDatabaseMetadata.decode.bind(moveTableToDatabaseMetadata)
+      ),
+      alterMetadataResourceLocation: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        alterMetadataResourceLocationResponse.decode.bind(
+          alterMetadataResourceLocationResponse
+        ),
+        alterMetadataResourceLocationMetadata.decode.bind(
+          alterMetadataResourceLocationMetadata
+        )
       ),
     };
 
@@ -521,6 +561,10 @@ export class DataprocMetastoreClient {
       'getBackup',
       'createBackup',
       'deleteBackup',
+      'removeIamPolicy',
+      'queryMetadata',
+      'moveTableToDatabase',
+      'alterMetadataResourceLocation',
     ];
     for (const methodName of dataprocMetastoreStubMethods) {
       const callPromise = this.dataprocMetastoreStub.then(
@@ -888,6 +932,105 @@ export class DataprocMetastoreClient {
       });
     this.initialize();
     return this.innerApiCalls.getBackup(request, options, callback);
+  }
+  /**
+   * Removes the attached IAM policies for a resource
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   Required. The relative resource name of the dataplane resource to remove
+   *   IAM policy, in the following form:
+   *
+   *   `projects/{project_id}/locations/{location_id}/services/{service_id}/databases/{database_id}`
+   *   or
+   *   `projects/{project_id}/locations/{location_id}/services/{service_id}/databases/{database_id}/tables/{table_id}`.
+   * @param {boolean} [request.asynchronous]
+   *   Optional. Removes IAM policy attached to database or table asynchronously
+   *   when it is set. The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RemoveIamPolicyResponse]{@link google.cloud.metastore.v1beta.RemoveIamPolicyResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.remove_iam_policy.js</caption>
+   * region_tag:metastore_v1beta_generated_DataprocMetastore_RemoveIamPolicy_async
+   */
+  removeIamPolicy(
+    request?: protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
+      protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  removeIamPolicy(
+    request: protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
+      | protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeIamPolicy(
+    request: protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
+      | protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeIamPolicy(
+    request?: protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
+          | protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
+      | protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse,
+      protos.google.cloud.metastore.v1beta.IRemoveIamPolicyRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.removeIamPolicy(request, options, callback);
   }
 
   /**
@@ -2332,6 +2475,455 @@ export class DataprocMetastoreClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
+      protos.google.cloud.metastore.v1beta.OperationMetadata
+    >;
+  }
+  /**
+   * Query DPMS metadata.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.service
+   *   Required. The relative resource name of the metastore service to query
+   *   metadata, in the following format:
+   *
+   *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+   * @param {string} request.query
+   *   Required. A read-only SQL query to execute against the metadata database.
+   *   The query cannot change or mutate the data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.query_metadata.js</caption>
+   * region_tag:metastore_v1beta_generated_DataprocMetastore_QueryMetadata_async
+   */
+  queryMetadata(
+    request?: protos.google.cloud.metastore.v1beta.IQueryMetadataRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  queryMetadata(
+    request: protos.google.cloud.metastore.v1beta.IQueryMetadataRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  queryMetadata(
+    request: protos.google.cloud.metastore.v1beta.IQueryMetadataRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  queryMetadata(
+    request?: protos.google.cloud.metastore.v1beta.IQueryMetadataRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
+            protos.google.cloud.metastore.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        service: request.service ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.queryMetadata(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `queryMetadata()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.query_metadata.js</caption>
+   * region_tag:metastore_v1beta_generated_DataprocMetastore_QueryMetadata_async
+   */
+  async checkQueryMetadataProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.metastore.v1beta.QueryMetadataResponse,
+      protos.google.cloud.metastore.v1beta.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.queryMetadata,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.metastore.v1beta.QueryMetadataResponse,
+      protos.google.cloud.metastore.v1beta.OperationMetadata
+    >;
+  }
+  /**
+   * Move a table to another database.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.service
+   *   Required. The relative resource name of the metastore service to mutate
+   *   metadata, in the following format:
+   *
+   *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+   * @param {string} request.tableName
+   *   Required. The name of the table to be moved.
+   * @param {string} request.dbName
+   *   Required. The name of the database where the table resides.
+   * @param {string} request.destinationDbName
+   *   Required. The name of the database where the table should be moved.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.move_table_to_database.js</caption>
+   * region_tag:metastore_v1beta_generated_DataprocMetastore_MoveTableToDatabase_async
+   */
+  moveTableToDatabase(
+    request?: protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  moveTableToDatabase(
+    request: protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  moveTableToDatabase(
+    request: protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  moveTableToDatabase(
+    request?: protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
+            protos.google.cloud.metastore.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        service: request.service ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.moveTableToDatabase(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `moveTableToDatabase()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.move_table_to_database.js</caption>
+   * region_tag:metastore_v1beta_generated_DataprocMetastore_MoveTableToDatabase_async
+   */
+  async checkMoveTableToDatabaseProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.metastore.v1beta.MoveTableToDatabaseResponse,
+      protos.google.cloud.metastore.v1beta.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.moveTableToDatabase,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.metastore.v1beta.MoveTableToDatabaseResponse,
+      protos.google.cloud.metastore.v1beta.OperationMetadata
+    >;
+  }
+  /**
+   * Alter metadata resource location. The metadata resource can be a database,
+   * table, or partition. This functionality only updates the parent directory
+   * for the respective metadata resource and does not transfer any existing
+   * data to the new location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.service
+   *   Required. The relative resource name of the metastore service to mutate
+   *   metadata, in the following format:
+   *
+   *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+   * @param {string} request.resourceName
+   *   Required. The relative metadata resource name in the following format.
+   *
+   *   `databases/{database_id}`
+   *   or
+   *   `databases/{database_id}/tables/{table_id}`
+   *   or
+   *   `databases/{database_id}/tables/{table_id}/partitions/{partition_id}`
+   * @param {string} request.locationUri
+   *   Required. The new location URI for the metadata resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.alter_metadata_resource_location.js</caption>
+   * region_tag:metastore_v1beta_generated_DataprocMetastore_AlterMetadataResourceLocation_async
+   */
+  alterMetadataResourceLocation(
+    request?: protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  alterMetadataResourceLocation(
+    request: protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  alterMetadataResourceLocation(
+    request: protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  alterMetadataResourceLocation(
+    request?: protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
+            protos.google.cloud.metastore.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
+        protos.google.cloud.metastore.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        service: request.service ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.alterMetadataResourceLocation(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `alterMetadataResourceLocation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/dataproc_metastore.alter_metadata_resource_location.js</caption>
+   * region_tag:metastore_v1beta_generated_DataprocMetastore_AlterMetadataResourceLocation_async
+   */
+  async checkAlterMetadataResourceLocationProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse,
+      protos.google.cloud.metastore.v1beta.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.alterMetadataResourceLocation,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse,
       protos.google.cloud.metastore.v1beta.OperationMetadata
     >;
   }

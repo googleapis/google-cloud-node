@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START metastore_v1beta_generated_DataprocMetastoreFederation_GetFederation_async]
+function main(resource) {
+  // [START metastore_v1beta_generated_DataprocMetastore_RemoveIamPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,38 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The relative resource name of the metastore federation to
-   *  retrieve, in the following form:
-   *  `projects/{project_number}/locations/{location_id}/federations/{federation_id}`.
+   *  Required. The relative resource name of the dataplane resource to remove
+   *  IAM policy, in the following form:
+   *  `projects/{project_id}/locations/{location_id}/services/{service_id}/databases/{database_id}`
+   *  or
+   *  `projects/{project_id}/locations/{location_id}/services/{service_id}/databases/{database_id}/tables/{table_id}`.
    */
-  // const name = 'abc123'
+  // const resource = 'abc123'
+  /**
+   *  Optional. Removes IAM policy attached to database or table asynchronously
+   *  when it is set. The default is false.
+   */
+  // const asynchronous = true
 
   // Imports the Metastore library
-  const {DataprocMetastoreFederationClient} = require('@google-cloud/dataproc-metastore').v1beta;
+  const {DataprocMetastoreClient} = require('@google-cloud/dataproc-metastore').v1beta;
 
   // Instantiates a client
-  const metastoreClient = new DataprocMetastoreFederationClient();
+  const metastoreClient = new DataprocMetastoreClient();
 
-  async function callGetFederation() {
+  async function callRemoveIamPolicy() {
     // Construct request
     const request = {
-      name,
+      resource,
     };
 
     // Run request
-    const response = await metastoreClient.getFederation(request);
+    const response = await metastoreClient.removeIamPolicy(request);
     console.log(response);
   }
 
-  callGetFederation();
-  // [END metastore_v1beta_generated_DataprocMetastoreFederation_GetFederation_async]
+  callRemoveIamPolicy();
+  // [END metastore_v1beta_generated_DataprocMetastore_RemoveIamPolicy_async]
 }
 
 process.on('unhandledRejection', err => {
