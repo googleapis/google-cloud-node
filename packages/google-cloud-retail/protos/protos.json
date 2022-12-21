@@ -9088,6 +9088,10 @@
                         "exactSearchableOption": {
                           "type": "ExactSearchableOption",
                           "id": 11
+                        },
+                        "retrievableOption": {
+                          "type": "RetrievableOption",
+                          "id": 12
                         }
                       },
                       "nested": {
@@ -9124,6 +9128,13 @@
                             "EXACT_SEARCHABLE_OPTION_UNSPECIFIED": 0,
                             "EXACT_SEARCHABLE_ENABLED": 1,
                             "EXACT_SEARCHABLE_DISABLED": 2
+                          }
+                        },
+                        "RetrievableOption": {
+                          "values": {
+                            "RETRIEVABLE_OPTION_UNSPECIFIED": 0,
+                            "RETRIEVABLE_ENABLED": 1,
+                            "RETRIEVABLE_DISABLED": 2
                           }
                         }
                       }
@@ -9253,6 +9264,23 @@
                         "languageCode": {
                           "type": "string",
                           "id": 5
+                        },
+                        "feeds": {
+                          "rule": "repeated",
+                          "type": "MerchantCenterFeedFilter",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "MerchantCenterFeedFilter": {
+                      "fields": {
+                        "primaryFeedId": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "primaryFeedName": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -10292,7 +10320,10 @@
                         },
                         "retrievableFields": {
                           "type": "google.protobuf.FieldMask",
-                          "id": 30
+                          "id": 30,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "variants": {
                           "rule": "repeated",
@@ -11919,6 +11950,11 @@
                           "rule": "repeated",
                           "type": "BigQueryOutputResult",
                           "id": 1
+                        },
+                        "gcsResult": {
+                          "rule": "repeated",
+                          "type": "GcsOutputResult",
+                          "id": 2
                         }
                       }
                     },
@@ -11931,6 +11967,14 @@
                         "tableId": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "GcsOutputResult": {
+                      "fields": {
+                        "outputUri": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -13622,11 +13666,26 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "writeAsync": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },
                     "CollectUserEventRequest": {
+                      "oneofs": {
+                        "conversionRule": {
+                          "oneof": [
+                            "prebuiltRule"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "prebuiltRule": {
+                          "type": "string",
+                          "id": 6
+                        },
                         "parent": {
                           "type": "string",
                           "id": 1,
@@ -13648,6 +13707,10 @@
                         "ets": {
                           "type": "int64",
                           "id": 4
+                        },
+                        "rawJson": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
