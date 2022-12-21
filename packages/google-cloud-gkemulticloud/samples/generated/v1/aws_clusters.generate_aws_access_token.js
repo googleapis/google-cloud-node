@@ -29,7 +29,9 @@ function main(awsCluster) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the AwsCluster google.cloud.gkemulticloud.v1.AwsCluster  resource to authenticate to.
+   *  Required. The name of the
+   *  AwsCluster google.cloud.gkemulticloud.v1.AwsCluster  resource to
+   *  authenticate to.
    *  `AwsCluster` names are formatted as
    *  `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)

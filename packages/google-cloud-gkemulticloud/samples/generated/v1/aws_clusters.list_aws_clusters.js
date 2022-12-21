@@ -41,13 +41,14 @@ function main(parent) {
    *  If not specified, a default value of 50 will be used by the service.
    *  Regardless of the pageSize value, the response can include a partial list
    *  and a caller should only rely on response's
-   *  nextPageToken google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token  to determine if
-   *  there are more instances left to be queried.
+   *  nextPageToken google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token 
+   *  to determine if there are more instances left to be queried.
    */
   // const pageSize = 1234
   /**
    *  The `nextPageToken` value returned from a previous
-   *  awsClusters.list google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters  request, if any.
+   *  awsClusters.list google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters 
+   *  request, if any.
    */
   // const pageToken = 'abc123'
 

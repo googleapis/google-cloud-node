@@ -29,7 +29,8 @@ function main(awsNodePool, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The AwsNodePool google.cloud.gkemulticloud.v1.AwsNodePool  resource to update.
+   *  Required. The AwsNodePool google.cloud.gkemulticloud.v1.AwsNodePool 
+   *  resource to update.
    */
   // const awsNodePool = {}
   /**
@@ -55,6 +56,13 @@ function main(awsNodePool, updateMask) {
    *   *   `config.proxy_config.secret_version`.
    *   *   `config.ssh_config`.
    *   *   `config.ssh_config.ec2_key_pair`.
+   *   *   `config.instance_placement.tenancy`.
+   *   *   `config.iam_instance_profile`.
+   *   *   `config.labels`.
+   *   *   `config.tags`.
+   *   *   `config.autoscaling_metrics_collection`.
+   *   *   `config.autoscaling_metrics_collection.granularity`.
+   *   *   `config.autoscaling_metrics_collection.metrics`.
    */
   // const updateMask = {}
 
