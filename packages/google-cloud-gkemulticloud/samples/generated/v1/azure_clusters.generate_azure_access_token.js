@@ -29,7 +29,9 @@ function main(azureCluster) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the AzureCluster google.cloud.gkemulticloud.v1.AzureCluster  resource to authenticate to.
+   *  Required. The name of the
+   *  AzureCluster google.cloud.gkemulticloud.v1.AzureCluster  resource to
+   *  authenticate to.
    *  `AzureCluster` names are formatted as
    *  `projects/<project-id>/locations/<region>/AzureClusters/<cluster-id>`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)

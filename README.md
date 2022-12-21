@@ -177,6 +177,7 @@ applications that interact with individual Google Cloud services:
 | [Run](https://github.com/googleapis/nodejs-run) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/run)](https://npm.im/@google-cloud/run) |
 | [Trace](https://github.com/googleapis/cloud-trace-nodejs) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/trace-agent)](https://npm.im/@google-cloud/trace-agent) |
 | [Video Stitcher API](https://github.com/googleapis/nodejs-video-stitcher) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/video-stitcher)](https://npm.im/@google-cloud/video-stitcher) |
+| [VMware Engine API](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-vmwareengine) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/vmwareengine)](https://npm.im/@google-cloud/vmwareengine) |
 
 
 If the service is not listed above, [google-api-nodejs-client](https://github.com/googleapis/google-api-nodejs-client) interfaces
