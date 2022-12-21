@@ -29,7 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name the AzureCluster google.cloud.gkemulticloud.v1.AzureCluster  to delete.
+   *  Required. The resource name the
+   *  AzureCluster google.cloud.gkemulticloud.v1.AzureCluster  to delete.
    *  `AzureCluster` names are formatted as
    *  `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
@@ -37,9 +38,10 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  If set to true, and the AzureCluster google.cloud.gkemulticloud.v1.AzureCluster  resource is not found,
-   *  the request will succeed but no action will be taken on the server and a
-   *  completed Operation google.longrunning.Operation  will be returned.
+   *  If set to true, and the
+   *  AzureCluster google.cloud.gkemulticloud.v1.AzureCluster  resource is not
+   *  found, the request will succeed but no action will be taken on the server
+   *  and a completed Operation google.longrunning.Operation  will be returned.
    *  Useful for idempotent deletion.
    */
   // const allowMissing = true
@@ -48,7 +50,8 @@ function main(name) {
    */
   // const validateOnly = true
   /**
-   *  The current etag of the AzureCluster google.cloud.gkemulticloud.v1.AzureCluster.
+   *  The current etag of the
+   *  AzureCluster google.cloud.gkemulticloud.v1.AzureCluster.
    *  Allows clients to perform deletions through optimistic concurrency control.
    *  If the provided etag does not match the current etag of the cluster,
    *  the request will fail and an ABORTED error will be returned.
