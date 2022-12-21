@@ -29,7 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of Processor google.cloud.documentai.v1beta3.Processor  or
+   *  Required. The resource name of
+   *  Processor google.cloud.documentai.v1beta3.Processor  or
    *  ProcessorVersion google.cloud.documentai.v1beta3.ProcessorVersion.
    *  Format: `projects/{project}/locations/{location}/processors/{processor}`,
    *  or
@@ -57,6 +58,10 @@ function main(name) {
    *  false.
    */
   // const skipHumanReview = true
+  /**
+   *  Inference-time options for the process API
+   */
+  // const processOptions = {}
 
   // Imports the Documentai library
   const {DocumentProcessorServiceClient} = require('@google-cloud/documentai').v1beta3;

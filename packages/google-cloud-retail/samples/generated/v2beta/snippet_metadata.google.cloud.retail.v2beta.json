@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-retail",
-        "version": "2.1.1",
+        "version": "2.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -554,7 +554,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 114,
+                    "end": 115,
                     "type": "FULL"
                 }
             ],
@@ -1190,7 +1190,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 178,
+                    "end": 177,
                     "type": "FULL"
                 }
             ],
@@ -2254,7 +2254,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 59,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -2270,6 +2270,10 @@
                     {
                         "name": "user_event",
                         "type": ".google.cloud.retail.v2beta.UserEvent"
+                    },
+                    {
+                        "name": "write_async",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.retail.v2beta.UserEvent",
@@ -2298,7 +2302,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 85,
                     "type": "FULL"
                 }
             ],
@@ -2307,6 +2311,10 @@
                 "fullName": "google.cloud.retail.v2beta.UserEventService.CollectUserEvent",
                 "async": true,
                 "parameters": [
+                    {
+                        "name": "prebuilt_rule",
+                        "type": "TYPE_STRING"
+                    },
                     {
                         "name": "parent",
                         "type": "TYPE_STRING"
@@ -2322,6 +2330,10 @@
                     {
                         "name": "ets",
                         "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "raw_json",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.api.HttpBody",

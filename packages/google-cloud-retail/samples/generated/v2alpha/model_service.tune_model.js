@@ -31,7 +31,7 @@ function main(name) {
   /**
    *  Required. The resource name of the model to tune.
    *  Format:
-   *  projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}
+   *  `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`
    */
   // const name = 'abc123'
 

@@ -1046,25 +1046,6 @@
     "distribution_name": "@google-cloud/bigquery-storage",
     "release_level": "stable",
     "product_documentation": "https://cloud.google.com/bigquery/docs/reference/storage",
-    "repo": "googleapis/google-cloud-node",
-    "default_version": "v1",
-    "language": "nodejs",
-    "requires_billing": true,
-    "issue_tracker": "https://b.corp.google.com/savedsearches/559654",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-storage/latest",
-    "name": "bigquerystorage",
-    "name_pretty": "Google BigQuery Storage",
-    "api_id": "bigquerystorage.googleapis.com",
-    "codeowner_team": "@googleapis/api-bigquery",
-    "api_shortname": "bigquerystorage",
-    "library_type": "GAPIC_AUTO",
-    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-storage",
-    "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
-  },
-  {
-    "distribution_name": "@google-cloud/bigquery-storage",
-    "release_level": "stable",
-    "product_documentation": "https://cloud.google.com/bigquery/docs/reference/storage",
     "repo": "googleapis/nodejs-bigquery-storage",
     "default_version": "v1",
     "language": "nodejs",
@@ -3056,5 +3037,22 @@
     "requires_billing": true,
     "linkToRepoHomepage": "https://github.com/googleapis/nodejs-video-stitcher",
     "support_documentation": "https://cloud.google.com/video-stitcher/docs/getting-support"
+  },
+  {
+    "name": "vmwareengine",
+    "name_pretty": "VMware Engine API",
+    "product_documentation": "cloud.google.com/vmware-engine/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vmwareengine/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/vmwareengine",
+    "api_id": "vmwareengine.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-vmwareengine",
+    "support_documentation": "https://cloud.google.com/vmware-engine/docs/getting-support"
   }
 ]

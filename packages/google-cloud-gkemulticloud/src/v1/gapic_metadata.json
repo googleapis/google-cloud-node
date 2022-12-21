@@ -5,6 +5,104 @@
   "protoPackage": "google.cloud.gkemulticloud.v1",
   "libraryPackage": "@google-cloud/gkemulticloud",
   "services": {
+    "AttachedClusters": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AttachedClustersClient",
+          "rpcs": {
+            "GetAttachedCluster": {
+              "methods": [
+                "getAttachedCluster"
+              ]
+            },
+            "GetAttachedServerConfig": {
+              "methods": [
+                "getAttachedServerConfig"
+              ]
+            },
+            "GenerateAttachedClusterInstallManifest": {
+              "methods": [
+                "generateAttachedClusterInstallManifest"
+              ]
+            },
+            "CreateAttachedCluster": {
+              "methods": [
+                "createAttachedCluster"
+              ]
+            },
+            "UpdateAttachedCluster": {
+              "methods": [
+                "updateAttachedCluster"
+              ]
+            },
+            "ImportAttachedCluster": {
+              "methods": [
+                "importAttachedCluster"
+              ]
+            },
+            "DeleteAttachedCluster": {
+              "methods": [
+                "deleteAttachedCluster"
+              ]
+            },
+            "ListAttachedClusters": {
+              "methods": [
+                "listAttachedClusters",
+                "listAttachedClustersStream",
+                "listAttachedClustersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AttachedClustersClient",
+          "rpcs": {
+            "GetAttachedCluster": {
+              "methods": [
+                "getAttachedCluster"
+              ]
+            },
+            "GetAttachedServerConfig": {
+              "methods": [
+                "getAttachedServerConfig"
+              ]
+            },
+            "GenerateAttachedClusterInstallManifest": {
+              "methods": [
+                "generateAttachedClusterInstallManifest"
+              ]
+            },
+            "CreateAttachedCluster": {
+              "methods": [
+                "createAttachedCluster"
+              ]
+            },
+            "UpdateAttachedCluster": {
+              "methods": [
+                "updateAttachedCluster"
+              ]
+            },
+            "ImportAttachedCluster": {
+              "methods": [
+                "importAttachedCluster"
+              ]
+            },
+            "DeleteAttachedCluster": {
+              "methods": [
+                "deleteAttachedCluster"
+              ]
+            },
+            "ListAttachedClusters": {
+              "methods": [
+                "listAttachedClusters",
+                "listAttachedClustersStream",
+                "listAttachedClustersAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "AwsClusters": {
       "clients": {
         "grpc": {

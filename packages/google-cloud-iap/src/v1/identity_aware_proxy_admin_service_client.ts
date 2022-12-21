@@ -121,6 +121,9 @@ export class IdentityAwareProxyAdminServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -811,11 +814,11 @@ export class IdentityAwareProxyAdminServiceClient {
    * @param {google.cloud.iap.v1.TunnelDestGroup} request.tunnelDestGroup
    *   Required. The TunnelDestGroup to create.
    * @param {string} request.tunnelDestGroupId
-   *   Required. The ID to use for the TunnelDestGroup, which becomes the final component of
-   *   the resource name.
+   *   Required. The ID to use for the TunnelDestGroup, which becomes the final
+   *   component of the resource name.
    *
    *   This value must be 4-63 characters, and valid characters
-   *   are `{@link 0-9|a-z}-`.
+   *   are `[a-z]-`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

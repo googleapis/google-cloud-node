@@ -33,7 +33,7 @@ function main(placement, visitorId) {
    *  `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
    *  or the name of the legacy placement resource, such as
    *  `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
-   *  This field is used to identify the serving configuration name and the set
+   *  This field is used to identify the serving config name and the set
    *  of models that will be used to make the search.
    */
   // const placement = 'abc123'
@@ -224,7 +224,7 @@ function main(placement, visitorId) {
    *  the same as
    *  UserEvent.page_categories google.cloud.retail.v2.UserEvent.page_categories;
    *  To represent full path of category, use '>' sign to separate different
-   *  hierarchies. If '>' is part of the category name, please replace it with
+   *  hierarchies. If '>' is part of the category name, replace it with
    *  other character(s).
    *  Category pages include special pages such as sales or promotions. For
    *  instance, a special sale page may have the category hierarchy:

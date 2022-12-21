@@ -27,7 +27,7 @@ const {TablesServiceClient} = require('@google/area120-tables');
 
 const client = new TablesServiceClient();
 
-describe.skip('Quickstart', () => {
+describe('Quickstart', () => {
   let projectId;
 
   before(async () => {

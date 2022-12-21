@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.4.0...container-v4.5.0) (2022-12-16)
+
+
+### Features
+
+* Add a FastSocket API ([b907f45](https://github.com/googleapis/google-cloud-node/commit/b907f4559965bdfc7b38388671ab2cb32b48a35d))
+* Add a FastSocket API ([b907f45](https://github.com/googleapis/google-cloud-node/commit/b907f4559965bdfc7b38388671ab2cb32b48a35d))
+* Add compact placement feature for node pools ([b907f45](https://github.com/googleapis/google-cloud-node/commit/b907f4559965bdfc7b38388671ab2cb32b48a35d))
+* Add compact placement feature for node pools  ([#3636](https://github.com/googleapis/google-cloud-node/issues/3636)) ([b907f45](https://github.com/googleapis/google-cloud-node/commit/b907f4559965bdfc7b38388671ab2cb32b48a35d))
+* Add support for specifying stack type for clusters. This will allow clusters to be created as dual stack or toggled between IPV4 and dual stack ([#3754](https://github.com/googleapis/google-cloud-node/issues/3754)) ([283d098](https://github.com/googleapis/google-cloud-node/commit/283d098d0cc66663d19568f95ea8f35d8385cd3e))
+
 ## [4.4.0](https://github.com/googleapis/nodejs-cloud-container/compare/v4.3.0...v4.4.0) (2022-11-10)
 
 

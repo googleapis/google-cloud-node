@@ -125,6 +125,9 @@ export class CatalogServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -734,7 +737,7 @@ export class CatalogServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Full CompletionConfig resource name. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/completionConfig
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/completionConfig`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

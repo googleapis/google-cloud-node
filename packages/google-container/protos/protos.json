@@ -2161,6 +2161,10 @@
                     "desiredNodePoolLoggingConfig": {
                       "type": "NodePoolLoggingConfig",
                       "id": 116
+                    },
+                    "desiredStackType": {
+                      "type": "StackType",
+                      "id": 119
                     }
                   }
                 },
@@ -7358,6 +7362,10 @@
                     "desiredNodePoolLoggingConfig": {
                       "type": "NodePoolLoggingConfig",
                       "id": 116
+                    },
+                    "desiredStackType": {
+                      "type": "StackType",
+                      "id": 119
                     }
                   }
                 },
@@ -10396,6 +10404,13 @@
                     "DATAPATH_PROVIDER_UNSPECIFIED": 0,
                     "LEGACY_DATAPATH": 1,
                     "ADVANCED_DATAPATH": 2
+                  }
+                },
+                "StackType": {
+                  "values": {
+                    "STACK_TYPE_UNSPECIFIED": 0,
+                    "IPV4": 1,
+                    "IPV4_IPV6": 2
                   }
                 }
               }

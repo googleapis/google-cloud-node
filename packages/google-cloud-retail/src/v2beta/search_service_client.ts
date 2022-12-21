@@ -128,6 +128,9 @@ export class SearchServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -408,7 +411,7 @@ export class SearchServiceClient {
    *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
    *   or the name of the legacy placement resource, such as
    *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
-   *   This field is used to identify the serving configuration name and the set
+   *   This field is used to identify the serving config name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
    *   The branch resource name, such as
@@ -723,7 +726,7 @@ export class SearchServiceClient {
    *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
    *   or the name of the legacy placement resource, such as
    *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
-   *   This field is used to identify the serving configuration name and the set
+   *   This field is used to identify the serving config name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
    *   The branch resource name, such as
@@ -994,7 +997,7 @@ export class SearchServiceClient {
    *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
    *   or the name of the legacy placement resource, such as
    *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
-   *   This field is used to identify the serving configuration name and the set
+   *   This field is used to identify the serving config name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
    *   The branch resource name, such as

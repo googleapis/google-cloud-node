@@ -29,7 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the AwsServerConfig google.cloud.gkemulticloud.v1.AwsServerConfig  resource to describe.
+   *  Required. The name of the
+   *  AwsServerConfig google.cloud.gkemulticloud.v1.AwsServerConfig  resource
+   *  to describe.
    *  `AwsServerConfig` names are formatted as
    *  `projects/<project-id>/locations/<region>/awsServerConfig`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)

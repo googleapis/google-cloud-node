@@ -179,6 +179,12 @@ export class AwsClustersClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      attachedClusterPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/attachedClusters/{attached_cluster}'
+      ),
+      attachedServerConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/attachedServerConfig'
+      ),
       awsClusterPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/awsClusters/{aws_cluster}'
       ),
@@ -476,12 +482,15 @@ export class AwsClustersClient {
   // -- Service calls --
   // -------------------
   /**
-   * Describes a specific {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource.
+   * Describes a specific {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   * resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource to describe.
+   *   Required. The name of the
+   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource to
+   *   describe.
    *
    *   `AwsCluster` names are formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
@@ -579,7 +588,9 @@ export class AwsClustersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.awsCluster
-   *   Required. The name of the {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource to authenticate to.
+   *   Required. The name of the
+   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource to
+   *   authenticate to.
    *
    *   `AwsCluster` names are formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
@@ -681,12 +692,15 @@ export class AwsClustersClient {
     );
   }
   /**
-   * Describes a specific {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource.
+   * Describes a specific
+   * {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource to describe.
+   *   Required. The name of the
+   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource to
+   *   describe.
    *
    *   `AwsNodePool` names are formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
@@ -784,7 +798,9 @@ export class AwsClustersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.gkemulticloud.v1.AwsServerConfig|AwsServerConfig} resource to describe.
+   *   Required. The name of the
+   *   {@link google.cloud.gkemulticloud.v1.AwsServerConfig|AwsServerConfig} resource
+   *   to describe.
    *
    *   `AwsServerConfig` names are formatted as
    *   `projects/<project-id>/locations/<region>/awsServerConfig`.
@@ -883,7 +899,8 @@ export class AwsClustersClient {
   }
 
   /**
-   * Creates a new {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource on a given GCP project and region.
+   * Creates a new {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   * resource on a given GCP project and region.
    *
    * If successful, the response contains a newly created
    * {@link google.longrunning.Operation|Operation} resource that can be
@@ -892,24 +909,27 @@ export class AwsClustersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent location where this {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource
-   *   will be created.
+   *   Required. The parent location where this
+   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource will be
+   *   created.
    *
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
    *
    *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
    *   for more details on Google Cloud resource names.
    * @param {google.cloud.gkemulticloud.v1.AwsCluster} request.awsCluster
-   *   Required. The specification of the {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} to create.
+   *   Required. The specification of the
+   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} to create.
    * @param {string} request.awsClusterId
-   *   Required. A client provided ID the resource. Must be unique within the parent
-   *   resource.
+   *   Required. A client provided ID the resource. Must be unique within the
+   *   parent resource.
    *
-   *   The provided ID will be part of the {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
-   *   resource name formatted as
+   *   The provided ID will be part of the
+   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource name
+   *   formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
    *
-   *   Valid characters are `/{@link 0-9|a-z}-/`. Cannot be longer than 40 characters.
+   *   Valid characters are `/{@link 0-9|a-z}-/`. Cannot be longer than 63 characters.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but do not actually create the cluster.
    * @param {object} [options]
@@ -1049,7 +1069,8 @@ export class AwsClustersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gkemulticloud.v1.AwsCluster} request.awsCluster
-   *   Required. The {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource to update.
+   *   Required. The {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   *   resource to update.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but do not actually update the cluster.
    * @param {google.protobuf.FieldMask} request.updateMask
@@ -1069,14 +1090,17 @@ export class AwsClustersClient {
    *    *   `control_plane.proxy_config`.
    *    *   `control_plane.proxy_config.secret_arn`.
    *    *   `control_plane.proxy_config.secret_version`.
+   *    *   `control_plane.root_volume.size_gib`.
+   *    *   `control_plane.root_volume.volume_type`.
    *    *   `control_plane.root_volume.iops`.
    *    *   `control_plane.root_volume.kms_key_arn`.
-   *    *   `control_plane.root_volume.volume_type`.
-   *    *   `control_plane.root_volume.size_gib`.
    *    *   `control_plane.ssh_config`.
    *    *   `control_plane.ssh_config.ec2_key_pair`.
    *    *   `control_plane.instance_placement.tenancy`.
-   *    *   `logging_config`.
+   *    *   `control_plane.iam_instance_profile`.
+   *    *   `logging_config.component_config.enable_components`.
+   *    *   `control_plane.tags`.
+   *    *   `monitoring_config.managed_prometheus_config.enabled`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1209,10 +1233,11 @@ export class AwsClustersClient {
     >;
   }
   /**
-   * Deletes a specific {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource.
+   * Deletes a specific {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   * resource.
    *
-   * Fails if the cluster has one or more associated {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
-   * resources.
+   * Fails if the cluster has one or more associated
+   * {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
    *
    * If successful, the response contains a newly created
    * {@link google.longrunning.Operation|Operation} resource that can be
@@ -1221,7 +1246,8 @@ export class AwsClustersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name the {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} to delete.
+   *   Required. The resource name the
+   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} to delete.
    *
    *   `AwsCluster` names are formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
@@ -1231,13 +1257,15 @@ export class AwsClustersClient {
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but do not actually delete the resource.
    * @param {boolean} request.allowMissing
-   *   If set to true, and the {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource is not found,
-   *   the request will succeed but no action will be taken on the server and a
-   *   completed {@link google.longrunning.Operation|Operation} will be returned.
+   *   If set to true, and the
+   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource is not
+   *   found, the request will succeed but no action will be taken on the server
+   *   and a completed {@link google.longrunning.Operation|Operation} will be returned.
    *
    *   Useful for idempotent deletion.
    * @param {string} request.etag
-   *   The current etag of the {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
+   *   The current etag of the
+   *   {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
    *
    *   Allows clients to perform deletions through optimistic concurrency control.
    *
@@ -1375,7 +1403,8 @@ export class AwsClustersClient {
     >;
   }
   /**
-   * Creates a new {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}, attached to a given {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
+   * Creates a new {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool},
+   * attached to a given {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
    *
    * If successful, the response contains a newly created
    * {@link google.longrunning.Operation|Operation} resource that can be
@@ -1384,7 +1413,8 @@ export class AwsClustersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource where this node pool will be created.
+   *   Required. The {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   *   resource where this node pool will be created.
    *
    *   `AwsCluster` names are formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
@@ -1392,16 +1422,18 @@ export class AwsClustersClient {
    *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
    *   for more details on Google Cloud resource names.
    * @param {google.cloud.gkemulticloud.v1.AwsNodePool} request.awsNodePool
-   *   Required. The specification of the {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} to create.
+   *   Required. The specification of the
+   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} to create.
    * @param {string} request.awsNodePoolId
-   *   Required. A client provided ID the resource. Must be unique within the parent
-   *   resource.
+   *   Required. A client provided ID the resource. Must be unique within the
+   *   parent resource.
    *
-   *   The provided ID will be part of the {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
-   *   resource name formatted as
+   *   The provided ID will be part of the
+   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource name
+   *   formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
    *
-   *   Valid characters are `/{@link 0-9|a-z}-/`. Cannot be longer than 40 characters.
+   *   Valid characters are `/{@link 0-9|a-z}-/`. Cannot be longer than 63 characters.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but do not actually create the node
    *   pool.
@@ -1542,7 +1574,8 @@ export class AwsClustersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.gkemulticloud.v1.AwsNodePool} request.awsNodePool
-   *   Required. The {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource to update.
+   *   Required. The {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
+   *   resource to update.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but don't actually update the node pool.
    * @param {google.protobuf.FieldMask} request.updateMask
@@ -1565,6 +1598,13 @@ export class AwsClustersClient {
    *    *   `config.proxy_config.secret_version`.
    *    *   `config.ssh_config`.
    *    *   `config.ssh_config.ec2_key_pair`.
+   *    *   `config.instance_placement.tenancy`.
+   *    *   `config.iam_instance_profile`.
+   *    *   `config.labels`.
+   *    *   `config.tags`.
+   *    *   `config.autoscaling_metrics_collection`.
+   *    *   `config.autoscaling_metrics_collection.granularity`.
+   *    *   `config.autoscaling_metrics_collection.metrics`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1697,7 +1737,8 @@ export class AwsClustersClient {
     >;
   }
   /**
-   * Deletes a specific {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource.
+   * Deletes a specific {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
+   * resource.
    *
    * If successful, the response contains a newly created
    * {@link google.longrunning.Operation|Operation} resource that can be
@@ -1706,7 +1747,8 @@ export class AwsClustersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name the {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} to delete.
+   *   Required. The resource name the
+   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} to delete.
    *
    *   `AwsNodePool` names are formatted as
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
@@ -1717,13 +1759,15 @@ export class AwsClustersClient {
    *   If set, only validate the request, but do not actually delete the node
    *   pool.
    * @param {boolean} request.allowMissing
-   *   If set to true, and the {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource is not found,
-   *   the request will succeed but no action will be taken on the server and a
-   *   completed {@link google.longrunning.Operation|Operation} will be returned.
+   *   If set to true, and the
+   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource is not
+   *   found, the request will succeed but no action will be taken on the server
+   *   and a completed {@link google.longrunning.Operation|Operation} will be returned.
    *
    *   Useful for idempotent deletion.
    * @param {string} request.etag
-   *   The current ETag of the {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
+   *   The current ETag of the
+   *   {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
    *
    *   Allows clients to perform deletions through optimistic concurrency control.
    *
@@ -1861,8 +1905,8 @@ export class AwsClustersClient {
     >;
   }
   /**
-   * Lists all {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources on a given Google Cloud project and
-   * region.
+   * Lists all {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources
+   * on a given Google Cloud project and region.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1880,11 +1924,12 @@ export class AwsClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken} to determine if
-   *   there are more instances left to be queried.
+   *   {@link google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list} request, if any.
+   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
+   *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1991,11 +2036,12 @@ export class AwsClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken} to determine if
-   *   there are more instances left to be queried.
+   *   {@link google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list} request, if any.
+   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
+   *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2050,11 +2096,12 @@ export class AwsClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken} to determine if
-   *   there are more instances left to be queried.
+   *   {@link google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list} request, if any.
+   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
+   *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2090,7 +2137,9 @@ export class AwsClustersClient {
     ) as AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAwsCluster>;
   }
   /**
-   * Lists all {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources on a given {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
+   * Lists all {@link google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
+   * resources on a given
+   * {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2109,11 +2158,12 @@ export class AwsClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken} to determine if
-   *   there are more instances left to be queried.
+   *   {@link google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list} request, if any.
+   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
+   *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2221,11 +2271,12 @@ export class AwsClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken} to determine if
-   *   there are more instances left to be queried.
+   *   {@link google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list} request, if any.
+   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
+   *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2281,11 +2332,12 @@ export class AwsClustersClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the pageSize value, the response can include a partial list
    *   and a caller should only rely on response's
-   *   {@link google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken} to determine if
-   *   there are more instances left to be queried.
+   *   {@link google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The `nextPageToken` value returned from a previous
-   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list} request, if any.
+   *   {@link google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
+   *   request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2320,9 +2372,285 @@ export class AwsClustersClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAwsNodePool>;
   }
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}. The promise has a method named
+   * "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified attachedCluster resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} attached_cluster
+   * @returns {string} Resource name string.
+   */
+  attachedClusterPath(
+    project: string,
+    location: string,
+    attachedCluster: string
+  ) {
+    return this.pathTemplates.attachedClusterPathTemplate.render({
+      project: project,
+      location: location,
+      attached_cluster: attachedCluster,
+    });
+  }
+
+  /**
+   * Parse the project from AttachedCluster resource.
+   *
+   * @param {string} attachedClusterName
+   *   A fully-qualified path representing AttachedCluster resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAttachedClusterName(attachedClusterName: string) {
+    return this.pathTemplates.attachedClusterPathTemplate.match(
+      attachedClusterName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AttachedCluster resource.
+   *
+   * @param {string} attachedClusterName
+   *   A fully-qualified path representing AttachedCluster resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAttachedClusterName(attachedClusterName: string) {
+    return this.pathTemplates.attachedClusterPathTemplate.match(
+      attachedClusterName
+    ).location;
+  }
+
+  /**
+   * Parse the attached_cluster from AttachedCluster resource.
+   *
+   * @param {string} attachedClusterName
+   *   A fully-qualified path representing AttachedCluster resource.
+   * @returns {string} A string representing the attached_cluster.
+   */
+  matchAttachedClusterFromAttachedClusterName(attachedClusterName: string) {
+    return this.pathTemplates.attachedClusterPathTemplate.match(
+      attachedClusterName
+    ).attached_cluster;
+  }
+
+  /**
+   * Return a fully-qualified attachedServerConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  attachedServerConfigPath(project: string, location: string) {
+    return this.pathTemplates.attachedServerConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from AttachedServerConfig resource.
+   *
+   * @param {string} attachedServerConfigName
+   *   A fully-qualified path representing AttachedServerConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAttachedServerConfigName(attachedServerConfigName: string) {
+    return this.pathTemplates.attachedServerConfigPathTemplate.match(
+      attachedServerConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AttachedServerConfig resource.
+   *
+   * @param {string} attachedServerConfigName
+   *   A fully-qualified path representing AttachedServerConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAttachedServerConfigName(attachedServerConfigName: string) {
+    return this.pathTemplates.attachedServerConfigPathTemplate.match(
+      attachedServerConfigName
+    ).location;
+  }
 
   /**
    * Return a fully-qualified awsCluster resource name string.

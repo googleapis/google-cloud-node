@@ -73,7 +73,10 @@
                         "textStyles": {
                           "rule": "repeated",
                           "type": "Style",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "pages": {
                           "rule": "repeated",
@@ -2449,6 +2452,11 @@
                         "launchStage": {
                           "type": "google.api.LaunchStage",
                           "id": 8
+                        },
+                        "sampleDocumentUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -4350,7 +4358,10 @@
                         "textStyles": {
                           "rule": "repeated",
                           "type": "Style",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "pages": {
                           "rule": "repeated",
@@ -5437,6 +5448,14 @@
                         }
                       }
                     },
+                    "OcrConfig": {
+                      "fields": {
+                        "enableNativePdfParsing": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
                     "DocumentProcessorService": {
                       "options": {
                         "(google.api.default_host)": "documentai.googleapis.com",
@@ -5933,6 +5952,14 @@
                         }
                       }
                     },
+                    "ProcessOptions": {
+                      "fields": {
+                        "ocrConfig": {
+                          "type": "OcrConfig",
+                          "id": 1
+                        }
+                      }
+                    },
                     "ProcessRequest": {
                       "oneofs": {
                         "source": {
@@ -5973,6 +6000,10 @@
                         "fieldMask": {
                           "type": "google.protobuf.FieldMask",
                           "id": 6
+                        },
+                        "processOptions": {
+                          "type": "ProcessOptions",
+                          "id": 7
                         }
                       }
                     },
@@ -6058,6 +6089,10 @@
                         "skipHumanReview": {
                           "type": "bool",
                           "id": 4
+                        },
+                        "processOptions": {
+                          "type": "ProcessOptions",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -7260,6 +7295,11 @@
                         "launchStage": {
                           "type": "google.api.LaunchStage",
                           "id": 8
+                        },
+                        "sampleDocumentUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9
                         }
                       },
                       "nested": {

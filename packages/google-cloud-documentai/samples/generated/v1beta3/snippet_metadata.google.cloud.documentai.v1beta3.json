@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-documentai",
-        "version": "6.1.0",
+        "version": "6.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 81,
+                    "end": 89,
                     "type": "FULL"
                 }
             ],
@@ -54,6 +54,10 @@
                     {
                         "name": "field_mask",
                         "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "process_options",
+                        "type": ".google.cloud.documentai.v1beta3.ProcessOptions"
                     }
                 ],
                 "resultType": ".google.cloud.documentai.v1beta3.ProcessResponse",
@@ -82,7 +86,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 84,
                     "type": "FULL"
                 }
             ],
@@ -114,6 +118,10 @@
                     {
                         "name": "skip_human_review",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "process_options",
+                        "type": ".google.cloud.documentai.v1beta3.ProcessOptions"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -318,7 +326,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -414,7 +422,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -582,7 +590,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 61,
                     "type": "FULL"
                 }
             ],
@@ -746,7 +754,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -850,7 +858,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 62,
                     "type": "FULL"
                 }
             ],
@@ -894,7 +902,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 55,
                     "type": "FULL"
                 }
             ],
@@ -934,7 +942,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 69,
                     "type": "FULL"
                 }
             ],
