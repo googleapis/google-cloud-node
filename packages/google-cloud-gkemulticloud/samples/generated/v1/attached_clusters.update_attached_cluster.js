@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START gkemulticloud_v1_generated_AwsClusters_GetAwsServerConfig_async]
+function main(attachedCluster, updateMask) {
+  // [START gkemulticloud_v1_generated_AttachedClusters_UpdateAttachedCluster_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,35 +29,50 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the
-   *  AwsServerConfig google.cloud.gkemulticloud.v1.AwsServerConfig  resource
-   *  to describe.
-   *  `AwsServerConfig` names are formatted as
-   *  `projects/<project-id>/locations/<region>/awsServerConfig`.
-   *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
-   *  for more details on Google Cloud resource names.
+   *  Required. The
+   *  AttachedCluster google.cloud.gkemulticloud.v1.AttachedCluster  resource
+   *  to update.
    */
-  // const name = 'abc123'
+  // const attachedCluster = {}
+  /**
+   *  If set, only validate the request, but do not actually update the cluster.
+   */
+  // const validateOnly = true
+  /**
+   *  Required. Mask of fields to update. At least one path must be supplied in
+   *  this field. The elements of the repeated paths field can only include these
+   *  fields from
+   *  AttachedCluster google.cloud.gkemulticloud.v1.AttachedCluster:
+   *   *   `description`.
+   *   *   `annotations`.
+   *   *   `platform_version`.
+   *   *   `authorization.admin_users`.
+   *   *   `logging_config.component_config.enable_components`.
+   *   *   `monitoring_config.managed_prometheus_config.enabled`.
+   */
+  // const updateMask = {}
 
   // Imports the Gkemulticloud library
-  const {AwsClustersClient} = require('@google-cloud/gkemulticloud').v1;
+  const {AttachedClustersClient} = require('@google-cloud/gkemulticloud').v1;
 
   // Instantiates a client
-  const gkemulticloudClient = new AwsClustersClient();
+  const gkemulticloudClient = new AttachedClustersClient();
 
-  async function callGetAwsServerConfig() {
+  async function callUpdateAttachedCluster() {
     // Construct request
     const request = {
-      name,
+      attachedCluster,
+      updateMask,
     };
 
     // Run request
-    const response = await gkemulticloudClient.getAwsServerConfig(request);
+    const [operation] = await gkemulticloudClient.updateAttachedCluster(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callGetAwsServerConfig();
-  // [END gkemulticloud_v1_generated_AwsClusters_GetAwsServerConfig_async]
+  callUpdateAttachedCluster();
+  // [END gkemulticloud_v1_generated_AttachedClusters_UpdateAttachedCluster_async]
 }
 
 process.on('unhandledRejection', err => {

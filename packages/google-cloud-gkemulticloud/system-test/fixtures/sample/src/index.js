@@ -20,6 +20,7 @@
 const gkemulticloud = require('@google-cloud/gkemulticloud');
 
 function main() {
+  const attachedClustersClient = new gkemulticloud.AttachedClustersClient();
   const awsClustersClient = new gkemulticloud.AwsClustersClient();
   const azureClustersClient = new gkemulticloud.AzureClustersClient();
 }
