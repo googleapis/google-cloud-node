@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START gkemulticloud_v1_generated_AwsClusters_GetAwsServerConfig_async]
+  // [START gkemulticloud_v1_generated_AttachedClusters_GetAttachedServerConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -30,34 +30,34 @@ function main(name) {
    */
   /**
    *  Required. The name of the
-   *  AwsServerConfig google.cloud.gkemulticloud.v1.AwsServerConfig  resource
-   *  to describe.
-   *  `AwsServerConfig` names are formatted as
-   *  `projects/<project-id>/locations/<region>/awsServerConfig`.
+   *  AttachedServerConfig google.cloud.gkemulticloud.v1.AttachedServerConfig 
+   *  resource to describe.
+   *  `AttachedServerConfig` names are formatted as
+   *  `projects/<project-id>/locations/<region>/attachedServerConfig`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
    *  for more details on Google Cloud resource names.
    */
   // const name = 'abc123'
 
   // Imports the Gkemulticloud library
-  const {AwsClustersClient} = require('@google-cloud/gkemulticloud').v1;
+  const {AttachedClustersClient} = require('@google-cloud/gkemulticloud').v1;
 
   // Instantiates a client
-  const gkemulticloudClient = new AwsClustersClient();
+  const gkemulticloudClient = new AttachedClustersClient();
 
-  async function callGetAwsServerConfig() {
+  async function callGetAttachedServerConfig() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await gkemulticloudClient.getAwsServerConfig(request);
+    const response = await gkemulticloudClient.getAttachedServerConfig(request);
     console.log(response);
   }
 
-  callGetAwsServerConfig();
-  // [END gkemulticloud_v1_generated_AwsClusters_GetAwsServerConfig_async]
+  callGetAttachedServerConfig();
+  // [END gkemulticloud_v1_generated_AttachedClusters_GetAttachedServerConfig_async]
 }
 
 process.on('unhandledRejection', err => {

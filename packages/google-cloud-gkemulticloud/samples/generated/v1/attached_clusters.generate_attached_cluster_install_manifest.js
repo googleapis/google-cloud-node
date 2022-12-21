@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, azureClient, azureClientId) {
-  // [START gkemulticloud_v1_generated_AzureClusters_CreateAzureClient_async]
+function main(parent, attachedClusterId, platformVersion) {
+  // [START gkemulticloud_v1_generated_AttachedClusters_GenerateAttachedClusterInstallManifest_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -30,55 +30,56 @@ function main(parent, azureClient, azureClientId) {
    */
   /**
    *  Required. The parent location where this
-   *  AzureClient google.cloud.gkemulticloud.v1.AzureClient  resource will be
-   *  created.
+   *  AttachedCluster google.cloud.gkemulticloud.v1.AttachedCluster  resource
+   *  will be created.
    *  Location names are formatted as `projects/<project-id>/locations/<region>`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
    *  for more details on Google Cloud resource names.
    */
   // const parent = 'abc123'
   /**
-   *  Required. The specification of the
-   *  AzureClient google.cloud.gkemulticloud.v1.AzureClient  to create.
-   */
-  // const azureClient = {}
-  /**
    *  Required. A client provided ID the resource. Must be unique within the
    *  parent resource.
    *  The provided ID will be part of the
-   *  AzureClient google.cloud.gkemulticloud.v1.AzureClient  resource name
-   *  formatted as
-   *  `projects/<project-id>/locations/<region>/azureClients/<client-id>`.
+   *  AttachedCluster google.cloud.gkemulticloud.v1.AttachedCluster  resource
+   *  name formatted as
+   *  `projects/<project-id>/locations/<region>/attachedClusters/<cluster-id>`.
    *  Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 63 characters.
+   *  When generating an install manifest for importing an existing Membership
+   *  resource, the attached_cluster_id field must be the Membership id.
+   *  Membership names are formatted as `resource name formatted as
+   *  `projects/<project-id>/locations/<region>/memberships/<membership-id>`.
    */
-  // const azureClientId = 'abc123'
+  // const attachedClusterId = 'abc123'
   /**
-   *  If set, only validate the request, but do not actually create the client.
+   *  Required. The platform version for the cluster (e.g. `1.19.0-gke.1000`).
+   *  You can list all supported versions on a given Google Cloud region by
+   *  calling
+   *  GetAttachedServerConfig google.cloud.gkemulticloud.v1.AttachedClusters.GetAttachedServerConfig.
    */
-  // const validateOnly = true
+  // const platformVersion = 'abc123'
 
   // Imports the Gkemulticloud library
-  const {AzureClustersClient} = require('@google-cloud/gkemulticloud').v1;
+  const {AttachedClustersClient} = require('@google-cloud/gkemulticloud').v1;
 
   // Instantiates a client
-  const gkemulticloudClient = new AzureClustersClient();
+  const gkemulticloudClient = new AttachedClustersClient();
 
-  async function callCreateAzureClient() {
+  async function callGenerateAttachedClusterInstallManifest() {
     // Construct request
     const request = {
       parent,
-      azureClient,
-      azureClientId,
+      attachedClusterId,
+      platformVersion,
     };
 
     // Run request
-    const [operation] = await gkemulticloudClient.createAzureClient(request);
-    const [response] = await operation.promise();
+    const response = await gkemulticloudClient.generateAttachedClusterInstallManifest(request);
     console.log(response);
   }
 
-  callCreateAzureClient();
-  // [END gkemulticloud_v1_generated_AzureClusters_CreateAzureClient_async]
+  callGenerateAttachedClusterInstallManifest();
+  // [END gkemulticloud_v1_generated_AttachedClusters_GenerateAttachedClusterInstallManifest_async]
 }
 
 process.on('unhandledRejection', err => {
