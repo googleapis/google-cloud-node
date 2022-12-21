@@ -28,17 +28,9 @@ const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
   it('should run quickstart', async () => {
-    // We no longer use service account credentials, so we must assert an error
-    try {
-      execSync(
-        'node ./quickstart.js fake_account@long-door-651.iam.gserviceaccount.com https://www.googleapis.com/auth/iam',
-        {cwd}
-      );
-    } catch (err) {
-      assert.match(
-        err,
-        /Gaia id not found for email fake_account@long-door-651.iam.gserviceaccount.com/
-      );
-    }
+    const output = execSync(
+      'node ./quickstart.js kokoro-system-test@long-door-651.iam.gserviceaccount.com https://www.googleapis.com/auth/iam'
+    );
+    assert(output != null);
   });
 });

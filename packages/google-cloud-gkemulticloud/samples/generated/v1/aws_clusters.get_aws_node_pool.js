@@ -29,7 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the AwsNodePool google.cloud.gkemulticloud.v1.AwsNodePool  resource to describe.
+   *  Required. The name of the
+   *  AwsNodePool google.cloud.gkemulticloud.v1.AwsNodePool  resource to
+   *  describe.
    *  `AwsNodePool` names are formatted as
    *  `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)

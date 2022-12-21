@@ -16,5 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export {AttachedClustersClient} from './attached_clusters_client';
 export {AwsClustersClient} from './aws_clusters_client';
 export {AzureClustersClient} from './azure_clusters_client';
