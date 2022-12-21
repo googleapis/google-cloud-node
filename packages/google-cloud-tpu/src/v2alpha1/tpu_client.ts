@@ -1822,7 +1822,7 @@ export class TpuClient {
    * @param {string} request.parent
    *   Required. The parent resource name.
    * @param {string} request.queuedResourceId
-   *   The unqualified resource name. Should follow the ^[A-Za-z0-9_.~+%-]+$
+   *   The unqualified resource name. Should follow the `^[A-Za-z0-9_.~+%-]+$`
    *   regex format.
    * @param {google.cloud.tpu.v2alpha1.QueuedResource} request.queuedResource
    *   Required. The queued resource.
