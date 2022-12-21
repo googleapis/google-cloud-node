@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Video Stitcher API: Node.js Samples](https://github.com/googleapis/nodejs-video-stitcher)
+# [Video Stitcher API: Node.js Samples](https://github.com/googleapis/google-cloud-node)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
@@ -12,31 +12,33 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Create Cdn Key](#create-cdn-key)
-  * [Create Live Session](#create-live-session)
-  * [Create Slate](#create-slate)
-  * [Create Vod Session](#create-vod-session)
-  * [Delete Cdn Key](#delete-cdn-key)
-  * [Delete Slate](#delete-slate)
-  * [Get Cdn Key](#get-cdn-key)
-  * [Get Live Ad Tag Detail](#get-live-ad-tag-detail)
-  * [Get Live Session](#get-live-session)
-  * [Get Slate](#get-slate)
-  * [Get Vod Ad Tag Detail](#get-vod-ad-tag-detail)
-  * [Get Vod Session](#get-vod-session)
-  * [Get Vod Stitch Detail](#get-vod-stitch-detail)
-  * [List Cdn Keys](#list-cdn-keys)
-  * [List Live Ad Tag Details](#list-live-ad-tag-details)
-  * [List Slates](#list-slates)
-  * [List Vod Ad Tag Details](#list-vod-ad-tag-details)
-  * [List Vod Stitch Details](#list-vod-stitch-details)
-  * [Update Cdn Key](#update-cdn-key)
-  * [Update Slate](#update-slate)
+  * [Video_stitcher_service.create_cdn_key](#video_stitcher_service.create_cdn_key)
+  * [Video_stitcher_service.create_live_session](#video_stitcher_service.create_live_session)
+  * [Video_stitcher_service.create_slate](#video_stitcher_service.create_slate)
+  * [Video_stitcher_service.create_vod_session](#video_stitcher_service.create_vod_session)
+  * [Video_stitcher_service.delete_cdn_key](#video_stitcher_service.delete_cdn_key)
+  * [Video_stitcher_service.delete_slate](#video_stitcher_service.delete_slate)
+  * [Video_stitcher_service.get_cdn_key](#video_stitcher_service.get_cdn_key)
+  * [Video_stitcher_service.get_live_ad_tag_detail](#video_stitcher_service.get_live_ad_tag_detail)
+  * [Video_stitcher_service.get_live_session](#video_stitcher_service.get_live_session)
+  * [Video_stitcher_service.get_slate](#video_stitcher_service.get_slate)
+  * [Video_stitcher_service.get_vod_ad_tag_detail](#video_stitcher_service.get_vod_ad_tag_detail)
+  * [Video_stitcher_service.get_vod_session](#video_stitcher_service.get_vod_session)
+  * [Video_stitcher_service.get_vod_stitch_detail](#video_stitcher_service.get_vod_stitch_detail)
+  * [Video_stitcher_service.list_cdn_keys](#video_stitcher_service.list_cdn_keys)
+  * [Video_stitcher_service.list_live_ad_tag_details](#video_stitcher_service.list_live_ad_tag_details)
+  * [Video_stitcher_service.list_slates](#video_stitcher_service.list_slates)
+  * [Video_stitcher_service.list_vod_ad_tag_details](#video_stitcher_service.list_vod_ad_tag_details)
+  * [Video_stitcher_service.list_vod_stitch_details](#video_stitcher_service.list_vod_stitch_details)
+  * [Video_stitcher_service.update_cdn_key](#video_stitcher_service.update_cdn_key)
+  * [Video_stitcher_service.update_slate](#video_stitcher_service.update_slate)
+  * [Quickstart](#quickstart)
+  * [Quickstart](#quickstart)
 
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/nodejs-video-stitcher#using-the-client-library).
+[Using the client library](https://github.com/googleapis/google-cloud-node#using-the-client-library).
 
 `cd samples`
 
@@ -48,16 +50,16 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Create Cdn Key
+### Video_stitcher_service.create_cdn_key
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/createCdnKey.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_cdn_key.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/createCdnKey.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_cdn_key.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/createCdnKey.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_cdn_key.js`
 
 
 -----
@@ -65,16 +67,16 @@ __Usage:__
 
 
 
-### Create Live Session
+### Video_stitcher_service.create_live_session
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/createLiveSession.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_live_session.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/createLiveSession.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_live_session.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/createLiveSession.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_live_session.js`
 
 
 -----
@@ -82,16 +84,16 @@ __Usage:__
 
 
 
-### Create Slate
+### Video_stitcher_service.create_slate
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/createSlate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_slate.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/createSlate.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_slate.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/createSlate.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_slate.js`
 
 
 -----
@@ -99,16 +101,16 @@ __Usage:__
 
 
 
-### Create Vod Session
+### Video_stitcher_service.create_vod_session
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/createVodSession.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_vod_session.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/createVodSession.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_vod_session.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/createVodSession.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_vod_session.js`
 
 
 -----
@@ -116,16 +118,16 @@ __Usage:__
 
 
 
-### Delete Cdn Key
+### Video_stitcher_service.delete_cdn_key
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/deleteCdnKey.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.delete_cdn_key.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/deleteCdnKey.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.delete_cdn_key.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/deleteCdnKey.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.delete_cdn_key.js`
 
 
 -----
@@ -133,16 +135,16 @@ __Usage:__
 
 
 
-### Delete Slate
+### Video_stitcher_service.delete_slate
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/deleteSlate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.delete_slate.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/deleteSlate.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.delete_slate.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/deleteSlate.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.delete_slate.js`
 
 
 -----
@@ -150,16 +152,16 @@ __Usage:__
 
 
 
-### Get Cdn Key
+### Video_stitcher_service.get_cdn_key
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/getCdnKey.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_cdn_key.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/getCdnKey.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_cdn_key.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/getCdnKey.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_cdn_key.js`
 
 
 -----
@@ -167,16 +169,16 @@ __Usage:__
 
 
 
-### Get Live Ad Tag Detail
+### Video_stitcher_service.get_live_ad_tag_detail
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/getLiveAdTagDetail.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_live_ad_tag_detail.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/getLiveAdTagDetail.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_live_ad_tag_detail.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/getLiveAdTagDetail.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_live_ad_tag_detail.js`
 
 
 -----
@@ -184,16 +186,16 @@ __Usage:__
 
 
 
-### Get Live Session
+### Video_stitcher_service.get_live_session
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/getLiveSession.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_live_session.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/getLiveSession.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_live_session.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/getLiveSession.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_live_session.js`
 
 
 -----
@@ -201,16 +203,16 @@ __Usage:__
 
 
 
-### Get Slate
+### Video_stitcher_service.get_slate
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/getSlate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_slate.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/getSlate.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_slate.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/getSlate.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_slate.js`
 
 
 -----
@@ -218,16 +220,16 @@ __Usage:__
 
 
 
-### Get Vod Ad Tag Detail
+### Video_stitcher_service.get_vod_ad_tag_detail
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/getVodAdTagDetail.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_vod_ad_tag_detail.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/getVodAdTagDetail.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_vod_ad_tag_detail.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/getVodAdTagDetail.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_vod_ad_tag_detail.js`
 
 
 -----
@@ -235,16 +237,16 @@ __Usage:__
 
 
 
-### Get Vod Session
+### Video_stitcher_service.get_vod_session
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/getVodSession.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_vod_session.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/getVodSession.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_vod_session.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/getVodSession.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_vod_session.js`
 
 
 -----
@@ -252,16 +254,16 @@ __Usage:__
 
 
 
-### Get Vod Stitch Detail
+### Video_stitcher_service.get_vod_stitch_detail
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/getVodStitchDetail.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_vod_stitch_detail.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/getVodStitchDetail.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_vod_stitch_detail.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/getVodStitchDetail.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.get_vod_stitch_detail.js`
 
 
 -----
@@ -269,16 +271,16 @@ __Usage:__
 
 
 
-### List Cdn Keys
+### Video_stitcher_service.list_cdn_keys
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/listCdnKeys.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_cdn_keys.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/listCdnKeys.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_cdn_keys.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/listCdnKeys.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_cdn_keys.js`
 
 
 -----
@@ -286,16 +288,16 @@ __Usage:__
 
 
 
-### List Live Ad Tag Details
+### Video_stitcher_service.list_live_ad_tag_details
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/listLiveAdTagDetails.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_live_ad_tag_details.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/listLiveAdTagDetails.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_live_ad_tag_details.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/listLiveAdTagDetails.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_live_ad_tag_details.js`
 
 
 -----
@@ -303,16 +305,16 @@ __Usage:__
 
 
 
-### List Slates
+### Video_stitcher_service.list_slates
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/listSlates.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_slates.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/listSlates.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_slates.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/listSlates.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_slates.js`
 
 
 -----
@@ -320,16 +322,16 @@ __Usage:__
 
 
 
-### List Vod Ad Tag Details
+### Video_stitcher_service.list_vod_ad_tag_details
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/listVodAdTagDetails.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_vod_ad_tag_details.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/listVodAdTagDetails.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_vod_ad_tag_details.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/listVodAdTagDetails.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_vod_ad_tag_details.js`
 
 
 -----
@@ -337,16 +339,16 @@ __Usage:__
 
 
 
-### List Vod Stitch Details
+### Video_stitcher_service.list_vod_stitch_details
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/listVodStitchDetails.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_vod_stitch_details.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/listVodStitchDetails.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_vod_stitch_details.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/listVodStitchDetails.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.list_vod_stitch_details.js`
 
 
 -----
@@ -354,16 +356,16 @@ __Usage:__
 
 
 
-### Update Cdn Key
+### Video_stitcher_service.update_cdn_key
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/updateCdnKey.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.update_cdn_key.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/updateCdnKey.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.update_cdn_key.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/updateCdnKey.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.update_cdn_key.js`
 
 
 -----
@@ -371,16 +373,50 @@ __Usage:__
 
 
 
-### Update Slate
+### Video_stitcher_service.update_slate
 
-View the [source code](https://github.com/googleapis/nodejs-video-stitcher/blob/main/samples/updateSlate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.update_slate.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/updateSlate.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.update_slate.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/updateSlate.js`
+`node packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.update_slate.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-video-stitcher/samples/quickstart.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/test/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-video-stitcher/samples/test/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-video-stitcher/samples/test/quickstart.js`
 
 
 
@@ -388,5 +424,5 @@ __Usage:__
 
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-stitcher&page=editor&open_in_editor=samples/README.md
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
 [product-docs]: https://cloud.google.com/video-stitcher/

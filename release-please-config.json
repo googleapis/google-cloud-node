@@ -101,9 +101,11 @@
     "packages/google-cloud-tpu": {},
     "packages/google-cloud-translate": {},
     "packages/google-cloud-video-livestream": {},
+    "packages/google-cloud-video-stitcher": {},
     "packages/google-cloud-video-transcoder": {},
     "packages/google-cloud-videointelligence": {},
     "packages/google-cloud-vmmigration": {},
+    "packages/google-cloud-vmwareengine": {},
     "packages/google-cloud-vpcaccess": {},
     "packages/google-cloud-webrisk": {},
     "packages/google-cloud-websecurityscanner": {},
@@ -121,8 +123,7 @@
     "packages/google-monitoring-dashboard": {},
     "packages/google-storagetransfer": {},
     "packages/grafeas": {},
-    "packages/typeless-sample-bot": {},
-    "packages/google-cloud-vmwareengine": {}
+    "packages/typeless-sample-bot": {}
   },
   "plugins": [
     {
