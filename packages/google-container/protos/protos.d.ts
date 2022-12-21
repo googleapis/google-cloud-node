@@ -25167,6 +25167,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredNodePoolLoggingConfig */
                 desiredNodePoolLoggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
+
+                /** ClusterUpdate desiredStackType */
+                desiredStackType?: (google.container.v1beta1.StackType|keyof typeof google.container.v1beta1.StackType|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -25312,6 +25315,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredNodePoolLoggingConfig. */
                 public desiredNodePoolLoggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
+
+                /** ClusterUpdate desiredStackType. */
+                public desiredStackType: (google.container.v1beta1.StackType|keyof typeof google.container.v1beta1.StackType);
 
                 /** ClusterUpdate _desiredEnablePrivateEndpoint. */
                 public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";
@@ -38868,6 +38874,13 @@ export namespace google {
                 DATAPATH_PROVIDER_UNSPECIFIED = 0,
                 LEGACY_DATAPATH = 1,
                 ADVANCED_DATAPATH = 2
+            }
+
+            /** StackType enum. */
+            enum StackType {
+                STACK_TYPE_UNSPECIFIED = 0,
+                IPV4 = 1,
+                IPV4_IPV6 = 2
             }
         }
     }
