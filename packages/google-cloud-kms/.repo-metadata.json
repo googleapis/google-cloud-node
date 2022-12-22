@@ -1,17 +1,16 @@
 {
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/kms/latest",
-  "api_id": "kms.googleapis.com",
-  "distribution_name": "@google-cloud/kms",
-  "release_level": "stable",
-  "default_version": "v1",
+  "name": "cloudkms",
+  "name_pretty": "Cloud Key Management Service (KMS) API",
+  "product_documentation": "cloud.google.com/kms/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudkms/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "beta",
   "language": "nodejs",
-  "name_pretty": "Google Cloud Key Management Service",
   "repo": "googleapis/google-cloud-node",
-  "product_documentation": "https://cloud.google.com/kms",
+  "distribution_name": "@google-cloud/kms",
+  "api_id": "cloudkms.googleapis.com",
+  "default_version": "v1",
   "requires_billing": true,
-  "name": "kms",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/5264932",
-  "codeowner_team": "@googleapis/api-kms",
-  "api_shortname": "cloudkms",
   "library_type": "GAPIC_AUTO"
 }
+
