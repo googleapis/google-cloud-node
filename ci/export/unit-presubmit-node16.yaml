@@ -15,4 +15,4 @@ substitutions:
   _BUILD_TYPE: presubmit
   _LOGS_BUCKET: cloud-node-public-logs
   _NODE_VERSION: '16'
-  _TEST_TYPE: samples
+  _TEST_TYPE: units
