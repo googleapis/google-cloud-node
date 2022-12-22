@@ -37,7 +37,7 @@ steps:
     ]
   - name: gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}
     id: "run-tests"
-    timeout: 7200s
+    timeout: 9000s
     entrypoint: "ci/run_conditional_tests.sh"
     env:
     - 'BUILD_TYPE=${_BUILD_TYPE}'
