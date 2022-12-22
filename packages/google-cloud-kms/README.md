@@ -2,22 +2,22 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Cloud Key Management Service: Node.js Client](https://github.com/googleapis/google-cloud-node)
+# [Cloud Key Management Service (KMS) API: Node.js Client](https://github.com/googleapis/google-cloud-node)
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/kms.svg)](https://www.npmjs.org/package/@google-cloud/kms)
 
 
 
 
-Google Cloud Key Management Service (KMS) API client for Node.js
+Cloud Key Management Service (KMS) API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-kms/CHANGELOG.md).
 
-* [Google Cloud Key Management Service Node.js Client API Reference][client-docs]
-* [Google Cloud Key Management Service Documentation][product-docs]
+* [Cloud Key Management Service (KMS) API Node.js Client API Reference][client-docs]
+* [Cloud Key Management Service (KMS) API Documentation][product-docs]
 * [github.com/googleapis/google-cloud-node/packages/google-cloud-kms](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-kms)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -43,7 +43,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Google Cloud Key Management Service API][enable_api].
+1.  [Enable the Cloud Key Management Service (KMS) API API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
@@ -131,7 +131,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 
 
-The [Google Cloud Key Management Service Node.js Client API Reference][client-docs] documentation
+The [Cloud Key Management Service (KMS) API Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Supported Node.js Versions
@@ -161,11 +161,11 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
 
+This library is considered to be in **beta**. This means it is expected to be
+mostly stable while we work toward a general availability release; however,
+complete stability is not guaranteed. We will address issues and requests
+against beta libraries with a high priority.
 
 
 
@@ -191,10 +191,10 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/kms/latest
-[product-docs]: https://cloud.google.com/kms
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/cloudkms/latest
+[product-docs]: cloud.google.com/kms/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=kms.googleapis.com
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started
