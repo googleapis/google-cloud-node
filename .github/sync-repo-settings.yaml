@@ -34,6 +34,8 @@ branchProtectionRules:
     - "samples-presubmit-node14-with-credentials (long-door-651)"
     - "samples-presubmit-node14 (long-door-651)"
     - "units (14)"
+    - "unit-presubmit-node16 (long-door-651)"
+    - "unit-presubmit-node18 (long-door-651)""
 # List of explicit permissions to add (additive only)
 permissionRules:
     # Team slug to add to repository permissions
