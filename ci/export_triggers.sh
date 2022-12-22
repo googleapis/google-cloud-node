@@ -47,3 +47,8 @@ for NODE_VERSION in ${NODE_VERSIONS[@]}; do
     echo "exporting presubmit build for node${NODE_VERSION} with credentials"
     gcloud beta builds triggers export "samples-presubmit-node${NODE_VERSION}-with-credentials" --destination "ci/export/samples-presubmit-node${NODE_VERSION}-with-credentials.yaml"
 done
+
+echo "exporting presubmit build for node16 unit tests"
+gcloud beta builds triggers export "unit-presubmit-node16" --destination "ci/export/unit-presubmit-node16.yaml"
+echo "exporting presubmit build for node18 unit tests"
+gcloud beta builds triggers export "unit-presubmit-node16" --destination "ci/export/unit-presubmit-node18.yaml"
