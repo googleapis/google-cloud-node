@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 148,
+                    "end": 152,
                     "type": "FULL"
                 }
             ],
@@ -326,6 +326,10 @@
                     {
                         "name": "resource_labels",
                         "type": ".google.container.v1beta1.ResourceLabels"
+                    },
+                    {
+                        "name": "windows_node_config",
+                        "type": ".google.container.v1beta1.WindowsNodeConfig"
                     }
                 ],
                 "resultType": ".google.container.v1beta1.Operation",
