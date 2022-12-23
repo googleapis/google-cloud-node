@@ -5781,6 +5781,23 @@
                     }
                   }
                 },
+                "WindowsNodeConfig": {
+                  "fields": {
+                    "osVersion": {
+                      "type": "OSVersion",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "OSVersion": {
+                      "values": {
+                        "OS_VERSION_UNSPECIFIED": 0,
+                        "OS_VERSION_LTSC2019": 1,
+                        "OS_VERSION_LTSC2022": 2
+                      }
+                    }
+                  }
+                },
                 "NodeKubeletConfig": {
                   "fields": {
                     "cpuManagerPolicy": {
@@ -5943,6 +5960,18 @@
                     "loggingConfig": {
                       "type": "NodePoolLoggingConfig",
                       "id": 38
+                    },
+                    "windowsNodeConfig": {
+                      "type": "WindowsNodeConfig",
+                      "id": 39
+                    },
+                    "localNvmeSsdBlockConfig": {
+                      "type": "LocalNvmeSsdBlockConfig",
+                      "id": 40
+                    },
+                    "ephemeralStorageLocalSsdConfig": {
+                      "type": "EphemeralStorageLocalSsdConfig",
+                      "id": 41
                     }
                   }
                 },
@@ -6085,6 +6114,22 @@
                   }
                 },
                 "EphemeralStorageConfig": {
+                  "fields": {
+                    "localSsdCount": {
+                      "type": "int32",
+                      "id": 1
+                    }
+                  }
+                },
+                "LocalNvmeSsdBlockConfig": {
+                  "fields": {
+                    "localSsdCount": {
+                      "type": "int32",
+                      "id": 1
+                    }
+                  }
+                },
+                "EphemeralStorageLocalSsdConfig": {
                   "fields": {
                     "localSsdCount": {
                       "type": "int32",
@@ -7753,6 +7798,10 @@
                     "resourceLabels": {
                       "type": "ResourceLabels",
                       "id": 33
+                    },
+                    "windowsNodeConfig": {
+                      "type": "WindowsNodeConfig",
+                      "id": 34
                     }
                   }
                 },
