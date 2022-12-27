@@ -637,6 +637,37 @@ export class Storage extends Service {
    * ```
    *
    * @example
+   * Create a client with credentials passed
+   * by value as a JavaScript object
+   * ```
+   * const storage = new Storage({
+   *   projectId: 'your-project-id',
+   *   credentials: {
+   *     type: 'service_account',
+   *     project_id: 'xxxxxxx',
+   *     private_key_id: 'xxxx',
+   *     private_key:'-----BEGIN PRIVATE KEY-----xxxxxxx\n-----END PRIVATE KEY-----\n',
+   *     client_email: 'xxxx',
+   *     client_id: 'xxx',
+   *     auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+   *     token_uri: 'https://oauth2.googleapis.com/token',
+   *     auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
+   *     client_x509_cert_url: 'xxx',
+   *     }
+   * });
+   * ```
+   *
+   * @example
+   * Create a client with credentials passed
+   * by loading a JSON file directly from disk
+   * ```
+   * const storage = new Storage({
+   *   projectId: 'your-project-id',
+   *   credentials: require('/path/to-keyfile.json')
+   * });
+   * ```
+   *
+   * @example
    * Create a client with an `AuthClient` (e.g. `DownscopedClient`)
    * ```
    * const {DownscopedClient} = require('google-auth-library');
