@@ -5249,6 +5249,9 @@ export namespace google {
 
                 /** Cluster nodePoolAutoConfig */
                 nodePoolAutoConfig?: (google.container.v1.INodePoolAutoConfig|null);
+
+                /** Cluster etag */
+                etag?: (string|null);
             }
 
             /** Represents a Cluster. */
@@ -5445,6 +5448,9 @@ export namespace google {
 
                 /** Cluster nodePoolAutoConfig. */
                 public nodePoolAutoConfig?: (google.container.v1.INodePoolAutoConfig|null);
+
+                /** Cluster etag. */
+                public etag: string;
 
                 /** Cluster _nodePoolDefaults. */
                 public _nodePoolDefaults?: "nodePoolDefaults";
@@ -5952,6 +5958,9 @@ export namespace google {
                 /** ClusterUpdate desiredGatewayApiConfig */
                 desiredGatewayApiConfig?: (google.container.v1.IGatewayAPIConfig|null);
 
+                /** ClusterUpdate etag */
+                etag?: (string|null);
+
                 /** ClusterUpdate desiredNodePoolLoggingConfig */
                 desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
 
@@ -6078,6 +6087,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredGatewayApiConfig. */
                 public desiredGatewayApiConfig?: (google.container.v1.IGatewayAPIConfig|null);
+
+                /** ClusterUpdate etag. */
+                public etag: string;
 
                 /** ClusterUpdate desiredNodePoolLoggingConfig. */
                 public desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
@@ -7027,6 +7039,9 @@ export namespace google {
                 /** UpdateNodePoolRequest gvnic */
                 gvnic?: (google.container.v1.IVirtualNIC|null);
 
+                /** UpdateNodePoolRequest etag */
+                etag?: (string|null);
+
                 /** UpdateNodePoolRequest fastSocket */
                 fastSocket?: (google.container.v1.IFastSocket|null);
 
@@ -7105,6 +7120,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest gvnic. */
                 public gvnic?: (google.container.v1.IVirtualNIC|null);
+
+                /** UpdateNodePoolRequest etag. */
+                public etag: string;
 
                 /** UpdateNodePoolRequest fastSocket. */
                 public fastSocket?: (google.container.v1.IFastSocket|null);
@@ -9944,6 +9962,9 @@ export namespace google {
 
                 /** NodePool updateInfo */
                 updateInfo?: (google.container.v1.NodePool.IUpdateInfo|null);
+
+                /** NodePool etag */
+                etag?: (string|null);
             }
 
             /** Represents a NodePool. */
@@ -10008,6 +10029,9 @@ export namespace google {
 
                 /** NodePool updateInfo. */
                 public updateInfo?: (google.container.v1.NodePool.IUpdateInfo|null);
+
+                /** NodePool etag. */
+                public etag: string;
 
                 /**
                  * Creates a new NodePool instance using the specified properties.
