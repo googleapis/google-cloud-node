@@ -50,6 +50,6 @@ done
 
 # Since we don't want to run nightly, and continuous for node 16 and node 18, adding these outside of the loop
 echo "importing presubmit unit build for node16 unit tests"
-gcloud beta builds triggers import "unit-presubmit-node16" --source "ci/export/unit-presubmit-node16.yaml"
+gcloud beta builds triggers import --source "ci/export/unit-presubmit-node16.yaml"
 echo "importing presubmit unit build for node18 unit tests"
-gcloud beta builds triggers import "unit-presubmit-node18" --source "ci/export/unit-presubmit-node18.yaml"
+gcloud beta builds triggers import --source "ci/export/unit-presubmit-node18.yaml"
