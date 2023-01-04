@@ -37,7 +37,7 @@ describe('helper functions', () => {
 
     it('should return the API path without the version, with dashes', async () => {
       assert.deepStrictEqual(cp.execSync(
-        `node ${createFolderNamePath} 'google.cloud.kms.v1'`).toString('utf-8'),
+        `node ${createFolderNamePath} google.cloud.kms.v1`).toString('utf-8'),
         'google-cloud-kms\n'
       );
     });
