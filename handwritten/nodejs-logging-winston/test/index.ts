@@ -138,6 +138,26 @@ describe('logging-winston', () => {
         OPTIONS.serviceContext
       );
     });
+
+    it('should pass all parameters to TransportStream', () => {
+      const level = 'INFO';
+      const format = 'FORMAT';
+      const optionsWithTransportStreamparameters = Object.assign({}, OPTIONS, {
+        level: level,
+        format: format,
+        silent: true,
+        handleExceptions: true,
+        handleRejections: false,
+      });
+      new loggingWinstonLib.LoggingWinston(
+        optionsWithTransportStreamparameters
+      );
+      assert.strictEqual(fakeLoggingOptions_!.level, level);
+      assert.strictEqual(fakeLoggingOptions_!.format, format);
+      assert.strictEqual(fakeLoggingOptions_!.silent, true);
+      assert.strictEqual(fakeLoggingOptions_!.handleExceptions, true);
+      assert.strictEqual(fakeLoggingOptions_!.handleRejections, false);
+    });
   });
 
   describe('log', () => {
