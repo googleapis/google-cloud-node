@@ -52,6 +52,7 @@ objects to users via direct download.
   * [Download File](#download-file)
   * [Download a File in Chunks Utilzing Transfer Manager](#download-a-file-in-chunks-utilzing-transfer-manager)
   * [Download File Using Requester Pays](#download-file-using-requester-pays)
+  * [Download Folder With Transfer Manager](#download-folder-with-transfer-manager)
   * [Download Into Memory](#download-into-memory)
   * [Download Many Files With Transfer Manager](#download-many-files-with-transfer-manager)
   * [Storage Download Public File.](#storage-download-public-file.)
@@ -124,6 +125,7 @@ objects to users via direct download.
   * [Stream File Download](#stream-file-download)
   * [Stream File Upload](#stream-file-upload)
   * [Upload a directory to a bucket.](#upload-a-directory-to-a-bucket.)
+  * [Upload Directory With Transfer Manager](#upload-directory-with-transfer-manager)
   * [Upload Encrypted File](#upload-encrypted-file)
   * [Upload File](#upload-file)
   * [Upload File With Kms Key](#upload-file-with-kms-key)
@@ -745,6 +747,25 @@ __Usage:__
 
 
 `node samples/downloadFileUsingRequesterPays.js`
+
+
+-----
+
+
+
+
+### Download Folder With Transfer Manager
+
+Downloads a folder in parallel utilizing transfer manager.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/downloadFolderWithTransferManager.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/downloadFolderWithTransferManager.js,samples/README.md)
+
+__Usage:__
+
+
+`node downloadFolderWithTransferManager.js <BUCKET_NAME> <FOLDER_NAME>`
 
 
 -----
@@ -2005,6 +2026,25 @@ __Usage:__
 
 
 `node files.js upload-directory <bucketName> <directoryPath>`
+
+
+-----
+
+
+
+
+### Upload Directory With Transfer Manager
+
+Uploads a directory in parallel utilizing transfer manager.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/uploadDirectoryWithTransferManager.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/uploadDirectoryWithTransferManager.js,samples/README.md)
+
+__Usage:__
+
+
+`node uploadFolderWithTransferManager.js <BUCKET_NAME> <DIRECTORY_NAME>`
 
 
 -----

@@ -44,7 +44,7 @@ function main(
   // Creates a client
   const storage = new Storage();
 
-  // Creates a transfer manager instance
+  // Creates a transfer manager client
   const transferManager = new TransferManager(storage.bucket(bucketName));
 
   async function uploadManyFilesWithTransferManager() {

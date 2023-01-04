@@ -28,8 +28,9 @@ const bucketName = generateName();
 const bucket = storage.bucket(bucketName);
 const firstFileName = 'test.txt';
 const secondFileName = 'test2.txt';
-const firstFilePath = path.join(cwd, 'resources', firstFileName);
-const secondFilePath = path.join(cwd, 'resources', secondFileName);
+const resourcesPath = path.join(cwd, 'resources');
+const firstFilePath = path.join(resourcesPath, firstFileName);
+const secondFilePath = path.join(resourcesPath, secondFileName);
 const downloadFilePath = path.join(cwd, 'downloaded.txt');
 const chunkSize = 1024;
 
@@ -75,6 +76,28 @@ describe('transfer manager', () => {
       output,
       new RegExp(
         `gs://${bucketName}/${firstFilePath} downloaded to ${downloadFilePath}.`
+      )
+    );
+  });
+
+  it('should upload a directory', async () => {
+    const output = execSync(
+      `node uploadDirectoryWithTransferManager.js ${bucketName} ${resourcesPath}`
+    );
+    assert.match(
+      output,
+      new RegExp(`${resourcesPath} uploaded to ${bucketName}.`)
+    );
+  });
+
+  it('should download a directory', async () => {
+    const output = execSync(
+      `node downloadFolderWithTransferManager.js ${bucketName} ${resourcesPath}`
+    );
+    assert.match(
+      output,
+      new RegExp(
+        `gs://${bucketName}/${resourcesPath} downloaded to ${resourcesPath}.`
       )
     );
   });

@@ -99,7 +99,8 @@ export class TransferManager {
    * Upload multiple files in parallel to the bucket. This is a convenience method
    * that utilizes {@link Bucket#upload} to perform the upload.
    *
-   * @param {array} [filePaths] An array of fully qualified paths to the files.
+   * @param {array | string} [filePathsOrDirectory] An array of fully qualified paths to the files or a directory name.
+   * If a directory name is provided, the directory will be recursively walked and all files will be added to the upload list.
    * to be uploaded to the bucket
    * @param {UploadManyFilesOptions} [options] Configuration options.
    * @returns {Promise<UploadResponse[]>}
@@ -118,11 +119,13 @@ export class TransferManager {
    * // Your bucket now contains:
    * // - "local/path/file1.txt" (with the contents of '/local/path/file1.txt')
    * // - "local/path/file2.txt" (with the contents of '/local/path/file2.txt')
+   * const response = await transferManager.uploadManyFiles('/local/directory');
+   * // Your bucket will now contain all files contained in '/local/directory' maintaining the subdirectory structure.
    * ```
    * @experimental
    */
   async uploadManyFiles(
-    filePaths: string[],
+    filePathsOrDirectory: string[] | string,
     options: UploadManyFilesOptions = {}
   ): Promise<UploadResponse[]> {
     if (options.skipIfExists && options.passthroughOptions?.preconditionOpts) {
@@ -142,8 +145,18 @@ export class TransferManager {
       options.concurrencyLimit || DEFAULT_PARALLEL_UPLOAD_LIMIT
     );
     const promises = [];
+    let allPaths: string[] = [];
+    if (!Array.isArray(filePathsOrDirectory)) {
+      for await (const curPath of this.getPathsFromDirectory(
+        filePathsOrDirectory
+      )) {
+        allPaths.push(curPath);
+      }
+    } else {
+      allPaths = filePathsOrDirectory;
+    }
 
-    for (const filePath of filePaths) {
+    for (const filePath of allPaths) {
       const stat = await fsp.lstat(filePath);
       if (stat.isDirectory()) {
         continue;
@@ -354,5 +367,19 @@ export class TransferManager {
           fileToWrite.close();
         });
     });
+  }
+
+  private async *getPathsFromDirectory(
+    directory: string
+  ): AsyncGenerator<string> {
+    const filesAndSubdirectories = await fsp.readdir(directory, {
+      withFileTypes: true,
+    });
+    for (const curFileOrDirectory of filesAndSubdirectories) {
+      const fullPath = path.join(directory, curFileOrDirectory.name);
+      curFileOrDirectory.isDirectory()
+        ? yield* this.getPathsFromDirectory(fullPath)
+        : yield fullPath;
+    }
   }
 }

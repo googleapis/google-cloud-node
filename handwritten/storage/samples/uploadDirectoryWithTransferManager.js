@@ -16,27 +16,20 @@
  */
 
 // sample-metadata:
-//   title: Download Many Files With Transfer Manager
-//   description: Downloads many files in parallel utilizing transfer manager.
-//   usage: node downloadManyFilesWithTransferManager.js <BUCKET_NAME> <FIRST_FILE_NAME> <SECOND_FILE_NAME>
+//   title: Upload Directory With Transfer Manager
+//   description: Uploads a directory in parallel utilizing transfer manager.
+//   usage: node uploadFolderWithTransferManager.js <BUCKET_NAME> <DIRECTORY_NAME>
 
-function main(
-  bucketName = 'my-bucket',
-  firstFileName = 'file1.txt',
-  secondFileName = 'file2.txt'
-) {
-  // [START storage_download_many_files_transfer_manager]
+function main(bucketName = 'my-bucket', directoryName = 'my-directory') {
+  // [START storage_upload_directory_transfer_manager]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
   // The ID of your GCS bucket
   // const bucketName = 'your-unique-bucket-name';
 
-  // The ID of the first GCS file to download
-  // const firstFileName = 'your-first-file-name';
-
-  // The ID of the second GCS file to download
-  // const secondFileName = 'your-second-file-name;
+  // The local directory to upload
+  // const directoryName = 'your-directory';
 
   // Imports the Google Cloud client library
   const {Storage, TransferManager} = require('@google-cloud/storage');
@@ -47,17 +40,15 @@ function main(
   // Creates a transfer manager client
   const transferManager = new TransferManager(storage.bucket(bucketName));
 
-  async function downloadManyFilesWithTransferManager() {
-    // Downloads the files
-    await transferManager.downloadManyFiles([firstFileName, secondFileName]);
+  async function uploadDirectoryWithTransferManager() {
+    // Uploads the directory
+    await transferManager.uploadManyFiles(directoryName);
 
-    for (const fileName of [firstFileName, secondFileName]) {
-      console.log(`gs://${bucketName}/${fileName} downloaded to ${fileName}.`);
-    }
+    console.log(`${directoryName} uploaded to ${bucketName}.`);
   }
 
-  downloadManyFilesWithTransferManager().catch(console.error);
-  // [END storage_download_many_files_transfer_manager]
+  uploadDirectoryWithTransferManager().catch(console.error);
+  // [END storage_upload_directory_transfer_manager]
 }
 
 process.on('unhandledRejection', err => {
