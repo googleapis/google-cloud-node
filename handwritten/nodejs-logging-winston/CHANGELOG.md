@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/nodejs-logging-winston/compare/v5.2.3...v5.3.0) (2023-01-04)
+
+
+### Features
+
+* Add support for TransportStream options ([#775](https://github.com/googleapis/nodejs-logging-winston/issues/775)) ([cf240dd](https://github.com/googleapis/nodejs-logging-winston/commit/cf240ddd1edc04f5485b62f94c78c28a1b5614b6))
+
 ## [5.2.3](https://github.com/googleapis/nodejs-logging-winston/compare/v5.2.2...v5.2.3) (2022-12-02)
 
 
