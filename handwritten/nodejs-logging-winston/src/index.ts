@@ -105,6 +105,16 @@ export interface Options extends LoggingOptions {
    * By default this value is true
    */
   useMessageField?: boolean;
+
+  /**
+   * Additional parameters for {@link TransportStream}. For more information on parameters,
+   * please see [winston-transport](https://github.com/winstonjs/winston-transport/blob/0e5e4c0056188a74e24407ee066902fb113bd8de/index.js#L8).
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  format?: any;
+  silent?: boolean;
+  handleExceptions?: boolean;
+  handleRejections?: boolean;
 }
 
 /**
@@ -196,6 +206,10 @@ export class LoggingWinston extends TransportStream {
     options = options || {};
     super({
       level: options.level,
+      format: options.format,
+      silent: options.silent,
+      handleExceptions: options.handleExceptions,
+      handleRejections: options.handleRejections,
     });
     this.common = new LoggingCommon(options);
   }
