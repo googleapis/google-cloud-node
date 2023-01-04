@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.9.0](https://github.com/googleapis/nodejs-storage/compare/v6.8.0...v6.9.0) (2023-01-04)
+
+
+### Features
+
+* Add ability to upload entire directory, add samples for upload … ([#2118](https://github.com/googleapis/nodejs-storage/issues/2118)) ([b0f32ce](https://github.com/googleapis/nodejs-storage/commit/b0f32ced04eae1b8ad88a0939fa763cb16b08df9))
+
 ## [6.8.0](https://github.com/googleapis/nodejs-storage/compare/v6.7.0...v6.8.0) (2022-12-07)
 
 
