@@ -32,8 +32,6 @@ import {
 // eslint-disable-next-line node/no-unpublished-import
 import * as sinon from 'sinon';
 // eslint-disable-next-line node/no-unpublished-import
-import nock from 'nock';
-// eslint-disable-next-line node/no-unpublished-import
 import {Octokit} from '@octokit/rest';
 import * as fs from 'fs';
 import yaml from 'js-yaml';
@@ -41,8 +39,6 @@ import yaml from 'js-yaml';
 const octokit = new Octokit({
   auth: 'mypersonalaccesstoken123',
 });
-
-nock.disableNetConnect();
 
 describe('get bootstrap template vars', () => {
   describe('tests for metadata information', () => {
@@ -108,14 +104,7 @@ describe('get bootstrap template vars', () => {
 
   describe('get package name', () => {
     it('should get the distribution name', async () => {
-      const fileRequest = nock('https://api.github.com')
-        .get(
-          '/repos/googleapis/googleapis/contents/google%2Fcloud%2Fkms%2Fv1%2FBUILD.bazel'
-        )
-        .reply(200, {
-          name: 'BUILD.bazel',
-          content: 'content',
-        });
+      const getContentStub = sinon.stub(octokit.repos, 'getContent').resolves({data: {name: 'BUILD.bazel', content: 'content'}} as any);
 
       await getDistributionName(
         octokit,
@@ -123,7 +112,7 @@ describe('get bootstrap template vars', () => {
         sinon.stub().returns(Buffer)
       );
 
-      fileRequest.done();
+      assert.ok(getContentStub.calledOnce);
     });
   });
 
