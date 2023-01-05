@@ -50,7 +50,7 @@ describe('helper functions', () => {
 
 
   
-      it.only('should open an issue on a given repo', async () => {
+      it('should open an issue on a given repo', async () => {
        process.env.MONO_REPO_NAME = 'google-cloud-node';
        process.env.API_ID = 'google.cloud.kms.v1';
        process.env.PROJECT_ID = 'owlbot-bootstrap-prod';

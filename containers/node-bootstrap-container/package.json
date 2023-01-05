@@ -20,11 +20,11 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node#readme",
   "dependencies": {
-    "@octokit/rest": "^19.0.0",
-    "sinon": "^15.0.1"
+    "@octokit/rest": "^19.0.0"
   },
   "devDependencies": {
     "mocha": "^9.0.0",
+    "sinon": "^15.0.1",
     "snap-shot-it": "^7.9.6"
   }
 }
