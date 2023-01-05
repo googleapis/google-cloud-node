@@ -104,7 +104,9 @@ describe('get bootstrap template vars', () => {
 
   describe('get package name', () => {
     it('should get the distribution name', async () => {
-      const getContentStub = sinon.stub(octokit.repos, 'getContent').resolves({data: {name: 'BUILD.bazel', content: 'content'}} as any);
+      const getContentStub = sinon
+        .stub(octokit.repos, 'getContent')
+        .resolves({data: {name: 'BUILD.bazel', content: 'content'}} as any);
 
       await getDistributionName(
         octokit,
