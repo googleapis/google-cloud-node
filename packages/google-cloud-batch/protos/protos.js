@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11956,6 +11956,8 @@
                          * @memberof google.cloud.batch.v1
                          * @interface IEnvironment
                          * @property {Object.<string,string>|null} [variables] Environment variables
+                         * @property {Object.<string,string>|null} [secretVariables] Environment secretVariables
+                         * @property {google.cloud.batch.v1.Environment.IKMSEnvMap|null} [encryptedVariables] Environment encryptedVariables
                          */
     
                         /**
@@ -11968,6 +11970,7 @@
                          */
                         function Environment(properties) {
                             this.variables = {};
+                            this.secretVariables = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -11981,6 +11984,22 @@
                          * @instance
                          */
                         Environment.prototype.variables = $util.emptyObject;
+    
+                        /**
+                         * Environment secretVariables.
+                         * @member {Object.<string,string>} secretVariables
+                         * @memberof google.cloud.batch.v1.Environment
+                         * @instance
+                         */
+                        Environment.prototype.secretVariables = $util.emptyObject;
+    
+                        /**
+                         * Environment encryptedVariables.
+                         * @member {google.cloud.batch.v1.Environment.IKMSEnvMap|null|undefined} encryptedVariables
+                         * @memberof google.cloud.batch.v1.Environment
+                         * @instance
+                         */
+                        Environment.prototype.encryptedVariables = null;
     
                         /**
                          * Creates a new Environment instance using the specified properties.
@@ -12009,6 +12028,11 @@
                             if (message.variables != null && Object.hasOwnProperty.call(message, "variables"))
                                 for (var keys = Object.keys(message.variables), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.variables[keys[i]]).ldelim();
+                            if (message.secretVariables != null && Object.hasOwnProperty.call(message, "secretVariables"))
+                                for (var keys = Object.keys(message.secretVariables), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.secretVariables[keys[i]]).ldelim();
+                            if (message.encryptedVariables != null && Object.hasOwnProperty.call(message, "encryptedVariables"))
+                                $root.google.cloud.batch.v1.Environment.KMSEnvMap.encode(message.encryptedVariables, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -12066,6 +12090,33 @@
                                         message.variables[key] = value;
                                         break;
                                     }
+                                case 2: {
+                                        if (message.secretVariables === $util.emptyObject)
+                                            message.secretVariables = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.secretVariables[key] = value;
+                                        break;
+                                    }
+                                case 3: {
+                                        message.encryptedVariables = $root.google.cloud.batch.v1.Environment.KMSEnvMap.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12109,6 +12160,19 @@
                                     if (!$util.isString(message.variables[key[i]]))
                                         return "variables: string{k:string} expected";
                             }
+                            if (message.secretVariables != null && message.hasOwnProperty("secretVariables")) {
+                                if (!$util.isObject(message.secretVariables))
+                                    return "secretVariables: object expected";
+                                var key = Object.keys(message.secretVariables);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.secretVariables[key[i]]))
+                                        return "secretVariables: string{k:string} expected";
+                            }
+                            if (message.encryptedVariables != null && message.hasOwnProperty("encryptedVariables")) {
+                                var error = $root.google.cloud.batch.v1.Environment.KMSEnvMap.verify(message.encryptedVariables);
+                                if (error)
+                                    return "encryptedVariables." + error;
+                            }
                             return null;
                         };
     
@@ -12131,6 +12195,18 @@
                                 for (var keys = Object.keys(object.variables), i = 0; i < keys.length; ++i)
                                     message.variables[keys[i]] = String(object.variables[keys[i]]);
                             }
+                            if (object.secretVariables) {
+                                if (typeof object.secretVariables !== "object")
+                                    throw TypeError(".google.cloud.batch.v1.Environment.secretVariables: object expected");
+                                message.secretVariables = {};
+                                for (var keys = Object.keys(object.secretVariables), i = 0; i < keys.length; ++i)
+                                    message.secretVariables[keys[i]] = String(object.secretVariables[keys[i]]);
+                            }
+                            if (object.encryptedVariables != null) {
+                                if (typeof object.encryptedVariables !== "object")
+                                    throw TypeError(".google.cloud.batch.v1.Environment.encryptedVariables: object expected");
+                                message.encryptedVariables = $root.google.cloud.batch.v1.Environment.KMSEnvMap.fromObject(object.encryptedVariables);
+                            }
                             return message;
                         };
     
@@ -12147,14 +12223,25 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.variables = {};
+                                object.secretVariables = {};
+                            }
+                            if (options.defaults)
+                                object.encryptedVariables = null;
                             var keys2;
                             if (message.variables && (keys2 = Object.keys(message.variables)).length) {
                                 object.variables = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.variables[keys2[j]] = message.variables[keys2[j]];
                             }
+                            if (message.secretVariables && (keys2 = Object.keys(message.secretVariables)).length) {
+                                object.secretVariables = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.secretVariables[keys2[j]] = message.secretVariables[keys2[j]];
+                            }
+                            if (message.encryptedVariables != null && message.hasOwnProperty("encryptedVariables"))
+                                object.encryptedVariables = $root.google.cloud.batch.v1.Environment.KMSEnvMap.toObject(message.encryptedVariables, options);
                             return object;
                         };
     
@@ -12183,6 +12270,233 @@
                             }
                             return typeUrlPrefix + "/google.cloud.batch.v1.Environment";
                         };
+    
+                        Environment.KMSEnvMap = (function() {
+    
+                            /**
+                             * Properties of a KMSEnvMap.
+                             * @memberof google.cloud.batch.v1.Environment
+                             * @interface IKMSEnvMap
+                             * @property {string|null} [keyName] KMSEnvMap keyName
+                             * @property {string|null} [cipherText] KMSEnvMap cipherText
+                             */
+    
+                            /**
+                             * Constructs a new KMSEnvMap.
+                             * @memberof google.cloud.batch.v1.Environment
+                             * @classdesc Represents a KMSEnvMap.
+                             * @implements IKMSEnvMap
+                             * @constructor
+                             * @param {google.cloud.batch.v1.Environment.IKMSEnvMap=} [properties] Properties to set
+                             */
+                            function KMSEnvMap(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * KMSEnvMap keyName.
+                             * @member {string} keyName
+                             * @memberof google.cloud.batch.v1.Environment.KMSEnvMap
+                             * @instance
+                             */
+                            KMSEnvMap.prototype.keyName = "";
+    
+                            /**
+                             * KMSEnvMap cipherText.
+                             * @member {string} cipherText
+                             * @memberof google.cloud.batch.v1.Environment.KMSEnvMap
+                             * @instance
+                             */
+                            KMSEnvMap.prototype.cipherText = "";
+    
+                            /**
+                             * Creates a new KMSEnvMap instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.batch.v1.Environment.KMSEnvMap
+                             * @static
+                             * @param {google.cloud.batch.v1.Environment.IKMSEnvMap=} [properties] Properties to set
+                             * @returns {google.cloud.batch.v1.Environment.KMSEnvMap} KMSEnvMap instance
+                             */
+                            KMSEnvMap.create = function create(properties) {
+                                return new KMSEnvMap(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified KMSEnvMap message. Does not implicitly {@link google.cloud.batch.v1.Environment.KMSEnvMap.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.batch.v1.Environment.KMSEnvMap
+                             * @static
+                             * @param {google.cloud.batch.v1.Environment.IKMSEnvMap} message KMSEnvMap message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            KMSEnvMap.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.keyName != null && Object.hasOwnProperty.call(message, "keyName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.keyName);
+                                if (message.cipherText != null && Object.hasOwnProperty.call(message, "cipherText"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.cipherText);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified KMSEnvMap message, length delimited. Does not implicitly {@link google.cloud.batch.v1.Environment.KMSEnvMap.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.batch.v1.Environment.KMSEnvMap
+                             * @static
+                             * @param {google.cloud.batch.v1.Environment.IKMSEnvMap} message KMSEnvMap message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            KMSEnvMap.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a KMSEnvMap message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.batch.v1.Environment.KMSEnvMap
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.batch.v1.Environment.KMSEnvMap} KMSEnvMap
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            KMSEnvMap.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.batch.v1.Environment.KMSEnvMap();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.keyName = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.cipherText = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a KMSEnvMap message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.batch.v1.Environment.KMSEnvMap
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.batch.v1.Environment.KMSEnvMap} KMSEnvMap
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            KMSEnvMap.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a KMSEnvMap message.
+                             * @function verify
+                             * @memberof google.cloud.batch.v1.Environment.KMSEnvMap
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            KMSEnvMap.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.keyName != null && message.hasOwnProperty("keyName"))
+                                    if (!$util.isString(message.keyName))
+                                        return "keyName: string expected";
+                                if (message.cipherText != null && message.hasOwnProperty("cipherText"))
+                                    if (!$util.isString(message.cipherText))
+                                        return "cipherText: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a KMSEnvMap message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.batch.v1.Environment.KMSEnvMap
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.batch.v1.Environment.KMSEnvMap} KMSEnvMap
+                             */
+                            KMSEnvMap.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.batch.v1.Environment.KMSEnvMap)
+                                    return object;
+                                var message = new $root.google.cloud.batch.v1.Environment.KMSEnvMap();
+                                if (object.keyName != null)
+                                    message.keyName = String(object.keyName);
+                                if (object.cipherText != null)
+                                    message.cipherText = String(object.cipherText);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a KMSEnvMap message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.batch.v1.Environment.KMSEnvMap
+                             * @static
+                             * @param {google.cloud.batch.v1.Environment.KMSEnvMap} message KMSEnvMap
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            KMSEnvMap.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.keyName = "";
+                                    object.cipherText = "";
+                                }
+                                if (message.keyName != null && message.hasOwnProperty("keyName"))
+                                    object.keyName = message.keyName;
+                                if (message.cipherText != null && message.hasOwnProperty("cipherText"))
+                                    object.cipherText = message.cipherText;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this KMSEnvMap to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.batch.v1.Environment.KMSEnvMap
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            KMSEnvMap.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for KMSEnvMap
+                             * @function getTypeUrl
+                             * @memberof google.cloud.batch.v1.Environment.KMSEnvMap
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            KMSEnvMap.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.batch.v1.Environment.KMSEnvMap";
+                            };
+    
+                            return KMSEnvMap;
+                        })();
     
                         return Environment;
                     })();
