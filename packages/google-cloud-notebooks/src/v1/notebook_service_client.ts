@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3269,7 +3269,7 @@ export class NotebookServiceClient {
    *   `projects/{project_id}/locations/{location}/instances/{instance_id}`
    * @param {string} request.targetSnapshot
    *   Required. The snapshot for rollback.
-   *   Example: "projects/test-project/global/snapshots/krwlzipynril".
+   *   Example: `projects/test-project/global/snapshots/krwlzipynril`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5288,7 +5288,7 @@ export class NotebookServiceClient {
    *   from the last result.
    * @param {string} request.filter
    *   Filter applied to resulting executions. Currently only supports filtering
-   *   executions by a specified schedule_id.
+   *   executions by a specified `schedule_id`.
    *   Format: `schedule_id=<Schedule_ID>`
    * @param {string} request.orderBy
    *   Sort by field.
@@ -5394,7 +5394,7 @@ export class NotebookServiceClient {
    *   from the last result.
    * @param {string} request.filter
    *   Filter applied to resulting executions. Currently only supports filtering
-   *   executions by a specified schedule_id.
+   *   executions by a specified `schedule_id`.
    *   Format: `schedule_id=<Schedule_ID>`
    * @param {string} request.orderBy
    *   Sort by field.
@@ -5448,7 +5448,7 @@ export class NotebookServiceClient {
    *   from the last result.
    * @param {string} request.filter
    *   Filter applied to resulting executions. Currently only supports filtering
-   *   executions by a specified schedule_id.
+   *   executions by a specified `schedule_id`.
    *   Format: `schedule_id=<Schedule_ID>`
    * @param {string} request.orderBy
    *   Sort by field.
