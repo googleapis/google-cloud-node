@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -861,6 +861,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ExcludeByHotword. */
+                interface IExcludeByHotword {
+
+                    /** ExcludeByHotword hotwordRegex */
+                    hotwordRegex?: (google.privacy.dlp.v2.CustomInfoType.IRegex|null);
+
+                    /** ExcludeByHotword proximity */
+                    proximity?: (google.privacy.dlp.v2.CustomInfoType.DetectionRule.IProximity|null);
+                }
+
+                /** Represents an ExcludeByHotword. */
+                class ExcludeByHotword implements IExcludeByHotword {
+
+                    /**
+                     * Constructs a new ExcludeByHotword.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IExcludeByHotword);
+
+                    /** ExcludeByHotword hotwordRegex. */
+                    public hotwordRegex?: (google.privacy.dlp.v2.CustomInfoType.IRegex|null);
+
+                    /** ExcludeByHotword proximity. */
+                    public proximity?: (google.privacy.dlp.v2.CustomInfoType.DetectionRule.IProximity|null);
+
+                    /**
+                     * Creates a new ExcludeByHotword instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExcludeByHotword instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IExcludeByHotword): google.privacy.dlp.v2.ExcludeByHotword;
+
+                    /**
+                     * Encodes the specified ExcludeByHotword message. Does not implicitly {@link google.privacy.dlp.v2.ExcludeByHotword.verify|verify} messages.
+                     * @param message ExcludeByHotword message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IExcludeByHotword, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExcludeByHotword message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ExcludeByHotword.verify|verify} messages.
+                     * @param message ExcludeByHotword message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IExcludeByHotword, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExcludeByHotword message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExcludeByHotword
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ExcludeByHotword;
+
+                    /**
+                     * Decodes an ExcludeByHotword message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExcludeByHotword
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ExcludeByHotword;
+
+                    /**
+                     * Verifies an ExcludeByHotword message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExcludeByHotword message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExcludeByHotword
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ExcludeByHotword;
+
+                    /**
+                     * Creates a plain object from an ExcludeByHotword message. Also converts values to other types if specified.
+                     * @param message ExcludeByHotword
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ExcludeByHotword, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExcludeByHotword to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExcludeByHotword
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an ExclusionRule. */
                 interface IExclusionRule {
 
@@ -872,6 +975,9 @@ export namespace google {
 
                     /** ExclusionRule excludeInfoTypes */
                     excludeInfoTypes?: (google.privacy.dlp.v2.IExcludeInfoTypes|null);
+
+                    /** ExclusionRule excludeByHotword */
+                    excludeByHotword?: (google.privacy.dlp.v2.IExcludeByHotword|null);
 
                     /** ExclusionRule matchingType */
                     matchingType?: (google.privacy.dlp.v2.MatchingType|keyof typeof google.privacy.dlp.v2.MatchingType|null);
@@ -895,11 +1001,14 @@ export namespace google {
                     /** ExclusionRule excludeInfoTypes. */
                     public excludeInfoTypes?: (google.privacy.dlp.v2.IExcludeInfoTypes|null);
 
+                    /** ExclusionRule excludeByHotword. */
+                    public excludeByHotword?: (google.privacy.dlp.v2.IExcludeByHotword|null);
+
                     /** ExclusionRule matchingType. */
                     public matchingType: (google.privacy.dlp.v2.MatchingType|keyof typeof google.privacy.dlp.v2.MatchingType);
 
                     /** ExclusionRule type. */
-                    public type?: ("dictionary"|"regex"|"excludeInfoTypes");
+                    public type?: ("dictionary"|"regex"|"excludeInfoTypes"|"excludeByHotword");
 
                     /**
                      * Creates a new ExclusionRule instance using the specified properties.
@@ -5549,7 +5658,8 @@ export namespace google {
                         UNITED_STATES = 37,
                         URUGUAY = 38,
                         VENEZUELA = 39,
-                        INTERNAL = 40
+                        INTERNAL = 40,
+                        NEW_ZEALAND = 41
                     }
 
                     /** IndustryCategory enum. */

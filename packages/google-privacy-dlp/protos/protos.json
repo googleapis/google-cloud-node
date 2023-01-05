@@ -977,13 +977,26 @@
                         }
                       }
                     },
+                    "ExcludeByHotword": {
+                      "fields": {
+                        "hotwordRegex": {
+                          "type": "CustomInfoType.Regex",
+                          "id": 1
+                        },
+                        "proximity": {
+                          "type": "CustomInfoType.DetectionRule.Proximity",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ExclusionRule": {
                       "oneofs": {
                         "type": {
                           "oneof": [
                             "dictionary",
                             "regex",
-                            "excludeInfoTypes"
+                            "excludeInfoTypes",
+                            "excludeByHotword"
                           ]
                         }
                       },
@@ -999,6 +1012,10 @@
                         "excludeInfoTypes": {
                           "type": "ExcludeInfoTypes",
                           "id": 3
+                        },
+                        "excludeByHotword": {
+                          "type": "ExcludeByHotword",
+                          "id": 5
                         },
                         "matchingType": {
                           "type": "MatchingType",
@@ -1897,7 +1914,8 @@
                             "UNITED_STATES": 37,
                             "URUGUAY": 38,
                             "VENEZUELA": 39,
-                            "INTERNAL": 40
+                            "INTERNAL": 40,
+                            "NEW_ZEALAND": 41
                           }
                         },
                         "IndustryCategory": {

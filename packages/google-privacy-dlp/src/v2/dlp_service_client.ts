@@ -131,6 +131,9 @@ export class DlpServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -733,6 +736,13 @@ export class DlpServiceClient {
    *   inspect_template_name argument.
    * @param {google.privacy.dlp.v2.ContentItem} request.item
    *   The item to de-identify. Will be treated as text.
+   *
+   *   This value must be of type
+   *   {@link google.privacy.dlp.v2.Table|Table} if your
+   *   {@link google.privacy.dlp.v2.DeidentifyContentRequest.deidentify_config|deidentify_config}
+   *   is a
+   *   {@link google.privacy.dlp.v2.RecordTransformations|RecordTransformations}
+   *   object.
    * @param {string} request.inspectTemplateName
    *   Template to use. Any configuration directly specified in
    *   inspect_config will override those set in the template. Singular fields
