@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -47,12 +47,12 @@ function main(runtime, updateMask) {
    *          }
    *      }
    *  Currently, only the following fields can be updated:
-   *  - software_config.kernels
-   *  - software_config.post_startup_script
-   *  - software_config.custom_gpu_driver_path
-   *  - software_config.idle_shutdown
-   *  - software_config.idle_shutdown_timeout
-   *  - software_config.disable_terminal
+   *  - `software_config.kernels`
+   *  - `software_config.post_startup_script`
+   *  - `software_config.custom_gpu_driver_path`
+   *  - `software_config.idle_shutdown`
+   *  - `software_config.idle_shutdown_timeout`
+   *  - `software_config.disable_terminal`
    */
   // const updateMask = {}
   /**
