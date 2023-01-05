@@ -1076,6 +1076,29 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 1
+                        },
+                        "secretVariables": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "encryptedVariables": {
+                          "type": "KMSEnvMap",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "KMSEnvMap": {
+                          "fields": {
+                            "keyName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "cipherText": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
