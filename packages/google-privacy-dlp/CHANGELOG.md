@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [4.3.0](https://github.com/googleapis/nodejs-dlp/compare/v4.2.0...v4.3.0) (2023-01-06)
+
+
+### Features
+
+* ExcludeByHotword added as an ExclusionRule type, NEW_ZEALAND added as a LocationCategory value ([5b54b2e](https://github.com/googleapis/nodejs-dlp/commit/5b54b2e9c63acee3022089d9fb94d8b1907c1eb2))
+
+
+### Bug Fixes
+
+* Deprecate extra field to avoid confusion ([#777](https://github.com/googleapis/nodejs-dlp/issues/777)) ([f6a7ebd](https://github.com/googleapis/nodejs-dlp/commit/f6a7ebde9f78440600ac178a568e3fe79ccfadc2))
+* **deps:** Use google-gax v3.5.2 ([#781](https://github.com/googleapis/nodejs-dlp/issues/781)) ([3601ed8](https://github.com/googleapis/nodejs-dlp/commit/3601ed84fa97958ca52bdc8d5620317f1a4a1de5))
+* Regenerated protos JS and TS definitions ([#784](https://github.com/googleapis/nodejs-dlp/issues/784)) ([fa109f0](https://github.com/googleapis/nodejs-dlp/commit/fa109f05c3a29473a330e96b20e89480fb89496e))
+
 ## [4.2.0](https://github.com/googleapis/nodejs-dlp/compare/v4.1.1...v4.2.0) (2022-09-22)
 
 
