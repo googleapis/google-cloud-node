@@ -30,7 +30,8 @@ function main(name) {
    */
   /**
    *  Required. The full name of the Service.
-   *  Format: projects/{projectnumber}/locations/{location}/services/{service}
+   *  Format: projects/{project}/locations/{location}/services/{service}, where
+   *  {project} can be project id or number.
    */
   // const name = 'abc123'
   /**

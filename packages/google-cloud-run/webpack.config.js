@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'Revisions',
-    filename: './revisions.js',
+    library: 'Executions',
+    filename: './executions.js',
   },
   node: {
     child_process: 'empty',

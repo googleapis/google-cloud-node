@@ -93,14 +93,33 @@ message Container {
 
   // Volume to mount into the container's filesystem.
   repeated VolumeMount volume_mounts = 8;
+
+  // Container's working directory.
+  // If not specified, the container runtime's default will be used, which
+  // might be configured in the container image.
+  string working_dir = 9;
+
+  // Periodic probe of container liveness.
+  // Container will be restarted if the probe fails.
+  // More info:
+  // https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+  Probe liveness_probe = 10;
+
+  // Startup probe of application within the container.
+  // All other probes are disabled if a startup probe is provided, until it
+  // succeeds. Container will not be added to service endpoints if the probe
+  // fails.
+  // More info:
+  // https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+  Probe startup_probe = 11;
 }
 
 // ResourceRequirements describes the compute resource requirements.
 message ResourceRequirements {
   // Only memory and CPU are supported. Note: The only
-  // supported values for CPU are '1', '2', and '4'. Setting 4 CPU requires at
-  // least 2Gi of memory.
-  // The values of the map is string form of the 'quantity' k8s type:
+  // supported values for CPU are '1', '2',  '4', and '8'. Setting 4 CPU
+  // requires at least 2Gi of memory. The values of the map is string form of
+  // the 'quantity' k8s type:
   // https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go
   map<string, string> limits = 1;
 
@@ -150,7 +169,8 @@ message SecretKeySelector {
   ];
 
   // The Cloud Secret Manager secret version.
-  // Can be 'latest' for the latest value or an integer for a specific version.
+  // Can be 'latest' for the latest version, an integer for a specific version,
+  // or a version alias.
   string version = 2 [(google.api.resource_reference) = {
                         type: "secretmanager.googleapis.com/SecretVersion"
                       }];
@@ -215,7 +235,7 @@ message SecretVolumeSource {
   repeated VersionToPath items = 2;
 
   // Integer representation of mode bits to use on created files by default.
-  // Must be a value between 0000 and 0777 (octal), defaulting to 0644.
+  // Must be a value between 0000 and 0777 (octal), defaulting to 0444.
   // Directories within the path are not affected by  this setting.
   //
   // Notes
@@ -242,7 +262,8 @@ message VersionToPath {
   string path = 1 [(google.api.field_behavior) = REQUIRED];
 
   // The Cloud Secret Manager secret version.
-  // Can be 'latest' for the latest value or an integer for a specific version.
+  // Can be 'latest' for the latest value, or an integer or a secret alias for a
+  // specific version.
   string version = 2;
 
   // Integer octal mode bits to use on this file, must be a value between
@@ -271,4 +292,84 @@ message CloudSqlInstance {
   // how to connect Cloud SQL and Cloud Run. Format:
   // {project}:{location}:{instance}
   repeated string instances = 1;
+}
+
+// Probe describes a health check to be performed against a container to
+// determine whether it is alive or ready to receive traffic.
+message Probe {
+  // Number of seconds after the container has started before the probe is
+  // initiated.
+  // Defaults to 0 seconds. Minimum value is 0. Maximum value for liveness probe
+  // is 3600. Maximum value for startup probe is 240.
+  // More info:
+  // https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+  int32 initial_delay_seconds = 1;
+
+  // Number of seconds after which the probe times out.
+  // Defaults to 1 second. Minimum value is 1. Maximum value is 3600.
+  // Must be smaller than period_seconds.
+  // More info:
+  // https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+  int32 timeout_seconds = 2;
+
+  // How often (in seconds) to perform the probe.
+  // Default to 10 seconds. Minimum value is 1. Maximum value for liveness probe
+  // is 3600. Maximum value for startup probe is 240.
+  // Must be greater or equal than timeout_seconds.
+  int32 period_seconds = 3;
+
+  // Minimum consecutive failures for the probe to be considered failed after
+  // having succeeded. Defaults to 3. Minimum value is 1.
+  int32 failure_threshold = 4;
+
+  oneof probe_type {
+    // HTTPGet specifies the http request to perform.
+    // Exactly one of httpGet, tcpSocket, or grpc must be specified.
+    HTTPGetAction http_get = 5;
+
+    // TCPSocket specifies an action involving a TCP port.
+    // Exactly one of httpGet, tcpSocket, or grpc must be specified.
+    TCPSocketAction tcp_socket = 6;
+
+    // GRPC specifies an action involving a gRPC port.
+    // Exactly one of httpGet, tcpSocket, or grpc must be specified.
+    GRPCAction grpc = 7;
+  }
+}
+
+// HTTPGetAction describes an action based on HTTP Get requests.
+message HTTPGetAction {
+  // Path to access on the HTTP server. Defaults to '/'.
+  string path = 1;
+
+  // Custom headers to set in the request. HTTP allows repeated headers.
+  repeated HTTPHeader http_headers = 4;
+}
+
+// HTTPHeader describes a custom header to be used in HTTP probes
+message HTTPHeader {
+  // Required. The header field name
+  string name = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // The header field value
+  string value = 2;
+}
+
+// TCPSocketAction describes an action based on opening a socket
+message TCPSocketAction {
+  // Port number to access on the container. Must be in the range 1 to 65535.
+  // If not specified, defaults to 8080.
+  int32 port = 1;
+}
+
+// GRPCAction describes an action involving a GRPC port.
+message GRPCAction {
+  // Port number of the gRPC service. Number must be in the range 1 to 65535.
+  // If not specified, defaults to 8080.
+  int32 port = 1;
+
+  // Service is the name of the service to place in the gRPC HealthCheckRequest
+  // (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md). If
+  // this is not specified, the default behavior is defined by gRPC.
+  string service = 2;
 }

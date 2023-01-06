@@ -16,23 +16,47 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {RevisionsClient, ServicesClient} from '@google-cloud/run';
+import {
+  ExecutionsClient,
+  JobsClient,
+  RevisionsClient,
+  ServicesClient,
+  TasksClient,
+} from '@google-cloud/run';
 
 // check that the client class type name can be used
+function doStuffWithExecutionsClient(client: ExecutionsClient) {
+  client.close();
+}
+function doStuffWithJobsClient(client: JobsClient) {
+  client.close();
+}
 function doStuffWithRevisionsClient(client: RevisionsClient) {
   client.close();
 }
 function doStuffWithServicesClient(client: ServicesClient) {
   client.close();
 }
+function doStuffWithTasksClient(client: TasksClient) {
+  client.close();
+}
 
 function main() {
+  // check that the client instance can be created
+  const executionsClient = new ExecutionsClient();
+  doStuffWithExecutionsClient(executionsClient);
+  // check that the client instance can be created
+  const jobsClient = new JobsClient();
+  doStuffWithJobsClient(jobsClient);
   // check that the client instance can be created
   const revisionsClient = new RevisionsClient();
   doStuffWithRevisionsClient(revisionsClient);
   // check that the client instance can be created
   const servicesClient = new ServicesClient();
   doStuffWithServicesClient(servicesClient);
+  // check that the client instance can be created
+  const tasksClient = new TasksClient();
+  doStuffWithTasksClient(tasksClient);
 }
 
 main();

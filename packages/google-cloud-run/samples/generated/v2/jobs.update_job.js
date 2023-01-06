@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, service, serviceId) {
-  // [START run_v2_generated_Services_CreateService_async]
+function main(job) {
+  // [START run_v2_generated_Jobs_UpdateJob_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,49 +29,41 @@ function main(parent, service, serviceId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location and project in which this service should be created.
-   *  Format: projects/{project}/locations/{location}, where {project} can be
-   *  project id or number. Only lowercase characters, digits, and hyphens.
+   *  Required. The Job to be updated.
    */
-  // const parent = 'abc123'
-  /**
-   *  Required. The Service instance to create.
-   */
-  // const service = {}
-  /**
-   *  Required. The unique identifier for the Service. It must begin with letter,
-   *  and cannot end with hyphen; must contain fewer than 50 characters.
-   *  The name of the service becomes {parent}/services/{service_id}.
-   */
-  // const serviceId = 'abc123'
+  // const job = {}
   /**
    *  Indicates that the request should be validated and default values
-   *  populated, without persisting the request or creating any resources.
+   *  populated, without persisting the request or updating any resources.
    */
   // const validateOnly = true
+  /**
+   *  If set to true, and if the Job does not exist, it will create a new
+   *  one. Caller must have both create and update permissions for this call if
+   *  this is set to true.
+   */
+  // const allowMissing = true
 
   // Imports the Run library
-  const {ServicesClient} = require('@google-cloud/run').v2;
+  const {JobsClient} = require('@google-cloud/run').v2;
 
   // Instantiates a client
-  const runClient = new ServicesClient();
+  const runClient = new JobsClient();
 
-  async function callCreateService() {
+  async function callUpdateJob() {
     // Construct request
     const request = {
-      parent,
-      service,
-      serviceId,
+      job,
     };
 
     // Run request
-    const [operation] = await runClient.createService(request);
+    const [operation] = await runClient.updateJob(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateService();
-  // [END run_v2_generated_Services_CreateService_async]
+  callUpdateJob();
+  // [END run_v2_generated_Jobs_UpdateJob_async]
 }
 
 process.on('unhandledRejection', err => {

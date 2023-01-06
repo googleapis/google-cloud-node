@@ -23,8 +23,6 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
-  GrpcClientOptions,
-  LROperation,
   PaginationCallback,
   GaxCall,
   LocationsClient,
@@ -35,18 +33,18 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v2/revisions_client_config.json`.
+ * `src/v2/tasks_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './revisions_client_config.json';
+import * as gapicConfig from './tasks_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Cloud Run Revision Control Plane API.
+ *  Cloud Run Task Control Plane API.
  * @class
  * @memberof v2
  */
-export class RevisionsClient {
+export class TasksClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -65,11 +63,10 @@ export class RevisionsClient {
   innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
-  operationsClient: gax.OperationsClient;
-  revisionsStub?: Promise<{[name: string]: Function}>;
+  tasksStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of RevisionsClient.
+   * Construct an instance of TasksClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -105,7 +102,7 @@ export class RevisionsClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new RevisionsClient({fallback: 'rest'}, gax);
+   *     const client = new TasksClient({fallback: 'rest'}, gax);
    *     ```
    */
   constructor(
@@ -113,7 +110,7 @@ export class RevisionsClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof RevisionsClient;
+    const staticMembers = this.constructor as typeof TasksClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -218,59 +215,16 @@ export class RevisionsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listRevisions: new this._gaxModule.PageDescriptor(
+      listTasks: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'revisions'
-      ),
-    };
-
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
-    // This API contains "long-running operations", which return a
-    // an Operation object that allows for tracking of the operation,
-    // rather than holding a request open.
-    const lroOptions: GrpcClientOptions = {
-      auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
-    };
-    if (opts.fallback === 'rest') {
-      lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v2/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2/{name=projects/*/locations/*}/operations',
-        },
-      ];
-    }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
-    const deleteRevisionResponse = protoFilesRoot.lookup(
-      '.google.cloud.run.v2.Revision'
-    ) as gax.protobuf.Type;
-    const deleteRevisionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.run.v2.Revision'
-    ) as gax.protobuf.Type;
-
-    this.descriptors.longrunning = {
-      deleteRevision: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deleteRevisionResponse.decode.bind(deleteRevisionResponse),
-        deleteRevisionMetadata.decode.bind(deleteRevisionMetadata)
+        'tasks'
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.run.v2.Revisions',
+      'google.cloud.run.v2.Tasks',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -298,32 +252,28 @@ export class RevisionsClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.revisionsStub) {
-      return this.revisionsStub;
+    if (this.tasksStub) {
+      return this.tasksStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.run.v2.Revisions.
-    this.revisionsStub = this._gaxGrpc.createStub(
+    // google.cloud.run.v2.Tasks.
+    this.tasksStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.run.v2.Revisions'
+            'google.cloud.run.v2.Tasks'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.run.v2.Revisions,
+          (this._protos as any).google.cloud.run.v2.Tasks,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const revisionsStubMethods = [
-      'getRevision',
-      'listRevisions',
-      'deleteRevision',
-    ];
-    for (const methodName of revisionsStubMethods) {
-      const callPromise = this.revisionsStub.then(
+    const tasksStubMethods = ['getTask', 'listTasks'];
+    for (const methodName of tasksStubMethods) {
+      const callPromise = this.tasksStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -337,10 +287,7 @@ export class RevisionsClient {
         }
       );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        this.descriptors.longrunning[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -351,7 +298,7 @@ export class RevisionsClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.revisionsStub;
+    return this.tasksStub;
   }
 
   /**
@@ -408,69 +355,69 @@ export class RevisionsClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets information about a Revision.
+   * Gets information about a Task.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The full name of the Revision.
+   *   Required. The full name of the Task.
    *   Format:
-   *   projects/{project}/locations/{location}/services/{service}/revisions/{revision}
+   *   projects/{project}/locations/{location}/jobs/{job}/executions/{execution}/tasks/{task}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Revision]{@link google.cloud.run.v2.Revision}.
+   *   The first element of the array is an object representing [Task]{@link google.cloud.run.v2.Task}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/revisions.get_revision.js</caption>
-   * region_tag:run_v2_generated_Revisions_GetRevision_async
+   * @example <caption>include:samples/generated/v2/tasks.get_task.js</caption>
+   * region_tag:run_v2_generated_Tasks_GetTask_async
    */
-  getRevision(
-    request?: protos.google.cloud.run.v2.IGetRevisionRequest,
+  getTask(
+    request?: protos.google.cloud.run.v2.IGetTaskRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.run.v2.IRevision,
-      protos.google.cloud.run.v2.IGetRevisionRequest | undefined,
+      protos.google.cloud.run.v2.ITask,
+      protos.google.cloud.run.v2.IGetTaskRequest | undefined,
       {} | undefined
     ]
   >;
-  getRevision(
-    request: protos.google.cloud.run.v2.IGetRevisionRequest,
+  getTask(
+    request: protos.google.cloud.run.v2.IGetTaskRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.run.v2.IRevision,
-      protos.google.cloud.run.v2.IGetRevisionRequest | null | undefined,
+      protos.google.cloud.run.v2.ITask,
+      protos.google.cloud.run.v2.IGetTaskRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  getRevision(
-    request: protos.google.cloud.run.v2.IGetRevisionRequest,
+  getTask(
+    request: protos.google.cloud.run.v2.IGetTaskRequest,
     callback: Callback<
-      protos.google.cloud.run.v2.IRevision,
-      protos.google.cloud.run.v2.IGetRevisionRequest | null | undefined,
+      protos.google.cloud.run.v2.ITask,
+      protos.google.cloud.run.v2.IGetTaskRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  getRevision(
-    request?: protos.google.cloud.run.v2.IGetRevisionRequest,
+  getTask(
+    request?: protos.google.cloud.run.v2.IGetTaskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.run.v2.IRevision,
-          protos.google.cloud.run.v2.IGetRevisionRequest | null | undefined,
+          protos.google.cloud.run.v2.ITask,
+          protos.google.cloud.run.v2.IGetTaskRequest | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.run.v2.IRevision,
-      protos.google.cloud.run.v2.IGetRevisionRequest | null | undefined,
+      protos.google.cloud.run.v2.ITask,
+      protos.google.cloud.run.v2.IGetTaskRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.run.v2.IRevision,
-      protos.google.cloud.run.v2.IGetRevisionRequest | undefined,
+      protos.google.cloud.run.v2.ITask,
+      protos.google.cloud.run.v2.IGetTaskRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -485,258 +432,90 @@ export class RevisionsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
-    {
-      const fieldValue = request.name;
-      if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?'));
-        if (match) {
-          const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
-        }
-      }
-    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams(routingParameter);
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     this.initialize();
-    return this.innerApiCalls.getRevision(request, options, callback);
+    return this.innerApiCalls.getTask(request, options, callback);
   }
 
   /**
-   * Deletes a Revision.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Revision to delete.
-   *   Format:
-   *   projects/{project}/locations/{location}/services/{service}/revisions/{revision}
-   * @param {boolean} request.validateOnly
-   *   Indicates that the request should be validated without actually
-   *   deleting any resources.
-   * @param {string} request.etag
-   *   A system-generated fingerprint for this version of the
-   *   resource. This may be used to detect modification conflict during updates.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/revisions.delete_revision.js</caption>
-   * region_tag:run_v2_generated_Revisions_DeleteRevision_async
-   */
-  deleteRevision(
-    request?: protos.google.cloud.run.v2.IDeleteRevisionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.run.v2.IRevision,
-        protos.google.cloud.run.v2.IRevision
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  deleteRevision(
-    request: protos.google.cloud.run.v2.IDeleteRevisionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.run.v2.IRevision,
-        protos.google.cloud.run.v2.IRevision
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteRevision(
-    request: protos.google.cloud.run.v2.IDeleteRevisionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.run.v2.IRevision,
-        protos.google.cloud.run.v2.IRevision
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteRevision(
-    request?: protos.google.cloud.run.v2.IDeleteRevisionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.run.v2.IRevision,
-            protos.google.cloud.run.v2.IRevision
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.run.v2.IRevision,
-        protos.google.cloud.run.v2.IRevision
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.run.v2.IRevision,
-        protos.google.cloud.run.v2.IRevision
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
-    {
-      const fieldValue = request.name;
-      if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?'));
-        if (match) {
-          const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
-        }
-      }
-    }
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
-    return this.innerApiCalls.deleteRevision(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `deleteRevision()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/revisions.delete_revision.js</caption>
-   * region_tag:run_v2_generated_Revisions_DeleteRevision_async
-   */
-  async checkDeleteRevisionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.run.v2.Revision,
-      protos.google.cloud.run.v2.Revision
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteRevision,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.run.v2.Revision,
-      protos.google.cloud.run.v2.Revision
-    >;
-  }
-  /**
-   * Lists Revisions from a given Service, or from a given location.
+   * Lists Tasks from an Execution of a Job.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The Service from which the Revisions should be listed.
-   *   To list all Revisions across Services, use "-" instead of Service name.
-   *   Format:
-   *   projects/{project}/locations/{location}/services/{service}
+   *   Required. The Execution from which the Tasks should be listed.
+   *   To list all Tasks across Executions of a Job, use "-" instead of Execution
+   *   name. To list all Tasks across Jobs, use "-" instead of Job name. Format:
+   *   projects/{project}/locations/{location}/jobs/{job}/executions/{execution}
    * @param {number} request.pageSize
-   *   Maximum number of revisions to return in this call.
+   *   Maximum number of Tasks to return in this call.
    * @param {string} request.pageToken
-   *   A page token received from a previous call to ListRevisions.
+   *   A page token received from a previous call to ListTasks.
    *   All other parameters must match.
    * @param {boolean} request.showDeleted
    *   If true, returns deleted (but unexpired) resources along with active ones.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Revision]{@link google.cloud.run.v2.Revision}.
+   *   The first element of the array is Array of [Task]{@link google.cloud.run.v2.Task}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listRevisionsAsync()`
+   *   We recommend using `listTasksAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  listRevisions(
-    request?: protos.google.cloud.run.v2.IListRevisionsRequest,
+  listTasks(
+    request?: protos.google.cloud.run.v2.IListTasksRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.run.v2.IRevision[],
-      protos.google.cloud.run.v2.IListRevisionsRequest | null,
-      protos.google.cloud.run.v2.IListRevisionsResponse
+      protos.google.cloud.run.v2.ITask[],
+      protos.google.cloud.run.v2.IListTasksRequest | null,
+      protos.google.cloud.run.v2.IListTasksResponse
     ]
   >;
-  listRevisions(
-    request: protos.google.cloud.run.v2.IListRevisionsRequest,
+  listTasks(
+    request: protos.google.cloud.run.v2.IListTasksRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.run.v2.IListRevisionsRequest,
-      protos.google.cloud.run.v2.IListRevisionsResponse | null | undefined,
-      protos.google.cloud.run.v2.IRevision
+      protos.google.cloud.run.v2.IListTasksRequest,
+      protos.google.cloud.run.v2.IListTasksResponse | null | undefined,
+      protos.google.cloud.run.v2.ITask
     >
   ): void;
-  listRevisions(
-    request: protos.google.cloud.run.v2.IListRevisionsRequest,
+  listTasks(
+    request: protos.google.cloud.run.v2.IListTasksRequest,
     callback: PaginationCallback<
-      protos.google.cloud.run.v2.IListRevisionsRequest,
-      protos.google.cloud.run.v2.IListRevisionsResponse | null | undefined,
-      protos.google.cloud.run.v2.IRevision
+      protos.google.cloud.run.v2.IListTasksRequest,
+      protos.google.cloud.run.v2.IListTasksResponse | null | undefined,
+      protos.google.cloud.run.v2.ITask
     >
   ): void;
-  listRevisions(
-    request?: protos.google.cloud.run.v2.IListRevisionsRequest,
+  listTasks(
+    request?: protos.google.cloud.run.v2.IListTasksRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.run.v2.IListRevisionsRequest,
-          protos.google.cloud.run.v2.IListRevisionsResponse | null | undefined,
-          protos.google.cloud.run.v2.IRevision
+          protos.google.cloud.run.v2.IListTasksRequest,
+          protos.google.cloud.run.v2.IListTasksResponse | null | undefined,
+          protos.google.cloud.run.v2.ITask
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.run.v2.IListRevisionsRequest,
-      protos.google.cloud.run.v2.IListRevisionsResponse | null | undefined,
-      protos.google.cloud.run.v2.IRevision
+      protos.google.cloud.run.v2.IListTasksRequest,
+      protos.google.cloud.run.v2.IListTasksResponse | null | undefined,
+      protos.google.cloud.run.v2.ITask
     >
   ): Promise<
     [
-      protos.google.cloud.run.v2.IRevision[],
-      protos.google.cloud.run.v2.IListRevisionsRequest | null,
-      protos.google.cloud.run.v2.IListRevisionsResponse
+      protos.google.cloud.run.v2.ITask[],
+      protos.google.cloud.run.v2.IListTasksRequest | null,
+      protos.google.cloud.run.v2.IListTasksResponse
     ]
   > | void {
     request = request || {};
@@ -750,23 +529,12 @@ export class RevisionsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
-    {
-      const fieldValue = request.parent;
-      if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?'));
-        if (match) {
-          const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
-        }
-      }
-    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams(routingParameter);
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     this.initialize();
-    return this.innerApiCalls.listRevisions(request, options, callback);
+    return this.innerApiCalls.listTasks(request, options, callback);
   }
 
   /**
@@ -774,77 +542,66 @@ export class RevisionsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The Service from which the Revisions should be listed.
-   *   To list all Revisions across Services, use "-" instead of Service name.
-   *   Format:
-   *   projects/{project}/locations/{location}/services/{service}
+   *   Required. The Execution from which the Tasks should be listed.
+   *   To list all Tasks across Executions of a Job, use "-" instead of Execution
+   *   name. To list all Tasks across Jobs, use "-" instead of Job name. Format:
+   *   projects/{project}/locations/{location}/jobs/{job}/executions/{execution}
    * @param {number} request.pageSize
-   *   Maximum number of revisions to return in this call.
+   *   Maximum number of Tasks to return in this call.
    * @param {string} request.pageToken
-   *   A page token received from a previous call to ListRevisions.
+   *   A page token received from a previous call to ListTasks.
    *   All other parameters must match.
    * @param {boolean} request.showDeleted
    *   If true, returns deleted (but unexpired) resources along with active ones.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Revision]{@link google.cloud.run.v2.Revision} on 'data' event.
+   *   An object stream which emits an object representing [Task]{@link google.cloud.run.v2.Task} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRevisionsAsync()`
+   *   We recommend using `listTasksAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  listRevisionsStream(
-    request?: protos.google.cloud.run.v2.IListRevisionsRequest,
+  listTasksStream(
+    request?: protos.google.cloud.run.v2.IListTasksRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
-    {
-      const fieldValue = request.parent;
-      if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?'));
-        if (match) {
-          const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
-        }
-      }
-    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams(routingParameter);
-    const defaultCallSettings = this._defaults['listRevisions'];
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listRevisions.createStream(
-      this.innerApiCalls.listRevisions as GaxCall,
+    return this.descriptors.page.listTasks.createStream(
+      this.innerApiCalls.listTasks as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listRevisions`, but returns an iterable object.
+   * Equivalent to `listTasks`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The Service from which the Revisions should be listed.
-   *   To list all Revisions across Services, use "-" instead of Service name.
-   *   Format:
-   *   projects/{project}/locations/{location}/services/{service}
+   *   Required. The Execution from which the Tasks should be listed.
+   *   To list all Tasks across Executions of a Job, use "-" instead of Execution
+   *   name. To list all Tasks across Jobs, use "-" instead of Job name. Format:
+   *   projects/{project}/locations/{location}/jobs/{job}/executions/{execution}
    * @param {number} request.pageSize
-   *   Maximum number of revisions to return in this call.
+   *   Maximum number of Tasks to return in this call.
    * @param {string} request.pageToken
-   *   A page token received from a previous call to ListRevisions.
+   *   A page token received from a previous call to ListTasks.
    *   All other parameters must match.
    * @param {boolean} request.showDeleted
    *   If true, returns deleted (but unexpired) resources along with active ones.
@@ -853,45 +610,34 @@ export class RevisionsClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Revision]{@link google.cloud.run.v2.Revision}. The API will be called under the hood as needed, once per the page,
+   *   [Task]{@link google.cloud.run.v2.Task}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/revisions.list_revisions.js</caption>
-   * region_tag:run_v2_generated_Revisions_ListRevisions_async
+   * @example <caption>include:samples/generated/v2/tasks.list_tasks.js</caption>
+   * region_tag:run_v2_generated_Tasks_ListTasks_async
    */
-  listRevisionsAsync(
-    request?: protos.google.cloud.run.v2.IListRevisionsRequest,
+  listTasksAsync(
+    request?: protos.google.cloud.run.v2.IListTasksRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.run.v2.IRevision> {
+  ): AsyncIterable<protos.google.cloud.run.v2.ITask> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    const routingParameter = {};
-    {
-      const fieldValue = request.parent;
-      if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue
-          .toString()
-          .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?'));
-        if (match) {
-          const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, {location: parameterValue});
-        }
-      }
-    }
     options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams(routingParameter);
-    const defaultCallSettings = this._defaults['listRevisions'];
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listRevisions.asyncIterate(
-      this.innerApiCalls['listRevisions'] as GaxCall,
+    return this.descriptors.page.listTasks.asyncIterate(
+      this.innerApiCalls['listTasks'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.run.v2.IRevision>;
+    ) as AsyncIterable<protos.google.cloud.run.v2.ITask>;
   }
   /**
    * Gets information about a location.
@@ -971,183 +717,6 @@ export class RevisionsClient {
     options?: CallOptions
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
-  }
-
-  /**
-   * Gets the latest state of a long-running operation.  Clients can use this
-   * method to poll the operation result at intervals as recommended by the API
-   * service.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   *   details.
-   * @param {function(?Error, ?Object)=} callback
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing
-   * [google.longrunning.Operation]{@link
-   * external:"google.longrunning.Operation"}.
-   * @return {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   * [google.longrunning.Operation]{@link
-   * external:"google.longrunning.Operation"}. The promise has a method named
-   * "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * const name = '';
-   * const [response] = await client.getOperation({name});
-   * // doThingsWith(response)
-   * ```
-   */
-  getOperation(
-    request: protos.google.longrunning.GetOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.longrunning.Operation,
-          protos.google.longrunning.GetOperationRequest,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.longrunning.Operation,
-      protos.google.longrunning.GetOperationRequest,
-      {} | null | undefined
-    >
-  ): Promise<[protos.google.longrunning.Operation]> {
-    return this.operationsClient.getOperation(request, options, callback);
-  }
-  /**
-   * Lists operations that match the specified filter in the request. If the
-   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
-   *
-   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation collection.
-   * @param {string} request.filter - The standard list filter.
-   * @param {number=} request.pageSize -
-   *   The maximum number of resources contained in the underlying API
-   *   response. If page streaming is performed per-resource, this
-   *   parameter does not affect the return value. If page streaming is
-   *   performed per-page, this determines the maximum number of
-   *   resources in a page.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   *   details.
-   * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * for await (const response of client.listOperationsAsync(request));
-   * // doThingsWith(response)
-   * ```
-   */
-  listOperationsAsync(
-    request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
-    return this.operationsClient.listOperationsAsync(request, options);
-  }
-  /**
-   * Starts asynchronous cancellation on a long-running operation.  The server
-   * makes a best effort to cancel the operation, but success is not
-   * guaranteed.  If the server doesn't support this method, it returns
-   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-   * {@link Operations.GetOperation} or
-   * other methods to check whether the cancellation succeeded or whether the
-   * operation completed despite cancellation. On successful cancellation,
-   * the operation is not deleted; instead, it becomes an operation with
-   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
-   * 1, corresponding to `Code.CANCELLED`.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource to be cancelled.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   * details.
-   * @param {function(?Error)=} callback
-   *   The function which will be called with the result of the API call.
-   * @return {Promise} - The promise which resolves when API call finishes.
-   *   The promise has a method named "cancel" which cancels the ongoing API
-   * call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * await client.cancelOperation({name: ''});
-   * ```
-   */
-  cancelOperation(
-    request: protos.google.longrunning.CancelOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.protobuf.Empty,
-          protos.google.longrunning.CancelOperationRequest,
-          {} | undefined | null
-        >,
-    callback?: Callback<
-      protos.google.longrunning.CancelOperationRequest,
-      protos.google.protobuf.Empty,
-      {} | undefined | null
-    >
-  ): Promise<protos.google.protobuf.Empty> {
-    return this.operationsClient.cancelOperation(request, options, callback);
-  }
-
-  /**
-   * Deletes a long-running operation. This method indicates that the client is
-   * no longer interested in the operation result. It does not cancel the
-   * operation. If the server doesn't support this method, it returns
-   * `google.rpc.Code.UNIMPLEMENTED`.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource to be deleted.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   * details.
-   * @param {function(?Error)=} callback
-   *   The function which will be called with the result of the API call.
-   * @return {Promise} - The promise which resolves when API call finishes.
-   *   The promise has a method named "cancel" which cancels the ongoing API
-   * call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * await client.deleteOperation({name: ''});
-   * ```
-   */
-  deleteOperation(
-    request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.protobuf.Empty,
-          protos.google.longrunning.DeleteOperationRequest,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.Empty,
-      protos.google.longrunning.DeleteOperationRequest,
-      {} | null | undefined
-    >
-  ): Promise<protos.google.protobuf.Empty> {
-    return this.operationsClient.deleteOperation(request, options, callback);
   }
 
   // --------------------
@@ -1607,12 +1176,11 @@ export class RevisionsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.revisionsStub && !this._terminated) {
-      return this.revisionsStub.then(stub => {
+    if (this.tasksStub && !this._terminated) {
+      return this.tasksStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
-        this.operationsClient.close();
       });
     }
     return Promise.resolve();

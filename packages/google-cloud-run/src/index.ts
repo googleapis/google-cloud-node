@@ -18,12 +18,32 @@
 
 import * as v2 from './v2';
 
+const ExecutionsClient = v2.ExecutionsClient;
+type ExecutionsClient = v2.ExecutionsClient;
+const JobsClient = v2.JobsClient;
+type JobsClient = v2.JobsClient;
 const RevisionsClient = v2.RevisionsClient;
 type RevisionsClient = v2.RevisionsClient;
 const ServicesClient = v2.ServicesClient;
 type ServicesClient = v2.ServicesClient;
+const TasksClient = v2.TasksClient;
+type TasksClient = v2.TasksClient;
 
-export {v2, RevisionsClient, ServicesClient};
-export default {v2, RevisionsClient, ServicesClient};
+export {
+  v2,
+  ExecutionsClient,
+  JobsClient,
+  RevisionsClient,
+  ServicesClient,
+  TasksClient,
+};
+export default {
+  v2,
+  ExecutionsClient,
+  JobsClient,
+  RevisionsClient,
+  ServicesClient,
+  TasksClient,
+};
 import * as protos from '../protos/protos';
 export {protos};

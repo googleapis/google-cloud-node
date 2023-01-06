@@ -53,7 +53,7 @@ service Revisions {
     option (google.api.method_signature) = "name";
   }
 
-  // List Revisions from a given Service, or from a given location.
+  // Lists Revisions from a given Service, or from a given location.
   rpc ListRevisions(ListRevisionsRequest) returns (ListRevisionsResponse) {
     option (google.api.http) = {
       get: "/v2/{parent=projects/*/locations/*/services/*}/revisions"
@@ -67,7 +67,7 @@ service Revisions {
     option (google.api.method_signature) = "parent";
   }
 
-  // Delete a Revision.
+  // Deletes a Revision.
   rpc DeleteRevision(DeleteRevisionRequest) returns (google.longrunning.Operation) {
     option (google.api.http) = {
       delete: "/v2/{name=projects/*/locations/*/services/*/revisions/*}"

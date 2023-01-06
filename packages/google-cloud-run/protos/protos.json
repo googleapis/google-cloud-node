@@ -945,18 +945,6 @@
                 }
               }
             },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -965,6 +953,18 @@
                 },
                 "nanos": {
                   "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
                   "id": 2
                 }
               }
@@ -991,7 +991,7 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/run/v2;run",
                     "java_multiple_files": true,
-                    "java_outer_classname": "TrafficTargetProto",
+                    "java_outer_classname": "TaskProto",
                     "java_package": "com.google.cloud.run.v2",
                     "(google.api.resource_definition).type": "vpcaccess.googleapis.com/Connector",
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/connectors/{connector}"
@@ -1098,8 +1098,361 @@
                           "values": {
                             "EXECUTION_REASON_UNDEFINED": 0,
                             "JOB_STATUS_SERVICE_POLLING_ERROR": 1,
-                            "NON_ZERO_EXIT_CODE": 2
+                            "NON_ZERO_EXIT_CODE": 2,
+                            "CANCELLED": 3
                           }
+                        }
+                      }
+                    },
+                    "Executions": {
+                      "options": {
+                        "(google.api.default_host)": "run.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "GetExecution": {
+                          "requestType": "GetExecutionRequest",
+                          "responseType": "Execution",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/jobs/*/executions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/locations/*/jobs/*/executions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListExecutions": {
+                          "requestType": "ListExecutionsRequest",
+                          "responseType": "ListExecutionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*/jobs/*}/executions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/locations/*/jobs/*}/executions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteExecution": {
+                          "requestType": "DeleteExecutionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=projects/*/locations/*/jobs/*/executions/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Execution",
+                            "(google.longrunning.operation_info).metadata_type": "Execution"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/locations/*/jobs/*/executions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Execution",
+                                "metadata_type": "Execution"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetExecutionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Execution"
+                          }
+                        }
+                      }
+                    },
+                    "ListExecutionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "run.googleapis.com/Execution"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "showDeleted": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListExecutionsResponse": {
+                      "fields": {
+                        "executions": {
+                          "rule": "repeated",
+                          "type": "Execution",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteExecutionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Execution"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Execution": {
+                      "options": {
+                        "(google.api.resource).type": "run.googleapis.com/Execution",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/jobs/{job}/executions/{execution}",
+                        "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "generation": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "completionTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "launchStage": {
+                          "type": "google.api.LaunchStage",
+                          "id": 11
+                        },
+                        "job": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Job"
+                          }
+                        },
+                        "parallelism": {
+                          "type": "int32",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "taskCount": {
+                          "type": "int32",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "template": {
+                          "type": "TaskTemplate",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reconciling": {
+                          "type": "bool",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "conditions": {
+                          "rule": "repeated",
+                          "type": "Condition",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "observedGeneration": {
+                          "type": "int64",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "runningCount": {
+                          "type": "int32",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "succeededCount": {
+                          "type": "int32",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "failedCount": {
+                          "type": "int32",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 99,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "TaskTemplate": {
+                      "oneofs": {
+                        "retries": {
+                          "oneof": [
+                            "maxRetries"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "containers": {
+                          "rule": "repeated",
+                          "type": "Container",
+                          "id": 1
+                        },
+                        "volumes": {
+                          "rule": "repeated",
+                          "type": "Volume",
+                          "id": 2
+                        },
+                        "maxRetries": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "timeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "executionEnvironment": {
+                          "type": "ExecutionEnvironment",
+                          "id": 6
+                        },
+                        "encryptionKey": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "vpcAccess": {
+                          "type": "VpcAccess",
+                          "id": 8
                         }
                       }
                     },
@@ -1144,6 +1497,18 @@
                           "rule": "repeated",
                           "type": "VolumeMount",
                           "id": 8
+                        },
+                        "workingDir": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "livenessProbe": {
+                          "type": "Probe",
+                          "id": 10
+                        },
+                        "startupProbe": {
+                          "type": "Probe",
+                          "id": 11
                         }
                       }
                     },
@@ -1316,6 +1681,703 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "Probe": {
+                      "oneofs": {
+                        "probeType": {
+                          "oneof": [
+                            "httpGet",
+                            "tcpSocket",
+                            "grpc"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "initialDelaySeconds": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "timeoutSeconds": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "periodSeconds": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "failureThreshold": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "httpGet": {
+                          "type": "HTTPGetAction",
+                          "id": 5
+                        },
+                        "tcpSocket": {
+                          "type": "TCPSocketAction",
+                          "id": 6
+                        },
+                        "grpc": {
+                          "type": "GRPCAction",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "HTTPGetAction": {
+                      "fields": {
+                        "path": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "httpHeaders": {
+                          "rule": "repeated",
+                          "type": "HTTPHeader",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "HTTPHeader": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TCPSocketAction": {
+                      "fields": {
+                        "port": {
+                          "type": "int32",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GRPCAction": {
+                      "fields": {
+                        "port": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "VpcAccess": {
+                      "fields": {
+                        "connector": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "vpcaccess.googleapis.com/Connector"
+                          }
+                        },
+                        "egress": {
+                          "type": "VpcEgress",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "VpcEgress": {
+                          "values": {
+                            "VPC_EGRESS_UNSPECIFIED": 0,
+                            "ALL_TRAFFIC": 1,
+                            "PRIVATE_RANGES_ONLY": 2
+                          }
+                        }
+                      }
+                    },
+                    "BinaryAuthorization": {
+                      "oneofs": {
+                        "binauthzMethod": {
+                          "oneof": [
+                            "useDefault"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "useDefault": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "breakglassJustification": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RevisionScaling": {
+                      "fields": {
+                        "minInstanceCount": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "maxInstanceCount": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "IngressTraffic": {
+                      "values": {
+                        "INGRESS_TRAFFIC_UNSPECIFIED": 0,
+                        "INGRESS_TRAFFIC_ALL": 1,
+                        "INGRESS_TRAFFIC_INTERNAL_ONLY": 2,
+                        "INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER": 3
+                      }
+                    },
+                    "ExecutionEnvironment": {
+                      "values": {
+                        "EXECUTION_ENVIRONMENT_UNSPECIFIED": 0,
+                        "EXECUTION_ENVIRONMENT_GEN1": 1,
+                        "EXECUTION_ENVIRONMENT_GEN2": 2
+                      }
+                    },
+                    "ExecutionTemplate": {
+                      "fields": {
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "parallelism": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "taskCount": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "template": {
+                          "type": "TaskTemplate",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Jobs": {
+                      "options": {
+                        "(google.api.default_host)": "run.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateJob": {
+                          "requestType": "CreateJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*}/jobs",
+                            "(google.api.http).body": "job",
+                            "(google.api.method_signature)": "parent,job,job_id",
+                            "(google.longrunning.operation_info).response_type": "Job",
+                            "(google.longrunning.operation_info).metadata_type": "Job"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*}/jobs",
+                                "body": "job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,job,job_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Job",
+                                "metadata_type": "Job"
+                              }
+                            }
+                          ]
+                        },
+                        "GetJob": {
+                          "requestType": "GetJobRequest",
+                          "responseType": "Job",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/jobs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/locations/*/jobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListJobs": {
+                          "requestType": "ListJobsRequest",
+                          "responseType": "ListJobsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*}/jobs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/locations/*}/jobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateJob": {
+                          "requestType": "UpdateJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{job.name=projects/*/locations/*/jobs/*}",
+                            "(google.api.http).body": "job",
+                            "(google.api.method_signature)": "job",
+                            "(google.longrunning.operation_info).response_type": "Job",
+                            "(google.longrunning.operation_info).metadata_type": "Job"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{job.name=projects/*/locations/*/jobs/*}",
+                                "body": "job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "job"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Job",
+                                "metadata_type": "Job"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteJob": {
+                          "requestType": "DeleteJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=projects/*/locations/*/jobs/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Job",
+                            "(google.longrunning.operation_info).metadata_type": "Job"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/locations/*/jobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Job",
+                                "metadata_type": "Job"
+                              }
+                            }
+                          ]
+                        },
+                        "RunJob": {
+                          "requestType": "RunJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/jobs/*}:run",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Execution",
+                            "(google.longrunning.operation_info).metadata_type": "Execution"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/jobs/*}:run",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Execution",
+                                "metadata_type": "Execution"
+                              }
+                            }
+                          ]
+                        },
+                        "GetIamPolicy": {
+                          "requestType": "google.iam.v1.GetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.http).get": "/v2/{resource=projects/*/locations/*/jobs/*}:getIamPolicy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{resource=projects/*/locations/*/jobs/*}:getIamPolicy"
+                              }
+                            }
+                          ]
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "google.iam.v1.SetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.http).post": "/v2/{resource=projects/*/locations/*/jobs/*}:setIamPolicy",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{resource=projects/*/locations/*/jobs/*}:setIamPolicy",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "google.iam.v1.TestIamPermissionsRequest",
+                          "responseType": "google.iam.v1.TestIamPermissionsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/{resource=projects/*/locations/*/jobs/*}:testIamPermissions",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{resource=projects/*/locations/*/jobs/*}:testIamPermissions",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateJobRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "run.googleapis.com/Job"
+                          }
+                        },
+                        "job": {
+                          "type": "Job",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "jobId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GetJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Job"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateJobRequest": {
+                      "fields": {
+                        "job": {
+                          "type": "Job",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListJobsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "run.googleapis.com/Job"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "showDeleted": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListJobsResponse": {
+                      "fields": {
+                        "jobs": {
+                          "rule": "repeated",
+                          "type": "Job",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Job"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "RunJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Job"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Job": {
+                      "options": {
+                        "(google.api.resource).type": "run.googleapis.com/Job",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/jobs/{job}",
+                        "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "generation": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "creator": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastModifier": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "client": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "clientVersion": {
+                          "type": "string",
+                          "id": 13
+                        },
+                        "launchStage": {
+                          "type": "google.api.LaunchStage",
+                          "id": 14
+                        },
+                        "binaryAuthorization": {
+                          "type": "BinaryAuthorization",
+                          "id": 15
+                        },
+                        "template": {
+                          "type": "ExecutionTemplate",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "observedGeneration": {
+                          "type": "int64",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "terminalCondition": {
+                          "type": "Condition",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "conditions": {
+                          "rule": "repeated",
+                          "type": "Condition",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "executionCount": {
+                          "type": "int32",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "latestCreatedExecution": {
+                          "type": "ExecutionReference",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reconciling": {
+                          "type": "bool",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 99,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ExecutionReference": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "run.googleapis.com/Execution"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "completionTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
                         }
                       }
                     },
@@ -1643,76 +2705,6 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
-                      }
-                    },
-                    "VpcAccess": {
-                      "fields": {
-                        "connector": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.resource_reference).type": "vpcaccess.googleapis.com/Connector"
-                          }
-                        },
-                        "egress": {
-                          "type": "VpcEgress",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "VpcEgress": {
-                          "values": {
-                            "VPC_EGRESS_UNSPECIFIED": 0,
-                            "ALL_TRAFFIC": 1,
-                            "PRIVATE_RANGES_ONLY": 2
-                          }
-                        }
-                      }
-                    },
-                    "BinaryAuthorization": {
-                      "oneofs": {
-                        "binauthzMethod": {
-                          "oneof": [
-                            "useDefault"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "useDefault": {
-                          "type": "bool",
-                          "id": 1
-                        },
-                        "breakglassJustification": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "RevisionScaling": {
-                      "fields": {
-                        "minInstanceCount": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "maxInstanceCount": {
-                          "type": "int32",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "IngressTraffic": {
-                      "values": {
-                        "INGRESS_TRAFFIC_UNSPECIFIED": 0,
-                        "INGRESS_TRAFFIC_ALL": 1,
-                        "INGRESS_TRAFFIC_INTERNAL_ONLY": 2,
-                        "INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER": 3
-                      }
-                    },
-                    "ExecutionEnvironment": {
-                      "values": {
-                        "EXECUTION_ENVIRONMENT_UNSPECIFIED": 0,
-                        "EXECUTION_ENVIRONMENT_GEN1": 1,
-                        "EXECUTION_ENVIRONMENT_GEN2": 2
                       }
                     },
                     "RevisionTemplate": {
@@ -2355,6 +3347,306 @@
                         "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST": 1,
                         "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION": 2
                       }
+                    },
+                    "Tasks": {
+                      "options": {
+                        "(google.api.default_host)": "run.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "GetTask": {
+                          "requestType": "GetTaskRequest",
+                          "responseType": "Task",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/jobs/*/executions/*/tasks/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/locations/*/jobs/*/executions/*/tasks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListTasks": {
+                          "requestType": "ListTasksRequest",
+                          "responseType": "ListTasksResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*/jobs/*/executions/*}/tasks",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/locations/*/jobs/*/executions/*}/tasks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetTaskRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Task"
+                          }
+                        }
+                      }
+                    },
+                    "ListTasksRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "run.googleapis.com/Task"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "showDeleted": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListTasksResponse": {
+                      "fields": {
+                        "tasks": {
+                          "rule": "repeated",
+                          "type": "Task",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Task": {
+                      "options": {
+                        "(google.api.resource).type": "run.googleapis.com/Task",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/jobs/{job}/executions/{execution}/tasks/{task}",
+                        "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "generation": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "completionTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "job": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Job"
+                          }
+                        },
+                        "execution": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Execution"
+                          }
+                        },
+                        "containers": {
+                          "rule": "repeated",
+                          "type": "Container",
+                          "id": 14
+                        },
+                        "volumes": {
+                          "rule": "repeated",
+                          "type": "Volume",
+                          "id": 15
+                        },
+                        "maxRetries": {
+                          "type": "int32",
+                          "id": 16
+                        },
+                        "timeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 17
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 18
+                        },
+                        "executionEnvironment": {
+                          "type": "ExecutionEnvironment",
+                          "id": 20
+                        },
+                        "reconciling": {
+                          "type": "bool",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "conditions": {
+                          "rule": "repeated",
+                          "type": "Condition",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "observedGeneration": {
+                          "type": "int64",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "index": {
+                          "type": "int32",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "retried": {
+                          "type": "int32",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastAttemptResult": {
+                          "type": "TaskAttemptResult",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "encryptionKey": {
+                          "type": "string",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "vpcAccess": {
+                          "type": "VpcAccess",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 99,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "TaskAttemptResult": {
+                      "fields": {
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "exitCode": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -2372,101 +3664,6 @@
             "cc_enable_arenas": true
           },
           "nested": {
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -2570,6 +3767,24 @@
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
             },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
+              }
+            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -2580,6 +3795,83 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             },
             "routing": {

@@ -27,6 +27,8 @@ import type {
   LROperation,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -61,6 +63,7 @@ export class ServicesClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   servicesStub?: Promise<{[name: string]: Function}>;
@@ -123,6 +126,9 @@ export class ServicesClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -155,6 +161,10 @@ export class ServicesClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -178,6 +188,12 @@ export class ServicesClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      executionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/jobs/{job}/executions/{execution}'
+      ),
+      jobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/jobs/{job}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
@@ -189,6 +205,9 @@ export class ServicesClient {
       ),
       servicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/services/{service}'
+      ),
+      taskPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/jobs/{job}/executions/{execution}/tasks/{task}'
       ),
     };
 
@@ -419,7 +438,8 @@ export class ServicesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The full name of the Service.
-   *   Format: projects/{projectnumber}/locations/{location}/services/{service}
+   *   Format: projects/{project}/locations/{location}/services/{service}, where
+   *   {project} can be project id or number.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -508,7 +528,7 @@ export class ServicesClient {
     return this.innerApiCalls.getService(request, options, callback);
   }
   /**
-   * Get the IAM Access Control policy currently in effect for the given
+   * Gets the IAM Access Control policy currently in effect for the given
    * Cloud Run Service. This result does not include any inherited policies.
    *
    * @param {Object} request
@@ -790,12 +810,14 @@ export class ServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location and project in which this service should be created.
-   *   Format: projects/{projectnumber}/locations/{location}
+   *   Format: projects/{project}/locations/{location}, where {project} can be
+   *   project id or number. Only lowercase characters, digits, and hyphens.
    * @param {google.cloud.run.v2.Service} request.service
    *   Required. The Service instance to create.
    * @param {string} request.serviceId
-   *   Required. The unique identifier for the Service. The name of the service becomes
-   *   {parent}/services/{service_id}.
+   *   Required. The unique identifier for the Service. It must begin with letter,
+   *   and cannot end with hyphen; must contain fewer than 50 characters.
+   *   The name of the service becomes {parent}/services/{service_id}.
    * @param {boolean} request.validateOnly
    *   Indicates that the request should be validated and default values
    *   populated, without persisting the request or creating any resources.
@@ -1106,7 +1128,8 @@ export class ServicesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The full name of the Service.
-   *   Format: projects/{projectnumber}/locations/{location}/services/{service}
+   *   Format: projects/{project}/locations/{location}/services/{service}, where
+   *   {project} can be project id or number.
    * @param {boolean} request.validateOnly
    *   Indicates that the request should be validated without actually
    *   deleting any resources.
@@ -1256,14 +1279,15 @@ export class ServicesClient {
     >;
   }
   /**
-   * List Services.
+   * Lists Services.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location and project to list resources on.
-   *   Location must be a valid GCP region, and may not be the "-" wildcard.
-   *   Format: projects/{projectnumber}/locations/{location}
+   *   Location must be a valid GCP region, and cannot be the "-" wildcard.
+   *   Format: projects/{project}/locations/{location}, where {project} can be
+   *   project id or number.
    * @param {number} request.pageSize
    *   Maximum number of Services to return in this call.
    * @param {string} request.pageToken
@@ -1368,8 +1392,9 @@ export class ServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location and project to list resources on.
-   *   Location must be a valid GCP region, and may not be the "-" wildcard.
-   *   Format: projects/{projectnumber}/locations/{location}
+   *   Location must be a valid GCP region, and cannot be the "-" wildcard.
+   *   Format: projects/{project}/locations/{location}, where {project} can be
+   *   project id or number.
    * @param {number} request.pageSize
    *   Maximum number of Services to return in this call.
    * @param {string} request.pageToken
@@ -1430,8 +1455,9 @@ export class ServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location and project to list resources on.
-   *   Location must be a valid GCP region, and may not be the "-" wildcard.
-   *   Format: projects/{projectnumber}/locations/{location}
+   *   Location must be a valid GCP region, and cannot be the "-" wildcard.
+   *   Format: projects/{project}/locations/{location}, where {project} can be
+   *   project id or number.
    * @param {number} request.pageSize
    *   Maximum number of Services to return in this call.
    * @param {string} request.pageToken
@@ -1484,9 +1510,385 @@ export class ServicesClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.run.v2.IService>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Location]{@link google.cloud.location.Location}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Location]{@link google.cloud.location.Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}. The promise has a method named
+   * "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified execution resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} job
+   * @param {string} execution
+   * @returns {string} Resource name string.
+   */
+  executionPath(
+    project: string,
+    location: string,
+    job: string,
+    execution: string
+  ) {
+    return this.pathTemplates.executionPathTemplate.render({
+      project: project,
+      location: location,
+      job: job,
+      execution: execution,
+    });
+  }
+
+  /**
+   * Parse the project from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .location;
+  }
+
+  /**
+   * Parse the job from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the job.
+   */
+  matchJobFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName).job;
+  }
+
+  /**
+   * Parse the execution from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the execution.
+   */
+  matchExecutionFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .execution;
+  }
+
+  /**
+   * Return a fully-qualified job resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} job
+   * @returns {string} Resource name string.
+   */
+  jobPath(project: string, location: string, job: string) {
+    return this.pathTemplates.jobPathTemplate.render({
+      project: project,
+      location: location,
+      job: job,
+    });
+  }
+
+  /**
+   * Parse the project from Job resource.
+   *
+   * @param {string} jobName
+   *   A fully-qualified path representing Job resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromJobName(jobName: string) {
+    return this.pathTemplates.jobPathTemplate.match(jobName).project;
+  }
+
+  /**
+   * Parse the location from Job resource.
+   *
+   * @param {string} jobName
+   *   A fully-qualified path representing Job resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromJobName(jobName: string) {
+    return this.pathTemplates.jobPathTemplate.match(jobName).location;
+  }
+
+  /**
+   * Parse the job from Job resource.
+   *
+   * @param {string} jobName
+   *   A fully-qualified path representing Job resource.
+   * @returns {string} A string representing the job.
+   */
+  matchJobFromJobName(jobName: string) {
+    return this.pathTemplates.jobPathTemplate.match(jobName).job;
+  }
 
   /**
    * Return a fully-qualified location resource name string.
@@ -1664,6 +2066,87 @@ export class ServicesClient {
   }
 
   /**
+   * Return a fully-qualified task resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} job
+   * @param {string} execution
+   * @param {string} task
+   * @returns {string} Resource name string.
+   */
+  taskPath(
+    project: string,
+    location: string,
+    job: string,
+    execution: string,
+    task: string
+  ) {
+    return this.pathTemplates.taskPathTemplate.render({
+      project: project,
+      location: location,
+      job: job,
+      execution: execution,
+      task: task,
+    });
+  }
+
+  /**
+   * Parse the project from Task resource.
+   *
+   * @param {string} taskName
+   *   A fully-qualified path representing Task resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTaskName(taskName: string) {
+    return this.pathTemplates.taskPathTemplate.match(taskName).project;
+  }
+
+  /**
+   * Parse the location from Task resource.
+   *
+   * @param {string} taskName
+   *   A fully-qualified path representing Task resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTaskName(taskName: string) {
+    return this.pathTemplates.taskPathTemplate.match(taskName).location;
+  }
+
+  /**
+   * Parse the job from Task resource.
+   *
+   * @param {string} taskName
+   *   A fully-qualified path representing Task resource.
+   * @returns {string} A string representing the job.
+   */
+  matchJobFromTaskName(taskName: string) {
+    return this.pathTemplates.taskPathTemplate.match(taskName).job;
+  }
+
+  /**
+   * Parse the execution from Task resource.
+   *
+   * @param {string} taskName
+   *   A fully-qualified path representing Task resource.
+   * @returns {string} A string representing the execution.
+   */
+  matchExecutionFromTaskName(taskName: string) {
+    return this.pathTemplates.taskPathTemplate.match(taskName).execution;
+  }
+
+  /**
+   * Parse the task from Task resource.
+   *
+   * @param {string} taskName
+   *   A fully-qualified path representing Task resource.
+   * @returns {string} A string representing the task.
+   */
+  matchTaskFromTaskName(taskName: string) {
+    return this.pathTemplates.taskPathTemplate.match(taskName).task;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
@@ -1674,6 +2157,7 @@ export class ServicesClient {
       return this.servicesStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
         this.operationsClient.close();
       });
     }

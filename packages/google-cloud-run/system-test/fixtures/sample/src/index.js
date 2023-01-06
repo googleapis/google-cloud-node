@@ -20,8 +20,11 @@
 const run = require('@google-cloud/run');
 
 function main() {
+  const executionsClient = new run.ExecutionsClient();
+  const jobsClient = new run.JobsClient();
   const revisionsClient = new run.RevisionsClient();
   const servicesClient = new run.ServicesClient();
+  const tasksClient = new run.TasksClient();
 }
 
 main();

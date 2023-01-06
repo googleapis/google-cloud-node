@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, service, serviceId) {
-  // [START run_v2_generated_Services_CreateService_async]
+function main(resource, policy) {
+  // [START run_v2_generated_Jobs_SetIamPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,49 +29,45 @@ function main(parent, service, serviceId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location and project in which this service should be created.
-   *  Format: projects/{project}/locations/{location}, where {project} can be
-   *  project id or number. Only lowercase characters, digits, and hyphens.
+   *  REQUIRED: The resource for which the policy is being specified.
+   *  See the operation documentation for the appropriate value for this field.
    */
-  // const parent = 'abc123'
+  // const resource = 'abc123'
   /**
-   *  Required. The Service instance to create.
+   *  REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *  the policy is limited to a few 10s of KB. An empty policy is a
+   *  valid policy but certain Cloud Platform services (such as Projects)
+   *  might reject them.
    */
-  // const service = {}
+  // const policy = {}
   /**
-   *  Required. The unique identifier for the Service. It must begin with letter,
-   *  and cannot end with hyphen; must contain fewer than 50 characters.
-   *  The name of the service becomes {parent}/services/{service_id}.
+   *  OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+   *  the fields in the mask will be modified. If no mask is provided, the
+   *  following default mask is used:
+   *  `paths: "bindings, etag"`
    */
-  // const serviceId = 'abc123'
-  /**
-   *  Indicates that the request should be validated and default values
-   *  populated, without persisting the request or creating any resources.
-   */
-  // const validateOnly = true
+  // const updateMask = {}
 
   // Imports the Run library
-  const {ServicesClient} = require('@google-cloud/run').v2;
+  const {JobsClient} = require('@google-cloud/run').v2;
 
   // Instantiates a client
-  const runClient = new ServicesClient();
+  const runClient = new JobsClient();
 
-  async function callCreateService() {
+  async function callSetIamPolicy() {
     // Construct request
     const request = {
-      parent,
-      service,
-      serviceId,
+      resource,
+      policy,
     };
 
     // Run request
-    const [operation] = await runClient.createService(request);
-    const [response] = await operation.promise();
+    const response = await runClient.setIamPolicy(request);
     console.log(response);
   }
 
-  callCreateService();
-  // [END run_v2_generated_Services_CreateService_async]
+  callSetIamPolicy();
+  // [END run_v2_generated_Jobs_SetIamPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

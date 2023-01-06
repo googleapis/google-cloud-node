@@ -21,16 +21,11 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as revisionsModule from '../src';
+import * as tasksModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -69,38 +64,6 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
-}
-
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
-}
-
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 function stubPageStreamingCall<ResponseType>(
@@ -164,64 +127,64 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v2.RevisionsClient', () => {
+describe('v2.TasksClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = revisionsModule.v2.RevisionsClient.servicePath;
+      const servicePath = tasksModule.v2.TasksClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = revisionsModule.v2.RevisionsClient.apiEndpoint;
+      const apiEndpoint = tasksModule.v2.TasksClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port = revisionsModule.v2.RevisionsClient.port;
+      const port = tasksModule.v2.TasksClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new revisionsModule.v2.RevisionsClient();
+      const client = new tasksModule.v2.TasksClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.revisionsStub, undefined);
+      assert.strictEqual(client.tasksStub, undefined);
       await client.initialize();
-      assert(client.revisionsStub);
+      assert(client.tasksStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
-      assert(client.revisionsStub);
+      assert(client.tasksStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.revisionsStub, undefined);
+      assert.strictEqual(client.tasksStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -229,7 +192,7 @@ describe('v2.RevisionsClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -241,7 +204,7 @@ describe('v2.RevisionsClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -262,58 +225,64 @@ describe('v2.RevisionsClient', () => {
     });
   });
 
-  describe('getRevision', () => {
-    it('invokes getRevision without error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+  describe('getTask', () => {
+    it('invokes getTask without error', async () => {
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.GetRevisionRequest()
+        new protos.google.cloud.run.v2.GetTaskRequest()
       );
-      // path template: projects/*/locations/{location=*}/**
-      request.name = 'projects/value/locations/value/value';
-      const expectedHeaderRequestParams = 'location=value';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.run.v2.GetTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.run.v2.Revision()
+        new protos.google.cloud.run.v2.Task()
       );
-      client.innerApiCalls.getRevision = stubSimpleCall(expectedResponse);
-      const [response] = await client.getRevision(request);
+      client.innerApiCalls.getTask = stubSimpleCall(expectedResponse);
+      const [response] = await client.getTask(request);
       assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRevision as SinonStub
-      ).getCall(0).args[0];
+      const actualRequest = (client.innerApiCalls.getTask as SinonStub).getCall(
+        0
+      ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getRevision as SinonStub
+        client.innerApiCalls.getTask as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getRevision without error using callback', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+    it('invokes getTask without error using callback', async () => {
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.GetRevisionRequest()
+        new protos.google.cloud.run.v2.GetTaskRequest()
       );
-      // path template: projects/*/locations/{location=*}/**
-      request.name = 'projects/value/locations/value/value';
-      const expectedHeaderRequestParams = 'location=value';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.run.v2.GetTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.run.v2.Revision()
+        new protos.google.cloud.run.v2.Task()
       );
-      client.innerApiCalls.getRevision =
+      client.innerApiCalls.getTask =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getRevision(
+        client.getTask(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.run.v2.IRevision | null
+            result?: protos.google.cloud.run.v2.ITask | null
           ) => {
             if (err) {
               reject(err);
@@ -325,299 +294,126 @@ describe('v2.RevisionsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRevision as SinonStub
-      ).getCall(0).args[0];
+      const actualRequest = (client.innerApiCalls.getTask as SinonStub).getCall(
+        0
+      ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getRevision as SinonStub
+        client.innerApiCalls.getTask as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getRevision with error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+    it('invokes getTask with error', async () => {
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.GetRevisionRequest()
+        new protos.google.cloud.run.v2.GetTaskRequest()
       );
-      // path template: projects/*/locations/{location=*}/**
-      request.name = 'projects/value/locations/value/value';
-      const expectedHeaderRequestParams = 'location=value';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.run.v2.GetTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getRevision = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getRevision(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getRevision as SinonStub
-      ).getCall(0).args[0];
+      client.innerApiCalls.getTask = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getTask(request), expectedError);
+      const actualRequest = (client.innerApiCalls.getTask as SinonStub).getCall(
+        0
+      ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getRevision as SinonStub
+        client.innerApiCalls.getTask as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getRevision with closed client', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+    it('invokes getTask with closed client', async () => {
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.GetRevisionRequest()
+        new protos.google.cloud.run.v2.GetTaskRequest()
       );
-      // path template: projects/*/locations/{location=*}/**
-      request.name = 'projects/value/locations/value/value';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.run.v2.GetTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.getRevision(request), expectedError);
+      await assert.rejects(client.getTask(request), expectedError);
     });
   });
 
-  describe('deleteRevision', () => {
-    it('invokes deleteRevision without error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+  describe('listTasks', () => {
+    it('invokes listTasks without error', async () => {
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.DeleteRevisionRequest()
+        new protos.google.cloud.run.v2.ListTasksRequest()
       );
-      // path template: projects/*/locations/{location=*}/**
-      request.name = 'projects/value/locations/value/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.run.v2.ListTasksRequest',
+        ['parent']
       );
-      client.innerApiCalls.deleteRevision =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteRevision(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteRevision as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRevision as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRevision without error using callback', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.DeleteRevisionRequest()
-      );
-      // path template: projects/*/locations/{location=*}/**
-      request.name = 'projects/value/locations/value/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteRevision =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteRevision(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.run.v2.IRevision,
-              protos.google.cloud.run.v2.IRevision
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.run.v2.IRevision,
-        protos.google.cloud.run.v2.IRevision
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteRevision as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRevision as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRevision with call error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.DeleteRevisionRequest()
-      );
-      // path template: projects/*/locations/{location=*}/**
-      request.name = 'projects/value/locations/value/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteRevision = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteRevision(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteRevision as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRevision as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRevision with LRO error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.DeleteRevisionRequest()
-      );
-      // path template: projects/*/locations/{location=*}/**
-      request.name = 'projects/value/locations/value/value';
-      const expectedHeaderRequestParams = 'location=value';
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteRevision = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteRevision(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteRevision as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRevision as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteRevisionProgress without error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteRevisionProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteRevisionProgress with error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteRevisionProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listRevisions', () => {
-    it('invokes listRevisions without error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.ListRevisionsRequest()
-      );
-      // path template: projects/*/locations/{location=*}/**
-      request.parent = 'projects/value/locations/value/value';
-      const expectedHeaderRequestParams = 'location=value';
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
-        generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
-        generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
+        generateSampleMessage(new protos.google.cloud.run.v2.Task()),
+        generateSampleMessage(new protos.google.cloud.run.v2.Task()),
+        generateSampleMessage(new protos.google.cloud.run.v2.Task()),
       ];
-      client.innerApiCalls.listRevisions = stubSimpleCall(expectedResponse);
-      const [response] = await client.listRevisions(request);
+      client.innerApiCalls.listTasks = stubSimpleCall(expectedResponse);
+      const [response] = await client.listTasks(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listRevisions as SinonStub
+        client.innerApiCalls.listTasks as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listRevisions as SinonStub
+        client.innerApiCalls.listTasks as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listRevisions without error using callback', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+    it('invokes listTasks without error using callback', async () => {
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.ListRevisionsRequest()
+        new protos.google.cloud.run.v2.ListTasksRequest()
       );
-      // path template: projects/*/locations/{location=*}/**
-      request.parent = 'projects/value/locations/value/value';
-      const expectedHeaderRequestParams = 'location=value';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.run.v2.ListTasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
-        generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
-        generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
+        generateSampleMessage(new protos.google.cloud.run.v2.Task()),
+        generateSampleMessage(new protos.google.cloud.run.v2.Task()),
+        generateSampleMessage(new protos.google.cloud.run.v2.Task()),
       ];
-      client.innerApiCalls.listRevisions =
+      client.innerApiCalls.listTasks =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listRevisions(
+        client.listTasks(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.run.v2.IRevision[] | null
+            result?: protos.google.cloud.run.v2.ITask[] | null
           ) => {
             if (err) {
               reject(err);
@@ -630,66 +426,69 @@ describe('v2.RevisionsClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listRevisions as SinonStub
+        client.innerApiCalls.listTasks as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listRevisions as SinonStub
+        client.innerApiCalls.listTasks as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listRevisions with error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+    it('invokes listTasks with error', async () => {
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.ListRevisionsRequest()
+        new protos.google.cloud.run.v2.ListTasksRequest()
       );
-      // path template: projects/*/locations/{location=*}/**
-      request.parent = 'projects/value/locations/value/value';
-      const expectedHeaderRequestParams = 'location=value';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.run.v2.ListTasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listRevisions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listRevisions(request), expectedError);
+      client.innerApiCalls.listTasks = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.listTasks(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.listRevisions as SinonStub
+        client.innerApiCalls.listTasks as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listRevisions as SinonStub
+        client.innerApiCalls.listTasks as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listRevisionsStream without error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+    it('invokes listTasksStream without error', async () => {
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.ListRevisionsRequest()
+        new protos.google.cloud.run.v2.ListTasksRequest()
       );
-      // path template: projects/*/locations/{location=*}/**
-      request.parent = 'projects/value/locations/value/value';
-      const expectedHeaderRequestParams = 'location=value';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.run.v2.ListTasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
-        generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
-        generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
+        generateSampleMessage(new protos.google.cloud.run.v2.Task()),
+        generateSampleMessage(new protos.google.cloud.run.v2.Task()),
+        generateSampleMessage(new protos.google.cloud.run.v2.Task()),
       ];
-      client.descriptors.page.listRevisions.createStream =
+      client.descriptors.page.listTasks.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listRevisionsStream(request);
+      const stream = client.listTasksStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.run.v2.Revision[] = [];
-        stream.on('data', (response: protos.google.cloud.run.v2.Revision) => {
+        const responses: protos.google.cloud.run.v2.Task[] = [];
+        stream.on('data', (response: protos.google.cloud.run.v2.Task) => {
           responses.push(response);
         });
         stream.on('end', () => {
@@ -702,12 +501,12 @@ describe('v2.RevisionsClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listRevisions.createStream as SinonStub)
+        (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listRevisions, request)
+          .calledWith(client.innerApiCalls.listTasks, request)
       );
       assert(
-        (client.descriptors.page.listRevisions.createStream as SinonStub)
+        (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -715,25 +514,30 @@ describe('v2.RevisionsClient', () => {
       );
     });
 
-    it('invokes listRevisionsStream with error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+    it('invokes listTasksStream with error', async () => {
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.ListRevisionsRequest()
+        new protos.google.cloud.run.v2.ListTasksRequest()
       );
-      // path template: projects/*/locations/{location=*}/**
-      request.parent = 'projects/value/locations/value/value';
-      const expectedHeaderRequestParams = 'location=value';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.run.v2.ListTasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listRevisions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listRevisionsStream(request);
+      client.descriptors.page.listTasks.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listTasksStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.run.v2.Revision[] = [];
-        stream.on('data', (response: protos.google.cloud.run.v2.Revision) => {
+        const responses: protos.google.cloud.run.v2.Task[] = [];
+        stream.on('data', (response: protos.google.cloud.run.v2.Task) => {
           responses.push(response);
         });
         stream.on('end', () => {
@@ -745,12 +549,12 @@ describe('v2.RevisionsClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listRevisions.createStream as SinonStub)
+        (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listRevisions, request)
+          .calledWith(client.innerApiCalls.listTasks, request)
       );
       assert(
-        (client.descriptors.page.listRevisions.createStream as SinonStub)
+        (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -758,39 +562,41 @@ describe('v2.RevisionsClient', () => {
       );
     });
 
-    it('uses async iteration with listRevisions without error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+    it('uses async iteration with listTasks without error', async () => {
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.ListRevisionsRequest()
+        new protos.google.cloud.run.v2.ListTasksRequest()
       );
-      // path template: projects/*/locations/{location=*}/**
-      request.parent = 'projects/value/locations/value/value';
-      const expectedHeaderRequestParams = 'location=value';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.run.v2.ListTasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
-        generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
-        generateSampleMessage(new protos.google.cloud.run.v2.Revision()),
+        generateSampleMessage(new protos.google.cloud.run.v2.Task()),
+        generateSampleMessage(new protos.google.cloud.run.v2.Task()),
+        generateSampleMessage(new protos.google.cloud.run.v2.Task()),
       ];
-      client.descriptors.page.listRevisions.asyncIterate =
+      client.descriptors.page.listTasks.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.run.v2.IRevision[] = [];
-      const iterable = client.listRevisionsAsync(request);
+      const responses: protos.google.cloud.run.v2.ITask[] = [];
+      const iterable = client.listTasksAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRevisions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listTasks.asyncIterate as SinonStub).getCall(0)
+          .args[1],
         request
       );
       assert(
-        (client.descriptors.page.listRevisions.asyncIterate as SinonStub)
+        (client.descriptors.page.listTasks.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -798,36 +604,40 @@ describe('v2.RevisionsClient', () => {
       );
     });
 
-    it('uses async iteration with listRevisions with error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+    it('uses async iteration with listTasks with error', async () => {
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.run.v2.ListRevisionsRequest()
+        new protos.google.cloud.run.v2.ListTasksRequest()
       );
-      // path template: projects/*/locations/{location=*}/**
-      request.parent = 'projects/value/locations/value/value';
-      const expectedHeaderRequestParams = 'location=value';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.run.v2.ListTasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listRevisions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listRevisionsAsync(request);
+      client.descriptors.page.listTasks.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listTasksAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.run.v2.IRevision[] = [];
+        const responses: protos.google.cloud.run.v2.ITask[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRevisions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listTasks.asyncIterate as SinonStub).getCall(0)
+          .args[1],
         request
       );
       assert(
-        (client.descriptors.page.listRevisions.asyncIterate as SinonStub)
+        (client.descriptors.page.listTasks.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -837,7 +647,7 @@ describe('v2.RevisionsClient', () => {
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -867,7 +677,7 @@ describe('v2.RevisionsClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -911,7 +721,7 @@ describe('v2.RevisionsClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -946,7 +756,7 @@ describe('v2.RevisionsClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -994,7 +804,7 @@ describe('v2.RevisionsClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1033,311 +843,6 @@ describe('v2.RevisionsClient', () => {
       );
     });
   });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new revisionsModule.v2.RevisionsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
 
   describe('Path templates', () => {
     describe('cryptoKey', () => {
@@ -1348,7 +853,7 @@ describe('v2.RevisionsClient', () => {
         key_ring: 'keyRingValue',
         crypto_key: 'cryptoKeyValue',
       };
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1424,7 +929,7 @@ describe('v2.RevisionsClient', () => {
         job: 'jobValue',
         execution: 'executionValue',
       };
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1499,7 +1004,7 @@ describe('v2.RevisionsClient', () => {
         location: 'locationValue',
         job: 'jobValue',
       };
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1562,7 +1067,7 @@ describe('v2.RevisionsClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1610,7 +1115,7 @@ describe('v2.RevisionsClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1651,7 +1156,7 @@ describe('v2.RevisionsClient', () => {
         service: 'serviceValue',
         revision: 'revisionValue',
       };
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1726,7 +1231,7 @@ describe('v2.RevisionsClient', () => {
         location: 'locationValue',
         service: 'serviceValue',
       };
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1792,7 +1297,7 @@ describe('v2.RevisionsClient', () => {
         execution: 'executionValue',
         task: 'taskValue',
       };
-      const client = new revisionsModule.v2.RevisionsClient({
+      const client = new tasksModule.v2.TasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, service, serviceId) {
-  // [START run_v2_generated_Services_CreateService_async]
+function main(resource, permissions) {
+  // [START run_v2_generated_Jobs_TestIamPermissions_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,49 +29,38 @@ function main(parent, service, serviceId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location and project in which this service should be created.
-   *  Format: projects/{project}/locations/{location}, where {project} can be
-   *  project id or number. Only lowercase characters, digits, and hyphens.
+   *  REQUIRED: The resource for which the policy detail is being requested.
+   *  See the operation documentation for the appropriate value for this field.
    */
-  // const parent = 'abc123'
+  // const resource = 'abc123'
   /**
-   *  Required. The Service instance to create.
+   *  The set of permissions to check for the `resource`. Permissions with
+   *  wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *  information see
+   *  IAM Overview (https://cloud.google.com/iam/docs/overview#permissions).
    */
-  // const service = {}
-  /**
-   *  Required. The unique identifier for the Service. It must begin with letter,
-   *  and cannot end with hyphen; must contain fewer than 50 characters.
-   *  The name of the service becomes {parent}/services/{service_id}.
-   */
-  // const serviceId = 'abc123'
-  /**
-   *  Indicates that the request should be validated and default values
-   *  populated, without persisting the request or creating any resources.
-   */
-  // const validateOnly = true
+  // const permissions = 'abc123'
 
   // Imports the Run library
-  const {ServicesClient} = require('@google-cloud/run').v2;
+  const {JobsClient} = require('@google-cloud/run').v2;
 
   // Instantiates a client
-  const runClient = new ServicesClient();
+  const runClient = new JobsClient();
 
-  async function callCreateService() {
+  async function callTestIamPermissions() {
     // Construct request
     const request = {
-      parent,
-      service,
-      serviceId,
+      resource,
+      permissions,
     };
 
     // Run request
-    const [operation] = await runClient.createService(request);
-    const [response] = await operation.promise();
+    const response = await runClient.testIamPermissions(request);
     console.log(response);
   }
 
-  callCreateService();
-  // [END run_v2_generated_Services_CreateService_async]
+  callTestIamPermissions();
+  // [END run_v2_generated_Jobs_TestIamPermissions_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, service, serviceId) {
-  // [START run_v2_generated_Services_CreateService_async]
+function main(parent) {
+  // [START run_v2_generated_Executions_ListExecutions_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,49 +29,47 @@ function main(parent, service, serviceId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location and project in which this service should be created.
-   *  Format: projects/{project}/locations/{location}, where {project} can be
-   *  project id or number. Only lowercase characters, digits, and hyphens.
+   *  Required. The Execution from which the Executions should be listed.
+   *  To list all Executions across Jobs, use "-" instead of Job name.
+   *  Format: projects/{project}/locations/{location}/jobs/{job}, where {project}
+   *  can be project id or number.
    */
   // const parent = 'abc123'
   /**
-   *  Required. The Service instance to create.
+   *  Maximum number of Executions to return in this call.
    */
-  // const service = {}
+  // const pageSize = 1234
   /**
-   *  Required. The unique identifier for the Service. It must begin with letter,
-   *  and cannot end with hyphen; must contain fewer than 50 characters.
-   *  The name of the service becomes {parent}/services/{service_id}.
+   *  A page token received from a previous call to ListExecutions.
+   *  All other parameters must match.
    */
-  // const serviceId = 'abc123'
+  // const pageToken = 'abc123'
   /**
-   *  Indicates that the request should be validated and default values
-   *  populated, without persisting the request or creating any resources.
+   *  If true, returns deleted (but unexpired) resources along with active ones.
    */
-  // const validateOnly = true
+  // const showDeleted = true
 
   // Imports the Run library
-  const {ServicesClient} = require('@google-cloud/run').v2;
+  const {ExecutionsClient} = require('@google-cloud/run').v2;
 
   // Instantiates a client
-  const runClient = new ServicesClient();
+  const runClient = new ExecutionsClient();
 
-  async function callCreateService() {
+  async function callListExecutions() {
     // Construct request
     const request = {
       parent,
-      service,
-      serviceId,
     };
 
     // Run request
-    const [operation] = await runClient.createService(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await runClient.listExecutionsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callCreateService();
-  // [END run_v2_generated_Services_CreateService_async]
+  callListExecutions();
+  // [END run_v2_generated_Executions_ListExecutions_async]
 }
 
 process.on('unhandledRejection', err => {
