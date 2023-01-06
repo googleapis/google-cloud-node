@@ -122,6 +122,10 @@ function main(nodeVersion, imageType) {
    *  Google Compute Engine resources.
    */
   // const resourceLabels = {}
+  /**
+   *  Parameters that can be configured on Windows nodes.
+   */
+  // const windowsNodeConfig = {}
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;
