@@ -123,7 +123,8 @@
     "packages/google-monitoring-dashboard": {},
     "packages/google-storagetransfer": {},
     "packages/grafeas": {},
-    "packages/typeless-sample-bot": {}
+    "packages/typeless-sample-bot": {},
+    "packages/google-cloud-datacatalog-lineage": {}
   },
   "plugins": [
     {
