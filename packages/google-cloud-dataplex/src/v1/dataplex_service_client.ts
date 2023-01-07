@@ -198,12 +198,6 @@ export class DataplexServiceClient {
       contentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/content/{content}'
       ),
-      dataScanPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataScans/{dataScan}'
-      ),
-      dataScanJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataScans/{dataScan}/jobs/{job}'
-      ),
       entityPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}'
       ),
@@ -335,18 +329,6 @@ export class DataplexServiceClient {
             {
               get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',
             },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',
-            },
           ],
         },
         {
@@ -370,22 +352,6 @@ export class DataplexServiceClient {
               post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',
               body: '*',
             },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',
-              body: '*',
-            },
           ],
         },
         {
@@ -407,22 +373,6 @@ export class DataplexServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -3564,12 +3514,12 @@ export class DataplexServiceClient {
    *   `projects/{project_number}/locations/{location_id}`
    *   where `location_id` refers to a GCP region.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of Lakes to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 lakes will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of Lakes to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 lakes will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListLakes` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListLakes` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListLakes` must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
@@ -3664,12 +3614,12 @@ export class DataplexServiceClient {
    *   `projects/{project_number}/locations/{location_id}`
    *   where `location_id` refers to a GCP region.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of Lakes to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 lakes will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of Lakes to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 lakes will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListLakes` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListLakes` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListLakes` must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
@@ -3720,12 +3670,12 @@ export class DataplexServiceClient {
    *   `projects/{project_number}/locations/{location_id}`
    *   where `location_id` refers to a GCP region.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of Lakes to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 lakes will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of Lakes to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 lakes will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListLakes` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListLakes` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListLakes` must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
@@ -3774,14 +3724,14 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent lake:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of actions to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 actions will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of actions to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 actions will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListLakeActions` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListLakeActions` must match the call that provided
-   *   the page token.
+   *   Optional. Page token received from a previous `ListLakeActions` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListLakeActions` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3872,14 +3822,14 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent lake:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of actions to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 actions will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of actions to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 actions will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListLakeActions` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListLakeActions` must match the call that provided
-   *   the page token.
+   *   Optional. Page token received from a previous `ListLakeActions` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListLakeActions` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3924,14 +3874,14 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent lake:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of actions to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 actions will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of actions to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 actions will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListLakeActions` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListLakeActions` must match the call that provided
-   *   the page token.
+   *   Optional. Page token received from a previous `ListLakeActions` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListLakeActions` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3975,12 +3925,12 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent lake:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of zones to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 zones will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of zones to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 zones will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListZones` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListZones` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListZones` must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
@@ -4074,12 +4024,12 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent lake:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of zones to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 zones will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of zones to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 zones will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListZones` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListZones` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListZones` must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
@@ -4129,12 +4079,12 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent lake:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of zones to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 zones will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of zones to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 zones will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListZones` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListZones` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListZones` must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
@@ -4183,14 +4133,14 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent zone:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of actions to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 actions will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of actions to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 actions will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListZoneActions` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListZoneActions` must match the call that provided
-   *   the page token.
+   *   Optional. Page token received from a previous `ListZoneActions` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListZoneActions` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4281,14 +4231,14 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent zone:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of actions to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 actions will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of actions to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 actions will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListZoneActions` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListZoneActions` must match the call that provided
-   *   the page token.
+   *   Optional. Page token received from a previous `ListZoneActions` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListZoneActions` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4333,14 +4283,14 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent zone:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of actions to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 actions will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of actions to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 actions will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListZoneActions` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListZoneActions` must match the call that provided
-   *   the page token.
+   *   Optional. Page token received from a previous `ListZoneActions` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListZoneActions` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4384,12 +4334,12 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent zone:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of asset to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 assets will be returned. The
+   *   Optional. Maximum number of asset to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 assets will be returned. The
    *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListAssets` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListAssets` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListAssets` must match the call that provided the page
    *   token.
    * @param {string} [request.filter]
@@ -4486,12 +4436,12 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent zone:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of asset to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 assets will be returned. The
+   *   Optional. Maximum number of asset to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 assets will be returned. The
    *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListAssets` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListAssets` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListAssets` must match the call that provided the page
    *   token.
    * @param {string} [request.filter]
@@ -4542,12 +4492,12 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent zone:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of asset to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 assets will be returned. The
+   *   Optional. Maximum number of asset to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 assets will be returned. The
    *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListAssets` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListAssets` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListAssets` must match the call that provided the page
    *   token.
    * @param {string} [request.filter]
@@ -4597,14 +4547,14 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent asset:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of actions to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 actions will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of actions to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 actions will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListAssetActions` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListAssetActions` must match the call that provided
-   *   the page token.
+   *   Optional. Page token received from a previous `ListAssetActions` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListAssetActions` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4695,14 +4645,14 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent asset:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of actions to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 actions will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of actions to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 actions will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListAssetActions` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListAssetActions` must match the call that provided
-   *   the page token.
+   *   Optional. Page token received from a previous `ListAssetActions` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListAssetActions` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4747,14 +4697,14 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent asset:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of actions to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 actions will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of actions to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 actions will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListAssetActions` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListAssetActions` must match the call that provided
-   *   the page token.
+   *   Optional. Page token received from a previous `ListAssetActions` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListAssetActions` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4798,12 +4748,12 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent lake:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of tasks to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 tasks will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of tasks to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 tasks will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListZones` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListZones` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListZones` must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
@@ -4897,12 +4847,12 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent lake:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of tasks to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 tasks will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of tasks to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 tasks will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListZones` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListZones` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListZones` must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
@@ -4952,12 +4902,12 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent lake:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of tasks to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 tasks will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   Optional. Maximum number of tasks to return. The service may return fewer than this
+   *   value. If unspecified, at most 10 tasks will be returned. The maximum
+   *   value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListZones` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListZones` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListZones` must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
@@ -5006,12 +4956,12 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent environment:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of jobs to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 jobs will be returned. The
+   *   Optional. Maximum number of jobs to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 jobs will be returned. The
    *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListJobs` call. Provide this
-   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListJobs` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListJobs` must match the call that provided the page
    *   token.
    * @param {object} [options]
@@ -5102,12 +5052,12 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent environment:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of jobs to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 jobs will be returned. The
+   *   Optional. Maximum number of jobs to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 jobs will be returned. The
    *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListJobs` call. Provide this
-   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListJobs` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListJobs` must match the call that provided the page
    *   token.
    * @param {object} [options]
@@ -5154,12 +5104,12 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent environment:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of jobs to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 jobs will be returned. The
+   *   Optional. Maximum number of jobs to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 jobs will be returned. The
    *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListJobs` call. Provide this
-   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListJobs` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListJobs` must match the call that provided the page
    *   token.
    * @param {object} [options]
@@ -5205,15 +5155,14 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent lake:
    *   `projects/{project_id}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of environments to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 environments will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. Maximum number of environments to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 environments will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEnvironments` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListEnvironments` must match the call that provided
-   *   the page token.
+   *   Optional. Page token received from a previous `ListEnvironments` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListEnvironments` must match the call that provided the page
+   *   token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
    * @param {string} [request.orderBy]
@@ -5314,15 +5263,14 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent lake:
    *   `projects/{project_id}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of environments to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 environments will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. Maximum number of environments to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 environments will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEnvironments` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListEnvironments` must match the call that provided
-   *   the page token.
+   *   Optional. Page token received from a previous `ListEnvironments` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListEnvironments` must match the call that provided the page
+   *   token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
    * @param {string} [request.orderBy]
@@ -5371,15 +5319,14 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent lake:
    *   `projects/{project_id}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of environments to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 environments will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. Maximum number of environments to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 environments will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEnvironments` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `ListEnvironments` must match the call that provided
-   *   the page token.
+   *   Optional. Page token received from a previous `ListEnvironments` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListEnvironments` must match the call that provided the page
+   *   token.
    * @param {string} [request.filter]
    *   Optional. Filter request.
    * @param {string} [request.orderBy]
@@ -5427,22 +5374,22 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent environment:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of sessions to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 sessions will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. Maximum number of sessions to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 sessions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListSessions` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListSessions` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListSessions` must match the call that provided the page
    *   token.
    * @param {string} [request.filter]
-   *   Optional. Filter request. The following `mode` filter is supported to
-   *   return only the sessions belonging to the requester when the mode is USER
-   *   and return sessions of all the users when the mode is ADMIN. When no filter
-   *   is sent default to USER mode. NOTE: When the mode is ADMIN, the requester
-   *   should have `dataplex.environments.listAllSessions` permission to list all
-   *   sessions, in absence of the permission, the request fails.
+   *   Optional. Filter request. The following `mode` filter is supported to return only the
+   *   sessions belonging to the requester when the mode is USER and return
+   *   sessions of all the users when the mode is ADMIN. When no filter is sent
+   *   default to USER mode.
+   *   NOTE: When the mode is ADMIN, the requester should have
+   *   `dataplex.environments.listAllSessions` permission to list all sessions,
+   *   in absence of the permission, the request fails.
    *
    *   mode = ADMIN | USER
    * @param {object} [options]
@@ -5535,22 +5482,22 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent environment:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of sessions to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 sessions will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. Maximum number of sessions to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 sessions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListSessions` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListSessions` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListSessions` must match the call that provided the page
    *   token.
    * @param {string} [request.filter]
-   *   Optional. Filter request. The following `mode` filter is supported to
-   *   return only the sessions belonging to the requester when the mode is USER
-   *   and return sessions of all the users when the mode is ADMIN. When no filter
-   *   is sent default to USER mode. NOTE: When the mode is ADMIN, the requester
-   *   should have `dataplex.environments.listAllSessions` permission to list all
-   *   sessions, in absence of the permission, the request fails.
+   *   Optional. Filter request. The following `mode` filter is supported to return only the
+   *   sessions belonging to the requester when the mode is USER and return
+   *   sessions of all the users when the mode is ADMIN. When no filter is sent
+   *   default to USER mode.
+   *   NOTE: When the mode is ADMIN, the requester should have
+   *   `dataplex.environments.listAllSessions` permission to list all sessions,
+   *   in absence of the permission, the request fails.
    *
    *   mode = ADMIN | USER
    * @param {object} [options]
@@ -5597,22 +5544,22 @@ export class DataplexServiceClient {
    *   Required. The resource name of the parent environment:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of sessions to return. The service may return
-   *   fewer than this value. If unspecified, at most 10 sessions will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
+   *   Optional. Maximum number of sessions to return. The service may return fewer than
+   *   this value. If unspecified, at most 10 sessions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListSessions` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   Optional. Page token received from a previous `ListSessions` call. Provide this to
+   *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListSessions` must match the call that provided the page
    *   token.
    * @param {string} [request.filter]
-   *   Optional. Filter request. The following `mode` filter is supported to
-   *   return only the sessions belonging to the requester when the mode is USER
-   *   and return sessions of all the users when the mode is ADMIN. When no filter
-   *   is sent default to USER mode. NOTE: When the mode is ADMIN, the requester
-   *   should have `dataplex.environments.listAllSessions` permission to list all
-   *   sessions, in absence of the permission, the request fails.
+   *   Optional. Filter request. The following `mode` filter is supported to return only the
+   *   sessions belonging to the requester when the mode is USER and return
+   *   sessions of all the users when the mode is ADMIN. When no filter is sent
+   *   default to USER mode.
+   *   NOTE: When the mode is ADMIN, the requester should have
+   *   `dataplex.environments.listAllSessions` permission to list all sessions,
+   *   in absence of the permission, the request fails.
    *
    *   mode = ADMIN | USER
    * @param {object} [options]
@@ -6056,126 +6003,6 @@ export class DataplexServiceClient {
    */
   matchContentFromContentName(contentName: string) {
     return this.pathTemplates.contentPathTemplate.match(contentName).content;
-  }
-
-  /**
-   * Return a fully-qualified dataScan resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} dataScan
-   * @returns {string} Resource name string.
-   */
-  dataScanPath(project: string, location: string, dataScan: string) {
-    return this.pathTemplates.dataScanPathTemplate.render({
-      project: project,
-      location: location,
-      dataScan: dataScan,
-    });
-  }
-
-  /**
-   * Parse the project from DataScan resource.
-   *
-   * @param {string} dataScanName
-   *   A fully-qualified path representing DataScan resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromDataScanName(dataScanName: string) {
-    return this.pathTemplates.dataScanPathTemplate.match(dataScanName).project;
-  }
-
-  /**
-   * Parse the location from DataScan resource.
-   *
-   * @param {string} dataScanName
-   *   A fully-qualified path representing DataScan resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromDataScanName(dataScanName: string) {
-    return this.pathTemplates.dataScanPathTemplate.match(dataScanName).location;
-  }
-
-  /**
-   * Parse the dataScan from DataScan resource.
-   *
-   * @param {string} dataScanName
-   *   A fully-qualified path representing DataScan resource.
-   * @returns {string} A string representing the dataScan.
-   */
-  matchDataScanFromDataScanName(dataScanName: string) {
-    return this.pathTemplates.dataScanPathTemplate.match(dataScanName).dataScan;
-  }
-
-  /**
-   * Return a fully-qualified dataScanJob resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} dataScan
-   * @param {string} job
-   * @returns {string} Resource name string.
-   */
-  dataScanJobPath(
-    project: string,
-    location: string,
-    dataScan: string,
-    job: string
-  ) {
-    return this.pathTemplates.dataScanJobPathTemplate.render({
-      project: project,
-      location: location,
-      dataScan: dataScan,
-      job: job,
-    });
-  }
-
-  /**
-   * Parse the project from DataScanJob resource.
-   *
-   * @param {string} dataScanJobName
-   *   A fully-qualified path representing DataScanJob resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .project;
-  }
-
-  /**
-   * Parse the location from DataScanJob resource.
-   *
-   * @param {string} dataScanJobName
-   *   A fully-qualified path representing DataScanJob resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .location;
-  }
-
-  /**
-   * Parse the dataScan from DataScanJob resource.
-   *
-   * @param {string} dataScanJobName
-   *   A fully-qualified path representing DataScanJob resource.
-   * @returns {string} A string representing the dataScan.
-   */
-  matchDataScanFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .dataScan;
-  }
-
-  /**
-   * Parse the job from DataScanJob resource.
-   *
-   * @param {string} dataScanJobName
-   *   A fully-qualified path representing DataScanJob resource.
-   * @returns {string} A string representing the job.
-   */
-  matchJobFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .job;
   }
 
   /**

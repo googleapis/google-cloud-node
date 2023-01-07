@@ -34,7 +34,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Routes.compute_route_matrix
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routing/samples/generated/v2/routes.compute_route_matrix.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-routing/samples/generated/v2/routes.compute_route_matrix.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-routing/samples/generated/v2/routes.compute_route_matrix.js,samples/README.md)
 
@@ -51,7 +51,7 @@ __Usage:__
 
 ### Routes.compute_routes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routing/samples/generated/v2/routes.compute_routes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-routing/samples/generated/v2/routes.compute_routes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-routing/samples/generated/v2/routes.compute_routes.js,samples/README.md)
 
@@ -68,7 +68,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routing/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-routing/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-routing/samples/quickstart.js,samples/README.md)
 
@@ -85,7 +85,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routing/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-routing/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-routing/samples/test/quickstart.js,samples/README.md)
 

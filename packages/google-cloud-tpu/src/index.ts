@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,13 +17,12 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v2 from './v2';
 import * as v2alpha1 from './v2alpha1';
 
 const TpuClient = v1.TpuClient;
 type TpuClient = v1.TpuClient;
 
-export {v1, v2, v2alpha1, TpuClient};
-export default {v1, v2, v2alpha1, TpuClient};
+export {v1, v2alpha1, TpuClient};
+export default {v1, v2alpha1, TpuClient};
 import * as protos from '../protos/protos';
 export {protos};

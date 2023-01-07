@@ -539,6 +539,447 @@
                           }
                         }
                       }
+                    },
+                    "v1beta1": {
+                      "options": {
+                        "csharp_namespace": "Google.Cloud.BigQuery.Connection.V1Beta1",
+                        "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/connection/v1beta1;connection",
+                        "java_outer_classname": "ConnectionProto",
+                        "java_package": "com.google.cloud.bigquery.connection.v1beta1",
+                        "php_namespace": "Google\\Cloud\\BigQuery\\Connection\\V1beta1"
+                      },
+                      "nested": {
+                        "ConnectionService": {
+                          "options": {
+                            "(google.api.default_host)": "bigqueryconnection.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/bigquery,https://www.googleapis.com/auth/cloud-platform"
+                          },
+                          "methods": {
+                            "CreateConnection": {
+                              "requestType": "CreateConnectionRequest",
+                              "responseType": "Connection",
+                              "options": {
+                                "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/connections",
+                                "(google.api.http).body": "connection",
+                                "(google.api.method_signature)": "parent,connection,connection_id"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{parent=projects/*/locations/*}/connections",
+                                    "body": "connection"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,connection,connection_id"
+                                }
+                              ]
+                            },
+                            "GetConnection": {
+                              "requestType": "GetConnectionRequest",
+                              "responseType": "Connection",
+                              "options": {
+                                "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/connections/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{name=projects/*/locations/*/connections/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListConnections": {
+                              "requestType": "ListConnectionsRequest",
+                              "responseType": "ListConnectionsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/connections",
+                                "(google.api.method_signature)": "parent,max_results"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{parent=projects/*/locations/*}/connections"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,max_results"
+                                }
+                              ]
+                            },
+                            "UpdateConnection": {
+                              "requestType": "UpdateConnectionRequest",
+                              "responseType": "Connection",
+                              "options": {
+                                "(google.api.http).patch": "/v1beta1/{name=projects/*/locations/*/connections/*}",
+                                "(google.api.http).body": "connection",
+                                "(google.api.method_signature)": "name,connection,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1beta1/{name=projects/*/locations/*/connections/*}",
+                                    "body": "connection"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name,connection,update_mask"
+                                }
+                              ]
+                            },
+                            "UpdateConnectionCredential": {
+                              "requestType": "UpdateConnectionCredentialRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).patch": "/v1beta1/{name=projects/*/locations/*/connections/*/credential}",
+                                "(google.api.http).body": "credential",
+                                "(google.api.method_signature)": "name,credential"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1beta1/{name=projects/*/locations/*/connections/*/credential}",
+                                    "body": "credential"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name,credential"
+                                }
+                              ]
+                            },
+                            "DeleteConnection": {
+                              "requestType": "DeleteConnectionRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/connections/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1beta1/{name=projects/*/locations/*/connections/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "GetIamPolicy": {
+                              "requestType": "google.iam.v1.GetIamPolicyRequest",
+                              "responseType": "google.iam.v1.Policy",
+                              "options": {
+                                "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/connections/*}:getIamPolicy",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "resource,options"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{resource=projects/*/locations/*/connections/*}:getIamPolicy",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "resource,options"
+                                }
+                              ]
+                            },
+                            "SetIamPolicy": {
+                              "requestType": "google.iam.v1.SetIamPolicyRequest",
+                              "responseType": "google.iam.v1.Policy",
+                              "options": {
+                                "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/connections/*}:setIamPolicy",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "resource,policy"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{resource=projects/*/locations/*/connections/*}:setIamPolicy",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "resource,policy"
+                                }
+                              ]
+                            },
+                            "TestIamPermissions": {
+                              "requestType": "google.iam.v1.TestIamPermissionsRequest",
+                              "responseType": "google.iam.v1.TestIamPermissionsResponse",
+                              "options": {
+                                "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/connections/*}:testIamPermissions",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "resource,permissions"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{resource=projects/*/locations/*/connections/*}:testIamPermissions",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "resource,permissions"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "CreateConnectionRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "connectionId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "connection": {
+                              "type": "Connection",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "GetConnectionRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigqueryconnection.googleapis.com/Connection"
+                              }
+                            }
+                          }
+                        },
+                        "ListConnectionsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "maxResults": {
+                              "type": "google.protobuf.UInt32Value",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ListConnectionsResponse": {
+                          "fields": {
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "connections": {
+                              "rule": "repeated",
+                              "type": "Connection",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "UpdateConnectionRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigqueryconnection.googleapis.com/Connection"
+                              }
+                            },
+                            "connection": {
+                              "type": "Connection",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateConnectionCredentialRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "credential": {
+                              "type": "ConnectionCredential",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteConnectionRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigqueryconnection.googleapis.com/Connection"
+                              }
+                            }
+                          }
+                        },
+                        "Connection": {
+                          "options": {
+                            "(google.api.resource).type": "bigqueryconnection.googleapis.com/Connection",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/connections/{connection}"
+                          },
+                          "oneofs": {
+                            "properties": {
+                              "oneof": [
+                                "cloudSql"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "friendlyName": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "cloudSql": {
+                              "type": "CloudSqlProperties",
+                              "id": 4
+                            },
+                            "creationTime": {
+                              "type": "int64",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "lastModifiedTime": {
+                              "type": "int64",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "hasCredential": {
+                              "type": "bool",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "ConnectionCredential": {
+                          "oneofs": {
+                            "credential": {
+                              "oneof": [
+                                "cloudSql"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "cloudSql": {
+                              "type": "CloudSqlCredential",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "CloudSqlProperties": {
+                          "fields": {
+                            "instanceId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "database": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "type": {
+                              "type": "DatabaseType",
+                              "id": 3
+                            },
+                            "credential": {
+                              "type": "CloudSqlCredential",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY"
+                              }
+                            },
+                            "serviceAccountId": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "DatabaseType": {
+                              "values": {
+                                "DATABASE_TYPE_UNSPECIFIED": 0,
+                                "POSTGRES": 1,
+                                "MYSQL": 2
+                              }
+                            }
+                          }
+                        },
+                        "CloudSqlCredential": {
+                          "fields": {
+                            "username": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "password": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -1698,6 +2139,78 @@
             },
             "Empty": {
               "fields": {}
+            },
+            "DoubleValue": {
+              "fields": {
+                "value": {
+                  "type": "double",
+                  "id": 1
+                }
+              }
+            },
+            "FloatValue": {
+              "fields": {
+                "value": {
+                  "type": "float",
+                  "id": 1
+                }
+              }
+            },
+            "Int64Value": {
+              "fields": {
+                "value": {
+                  "type": "int64",
+                  "id": 1
+                }
+              }
+            },
+            "UInt64Value": {
+              "fields": {
+                "value": {
+                  "type": "uint64",
+                  "id": 1
+                }
+              }
+            },
+            "Int32Value": {
+              "fields": {
+                "value": {
+                  "type": "int32",
+                  "id": 1
+                }
+              }
+            },
+            "UInt32Value": {
+              "fields": {
+                "value": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "BoolValue": {
+              "fields": {
+                "value": {
+                  "type": "bool",
+                  "id": 1
+                }
+              }
+            },
+            "StringValue": {
+              "fields": {
+                "value": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "BytesValue": {
+              "fields": {
+                "value": {
+                  "type": "bytes",
+                  "id": 1
+                }
+              }
             }
           }
         },

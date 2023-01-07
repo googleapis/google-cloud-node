@@ -34,14 +34,14 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Maximum number of zones to return. The service may return fewer
-   *  than this value. If unspecified, at most 10 zones will be returned. The
-   *  maximum value is 1000; values above 1000 will be coerced to 1000.
+   *  Optional. Maximum number of zones to return. The service may return fewer than this
+   *  value. If unspecified, at most 10 zones will be returned. The maximum
+   *  value is 1000; values above 1000 will be coerced to 1000.
    */
   // const pageSize = 1234
   /**
-   *  Optional. Page token received from a previous `ListZones` call. Provide
-   *  this to retrieve the subsequent page. When paginating, all other parameters
+   *  Optional. Page token received from a previous `ListZones` call. Provide this to
+   *  retrieve the subsequent page. When paginating, all other parameters
    *  provided to `ListZones` must match the call that provided the page token.
    */
   // const pageToken = 'abc123'

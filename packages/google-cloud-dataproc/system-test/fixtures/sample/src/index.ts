@@ -21,7 +21,6 @@ import {
   BatchControllerClient,
   ClusterControllerClient,
   JobControllerClient,
-  NodeGroupControllerClient,
   WorkflowTemplateServiceClient,
 } from '@google-cloud/dataproc';
 
@@ -38,11 +37,6 @@ function doStuffWithClusterControllerClient(client: ClusterControllerClient) {
   client.close();
 }
 function doStuffWithJobControllerClient(client: JobControllerClient) {
-  client.close();
-}
-function doStuffWithNodeGroupControllerClient(
-  client: NodeGroupControllerClient
-) {
   client.close();
 }
 function doStuffWithWorkflowTemplateServiceClient(
@@ -64,9 +58,6 @@ function main() {
   // check that the client instance can be created
   const jobControllerClient = new JobControllerClient();
   doStuffWithJobControllerClient(jobControllerClient);
-  // check that the client instance can be created
-  const nodeGroupControllerClient = new NodeGroupControllerClient();
-  doStuffWithNodeGroupControllerClient(nodeGroupControllerClient);
   // check that the client instance can be created
   const workflowTemplateServiceClient = new WorkflowTemplateServiceClient();
   doStuffWithWorkflowTemplateServiceClient(workflowTemplateServiceClient);

@@ -21,8 +21,6 @@ const texttospeech = require('@google-cloud/text-to-speech');
 
 function main() {
   const textToSpeechClient = new texttospeech.TextToSpeechClient();
-  const textToSpeechLongAudioSynthesizeClient =
-    new texttospeech.TextToSpeechLongAudioSynthesizeClient();
 }
 
 main();

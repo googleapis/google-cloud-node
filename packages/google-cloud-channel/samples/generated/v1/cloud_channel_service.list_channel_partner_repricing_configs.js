@@ -29,34 +29,31 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the account's
-   *  ChannelPartnerLink google.cloud.channel.v1.ChannelPartnerLink. Parent
-   *  uses the format:
+   *  Required. The resource name of the account's ChannelPartnerLink google.cloud.channel.v1.ChannelPartnerLink.
+   *  Parent uses the format:
    *  accounts/{account_id}/channelPartnerLinks/{channel_partner_id}.
    *  Supports accounts/{account_id}/channelPartnerLinks/- to retrieve configs
    *  for all channel partners.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of repricing configs to return. The service
-   *  may return fewer than this value. If unspecified, returns a maximum of 50
-   *  rules. The maximum value is 100; values above 100 will be coerced to 100.
+   *  Optional. The maximum number of repricing configs to return. The service may return
+   *  fewer than this value. If unspecified, returns a maximum of 50 rules. The
+   *  maximum value is 100; values above 100 will be coerced to 100.
    */
   // const pageSize = 1234
   /**
    *  Optional. A token identifying a page of results beyond the first page.
    *  Obtained through
-   *  ListChannelPartnerRepricingConfigsResponse.next_page_token google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token 
-   *  of the previous
-   *  CloudChannelService.ListChannelPartnerRepricingConfigs google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs 
-   *  call.
+   *  ListChannelPartnerRepricingConfigsResponse.next_page_token google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token  of the
+   *  previous CloudChannelService.ListChannelPartnerRepricingConfigs google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs  call.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. A filter for
-   *  CloudChannelService.ListChannelPartnerRepricingConfigs  results
-   *  (channel_partner_link only). You can use this filter when you support a
-   *  BatchGet-like query. To use the filter, you must set
+   *  Optional. A filter for CloudChannelService.ListChannelPartnerRepricingConfigs 
+   *  results (channel_partner_link only). You can use this filter when you
+   *  support a BatchGet-like query.
+   *  To use the filter, you must set
    *  `parent=accounts/{account_id}/channelPartnerLinks/-`.
    *  Example: `channel_partner_link =
    *  accounts/account_id/channelPartnerLinks/c1` OR `channel_partner_link =

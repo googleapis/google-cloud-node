@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7788,9 +7788,6 @@ export namespace google {
                         /** InstancePolicy accelerators */
                         accelerators?: (google.cloud.batch.v1alpha.AllocationPolicy.IAccelerator[]|null);
 
-                        /** InstancePolicy bootDisk */
-                        bootDisk?: (google.cloud.batch.v1alpha.AllocationPolicy.IDisk|null);
-
                         /** InstancePolicy disks */
                         disks?: (google.cloud.batch.v1alpha.AllocationPolicy.IAttachedDisk[]|null);
 
@@ -7821,9 +7818,6 @@ export namespace google {
 
                         /** InstancePolicy accelerators. */
                         public accelerators: google.cloud.batch.v1alpha.AllocationPolicy.IAccelerator[];
-
-                        /** InstancePolicy bootDisk. */
-                        public bootDisk?: (google.cloud.batch.v1alpha.AllocationPolicy.IDisk|null);
 
                         /** InstancePolicy disks. */
                         public disks: google.cloud.batch.v1alpha.AllocationPolicy.IAttachedDisk[];

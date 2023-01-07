@@ -49,7 +49,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Binauthz_management_service_v1.create_attestor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.create_attestor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.create_attestor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.create_attestor.js,samples/README.md)
 
@@ -66,7 +66,7 @@ __Usage:__
 
 ### Binauthz_management_service_v1.delete_attestor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.delete_attestor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.delete_attestor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.delete_attestor.js,samples/README.md)
 
@@ -83,7 +83,7 @@ __Usage:__
 
 ### Binauthz_management_service_v1.get_attestor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.get_attestor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.get_attestor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.get_attestor.js,samples/README.md)
 
@@ -100,7 +100,7 @@ __Usage:__
 
 ### Binauthz_management_service_v1.get_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.get_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.get_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.get_policy.js,samples/README.md)
 
@@ -117,7 +117,7 @@ __Usage:__
 
 ### Binauthz_management_service_v1.list_attestors
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.list_attestors.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.list_attestors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.list_attestors.js,samples/README.md)
 
@@ -134,7 +134,7 @@ __Usage:__
 
 ### Binauthz_management_service_v1.update_attestor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.update_attestor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.update_attestor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.update_attestor.js,samples/README.md)
 
@@ -151,7 +151,7 @@ __Usage:__
 
 ### Binauthz_management_service_v1.update_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.update_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.update_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.update_policy.js,samples/README.md)
 
@@ -168,7 +168,7 @@ __Usage:__
 
 ### System_policy_v1.get_system_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/system_policy_v1.get_system_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1/system_policy_v1.get_system_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/system_policy_v1.get_system_policy.js,samples/README.md)
 
@@ -185,7 +185,7 @@ __Usage:__
 
 ### Validation_helper_v1.validate_attestation_occurrence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/validation_helper_v1.validate_attestation_occurrence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1/validation_helper_v1.validate_attestation_occurrence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/validation_helper_v1.validate_attestation_occurrence.js,samples/README.md)
 
@@ -202,7 +202,7 @@ __Usage:__
 
 ### Binauthz_management_service_v1_beta1.create_attestor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.create_attestor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.create_attestor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.create_attestor.js,samples/README.md)
 
@@ -219,7 +219,7 @@ __Usage:__
 
 ### Binauthz_management_service_v1_beta1.delete_attestor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.delete_attestor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.delete_attestor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.delete_attestor.js,samples/README.md)
 
@@ -236,7 +236,7 @@ __Usage:__
 
 ### Binauthz_management_service_v1_beta1.get_attestor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.get_attestor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.get_attestor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.get_attestor.js,samples/README.md)
 
@@ -253,7 +253,7 @@ __Usage:__
 
 ### Binauthz_management_service_v1_beta1.get_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.get_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.get_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.get_policy.js,samples/README.md)
 
@@ -270,7 +270,7 @@ __Usage:__
 
 ### Binauthz_management_service_v1_beta1.list_attestors
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.list_attestors.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.list_attestors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.list_attestors.js,samples/README.md)
 
@@ -287,7 +287,7 @@ __Usage:__
 
 ### Binauthz_management_service_v1_beta1.update_attestor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.update_attestor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.update_attestor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.update_attestor.js,samples/README.md)
 
@@ -304,7 +304,7 @@ __Usage:__
 
 ### Binauthz_management_service_v1_beta1.update_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.update_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.update_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.update_policy.js,samples/README.md)
 
@@ -321,7 +321,7 @@ __Usage:__
 
 ### System_policy_v1_beta1.get_system_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/system_policy_v1_beta1.get_system_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/system_policy_v1_beta1.get_system_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/system_policy_v1_beta1.get_system_policy.js,samples/README.md)
 
@@ -338,7 +338,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/quickstart.js,samples/README.md)
 
@@ -355,7 +355,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-binaryauthorization/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/test/quickstart.js,samples/README.md)
 

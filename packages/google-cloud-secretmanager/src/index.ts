@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,12 +17,11 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v1beta1 from './v1beta1';
 
 const SecretManagerServiceClient = v1.SecretManagerServiceClient;
 type SecretManagerServiceClient = v1.SecretManagerServiceClient;
 
-export {v1, v1beta1, SecretManagerServiceClient};
-export default {v1, v1beta1, SecretManagerServiceClient};
+export {v1, SecretManagerServiceClient};
+export default {v1, SecretManagerServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

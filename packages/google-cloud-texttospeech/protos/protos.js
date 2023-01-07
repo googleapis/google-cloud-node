@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3556,48 +3556,6 @@
                         return TextToSpeech;
                     })();
     
-                    /**
-                     * SsmlVoiceGender enum.
-                     * @name google.cloud.texttospeech.v1beta1.SsmlVoiceGender
-                     * @enum {number}
-                     * @property {number} SSML_VOICE_GENDER_UNSPECIFIED=0 SSML_VOICE_GENDER_UNSPECIFIED value
-                     * @property {number} MALE=1 MALE value
-                     * @property {number} FEMALE=2 FEMALE value
-                     * @property {number} NEUTRAL=3 NEUTRAL value
-                     */
-                    v1beta1.SsmlVoiceGender = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "SSML_VOICE_GENDER_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "MALE"] = 1;
-                        values[valuesById[2] = "FEMALE"] = 2;
-                        values[valuesById[3] = "NEUTRAL"] = 3;
-                        return values;
-                    })();
-    
-                    /**
-                     * AudioEncoding enum.
-                     * @name google.cloud.texttospeech.v1beta1.AudioEncoding
-                     * @enum {number}
-                     * @property {number} AUDIO_ENCODING_UNSPECIFIED=0 AUDIO_ENCODING_UNSPECIFIED value
-                     * @property {number} LINEAR16=1 LINEAR16 value
-                     * @property {number} MP3=2 MP3 value
-                     * @property {number} MP3_64_KBPS=4 MP3_64_KBPS value
-                     * @property {number} OGG_OPUS=3 OGG_OPUS value
-                     * @property {number} MULAW=5 MULAW value
-                     * @property {number} ALAW=6 ALAW value
-                     */
-                    v1beta1.AudioEncoding = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "AUDIO_ENCODING_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "LINEAR16"] = 1;
-                        values[valuesById[2] = "MP3"] = 2;
-                        values[valuesById[4] = "MP3_64_KBPS"] = 4;
-                        values[valuesById[3] = "OGG_OPUS"] = 3;
-                        values[valuesById[5] = "MULAW"] = 5;
-                        values[valuesById[6] = "ALAW"] = 6;
-                        return values;
-                    })();
-    
                     v1beta1.ListVoicesRequest = (function() {
     
                         /**
@@ -3799,6 +3757,48 @@
                         };
     
                         return ListVoicesRequest;
+                    })();
+    
+                    /**
+                     * SsmlVoiceGender enum.
+                     * @name google.cloud.texttospeech.v1beta1.SsmlVoiceGender
+                     * @enum {number}
+                     * @property {number} SSML_VOICE_GENDER_UNSPECIFIED=0 SSML_VOICE_GENDER_UNSPECIFIED value
+                     * @property {number} MALE=1 MALE value
+                     * @property {number} FEMALE=2 FEMALE value
+                     * @property {number} NEUTRAL=3 NEUTRAL value
+                     */
+                    v1beta1.SsmlVoiceGender = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SSML_VOICE_GENDER_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MALE"] = 1;
+                        values[valuesById[2] = "FEMALE"] = 2;
+                        values[valuesById[3] = "NEUTRAL"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * AudioEncoding enum.
+                     * @name google.cloud.texttospeech.v1beta1.AudioEncoding
+                     * @enum {number}
+                     * @property {number} AUDIO_ENCODING_UNSPECIFIED=0 AUDIO_ENCODING_UNSPECIFIED value
+                     * @property {number} LINEAR16=1 LINEAR16 value
+                     * @property {number} MP3=2 MP3 value
+                     * @property {number} MP3_64_KBPS=4 MP3_64_KBPS value
+                     * @property {number} OGG_OPUS=3 OGG_OPUS value
+                     * @property {number} MULAW=5 MULAW value
+                     * @property {number} ALAW=6 ALAW value
+                     */
+                    v1beta1.AudioEncoding = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "AUDIO_ENCODING_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "LINEAR16"] = 1;
+                        values[valuesById[2] = "MP3"] = 2;
+                        values[valuesById[4] = "MP3_64_KBPS"] = 4;
+                        values[valuesById[3] = "OGG_OPUS"] = 3;
+                        values[valuesById[5] = "MULAW"] = 5;
+                        values[valuesById[6] = "ALAW"] = 6;
+                        return values;
                     })();
     
                     v1beta1.ListVoicesResponse = (function() {

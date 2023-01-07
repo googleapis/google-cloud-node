@@ -36,7 +36,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### I_a_m_credentials.generate_access_token
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.generate_access_token.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.generate_access_token.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.generate_access_token.js,samples/README.md)
 
@@ -53,7 +53,7 @@ __Usage:__
 
 ### I_a_m_credentials.generate_id_token
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.generate_id_token.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.generate_id_token.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.generate_id_token.js,samples/README.md)
 
@@ -70,7 +70,7 @@ __Usage:__
 
 ### I_a_m_credentials.sign_blob
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.sign_blob.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.sign_blob.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.sign_blob.js,samples/README.md)
 
@@ -87,7 +87,7 @@ __Usage:__
 
 ### I_a_m_credentials.sign_jwt
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.sign_jwt.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.sign_jwt.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.sign_jwt.js,samples/README.md)
 
@@ -104,7 +104,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam-credentials/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam-credentials/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam-credentials/samples/quickstart.js,samples/README.md)
 
@@ -121,7 +121,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam-credentials/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam-credentials/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam-credentials/samples/test/quickstart.js,samples/README.md)
 

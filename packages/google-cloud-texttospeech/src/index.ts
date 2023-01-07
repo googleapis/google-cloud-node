@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,17 +21,8 @@ import * as v1beta1 from './v1beta1';
 
 const TextToSpeechClient = v1.TextToSpeechClient;
 type TextToSpeechClient = v1.TextToSpeechClient;
-const TextToSpeechLongAudioSynthesizeClient =
-  v1.TextToSpeechLongAudioSynthesizeClient;
-type TextToSpeechLongAudioSynthesizeClient =
-  v1.TextToSpeechLongAudioSynthesizeClient;
 
-export {v1, v1beta1, TextToSpeechClient, TextToSpeechLongAudioSynthesizeClient};
-export default {
-  v1,
-  v1beta1,
-  TextToSpeechClient,
-  TextToSpeechLongAudioSynthesizeClient,
-};
+export {v1, v1beta1, TextToSpeechClient};
+export default {v1, v1beta1, TextToSpeechClient};
 import * as protos from '../protos/protos';
 export {protos};

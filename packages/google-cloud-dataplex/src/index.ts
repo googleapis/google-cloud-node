@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,23 +22,14 @@ const ContentServiceClient = v1.ContentServiceClient;
 type ContentServiceClient = v1.ContentServiceClient;
 const DataplexServiceClient = v1.DataplexServiceClient;
 type DataplexServiceClient = v1.DataplexServiceClient;
-const DataScanServiceClient = v1.DataScanServiceClient;
-type DataScanServiceClient = v1.DataScanServiceClient;
 const MetadataServiceClient = v1.MetadataServiceClient;
 type MetadataServiceClient = v1.MetadataServiceClient;
 
-export {
-  v1,
-  ContentServiceClient,
-  DataplexServiceClient,
-  DataScanServiceClient,
-  MetadataServiceClient,
-};
+export {v1, ContentServiceClient, DataplexServiceClient, MetadataServiceClient};
 export default {
   v1,
   ContentServiceClient,
   DataplexServiceClient,
-  DataScanServiceClient,
   MetadataServiceClient,
 };
 import * as protos from '../protos/protos';

@@ -29,8 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the channel partner repricing config rule to
-   *  delete.
+   *  Required. The resource name of the channel partner repricing config rule to delete.
    */
   // const name = 'abc123'
 

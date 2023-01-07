@@ -38,10 +38,9 @@ function main(parent, view) {
    */
   // const view = {}
   /**
-   *  Optional. Maximum number of entities to return. The service may return
-   *  fewer than this value. If unspecified, 100 entities will be returned by
-   *  default. The maximum value is 500; larger values will will be truncated to
-   *  500.
+   *  Optional. Maximum number of entities to return. The service may return fewer than
+   *  this value. If unspecified, 100 entities will be returned by default. The
+   *  maximum value is 500; larger values will will be truncated to 500.
    */
   // const pageSize = 1234
   /**
@@ -52,8 +51,8 @@ function main(parent, view) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. The following filter parameters can be added to the URL to limit
-   *  the entities returned by the API:
+   *  Optional. The following filter parameters can be added to the URL to limit the
+   *  entities returned by the API:
    *  - Entity ID: ?filter="id=entityID"
    *  - Asset ID: ?filter="asset=assetID"
    *  - Data path ?filter="data_path=gs://my-bucket"
