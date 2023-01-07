@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/nodejs-run/compare/v0.2.3...v0.3.0) (2023-01-06)
+
+
+### Features
+
+* Adds Cloud Run Jobs v2 API client libraries ([d2f1501](https://github.com/googleapis/nodejs-run/commit/d2f1501ca9bc842924cf13b6f2bd4e7d8d36b0ea))
+* Adds gRPC probe support to Cloud Run v2 API client libraries ([d2f1501](https://github.com/googleapis/nodejs-run/commit/d2f1501ca9bc842924cf13b6f2bd4e7d8d36b0ea))
+* Adds Startup and Liveness probes to Cloud Run v2 API client libraries ([d2f1501](https://github.com/googleapis/nodejs-run/commit/d2f1501ca9bc842924cf13b6f2bd4e7d8d36b0ea))
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#33](https://github.com/googleapis/nodejs-run/issues/33)) ([c6eef9a](https://github.com/googleapis/nodejs-run/commit/c6eef9ac1ef26eb966535a490fa5585fe0748f6e))
+* Regenerated protos JS and TS definitions ([#37](https://github.com/googleapis/nodejs-run/issues/37)) ([2f1d253](https://github.com/googleapis/nodejs-run/commit/2f1d25341172c844a5d9203bdafaf5ef49603282))
+
 ## [0.2.3](https://github.com/googleapis/nodejs-run/compare/v0.2.2...v0.2.3) (2022-09-14)
 
 
