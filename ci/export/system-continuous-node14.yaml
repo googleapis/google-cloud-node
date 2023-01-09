@@ -8,6 +8,7 @@ github:
     branch: ^main$
 id: d05bbe17-fb41-4a39-9be2-3210779da9fb
 name: system-continuous-node14
+resourceName: projects/long-door-651/locations/global/triggers/d05bbe17-fb41-4a39-9be2-3210779da9fb
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 substitutions:
   _BUILD_TYPE: continuous
