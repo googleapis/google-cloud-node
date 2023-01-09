@@ -55,25 +55,6 @@
     "support_documentation": "https://cloud.google.com/ai-platform/notebooks/docs/getting-support"
   },
   {
-    "repo": "googleapis/nodejs-notebooks",
-    "codeowner_team": "@googleapis/ml-apis",
-    "requires_billing": true,
-    "name": "notebooks",
-    "issue_tracker": "",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/notebooks/latest",
-    "language": "nodejs",
-    "release_level": "stable",
-    "product_documentation": "https://cloud.google.com/ai-platform/notebooks/docs",
-    "default_version": "v1",
-    "name_pretty": "AI Platform Notebooks",
-    "distribution_name": "@google-cloud/notebooks",
-    "api_id": "notebooks.googleapis.com",
-    "api_shortname": "notebooks",
-    "library_type": "GAPIC_AUTO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-notebooks",
-    "support_documentation": "https://cloud.google.com/ai-platform/notebooks/docs/getting-support"
-  },
-  {
     "requires_billing": true,
     "name": "api-gateway",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/api-gateway/latest",
@@ -2398,25 +2379,6 @@
     "support_documentation": "https://cloud.google.com/workflows/docs/getting-support"
   },
   {
-    "name": "workflows",
-    "name_pretty": "Workflows",
-    "product_documentation": "https://cloud.google.com/workflows/docs/",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/workflows/latest",
-    "issue_tracker": "https://github.com/googleapis/nodejs-workflows/issues",
-    "release_level": "stable",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-workflows",
-    "distribution_name": "@google-cloud/workflows",
-    "api_id": "workflows.googleapis.com",
-    "requires_billing": true,
-    "default_version": "v1",
-    "api_shortname": "workflows",
-    "library_type": "GAPIC_AUTO",
-    "codeowner_team": "@googleapis/aap-dpes",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-workflows",
-    "support_documentation": "https://cloud.google.com/workflows/docs/getting-support"
-  },
-  {
     "name": "datapolicies",
     "name_pretty": "",
     "product_documentation": "",
@@ -3020,6 +2982,23 @@
     "library_type": "AGENT",
     "linkToRepoHomepage": "https://github.com/googleapis/cloud-trace-nodejs",
     "support_documentation": "https://cloud.google.com/trace/docs/getting-support"
+  },
+  {
+    "name": "videostitcher",
+    "name_pretty": "Video Stitcher API",
+    "product_documentation": "https://cloud.google.com/video-stitcher/",
+    "client_documentation": "https://googleapis.dev/nodejs/videostitcher/latest/",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "codeowner_team": "@googleapis/cloud-media-team",
+    "distribution_name": "@google-cloud/video-stitcher",
+    "api_id": "stitcher.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-video-stitcher",
+    "support_documentation": "https://cloud.google.com/video-stitcher/docs/getting-support"
   },
   {
     "name": "videostitcher",

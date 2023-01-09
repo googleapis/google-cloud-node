@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/gkemulticloud",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Anthos Multi-Cloud API client for Node.js",
   "repository": {
     "type": "git",

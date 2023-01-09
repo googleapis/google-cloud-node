@@ -16,15 +16,14 @@
 const path = require('path');
 const createGhIssue = require('../../node-bootstrap-container/create-gh-issue');
 const createFolderNamePath = path.resolve(__dirname, '../../node-bootstrap-container/create-folder-name');
-const nock = require('nock');
 const snapshot = require('snap-shot-it');
 const {describe, it} = require('mocha');
 const assert = require('assert');
 const cp = require('child_process');
 const { Octokit } = require('@octokit/rest');
 const fs = require('fs');
+const sinon = require('sinon');
 
-nock.disableNetConnect();
 
 describe('helper functions', () => {
     beforeEach(() => {
@@ -37,7 +36,7 @@ describe('helper functions', () => {
 
     it('should return the API path without the version, with dashes', async () => {
       assert.deepStrictEqual(cp.execSync(
-        `node ${createFolderNamePath} 'google.cloud.kms.v1'`).toString('utf-8'),
+        `node ${createFolderNamePath} google.cloud.kms.v1`).toString('utf-8'),
         'google-cloud-kms\n'
       );
     });
@@ -58,20 +57,15 @@ describe('helper functions', () => {
        process.env.BUILD_ID = '1234';
        process.env.GITHUB_TOKEN = '22334';
        const octokit = new Octokit({auth: process.env.GITHUB_TOKEN});
-        const scope = nock('https://api.github.com')
-          .post(`/repos/googleapis/google-cloud-node/issues`, body => {
-            snapshot(body);
-            return true;
-          })
-          .reply(201);
+       const issueStub = sinon.stub(octokit.rest.issues, 'create');
     
-        await createGhIssue.createGHIssue(octokit);
-        scope.done();
+       await createGhIssue.createGHIssue(octokit);
+       assert.ok(issueStub.calledOnce);
 
-        delete process.env.MONO_REPO_NAME;
-        delete process.env.API_ID;
-        delete process.env.PROJECT_ID;
-        delete process.env.BUILD_ID;
-        delete process.env.GITHUB_TOKEN;
+       delete process.env.MONO_REPO_NAME;
+       delete process.env.API_ID;
+       delete process.env.PROJECT_ID;
+       delete process.env.BUILD_ID;
+       delete process.env.GITHUB_TOKEN;
       });
 });

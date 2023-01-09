@@ -4638,6 +4638,12 @@ export namespace google {
 
                     /** Environment variables */
                     variables?: ({ [k: string]: string }|null);
+
+                    /** Environment secretVariables */
+                    secretVariables?: ({ [k: string]: string }|null);
+
+                    /** Environment encryptedVariables */
+                    encryptedVariables?: (google.cloud.batch.v1.Environment.IKMSEnvMap|null);
                 }
 
                 /** Represents an Environment. */
@@ -4651,6 +4657,12 @@ export namespace google {
 
                     /** Environment variables. */
                     public variables: { [k: string]: string };
+
+                    /** Environment secretVariables. */
+                    public secretVariables: { [k: string]: string };
+
+                    /** Environment encryptedVariables. */
+                    public encryptedVariables?: (google.cloud.batch.v1.Environment.IKMSEnvMap|null);
 
                     /**
                      * Creates a new Environment instance using the specified properties.
@@ -4728,6 +4740,112 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Environment {
+
+                    /** Properties of a KMSEnvMap. */
+                    interface IKMSEnvMap {
+
+                        /** KMSEnvMap keyName */
+                        keyName?: (string|null);
+
+                        /** KMSEnvMap cipherText */
+                        cipherText?: (string|null);
+                    }
+
+                    /** Represents a KMSEnvMap. */
+                    class KMSEnvMap implements IKMSEnvMap {
+
+                        /**
+                         * Constructs a new KMSEnvMap.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.batch.v1.Environment.IKMSEnvMap);
+
+                        /** KMSEnvMap keyName. */
+                        public keyName: string;
+
+                        /** KMSEnvMap cipherText. */
+                        public cipherText: string;
+
+                        /**
+                         * Creates a new KMSEnvMap instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns KMSEnvMap instance
+                         */
+                        public static create(properties?: google.cloud.batch.v1.Environment.IKMSEnvMap): google.cloud.batch.v1.Environment.KMSEnvMap;
+
+                        /**
+                         * Encodes the specified KMSEnvMap message. Does not implicitly {@link google.cloud.batch.v1.Environment.KMSEnvMap.verify|verify} messages.
+                         * @param message KMSEnvMap message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.batch.v1.Environment.IKMSEnvMap, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified KMSEnvMap message, length delimited. Does not implicitly {@link google.cloud.batch.v1.Environment.KMSEnvMap.verify|verify} messages.
+                         * @param message KMSEnvMap message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.batch.v1.Environment.IKMSEnvMap, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a KMSEnvMap message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns KMSEnvMap
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1.Environment.KMSEnvMap;
+
+                        /**
+                         * Decodes a KMSEnvMap message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns KMSEnvMap
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1.Environment.KMSEnvMap;
+
+                        /**
+                         * Verifies a KMSEnvMap message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a KMSEnvMap message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns KMSEnvMap
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1.Environment.KMSEnvMap;
+
+                        /**
+                         * Creates a plain object from a KMSEnvMap message. Also converts values to other types if specified.
+                         * @param message KMSEnvMap
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.batch.v1.Environment.KMSEnvMap, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this KMSEnvMap to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for KMSEnvMap
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a Volume. */

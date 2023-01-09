@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.5.0...container-v4.6.0) (2022-12-21)
+
+
+### Features
+
+* Add support for specifying stack type for clusters. This will allow clusters to be created as dual stack or toggled between IPV4 and dual stack ([#3781](https://github.com/googleapis/google-cloud-node/issues/3781)) ([175d9d1](https://github.com/googleapis/google-cloud-node/commit/175d9d1391f01902e4c6ec61817706d17a7b72a1))
+
 ## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.4.0...container-v4.5.0) (2022-12-16)
 
 

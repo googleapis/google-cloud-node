@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-container",
-        "version": "4.5.0",
+        "version": "4.6.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 144,
+                    "end": 148,
                     "type": "FULL"
                 }
             ],
@@ -326,6 +326,10 @@
                     {
                         "name": "resource_labels",
                         "type": ".google.container.v1.ResourceLabels"
+                    },
+                    {
+                        "name": "windows_node_config",
+                        "type": ".google.container.v1.WindowsNodeConfig"
                     }
                 ],
                 "resultType": ".google.container.v1.Operation",
