@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [5.1.1](https://github.com/googleapis/nodejs-speech/compare/v5.1.0...v5.1.1) (2022-12-19)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#971](https://github.com/googleapis/nodejs-speech/issues/971)) ([aca8d0c](https://github.com/googleapis/nodejs-speech/commit/aca8d0cbfba8cbfc3596959ca96a30020c7b2b40))
+* Regenerated protos JS and TS definitions ([#975](https://github.com/googleapis/nodejs-speech/issues/975)) ([9087201](https://github.com/googleapis/nodejs-speech/commit/908720108ad9176488d1fd5851e9bd37f769b47f))
+
 ## [5.1.0](https://github.com/googleapis/nodejs-speech/compare/v5.0.3...v5.1.0) (2022-09-30)
 
 
