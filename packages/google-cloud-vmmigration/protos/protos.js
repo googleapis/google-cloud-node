@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1550,6 +1550,72 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|listReplicationCycles}.
+                         * @memberof google.cloud.vmmigration.v1.VmMigration
+                         * @typedef ListReplicationCyclesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.vmmigration.v1.ListReplicationCyclesResponse} [response] ListReplicationCyclesResponse
+                         */
+    
+                        /**
+                         * Calls ListReplicationCycles.
+                         * @function listReplicationCycles
+                         * @memberof google.cloud.vmmigration.v1.VmMigration
+                         * @instance
+                         * @param {google.cloud.vmmigration.v1.IListReplicationCyclesRequest} request ListReplicationCyclesRequest message or plain object
+                         * @param {google.cloud.vmmigration.v1.VmMigration.ListReplicationCyclesCallback} callback Node-style callback called with the error, if any, and ListReplicationCyclesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VmMigration.prototype.listReplicationCycles = function listReplicationCycles(request, callback) {
+                            return this.rpcCall(listReplicationCycles, $root.google.cloud.vmmigration.v1.ListReplicationCyclesRequest, $root.google.cloud.vmmigration.v1.ListReplicationCyclesResponse, request, callback);
+                        }, "name", { value: "ListReplicationCycles" });
+    
+                        /**
+                         * Calls ListReplicationCycles.
+                         * @function listReplicationCycles
+                         * @memberof google.cloud.vmmigration.v1.VmMigration
+                         * @instance
+                         * @param {google.cloud.vmmigration.v1.IListReplicationCyclesRequest} request ListReplicationCyclesRequest message or plain object
+                         * @returns {Promise<google.cloud.vmmigration.v1.ListReplicationCyclesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|getReplicationCycle}.
+                         * @memberof google.cloud.vmmigration.v1.VmMigration
+                         * @typedef GetReplicationCycleCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.vmmigration.v1.ReplicationCycle} [response] ReplicationCycle
+                         */
+    
+                        /**
+                         * Calls GetReplicationCycle.
+                         * @function getReplicationCycle
+                         * @memberof google.cloud.vmmigration.v1.VmMigration
+                         * @instance
+                         * @param {google.cloud.vmmigration.v1.IGetReplicationCycleRequest} request GetReplicationCycleRequest message or plain object
+                         * @param {google.cloud.vmmigration.v1.VmMigration.GetReplicationCycleCallback} callback Node-style callback called with the error, if any, and ReplicationCycle
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VmMigration.prototype.getReplicationCycle = function getReplicationCycle(request, callback) {
+                            return this.rpcCall(getReplicationCycle, $root.google.cloud.vmmigration.v1.GetReplicationCycleRequest, $root.google.cloud.vmmigration.v1.ReplicationCycle, request, callback);
+                        }, "name", { value: "GetReplicationCycle" });
+    
+                        /**
+                         * Calls GetReplicationCycle.
+                         * @function getReplicationCycle
+                         * @memberof google.cloud.vmmigration.v1.VmMigration
+                         * @instance
+                         * @param {google.cloud.vmmigration.v1.IGetReplicationCycleRequest} request GetReplicationCycleRequest message or plain object
+                         * @returns {Promise<google.cloud.vmmigration.v1.ReplicationCycle>} Promise
+                         * @variation 2
+                         */
+    
                         return VmMigration;
                     })();
     
@@ -1641,8 +1707,15 @@
                          * Properties of a ReplicationCycle.
                          * @memberof google.cloud.vmmigration.v1
                          * @interface IReplicationCycle
+                         * @property {string|null} [name] ReplicationCycle name
+                         * @property {number|null} [cycleNumber] ReplicationCycle cycleNumber
                          * @property {google.protobuf.ITimestamp|null} [startTime] ReplicationCycle startTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] ReplicationCycle endTime
+                         * @property {google.protobuf.IDuration|null} [totalPauseDuration] ReplicationCycle totalPauseDuration
                          * @property {number|null} [progressPercent] ReplicationCycle progressPercent
+                         * @property {Array.<google.cloud.vmmigration.v1.ICycleStep>|null} [steps] ReplicationCycle steps
+                         * @property {google.cloud.vmmigration.v1.ReplicationCycle.State|null} [state] ReplicationCycle state
+                         * @property {google.rpc.IStatus|null} [error] ReplicationCycle error
                          */
     
                         /**
@@ -1654,11 +1727,28 @@
                          * @param {google.cloud.vmmigration.v1.IReplicationCycle=} [properties] Properties to set
                          */
                         function ReplicationCycle(properties) {
+                            this.steps = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * ReplicationCycle name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmmigration.v1.ReplicationCycle
+                         * @instance
+                         */
+                        ReplicationCycle.prototype.name = "";
+    
+                        /**
+                         * ReplicationCycle cycleNumber.
+                         * @member {number} cycleNumber
+                         * @memberof google.cloud.vmmigration.v1.ReplicationCycle
+                         * @instance
+                         */
+                        ReplicationCycle.prototype.cycleNumber = 0;
     
                         /**
                          * ReplicationCycle startTime.
@@ -1669,12 +1759,52 @@
                         ReplicationCycle.prototype.startTime = null;
     
                         /**
+                         * ReplicationCycle endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.vmmigration.v1.ReplicationCycle
+                         * @instance
+                         */
+                        ReplicationCycle.prototype.endTime = null;
+    
+                        /**
+                         * ReplicationCycle totalPauseDuration.
+                         * @member {google.protobuf.IDuration|null|undefined} totalPauseDuration
+                         * @memberof google.cloud.vmmigration.v1.ReplicationCycle
+                         * @instance
+                         */
+                        ReplicationCycle.prototype.totalPauseDuration = null;
+    
+                        /**
                          * ReplicationCycle progressPercent.
                          * @member {number} progressPercent
                          * @memberof google.cloud.vmmigration.v1.ReplicationCycle
                          * @instance
                          */
                         ReplicationCycle.prototype.progressPercent = 0;
+    
+                        /**
+                         * ReplicationCycle steps.
+                         * @member {Array.<google.cloud.vmmigration.v1.ICycleStep>} steps
+                         * @memberof google.cloud.vmmigration.v1.ReplicationCycle
+                         * @instance
+                         */
+                        ReplicationCycle.prototype.steps = $util.emptyArray;
+    
+                        /**
+                         * ReplicationCycle state.
+                         * @member {google.cloud.vmmigration.v1.ReplicationCycle.State} state
+                         * @memberof google.cloud.vmmigration.v1.ReplicationCycle
+                         * @instance
+                         */
+                        ReplicationCycle.prototype.state = 0;
+    
+                        /**
+                         * ReplicationCycle error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.vmmigration.v1.ReplicationCycle
+                         * @instance
+                         */
+                        ReplicationCycle.prototype.error = null;
     
                         /**
                          * Creates a new ReplicationCycle instance using the specified properties.
@@ -1704,6 +1834,21 @@
                                 $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.progressPercent != null && Object.hasOwnProperty.call(message, "progressPercent"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.progressPercent);
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.totalPauseDuration != null && Object.hasOwnProperty.call(message, "totalPauseDuration"))
+                                $root.google.protobuf.Duration.encode(message.totalPauseDuration, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.steps != null && message.steps.length)
+                                for (var i = 0; i < message.steps.length; ++i)
+                                    $root.google.cloud.vmmigration.v1.CycleStep.encode(message.steps[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.cycleNumber != null && Object.hasOwnProperty.call(message, "cycleNumber"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.cycleNumber);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.state);
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.name);
                             return writer;
                         };
     
@@ -1738,12 +1883,42 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 13: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.cycleNumber = reader.int32();
+                                        break;
+                                    }
                                 case 1: {
                                         message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 6: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.totalPauseDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 5: {
                                         message.progressPercent = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        if (!(message.steps && message.steps.length))
+                                            message.steps = [];
+                                        message.steps.push($root.google.cloud.vmmigration.v1.CycleStep.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 11: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1781,14 +1956,55 @@
                         ReplicationCycle.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.cycleNumber != null && message.hasOwnProperty("cycleNumber"))
+                                if (!$util.isInteger(message.cycleNumber))
+                                    return "cycleNumber: integer expected";
                             if (message.startTime != null && message.hasOwnProperty("startTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.startTime);
                                 if (error)
                                     return "startTime." + error;
                             }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.totalPauseDuration != null && message.hasOwnProperty("totalPauseDuration")) {
+                                var error = $root.google.protobuf.Duration.verify(message.totalPauseDuration);
+                                if (error)
+                                    return "totalPauseDuration." + error;
+                            }
                             if (message.progressPercent != null && message.hasOwnProperty("progressPercent"))
                                 if (!$util.isInteger(message.progressPercent))
                                     return "progressPercent: integer expected";
+                            if (message.steps != null && message.hasOwnProperty("steps")) {
+                                if (!Array.isArray(message.steps))
+                                    return "steps: array expected";
+                                for (var i = 0; i < message.steps.length; ++i) {
+                                    var error = $root.google.cloud.vmmigration.v1.CycleStep.verify(message.steps[i]);
+                                    if (error)
+                                        return "steps." + error;
+                                }
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error);
+                                if (error)
+                                    return "error." + error;
+                            }
                             return null;
                         };
     
@@ -1804,13 +2020,70 @@
                             if (object instanceof $root.google.cloud.vmmigration.v1.ReplicationCycle)
                                 return object;
                             var message = new $root.google.cloud.vmmigration.v1.ReplicationCycle();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.cycleNumber != null)
+                                message.cycleNumber = object.cycleNumber | 0;
                             if (object.startTime != null) {
                                 if (typeof object.startTime !== "object")
                                     throw TypeError(".google.cloud.vmmigration.v1.ReplicationCycle.startTime: object expected");
                                 message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
                             }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.ReplicationCycle.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.totalPauseDuration != null) {
+                                if (typeof object.totalPauseDuration !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.ReplicationCycle.totalPauseDuration: object expected");
+                                message.totalPauseDuration = $root.google.protobuf.Duration.fromObject(object.totalPauseDuration);
+                            }
                             if (object.progressPercent != null)
                                 message.progressPercent = object.progressPercent | 0;
+                            if (object.steps) {
+                                if (!Array.isArray(object.steps))
+                                    throw TypeError(".google.cloud.vmmigration.v1.ReplicationCycle.steps: array expected");
+                                message.steps = [];
+                                for (var i = 0; i < object.steps.length; ++i) {
+                                    if (typeof object.steps[i] !== "object")
+                                        throw TypeError(".google.cloud.vmmigration.v1.ReplicationCycle.steps: object expected");
+                                    message.steps[i] = $root.google.cloud.vmmigration.v1.CycleStep.fromObject(object.steps[i]);
+                                }
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "PAUSED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "SUCCEEDED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.ReplicationCycle.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
                             return message;
                         };
     
@@ -1827,14 +2100,39 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.steps = [];
                             if (options.defaults) {
                                 object.startTime = null;
                                 object.progressPercent = 0;
+                                object.endTime = null;
+                                object.totalPauseDuration = null;
+                                object.cycleNumber = 0;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.error = null;
+                                object.name = "";
                             }
                             if (message.startTime != null && message.hasOwnProperty("startTime"))
                                 object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
                             if (message.progressPercent != null && message.hasOwnProperty("progressPercent"))
                                 object.progressPercent = message.progressPercent;
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.totalPauseDuration != null && message.hasOwnProperty("totalPauseDuration"))
+                                object.totalPauseDuration = $root.google.protobuf.Duration.toObject(message.totalPauseDuration, options);
+                            if (message.steps && message.steps.length) {
+                                object.steps = [];
+                                for (var j = 0; j < message.steps.length; ++j)
+                                    object.steps[j] = $root.google.cloud.vmmigration.v1.CycleStep.toObject(message.steps[j], options);
+                            }
+                            if (message.cycleNumber != null && message.hasOwnProperty("cycleNumber"))
+                                object.cycleNumber = message.cycleNumber;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.ReplicationCycle.State[message.state] === undefined ? message.state : $root.google.cloud.vmmigration.v1.ReplicationCycle.State[message.state] : message.state;
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
                             return object;
                         };
     
@@ -1864,7 +2162,1061 @@
                             return typeUrlPrefix + "/google.cloud.vmmigration.v1.ReplicationCycle";
                         };
     
+                        /**
+                         * State enum.
+                         * @name google.cloud.vmmigration.v1.ReplicationCycle.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} RUNNING=1 RUNNING value
+                         * @property {number} PAUSED=2 PAUSED value
+                         * @property {number} FAILED=3 FAILED value
+                         * @property {number} SUCCEEDED=4 SUCCEEDED value
+                         */
+                        ReplicationCycle.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RUNNING"] = 1;
+                            values[valuesById[2] = "PAUSED"] = 2;
+                            values[valuesById[3] = "FAILED"] = 3;
+                            values[valuesById[4] = "SUCCEEDED"] = 4;
+                            return values;
+                        })();
+    
                         return ReplicationCycle;
+                    })();
+    
+                    v1.CycleStep = (function() {
+    
+                        /**
+                         * Properties of a CycleStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface ICycleStep
+                         * @property {google.cloud.vmmigration.v1.IInitializingReplicationStep|null} [initializingReplication] CycleStep initializingReplication
+                         * @property {google.cloud.vmmigration.v1.IReplicatingStep|null} [replicating] CycleStep replicating
+                         * @property {google.cloud.vmmigration.v1.IPostProcessingStep|null} [postProcessing] CycleStep postProcessing
+                         * @property {google.protobuf.ITimestamp|null} [startTime] CycleStep startTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] CycleStep endTime
+                         */
+    
+                        /**
+                         * Constructs a new CycleStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents a CycleStep.
+                         * @implements ICycleStep
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.ICycleStep=} [properties] Properties to set
+                         */
+                        function CycleStep(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CycleStep initializingReplication.
+                         * @member {google.cloud.vmmigration.v1.IInitializingReplicationStep|null|undefined} initializingReplication
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @instance
+                         */
+                        CycleStep.prototype.initializingReplication = null;
+    
+                        /**
+                         * CycleStep replicating.
+                         * @member {google.cloud.vmmigration.v1.IReplicatingStep|null|undefined} replicating
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @instance
+                         */
+                        CycleStep.prototype.replicating = null;
+    
+                        /**
+                         * CycleStep postProcessing.
+                         * @member {google.cloud.vmmigration.v1.IPostProcessingStep|null|undefined} postProcessing
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @instance
+                         */
+                        CycleStep.prototype.postProcessing = null;
+    
+                        /**
+                         * CycleStep startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @instance
+                         */
+                        CycleStep.prototype.startTime = null;
+    
+                        /**
+                         * CycleStep endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @instance
+                         */
+                        CycleStep.prototype.endTime = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * CycleStep step.
+                         * @member {"initializingReplication"|"replicating"|"postProcessing"|undefined} step
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @instance
+                         */
+                        Object.defineProperty(CycleStep.prototype, "step", {
+                            get: $util.oneOfGetter($oneOfFields = ["initializingReplication", "replicating", "postProcessing"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CycleStep instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.ICycleStep=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.CycleStep} CycleStep instance
+                         */
+                        CycleStep.create = function create(properties) {
+                            return new CycleStep(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CycleStep message. Does not implicitly {@link google.cloud.vmmigration.v1.CycleStep.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.ICycleStep} message CycleStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CycleStep.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.initializingReplication != null && Object.hasOwnProperty.call(message, "initializingReplication"))
+                                $root.google.cloud.vmmigration.v1.InitializingReplicationStep.encode(message.initializingReplication, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.replicating != null && Object.hasOwnProperty.call(message, "replicating"))
+                                $root.google.cloud.vmmigration.v1.ReplicatingStep.encode(message.replicating, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.postProcessing != null && Object.hasOwnProperty.call(message, "postProcessing"))
+                                $root.google.cloud.vmmigration.v1.PostProcessingStep.encode(message.postProcessing, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CycleStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CycleStep.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.ICycleStep} message CycleStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CycleStep.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CycleStep message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.CycleStep} CycleStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CycleStep.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.CycleStep();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.initializingReplication = $root.google.cloud.vmmigration.v1.InitializingReplicationStep.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.replicating = $root.google.cloud.vmmigration.v1.ReplicatingStep.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.postProcessing = $root.google.cloud.vmmigration.v1.PostProcessingStep.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CycleStep message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.CycleStep} CycleStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CycleStep.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CycleStep message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CycleStep.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.initializingReplication != null && message.hasOwnProperty("initializingReplication")) {
+                                properties.step = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.InitializingReplicationStep.verify(message.initializingReplication);
+                                    if (error)
+                                        return "initializingReplication." + error;
+                                }
+                            }
+                            if (message.replicating != null && message.hasOwnProperty("replicating")) {
+                                if (properties.step === 1)
+                                    return "step: multiple values";
+                                properties.step = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.ReplicatingStep.verify(message.replicating);
+                                    if (error)
+                                        return "replicating." + error;
+                                }
+                            }
+                            if (message.postProcessing != null && message.hasOwnProperty("postProcessing")) {
+                                if (properties.step === 1)
+                                    return "step: multiple values";
+                                properties.step = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.PostProcessingStep.verify(message.postProcessing);
+                                    if (error)
+                                        return "postProcessing." + error;
+                                }
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CycleStep message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.CycleStep} CycleStep
+                         */
+                        CycleStep.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.CycleStep)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.CycleStep();
+                            if (object.initializingReplication != null) {
+                                if (typeof object.initializingReplication !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CycleStep.initializingReplication: object expected");
+                                message.initializingReplication = $root.google.cloud.vmmigration.v1.InitializingReplicationStep.fromObject(object.initializingReplication);
+                            }
+                            if (object.replicating != null) {
+                                if (typeof object.replicating !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CycleStep.replicating: object expected");
+                                message.replicating = $root.google.cloud.vmmigration.v1.ReplicatingStep.fromObject(object.replicating);
+                            }
+                            if (object.postProcessing != null) {
+                                if (typeof object.postProcessing !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CycleStep.postProcessing: object expected");
+                                message.postProcessing = $root.google.cloud.vmmigration.v1.PostProcessingStep.fromObject(object.postProcessing);
+                            }
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CycleStep.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CycleStep.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CycleStep message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.CycleStep} message CycleStep
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CycleStep.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startTime = null;
+                                object.endTime = null;
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.initializingReplication != null && message.hasOwnProperty("initializingReplication")) {
+                                object.initializingReplication = $root.google.cloud.vmmigration.v1.InitializingReplicationStep.toObject(message.initializingReplication, options);
+                                if (options.oneofs)
+                                    object.step = "initializingReplication";
+                            }
+                            if (message.replicating != null && message.hasOwnProperty("replicating")) {
+                                object.replicating = $root.google.cloud.vmmigration.v1.ReplicatingStep.toObject(message.replicating, options);
+                                if (options.oneofs)
+                                    object.step = "replicating";
+                            }
+                            if (message.postProcessing != null && message.hasOwnProperty("postProcessing")) {
+                                object.postProcessing = $root.google.cloud.vmmigration.v1.PostProcessingStep.toObject(message.postProcessing, options);
+                                if (options.oneofs)
+                                    object.step = "postProcessing";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CycleStep to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CycleStep.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CycleStep
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.CycleStep
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CycleStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.CycleStep";
+                        };
+    
+                        return CycleStep;
+                    })();
+    
+                    v1.InitializingReplicationStep = (function() {
+    
+                        /**
+                         * Properties of an InitializingReplicationStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IInitializingReplicationStep
+                         */
+    
+                        /**
+                         * Constructs a new InitializingReplicationStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents an InitializingReplicationStep.
+                         * @implements IInitializingReplicationStep
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IInitializingReplicationStep=} [properties] Properties to set
+                         */
+                        function InitializingReplicationStep(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new InitializingReplicationStep instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.InitializingReplicationStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IInitializingReplicationStep=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.InitializingReplicationStep} InitializingReplicationStep instance
+                         */
+                        InitializingReplicationStep.create = function create(properties) {
+                            return new InitializingReplicationStep(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InitializingReplicationStep message. Does not implicitly {@link google.cloud.vmmigration.v1.InitializingReplicationStep.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.InitializingReplicationStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IInitializingReplicationStep} message InitializingReplicationStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializingReplicationStep.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InitializingReplicationStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.InitializingReplicationStep.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.InitializingReplicationStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IInitializingReplicationStep} message InitializingReplicationStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializingReplicationStep.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InitializingReplicationStep message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.InitializingReplicationStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.InitializingReplicationStep} InitializingReplicationStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializingReplicationStep.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.InitializingReplicationStep();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InitializingReplicationStep message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.InitializingReplicationStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.InitializingReplicationStep} InitializingReplicationStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializingReplicationStep.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InitializingReplicationStep message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.InitializingReplicationStep
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InitializingReplicationStep.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InitializingReplicationStep message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.InitializingReplicationStep
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.InitializingReplicationStep} InitializingReplicationStep
+                         */
+                        InitializingReplicationStep.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.InitializingReplicationStep)
+                                return object;
+                            return new $root.google.cloud.vmmigration.v1.InitializingReplicationStep();
+                        };
+    
+                        /**
+                         * Creates a plain object from an InitializingReplicationStep message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.InitializingReplicationStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.InitializingReplicationStep} message InitializingReplicationStep
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InitializingReplicationStep.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this InitializingReplicationStep to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.InitializingReplicationStep
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InitializingReplicationStep.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InitializingReplicationStep
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.InitializingReplicationStep
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InitializingReplicationStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.InitializingReplicationStep";
+                        };
+    
+                        return InitializingReplicationStep;
+                    })();
+    
+                    v1.ReplicatingStep = (function() {
+    
+                        /**
+                         * Properties of a ReplicatingStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IReplicatingStep
+                         * @property {number|Long|null} [totalBytes] ReplicatingStep totalBytes
+                         * @property {number|Long|null} [replicatedBytes] ReplicatingStep replicatedBytes
+                         * @property {number|Long|null} [lastTwoMinutesAverageBytesPerSecond] ReplicatingStep lastTwoMinutesAverageBytesPerSecond
+                         * @property {number|Long|null} [lastThirtyMinutesAverageBytesPerSecond] ReplicatingStep lastThirtyMinutesAverageBytesPerSecond
+                         */
+    
+                        /**
+                         * Constructs a new ReplicatingStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents a ReplicatingStep.
+                         * @implements IReplicatingStep
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IReplicatingStep=} [properties] Properties to set
+                         */
+                        function ReplicatingStep(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReplicatingStep totalBytes.
+                         * @member {number|Long} totalBytes
+                         * @memberof google.cloud.vmmigration.v1.ReplicatingStep
+                         * @instance
+                         */
+                        ReplicatingStep.prototype.totalBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * ReplicatingStep replicatedBytes.
+                         * @member {number|Long} replicatedBytes
+                         * @memberof google.cloud.vmmigration.v1.ReplicatingStep
+                         * @instance
+                         */
+                        ReplicatingStep.prototype.replicatedBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * ReplicatingStep lastTwoMinutesAverageBytesPerSecond.
+                         * @member {number|Long} lastTwoMinutesAverageBytesPerSecond
+                         * @memberof google.cloud.vmmigration.v1.ReplicatingStep
+                         * @instance
+                         */
+                        ReplicatingStep.prototype.lastTwoMinutesAverageBytesPerSecond = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * ReplicatingStep lastThirtyMinutesAverageBytesPerSecond.
+                         * @member {number|Long} lastThirtyMinutesAverageBytesPerSecond
+                         * @memberof google.cloud.vmmigration.v1.ReplicatingStep
+                         * @instance
+                         */
+                        ReplicatingStep.prototype.lastThirtyMinutesAverageBytesPerSecond = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new ReplicatingStep instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.ReplicatingStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IReplicatingStep=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.ReplicatingStep} ReplicatingStep instance
+                         */
+                        ReplicatingStep.create = function create(properties) {
+                            return new ReplicatingStep(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReplicatingStep message. Does not implicitly {@link google.cloud.vmmigration.v1.ReplicatingStep.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.ReplicatingStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IReplicatingStep} message ReplicatingStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReplicatingStep.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.totalBytes != null && Object.hasOwnProperty.call(message, "totalBytes"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.totalBytes);
+                            if (message.replicatedBytes != null && Object.hasOwnProperty.call(message, "replicatedBytes"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.replicatedBytes);
+                            if (message.lastTwoMinutesAverageBytesPerSecond != null && Object.hasOwnProperty.call(message, "lastTwoMinutesAverageBytesPerSecond"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.lastTwoMinutesAverageBytesPerSecond);
+                            if (message.lastThirtyMinutesAverageBytesPerSecond != null && Object.hasOwnProperty.call(message, "lastThirtyMinutesAverageBytesPerSecond"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.lastThirtyMinutesAverageBytesPerSecond);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReplicatingStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ReplicatingStep.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.ReplicatingStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IReplicatingStep} message ReplicatingStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReplicatingStep.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReplicatingStep message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.ReplicatingStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.ReplicatingStep} ReplicatingStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReplicatingStep.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.ReplicatingStep();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.totalBytes = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.replicatedBytes = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.lastTwoMinutesAverageBytesPerSecond = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.lastThirtyMinutesAverageBytesPerSecond = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReplicatingStep message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.ReplicatingStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.ReplicatingStep} ReplicatingStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReplicatingStep.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReplicatingStep message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.ReplicatingStep
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReplicatingStep.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.totalBytes != null && message.hasOwnProperty("totalBytes"))
+                                if (!$util.isInteger(message.totalBytes) && !(message.totalBytes && $util.isInteger(message.totalBytes.low) && $util.isInteger(message.totalBytes.high)))
+                                    return "totalBytes: integer|Long expected";
+                            if (message.replicatedBytes != null && message.hasOwnProperty("replicatedBytes"))
+                                if (!$util.isInteger(message.replicatedBytes) && !(message.replicatedBytes && $util.isInteger(message.replicatedBytes.low) && $util.isInteger(message.replicatedBytes.high)))
+                                    return "replicatedBytes: integer|Long expected";
+                            if (message.lastTwoMinutesAverageBytesPerSecond != null && message.hasOwnProperty("lastTwoMinutesAverageBytesPerSecond"))
+                                if (!$util.isInteger(message.lastTwoMinutesAverageBytesPerSecond) && !(message.lastTwoMinutesAverageBytesPerSecond && $util.isInteger(message.lastTwoMinutesAverageBytesPerSecond.low) && $util.isInteger(message.lastTwoMinutesAverageBytesPerSecond.high)))
+                                    return "lastTwoMinutesAverageBytesPerSecond: integer|Long expected";
+                            if (message.lastThirtyMinutesAverageBytesPerSecond != null && message.hasOwnProperty("lastThirtyMinutesAverageBytesPerSecond"))
+                                if (!$util.isInteger(message.lastThirtyMinutesAverageBytesPerSecond) && !(message.lastThirtyMinutesAverageBytesPerSecond && $util.isInteger(message.lastThirtyMinutesAverageBytesPerSecond.low) && $util.isInteger(message.lastThirtyMinutesAverageBytesPerSecond.high)))
+                                    return "lastThirtyMinutesAverageBytesPerSecond: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReplicatingStep message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.ReplicatingStep
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.ReplicatingStep} ReplicatingStep
+                         */
+                        ReplicatingStep.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.ReplicatingStep)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.ReplicatingStep();
+                            if (object.totalBytes != null)
+                                if ($util.Long)
+                                    (message.totalBytes = $util.Long.fromValue(object.totalBytes)).unsigned = false;
+                                else if (typeof object.totalBytes === "string")
+                                    message.totalBytes = parseInt(object.totalBytes, 10);
+                                else if (typeof object.totalBytes === "number")
+                                    message.totalBytes = object.totalBytes;
+                                else if (typeof object.totalBytes === "object")
+                                    message.totalBytes = new $util.LongBits(object.totalBytes.low >>> 0, object.totalBytes.high >>> 0).toNumber();
+                            if (object.replicatedBytes != null)
+                                if ($util.Long)
+                                    (message.replicatedBytes = $util.Long.fromValue(object.replicatedBytes)).unsigned = false;
+                                else if (typeof object.replicatedBytes === "string")
+                                    message.replicatedBytes = parseInt(object.replicatedBytes, 10);
+                                else if (typeof object.replicatedBytes === "number")
+                                    message.replicatedBytes = object.replicatedBytes;
+                                else if (typeof object.replicatedBytes === "object")
+                                    message.replicatedBytes = new $util.LongBits(object.replicatedBytes.low >>> 0, object.replicatedBytes.high >>> 0).toNumber();
+                            if (object.lastTwoMinutesAverageBytesPerSecond != null)
+                                if ($util.Long)
+                                    (message.lastTwoMinutesAverageBytesPerSecond = $util.Long.fromValue(object.lastTwoMinutesAverageBytesPerSecond)).unsigned = false;
+                                else if (typeof object.lastTwoMinutesAverageBytesPerSecond === "string")
+                                    message.lastTwoMinutesAverageBytesPerSecond = parseInt(object.lastTwoMinutesAverageBytesPerSecond, 10);
+                                else if (typeof object.lastTwoMinutesAverageBytesPerSecond === "number")
+                                    message.lastTwoMinutesAverageBytesPerSecond = object.lastTwoMinutesAverageBytesPerSecond;
+                                else if (typeof object.lastTwoMinutesAverageBytesPerSecond === "object")
+                                    message.lastTwoMinutesAverageBytesPerSecond = new $util.LongBits(object.lastTwoMinutesAverageBytesPerSecond.low >>> 0, object.lastTwoMinutesAverageBytesPerSecond.high >>> 0).toNumber();
+                            if (object.lastThirtyMinutesAverageBytesPerSecond != null)
+                                if ($util.Long)
+                                    (message.lastThirtyMinutesAverageBytesPerSecond = $util.Long.fromValue(object.lastThirtyMinutesAverageBytesPerSecond)).unsigned = false;
+                                else if (typeof object.lastThirtyMinutesAverageBytesPerSecond === "string")
+                                    message.lastThirtyMinutesAverageBytesPerSecond = parseInt(object.lastThirtyMinutesAverageBytesPerSecond, 10);
+                                else if (typeof object.lastThirtyMinutesAverageBytesPerSecond === "number")
+                                    message.lastThirtyMinutesAverageBytesPerSecond = object.lastThirtyMinutesAverageBytesPerSecond;
+                                else if (typeof object.lastThirtyMinutesAverageBytesPerSecond === "object")
+                                    message.lastThirtyMinutesAverageBytesPerSecond = new $util.LongBits(object.lastThirtyMinutesAverageBytesPerSecond.low >>> 0, object.lastThirtyMinutesAverageBytesPerSecond.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReplicatingStep message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.ReplicatingStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.ReplicatingStep} message ReplicatingStep
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReplicatingStep.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalBytes = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.replicatedBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.replicatedBytes = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.lastTwoMinutesAverageBytesPerSecond = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.lastTwoMinutesAverageBytesPerSecond = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.lastThirtyMinutesAverageBytesPerSecond = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.lastThirtyMinutesAverageBytesPerSecond = options.longs === String ? "0" : 0;
+                            }
+                            if (message.totalBytes != null && message.hasOwnProperty("totalBytes"))
+                                if (typeof message.totalBytes === "number")
+                                    object.totalBytes = options.longs === String ? String(message.totalBytes) : message.totalBytes;
+                                else
+                                    object.totalBytes = options.longs === String ? $util.Long.prototype.toString.call(message.totalBytes) : options.longs === Number ? new $util.LongBits(message.totalBytes.low >>> 0, message.totalBytes.high >>> 0).toNumber() : message.totalBytes;
+                            if (message.replicatedBytes != null && message.hasOwnProperty("replicatedBytes"))
+                                if (typeof message.replicatedBytes === "number")
+                                    object.replicatedBytes = options.longs === String ? String(message.replicatedBytes) : message.replicatedBytes;
+                                else
+                                    object.replicatedBytes = options.longs === String ? $util.Long.prototype.toString.call(message.replicatedBytes) : options.longs === Number ? new $util.LongBits(message.replicatedBytes.low >>> 0, message.replicatedBytes.high >>> 0).toNumber() : message.replicatedBytes;
+                            if (message.lastTwoMinutesAverageBytesPerSecond != null && message.hasOwnProperty("lastTwoMinutesAverageBytesPerSecond"))
+                                if (typeof message.lastTwoMinutesAverageBytesPerSecond === "number")
+                                    object.lastTwoMinutesAverageBytesPerSecond = options.longs === String ? String(message.lastTwoMinutesAverageBytesPerSecond) : message.lastTwoMinutesAverageBytesPerSecond;
+                                else
+                                    object.lastTwoMinutesAverageBytesPerSecond = options.longs === String ? $util.Long.prototype.toString.call(message.lastTwoMinutesAverageBytesPerSecond) : options.longs === Number ? new $util.LongBits(message.lastTwoMinutesAverageBytesPerSecond.low >>> 0, message.lastTwoMinutesAverageBytesPerSecond.high >>> 0).toNumber() : message.lastTwoMinutesAverageBytesPerSecond;
+                            if (message.lastThirtyMinutesAverageBytesPerSecond != null && message.hasOwnProperty("lastThirtyMinutesAverageBytesPerSecond"))
+                                if (typeof message.lastThirtyMinutesAverageBytesPerSecond === "number")
+                                    object.lastThirtyMinutesAverageBytesPerSecond = options.longs === String ? String(message.lastThirtyMinutesAverageBytesPerSecond) : message.lastThirtyMinutesAverageBytesPerSecond;
+                                else
+                                    object.lastThirtyMinutesAverageBytesPerSecond = options.longs === String ? $util.Long.prototype.toString.call(message.lastThirtyMinutesAverageBytesPerSecond) : options.longs === Number ? new $util.LongBits(message.lastThirtyMinutesAverageBytesPerSecond.low >>> 0, message.lastThirtyMinutesAverageBytesPerSecond.high >>> 0).toNumber() : message.lastThirtyMinutesAverageBytesPerSecond;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReplicatingStep to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.ReplicatingStep
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReplicatingStep.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReplicatingStep
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.ReplicatingStep
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReplicatingStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.ReplicatingStep";
+                        };
+    
+                        return ReplicatingStep;
+                    })();
+    
+                    v1.PostProcessingStep = (function() {
+    
+                        /**
+                         * Properties of a PostProcessingStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IPostProcessingStep
+                         */
+    
+                        /**
+                         * Constructs a new PostProcessingStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents a PostProcessingStep.
+                         * @implements IPostProcessingStep
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IPostProcessingStep=} [properties] Properties to set
+                         */
+                        function PostProcessingStep(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new PostProcessingStep instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.PostProcessingStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IPostProcessingStep=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.PostProcessingStep} PostProcessingStep instance
+                         */
+                        PostProcessingStep.create = function create(properties) {
+                            return new PostProcessingStep(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PostProcessingStep message. Does not implicitly {@link google.cloud.vmmigration.v1.PostProcessingStep.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.PostProcessingStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IPostProcessingStep} message PostProcessingStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostProcessingStep.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PostProcessingStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.PostProcessingStep.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.PostProcessingStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IPostProcessingStep} message PostProcessingStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PostProcessingStep.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PostProcessingStep message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.PostProcessingStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.PostProcessingStep} PostProcessingStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostProcessingStep.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.PostProcessingStep();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PostProcessingStep message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.PostProcessingStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.PostProcessingStep} PostProcessingStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PostProcessingStep.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PostProcessingStep message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.PostProcessingStep
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PostProcessingStep.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PostProcessingStep message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.PostProcessingStep
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.PostProcessingStep} PostProcessingStep
+                         */
+                        PostProcessingStep.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.PostProcessingStep)
+                                return object;
+                            return new $root.google.cloud.vmmigration.v1.PostProcessingStep();
+                        };
+    
+                        /**
+                         * Creates a plain object from a PostProcessingStep message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.PostProcessingStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.PostProcessingStep} message PostProcessingStep
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PostProcessingStep.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this PostProcessingStep to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.PostProcessingStep
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PostProcessingStep.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PostProcessingStep
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.PostProcessingStep
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PostProcessingStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.PostProcessingStep";
+                        };
+    
+                        return PostProcessingStep;
                     })();
     
                     v1.ReplicationSync = (function() {
@@ -2082,6 +3434,7 @@
                          * @memberof google.cloud.vmmigration.v1
                          * @interface IMigratingVm
                          * @property {google.cloud.vmmigration.v1.IComputeEngineTargetDefaults|null} [computeEngineTargetDefaults] MigratingVm computeEngineTargetDefaults
+                         * @property {google.cloud.vmmigration.v1.IAwsSourceVmDetails|null} [awsSourceVmDetails] MigratingVm awsSourceVmDetails
                          * @property {string|null} [name] MigratingVm name
                          * @property {string|null} [sourceVmId] MigratingVm sourceVmId
                          * @property {string|null} [displayName] MigratingVm displayName
@@ -2125,6 +3478,14 @@
                          * @instance
                          */
                         MigratingVm.prototype.computeEngineTargetDefaults = null;
+    
+                        /**
+                         * MigratingVm awsSourceVmDetails.
+                         * @member {google.cloud.vmmigration.v1.IAwsSourceVmDetails|null|undefined} awsSourceVmDetails
+                         * @memberof google.cloud.vmmigration.v1.MigratingVm
+                         * @instance
+                         */
+                        MigratingVm.prototype.awsSourceVmDetails = null;
     
                         /**
                          * MigratingVm name.
@@ -2269,6 +3630,17 @@
                         });
     
                         /**
+                         * MigratingVm sourceVmDetails.
+                         * @member {"awsSourceVmDetails"|undefined} sourceVmDetails
+                         * @memberof google.cloud.vmmigration.v1.MigratingVm
+                         * @instance
+                         */
+                        Object.defineProperty(MigratingVm.prototype, "sourceVmDetails", {
+                            get: $util.oneOfGetter($oneOfFields = ["awsSourceVmDetails"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new MigratingVm instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.vmmigration.v1.MigratingVm
@@ -2329,6 +3701,8 @@
                                 writer.uint32(/* id 23, wireType 0 =*/184).int32(message.state);
                             if (message.computeEngineTargetDefaults != null && Object.hasOwnProperty.call(message, "computeEngineTargetDefaults"))
                                 $root.google.cloud.vmmigration.v1.ComputeEngineTargetDefaults.encode(message.computeEngineTargetDefaults, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                            if (message.awsSourceVmDetails != null && Object.hasOwnProperty.call(message, "awsSourceVmDetails"))
+                                $root.google.cloud.vmmigration.v1.AwsSourceVmDetails.encode(message.awsSourceVmDetails, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
                             return writer;
                         };
     
@@ -2365,6 +3739,10 @@
                                 switch (tag >>> 3) {
                                 case 26: {
                                         message.computeEngineTargetDefaults = $root.google.cloud.vmmigration.v1.ComputeEngineTargetDefaults.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 29: {
+                                        message.awsSourceVmDetails = $root.google.cloud.vmmigration.v1.AwsSourceVmDetails.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -2498,6 +3876,14 @@
                                         return "computeEngineTargetDefaults." + error;
                                 }
                             }
+                            if (message.awsSourceVmDetails != null && message.hasOwnProperty("awsSourceVmDetails")) {
+                                properties.sourceVmDetails = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.AwsSourceVmDetails.verify(message.awsSourceVmDetails);
+                                    if (error)
+                                        return "awsSourceVmDetails." + error;
+                                }
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -2611,6 +3997,11 @@
                                 if (typeof object.computeEngineTargetDefaults !== "object")
                                     throw TypeError(".google.cloud.vmmigration.v1.MigratingVm.computeEngineTargetDefaults: object expected");
                                 message.computeEngineTargetDefaults = $root.google.cloud.vmmigration.v1.ComputeEngineTargetDefaults.fromObject(object.computeEngineTargetDefaults);
+                            }
+                            if (object.awsSourceVmDetails != null) {
+                                if (typeof object.awsSourceVmDetails !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.MigratingVm.awsSourceVmDetails: object expected");
+                                message.awsSourceVmDetails = $root.google.cloud.vmmigration.v1.AwsSourceVmDetails.fromObject(object.awsSourceVmDetails);
                             }
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -2824,6 +4215,11 @@
                                 if (options.oneofs)
                                     object.targetVmDefaults = "computeEngineTargetDefaults";
                             }
+                            if (message.awsSourceVmDetails != null && message.hasOwnProperty("awsSourceVmDetails")) {
+                                object.awsSourceVmDetails = $root.google.cloud.vmmigration.v1.AwsSourceVmDetails.toObject(message.awsSourceVmDetails, options);
+                                if (options.oneofs)
+                                    object.sourceVmDetails = "awsSourceVmDetails";
+                            }
                             return object;
                         };
     
@@ -2903,6 +4299,7 @@
                          * @property {google.cloud.vmmigration.v1.CloneJob.State|null} [state] CloneJob state
                          * @property {google.protobuf.ITimestamp|null} [stateTime] CloneJob stateTime
                          * @property {google.rpc.IStatus|null} [error] CloneJob error
+                         * @property {Array.<google.cloud.vmmigration.v1.ICloneStep>|null} [steps] CloneJob steps
                          */
     
                         /**
@@ -2914,6 +4311,7 @@
                          * @param {google.cloud.vmmigration.v1.ICloneJob=} [properties] Properties to set
                          */
                         function CloneJob(properties) {
+                            this.steps = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -2976,6 +4374,14 @@
                          */
                         CloneJob.prototype.error = null;
     
+                        /**
+                         * CloneJob steps.
+                         * @member {Array.<google.cloud.vmmigration.v1.ICloneStep>} steps
+                         * @memberof google.cloud.vmmigration.v1.CloneJob
+                         * @instance
+                         */
+                        CloneJob.prototype.steps = $util.emptyArray;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -3028,6 +4434,9 @@
                                 $root.google.cloud.vmmigration.v1.ComputeEngineTargetDetails.encode(message.computeEngineTargetDetails, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
                                 $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                            if (message.steps != null && message.steps.length)
+                                for (var i = 0; i < message.steps.length; ++i)
+                                    $root.google.cloud.vmmigration.v1.CloneStep.encode(message.steps[i], writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                             return writer;
                         };
     
@@ -3088,6 +4497,12 @@
                                     }
                                 case 17: {
                                         message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 23: {
+                                        if (!(message.steps && message.steps.length))
+                                            message.steps = [];
+                                        message.steps.push($root.google.cloud.vmmigration.v1.CloneStep.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -3171,6 +4586,15 @@
                                 if (error)
                                     return "error." + error;
                             }
+                            if (message.steps != null && message.hasOwnProperty("steps")) {
+                                if (!Array.isArray(message.steps))
+                                    return "steps: array expected";
+                                for (var i = 0; i < message.steps.length; ++i) {
+                                    var error = $root.google.cloud.vmmigration.v1.CloneStep.verify(message.steps[i]);
+                                    if (error)
+                                        return "steps." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -3253,6 +4677,16 @@
                                     throw TypeError(".google.cloud.vmmigration.v1.CloneJob.error: object expected");
                                 message.error = $root.google.rpc.Status.fromObject(object.error);
                             }
+                            if (object.steps) {
+                                if (!Array.isArray(object.steps))
+                                    throw TypeError(".google.cloud.vmmigration.v1.CloneJob.steps: array expected");
+                                message.steps = [];
+                                for (var i = 0; i < object.steps.length; ++i) {
+                                    if (typeof object.steps[i] !== "object")
+                                        throw TypeError(".google.cloud.vmmigration.v1.CloneJob.steps: object expected");
+                                    message.steps[i] = $root.google.cloud.vmmigration.v1.CloneStep.fromObject(object.steps[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -3269,6 +4703,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.steps = [];
                             if (options.defaults) {
                                 object.createTime = null;
                                 object.name = "";
@@ -3294,6 +4730,11 @@
                             }
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.steps && message.steps.length) {
+                                object.steps = [];
+                                for (var j = 0; j < message.steps.length; ++j)
+                                    object.steps[j] = $root.google.cloud.vmmigration.v1.CloneStep.toObject(message.steps[j], options);
+                            }
                             return object;
                         };
     
@@ -3352,6 +4793,886 @@
                         return CloneJob;
                     })();
     
+                    v1.CloneStep = (function() {
+    
+                        /**
+                         * Properties of a CloneStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface ICloneStep
+                         * @property {google.cloud.vmmigration.v1.IAdaptingOSStep|null} [adaptingOs] CloneStep adaptingOs
+                         * @property {google.cloud.vmmigration.v1.IPreparingVMDisksStep|null} [preparingVmDisks] CloneStep preparingVmDisks
+                         * @property {google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep|null} [instantiatingMigratedVm] CloneStep instantiatingMigratedVm
+                         * @property {google.protobuf.ITimestamp|null} [startTime] CloneStep startTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] CloneStep endTime
+                         */
+    
+                        /**
+                         * Constructs a new CloneStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents a CloneStep.
+                         * @implements ICloneStep
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.ICloneStep=} [properties] Properties to set
+                         */
+                        function CloneStep(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloneStep adaptingOs.
+                         * @member {google.cloud.vmmigration.v1.IAdaptingOSStep|null|undefined} adaptingOs
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @instance
+                         */
+                        CloneStep.prototype.adaptingOs = null;
+    
+                        /**
+                         * CloneStep preparingVmDisks.
+                         * @member {google.cloud.vmmigration.v1.IPreparingVMDisksStep|null|undefined} preparingVmDisks
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @instance
+                         */
+                        CloneStep.prototype.preparingVmDisks = null;
+    
+                        /**
+                         * CloneStep instantiatingMigratedVm.
+                         * @member {google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep|null|undefined} instantiatingMigratedVm
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @instance
+                         */
+                        CloneStep.prototype.instantiatingMigratedVm = null;
+    
+                        /**
+                         * CloneStep startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @instance
+                         */
+                        CloneStep.prototype.startTime = null;
+    
+                        /**
+                         * CloneStep endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @instance
+                         */
+                        CloneStep.prototype.endTime = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * CloneStep step.
+                         * @member {"adaptingOs"|"preparingVmDisks"|"instantiatingMigratedVm"|undefined} step
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @instance
+                         */
+                        Object.defineProperty(CloneStep.prototype, "step", {
+                            get: $util.oneOfGetter($oneOfFields = ["adaptingOs", "preparingVmDisks", "instantiatingMigratedVm"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CloneStep instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.ICloneStep=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.CloneStep} CloneStep instance
+                         */
+                        CloneStep.create = function create(properties) {
+                            return new CloneStep(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloneStep message. Does not implicitly {@link google.cloud.vmmigration.v1.CloneStep.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.ICloneStep} message CloneStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloneStep.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.adaptingOs != null && Object.hasOwnProperty.call(message, "adaptingOs"))
+                                $root.google.cloud.vmmigration.v1.AdaptingOSStep.encode(message.adaptingOs, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.preparingVmDisks != null && Object.hasOwnProperty.call(message, "preparingVmDisks"))
+                                $root.google.cloud.vmmigration.v1.PreparingVMDisksStep.encode(message.preparingVmDisks, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.instantiatingMigratedVm != null && Object.hasOwnProperty.call(message, "instantiatingMigratedVm"))
+                                $root.google.cloud.vmmigration.v1.InstantiatingMigratedVMStep.encode(message.instantiatingMigratedVm, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloneStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CloneStep.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.ICloneStep} message CloneStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloneStep.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloneStep message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.CloneStep} CloneStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloneStep.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.CloneStep();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.adaptingOs = $root.google.cloud.vmmigration.v1.AdaptingOSStep.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.preparingVmDisks = $root.google.cloud.vmmigration.v1.PreparingVMDisksStep.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.instantiatingMigratedVm = $root.google.cloud.vmmigration.v1.InstantiatingMigratedVMStep.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloneStep message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.CloneStep} CloneStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloneStep.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloneStep message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloneStep.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.adaptingOs != null && message.hasOwnProperty("adaptingOs")) {
+                                properties.step = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.AdaptingOSStep.verify(message.adaptingOs);
+                                    if (error)
+                                        return "adaptingOs." + error;
+                                }
+                            }
+                            if (message.preparingVmDisks != null && message.hasOwnProperty("preparingVmDisks")) {
+                                if (properties.step === 1)
+                                    return "step: multiple values";
+                                properties.step = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.PreparingVMDisksStep.verify(message.preparingVmDisks);
+                                    if (error)
+                                        return "preparingVmDisks." + error;
+                                }
+                            }
+                            if (message.instantiatingMigratedVm != null && message.hasOwnProperty("instantiatingMigratedVm")) {
+                                if (properties.step === 1)
+                                    return "step: multiple values";
+                                properties.step = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.InstantiatingMigratedVMStep.verify(message.instantiatingMigratedVm);
+                                    if (error)
+                                        return "instantiatingMigratedVm." + error;
+                                }
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloneStep message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.CloneStep} CloneStep
+                         */
+                        CloneStep.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.CloneStep)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.CloneStep();
+                            if (object.adaptingOs != null) {
+                                if (typeof object.adaptingOs !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CloneStep.adaptingOs: object expected");
+                                message.adaptingOs = $root.google.cloud.vmmigration.v1.AdaptingOSStep.fromObject(object.adaptingOs);
+                            }
+                            if (object.preparingVmDisks != null) {
+                                if (typeof object.preparingVmDisks !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CloneStep.preparingVmDisks: object expected");
+                                message.preparingVmDisks = $root.google.cloud.vmmigration.v1.PreparingVMDisksStep.fromObject(object.preparingVmDisks);
+                            }
+                            if (object.instantiatingMigratedVm != null) {
+                                if (typeof object.instantiatingMigratedVm !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CloneStep.instantiatingMigratedVm: object expected");
+                                message.instantiatingMigratedVm = $root.google.cloud.vmmigration.v1.InstantiatingMigratedVMStep.fromObject(object.instantiatingMigratedVm);
+                            }
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CloneStep.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CloneStep.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloneStep message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.CloneStep} message CloneStep
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloneStep.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startTime = null;
+                                object.endTime = null;
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.adaptingOs != null && message.hasOwnProperty("adaptingOs")) {
+                                object.adaptingOs = $root.google.cloud.vmmigration.v1.AdaptingOSStep.toObject(message.adaptingOs, options);
+                                if (options.oneofs)
+                                    object.step = "adaptingOs";
+                            }
+                            if (message.preparingVmDisks != null && message.hasOwnProperty("preparingVmDisks")) {
+                                object.preparingVmDisks = $root.google.cloud.vmmigration.v1.PreparingVMDisksStep.toObject(message.preparingVmDisks, options);
+                                if (options.oneofs)
+                                    object.step = "preparingVmDisks";
+                            }
+                            if (message.instantiatingMigratedVm != null && message.hasOwnProperty("instantiatingMigratedVm")) {
+                                object.instantiatingMigratedVm = $root.google.cloud.vmmigration.v1.InstantiatingMigratedVMStep.toObject(message.instantiatingMigratedVm, options);
+                                if (options.oneofs)
+                                    object.step = "instantiatingMigratedVm";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloneStep to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloneStep.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloneStep
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.CloneStep
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloneStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.CloneStep";
+                        };
+    
+                        return CloneStep;
+                    })();
+    
+                    v1.AdaptingOSStep = (function() {
+    
+                        /**
+                         * Properties of an AdaptingOSStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IAdaptingOSStep
+                         */
+    
+                        /**
+                         * Constructs a new AdaptingOSStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents an AdaptingOSStep.
+                         * @implements IAdaptingOSStep
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IAdaptingOSStep=} [properties] Properties to set
+                         */
+                        function AdaptingOSStep(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new AdaptingOSStep instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.AdaptingOSStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAdaptingOSStep=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.AdaptingOSStep} AdaptingOSStep instance
+                         */
+                        AdaptingOSStep.create = function create(properties) {
+                            return new AdaptingOSStep(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptingOSStep message. Does not implicitly {@link google.cloud.vmmigration.v1.AdaptingOSStep.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.AdaptingOSStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAdaptingOSStep} message AdaptingOSStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptingOSStep.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdaptingOSStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AdaptingOSStep.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AdaptingOSStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAdaptingOSStep} message AdaptingOSStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdaptingOSStep.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdaptingOSStep message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.AdaptingOSStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.AdaptingOSStep} AdaptingOSStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptingOSStep.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.AdaptingOSStep();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdaptingOSStep message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AdaptingOSStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.AdaptingOSStep} AdaptingOSStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdaptingOSStep.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdaptingOSStep message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.AdaptingOSStep
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdaptingOSStep.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdaptingOSStep message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.AdaptingOSStep
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.AdaptingOSStep} AdaptingOSStep
+                         */
+                        AdaptingOSStep.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.AdaptingOSStep)
+                                return object;
+                            return new $root.google.cloud.vmmigration.v1.AdaptingOSStep();
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdaptingOSStep message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.AdaptingOSStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.AdaptingOSStep} message AdaptingOSStep
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdaptingOSStep.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this AdaptingOSStep to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.AdaptingOSStep
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdaptingOSStep.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdaptingOSStep
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.AdaptingOSStep
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdaptingOSStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.AdaptingOSStep";
+                        };
+    
+                        return AdaptingOSStep;
+                    })();
+    
+                    v1.PreparingVMDisksStep = (function() {
+    
+                        /**
+                         * Properties of a PreparingVMDisksStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IPreparingVMDisksStep
+                         */
+    
+                        /**
+                         * Constructs a new PreparingVMDisksStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents a PreparingVMDisksStep.
+                         * @implements IPreparingVMDisksStep
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IPreparingVMDisksStep=} [properties] Properties to set
+                         */
+                        function PreparingVMDisksStep(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new PreparingVMDisksStep instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.PreparingVMDisksStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IPreparingVMDisksStep=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.PreparingVMDisksStep} PreparingVMDisksStep instance
+                         */
+                        PreparingVMDisksStep.create = function create(properties) {
+                            return new PreparingVMDisksStep(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PreparingVMDisksStep message. Does not implicitly {@link google.cloud.vmmigration.v1.PreparingVMDisksStep.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.PreparingVMDisksStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IPreparingVMDisksStep} message PreparingVMDisksStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PreparingVMDisksStep.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PreparingVMDisksStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.PreparingVMDisksStep.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.PreparingVMDisksStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IPreparingVMDisksStep} message PreparingVMDisksStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PreparingVMDisksStep.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PreparingVMDisksStep message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.PreparingVMDisksStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.PreparingVMDisksStep} PreparingVMDisksStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PreparingVMDisksStep.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.PreparingVMDisksStep();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PreparingVMDisksStep message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.PreparingVMDisksStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.PreparingVMDisksStep} PreparingVMDisksStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PreparingVMDisksStep.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PreparingVMDisksStep message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.PreparingVMDisksStep
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PreparingVMDisksStep.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PreparingVMDisksStep message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.PreparingVMDisksStep
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.PreparingVMDisksStep} PreparingVMDisksStep
+                         */
+                        PreparingVMDisksStep.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.PreparingVMDisksStep)
+                                return object;
+                            return new $root.google.cloud.vmmigration.v1.PreparingVMDisksStep();
+                        };
+    
+                        /**
+                         * Creates a plain object from a PreparingVMDisksStep message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.PreparingVMDisksStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.PreparingVMDisksStep} message PreparingVMDisksStep
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PreparingVMDisksStep.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this PreparingVMDisksStep to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.PreparingVMDisksStep
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PreparingVMDisksStep.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PreparingVMDisksStep
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.PreparingVMDisksStep
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PreparingVMDisksStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.PreparingVMDisksStep";
+                        };
+    
+                        return PreparingVMDisksStep;
+                    })();
+    
+                    v1.InstantiatingMigratedVMStep = (function() {
+    
+                        /**
+                         * Properties of an InstantiatingMigratedVMStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IInstantiatingMigratedVMStep
+                         */
+    
+                        /**
+                         * Constructs a new InstantiatingMigratedVMStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents an InstantiatingMigratedVMStep.
+                         * @implements IInstantiatingMigratedVMStep
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep=} [properties] Properties to set
+                         */
+                        function InstantiatingMigratedVMStep(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new InstantiatingMigratedVMStep instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.InstantiatingMigratedVMStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.InstantiatingMigratedVMStep} InstantiatingMigratedVMStep instance
+                         */
+                        InstantiatingMigratedVMStep.create = function create(properties) {
+                            return new InstantiatingMigratedVMStep(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InstantiatingMigratedVMStep message. Does not implicitly {@link google.cloud.vmmigration.v1.InstantiatingMigratedVMStep.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.InstantiatingMigratedVMStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep} message InstantiatingMigratedVMStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InstantiatingMigratedVMStep.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InstantiatingMigratedVMStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.InstantiatingMigratedVMStep.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.InstantiatingMigratedVMStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep} message InstantiatingMigratedVMStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InstantiatingMigratedVMStep.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InstantiatingMigratedVMStep message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.InstantiatingMigratedVMStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.InstantiatingMigratedVMStep} InstantiatingMigratedVMStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InstantiatingMigratedVMStep.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.InstantiatingMigratedVMStep();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InstantiatingMigratedVMStep message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.InstantiatingMigratedVMStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.InstantiatingMigratedVMStep} InstantiatingMigratedVMStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InstantiatingMigratedVMStep.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InstantiatingMigratedVMStep message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.InstantiatingMigratedVMStep
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InstantiatingMigratedVMStep.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InstantiatingMigratedVMStep message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.InstantiatingMigratedVMStep
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.InstantiatingMigratedVMStep} InstantiatingMigratedVMStep
+                         */
+                        InstantiatingMigratedVMStep.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.InstantiatingMigratedVMStep)
+                                return object;
+                            return new $root.google.cloud.vmmigration.v1.InstantiatingMigratedVMStep();
+                        };
+    
+                        /**
+                         * Creates a plain object from an InstantiatingMigratedVMStep message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.InstantiatingMigratedVMStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.InstantiatingMigratedVMStep} message InstantiatingMigratedVMStep
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InstantiatingMigratedVMStep.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this InstantiatingMigratedVMStep to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.InstantiatingMigratedVMStep
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InstantiatingMigratedVMStep.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InstantiatingMigratedVMStep
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.InstantiatingMigratedVMStep
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InstantiatingMigratedVMStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.InstantiatingMigratedVMStep";
+                        };
+    
+                        return InstantiatingMigratedVMStep;
+                    })();
+    
                     v1.CutoverJob = (function() {
     
                         /**
@@ -3367,6 +5688,7 @@
                          * @property {number|null} [progressPercent] CutoverJob progressPercent
                          * @property {google.rpc.IStatus|null} [error] CutoverJob error
                          * @property {string|null} [stateMessage] CutoverJob stateMessage
+                         * @property {Array.<google.cloud.vmmigration.v1.ICutoverStep>|null} [steps] CutoverJob steps
                          */
     
                         /**
@@ -3378,6 +5700,7 @@
                          * @param {google.cloud.vmmigration.v1.ICutoverJob=} [properties] Properties to set
                          */
                         function CutoverJob(properties) {
+                            this.steps = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -3456,6 +5779,14 @@
                          */
                         CutoverJob.prototype.stateMessage = "";
     
+                        /**
+                         * CutoverJob steps.
+                         * @member {Array.<google.cloud.vmmigration.v1.ICutoverStep>} steps
+                         * @memberof google.cloud.vmmigration.v1.CutoverJob
+                         * @instance
+                         */
+                        CutoverJob.prototype.steps = $util.emptyArray;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -3512,6 +5843,9 @@
                                 $root.google.cloud.vmmigration.v1.ComputeEngineTargetDetails.encode(message.computeEngineTargetDetails, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
                                 $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.steps != null && message.steps.length)
+                                for (var i = 0; i < message.steps.length; ++i)
+                                    $root.google.cloud.vmmigration.v1.CutoverStep.encode(message.steps[i], writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             return writer;
                         };
     
@@ -3580,6 +5914,12 @@
                                     }
                                 case 10: {
                                         message.stateMessage = reader.string();
+                                        break;
+                                    }
+                                case 17: {
+                                        if (!(message.steps && message.steps.length))
+                                            message.steps = [];
+                                        message.steps.push($root.google.cloud.vmmigration.v1.CutoverStep.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -3669,6 +6009,15 @@
                             if (message.stateMessage != null && message.hasOwnProperty("stateMessage"))
                                 if (!$util.isString(message.stateMessage))
                                     return "stateMessage: string expected";
+                            if (message.steps != null && message.hasOwnProperty("steps")) {
+                                if (!Array.isArray(message.steps))
+                                    return "steps: array expected";
+                                for (var i = 0; i < message.steps.length; ++i) {
+                                    var error = $root.google.cloud.vmmigration.v1.CutoverStep.verify(message.steps[i]);
+                                    if (error)
+                                        return "steps." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -3755,6 +6104,16 @@
                             }
                             if (object.stateMessage != null)
                                 message.stateMessage = String(object.stateMessage);
+                            if (object.steps) {
+                                if (!Array.isArray(object.steps))
+                                    throw TypeError(".google.cloud.vmmigration.v1.CutoverJob.steps: array expected");
+                                message.steps = [];
+                                for (var i = 0; i < object.steps.length; ++i) {
+                                    if (typeof object.steps[i] !== "object")
+                                        throw TypeError(".google.cloud.vmmigration.v1.CutoverJob.steps: object expected");
+                                    message.steps[i] = $root.google.cloud.vmmigration.v1.CutoverStep.fromObject(object.steps[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -3771,6 +6130,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.steps = [];
                             if (options.defaults) {
                                 object.createTime = null;
                                 object.name = "";
@@ -3802,6 +6163,11 @@
                             }
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.steps && message.steps.length) {
+                                object.steps = [];
+                                for (var j = 0; j < message.steps.length; ++j)
+                                    object.steps[j] = $root.google.cloud.vmmigration.v1.CutoverStep.toObject(message.steps[j], options);
+                            }
                             return object;
                         };
     
@@ -3858,6 +6224,606 @@
                         })();
     
                         return CutoverJob;
+                    })();
+    
+                    v1.CutoverStep = (function() {
+    
+                        /**
+                         * Properties of a CutoverStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface ICutoverStep
+                         * @property {google.cloud.vmmigration.v1.IReplicationCycle|null} [previousReplicationCycle] CutoverStep previousReplicationCycle
+                         * @property {google.cloud.vmmigration.v1.IShuttingDownSourceVMStep|null} [shuttingDownSourceVm] CutoverStep shuttingDownSourceVm
+                         * @property {google.cloud.vmmigration.v1.IReplicationCycle|null} [finalSync] CutoverStep finalSync
+                         * @property {google.cloud.vmmigration.v1.IPreparingVMDisksStep|null} [preparingVmDisks] CutoverStep preparingVmDisks
+                         * @property {google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep|null} [instantiatingMigratedVm] CutoverStep instantiatingMigratedVm
+                         * @property {google.protobuf.ITimestamp|null} [startTime] CutoverStep startTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] CutoverStep endTime
+                         */
+    
+                        /**
+                         * Constructs a new CutoverStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents a CutoverStep.
+                         * @implements ICutoverStep
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.ICutoverStep=} [properties] Properties to set
+                         */
+                        function CutoverStep(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CutoverStep previousReplicationCycle.
+                         * @member {google.cloud.vmmigration.v1.IReplicationCycle|null|undefined} previousReplicationCycle
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @instance
+                         */
+                        CutoverStep.prototype.previousReplicationCycle = null;
+    
+                        /**
+                         * CutoverStep shuttingDownSourceVm.
+                         * @member {google.cloud.vmmigration.v1.IShuttingDownSourceVMStep|null|undefined} shuttingDownSourceVm
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @instance
+                         */
+                        CutoverStep.prototype.shuttingDownSourceVm = null;
+    
+                        /**
+                         * CutoverStep finalSync.
+                         * @member {google.cloud.vmmigration.v1.IReplicationCycle|null|undefined} finalSync
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @instance
+                         */
+                        CutoverStep.prototype.finalSync = null;
+    
+                        /**
+                         * CutoverStep preparingVmDisks.
+                         * @member {google.cloud.vmmigration.v1.IPreparingVMDisksStep|null|undefined} preparingVmDisks
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @instance
+                         */
+                        CutoverStep.prototype.preparingVmDisks = null;
+    
+                        /**
+                         * CutoverStep instantiatingMigratedVm.
+                         * @member {google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep|null|undefined} instantiatingMigratedVm
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @instance
+                         */
+                        CutoverStep.prototype.instantiatingMigratedVm = null;
+    
+                        /**
+                         * CutoverStep startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @instance
+                         */
+                        CutoverStep.prototype.startTime = null;
+    
+                        /**
+                         * CutoverStep endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @instance
+                         */
+                        CutoverStep.prototype.endTime = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * CutoverStep step.
+                         * @member {"previousReplicationCycle"|"shuttingDownSourceVm"|"finalSync"|"preparingVmDisks"|"instantiatingMigratedVm"|undefined} step
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @instance
+                         */
+                        Object.defineProperty(CutoverStep.prototype, "step", {
+                            get: $util.oneOfGetter($oneOfFields = ["previousReplicationCycle", "shuttingDownSourceVm", "finalSync", "preparingVmDisks", "instantiatingMigratedVm"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CutoverStep instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.ICutoverStep=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.CutoverStep} CutoverStep instance
+                         */
+                        CutoverStep.create = function create(properties) {
+                            return new CutoverStep(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CutoverStep message. Does not implicitly {@link google.cloud.vmmigration.v1.CutoverStep.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.ICutoverStep} message CutoverStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CutoverStep.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.previousReplicationCycle != null && Object.hasOwnProperty.call(message, "previousReplicationCycle"))
+                                $root.google.cloud.vmmigration.v1.ReplicationCycle.encode(message.previousReplicationCycle, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.shuttingDownSourceVm != null && Object.hasOwnProperty.call(message, "shuttingDownSourceVm"))
+                                $root.google.cloud.vmmigration.v1.ShuttingDownSourceVMStep.encode(message.shuttingDownSourceVm, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.finalSync != null && Object.hasOwnProperty.call(message, "finalSync"))
+                                $root.google.cloud.vmmigration.v1.ReplicationCycle.encode(message.finalSync, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.preparingVmDisks != null && Object.hasOwnProperty.call(message, "preparingVmDisks"))
+                                $root.google.cloud.vmmigration.v1.PreparingVMDisksStep.encode(message.preparingVmDisks, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.instantiatingMigratedVm != null && Object.hasOwnProperty.call(message, "instantiatingMigratedVm"))
+                                $root.google.cloud.vmmigration.v1.InstantiatingMigratedVMStep.encode(message.instantiatingMigratedVm, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CutoverStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CutoverStep.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.ICutoverStep} message CutoverStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CutoverStep.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CutoverStep message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.CutoverStep} CutoverStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CutoverStep.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.CutoverStep();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.previousReplicationCycle = $root.google.cloud.vmmigration.v1.ReplicationCycle.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.shuttingDownSourceVm = $root.google.cloud.vmmigration.v1.ShuttingDownSourceVMStep.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.finalSync = $root.google.cloud.vmmigration.v1.ReplicationCycle.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.preparingVmDisks = $root.google.cloud.vmmigration.v1.PreparingVMDisksStep.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.instantiatingMigratedVm = $root.google.cloud.vmmigration.v1.InstantiatingMigratedVMStep.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CutoverStep message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.CutoverStep} CutoverStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CutoverStep.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CutoverStep message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CutoverStep.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.previousReplicationCycle != null && message.hasOwnProperty("previousReplicationCycle")) {
+                                properties.step = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.ReplicationCycle.verify(message.previousReplicationCycle);
+                                    if (error)
+                                        return "previousReplicationCycle." + error;
+                                }
+                            }
+                            if (message.shuttingDownSourceVm != null && message.hasOwnProperty("shuttingDownSourceVm")) {
+                                if (properties.step === 1)
+                                    return "step: multiple values";
+                                properties.step = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.ShuttingDownSourceVMStep.verify(message.shuttingDownSourceVm);
+                                    if (error)
+                                        return "shuttingDownSourceVm." + error;
+                                }
+                            }
+                            if (message.finalSync != null && message.hasOwnProperty("finalSync")) {
+                                if (properties.step === 1)
+                                    return "step: multiple values";
+                                properties.step = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.ReplicationCycle.verify(message.finalSync);
+                                    if (error)
+                                        return "finalSync." + error;
+                                }
+                            }
+                            if (message.preparingVmDisks != null && message.hasOwnProperty("preparingVmDisks")) {
+                                if (properties.step === 1)
+                                    return "step: multiple values";
+                                properties.step = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.PreparingVMDisksStep.verify(message.preparingVmDisks);
+                                    if (error)
+                                        return "preparingVmDisks." + error;
+                                }
+                            }
+                            if (message.instantiatingMigratedVm != null && message.hasOwnProperty("instantiatingMigratedVm")) {
+                                if (properties.step === 1)
+                                    return "step: multiple values";
+                                properties.step = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.InstantiatingMigratedVMStep.verify(message.instantiatingMigratedVm);
+                                    if (error)
+                                        return "instantiatingMigratedVm." + error;
+                                }
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CutoverStep message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.CutoverStep} CutoverStep
+                         */
+                        CutoverStep.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.CutoverStep)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.CutoverStep();
+                            if (object.previousReplicationCycle != null) {
+                                if (typeof object.previousReplicationCycle !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CutoverStep.previousReplicationCycle: object expected");
+                                message.previousReplicationCycle = $root.google.cloud.vmmigration.v1.ReplicationCycle.fromObject(object.previousReplicationCycle);
+                            }
+                            if (object.shuttingDownSourceVm != null) {
+                                if (typeof object.shuttingDownSourceVm !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CutoverStep.shuttingDownSourceVm: object expected");
+                                message.shuttingDownSourceVm = $root.google.cloud.vmmigration.v1.ShuttingDownSourceVMStep.fromObject(object.shuttingDownSourceVm);
+                            }
+                            if (object.finalSync != null) {
+                                if (typeof object.finalSync !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CutoverStep.finalSync: object expected");
+                                message.finalSync = $root.google.cloud.vmmigration.v1.ReplicationCycle.fromObject(object.finalSync);
+                            }
+                            if (object.preparingVmDisks != null) {
+                                if (typeof object.preparingVmDisks !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CutoverStep.preparingVmDisks: object expected");
+                                message.preparingVmDisks = $root.google.cloud.vmmigration.v1.PreparingVMDisksStep.fromObject(object.preparingVmDisks);
+                            }
+                            if (object.instantiatingMigratedVm != null) {
+                                if (typeof object.instantiatingMigratedVm !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CutoverStep.instantiatingMigratedVm: object expected");
+                                message.instantiatingMigratedVm = $root.google.cloud.vmmigration.v1.InstantiatingMigratedVMStep.fromObject(object.instantiatingMigratedVm);
+                            }
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CutoverStep.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.CutoverStep.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CutoverStep message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.CutoverStep} message CutoverStep
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CutoverStep.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startTime = null;
+                                object.endTime = null;
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.previousReplicationCycle != null && message.hasOwnProperty("previousReplicationCycle")) {
+                                object.previousReplicationCycle = $root.google.cloud.vmmigration.v1.ReplicationCycle.toObject(message.previousReplicationCycle, options);
+                                if (options.oneofs)
+                                    object.step = "previousReplicationCycle";
+                            }
+                            if (message.shuttingDownSourceVm != null && message.hasOwnProperty("shuttingDownSourceVm")) {
+                                object.shuttingDownSourceVm = $root.google.cloud.vmmigration.v1.ShuttingDownSourceVMStep.toObject(message.shuttingDownSourceVm, options);
+                                if (options.oneofs)
+                                    object.step = "shuttingDownSourceVm";
+                            }
+                            if (message.finalSync != null && message.hasOwnProperty("finalSync")) {
+                                object.finalSync = $root.google.cloud.vmmigration.v1.ReplicationCycle.toObject(message.finalSync, options);
+                                if (options.oneofs)
+                                    object.step = "finalSync";
+                            }
+                            if (message.preparingVmDisks != null && message.hasOwnProperty("preparingVmDisks")) {
+                                object.preparingVmDisks = $root.google.cloud.vmmigration.v1.PreparingVMDisksStep.toObject(message.preparingVmDisks, options);
+                                if (options.oneofs)
+                                    object.step = "preparingVmDisks";
+                            }
+                            if (message.instantiatingMigratedVm != null && message.hasOwnProperty("instantiatingMigratedVm")) {
+                                object.instantiatingMigratedVm = $root.google.cloud.vmmigration.v1.InstantiatingMigratedVMStep.toObject(message.instantiatingMigratedVm, options);
+                                if (options.oneofs)
+                                    object.step = "instantiatingMigratedVm";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CutoverStep to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CutoverStep.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CutoverStep
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.CutoverStep
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CutoverStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.CutoverStep";
+                        };
+    
+                        return CutoverStep;
+                    })();
+    
+                    v1.ShuttingDownSourceVMStep = (function() {
+    
+                        /**
+                         * Properties of a ShuttingDownSourceVMStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IShuttingDownSourceVMStep
+                         */
+    
+                        /**
+                         * Constructs a new ShuttingDownSourceVMStep.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents a ShuttingDownSourceVMStep.
+                         * @implements IShuttingDownSourceVMStep
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IShuttingDownSourceVMStep=} [properties] Properties to set
+                         */
+                        function ShuttingDownSourceVMStep(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ShuttingDownSourceVMStep instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.ShuttingDownSourceVMStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IShuttingDownSourceVMStep=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.ShuttingDownSourceVMStep} ShuttingDownSourceVMStep instance
+                         */
+                        ShuttingDownSourceVMStep.create = function create(properties) {
+                            return new ShuttingDownSourceVMStep(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ShuttingDownSourceVMStep message. Does not implicitly {@link google.cloud.vmmigration.v1.ShuttingDownSourceVMStep.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.ShuttingDownSourceVMStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IShuttingDownSourceVMStep} message ShuttingDownSourceVMStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ShuttingDownSourceVMStep.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ShuttingDownSourceVMStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ShuttingDownSourceVMStep.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.ShuttingDownSourceVMStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IShuttingDownSourceVMStep} message ShuttingDownSourceVMStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ShuttingDownSourceVMStep.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ShuttingDownSourceVMStep message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.ShuttingDownSourceVMStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.ShuttingDownSourceVMStep} ShuttingDownSourceVMStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ShuttingDownSourceVMStep.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.ShuttingDownSourceVMStep();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ShuttingDownSourceVMStep message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.ShuttingDownSourceVMStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.ShuttingDownSourceVMStep} ShuttingDownSourceVMStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ShuttingDownSourceVMStep.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ShuttingDownSourceVMStep message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.ShuttingDownSourceVMStep
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ShuttingDownSourceVMStep.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ShuttingDownSourceVMStep message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.ShuttingDownSourceVMStep
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.ShuttingDownSourceVMStep} ShuttingDownSourceVMStep
+                         */
+                        ShuttingDownSourceVMStep.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.ShuttingDownSourceVMStep)
+                                return object;
+                            return new $root.google.cloud.vmmigration.v1.ShuttingDownSourceVMStep();
+                        };
+    
+                        /**
+                         * Creates a plain object from a ShuttingDownSourceVMStep message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.ShuttingDownSourceVMStep
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.ShuttingDownSourceVMStep} message ShuttingDownSourceVMStep
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ShuttingDownSourceVMStep.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ShuttingDownSourceVMStep to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.ShuttingDownSourceVMStep
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ShuttingDownSourceVMStep.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ShuttingDownSourceVMStep
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.ShuttingDownSourceVMStep
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ShuttingDownSourceVMStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.ShuttingDownSourceVMStep";
+                        };
+    
+                        return ShuttingDownSourceVMStep;
                     })();
     
                     v1.CreateCloneJobRequest = (function() {
@@ -5310,6 +8276,7 @@
                          * @memberof google.cloud.vmmigration.v1
                          * @interface ISource
                          * @property {google.cloud.vmmigration.v1.IVmwareSourceDetails|null} [vmware] Source vmware
+                         * @property {google.cloud.vmmigration.v1.IAwsSourceDetails|null} [aws] Source aws
                          * @property {string|null} [name] Source name
                          * @property {google.protobuf.ITimestamp|null} [createTime] Source createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Source updateTime
@@ -5340,6 +8307,14 @@
                          * @instance
                          */
                         Source.prototype.vmware = null;
+    
+                        /**
+                         * Source aws.
+                         * @member {google.cloud.vmmigration.v1.IAwsSourceDetails|null|undefined} aws
+                         * @memberof google.cloud.vmmigration.v1.Source
+                         * @instance
+                         */
+                        Source.prototype.aws = null;
     
                         /**
                          * Source name.
@@ -5386,12 +8361,12 @@
     
                         /**
                          * Source sourceDetails.
-                         * @member {"vmware"|undefined} sourceDetails
+                         * @member {"vmware"|"aws"|undefined} sourceDetails
                          * @memberof google.cloud.vmmigration.v1.Source
                          * @instance
                          */
                         Object.defineProperty(Source.prototype, "sourceDetails", {
-                            get: $util.oneOfGetter($oneOfFields = ["vmware"]),
+                            get: $util.oneOfGetter($oneOfFields = ["vmware", "aws"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -5432,6 +8407,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
                             if (message.vmware != null && Object.hasOwnProperty.call(message, "vmware"))
                                 $root.google.cloud.vmmigration.v1.VmwareSourceDetails.encode(message.vmware, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.aws != null && Object.hasOwnProperty.call(message, "aws"))
+                                $root.google.cloud.vmmigration.v1.AwsSourceDetails.encode(message.aws, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             return writer;
                         };
     
@@ -5468,6 +8445,10 @@
                                 switch (tag >>> 3) {
                                 case 10: {
                                         message.vmware = $root.google.cloud.vmmigration.v1.VmwareSourceDetails.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.aws = $root.google.cloud.vmmigration.v1.AwsSourceDetails.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -5553,6 +8534,16 @@
                                         return "vmware." + error;
                                 }
                             }
+                            if (message.aws != null && message.hasOwnProperty("aws")) {
+                                if (properties.sourceDetails === 1)
+                                    return "sourceDetails: multiple values";
+                                properties.sourceDetails = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.AwsSourceDetails.verify(message.aws);
+                                    if (error)
+                                        return "aws." + error;
+                                }
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -5596,6 +8587,11 @@
                                 if (typeof object.vmware !== "object")
                                     throw TypeError(".google.cloud.vmmigration.v1.Source.vmware: object expected");
                                 message.vmware = $root.google.cloud.vmmigration.v1.VmwareSourceDetails.fromObject(object.vmware);
+                            }
+                            if (object.aws != null) {
+                                if (typeof object.aws !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.Source.aws: object expected");
+                                message.aws = $root.google.cloud.vmmigration.v1.AwsSourceDetails.fromObject(object.aws);
                             }
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -5660,6 +8656,11 @@
                                 object.vmware = $root.google.cloud.vmmigration.v1.VmwareSourceDetails.toObject(message.vmware, options);
                                 if (options.oneofs)
                                     object.sourceDetails = "vmware";
+                            }
+                            if (message.aws != null && message.hasOwnProperty("aws")) {
+                                object.aws = $root.google.cloud.vmmigration.v1.AwsSourceDetails.toObject(message.aws, options);
+                                if (options.oneofs)
+                                    object.sourceDetails = "aws";
                             }
                             return object;
                         };
@@ -5964,6 +8965,977 @@
                         };
     
                         return VmwareSourceDetails;
+                    })();
+    
+                    v1.AwsSourceDetails = (function() {
+    
+                        /**
+                         * Properties of an AwsSourceDetails.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IAwsSourceDetails
+                         * @property {google.cloud.vmmigration.v1.AwsSourceDetails.IAccessKeyCredentials|null} [accessKeyCreds] AwsSourceDetails accessKeyCreds
+                         * @property {string|null} [awsRegion] AwsSourceDetails awsRegion
+                         * @property {google.cloud.vmmigration.v1.AwsSourceDetails.State|null} [state] AwsSourceDetails state
+                         * @property {google.rpc.IStatus|null} [error] AwsSourceDetails error
+                         * @property {Array.<google.cloud.vmmigration.v1.AwsSourceDetails.ITag>|null} [inventoryTagList] AwsSourceDetails inventoryTagList
+                         * @property {Array.<string>|null} [inventorySecurityGroupNames] AwsSourceDetails inventorySecurityGroupNames
+                         * @property {Object.<string,string>|null} [migrationResourcesUserTags] AwsSourceDetails migrationResourcesUserTags
+                         * @property {string|null} [publicIp] AwsSourceDetails publicIp
+                         */
+    
+                        /**
+                         * Constructs a new AwsSourceDetails.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents an AwsSourceDetails.
+                         * @implements IAwsSourceDetails
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IAwsSourceDetails=} [properties] Properties to set
+                         */
+                        function AwsSourceDetails(properties) {
+                            this.inventoryTagList = [];
+                            this.inventorySecurityGroupNames = [];
+                            this.migrationResourcesUserTags = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AwsSourceDetails accessKeyCreds.
+                         * @member {google.cloud.vmmigration.v1.AwsSourceDetails.IAccessKeyCredentials|null|undefined} accessKeyCreds
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @instance
+                         */
+                        AwsSourceDetails.prototype.accessKeyCreds = null;
+    
+                        /**
+                         * AwsSourceDetails awsRegion.
+                         * @member {string} awsRegion
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @instance
+                         */
+                        AwsSourceDetails.prototype.awsRegion = "";
+    
+                        /**
+                         * AwsSourceDetails state.
+                         * @member {google.cloud.vmmigration.v1.AwsSourceDetails.State} state
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @instance
+                         */
+                        AwsSourceDetails.prototype.state = 0;
+    
+                        /**
+                         * AwsSourceDetails error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @instance
+                         */
+                        AwsSourceDetails.prototype.error = null;
+    
+                        /**
+                         * AwsSourceDetails inventoryTagList.
+                         * @member {Array.<google.cloud.vmmigration.v1.AwsSourceDetails.ITag>} inventoryTagList
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @instance
+                         */
+                        AwsSourceDetails.prototype.inventoryTagList = $util.emptyArray;
+    
+                        /**
+                         * AwsSourceDetails inventorySecurityGroupNames.
+                         * @member {Array.<string>} inventorySecurityGroupNames
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @instance
+                         */
+                        AwsSourceDetails.prototype.inventorySecurityGroupNames = $util.emptyArray;
+    
+                        /**
+                         * AwsSourceDetails migrationResourcesUserTags.
+                         * @member {Object.<string,string>} migrationResourcesUserTags
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @instance
+                         */
+                        AwsSourceDetails.prototype.migrationResourcesUserTags = $util.emptyObject;
+    
+                        /**
+                         * AwsSourceDetails publicIp.
+                         * @member {string} publicIp
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @instance
+                         */
+                        AwsSourceDetails.prototype.publicIp = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AwsSourceDetails credentialsType.
+                         * @member {"accessKeyCreds"|undefined} credentialsType
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @instance
+                         */
+                        Object.defineProperty(AwsSourceDetails.prototype, "credentialsType", {
+                            get: $util.oneOfGetter($oneOfFields = ["accessKeyCreds"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AwsSourceDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsSourceDetails=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.AwsSourceDetails} AwsSourceDetails instance
+                         */
+                        AwsSourceDetails.create = function create(properties) {
+                            return new AwsSourceDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AwsSourceDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsSourceDetails} message AwsSourceDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AwsSourceDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.awsRegion != null && Object.hasOwnProperty.call(message, "awsRegion"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.awsRegion);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.inventorySecurityGroupNames != null && message.inventorySecurityGroupNames.length)
+                                for (var i = 0; i < message.inventorySecurityGroupNames.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.inventorySecurityGroupNames[i]);
+                            if (message.migrationResourcesUserTags != null && Object.hasOwnProperty.call(message, "migrationResourcesUserTags"))
+                                for (var keys = Object.keys(message.migrationResourcesUserTags), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.migrationResourcesUserTags[keys[i]]).ldelim();
+                            if (message.publicIp != null && Object.hasOwnProperty.call(message, "publicIp"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.publicIp);
+                            if (message.inventoryTagList != null && message.inventoryTagList.length)
+                                for (var i = 0; i < message.inventoryTagList.length; ++i)
+                                    $root.google.cloud.vmmigration.v1.AwsSourceDetails.Tag.encode(message.inventoryTagList[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.accessKeyCreds != null && Object.hasOwnProperty.call(message, "accessKeyCreds"))
+                                $root.google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials.encode(message.accessKeyCreds, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AwsSourceDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsSourceDetails} message AwsSourceDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AwsSourceDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AwsSourceDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.AwsSourceDetails} AwsSourceDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AwsSourceDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.AwsSourceDetails(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 11: {
+                                        message.accessKeyCreds = $root.google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.awsRegion = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        if (!(message.inventoryTagList && message.inventoryTagList.length))
+                                            message.inventoryTagList = [];
+                                        message.inventoryTagList.push($root.google.cloud.vmmigration.v1.AwsSourceDetails.Tag.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.inventorySecurityGroupNames && message.inventorySecurityGroupNames.length))
+                                            message.inventorySecurityGroupNames = [];
+                                        message.inventorySecurityGroupNames.push(reader.string());
+                                        break;
+                                    }
+                                case 8: {
+                                        if (message.migrationResourcesUserTags === $util.emptyObject)
+                                            message.migrationResourcesUserTags = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.migrationResourcesUserTags[key] = value;
+                                        break;
+                                    }
+                                case 9: {
+                                        message.publicIp = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AwsSourceDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.AwsSourceDetails} AwsSourceDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AwsSourceDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AwsSourceDetails message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AwsSourceDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.accessKeyCreds != null && message.hasOwnProperty("accessKeyCreds")) {
+                                properties.credentialsType = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials.verify(message.accessKeyCreds);
+                                    if (error)
+                                        return "accessKeyCreds." + error;
+                                }
+                            }
+                            if (message.awsRegion != null && message.hasOwnProperty("awsRegion"))
+                                if (!$util.isString(message.awsRegion))
+                                    return "awsRegion: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error);
+                                if (error)
+                                    return "error." + error;
+                            }
+                            if (message.inventoryTagList != null && message.hasOwnProperty("inventoryTagList")) {
+                                if (!Array.isArray(message.inventoryTagList))
+                                    return "inventoryTagList: array expected";
+                                for (var i = 0; i < message.inventoryTagList.length; ++i) {
+                                    var error = $root.google.cloud.vmmigration.v1.AwsSourceDetails.Tag.verify(message.inventoryTagList[i]);
+                                    if (error)
+                                        return "inventoryTagList." + error;
+                                }
+                            }
+                            if (message.inventorySecurityGroupNames != null && message.hasOwnProperty("inventorySecurityGroupNames")) {
+                                if (!Array.isArray(message.inventorySecurityGroupNames))
+                                    return "inventorySecurityGroupNames: array expected";
+                                for (var i = 0; i < message.inventorySecurityGroupNames.length; ++i)
+                                    if (!$util.isString(message.inventorySecurityGroupNames[i]))
+                                        return "inventorySecurityGroupNames: string[] expected";
+                            }
+                            if (message.migrationResourcesUserTags != null && message.hasOwnProperty("migrationResourcesUserTags")) {
+                                if (!$util.isObject(message.migrationResourcesUserTags))
+                                    return "migrationResourcesUserTags: object expected";
+                                var key = Object.keys(message.migrationResourcesUserTags);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.migrationResourcesUserTags[key[i]]))
+                                        return "migrationResourcesUserTags: string{k:string} expected";
+                            }
+                            if (message.publicIp != null && message.hasOwnProperty("publicIp"))
+                                if (!$util.isString(message.publicIp))
+                                    return "publicIp: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AwsSourceDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.AwsSourceDetails} AwsSourceDetails
+                         */
+                        AwsSourceDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.AwsSourceDetails)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.AwsSourceDetails();
+                            if (object.accessKeyCreds != null) {
+                                if (typeof object.accessKeyCreds !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.AwsSourceDetails.accessKeyCreds: object expected");
+                                message.accessKeyCreds = $root.google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials.fromObject(object.accessKeyCreds);
+                            }
+                            if (object.awsRegion != null)
+                                message.awsRegion = String(object.awsRegion);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "PENDING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "FAILED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "ACTIVE":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.AwsSourceDetails.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            if (object.inventoryTagList) {
+                                if (!Array.isArray(object.inventoryTagList))
+                                    throw TypeError(".google.cloud.vmmigration.v1.AwsSourceDetails.inventoryTagList: array expected");
+                                message.inventoryTagList = [];
+                                for (var i = 0; i < object.inventoryTagList.length; ++i) {
+                                    if (typeof object.inventoryTagList[i] !== "object")
+                                        throw TypeError(".google.cloud.vmmigration.v1.AwsSourceDetails.inventoryTagList: object expected");
+                                    message.inventoryTagList[i] = $root.google.cloud.vmmigration.v1.AwsSourceDetails.Tag.fromObject(object.inventoryTagList[i]);
+                                }
+                            }
+                            if (object.inventorySecurityGroupNames) {
+                                if (!Array.isArray(object.inventorySecurityGroupNames))
+                                    throw TypeError(".google.cloud.vmmigration.v1.AwsSourceDetails.inventorySecurityGroupNames: array expected");
+                                message.inventorySecurityGroupNames = [];
+                                for (var i = 0; i < object.inventorySecurityGroupNames.length; ++i)
+                                    message.inventorySecurityGroupNames[i] = String(object.inventorySecurityGroupNames[i]);
+                            }
+                            if (object.migrationResourcesUserTags) {
+                                if (typeof object.migrationResourcesUserTags !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.AwsSourceDetails.migrationResourcesUserTags: object expected");
+                                message.migrationResourcesUserTags = {};
+                                for (var keys = Object.keys(object.migrationResourcesUserTags), i = 0; i < keys.length; ++i)
+                                    message.migrationResourcesUserTags[keys[i]] = String(object.migrationResourcesUserTags[keys[i]]);
+                            }
+                            if (object.publicIp != null)
+                                message.publicIp = String(object.publicIp);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AwsSourceDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.AwsSourceDetails} message AwsSourceDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AwsSourceDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.inventorySecurityGroupNames = [];
+                                object.inventoryTagList = [];
+                            }
+                            if (options.objects || options.defaults)
+                                object.migrationResourcesUserTags = {};
+                            if (options.defaults) {
+                                object.awsRegion = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.error = null;
+                                object.publicIp = "";
+                            }
+                            if (message.awsRegion != null && message.hasOwnProperty("awsRegion"))
+                                object.awsRegion = message.awsRegion;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.AwsSourceDetails.State[message.state] === undefined ? message.state : $root.google.cloud.vmmigration.v1.AwsSourceDetails.State[message.state] : message.state;
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            if (message.inventorySecurityGroupNames && message.inventorySecurityGroupNames.length) {
+                                object.inventorySecurityGroupNames = [];
+                                for (var j = 0; j < message.inventorySecurityGroupNames.length; ++j)
+                                    object.inventorySecurityGroupNames[j] = message.inventorySecurityGroupNames[j];
+                            }
+                            var keys2;
+                            if (message.migrationResourcesUserTags && (keys2 = Object.keys(message.migrationResourcesUserTags)).length) {
+                                object.migrationResourcesUserTags = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.migrationResourcesUserTags[keys2[j]] = message.migrationResourcesUserTags[keys2[j]];
+                            }
+                            if (message.publicIp != null && message.hasOwnProperty("publicIp"))
+                                object.publicIp = message.publicIp;
+                            if (message.inventoryTagList && message.inventoryTagList.length) {
+                                object.inventoryTagList = [];
+                                for (var j = 0; j < message.inventoryTagList.length; ++j)
+                                    object.inventoryTagList[j] = $root.google.cloud.vmmigration.v1.AwsSourceDetails.Tag.toObject(message.inventoryTagList[j], options);
+                            }
+                            if (message.accessKeyCreds != null && message.hasOwnProperty("accessKeyCreds")) {
+                                object.accessKeyCreds = $root.google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials.toObject(message.accessKeyCreds, options);
+                                if (options.oneofs)
+                                    object.credentialsType = "accessKeyCreds";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AwsSourceDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AwsSourceDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AwsSourceDetails
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AwsSourceDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.AwsSourceDetails";
+                        };
+    
+                        AwsSourceDetails.AccessKeyCredentials = (function() {
+    
+                            /**
+                             * Properties of an AccessKeyCredentials.
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                             * @interface IAccessKeyCredentials
+                             * @property {string|null} [accessKeyId] AccessKeyCredentials accessKeyId
+                             * @property {string|null} [secretAccessKey] AccessKeyCredentials secretAccessKey
+                             */
+    
+                            /**
+                             * Constructs a new AccessKeyCredentials.
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                             * @classdesc Represents an AccessKeyCredentials.
+                             * @implements IAccessKeyCredentials
+                             * @constructor
+                             * @param {google.cloud.vmmigration.v1.AwsSourceDetails.IAccessKeyCredentials=} [properties] Properties to set
+                             */
+                            function AccessKeyCredentials(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AccessKeyCredentials accessKeyId.
+                             * @member {string} accessKeyId
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials
+                             * @instance
+                             */
+                            AccessKeyCredentials.prototype.accessKeyId = "";
+    
+                            /**
+                             * AccessKeyCredentials secretAccessKey.
+                             * @member {string} secretAccessKey
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials
+                             * @instance
+                             */
+                            AccessKeyCredentials.prototype.secretAccessKey = "";
+    
+                            /**
+                             * Creates a new AccessKeyCredentials instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials
+                             * @static
+                             * @param {google.cloud.vmmigration.v1.AwsSourceDetails.IAccessKeyCredentials=} [properties] Properties to set
+                             * @returns {google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials} AccessKeyCredentials instance
+                             */
+                            AccessKeyCredentials.create = function create(properties) {
+                                return new AccessKeyCredentials(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AccessKeyCredentials message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials
+                             * @static
+                             * @param {google.cloud.vmmigration.v1.AwsSourceDetails.IAccessKeyCredentials} message AccessKeyCredentials message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AccessKeyCredentials.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.accessKeyId != null && Object.hasOwnProperty.call(message, "accessKeyId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.accessKeyId);
+                                if (message.secretAccessKey != null && Object.hasOwnProperty.call(message, "secretAccessKey"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.secretAccessKey);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AccessKeyCredentials message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials
+                             * @static
+                             * @param {google.cloud.vmmigration.v1.AwsSourceDetails.IAccessKeyCredentials} message AccessKeyCredentials message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AccessKeyCredentials.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AccessKeyCredentials message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials} AccessKeyCredentials
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AccessKeyCredentials.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.accessKeyId = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.secretAccessKey = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AccessKeyCredentials message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials} AccessKeyCredentials
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AccessKeyCredentials.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AccessKeyCredentials message.
+                             * @function verify
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AccessKeyCredentials.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.accessKeyId != null && message.hasOwnProperty("accessKeyId"))
+                                    if (!$util.isString(message.accessKeyId))
+                                        return "accessKeyId: string expected";
+                                if (message.secretAccessKey != null && message.hasOwnProperty("secretAccessKey"))
+                                    if (!$util.isString(message.secretAccessKey))
+                                        return "secretAccessKey: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AccessKeyCredentials message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials} AccessKeyCredentials
+                             */
+                            AccessKeyCredentials.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials)
+                                    return object;
+                                var message = new $root.google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials();
+                                if (object.accessKeyId != null)
+                                    message.accessKeyId = String(object.accessKeyId);
+                                if (object.secretAccessKey != null)
+                                    message.secretAccessKey = String(object.secretAccessKey);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AccessKeyCredentials message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials
+                             * @static
+                             * @param {google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials} message AccessKeyCredentials
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AccessKeyCredentials.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.accessKeyId = "";
+                                    object.secretAccessKey = "";
+                                }
+                                if (message.accessKeyId != null && message.hasOwnProperty("accessKeyId"))
+                                    object.accessKeyId = message.accessKeyId;
+                                if (message.secretAccessKey != null && message.hasOwnProperty("secretAccessKey"))
+                                    object.secretAccessKey = message.secretAccessKey;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AccessKeyCredentials to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AccessKeyCredentials.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AccessKeyCredentials
+                             * @function getTypeUrl
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AccessKeyCredentials.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials";
+                            };
+    
+                            return AccessKeyCredentials;
+                        })();
+    
+                        AwsSourceDetails.Tag = (function() {
+    
+                            /**
+                             * Properties of a Tag.
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                             * @interface ITag
+                             * @property {string|null} [key] Tag key
+                             * @property {string|null} [value] Tag value
+                             */
+    
+                            /**
+                             * Constructs a new Tag.
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails
+                             * @classdesc Represents a Tag.
+                             * @implements ITag
+                             * @constructor
+                             * @param {google.cloud.vmmigration.v1.AwsSourceDetails.ITag=} [properties] Properties to set
+                             */
+                            function Tag(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Tag key.
+                             * @member {string} key
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.Tag
+                             * @instance
+                             */
+                            Tag.prototype.key = "";
+    
+                            /**
+                             * Tag value.
+                             * @member {string} value
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.Tag
+                             * @instance
+                             */
+                            Tag.prototype.value = "";
+    
+                            /**
+                             * Creates a new Tag instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.Tag
+                             * @static
+                             * @param {google.cloud.vmmigration.v1.AwsSourceDetails.ITag=} [properties] Properties to set
+                             * @returns {google.cloud.vmmigration.v1.AwsSourceDetails.Tag} Tag instance
+                             */
+                            Tag.create = function create(properties) {
+                                return new Tag(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Tag message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceDetails.Tag.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.Tag
+                             * @static
+                             * @param {google.cloud.vmmigration.v1.AwsSourceDetails.ITag} message Tag message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Tag.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Tag message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceDetails.Tag.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.Tag
+                             * @static
+                             * @param {google.cloud.vmmigration.v1.AwsSourceDetails.ITag} message Tag message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Tag.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Tag message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.Tag
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.vmmigration.v1.AwsSourceDetails.Tag} Tag
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Tag.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.AwsSourceDetails.Tag();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.key = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.value = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Tag message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.Tag
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.vmmigration.v1.AwsSourceDetails.Tag} Tag
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Tag.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Tag message.
+                             * @function verify
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.Tag
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Tag.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    if (!$util.isString(message.key))
+                                        return "key: string expected";
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    if (!$util.isString(message.value))
+                                        return "value: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Tag message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.Tag
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.vmmigration.v1.AwsSourceDetails.Tag} Tag
+                             */
+                            Tag.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.vmmigration.v1.AwsSourceDetails.Tag)
+                                    return object;
+                                var message = new $root.google.cloud.vmmigration.v1.AwsSourceDetails.Tag();
+                                if (object.key != null)
+                                    message.key = String(object.key);
+                                if (object.value != null)
+                                    message.value = String(object.value);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Tag message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.Tag
+                             * @static
+                             * @param {google.cloud.vmmigration.v1.AwsSourceDetails.Tag} message Tag
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Tag.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.key = "";
+                                    object.value = "";
+                                }
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    object.key = message.key;
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = message.value;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Tag to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.Tag
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Tag.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Tag
+                             * @function getTypeUrl
+                             * @memberof google.cloud.vmmigration.v1.AwsSourceDetails.Tag
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Tag.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.vmmigration.v1.AwsSourceDetails.Tag";
+                            };
+    
+                            return Tag;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.vmmigration.v1.AwsSourceDetails.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} PENDING=1 PENDING value
+                         * @property {number} FAILED=2 FAILED value
+                         * @property {number} ACTIVE=3 ACTIVE value
+                         */
+                        AwsSourceDetails.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PENDING"] = 1;
+                            values[valuesById[2] = "FAILED"] = 2;
+                            values[valuesById[3] = "ACTIVE"] = 3;
+                            return values;
+                        })();
+    
+                        return AwsSourceDetails;
                     })();
     
                     v1.DatacenterConnector = (function() {
@@ -9753,6 +13725,1088 @@
                         return VmwareVmDetails;
                     })();
     
+                    v1.AwsVmDetails = (function() {
+    
+                        /**
+                         * Properties of an AwsVmDetails.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IAwsVmDetails
+                         * @property {string|null} [vmId] AwsVmDetails vmId
+                         * @property {string|null} [displayName] AwsVmDetails displayName
+                         * @property {string|null} [sourceId] AwsVmDetails sourceId
+                         * @property {string|null} [sourceDescription] AwsVmDetails sourceDescription
+                         * @property {google.cloud.vmmigration.v1.AwsVmDetails.PowerState|null} [powerState] AwsVmDetails powerState
+                         * @property {number|null} [cpuCount] AwsVmDetails cpuCount
+                         * @property {number|null} [memoryMb] AwsVmDetails memoryMb
+                         * @property {number|null} [diskCount] AwsVmDetails diskCount
+                         * @property {number|Long|null} [committedStorageMb] AwsVmDetails committedStorageMb
+                         * @property {string|null} [osDescription] AwsVmDetails osDescription
+                         * @property {google.cloud.vmmigration.v1.AwsVmDetails.BootOption|null} [bootOption] AwsVmDetails bootOption
+                         * @property {string|null} [instanceType] AwsVmDetails instanceType
+                         * @property {string|null} [vpcId] AwsVmDetails vpcId
+                         * @property {Array.<google.cloud.vmmigration.v1.IAwsSecurityGroup>|null} [securityGroups] AwsVmDetails securityGroups
+                         * @property {Object.<string,string>|null} [tags] AwsVmDetails tags
+                         * @property {string|null} [zone] AwsVmDetails zone
+                         * @property {google.cloud.vmmigration.v1.AwsVmDetails.VmVirtualizationType|null} [virtualizationType] AwsVmDetails virtualizationType
+                         * @property {google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture|null} [architecture] AwsVmDetails architecture
+                         */
+    
+                        /**
+                         * Constructs a new AwsVmDetails.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents an AwsVmDetails.
+                         * @implements IAwsVmDetails
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IAwsVmDetails=} [properties] Properties to set
+                         */
+                        function AwsVmDetails(properties) {
+                            this.securityGroups = [];
+                            this.tags = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AwsVmDetails vmId.
+                         * @member {string} vmId
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.vmId = "";
+    
+                        /**
+                         * AwsVmDetails displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.displayName = "";
+    
+                        /**
+                         * AwsVmDetails sourceId.
+                         * @member {string} sourceId
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.sourceId = "";
+    
+                        /**
+                         * AwsVmDetails sourceDescription.
+                         * @member {string} sourceDescription
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.sourceDescription = "";
+    
+                        /**
+                         * AwsVmDetails powerState.
+                         * @member {google.cloud.vmmigration.v1.AwsVmDetails.PowerState} powerState
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.powerState = 0;
+    
+                        /**
+                         * AwsVmDetails cpuCount.
+                         * @member {number} cpuCount
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.cpuCount = 0;
+    
+                        /**
+                         * AwsVmDetails memoryMb.
+                         * @member {number} memoryMb
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.memoryMb = 0;
+    
+                        /**
+                         * AwsVmDetails diskCount.
+                         * @member {number} diskCount
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.diskCount = 0;
+    
+                        /**
+                         * AwsVmDetails committedStorageMb.
+                         * @member {number|Long} committedStorageMb
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.committedStorageMb = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * AwsVmDetails osDescription.
+                         * @member {string} osDescription
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.osDescription = "";
+    
+                        /**
+                         * AwsVmDetails bootOption.
+                         * @member {google.cloud.vmmigration.v1.AwsVmDetails.BootOption} bootOption
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.bootOption = 0;
+    
+                        /**
+                         * AwsVmDetails instanceType.
+                         * @member {string} instanceType
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.instanceType = "";
+    
+                        /**
+                         * AwsVmDetails vpcId.
+                         * @member {string} vpcId
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.vpcId = "";
+    
+                        /**
+                         * AwsVmDetails securityGroups.
+                         * @member {Array.<google.cloud.vmmigration.v1.IAwsSecurityGroup>} securityGroups
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.securityGroups = $util.emptyArray;
+    
+                        /**
+                         * AwsVmDetails tags.
+                         * @member {Object.<string,string>} tags
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.tags = $util.emptyObject;
+    
+                        /**
+                         * AwsVmDetails zone.
+                         * @member {string} zone
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.zone = "";
+    
+                        /**
+                         * AwsVmDetails virtualizationType.
+                         * @member {google.cloud.vmmigration.v1.AwsVmDetails.VmVirtualizationType} virtualizationType
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.virtualizationType = 0;
+    
+                        /**
+                         * AwsVmDetails architecture.
+                         * @member {google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture} architecture
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         */
+                        AwsVmDetails.prototype.architecture = 0;
+    
+                        /**
+                         * Creates a new AwsVmDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsVmDetails=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.AwsVmDetails} AwsVmDetails instance
+                         */
+                        AwsVmDetails.create = function create(properties) {
+                            return new AwsVmDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AwsVmDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsVmDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsVmDetails} message AwsVmDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AwsVmDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.vmId != null && Object.hasOwnProperty.call(message, "vmId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.vmId);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.sourceId != null && Object.hasOwnProperty.call(message, "sourceId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.sourceId);
+                            if (message.sourceDescription != null && Object.hasOwnProperty.call(message, "sourceDescription"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.sourceDescription);
+                            if (message.powerState != null && Object.hasOwnProperty.call(message, "powerState"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.powerState);
+                            if (message.cpuCount != null && Object.hasOwnProperty.call(message, "cpuCount"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.cpuCount);
+                            if (message.memoryMb != null && Object.hasOwnProperty.call(message, "memoryMb"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.memoryMb);
+                            if (message.diskCount != null && Object.hasOwnProperty.call(message, "diskCount"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.diskCount);
+                            if (message.committedStorageMb != null && Object.hasOwnProperty.call(message, "committedStorageMb"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.committedStorageMb);
+                            if (message.osDescription != null && Object.hasOwnProperty.call(message, "osDescription"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.osDescription);
+                            if (message.bootOption != null && Object.hasOwnProperty.call(message, "bootOption"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.bootOption);
+                            if (message.instanceType != null && Object.hasOwnProperty.call(message, "instanceType"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.instanceType);
+                            if (message.vpcId != null && Object.hasOwnProperty.call(message, "vpcId"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.vpcId);
+                            if (message.securityGroups != null && message.securityGroups.length)
+                                for (var i = 0; i < message.securityGroups.length; ++i)
+                                    $root.google.cloud.vmmigration.v1.AwsSecurityGroup.encode(message.securityGroups[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.tags != null && Object.hasOwnProperty.call(message, "tags"))
+                                for (var keys = Object.keys(message.tags), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 15, wireType 2 =*/122).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.tags[keys[i]]).ldelim();
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.zone);
+                            if (message.virtualizationType != null && Object.hasOwnProperty.call(message, "virtualizationType"))
+                                writer.uint32(/* id 17, wireType 0 =*/136).int32(message.virtualizationType);
+                            if (message.architecture != null && Object.hasOwnProperty.call(message, "architecture"))
+                                writer.uint32(/* id 18, wireType 0 =*/144).int32(message.architecture);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AwsVmDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsVmDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsVmDetails} message AwsVmDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AwsVmDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AwsVmDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.AwsVmDetails} AwsVmDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AwsVmDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.AwsVmDetails(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.vmId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sourceId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.sourceDescription = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.powerState = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.cpuCount = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.memoryMb = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.diskCount = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.committedStorageMb = reader.int64();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.osDescription = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.bootOption = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.instanceType = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.vpcId = reader.string();
+                                        break;
+                                    }
+                                case 14: {
+                                        if (!(message.securityGroups && message.securityGroups.length))
+                                            message.securityGroups = [];
+                                        message.securityGroups.push($root.google.cloud.vmmigration.v1.AwsSecurityGroup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 15: {
+                                        if (message.tags === $util.emptyObject)
+                                            message.tags = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.tags[key] = value;
+                                        break;
+                                    }
+                                case 16: {
+                                        message.zone = reader.string();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.virtualizationType = reader.int32();
+                                        break;
+                                    }
+                                case 18: {
+                                        message.architecture = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AwsVmDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.AwsVmDetails} AwsVmDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AwsVmDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AwsVmDetails message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AwsVmDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.vmId != null && message.hasOwnProperty("vmId"))
+                                if (!$util.isString(message.vmId))
+                                    return "vmId: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.sourceId != null && message.hasOwnProperty("sourceId"))
+                                if (!$util.isString(message.sourceId))
+                                    return "sourceId: string expected";
+                            if (message.sourceDescription != null && message.hasOwnProperty("sourceDescription"))
+                                if (!$util.isString(message.sourceDescription))
+                                    return "sourceDescription: string expected";
+                            if (message.powerState != null && message.hasOwnProperty("powerState"))
+                                switch (message.powerState) {
+                                default:
+                                    return "powerState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.cpuCount != null && message.hasOwnProperty("cpuCount"))
+                                if (!$util.isInteger(message.cpuCount))
+                                    return "cpuCount: integer expected";
+                            if (message.memoryMb != null && message.hasOwnProperty("memoryMb"))
+                                if (!$util.isInteger(message.memoryMb))
+                                    return "memoryMb: integer expected";
+                            if (message.diskCount != null && message.hasOwnProperty("diskCount"))
+                                if (!$util.isInteger(message.diskCount))
+                                    return "diskCount: integer expected";
+                            if (message.committedStorageMb != null && message.hasOwnProperty("committedStorageMb"))
+                                if (!$util.isInteger(message.committedStorageMb) && !(message.committedStorageMb && $util.isInteger(message.committedStorageMb.low) && $util.isInteger(message.committedStorageMb.high)))
+                                    return "committedStorageMb: integer|Long expected";
+                            if (message.osDescription != null && message.hasOwnProperty("osDescription"))
+                                if (!$util.isString(message.osDescription))
+                                    return "osDescription: string expected";
+                            if (message.bootOption != null && message.hasOwnProperty("bootOption"))
+                                switch (message.bootOption) {
+                                default:
+                                    return "bootOption: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.instanceType != null && message.hasOwnProperty("instanceType"))
+                                if (!$util.isString(message.instanceType))
+                                    return "instanceType: string expected";
+                            if (message.vpcId != null && message.hasOwnProperty("vpcId"))
+                                if (!$util.isString(message.vpcId))
+                                    return "vpcId: string expected";
+                            if (message.securityGroups != null && message.hasOwnProperty("securityGroups")) {
+                                if (!Array.isArray(message.securityGroups))
+                                    return "securityGroups: array expected";
+                                for (var i = 0; i < message.securityGroups.length; ++i) {
+                                    var error = $root.google.cloud.vmmigration.v1.AwsSecurityGroup.verify(message.securityGroups[i]);
+                                    if (error)
+                                        return "securityGroups." + error;
+                                }
+                            }
+                            if (message.tags != null && message.hasOwnProperty("tags")) {
+                                if (!$util.isObject(message.tags))
+                                    return "tags: object expected";
+                                var key = Object.keys(message.tags);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.tags[key[i]]))
+                                        return "tags: string{k:string} expected";
+                            }
+                            if (message.zone != null && message.hasOwnProperty("zone"))
+                                if (!$util.isString(message.zone))
+                                    return "zone: string expected";
+                            if (message.virtualizationType != null && message.hasOwnProperty("virtualizationType"))
+                                switch (message.virtualizationType) {
+                                default:
+                                    return "virtualizationType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.architecture != null && message.hasOwnProperty("architecture"))
+                                switch (message.architecture) {
+                                default:
+                                    return "architecture: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AwsVmDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.AwsVmDetails} AwsVmDetails
+                         */
+                        AwsVmDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.AwsVmDetails)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.AwsVmDetails();
+                            if (object.vmId != null)
+                                message.vmId = String(object.vmId);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.sourceId != null)
+                                message.sourceId = String(object.sourceId);
+                            if (object.sourceDescription != null)
+                                message.sourceDescription = String(object.sourceDescription);
+                            switch (object.powerState) {
+                            default:
+                                if (typeof object.powerState === "number") {
+                                    message.powerState = object.powerState;
+                                    break;
+                                }
+                                break;
+                            case "POWER_STATE_UNSPECIFIED":
+                            case 0:
+                                message.powerState = 0;
+                                break;
+                            case "ON":
+                            case 1:
+                                message.powerState = 1;
+                                break;
+                            case "OFF":
+                            case 2:
+                                message.powerState = 2;
+                                break;
+                            case "SUSPENDED":
+                            case 3:
+                                message.powerState = 3;
+                                break;
+                            case "PENDING":
+                            case 4:
+                                message.powerState = 4;
+                                break;
+                            }
+                            if (object.cpuCount != null)
+                                message.cpuCount = object.cpuCount | 0;
+                            if (object.memoryMb != null)
+                                message.memoryMb = object.memoryMb | 0;
+                            if (object.diskCount != null)
+                                message.diskCount = object.diskCount | 0;
+                            if (object.committedStorageMb != null)
+                                if ($util.Long)
+                                    (message.committedStorageMb = $util.Long.fromValue(object.committedStorageMb)).unsigned = false;
+                                else if (typeof object.committedStorageMb === "string")
+                                    message.committedStorageMb = parseInt(object.committedStorageMb, 10);
+                                else if (typeof object.committedStorageMb === "number")
+                                    message.committedStorageMb = object.committedStorageMb;
+                                else if (typeof object.committedStorageMb === "object")
+                                    message.committedStorageMb = new $util.LongBits(object.committedStorageMb.low >>> 0, object.committedStorageMb.high >>> 0).toNumber();
+                            if (object.osDescription != null)
+                                message.osDescription = String(object.osDescription);
+                            switch (object.bootOption) {
+                            default:
+                                if (typeof object.bootOption === "number") {
+                                    message.bootOption = object.bootOption;
+                                    break;
+                                }
+                                break;
+                            case "BOOT_OPTION_UNSPECIFIED":
+                            case 0:
+                                message.bootOption = 0;
+                                break;
+                            case "EFI":
+                            case 1:
+                                message.bootOption = 1;
+                                break;
+                            case "BIOS":
+                            case 2:
+                                message.bootOption = 2;
+                                break;
+                            }
+                            if (object.instanceType != null)
+                                message.instanceType = String(object.instanceType);
+                            if (object.vpcId != null)
+                                message.vpcId = String(object.vpcId);
+                            if (object.securityGroups) {
+                                if (!Array.isArray(object.securityGroups))
+                                    throw TypeError(".google.cloud.vmmigration.v1.AwsVmDetails.securityGroups: array expected");
+                                message.securityGroups = [];
+                                for (var i = 0; i < object.securityGroups.length; ++i) {
+                                    if (typeof object.securityGroups[i] !== "object")
+                                        throw TypeError(".google.cloud.vmmigration.v1.AwsVmDetails.securityGroups: object expected");
+                                    message.securityGroups[i] = $root.google.cloud.vmmigration.v1.AwsSecurityGroup.fromObject(object.securityGroups[i]);
+                                }
+                            }
+                            if (object.tags) {
+                                if (typeof object.tags !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.AwsVmDetails.tags: object expected");
+                                message.tags = {};
+                                for (var keys = Object.keys(object.tags), i = 0; i < keys.length; ++i)
+                                    message.tags[keys[i]] = String(object.tags[keys[i]]);
+                            }
+                            if (object.zone != null)
+                                message.zone = String(object.zone);
+                            switch (object.virtualizationType) {
+                            default:
+                                if (typeof object.virtualizationType === "number") {
+                                    message.virtualizationType = object.virtualizationType;
+                                    break;
+                                }
+                                break;
+                            case "VM_VIRTUALIZATION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.virtualizationType = 0;
+                                break;
+                            case "HVM":
+                            case 1:
+                                message.virtualizationType = 1;
+                                break;
+                            case "PARAVIRTUAL":
+                            case 2:
+                                message.virtualizationType = 2;
+                                break;
+                            }
+                            switch (object.architecture) {
+                            default:
+                                if (typeof object.architecture === "number") {
+                                    message.architecture = object.architecture;
+                                    break;
+                                }
+                                break;
+                            case "VM_ARCHITECTURE_UNSPECIFIED":
+                            case 0:
+                                message.architecture = 0;
+                                break;
+                            case "I386":
+                            case 1:
+                                message.architecture = 1;
+                                break;
+                            case "X86_64":
+                            case 2:
+                                message.architecture = 2;
+                                break;
+                            case "ARM64":
+                            case 3:
+                                message.architecture = 3;
+                                break;
+                            case "X86_64_MAC":
+                            case 4:
+                                message.architecture = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AwsVmDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.AwsVmDetails} message AwsVmDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AwsVmDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.securityGroups = [];
+                            if (options.objects || options.defaults)
+                                object.tags = {};
+                            if (options.defaults) {
+                                object.vmId = "";
+                                object.displayName = "";
+                                object.sourceId = "";
+                                object.sourceDescription = "";
+                                object.powerState = options.enums === String ? "POWER_STATE_UNSPECIFIED" : 0;
+                                object.cpuCount = 0;
+                                object.memoryMb = 0;
+                                object.diskCount = 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.committedStorageMb = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.committedStorageMb = options.longs === String ? "0" : 0;
+                                object.osDescription = "";
+                                object.bootOption = options.enums === String ? "BOOT_OPTION_UNSPECIFIED" : 0;
+                                object.instanceType = "";
+                                object.vpcId = "";
+                                object.zone = "";
+                                object.virtualizationType = options.enums === String ? "VM_VIRTUALIZATION_TYPE_UNSPECIFIED" : 0;
+                                object.architecture = options.enums === String ? "VM_ARCHITECTURE_UNSPECIFIED" : 0;
+                            }
+                            if (message.vmId != null && message.hasOwnProperty("vmId"))
+                                object.vmId = message.vmId;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.sourceId != null && message.hasOwnProperty("sourceId"))
+                                object.sourceId = message.sourceId;
+                            if (message.sourceDescription != null && message.hasOwnProperty("sourceDescription"))
+                                object.sourceDescription = message.sourceDescription;
+                            if (message.powerState != null && message.hasOwnProperty("powerState"))
+                                object.powerState = options.enums === String ? $root.google.cloud.vmmigration.v1.AwsVmDetails.PowerState[message.powerState] === undefined ? message.powerState : $root.google.cloud.vmmigration.v1.AwsVmDetails.PowerState[message.powerState] : message.powerState;
+                            if (message.cpuCount != null && message.hasOwnProperty("cpuCount"))
+                                object.cpuCount = message.cpuCount;
+                            if (message.memoryMb != null && message.hasOwnProperty("memoryMb"))
+                                object.memoryMb = message.memoryMb;
+                            if (message.diskCount != null && message.hasOwnProperty("diskCount"))
+                                object.diskCount = message.diskCount;
+                            if (message.committedStorageMb != null && message.hasOwnProperty("committedStorageMb"))
+                                if (typeof message.committedStorageMb === "number")
+                                    object.committedStorageMb = options.longs === String ? String(message.committedStorageMb) : message.committedStorageMb;
+                                else
+                                    object.committedStorageMb = options.longs === String ? $util.Long.prototype.toString.call(message.committedStorageMb) : options.longs === Number ? new $util.LongBits(message.committedStorageMb.low >>> 0, message.committedStorageMb.high >>> 0).toNumber() : message.committedStorageMb;
+                            if (message.osDescription != null && message.hasOwnProperty("osDescription"))
+                                object.osDescription = message.osDescription;
+                            if (message.bootOption != null && message.hasOwnProperty("bootOption"))
+                                object.bootOption = options.enums === String ? $root.google.cloud.vmmigration.v1.AwsVmDetails.BootOption[message.bootOption] === undefined ? message.bootOption : $root.google.cloud.vmmigration.v1.AwsVmDetails.BootOption[message.bootOption] : message.bootOption;
+                            if (message.instanceType != null && message.hasOwnProperty("instanceType"))
+                                object.instanceType = message.instanceType;
+                            if (message.vpcId != null && message.hasOwnProperty("vpcId"))
+                                object.vpcId = message.vpcId;
+                            if (message.securityGroups && message.securityGroups.length) {
+                                object.securityGroups = [];
+                                for (var j = 0; j < message.securityGroups.length; ++j)
+                                    object.securityGroups[j] = $root.google.cloud.vmmigration.v1.AwsSecurityGroup.toObject(message.securityGroups[j], options);
+                            }
+                            var keys2;
+                            if (message.tags && (keys2 = Object.keys(message.tags)).length) {
+                                object.tags = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.tags[keys2[j]] = message.tags[keys2[j]];
+                            }
+                            if (message.zone != null && message.hasOwnProperty("zone"))
+                                object.zone = message.zone;
+                            if (message.virtualizationType != null && message.hasOwnProperty("virtualizationType"))
+                                object.virtualizationType = options.enums === String ? $root.google.cloud.vmmigration.v1.AwsVmDetails.VmVirtualizationType[message.virtualizationType] === undefined ? message.virtualizationType : $root.google.cloud.vmmigration.v1.AwsVmDetails.VmVirtualizationType[message.virtualizationType] : message.virtualizationType;
+                            if (message.architecture != null && message.hasOwnProperty("architecture"))
+                                object.architecture = options.enums === String ? $root.google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture[message.architecture] === undefined ? message.architecture : $root.google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture[message.architecture] : message.architecture;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AwsVmDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AwsVmDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AwsVmDetails
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.AwsVmDetails
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AwsVmDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.AwsVmDetails";
+                        };
+    
+                        /**
+                         * PowerState enum.
+                         * @name google.cloud.vmmigration.v1.AwsVmDetails.PowerState
+                         * @enum {number}
+                         * @property {number} POWER_STATE_UNSPECIFIED=0 POWER_STATE_UNSPECIFIED value
+                         * @property {number} ON=1 ON value
+                         * @property {number} OFF=2 OFF value
+                         * @property {number} SUSPENDED=3 SUSPENDED value
+                         * @property {number} PENDING=4 PENDING value
+                         */
+                        AwsVmDetails.PowerState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "POWER_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ON"] = 1;
+                            values[valuesById[2] = "OFF"] = 2;
+                            values[valuesById[3] = "SUSPENDED"] = 3;
+                            values[valuesById[4] = "PENDING"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * BootOption enum.
+                         * @name google.cloud.vmmigration.v1.AwsVmDetails.BootOption
+                         * @enum {number}
+                         * @property {number} BOOT_OPTION_UNSPECIFIED=0 BOOT_OPTION_UNSPECIFIED value
+                         * @property {number} EFI=1 EFI value
+                         * @property {number} BIOS=2 BIOS value
+                         */
+                        AwsVmDetails.BootOption = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "BOOT_OPTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "EFI"] = 1;
+                            values[valuesById[2] = "BIOS"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * VmVirtualizationType enum.
+                         * @name google.cloud.vmmigration.v1.AwsVmDetails.VmVirtualizationType
+                         * @enum {number}
+                         * @property {number} VM_VIRTUALIZATION_TYPE_UNSPECIFIED=0 VM_VIRTUALIZATION_TYPE_UNSPECIFIED value
+                         * @property {number} HVM=1 HVM value
+                         * @property {number} PARAVIRTUAL=2 PARAVIRTUAL value
+                         */
+                        AwsVmDetails.VmVirtualizationType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "VM_VIRTUALIZATION_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "HVM"] = 1;
+                            values[valuesById[2] = "PARAVIRTUAL"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * VmArchitecture enum.
+                         * @name google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture
+                         * @enum {number}
+                         * @property {number} VM_ARCHITECTURE_UNSPECIFIED=0 VM_ARCHITECTURE_UNSPECIFIED value
+                         * @property {number} I386=1 I386 value
+                         * @property {number} X86_64=2 X86_64 value
+                         * @property {number} ARM64=3 ARM64 value
+                         * @property {number} X86_64_MAC=4 X86_64_MAC value
+                         */
+                        AwsVmDetails.VmArchitecture = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "VM_ARCHITECTURE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "I386"] = 1;
+                            values[valuesById[2] = "X86_64"] = 2;
+                            values[valuesById[3] = "ARM64"] = 3;
+                            values[valuesById[4] = "X86_64_MAC"] = 4;
+                            return values;
+                        })();
+    
+                        return AwsVmDetails;
+                    })();
+    
+                    v1.AwsSecurityGroup = (function() {
+    
+                        /**
+                         * Properties of an AwsSecurityGroup.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IAwsSecurityGroup
+                         * @property {string|null} [id] AwsSecurityGroup id
+                         * @property {string|null} [name] AwsSecurityGroup name
+                         */
+    
+                        /**
+                         * Constructs a new AwsSecurityGroup.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents an AwsSecurityGroup.
+                         * @implements IAwsSecurityGroup
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IAwsSecurityGroup=} [properties] Properties to set
+                         */
+                        function AwsSecurityGroup(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AwsSecurityGroup id.
+                         * @member {string} id
+                         * @memberof google.cloud.vmmigration.v1.AwsSecurityGroup
+                         * @instance
+                         */
+                        AwsSecurityGroup.prototype.id = "";
+    
+                        /**
+                         * AwsSecurityGroup name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmmigration.v1.AwsSecurityGroup
+                         * @instance
+                         */
+                        AwsSecurityGroup.prototype.name = "";
+    
+                        /**
+                         * Creates a new AwsSecurityGroup instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.AwsSecurityGroup
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsSecurityGroup=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.AwsSecurityGroup} AwsSecurityGroup instance
+                         */
+                        AwsSecurityGroup.create = function create(properties) {
+                            return new AwsSecurityGroup(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AwsSecurityGroup message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSecurityGroup.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.AwsSecurityGroup
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsSecurityGroup} message AwsSecurityGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AwsSecurityGroup.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AwsSecurityGroup message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSecurityGroup.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AwsSecurityGroup
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsSecurityGroup} message AwsSecurityGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AwsSecurityGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AwsSecurityGroup message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.AwsSecurityGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.AwsSecurityGroup} AwsSecurityGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AwsSecurityGroup.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.AwsSecurityGroup();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AwsSecurityGroup message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AwsSecurityGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.AwsSecurityGroup} AwsSecurityGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AwsSecurityGroup.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AwsSecurityGroup message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.AwsSecurityGroup
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AwsSecurityGroup.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AwsSecurityGroup message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.AwsSecurityGroup
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.AwsSecurityGroup} AwsSecurityGroup
+                         */
+                        AwsSecurityGroup.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.AwsSecurityGroup)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.AwsSecurityGroup();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AwsSecurityGroup message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.AwsSecurityGroup
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.AwsSecurityGroup} message AwsSecurityGroup
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AwsSecurityGroup.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.id = "";
+                                object.name = "";
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AwsSecurityGroup to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.AwsSecurityGroup
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AwsSecurityGroup.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AwsSecurityGroup
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.AwsSecurityGroup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AwsSecurityGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.AwsSecurityGroup";
+                        };
+    
+                        return AwsSecurityGroup;
+                    })();
+    
                     v1.VmwareVmsDetails = (function() {
     
                         /**
@@ -9977,6 +15031,230 @@
                         return VmwareVmsDetails;
                     })();
     
+                    v1.AwsVmsDetails = (function() {
+    
+                        /**
+                         * Properties of an AwsVmsDetails.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IAwsVmsDetails
+                         * @property {Array.<google.cloud.vmmigration.v1.IAwsVmDetails>|null} [details] AwsVmsDetails details
+                         */
+    
+                        /**
+                         * Constructs a new AwsVmsDetails.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents an AwsVmsDetails.
+                         * @implements IAwsVmsDetails
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IAwsVmsDetails=} [properties] Properties to set
+                         */
+                        function AwsVmsDetails(properties) {
+                            this.details = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AwsVmsDetails details.
+                         * @member {Array.<google.cloud.vmmigration.v1.IAwsVmDetails>} details
+                         * @memberof google.cloud.vmmigration.v1.AwsVmsDetails
+                         * @instance
+                         */
+                        AwsVmsDetails.prototype.details = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AwsVmsDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.AwsVmsDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsVmsDetails=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.AwsVmsDetails} AwsVmsDetails instance
+                         */
+                        AwsVmsDetails.create = function create(properties) {
+                            return new AwsVmsDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AwsVmsDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsVmsDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.AwsVmsDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsVmsDetails} message AwsVmsDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AwsVmsDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.details != null && message.details.length)
+                                for (var i = 0; i < message.details.length; ++i)
+                                    $root.google.cloud.vmmigration.v1.AwsVmDetails.encode(message.details[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AwsVmsDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsVmsDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AwsVmsDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsVmsDetails} message AwsVmsDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AwsVmsDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AwsVmsDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.AwsVmsDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.AwsVmsDetails} AwsVmsDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AwsVmsDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.AwsVmsDetails();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.details && message.details.length))
+                                            message.details = [];
+                                        message.details.push($root.google.cloud.vmmigration.v1.AwsVmDetails.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AwsVmsDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AwsVmsDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.AwsVmsDetails} AwsVmsDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AwsVmsDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AwsVmsDetails message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.AwsVmsDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AwsVmsDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.details != null && message.hasOwnProperty("details")) {
+                                if (!Array.isArray(message.details))
+                                    return "details: array expected";
+                                for (var i = 0; i < message.details.length; ++i) {
+                                    var error = $root.google.cloud.vmmigration.v1.AwsVmDetails.verify(message.details[i]);
+                                    if (error)
+                                        return "details." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AwsVmsDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.AwsVmsDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.AwsVmsDetails} AwsVmsDetails
+                         */
+                        AwsVmsDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.AwsVmsDetails)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.AwsVmsDetails();
+                            if (object.details) {
+                                if (!Array.isArray(object.details))
+                                    throw TypeError(".google.cloud.vmmigration.v1.AwsVmsDetails.details: array expected");
+                                message.details = [];
+                                for (var i = 0; i < object.details.length; ++i) {
+                                    if (typeof object.details[i] !== "object")
+                                        throw TypeError(".google.cloud.vmmigration.v1.AwsVmsDetails.details: object expected");
+                                    message.details[i] = $root.google.cloud.vmmigration.v1.AwsVmDetails.fromObject(object.details[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AwsVmsDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.AwsVmsDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.AwsVmsDetails} message AwsVmsDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AwsVmsDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.details = [];
+                            if (message.details && message.details.length) {
+                                object.details = [];
+                                for (var j = 0; j < message.details.length; ++j)
+                                    object.details[j] = $root.google.cloud.vmmigration.v1.AwsVmDetails.toObject(message.details[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AwsVmsDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.AwsVmsDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AwsVmsDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AwsVmsDetails
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.AwsVmsDetails
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AwsVmsDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.AwsVmsDetails";
+                        };
+    
+                        return AwsVmsDetails;
+                    })();
+    
                     v1.FetchInventoryResponse = (function() {
     
                         /**
@@ -9984,6 +15262,7 @@
                          * @memberof google.cloud.vmmigration.v1
                          * @interface IFetchInventoryResponse
                          * @property {google.cloud.vmmigration.v1.IVmwareVmsDetails|null} [vmwareVms] FetchInventoryResponse vmwareVms
+                         * @property {google.cloud.vmmigration.v1.IAwsVmsDetails|null} [awsVms] FetchInventoryResponse awsVms
                          * @property {google.protobuf.ITimestamp|null} [updateTime] FetchInventoryResponse updateTime
                          */
     
@@ -10011,6 +15290,14 @@
                         FetchInventoryResponse.prototype.vmwareVms = null;
     
                         /**
+                         * FetchInventoryResponse awsVms.
+                         * @member {google.cloud.vmmigration.v1.IAwsVmsDetails|null|undefined} awsVms
+                         * @memberof google.cloud.vmmigration.v1.FetchInventoryResponse
+                         * @instance
+                         */
+                        FetchInventoryResponse.prototype.awsVms = null;
+    
+                        /**
                          * FetchInventoryResponse updateTime.
                          * @member {google.protobuf.ITimestamp|null|undefined} updateTime
                          * @memberof google.cloud.vmmigration.v1.FetchInventoryResponse
@@ -10023,12 +15310,12 @@
     
                         /**
                          * FetchInventoryResponse SourceVms.
-                         * @member {"vmwareVms"|undefined} SourceVms
+                         * @member {"vmwareVms"|"awsVms"|undefined} SourceVms
                          * @memberof google.cloud.vmmigration.v1.FetchInventoryResponse
                          * @instance
                          */
                         Object.defineProperty(FetchInventoryResponse.prototype, "SourceVms", {
-                            get: $util.oneOfGetter($oneOfFields = ["vmwareVms"]),
+                            get: $util.oneOfGetter($oneOfFields = ["vmwareVms", "awsVms"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -10060,6 +15347,8 @@
                                 $root.google.cloud.vmmigration.v1.VmwareVmsDetails.encode(message.vmwareVms, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.awsVms != null && Object.hasOwnProperty.call(message, "awsVms"))
+                                $root.google.cloud.vmmigration.v1.AwsVmsDetails.encode(message.awsVms, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -10096,6 +15385,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.vmwareVms = $root.google.cloud.vmmigration.v1.VmwareVmsDetails.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.awsVms = $root.google.cloud.vmmigration.v1.AwsVmsDetails.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 2: {
@@ -10146,6 +15439,16 @@
                                         return "vmwareVms." + error;
                                 }
                             }
+                            if (message.awsVms != null && message.hasOwnProperty("awsVms")) {
+                                if (properties.SourceVms === 1)
+                                    return "SourceVms: multiple values";
+                                properties.SourceVms = 1;
+                                {
+                                    var error = $root.google.cloud.vmmigration.v1.AwsVmsDetails.verify(message.awsVms);
+                                    if (error)
+                                        return "awsVms." + error;
+                                }
+                            }
                             if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
                                 if (error)
@@ -10170,6 +15473,11 @@
                                 if (typeof object.vmwareVms !== "object")
                                     throw TypeError(".google.cloud.vmmigration.v1.FetchInventoryResponse.vmwareVms: object expected");
                                 message.vmwareVms = $root.google.cloud.vmmigration.v1.VmwareVmsDetails.fromObject(object.vmwareVms);
+                            }
+                            if (object.awsVms != null) {
+                                if (typeof object.awsVms !== "object")
+                                    throw TypeError(".google.cloud.vmmigration.v1.FetchInventoryResponse.awsVms: object expected");
+                                message.awsVms = $root.google.cloud.vmmigration.v1.AwsVmsDetails.fromObject(object.awsVms);
                             }
                             if (object.updateTime != null) {
                                 if (typeof object.updateTime !== "object")
@@ -10201,6 +15509,11 @@
                             }
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.awsVms != null && message.hasOwnProperty("awsVms")) {
+                                object.awsVms = $root.google.cloud.vmmigration.v1.AwsVmsDetails.toObject(message.awsVms, options);
+                                if (options.oneofs)
+                                    object.SourceVms = "awsVms";
+                            }
                             return object;
                         };
     
@@ -27509,6 +32822,1074 @@
                         })();
     
                         return MigrationError;
+                    })();
+    
+                    v1.AwsSourceVmDetails = (function() {
+    
+                        /**
+                         * Properties of an AwsSourceVmDetails.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IAwsSourceVmDetails
+                         * @property {google.cloud.vmmigration.v1.AwsSourceVmDetails.Firmware|null} [firmware] AwsSourceVmDetails firmware
+                         * @property {number|Long|null} [committedStorageBytes] AwsSourceVmDetails committedStorageBytes
+                         */
+    
+                        /**
+                         * Constructs a new AwsSourceVmDetails.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents an AwsSourceVmDetails.
+                         * @implements IAwsSourceVmDetails
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IAwsSourceVmDetails=} [properties] Properties to set
+                         */
+                        function AwsSourceVmDetails(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AwsSourceVmDetails firmware.
+                         * @member {google.cloud.vmmigration.v1.AwsSourceVmDetails.Firmware} firmware
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceVmDetails
+                         * @instance
+                         */
+                        AwsSourceVmDetails.prototype.firmware = 0;
+    
+                        /**
+                         * AwsSourceVmDetails committedStorageBytes.
+                         * @member {number|Long} committedStorageBytes
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceVmDetails
+                         * @instance
+                         */
+                        AwsSourceVmDetails.prototype.committedStorageBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new AwsSourceVmDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceVmDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsSourceVmDetails=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.AwsSourceVmDetails} AwsSourceVmDetails instance
+                         */
+                        AwsSourceVmDetails.create = function create(properties) {
+                            return new AwsSourceVmDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AwsSourceVmDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceVmDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceVmDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsSourceVmDetails} message AwsSourceVmDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AwsSourceVmDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.firmware != null && Object.hasOwnProperty.call(message, "firmware"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.firmware);
+                            if (message.committedStorageBytes != null && Object.hasOwnProperty.call(message, "committedStorageBytes"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.committedStorageBytes);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AwsSourceVmDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceVmDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceVmDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IAwsSourceVmDetails} message AwsSourceVmDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AwsSourceVmDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AwsSourceVmDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceVmDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.AwsSourceVmDetails} AwsSourceVmDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AwsSourceVmDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.AwsSourceVmDetails();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.firmware = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.committedStorageBytes = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AwsSourceVmDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceVmDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.AwsSourceVmDetails} AwsSourceVmDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AwsSourceVmDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AwsSourceVmDetails message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceVmDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AwsSourceVmDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.firmware != null && message.hasOwnProperty("firmware"))
+                                switch (message.firmware) {
+                                default:
+                                    return "firmware: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.committedStorageBytes != null && message.hasOwnProperty("committedStorageBytes"))
+                                if (!$util.isInteger(message.committedStorageBytes) && !(message.committedStorageBytes && $util.isInteger(message.committedStorageBytes.low) && $util.isInteger(message.committedStorageBytes.high)))
+                                    return "committedStorageBytes: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AwsSourceVmDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceVmDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.AwsSourceVmDetails} AwsSourceVmDetails
+                         */
+                        AwsSourceVmDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.AwsSourceVmDetails)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.AwsSourceVmDetails();
+                            switch (object.firmware) {
+                            default:
+                                if (typeof object.firmware === "number") {
+                                    message.firmware = object.firmware;
+                                    break;
+                                }
+                                break;
+                            case "FIRMWARE_UNSPECIFIED":
+                            case 0:
+                                message.firmware = 0;
+                                break;
+                            case "EFI":
+                            case 1:
+                                message.firmware = 1;
+                                break;
+                            case "BIOS":
+                            case 2:
+                                message.firmware = 2;
+                                break;
+                            }
+                            if (object.committedStorageBytes != null)
+                                if ($util.Long)
+                                    (message.committedStorageBytes = $util.Long.fromValue(object.committedStorageBytes)).unsigned = false;
+                                else if (typeof object.committedStorageBytes === "string")
+                                    message.committedStorageBytes = parseInt(object.committedStorageBytes, 10);
+                                else if (typeof object.committedStorageBytes === "number")
+                                    message.committedStorageBytes = object.committedStorageBytes;
+                                else if (typeof object.committedStorageBytes === "object")
+                                    message.committedStorageBytes = new $util.LongBits(object.committedStorageBytes.low >>> 0, object.committedStorageBytes.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AwsSourceVmDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceVmDetails
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.AwsSourceVmDetails} message AwsSourceVmDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AwsSourceVmDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.firmware = options.enums === String ? "FIRMWARE_UNSPECIFIED" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.committedStorageBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.committedStorageBytes = options.longs === String ? "0" : 0;
+                            }
+                            if (message.firmware != null && message.hasOwnProperty("firmware"))
+                                object.firmware = options.enums === String ? $root.google.cloud.vmmigration.v1.AwsSourceVmDetails.Firmware[message.firmware] === undefined ? message.firmware : $root.google.cloud.vmmigration.v1.AwsSourceVmDetails.Firmware[message.firmware] : message.firmware;
+                            if (message.committedStorageBytes != null && message.hasOwnProperty("committedStorageBytes"))
+                                if (typeof message.committedStorageBytes === "number")
+                                    object.committedStorageBytes = options.longs === String ? String(message.committedStorageBytes) : message.committedStorageBytes;
+                                else
+                                    object.committedStorageBytes = options.longs === String ? $util.Long.prototype.toString.call(message.committedStorageBytes) : options.longs === Number ? new $util.LongBits(message.committedStorageBytes.low >>> 0, message.committedStorageBytes.high >>> 0).toNumber() : message.committedStorageBytes;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AwsSourceVmDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceVmDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AwsSourceVmDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AwsSourceVmDetails
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.AwsSourceVmDetails
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AwsSourceVmDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.AwsSourceVmDetails";
+                        };
+    
+                        /**
+                         * Firmware enum.
+                         * @name google.cloud.vmmigration.v1.AwsSourceVmDetails.Firmware
+                         * @enum {number}
+                         * @property {number} FIRMWARE_UNSPECIFIED=0 FIRMWARE_UNSPECIFIED value
+                         * @property {number} EFI=1 EFI value
+                         * @property {number} BIOS=2 BIOS value
+                         */
+                        AwsSourceVmDetails.Firmware = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FIRMWARE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "EFI"] = 1;
+                            values[valuesById[2] = "BIOS"] = 2;
+                            return values;
+                        })();
+    
+                        return AwsSourceVmDetails;
+                    })();
+    
+                    v1.ListReplicationCyclesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListReplicationCyclesRequest.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IListReplicationCyclesRequest
+                         * @property {string|null} [parent] ListReplicationCyclesRequest parent
+                         * @property {number|null} [pageSize] ListReplicationCyclesRequest pageSize
+                         * @property {string|null} [pageToken] ListReplicationCyclesRequest pageToken
+                         * @property {string|null} [filter] ListReplicationCyclesRequest filter
+                         * @property {string|null} [orderBy] ListReplicationCyclesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListReplicationCyclesRequest.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents a ListReplicationCyclesRequest.
+                         * @implements IListReplicationCyclesRequest
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IListReplicationCyclesRequest=} [properties] Properties to set
+                         */
+                        function ListReplicationCyclesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListReplicationCyclesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @instance
+                         */
+                        ListReplicationCyclesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListReplicationCyclesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @instance
+                         */
+                        ListReplicationCyclesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListReplicationCyclesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @instance
+                         */
+                        ListReplicationCyclesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListReplicationCyclesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @instance
+                         */
+                        ListReplicationCyclesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListReplicationCyclesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @instance
+                         */
+                        ListReplicationCyclesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListReplicationCyclesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IListReplicationCyclesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.ListReplicationCyclesRequest} ListReplicationCyclesRequest instance
+                         */
+                        ListReplicationCyclesRequest.create = function create(properties) {
+                            return new ListReplicationCyclesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListReplicationCyclesRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.ListReplicationCyclesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IListReplicationCyclesRequest} message ListReplicationCyclesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListReplicationCyclesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListReplicationCyclesRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ListReplicationCyclesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IListReplicationCyclesRequest} message ListReplicationCyclesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListReplicationCyclesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListReplicationCyclesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.ListReplicationCyclesRequest} ListReplicationCyclesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListReplicationCyclesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.ListReplicationCyclesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListReplicationCyclesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.ListReplicationCyclesRequest} ListReplicationCyclesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListReplicationCyclesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListReplicationCyclesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListReplicationCyclesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListReplicationCyclesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.ListReplicationCyclesRequest} ListReplicationCyclesRequest
+                         */
+                        ListReplicationCyclesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.ListReplicationCyclesRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.ListReplicationCyclesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListReplicationCyclesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.ListReplicationCyclesRequest} message ListReplicationCyclesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListReplicationCyclesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListReplicationCyclesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListReplicationCyclesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListReplicationCyclesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListReplicationCyclesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.ListReplicationCyclesRequest";
+                        };
+    
+                        return ListReplicationCyclesRequest;
+                    })();
+    
+                    v1.ListReplicationCyclesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListReplicationCyclesResponse.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IListReplicationCyclesResponse
+                         * @property {Array.<google.cloud.vmmigration.v1.IReplicationCycle>|null} [replicationCycles] ListReplicationCyclesResponse replicationCycles
+                         * @property {string|null} [nextPageToken] ListReplicationCyclesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListReplicationCyclesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListReplicationCyclesResponse.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents a ListReplicationCyclesResponse.
+                         * @implements IListReplicationCyclesResponse
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IListReplicationCyclesResponse=} [properties] Properties to set
+                         */
+                        function ListReplicationCyclesResponse(properties) {
+                            this.replicationCycles = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListReplicationCyclesResponse replicationCycles.
+                         * @member {Array.<google.cloud.vmmigration.v1.IReplicationCycle>} replicationCycles
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesResponse
+                         * @instance
+                         */
+                        ListReplicationCyclesResponse.prototype.replicationCycles = $util.emptyArray;
+    
+                        /**
+                         * ListReplicationCyclesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesResponse
+                         * @instance
+                         */
+                        ListReplicationCyclesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListReplicationCyclesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesResponse
+                         * @instance
+                         */
+                        ListReplicationCyclesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListReplicationCyclesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesResponse
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IListReplicationCyclesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.ListReplicationCyclesResponse} ListReplicationCyclesResponse instance
+                         */
+                        ListReplicationCyclesResponse.create = function create(properties) {
+                            return new ListReplicationCyclesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListReplicationCyclesResponse message. Does not implicitly {@link google.cloud.vmmigration.v1.ListReplicationCyclesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesResponse
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IListReplicationCyclesResponse} message ListReplicationCyclesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListReplicationCyclesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.replicationCycles != null && message.replicationCycles.length)
+                                for (var i = 0; i < message.replicationCycles.length; ++i)
+                                    $root.google.cloud.vmmigration.v1.ReplicationCycle.encode(message.replicationCycles[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListReplicationCyclesResponse message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ListReplicationCyclesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesResponse
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IListReplicationCyclesResponse} message ListReplicationCyclesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListReplicationCyclesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListReplicationCyclesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.ListReplicationCyclesResponse} ListReplicationCyclesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListReplicationCyclesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.ListReplicationCyclesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.replicationCycles && message.replicationCycles.length))
+                                            message.replicationCycles = [];
+                                        message.replicationCycles.push($root.google.cloud.vmmigration.v1.ReplicationCycle.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListReplicationCyclesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.ListReplicationCyclesResponse} ListReplicationCyclesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListReplicationCyclesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListReplicationCyclesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListReplicationCyclesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.replicationCycles != null && message.hasOwnProperty("replicationCycles")) {
+                                if (!Array.isArray(message.replicationCycles))
+                                    return "replicationCycles: array expected";
+                                for (var i = 0; i < message.replicationCycles.length; ++i) {
+                                    var error = $root.google.cloud.vmmigration.v1.ReplicationCycle.verify(message.replicationCycles[i]);
+                                    if (error)
+                                        return "replicationCycles." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListReplicationCyclesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.ListReplicationCyclesResponse} ListReplicationCyclesResponse
+                         */
+                        ListReplicationCyclesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.ListReplicationCyclesResponse)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.ListReplicationCyclesResponse();
+                            if (object.replicationCycles) {
+                                if (!Array.isArray(object.replicationCycles))
+                                    throw TypeError(".google.cloud.vmmigration.v1.ListReplicationCyclesResponse.replicationCycles: array expected");
+                                message.replicationCycles = [];
+                                for (var i = 0; i < object.replicationCycles.length; ++i) {
+                                    if (typeof object.replicationCycles[i] !== "object")
+                                        throw TypeError(".google.cloud.vmmigration.v1.ListReplicationCyclesResponse.replicationCycles: object expected");
+                                    message.replicationCycles[i] = $root.google.cloud.vmmigration.v1.ReplicationCycle.fromObject(object.replicationCycles[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.vmmigration.v1.ListReplicationCyclesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListReplicationCyclesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesResponse
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.ListReplicationCyclesResponse} message ListReplicationCyclesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListReplicationCyclesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.replicationCycles = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.replicationCycles && message.replicationCycles.length) {
+                                object.replicationCycles = [];
+                                for (var j = 0; j < message.replicationCycles.length; ++j)
+                                    object.replicationCycles[j] = $root.google.cloud.vmmigration.v1.ReplicationCycle.toObject(message.replicationCycles[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListReplicationCyclesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListReplicationCyclesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListReplicationCyclesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.ListReplicationCyclesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListReplicationCyclesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.ListReplicationCyclesResponse";
+                        };
+    
+                        return ListReplicationCyclesResponse;
+                    })();
+    
+                    v1.GetReplicationCycleRequest = (function() {
+    
+                        /**
+                         * Properties of a GetReplicationCycleRequest.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @interface IGetReplicationCycleRequest
+                         * @property {string|null} [name] GetReplicationCycleRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetReplicationCycleRequest.
+                         * @memberof google.cloud.vmmigration.v1
+                         * @classdesc Represents a GetReplicationCycleRequest.
+                         * @implements IGetReplicationCycleRequest
+                         * @constructor
+                         * @param {google.cloud.vmmigration.v1.IGetReplicationCycleRequest=} [properties] Properties to set
+                         */
+                        function GetReplicationCycleRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetReplicationCycleRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmmigration.v1.GetReplicationCycleRequest
+                         * @instance
+                         */
+                        GetReplicationCycleRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetReplicationCycleRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmmigration.v1.GetReplicationCycleRequest
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IGetReplicationCycleRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmmigration.v1.GetReplicationCycleRequest} GetReplicationCycleRequest instance
+                         */
+                        GetReplicationCycleRequest.create = function create(properties) {
+                            return new GetReplicationCycleRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetReplicationCycleRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.GetReplicationCycleRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmmigration.v1.GetReplicationCycleRequest
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IGetReplicationCycleRequest} message GetReplicationCycleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetReplicationCycleRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetReplicationCycleRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.GetReplicationCycleRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.GetReplicationCycleRequest
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.IGetReplicationCycleRequest} message GetReplicationCycleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetReplicationCycleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetReplicationCycleRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmmigration.v1.GetReplicationCycleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmmigration.v1.GetReplicationCycleRequest} GetReplicationCycleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetReplicationCycleRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmmigration.v1.GetReplicationCycleRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetReplicationCycleRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmmigration.v1.GetReplicationCycleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmmigration.v1.GetReplicationCycleRequest} GetReplicationCycleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetReplicationCycleRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetReplicationCycleRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmmigration.v1.GetReplicationCycleRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetReplicationCycleRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetReplicationCycleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmmigration.v1.GetReplicationCycleRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmmigration.v1.GetReplicationCycleRequest} GetReplicationCycleRequest
+                         */
+                        GetReplicationCycleRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmmigration.v1.GetReplicationCycleRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmmigration.v1.GetReplicationCycleRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetReplicationCycleRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmmigration.v1.GetReplicationCycleRequest
+                         * @static
+                         * @param {google.cloud.vmmigration.v1.GetReplicationCycleRequest} message GetReplicationCycleRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetReplicationCycleRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetReplicationCycleRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmmigration.v1.GetReplicationCycleRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetReplicationCycleRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetReplicationCycleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmmigration.v1.GetReplicationCycleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetReplicationCycleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmmigration.v1.GetReplicationCycleRequest";
+                        };
+    
+                        return GetReplicationCycleRequest;
                     })();
     
                     return v1;

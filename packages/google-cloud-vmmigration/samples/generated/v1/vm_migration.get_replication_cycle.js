@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START vmmigration_v1_generated_VmMigration_DeleteUtilizationReport_async]
+  // [START vmmigration_v1_generated_VmMigration_GetReplicationCycle_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,23 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Utilization Report name.
+   *  Required. The name of the ReplicationCycle.
    */
   // const name = 'abc123'
-  /**
-   *  Optional. A request ID to identify requests. Specify a unique request ID
-   *  so that if you must retry your request, the server will know to ignore
-   *  the request if it has already been completed. The server will guarantee
-   *  that for at least 60 minutes after the first request.
-   *  For example, consider a situation where you make an initial request and t
-   *  he request times out. If you make the request again with the same request
-   *  ID, the server can check if original operation with the same request ID
-   *  was received, and if so, will ignore the second request. This prevents
-   *  clients from accidentally creating duplicate commitments.
-   *  The request ID must be a valid UUID with the exception that zero UUID is
-   *  not supported (00000000-0000-0000-0000-000000000000).
-   */
-  // const requestId = 'abc123'
 
   // Imports the Vmmigration library
   const {VmMigrationClient} = require('@google-cloud/vmmigration').v1;
@@ -53,20 +39,19 @@ function main(name) {
   // Instantiates a client
   const vmmigrationClient = new VmMigrationClient();
 
-  async function callDeleteUtilizationReport() {
+  async function callGetReplicationCycle() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await vmmigrationClient.deleteUtilizationReport(request);
-    const [response] = await operation.promise();
+    const response = await vmmigrationClient.getReplicationCycle(request);
     console.log(response);
   }
 
-  callDeleteUtilizationReport();
-  // [END vmmigration_v1_generated_VmMigration_DeleteUtilizationReport_async]
+  callGetReplicationCycle();
+  // [END vmmigration_v1_generated_VmMigration_GetReplicationCycle_async]
 }
 
 process.on('unhandledRejection', err => {
