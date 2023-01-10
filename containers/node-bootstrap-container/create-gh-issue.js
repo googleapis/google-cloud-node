@@ -15,7 +15,7 @@
 const {Octokit} = require('@octokit/rest');
 const octokit = new Octokit();
 
-async function createGHIssue (octokit) {
+async function createGHIssue(octokit) {
     await octokit.rest.issues.create({
         owner: 'googleapis',
         repo: process.env.MONO_REPO_NAME,
