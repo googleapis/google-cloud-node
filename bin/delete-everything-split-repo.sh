@@ -89,8 +89,7 @@ SAMPLES_CFG_TXT="#!/bin/bash
 set -eo pipefail
 export NPM_CONFIG_PREFIX=\${HOME}/.npm-global
 # Setup service account credentials.
-export GOOGLE_APPLICATION_CREDENTIALS=\${KOKORO_GFILE_DIR}/service-account.json
-export GCLOUD_PROJECT=long-door-651
+export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/secret_manager/long-door-651-kokoro-system-test-service-accountexport GCLOUD_PROJECT=long-door-651
 cd \$(dirname \$0)/..
 # Run a pre-test hook, if a pre-samples-test.sh is in the project
 if [ -f .kokoro/pre-samples-test.sh ]; then
