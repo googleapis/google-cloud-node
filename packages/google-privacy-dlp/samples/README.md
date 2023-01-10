@@ -2,50 +2,56 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Cloud Data Loss Prevention: Node.js Samples](https://github.com/googleapis/nodejs-dlp)
+# [Cloud Data Loss Prevention: Node.js Samples](https://github.com/googleapis/google-cloud-node)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
-The [Data Loss Prevention API](https://cloud.google.com/dlp/docs/) provides programmatic access to a
-powerful detection engine for personally identifiable information and other privacy-sensitive
-data in unstructured data streams.
+
 
 ## Table of Contents
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Categorical Risk Analysis](#categorical-risk-analysis)
-  * [Inspect Templates](#inspect-templates)
-  * [Job Triggers](#job-triggers)
-  * [Deidentify with Date Shift](#deidentify-with-date-shift)
-  * [Deidentify with FPE](#deidentify-with-fpe)
-  * [Deidentify with Mask](#deidentify-with-mask)
-  * [Deidentify with Replacement](#deidentify-with-replacement)
-  * [Delete Inspect Templates](#delete-inspect-templates)
-  * [Delete Job](#delete-job)
-  * [Delete Trigger](#delete-trigger)
-  * [Inspect Bigquery](#inspect-bigquery)
-  * [Inspect Datastore](#inspect-datastore)
-  * [Inspect File](#inspect-file)
-  * [Inspect GCS File](#inspect-gcs-file)
-  * [Inspects strings](#inspects-strings)
-  * [kAnonymity Analysis](#kanonymity-analysis)
-  * [kMap Estimation Analysis](#kmap-estimation-analysis)
-  * [l Diversity Analysis](#l-diversity-analysis)
-  * [List Inspect Templates](#list-inspect-templates)
-  * [List jobs](#list-jobs)
-  * [List Triggers](#list-triggers)
-  * [Metadata](#metadata)
-  * [Numerical Risk Analysis](#numerical-risk-analysis)
+  * [Dlp_service.activate_job_trigger](#dlp_service.activate_job_trigger)
+  * [Dlp_service.cancel_dlp_job](#dlp_service.cancel_dlp_job)
+  * [Dlp_service.create_deidentify_template](#dlp_service.create_deidentify_template)
+  * [Dlp_service.create_dlp_job](#dlp_service.create_dlp_job)
+  * [Dlp_service.create_inspect_template](#dlp_service.create_inspect_template)
+  * [Dlp_service.create_job_trigger](#dlp_service.create_job_trigger)
+  * [Dlp_service.create_stored_info_type](#dlp_service.create_stored_info_type)
+  * [Dlp_service.deidentify_content](#dlp_service.deidentify_content)
+  * [Dlp_service.delete_deidentify_template](#dlp_service.delete_deidentify_template)
+  * [Dlp_service.delete_dlp_job](#dlp_service.delete_dlp_job)
+  * [Dlp_service.delete_inspect_template](#dlp_service.delete_inspect_template)
+  * [Dlp_service.delete_job_trigger](#dlp_service.delete_job_trigger)
+  * [Dlp_service.delete_stored_info_type](#dlp_service.delete_stored_info_type)
+  * [Dlp_service.finish_dlp_job](#dlp_service.finish_dlp_job)
+  * [Dlp_service.get_deidentify_template](#dlp_service.get_deidentify_template)
+  * [Dlp_service.get_dlp_job](#dlp_service.get_dlp_job)
+  * [Dlp_service.get_inspect_template](#dlp_service.get_inspect_template)
+  * [Dlp_service.get_job_trigger](#dlp_service.get_job_trigger)
+  * [Dlp_service.get_stored_info_type](#dlp_service.get_stored_info_type)
+  * [Dlp_service.hybrid_inspect_dlp_job](#dlp_service.hybrid_inspect_dlp_job)
+  * [Dlp_service.hybrid_inspect_job_trigger](#dlp_service.hybrid_inspect_job_trigger)
+  * [Dlp_service.inspect_content](#dlp_service.inspect_content)
+  * [Dlp_service.list_deidentify_templates](#dlp_service.list_deidentify_templates)
+  * [Dlp_service.list_dlp_jobs](#dlp_service.list_dlp_jobs)
+  * [Dlp_service.list_info_types](#dlp_service.list_info_types)
+  * [Dlp_service.list_inspect_templates](#dlp_service.list_inspect_templates)
+  * [Dlp_service.list_job_triggers](#dlp_service.list_job_triggers)
+  * [Dlp_service.list_stored_info_types](#dlp_service.list_stored_info_types)
+  * [Dlp_service.redact_image](#dlp_service.redact_image)
+  * [Dlp_service.reidentify_content](#dlp_service.reidentify_content)
+  * [Dlp_service.update_deidentify_template](#dlp_service.update_deidentify_template)
+  * [Dlp_service.update_inspect_template](#dlp_service.update_inspect_template)
+  * [Dlp_service.update_job_trigger](#dlp_service.update_job_trigger)
+  * [Dlp_service.update_stored_info_type](#dlp_service.update_stored_info_type)
   * [Quickstart](#quickstart)
-  * [Redact Image](#redact-image)
-  * [Redact Text](#redact-text)
-  * [Reidentify with FPE](#reidentify-with-fpe)
 
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/nodejs-dlp#using-the-client-library).
+[Using the client library](https://github.com/googleapis/google-cloud-node#using-the-client-library).
 
 `cd samples`
 
@@ -57,18 +63,16 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Categorical Risk Analysis
+### Dlp_service.activate_job_trigger
 
-Computes risk metrics of a column of data in a Google BigQuery table.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.activate_job_trigger.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/categoricalRiskAnalysis.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/categoricalRiskAnalysis.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.activate_job_trigger.js,samples/README.md)
 
 __Usage:__
 
 
-`node categoricalRiskAnalysis.js my-project nhtsa_traffic_fatalities accident_2015 state_name my-topic my-subscription bigquery-public-data`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.activate_job_trigger.js`
 
 
 -----
@@ -76,18 +80,16 @@ __Usage:__
 
 
 
-### Inspect Templates
+### Dlp_service.cancel_dlp_job
 
-Create a new DLP inspection configuration template.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.cancel_dlp_job.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/createInspectTemplate.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/createInspectTemplate.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.cancel_dlp_job.js,samples/README.md)
 
 __Usage:__
 
 
-`node createInspectTemplate.js my-project VERY_LIKELY PERSON_NAME 5 false my-template-id`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.cancel_dlp_job.js`
 
 
 -----
@@ -95,18 +97,16 @@ __Usage:__
 
 
 
-### Job Triggers
+### Dlp_service.create_deidentify_template
 
-Create a Data Loss Prevention API job trigger.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_deidentify_template.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/createTrigger.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/createTrigger.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_deidentify_template.js,samples/README.md)
 
 __Usage:__
 
 
-`node createTrigger.js my-project triggerId displayName description bucketName autoPopulateTimespan scanPeriod infoTypes minLikelihood maxFindings`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_deidentify_template.js`
 
 
 -----
@@ -114,18 +114,16 @@ __Usage:__
 
 
 
-### Deidentify with Date Shift
+### Dlp_service.create_dlp_job
 
-Deidentify dates in a CSV file by pseudorandomly shifting them.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_dlp_job.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/deidentifyWithDateShift.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deidentifyWithDateShift.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_dlp_job.js,samples/README.md)
 
 __Usage:__
 
 
-`node deidentifyWithDateShift.js my-project dates.csv dates-shifted.csv 30 30 birth_date register_date [<YOUR_ENCRYPTED_AES_256_KEY> projects/my-project/locations/global/keyrings/my-keyring]`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_dlp_job.js`
 
 
 -----
@@ -133,18 +131,16 @@ __Usage:__
 
 
 
-### Deidentify with FPE
+### Dlp_service.create_inspect_template
 
-Deidentify sensitive data in a string using Format Preserving Encryption (FPE).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_inspect_template.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/deidentifyWithFpe.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deidentifyWithFpe.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_inspect_template.js,samples/README.md)
 
 __Usage:__
 
 
-`node deidentifyWithFpe.js my-project "My SSN is 372819127" <YOUR_ENCRYPTED_AES_256_KEY> projects/my-project/locations/global/keyrings/my-keyring SSN_TOKEN`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_inspect_template.js`
 
 
 -----
@@ -152,18 +148,16 @@ __Usage:__
 
 
 
-### Deidentify with Mask
+### Dlp_service.create_job_trigger
 
-Deidentify sensitive data in a string by masking it with a character.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_job_trigger.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/deidentifyWithMask.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deidentifyWithMask.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_job_trigger.js,samples/README.md)
 
 __Usage:__
 
 
-`node deidentifyWithMask.js my-project string maskingCharacter numberToMask`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_job_trigger.js`
 
 
 -----
@@ -171,18 +165,16 @@ __Usage:__
 
 
 
-### Deidentify with Replacement
+### Dlp_service.create_stored_info_type
 
-Deidentify sensitive data in a string by replacing it with a given replacement string.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_stored_info_type.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/deidentifyWithReplacement.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deidentifyWithReplacement.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_stored_info_type.js,samples/README.md)
 
 __Usage:__
 
 
-`node deidentifyWithMask.js my-project string replacement`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_stored_info_type.js`
 
 
 -----
@@ -190,18 +182,16 @@ __Usage:__
 
 
 
-### Delete Inspect Templates
+### Dlp_service.deidentify_content
 
-Delete the DLP inspection configuration template with the specified name.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.deidentify_content.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/deleteInspectTemplate.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deleteInspectTemplate.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.deidentify_content.js,samples/README.md)
 
 __Usage:__
 
 
-`node deleteInspectTemplates.js my-project projects/my-project/inspectTemplates/`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.deidentify_content.js`
 
 
 -----
@@ -209,18 +199,16 @@ __Usage:__
 
 
 
-### Delete Job
+### Dlp_service.delete_deidentify_template
 
-Delete results of a Data Loss Prevention API job.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_deidentify_template.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/deleteJob.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deleteJob.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_deidentify_template.js,samples/README.md)
 
 __Usage:__
 
 
-`node deleteJob.js my-project projects/YOUR_GCLOUD_PROJECT/dlpJobs/X-`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_deidentify_template.js`
 
 
 -----
@@ -228,18 +216,16 @@ __Usage:__
 
 
 
-### Delete Trigger
+### Dlp_service.delete_dlp_job
 
-Delete results of a Data Loss Prevention API job.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_dlp_job.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/deleteTrigger.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deleteTrigger.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_dlp_job.js,samples/README.md)
 
 __Usage:__
 
 
-`node deleteTrigger.js my-rpoject projects/my-project/jobTriggers/my-trigger`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_dlp_job.js`
 
 
 -----
@@ -247,18 +233,16 @@ __Usage:__
 
 
 
-### Inspect Bigquery
+### Dlp_service.delete_inspect_template
 
-Inspects a BigQuery table using the Data Loss Prevention API using Pub/Sub for job notifications.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_inspect_template.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/inspectBigQuery.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectBigQuery.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_inspect_template.js,samples/README.md)
 
 __Usage:__
 
 
-`node inspectBigQuery.js my-project dataProjectId datasetId tableId topicId subscriptionId minLikelihood maxFindings infoTypes customInfoTypes`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_inspect_template.js`
 
 
 -----
@@ -266,18 +250,16 @@ __Usage:__
 
 
 
-### Inspect Datastore
+### Dlp_service.delete_job_trigger
 
-Inspect a Datastore instance using the Data Loss Prevention API using Pub/Sub for job notifications.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_job_trigger.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/inspectDatastore.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectDatastore.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_job_trigger.js,samples/README.md)
 
 __Usage:__
 
 
-`node inspectDatastore.js my-project dataProjectId namespaceId kind topicId subscriptionId minLikelihood maxFindings infoTypes customInfoTypes`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_job_trigger.js`
 
 
 -----
@@ -285,18 +267,16 @@ __Usage:__
 
 
 
-### Inspect File
+### Dlp_service.delete_stored_info_type
 
-Inspects a local text, PNG, or JPEG file using the Data Loss Prevention API.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_stored_info_type.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/inspectFile.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectFile.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_stored_info_type.js,samples/README.md)
 
 __Usage:__
 
 
-`node inspectFile.js my-project filepath minLikelihood maxFindings infoTypes customInfoTypes includeQuote`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_stored_info_type.js`
 
 
 -----
@@ -304,18 +284,16 @@ __Usage:__
 
 
 
-### Inspect GCS File
+### Dlp_service.finish_dlp_job
 
-Inspects a text file stored on Google Cloud Storage with the Data Loss Prevention API, using Pub/Sub for job notifications.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.finish_dlp_job.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/inspectGCSFile.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectGCSFile.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.finish_dlp_job.js,samples/README.md)
 
 __Usage:__
 
 
-`node inspectGCSFile.js my-project filepath minLikelihood maxFindings infoTypes customInfoTypes includeQuote`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.finish_dlp_job.js`
 
 
 -----
@@ -323,18 +301,16 @@ __Usage:__
 
 
 
-### Inspects strings
+### Dlp_service.get_deidentify_template
 
-Inspect a string using the Data Loss Prevention API.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_deidentify_template.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/inspectString.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectString.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_deidentify_template.js,samples/README.md)
 
 __Usage:__
 
 
-`node inspectString.js my-project string minLikelihood maxFindings infoTypes customInfoTypes includeQuote`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_deidentify_template.js`
 
 
 -----
@@ -342,18 +318,16 @@ __Usage:__
 
 
 
-### kAnonymity Analysis
+### Dlp_service.get_dlp_job
 
-Computes the k-anonymity of a column set in a Google BigQuery table
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_dlp_job.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/kAnonymityAnalysis.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/kAnonymityAnalysis.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_dlp_job.js,samples/README.md)
 
 __Usage:__
 
 
-`node kAnonymityAnalysis.js my-project tableProjectId datasetId tableId topicId subscriptionId quasiIds`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_dlp_job.js`
 
 
 -----
@@ -361,18 +335,16 @@ __Usage:__
 
 
 
-### kMap Estimation Analysis
+### Dlp_service.get_inspect_template
 
-Computes the k-map risk estimation of a column set in a Google BigQuery table.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_inspect_template.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/kMapEstimationAnalysis.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/kMapEstimationAnalysis.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_inspect_template.js,samples/README.md)
 
 __Usage:__
 
 
-`node kMapEstimationAnalysis.js my-project tableProjectId datasetId tableId topicId subscriptionId regionCode quasiIds`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_inspect_template.js`
 
 
 -----
@@ -380,18 +352,16 @@ __Usage:__
 
 
 
-### l Diversity Analysis
+### Dlp_service.get_job_trigger
 
-Computes the l-diversity of a column set in a Google BigQuery table.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_job_trigger.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/lDiversityAnalysis.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/lDiversityAnalysis.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_job_trigger.js,samples/README.md)
 
 __Usage:__
 
 
-`node lDiversityAnalysis.js my-project tableProjectId datasetId tableId topicId subscriptionId sensitiveAttribute quasiIds`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_job_trigger.js`
 
 
 -----
@@ -399,18 +369,16 @@ __Usage:__
 
 
 
-### List Inspect Templates
+### Dlp_service.get_stored_info_type
 
-List DLP inspection configuration templates.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_stored_info_type.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/listInspectTemplates.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/listInspectTemplates.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_stored_info_type.js,samples/README.md)
 
 __Usage:__
 
 
-`node listInspectTemplates.js my-project`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_stored_info_type.js`
 
 
 -----
@@ -418,18 +386,16 @@ __Usage:__
 
 
 
-### List jobs
+### Dlp_service.hybrid_inspect_dlp_job
 
-List Data Loss Prevention API jobs corresponding to a given filter.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.hybrid_inspect_dlp_job.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/listJobs.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/listJobs.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.hybrid_inspect_dlp_job.js,samples/README.md)
 
 __Usage:__
 
 
-`node listJobs.js my-project filter jobType`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.hybrid_inspect_dlp_job.js`
 
 
 -----
@@ -437,18 +403,16 @@ __Usage:__
 
 
 
-### List Triggers
+### Dlp_service.hybrid_inspect_job_trigger
 
-List Data Loss Prevention API job triggers.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.hybrid_inspect_job_trigger.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/listTriggers.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/listTriggers.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.hybrid_inspect_job_trigger.js,samples/README.md)
 
 __Usage:__
 
 
-`node listTriggers.js my-project`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.hybrid_inspect_job_trigger.js`
 
 
 -----
@@ -456,18 +420,16 @@ __Usage:__
 
 
 
-### Metadata
+### Dlp_service.inspect_content
 
-List the types of sensitive information the DLP API supports
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.inspect_content.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/metadata.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/metadata.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.inspect_content.js,samples/README.md)
 
 __Usage:__
 
 
-`node metadata.js my-project langaugeCode filter`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.inspect_content.js`
 
 
 -----
@@ -475,18 +437,203 @@ __Usage:__
 
 
 
-### Numerical Risk Analysis
+### Dlp_service.list_deidentify_templates
 
-Computes risk metrics of a column of numbers in a Google BigQuery table.
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_deidentify_templates.js).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/numericalRiskAnalysis.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/numericalRiskAnalysis.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_deidentify_templates.js,samples/README.md)
 
 __Usage:__
 
 
-`node numericalRiskAnalysis.js my-project tableProjectId datasetId tableId columnName topicId subscriptionId`
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_deidentify_templates.js`
+
+
+-----
+
+
+
+
+### Dlp_service.list_dlp_jobs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_dlp_jobs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_dlp_jobs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_dlp_jobs.js`
+
+
+-----
+
+
+
+
+### Dlp_service.list_info_types
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_info_types.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_info_types.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_info_types.js`
+
+
+-----
+
+
+
+
+### Dlp_service.list_inspect_templates
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_inspect_templates.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_inspect_templates.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_inspect_templates.js`
+
+
+-----
+
+
+
+
+### Dlp_service.list_job_triggers
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_job_triggers.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_job_triggers.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_job_triggers.js`
+
+
+-----
+
+
+
+
+### Dlp_service.list_stored_info_types
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_stored_info_types.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_stored_info_types.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_stored_info_types.js`
+
+
+-----
+
+
+
+
+### Dlp_service.redact_image
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.redact_image.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.redact_image.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.redact_image.js`
+
+
+-----
+
+
+
+
+### Dlp_service.reidentify_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.reidentify_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.reidentify_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.reidentify_content.js`
+
+
+-----
+
+
+
+
+### Dlp_service.update_deidentify_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_deidentify_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_deidentify_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_deidentify_template.js`
+
+
+-----
+
+
+
+
+### Dlp_service.update_inspect_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_inspect_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_inspect_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_inspect_template.js`
+
+
+-----
+
+
+
+
+### Dlp_service.update_job_trigger
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_job_trigger.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_job_trigger.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_job_trigger.js`
+
+
+-----
+
+
+
+
+### Dlp_service.update_stored_info_type
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_stored_info_type.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_stored_info_type.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_stored_info_type.js`
 
 
 -----
@@ -498,9 +645,9 @@ __Usage:__
 
 Inspects and assesses a string.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
@@ -508,67 +655,10 @@ __Usage:__
 `node quickstart.js my-project`
 
 
------
-
-
-
-
-### Redact Image
-
-Redact sensitive data from an image using the Data Loss Prevention API.
-
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/redactImage.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/redactImage.js,samples/README.md)
-
-__Usage:__
-
-
-`node redactImage.js my-project filepath minLikelihood infoTypes outputPath`
-
-
------
-
-
-
-
-### Redact Text
-
-Redact sensitive data from text using the Data Loss Prevention API.
-
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/redactText.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/redactText.js,samples/README.md)
-
-__Usage:__
-
-
-`node redactText.js my-project string minLikelihood infoTypes`
-
-
------
-
-
-
-
-### Reidentify with FPE
-
-Reidentify sensitive data in a string using Format Preserving Encryption (FPE).
-
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/reidentifyWithFpe.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/reidentifyWithFpe.js,samples/README.md)
-
-__Usage:__
-
-
-`node reidentifyWithFpe.js my-project string alphabet surrogateType keyName wrappedKey`
-
-
 
 
 
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/README.md
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
 [product-docs]: https://cloud.google.com/dlp/docs/

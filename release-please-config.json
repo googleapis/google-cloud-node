@@ -121,6 +121,7 @@
     "packages/google-maps-addressvalidation": {},
     "packages/google-maps-routing": {},
     "packages/google-monitoring-dashboard": {},
+    "packages/google-privacy-dlp": {},
     "packages/google-storagetransfer": {},
     "packages/grafeas": {},
     "packages/typeless-sample-bot": {}

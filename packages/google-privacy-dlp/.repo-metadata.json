@@ -6,7 +6,7 @@
   "default_version": "v2",
   "language": "nodejs",
   "name_pretty": "Cloud Data Loss Prevention",
-  "repo": "googleapis/nodejs-dlp",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://cloud.google.com/dlp/docs/",
   "requires_billing": true,
   "name": "dlp",

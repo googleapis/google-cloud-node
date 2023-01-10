@@ -120,6 +120,7 @@
   "packages/google-maps-addressvalidation": "1.0.0",
   "packages/google-maps-routing": "0.2.1",
   "packages/google-monitoring-dashboard": "2.8.0",
+  "packages/google-privacy-dlp": "4.3.0",
   "packages/google-storagetransfer": "2.2.1",
   "packages/grafeas": "4.2.1",
   "packages/typeless-sample-bot": "1.2.0"
