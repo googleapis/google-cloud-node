@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId, networkPolicy) {
-  // [START container_v1beta1_generated_ClusterManager_SetNetworkPolicy_async]
+function main(name) {
+  // [START vmmigration_v1_generated_VmMigration_GetReplicationCycle_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,37 +29,29 @@ function main(projectId, zone, clusterId, networkPolicy) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Configuration options for the NetworkPolicy feature.
-   */
-  // const networkPolicy = {}
-  /**
-   *  The name (project, location, cluster name) of the cluster to set networking
-   *  policy. Specified in the format `projects/* /locations/* /clusters/*`.
+   *  Required. The name of the ReplicationCycle.
    */
   // const name = 'abc123'
 
-  // Imports the Container library
-  const {ClusterManagerClient} = require('@google-cloud/container').v1beta1;
+  // Imports the Vmmigration library
+  const {VmMigrationClient} = require('@google-cloud/vmmigration').v1;
 
   // Instantiates a client
-  const containerClient = new ClusterManagerClient();
+  const vmmigrationClient = new VmMigrationClient();
 
-  async function callSetNetworkPolicy() {
+  async function callGetReplicationCycle() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
-      networkPolicy,
+      name,
     };
 
     // Run request
-    const response = await containerClient.setNetworkPolicy(request);
+    const response = await vmmigrationClient.getReplicationCycle(request);
     console.log(response);
   }
 
-  callSetNetworkPolicy();
-  // [END container_v1beta1_generated_ClusterManager_SetNetworkPolicy_async]
+  callGetReplicationCycle();
+  // [END vmmigration_v1_generated_VmMigration_GetReplicationCycle_async]
 }
 
 process.on('unhandledRejection', err => {

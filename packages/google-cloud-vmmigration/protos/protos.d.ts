@@ -661,6 +661,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteTargetProject(request: google.cloud.vmmigration.v1.IDeleteTargetProjectRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListReplicationCycles.
+                     * @param request ListReplicationCyclesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListReplicationCyclesResponse
+                     */
+                    public listReplicationCycles(request: google.cloud.vmmigration.v1.IListReplicationCyclesRequest, callback: google.cloud.vmmigration.v1.VmMigration.ListReplicationCyclesCallback): void;
+
+                    /**
+                     * Calls ListReplicationCycles.
+                     * @param request ListReplicationCyclesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listReplicationCycles(request: google.cloud.vmmigration.v1.IListReplicationCyclesRequest): Promise<google.cloud.vmmigration.v1.ListReplicationCyclesResponse>;
+
+                    /**
+                     * Calls GetReplicationCycle.
+                     * @param request GetReplicationCycleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ReplicationCycle
+                     */
+                    public getReplicationCycle(request: google.cloud.vmmigration.v1.IGetReplicationCycleRequest, callback: google.cloud.vmmigration.v1.VmMigration.GetReplicationCycleCallback): void;
+
+                    /**
+                     * Calls GetReplicationCycle.
+                     * @param request GetReplicationCycleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getReplicationCycle(request: google.cloud.vmmigration.v1.IGetReplicationCycleRequest): Promise<google.cloud.vmmigration.v1.ReplicationCycle>;
                 }
 
                 namespace VmMigration {
@@ -972,6 +1000,20 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteTargetProjectCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|listReplicationCycles}.
+                     * @param error Error, if any
+                     * @param [response] ListReplicationCyclesResponse
+                     */
+                    type ListReplicationCyclesCallback = (error: (Error|null), response?: google.cloud.vmmigration.v1.ListReplicationCyclesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vmmigration.v1.VmMigration|getReplicationCycle}.
+                     * @param error Error, if any
+                     * @param [response] ReplicationCycle
+                     */
+                    type GetReplicationCycleCallback = (error: (Error|null), response?: google.cloud.vmmigration.v1.ReplicationCycle) => void;
                 }
 
                 /** UtilizationReportView enum. */
@@ -1013,11 +1055,32 @@ export namespace google {
                 /** Properties of a ReplicationCycle. */
                 interface IReplicationCycle {
 
+                    /** ReplicationCycle name */
+                    name?: (string|null);
+
+                    /** ReplicationCycle cycleNumber */
+                    cycleNumber?: (number|null);
+
                     /** ReplicationCycle startTime */
                     startTime?: (google.protobuf.ITimestamp|null);
 
+                    /** ReplicationCycle endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ReplicationCycle totalPauseDuration */
+                    totalPauseDuration?: (google.protobuf.IDuration|null);
+
                     /** ReplicationCycle progressPercent */
                     progressPercent?: (number|null);
+
+                    /** ReplicationCycle steps */
+                    steps?: (google.cloud.vmmigration.v1.ICycleStep[]|null);
+
+                    /** ReplicationCycle state */
+                    state?: (google.cloud.vmmigration.v1.ReplicationCycle.State|keyof typeof google.cloud.vmmigration.v1.ReplicationCycle.State|null);
+
+                    /** ReplicationCycle error */
+                    error?: (google.rpc.IStatus|null);
                 }
 
                 /** Represents a ReplicationCycle. */
@@ -1029,11 +1092,32 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.vmmigration.v1.IReplicationCycle);
 
+                    /** ReplicationCycle name. */
+                    public name: string;
+
+                    /** ReplicationCycle cycleNumber. */
+                    public cycleNumber: number;
+
                     /** ReplicationCycle startTime. */
                     public startTime?: (google.protobuf.ITimestamp|null);
 
+                    /** ReplicationCycle endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ReplicationCycle totalPauseDuration. */
+                    public totalPauseDuration?: (google.protobuf.IDuration|null);
+
                     /** ReplicationCycle progressPercent. */
                     public progressPercent: number;
+
+                    /** ReplicationCycle steps. */
+                    public steps: google.cloud.vmmigration.v1.ICycleStep[];
+
+                    /** ReplicationCycle state. */
+                    public state: (google.cloud.vmmigration.v1.ReplicationCycle.State|keyof typeof google.cloud.vmmigration.v1.ReplicationCycle.State);
+
+                    /** ReplicationCycle error. */
+                    public error?: (google.rpc.IStatus|null);
 
                     /**
                      * Creates a new ReplicationCycle instance using the specified properties.
@@ -1107,6 +1191,439 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ReplicationCycle
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReplicationCycle {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        PAUSED = 2,
+                        FAILED = 3,
+                        SUCCEEDED = 4
+                    }
+                }
+
+                /** Properties of a CycleStep. */
+                interface ICycleStep {
+
+                    /** CycleStep initializingReplication */
+                    initializingReplication?: (google.cloud.vmmigration.v1.IInitializingReplicationStep|null);
+
+                    /** CycleStep replicating */
+                    replicating?: (google.cloud.vmmigration.v1.IReplicatingStep|null);
+
+                    /** CycleStep postProcessing */
+                    postProcessing?: (google.cloud.vmmigration.v1.IPostProcessingStep|null);
+
+                    /** CycleStep startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CycleStep endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CycleStep. */
+                class CycleStep implements ICycleStep {
+
+                    /**
+                     * Constructs a new CycleStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ICycleStep);
+
+                    /** CycleStep initializingReplication. */
+                    public initializingReplication?: (google.cloud.vmmigration.v1.IInitializingReplicationStep|null);
+
+                    /** CycleStep replicating. */
+                    public replicating?: (google.cloud.vmmigration.v1.IReplicatingStep|null);
+
+                    /** CycleStep postProcessing. */
+                    public postProcessing?: (google.cloud.vmmigration.v1.IPostProcessingStep|null);
+
+                    /** CycleStep startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CycleStep endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CycleStep step. */
+                    public step?: ("initializingReplication"|"replicating"|"postProcessing");
+
+                    /**
+                     * Creates a new CycleStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CycleStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ICycleStep): google.cloud.vmmigration.v1.CycleStep;
+
+                    /**
+                     * Encodes the specified CycleStep message. Does not implicitly {@link google.cloud.vmmigration.v1.CycleStep.verify|verify} messages.
+                     * @param message CycleStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ICycleStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CycleStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CycleStep.verify|verify} messages.
+                     * @param message CycleStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ICycleStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CycleStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CycleStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.CycleStep;
+
+                    /**
+                     * Decodes a CycleStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CycleStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.CycleStep;
+
+                    /**
+                     * Verifies a CycleStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CycleStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CycleStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.CycleStep;
+
+                    /**
+                     * Creates a plain object from a CycleStep message. Also converts values to other types if specified.
+                     * @param message CycleStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.CycleStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CycleStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CycleStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InitializingReplicationStep. */
+                interface IInitializingReplicationStep {
+                }
+
+                /** Represents an InitializingReplicationStep. */
+                class InitializingReplicationStep implements IInitializingReplicationStep {
+
+                    /**
+                     * Constructs a new InitializingReplicationStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IInitializingReplicationStep);
+
+                    /**
+                     * Creates a new InitializingReplicationStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InitializingReplicationStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IInitializingReplicationStep): google.cloud.vmmigration.v1.InitializingReplicationStep;
+
+                    /**
+                     * Encodes the specified InitializingReplicationStep message. Does not implicitly {@link google.cloud.vmmigration.v1.InitializingReplicationStep.verify|verify} messages.
+                     * @param message InitializingReplicationStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IInitializingReplicationStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InitializingReplicationStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.InitializingReplicationStep.verify|verify} messages.
+                     * @param message InitializingReplicationStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IInitializingReplicationStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InitializingReplicationStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InitializingReplicationStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.InitializingReplicationStep;
+
+                    /**
+                     * Decodes an InitializingReplicationStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InitializingReplicationStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.InitializingReplicationStep;
+
+                    /**
+                     * Verifies an InitializingReplicationStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InitializingReplicationStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InitializingReplicationStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.InitializingReplicationStep;
+
+                    /**
+                     * Creates a plain object from an InitializingReplicationStep message. Also converts values to other types if specified.
+                     * @param message InitializingReplicationStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.InitializingReplicationStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InitializingReplicationStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InitializingReplicationStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReplicatingStep. */
+                interface IReplicatingStep {
+
+                    /** ReplicatingStep totalBytes */
+                    totalBytes?: (number|Long|string|null);
+
+                    /** ReplicatingStep replicatedBytes */
+                    replicatedBytes?: (number|Long|string|null);
+
+                    /** ReplicatingStep lastTwoMinutesAverageBytesPerSecond */
+                    lastTwoMinutesAverageBytesPerSecond?: (number|Long|string|null);
+
+                    /** ReplicatingStep lastThirtyMinutesAverageBytesPerSecond */
+                    lastThirtyMinutesAverageBytesPerSecond?: (number|Long|string|null);
+                }
+
+                /** Represents a ReplicatingStep. */
+                class ReplicatingStep implements IReplicatingStep {
+
+                    /**
+                     * Constructs a new ReplicatingStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IReplicatingStep);
+
+                    /** ReplicatingStep totalBytes. */
+                    public totalBytes: (number|Long|string);
+
+                    /** ReplicatingStep replicatedBytes. */
+                    public replicatedBytes: (number|Long|string);
+
+                    /** ReplicatingStep lastTwoMinutesAverageBytesPerSecond. */
+                    public lastTwoMinutesAverageBytesPerSecond: (number|Long|string);
+
+                    /** ReplicatingStep lastThirtyMinutesAverageBytesPerSecond. */
+                    public lastThirtyMinutesAverageBytesPerSecond: (number|Long|string);
+
+                    /**
+                     * Creates a new ReplicatingStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReplicatingStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IReplicatingStep): google.cloud.vmmigration.v1.ReplicatingStep;
+
+                    /**
+                     * Encodes the specified ReplicatingStep message. Does not implicitly {@link google.cloud.vmmigration.v1.ReplicatingStep.verify|verify} messages.
+                     * @param message ReplicatingStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IReplicatingStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReplicatingStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ReplicatingStep.verify|verify} messages.
+                     * @param message ReplicatingStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IReplicatingStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReplicatingStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReplicatingStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ReplicatingStep;
+
+                    /**
+                     * Decodes a ReplicatingStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReplicatingStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ReplicatingStep;
+
+                    /**
+                     * Verifies a ReplicatingStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReplicatingStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReplicatingStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ReplicatingStep;
+
+                    /**
+                     * Creates a plain object from a ReplicatingStep message. Also converts values to other types if specified.
+                     * @param message ReplicatingStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ReplicatingStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReplicatingStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReplicatingStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PostProcessingStep. */
+                interface IPostProcessingStep {
+                }
+
+                /** Represents a PostProcessingStep. */
+                class PostProcessingStep implements IPostProcessingStep {
+
+                    /**
+                     * Constructs a new PostProcessingStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IPostProcessingStep);
+
+                    /**
+                     * Creates a new PostProcessingStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PostProcessingStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IPostProcessingStep): google.cloud.vmmigration.v1.PostProcessingStep;
+
+                    /**
+                     * Encodes the specified PostProcessingStep message. Does not implicitly {@link google.cloud.vmmigration.v1.PostProcessingStep.verify|verify} messages.
+                     * @param message PostProcessingStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IPostProcessingStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PostProcessingStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.PostProcessingStep.verify|verify} messages.
+                     * @param message PostProcessingStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IPostProcessingStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PostProcessingStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PostProcessingStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.PostProcessingStep;
+
+                    /**
+                     * Decodes a PostProcessingStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PostProcessingStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.PostProcessingStep;
+
+                    /**
+                     * Verifies a PostProcessingStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PostProcessingStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PostProcessingStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.PostProcessingStep;
+
+                    /**
+                     * Creates a plain object from a PostProcessingStep message. Also converts values to other types if specified.
+                     * @param message PostProcessingStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.PostProcessingStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PostProcessingStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PostProcessingStep
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -1216,6 +1733,9 @@ export namespace google {
                     /** MigratingVm computeEngineTargetDefaults */
                     computeEngineTargetDefaults?: (google.cloud.vmmigration.v1.IComputeEngineTargetDefaults|null);
 
+                    /** MigratingVm awsSourceVmDetails */
+                    awsSourceVmDetails?: (google.cloud.vmmigration.v1.IAwsSourceVmDetails|null);
+
                     /** MigratingVm name */
                     name?: (string|null);
 
@@ -1277,6 +1797,9 @@ export namespace google {
                     /** MigratingVm computeEngineTargetDefaults. */
                     public computeEngineTargetDefaults?: (google.cloud.vmmigration.v1.IComputeEngineTargetDefaults|null);
 
+                    /** MigratingVm awsSourceVmDetails. */
+                    public awsSourceVmDetails?: (google.cloud.vmmigration.v1.IAwsSourceVmDetails|null);
+
                     /** MigratingVm name. */
                     public name: string;
 
@@ -1327,6 +1850,9 @@ export namespace google {
 
                     /** MigratingVm targetVmDefaults. */
                     public targetVmDefaults?: "computeEngineTargetDefaults";
+
+                    /** MigratingVm sourceVmDetails. */
+                    public sourceVmDetails?: "awsSourceVmDetails";
 
                     /**
                      * Creates a new MigratingVm instance using the specified properties.
@@ -1448,6 +1974,9 @@ export namespace google {
 
                     /** CloneJob error */
                     error?: (google.rpc.IStatus|null);
+
+                    /** CloneJob steps */
+                    steps?: (google.cloud.vmmigration.v1.ICloneStep[]|null);
                 }
 
                 /** Represents a CloneJob. */
@@ -1479,6 +2008,9 @@ export namespace google {
 
                     /** CloneJob error. */
                     public error?: (google.rpc.IStatus|null);
+
+                    /** CloneJob steps. */
+                    public steps: google.cloud.vmmigration.v1.ICloneStep[];
 
                     /** CloneJob targetVmDetails. */
                     public targetVmDetails?: "computeEngineTargetDetails";
@@ -1576,6 +2108,403 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a CloneStep. */
+                interface ICloneStep {
+
+                    /** CloneStep adaptingOs */
+                    adaptingOs?: (google.cloud.vmmigration.v1.IAdaptingOSStep|null);
+
+                    /** CloneStep preparingVmDisks */
+                    preparingVmDisks?: (google.cloud.vmmigration.v1.IPreparingVMDisksStep|null);
+
+                    /** CloneStep instantiatingMigratedVm */
+                    instantiatingMigratedVm?: (google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep|null);
+
+                    /** CloneStep startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CloneStep endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CloneStep. */
+                class CloneStep implements ICloneStep {
+
+                    /**
+                     * Constructs a new CloneStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ICloneStep);
+
+                    /** CloneStep adaptingOs. */
+                    public adaptingOs?: (google.cloud.vmmigration.v1.IAdaptingOSStep|null);
+
+                    /** CloneStep preparingVmDisks. */
+                    public preparingVmDisks?: (google.cloud.vmmigration.v1.IPreparingVMDisksStep|null);
+
+                    /** CloneStep instantiatingMigratedVm. */
+                    public instantiatingMigratedVm?: (google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep|null);
+
+                    /** CloneStep startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CloneStep endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CloneStep step. */
+                    public step?: ("adaptingOs"|"preparingVmDisks"|"instantiatingMigratedVm");
+
+                    /**
+                     * Creates a new CloneStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloneStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ICloneStep): google.cloud.vmmigration.v1.CloneStep;
+
+                    /**
+                     * Encodes the specified CloneStep message. Does not implicitly {@link google.cloud.vmmigration.v1.CloneStep.verify|verify} messages.
+                     * @param message CloneStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ICloneStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloneStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CloneStep.verify|verify} messages.
+                     * @param message CloneStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ICloneStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloneStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloneStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.CloneStep;
+
+                    /**
+                     * Decodes a CloneStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloneStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.CloneStep;
+
+                    /**
+                     * Verifies a CloneStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloneStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloneStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.CloneStep;
+
+                    /**
+                     * Creates a plain object from a CloneStep message. Also converts values to other types if specified.
+                     * @param message CloneStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.CloneStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloneStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloneStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AdaptingOSStep. */
+                interface IAdaptingOSStep {
+                }
+
+                /** Represents an AdaptingOSStep. */
+                class AdaptingOSStep implements IAdaptingOSStep {
+
+                    /**
+                     * Constructs a new AdaptingOSStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IAdaptingOSStep);
+
+                    /**
+                     * Creates a new AdaptingOSStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AdaptingOSStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IAdaptingOSStep): google.cloud.vmmigration.v1.AdaptingOSStep;
+
+                    /**
+                     * Encodes the specified AdaptingOSStep message. Does not implicitly {@link google.cloud.vmmigration.v1.AdaptingOSStep.verify|verify} messages.
+                     * @param message AdaptingOSStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IAdaptingOSStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AdaptingOSStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AdaptingOSStep.verify|verify} messages.
+                     * @param message AdaptingOSStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IAdaptingOSStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AdaptingOSStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AdaptingOSStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AdaptingOSStep;
+
+                    /**
+                     * Decodes an AdaptingOSStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AdaptingOSStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AdaptingOSStep;
+
+                    /**
+                     * Verifies an AdaptingOSStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AdaptingOSStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AdaptingOSStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AdaptingOSStep;
+
+                    /**
+                     * Creates a plain object from an AdaptingOSStep message. Also converts values to other types if specified.
+                     * @param message AdaptingOSStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.AdaptingOSStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AdaptingOSStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AdaptingOSStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PreparingVMDisksStep. */
+                interface IPreparingVMDisksStep {
+                }
+
+                /** Represents a PreparingVMDisksStep. */
+                class PreparingVMDisksStep implements IPreparingVMDisksStep {
+
+                    /**
+                     * Constructs a new PreparingVMDisksStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IPreparingVMDisksStep);
+
+                    /**
+                     * Creates a new PreparingVMDisksStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PreparingVMDisksStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IPreparingVMDisksStep): google.cloud.vmmigration.v1.PreparingVMDisksStep;
+
+                    /**
+                     * Encodes the specified PreparingVMDisksStep message. Does not implicitly {@link google.cloud.vmmigration.v1.PreparingVMDisksStep.verify|verify} messages.
+                     * @param message PreparingVMDisksStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IPreparingVMDisksStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PreparingVMDisksStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.PreparingVMDisksStep.verify|verify} messages.
+                     * @param message PreparingVMDisksStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IPreparingVMDisksStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PreparingVMDisksStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PreparingVMDisksStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.PreparingVMDisksStep;
+
+                    /**
+                     * Decodes a PreparingVMDisksStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PreparingVMDisksStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.PreparingVMDisksStep;
+
+                    /**
+                     * Verifies a PreparingVMDisksStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PreparingVMDisksStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PreparingVMDisksStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.PreparingVMDisksStep;
+
+                    /**
+                     * Creates a plain object from a PreparingVMDisksStep message. Also converts values to other types if specified.
+                     * @param message PreparingVMDisksStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.PreparingVMDisksStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PreparingVMDisksStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PreparingVMDisksStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InstantiatingMigratedVMStep. */
+                interface IInstantiatingMigratedVMStep {
+                }
+
+                /** Represents an InstantiatingMigratedVMStep. */
+                class InstantiatingMigratedVMStep implements IInstantiatingMigratedVMStep {
+
+                    /**
+                     * Constructs a new InstantiatingMigratedVMStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep);
+
+                    /**
+                     * Creates a new InstantiatingMigratedVMStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstantiatingMigratedVMStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep): google.cloud.vmmigration.v1.InstantiatingMigratedVMStep;
+
+                    /**
+                     * Encodes the specified InstantiatingMigratedVMStep message. Does not implicitly {@link google.cloud.vmmigration.v1.InstantiatingMigratedVMStep.verify|verify} messages.
+                     * @param message InstantiatingMigratedVMStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstantiatingMigratedVMStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.InstantiatingMigratedVMStep.verify|verify} messages.
+                     * @param message InstantiatingMigratedVMStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstantiatingMigratedVMStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstantiatingMigratedVMStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.InstantiatingMigratedVMStep;
+
+                    /**
+                     * Decodes an InstantiatingMigratedVMStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstantiatingMigratedVMStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.InstantiatingMigratedVMStep;
+
+                    /**
+                     * Verifies an InstantiatingMigratedVMStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstantiatingMigratedVMStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstantiatingMigratedVMStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.InstantiatingMigratedVMStep;
+
+                    /**
+                     * Creates a plain object from an InstantiatingMigratedVMStep message. Also converts values to other types if specified.
+                     * @param message InstantiatingMigratedVMStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.InstantiatingMigratedVMStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstantiatingMigratedVMStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstantiatingMigratedVMStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CutoverJob. */
                 interface ICutoverJob {
 
@@ -1605,6 +2534,9 @@ export namespace google {
 
                     /** CutoverJob stateMessage */
                     stateMessage?: (string|null);
+
+                    /** CutoverJob steps */
+                    steps?: (google.cloud.vmmigration.v1.ICutoverStep[]|null);
                 }
 
                 /** Represents a CutoverJob. */
@@ -1642,6 +2574,9 @@ export namespace google {
 
                     /** CutoverJob stateMessage. */
                     public stateMessage: string;
+
+                    /** CutoverJob steps. */
+                    public steps: google.cloud.vmmigration.v1.ICutoverStep[];
 
                     /** CutoverJob targetVmDetails. */
                     public targetVmDetails?: "computeEngineTargetDetails";
@@ -1737,6 +2672,233 @@ export namespace google {
                         ACTIVE = 6,
                         ADAPTING_OS = 7
                     }
+                }
+
+                /** Properties of a CutoverStep. */
+                interface ICutoverStep {
+
+                    /** CutoverStep previousReplicationCycle */
+                    previousReplicationCycle?: (google.cloud.vmmigration.v1.IReplicationCycle|null);
+
+                    /** CutoverStep shuttingDownSourceVm */
+                    shuttingDownSourceVm?: (google.cloud.vmmigration.v1.IShuttingDownSourceVMStep|null);
+
+                    /** CutoverStep finalSync */
+                    finalSync?: (google.cloud.vmmigration.v1.IReplicationCycle|null);
+
+                    /** CutoverStep preparingVmDisks */
+                    preparingVmDisks?: (google.cloud.vmmigration.v1.IPreparingVMDisksStep|null);
+
+                    /** CutoverStep instantiatingMigratedVm */
+                    instantiatingMigratedVm?: (google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep|null);
+
+                    /** CutoverStep startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CutoverStep endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CutoverStep. */
+                class CutoverStep implements ICutoverStep {
+
+                    /**
+                     * Constructs a new CutoverStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.ICutoverStep);
+
+                    /** CutoverStep previousReplicationCycle. */
+                    public previousReplicationCycle?: (google.cloud.vmmigration.v1.IReplicationCycle|null);
+
+                    /** CutoverStep shuttingDownSourceVm. */
+                    public shuttingDownSourceVm?: (google.cloud.vmmigration.v1.IShuttingDownSourceVMStep|null);
+
+                    /** CutoverStep finalSync. */
+                    public finalSync?: (google.cloud.vmmigration.v1.IReplicationCycle|null);
+
+                    /** CutoverStep preparingVmDisks. */
+                    public preparingVmDisks?: (google.cloud.vmmigration.v1.IPreparingVMDisksStep|null);
+
+                    /** CutoverStep instantiatingMigratedVm. */
+                    public instantiatingMigratedVm?: (google.cloud.vmmigration.v1.IInstantiatingMigratedVMStep|null);
+
+                    /** CutoverStep startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CutoverStep endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CutoverStep step. */
+                    public step?: ("previousReplicationCycle"|"shuttingDownSourceVm"|"finalSync"|"preparingVmDisks"|"instantiatingMigratedVm");
+
+                    /**
+                     * Creates a new CutoverStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CutoverStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.ICutoverStep): google.cloud.vmmigration.v1.CutoverStep;
+
+                    /**
+                     * Encodes the specified CutoverStep message. Does not implicitly {@link google.cloud.vmmigration.v1.CutoverStep.verify|verify} messages.
+                     * @param message CutoverStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.ICutoverStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CutoverStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.CutoverStep.verify|verify} messages.
+                     * @param message CutoverStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.ICutoverStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CutoverStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CutoverStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.CutoverStep;
+
+                    /**
+                     * Decodes a CutoverStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CutoverStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.CutoverStep;
+
+                    /**
+                     * Verifies a CutoverStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CutoverStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CutoverStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.CutoverStep;
+
+                    /**
+                     * Creates a plain object from a CutoverStep message. Also converts values to other types if specified.
+                     * @param message CutoverStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.CutoverStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CutoverStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CutoverStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ShuttingDownSourceVMStep. */
+                interface IShuttingDownSourceVMStep {
+                }
+
+                /** Represents a ShuttingDownSourceVMStep. */
+                class ShuttingDownSourceVMStep implements IShuttingDownSourceVMStep {
+
+                    /**
+                     * Constructs a new ShuttingDownSourceVMStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IShuttingDownSourceVMStep);
+
+                    /**
+                     * Creates a new ShuttingDownSourceVMStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ShuttingDownSourceVMStep instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IShuttingDownSourceVMStep): google.cloud.vmmigration.v1.ShuttingDownSourceVMStep;
+
+                    /**
+                     * Encodes the specified ShuttingDownSourceVMStep message. Does not implicitly {@link google.cloud.vmmigration.v1.ShuttingDownSourceVMStep.verify|verify} messages.
+                     * @param message ShuttingDownSourceVMStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IShuttingDownSourceVMStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ShuttingDownSourceVMStep message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ShuttingDownSourceVMStep.verify|verify} messages.
+                     * @param message ShuttingDownSourceVMStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IShuttingDownSourceVMStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ShuttingDownSourceVMStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ShuttingDownSourceVMStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ShuttingDownSourceVMStep;
+
+                    /**
+                     * Decodes a ShuttingDownSourceVMStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ShuttingDownSourceVMStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ShuttingDownSourceVMStep;
+
+                    /**
+                     * Verifies a ShuttingDownSourceVMStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ShuttingDownSourceVMStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ShuttingDownSourceVMStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ShuttingDownSourceVMStep;
+
+                    /**
+                     * Creates a plain object from a ShuttingDownSourceVMStep message. Also converts values to other types if specified.
+                     * @param message ShuttingDownSourceVMStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ShuttingDownSourceVMStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ShuttingDownSourceVMStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ShuttingDownSourceVMStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a CreateCloneJobRequest. */
@@ -2375,6 +3537,9 @@ export namespace google {
                     /** Source vmware */
                     vmware?: (google.cloud.vmmigration.v1.IVmwareSourceDetails|null);
 
+                    /** Source aws */
+                    aws?: (google.cloud.vmmigration.v1.IAwsSourceDetails|null);
+
                     /** Source name */
                     name?: (string|null);
 
@@ -2403,6 +3568,9 @@ export namespace google {
                     /** Source vmware. */
                     public vmware?: (google.cloud.vmmigration.v1.IVmwareSourceDetails|null);
 
+                    /** Source aws. */
+                    public aws?: (google.cloud.vmmigration.v1.IAwsSourceDetails|null);
+
                     /** Source name. */
                     public name: string;
 
@@ -2419,7 +3587,7 @@ export namespace google {
                     public description: string;
 
                     /** Source sourceDetails. */
-                    public sourceDetails?: "vmware";
+                    public sourceDetails?: ("vmware"|"aws");
 
                     /**
                      * Creates a new Source instance using the specified properties.
@@ -2612,6 +3780,365 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AwsSourceDetails. */
+                interface IAwsSourceDetails {
+
+                    /** AwsSourceDetails accessKeyCreds */
+                    accessKeyCreds?: (google.cloud.vmmigration.v1.AwsSourceDetails.IAccessKeyCredentials|null);
+
+                    /** AwsSourceDetails awsRegion */
+                    awsRegion?: (string|null);
+
+                    /** AwsSourceDetails state */
+                    state?: (google.cloud.vmmigration.v1.AwsSourceDetails.State|keyof typeof google.cloud.vmmigration.v1.AwsSourceDetails.State|null);
+
+                    /** AwsSourceDetails error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** AwsSourceDetails inventoryTagList */
+                    inventoryTagList?: (google.cloud.vmmigration.v1.AwsSourceDetails.ITag[]|null);
+
+                    /** AwsSourceDetails inventorySecurityGroupNames */
+                    inventorySecurityGroupNames?: (string[]|null);
+
+                    /** AwsSourceDetails migrationResourcesUserTags */
+                    migrationResourcesUserTags?: ({ [k: string]: string }|null);
+
+                    /** AwsSourceDetails publicIp */
+                    publicIp?: (string|null);
+                }
+
+                /** Represents an AwsSourceDetails. */
+                class AwsSourceDetails implements IAwsSourceDetails {
+
+                    /**
+                     * Constructs a new AwsSourceDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IAwsSourceDetails);
+
+                    /** AwsSourceDetails accessKeyCreds. */
+                    public accessKeyCreds?: (google.cloud.vmmigration.v1.AwsSourceDetails.IAccessKeyCredentials|null);
+
+                    /** AwsSourceDetails awsRegion. */
+                    public awsRegion: string;
+
+                    /** AwsSourceDetails state. */
+                    public state: (google.cloud.vmmigration.v1.AwsSourceDetails.State|keyof typeof google.cloud.vmmigration.v1.AwsSourceDetails.State);
+
+                    /** AwsSourceDetails error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** AwsSourceDetails inventoryTagList. */
+                    public inventoryTagList: google.cloud.vmmigration.v1.AwsSourceDetails.ITag[];
+
+                    /** AwsSourceDetails inventorySecurityGroupNames. */
+                    public inventorySecurityGroupNames: string[];
+
+                    /** AwsSourceDetails migrationResourcesUserTags. */
+                    public migrationResourcesUserTags: { [k: string]: string };
+
+                    /** AwsSourceDetails publicIp. */
+                    public publicIp: string;
+
+                    /** AwsSourceDetails credentialsType. */
+                    public credentialsType?: "accessKeyCreds";
+
+                    /**
+                     * Creates a new AwsSourceDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AwsSourceDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IAwsSourceDetails): google.cloud.vmmigration.v1.AwsSourceDetails;
+
+                    /**
+                     * Encodes the specified AwsSourceDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceDetails.verify|verify} messages.
+                     * @param message AwsSourceDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IAwsSourceDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AwsSourceDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceDetails.verify|verify} messages.
+                     * @param message AwsSourceDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IAwsSourceDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AwsSourceDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AwsSourceDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AwsSourceDetails;
+
+                    /**
+                     * Decodes an AwsSourceDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AwsSourceDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AwsSourceDetails;
+
+                    /**
+                     * Verifies an AwsSourceDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AwsSourceDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AwsSourceDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AwsSourceDetails;
+
+                    /**
+                     * Creates a plain object from an AwsSourceDetails message. Also converts values to other types if specified.
+                     * @param message AwsSourceDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.AwsSourceDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AwsSourceDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AwsSourceDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AwsSourceDetails {
+
+                    /** Properties of an AccessKeyCredentials. */
+                    interface IAccessKeyCredentials {
+
+                        /** AccessKeyCredentials accessKeyId */
+                        accessKeyId?: (string|null);
+
+                        /** AccessKeyCredentials secretAccessKey */
+                        secretAccessKey?: (string|null);
+                    }
+
+                    /** Represents an AccessKeyCredentials. */
+                    class AccessKeyCredentials implements IAccessKeyCredentials {
+
+                        /**
+                         * Constructs a new AccessKeyCredentials.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vmmigration.v1.AwsSourceDetails.IAccessKeyCredentials);
+
+                        /** AccessKeyCredentials accessKeyId. */
+                        public accessKeyId: string;
+
+                        /** AccessKeyCredentials secretAccessKey. */
+                        public secretAccessKey: string;
+
+                        /**
+                         * Creates a new AccessKeyCredentials instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AccessKeyCredentials instance
+                         */
+                        public static create(properties?: google.cloud.vmmigration.v1.AwsSourceDetails.IAccessKeyCredentials): google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials;
+
+                        /**
+                         * Encodes the specified AccessKeyCredentials message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials.verify|verify} messages.
+                         * @param message AccessKeyCredentials message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vmmigration.v1.AwsSourceDetails.IAccessKeyCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AccessKeyCredentials message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials.verify|verify} messages.
+                         * @param message AccessKeyCredentials message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vmmigration.v1.AwsSourceDetails.IAccessKeyCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AccessKeyCredentials message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AccessKeyCredentials
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials;
+
+                        /**
+                         * Decodes an AccessKeyCredentials message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AccessKeyCredentials
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials;
+
+                        /**
+                         * Verifies an AccessKeyCredentials message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AccessKeyCredentials message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AccessKeyCredentials
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials;
+
+                        /**
+                         * Creates a plain object from an AccessKeyCredentials message. Also converts values to other types if specified.
+                         * @param message AccessKeyCredentials
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AccessKeyCredentials to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AccessKeyCredentials
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Tag. */
+                    interface ITag {
+
+                        /** Tag key */
+                        key?: (string|null);
+
+                        /** Tag value */
+                        value?: (string|null);
+                    }
+
+                    /** Represents a Tag. */
+                    class Tag implements ITag {
+
+                        /**
+                         * Constructs a new Tag.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vmmigration.v1.AwsSourceDetails.ITag);
+
+                        /** Tag key. */
+                        public key: string;
+
+                        /** Tag value. */
+                        public value: string;
+
+                        /**
+                         * Creates a new Tag instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Tag instance
+                         */
+                        public static create(properties?: google.cloud.vmmigration.v1.AwsSourceDetails.ITag): google.cloud.vmmigration.v1.AwsSourceDetails.Tag;
+
+                        /**
+                         * Encodes the specified Tag message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceDetails.Tag.verify|verify} messages.
+                         * @param message Tag message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vmmigration.v1.AwsSourceDetails.ITag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Tag message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceDetails.Tag.verify|verify} messages.
+                         * @param message Tag message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vmmigration.v1.AwsSourceDetails.ITag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Tag message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Tag
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AwsSourceDetails.Tag;
+
+                        /**
+                         * Decodes a Tag message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Tag
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AwsSourceDetails.Tag;
+
+                        /**
+                         * Verifies a Tag message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Tag message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Tag
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AwsSourceDetails.Tag;
+
+                        /**
+                         * Creates a plain object from a Tag message. Also converts values to other types if specified.
+                         * @param message Tag
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vmmigration.v1.AwsSourceDetails.Tag, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Tag to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Tag
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING = 1,
+                        FAILED = 2,
+                        ACTIVE = 3
+                    }
                 }
 
                 /** Properties of a DatacenterConnector. */
@@ -4089,6 +5616,343 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an AwsVmDetails. */
+                interface IAwsVmDetails {
+
+                    /** AwsVmDetails vmId */
+                    vmId?: (string|null);
+
+                    /** AwsVmDetails displayName */
+                    displayName?: (string|null);
+
+                    /** AwsVmDetails sourceId */
+                    sourceId?: (string|null);
+
+                    /** AwsVmDetails sourceDescription */
+                    sourceDescription?: (string|null);
+
+                    /** AwsVmDetails powerState */
+                    powerState?: (google.cloud.vmmigration.v1.AwsVmDetails.PowerState|keyof typeof google.cloud.vmmigration.v1.AwsVmDetails.PowerState|null);
+
+                    /** AwsVmDetails cpuCount */
+                    cpuCount?: (number|null);
+
+                    /** AwsVmDetails memoryMb */
+                    memoryMb?: (number|null);
+
+                    /** AwsVmDetails diskCount */
+                    diskCount?: (number|null);
+
+                    /** AwsVmDetails committedStorageMb */
+                    committedStorageMb?: (number|Long|string|null);
+
+                    /** AwsVmDetails osDescription */
+                    osDescription?: (string|null);
+
+                    /** AwsVmDetails bootOption */
+                    bootOption?: (google.cloud.vmmigration.v1.AwsVmDetails.BootOption|keyof typeof google.cloud.vmmigration.v1.AwsVmDetails.BootOption|null);
+
+                    /** AwsVmDetails instanceType */
+                    instanceType?: (string|null);
+
+                    /** AwsVmDetails vpcId */
+                    vpcId?: (string|null);
+
+                    /** AwsVmDetails securityGroups */
+                    securityGroups?: (google.cloud.vmmigration.v1.IAwsSecurityGroup[]|null);
+
+                    /** AwsVmDetails tags */
+                    tags?: ({ [k: string]: string }|null);
+
+                    /** AwsVmDetails zone */
+                    zone?: (string|null);
+
+                    /** AwsVmDetails virtualizationType */
+                    virtualizationType?: (google.cloud.vmmigration.v1.AwsVmDetails.VmVirtualizationType|keyof typeof google.cloud.vmmigration.v1.AwsVmDetails.VmVirtualizationType|null);
+
+                    /** AwsVmDetails architecture */
+                    architecture?: (google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture|keyof typeof google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture|null);
+                }
+
+                /** Represents an AwsVmDetails. */
+                class AwsVmDetails implements IAwsVmDetails {
+
+                    /**
+                     * Constructs a new AwsVmDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IAwsVmDetails);
+
+                    /** AwsVmDetails vmId. */
+                    public vmId: string;
+
+                    /** AwsVmDetails displayName. */
+                    public displayName: string;
+
+                    /** AwsVmDetails sourceId. */
+                    public sourceId: string;
+
+                    /** AwsVmDetails sourceDescription. */
+                    public sourceDescription: string;
+
+                    /** AwsVmDetails powerState. */
+                    public powerState: (google.cloud.vmmigration.v1.AwsVmDetails.PowerState|keyof typeof google.cloud.vmmigration.v1.AwsVmDetails.PowerState);
+
+                    /** AwsVmDetails cpuCount. */
+                    public cpuCount: number;
+
+                    /** AwsVmDetails memoryMb. */
+                    public memoryMb: number;
+
+                    /** AwsVmDetails diskCount. */
+                    public diskCount: number;
+
+                    /** AwsVmDetails committedStorageMb. */
+                    public committedStorageMb: (number|Long|string);
+
+                    /** AwsVmDetails osDescription. */
+                    public osDescription: string;
+
+                    /** AwsVmDetails bootOption. */
+                    public bootOption: (google.cloud.vmmigration.v1.AwsVmDetails.BootOption|keyof typeof google.cloud.vmmigration.v1.AwsVmDetails.BootOption);
+
+                    /** AwsVmDetails instanceType. */
+                    public instanceType: string;
+
+                    /** AwsVmDetails vpcId. */
+                    public vpcId: string;
+
+                    /** AwsVmDetails securityGroups. */
+                    public securityGroups: google.cloud.vmmigration.v1.IAwsSecurityGroup[];
+
+                    /** AwsVmDetails tags. */
+                    public tags: { [k: string]: string };
+
+                    /** AwsVmDetails zone. */
+                    public zone: string;
+
+                    /** AwsVmDetails virtualizationType. */
+                    public virtualizationType: (google.cloud.vmmigration.v1.AwsVmDetails.VmVirtualizationType|keyof typeof google.cloud.vmmigration.v1.AwsVmDetails.VmVirtualizationType);
+
+                    /** AwsVmDetails architecture. */
+                    public architecture: (google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture|keyof typeof google.cloud.vmmigration.v1.AwsVmDetails.VmArchitecture);
+
+                    /**
+                     * Creates a new AwsVmDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AwsVmDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IAwsVmDetails): google.cloud.vmmigration.v1.AwsVmDetails;
+
+                    /**
+                     * Encodes the specified AwsVmDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsVmDetails.verify|verify} messages.
+                     * @param message AwsVmDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IAwsVmDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AwsVmDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsVmDetails.verify|verify} messages.
+                     * @param message AwsVmDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IAwsVmDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AwsVmDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AwsVmDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AwsVmDetails;
+
+                    /**
+                     * Decodes an AwsVmDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AwsVmDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AwsVmDetails;
+
+                    /**
+                     * Verifies an AwsVmDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AwsVmDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AwsVmDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AwsVmDetails;
+
+                    /**
+                     * Creates a plain object from an AwsVmDetails message. Also converts values to other types if specified.
+                     * @param message AwsVmDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.AwsVmDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AwsVmDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AwsVmDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AwsVmDetails {
+
+                    /** PowerState enum. */
+                    enum PowerState {
+                        POWER_STATE_UNSPECIFIED = 0,
+                        ON = 1,
+                        OFF = 2,
+                        SUSPENDED = 3,
+                        PENDING = 4
+                    }
+
+                    /** BootOption enum. */
+                    enum BootOption {
+                        BOOT_OPTION_UNSPECIFIED = 0,
+                        EFI = 1,
+                        BIOS = 2
+                    }
+
+                    /** VmVirtualizationType enum. */
+                    enum VmVirtualizationType {
+                        VM_VIRTUALIZATION_TYPE_UNSPECIFIED = 0,
+                        HVM = 1,
+                        PARAVIRTUAL = 2
+                    }
+
+                    /** VmArchitecture enum. */
+                    enum VmArchitecture {
+                        VM_ARCHITECTURE_UNSPECIFIED = 0,
+                        I386 = 1,
+                        X86_64 = 2,
+                        ARM64 = 3,
+                        X86_64_MAC = 4
+                    }
+                }
+
+                /** Properties of an AwsSecurityGroup. */
+                interface IAwsSecurityGroup {
+
+                    /** AwsSecurityGroup id */
+                    id?: (string|null);
+
+                    /** AwsSecurityGroup name */
+                    name?: (string|null);
+                }
+
+                /** Represents an AwsSecurityGroup. */
+                class AwsSecurityGroup implements IAwsSecurityGroup {
+
+                    /**
+                     * Constructs a new AwsSecurityGroup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IAwsSecurityGroup);
+
+                    /** AwsSecurityGroup id. */
+                    public id: string;
+
+                    /** AwsSecurityGroup name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new AwsSecurityGroup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AwsSecurityGroup instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IAwsSecurityGroup): google.cloud.vmmigration.v1.AwsSecurityGroup;
+
+                    /**
+                     * Encodes the specified AwsSecurityGroup message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSecurityGroup.verify|verify} messages.
+                     * @param message AwsSecurityGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IAwsSecurityGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AwsSecurityGroup message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSecurityGroup.verify|verify} messages.
+                     * @param message AwsSecurityGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IAwsSecurityGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AwsSecurityGroup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AwsSecurityGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AwsSecurityGroup;
+
+                    /**
+                     * Decodes an AwsSecurityGroup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AwsSecurityGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AwsSecurityGroup;
+
+                    /**
+                     * Verifies an AwsSecurityGroup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AwsSecurityGroup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AwsSecurityGroup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AwsSecurityGroup;
+
+                    /**
+                     * Creates a plain object from an AwsSecurityGroup message. Also converts values to other types if specified.
+                     * @param message AwsSecurityGroup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.AwsSecurityGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AwsSecurityGroup to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AwsSecurityGroup
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a VmwareVmsDetails. */
                 interface IVmwareVmsDetails {
 
@@ -4186,11 +6050,111 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an AwsVmsDetails. */
+                interface IAwsVmsDetails {
+
+                    /** AwsVmsDetails details */
+                    details?: (google.cloud.vmmigration.v1.IAwsVmDetails[]|null);
+                }
+
+                /** Represents an AwsVmsDetails. */
+                class AwsVmsDetails implements IAwsVmsDetails {
+
+                    /**
+                     * Constructs a new AwsVmsDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IAwsVmsDetails);
+
+                    /** AwsVmsDetails details. */
+                    public details: google.cloud.vmmigration.v1.IAwsVmDetails[];
+
+                    /**
+                     * Creates a new AwsVmsDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AwsVmsDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IAwsVmsDetails): google.cloud.vmmigration.v1.AwsVmsDetails;
+
+                    /**
+                     * Encodes the specified AwsVmsDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsVmsDetails.verify|verify} messages.
+                     * @param message AwsVmsDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IAwsVmsDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AwsVmsDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsVmsDetails.verify|verify} messages.
+                     * @param message AwsVmsDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IAwsVmsDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AwsVmsDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AwsVmsDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AwsVmsDetails;
+
+                    /**
+                     * Decodes an AwsVmsDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AwsVmsDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AwsVmsDetails;
+
+                    /**
+                     * Verifies an AwsVmsDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AwsVmsDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AwsVmsDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AwsVmsDetails;
+
+                    /**
+                     * Creates a plain object from an AwsVmsDetails message. Also converts values to other types if specified.
+                     * @param message AwsVmsDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.AwsVmsDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AwsVmsDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AwsVmsDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a FetchInventoryResponse. */
                 interface IFetchInventoryResponse {
 
                     /** FetchInventoryResponse vmwareVms */
                     vmwareVms?: (google.cloud.vmmigration.v1.IVmwareVmsDetails|null);
+
+                    /** FetchInventoryResponse awsVms */
+                    awsVms?: (google.cloud.vmmigration.v1.IAwsVmsDetails|null);
 
                     /** FetchInventoryResponse updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
@@ -4208,11 +6172,14 @@ export namespace google {
                     /** FetchInventoryResponse vmwareVms. */
                     public vmwareVms?: (google.cloud.vmmigration.v1.IVmwareVmsDetails|null);
 
+                    /** FetchInventoryResponse awsVms. */
+                    public awsVms?: (google.cloud.vmmigration.v1.IAwsVmsDetails|null);
+
                     /** FetchInventoryResponse updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** FetchInventoryResponse SourceVms. */
-                    public SourceVms?: "vmwareVms";
+                    public SourceVms?: ("vmwareVms"|"awsVms");
 
                     /**
                      * Creates a new FetchInventoryResponse instance using the specified properties.
@@ -11239,6 +13206,446 @@ export namespace google {
                         UTILIZATION_REPORT_ERROR = 8,
                         APPLIANCE_UPGRADE_ERROR = 9
                     }
+                }
+
+                /** Properties of an AwsSourceVmDetails. */
+                interface IAwsSourceVmDetails {
+
+                    /** AwsSourceVmDetails firmware */
+                    firmware?: (google.cloud.vmmigration.v1.AwsSourceVmDetails.Firmware|keyof typeof google.cloud.vmmigration.v1.AwsSourceVmDetails.Firmware|null);
+
+                    /** AwsSourceVmDetails committedStorageBytes */
+                    committedStorageBytes?: (number|Long|string|null);
+                }
+
+                /** Represents an AwsSourceVmDetails. */
+                class AwsSourceVmDetails implements IAwsSourceVmDetails {
+
+                    /**
+                     * Constructs a new AwsSourceVmDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IAwsSourceVmDetails);
+
+                    /** AwsSourceVmDetails firmware. */
+                    public firmware: (google.cloud.vmmigration.v1.AwsSourceVmDetails.Firmware|keyof typeof google.cloud.vmmigration.v1.AwsSourceVmDetails.Firmware);
+
+                    /** AwsSourceVmDetails committedStorageBytes. */
+                    public committedStorageBytes: (number|Long|string);
+
+                    /**
+                     * Creates a new AwsSourceVmDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AwsSourceVmDetails instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IAwsSourceVmDetails): google.cloud.vmmigration.v1.AwsSourceVmDetails;
+
+                    /**
+                     * Encodes the specified AwsSourceVmDetails message. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceVmDetails.verify|verify} messages.
+                     * @param message AwsSourceVmDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IAwsSourceVmDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AwsSourceVmDetails message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.AwsSourceVmDetails.verify|verify} messages.
+                     * @param message AwsSourceVmDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IAwsSourceVmDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AwsSourceVmDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AwsSourceVmDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.AwsSourceVmDetails;
+
+                    /**
+                     * Decodes an AwsSourceVmDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AwsSourceVmDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.AwsSourceVmDetails;
+
+                    /**
+                     * Verifies an AwsSourceVmDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AwsSourceVmDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AwsSourceVmDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.AwsSourceVmDetails;
+
+                    /**
+                     * Creates a plain object from an AwsSourceVmDetails message. Also converts values to other types if specified.
+                     * @param message AwsSourceVmDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.AwsSourceVmDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AwsSourceVmDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AwsSourceVmDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AwsSourceVmDetails {
+
+                    /** Firmware enum. */
+                    enum Firmware {
+                        FIRMWARE_UNSPECIFIED = 0,
+                        EFI = 1,
+                        BIOS = 2
+                    }
+                }
+
+                /** Properties of a ListReplicationCyclesRequest. */
+                interface IListReplicationCyclesRequest {
+
+                    /** ListReplicationCyclesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListReplicationCyclesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListReplicationCyclesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListReplicationCyclesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListReplicationCyclesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListReplicationCyclesRequest. */
+                class ListReplicationCyclesRequest implements IListReplicationCyclesRequest {
+
+                    /**
+                     * Constructs a new ListReplicationCyclesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IListReplicationCyclesRequest);
+
+                    /** ListReplicationCyclesRequest parent. */
+                    public parent: string;
+
+                    /** ListReplicationCyclesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListReplicationCyclesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListReplicationCyclesRequest filter. */
+                    public filter: string;
+
+                    /** ListReplicationCyclesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListReplicationCyclesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListReplicationCyclesRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IListReplicationCyclesRequest): google.cloud.vmmigration.v1.ListReplicationCyclesRequest;
+
+                    /**
+                     * Encodes the specified ListReplicationCyclesRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.ListReplicationCyclesRequest.verify|verify} messages.
+                     * @param message ListReplicationCyclesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IListReplicationCyclesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListReplicationCyclesRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ListReplicationCyclesRequest.verify|verify} messages.
+                     * @param message ListReplicationCyclesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IListReplicationCyclesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListReplicationCyclesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListReplicationCyclesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ListReplicationCyclesRequest;
+
+                    /**
+                     * Decodes a ListReplicationCyclesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListReplicationCyclesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ListReplicationCyclesRequest;
+
+                    /**
+                     * Verifies a ListReplicationCyclesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListReplicationCyclesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListReplicationCyclesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ListReplicationCyclesRequest;
+
+                    /**
+                     * Creates a plain object from a ListReplicationCyclesRequest message. Also converts values to other types if specified.
+                     * @param message ListReplicationCyclesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ListReplicationCyclesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListReplicationCyclesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListReplicationCyclesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListReplicationCyclesResponse. */
+                interface IListReplicationCyclesResponse {
+
+                    /** ListReplicationCyclesResponse replicationCycles */
+                    replicationCycles?: (google.cloud.vmmigration.v1.IReplicationCycle[]|null);
+
+                    /** ListReplicationCyclesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListReplicationCyclesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListReplicationCyclesResponse. */
+                class ListReplicationCyclesResponse implements IListReplicationCyclesResponse {
+
+                    /**
+                     * Constructs a new ListReplicationCyclesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IListReplicationCyclesResponse);
+
+                    /** ListReplicationCyclesResponse replicationCycles. */
+                    public replicationCycles: google.cloud.vmmigration.v1.IReplicationCycle[];
+
+                    /** ListReplicationCyclesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListReplicationCyclesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListReplicationCyclesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListReplicationCyclesResponse instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IListReplicationCyclesResponse): google.cloud.vmmigration.v1.ListReplicationCyclesResponse;
+
+                    /**
+                     * Encodes the specified ListReplicationCyclesResponse message. Does not implicitly {@link google.cloud.vmmigration.v1.ListReplicationCyclesResponse.verify|verify} messages.
+                     * @param message ListReplicationCyclesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IListReplicationCyclesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListReplicationCyclesResponse message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.ListReplicationCyclesResponse.verify|verify} messages.
+                     * @param message ListReplicationCyclesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IListReplicationCyclesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListReplicationCyclesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListReplicationCyclesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.ListReplicationCyclesResponse;
+
+                    /**
+                     * Decodes a ListReplicationCyclesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListReplicationCyclesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.ListReplicationCyclesResponse;
+
+                    /**
+                     * Verifies a ListReplicationCyclesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListReplicationCyclesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListReplicationCyclesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.ListReplicationCyclesResponse;
+
+                    /**
+                     * Creates a plain object from a ListReplicationCyclesResponse message. Also converts values to other types if specified.
+                     * @param message ListReplicationCyclesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.ListReplicationCyclesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListReplicationCyclesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListReplicationCyclesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetReplicationCycleRequest. */
+                interface IGetReplicationCycleRequest {
+
+                    /** GetReplicationCycleRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetReplicationCycleRequest. */
+                class GetReplicationCycleRequest implements IGetReplicationCycleRequest {
+
+                    /**
+                     * Constructs a new GetReplicationCycleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmmigration.v1.IGetReplicationCycleRequest);
+
+                    /** GetReplicationCycleRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetReplicationCycleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetReplicationCycleRequest instance
+                     */
+                    public static create(properties?: google.cloud.vmmigration.v1.IGetReplicationCycleRequest): google.cloud.vmmigration.v1.GetReplicationCycleRequest;
+
+                    /**
+                     * Encodes the specified GetReplicationCycleRequest message. Does not implicitly {@link google.cloud.vmmigration.v1.GetReplicationCycleRequest.verify|verify} messages.
+                     * @param message GetReplicationCycleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmmigration.v1.IGetReplicationCycleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetReplicationCycleRequest message, length delimited. Does not implicitly {@link google.cloud.vmmigration.v1.GetReplicationCycleRequest.verify|verify} messages.
+                     * @param message GetReplicationCycleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmmigration.v1.IGetReplicationCycleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetReplicationCycleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetReplicationCycleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmmigration.v1.GetReplicationCycleRequest;
+
+                    /**
+                     * Decodes a GetReplicationCycleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetReplicationCycleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmmigration.v1.GetReplicationCycleRequest;
+
+                    /**
+                     * Verifies a GetReplicationCycleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetReplicationCycleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetReplicationCycleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmmigration.v1.GetReplicationCycleRequest;
+
+                    /**
+                     * Creates a plain object from a GetReplicationCycleRequest message. Also converts values to other types if specified.
+                     * @param message GetReplicationCycleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmmigration.v1.GetReplicationCycleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetReplicationCycleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetReplicationCycleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }

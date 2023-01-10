@@ -36,6 +36,7 @@
   * [Vm_migration.get_datacenter_connector](#vm_migration.get_datacenter_connector)
   * [Vm_migration.get_group](#vm_migration.get_group)
   * [Vm_migration.get_migrating_vm](#vm_migration.get_migrating_vm)
+  * [Vm_migration.get_replication_cycle](#vm_migration.get_replication_cycle)
   * [Vm_migration.get_source](#vm_migration.get_source)
   * [Vm_migration.get_target_project](#vm_migration.get_target_project)
   * [Vm_migration.get_utilization_report](#vm_migration.get_utilization_report)
@@ -44,6 +45,7 @@
   * [Vm_migration.list_datacenter_connectors](#vm_migration.list_datacenter_connectors)
   * [Vm_migration.list_groups](#vm_migration.list_groups)
   * [Vm_migration.list_migrating_vms](#vm_migration.list_migrating_vms)
+  * [Vm_migration.list_replication_cycles](#vm_migration.list_replication_cycles)
   * [Vm_migration.list_sources](#vm_migration.list_sources)
   * [Vm_migration.list_target_projects](#vm_migration.list_target_projects)
   * [Vm_migration.list_utilization_reports](#vm_migration.list_utilization_reports)
@@ -482,6 +484,23 @@ __Usage:__
 
 
 
+### Vm_migration.get_replication_cycle
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_replication_cycle.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_replication_cycle.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_replication_cycle.js`
+
+
+-----
+
+
+
+
 ### Vm_migration.get_source
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.get_source.js).
@@ -611,6 +630,23 @@ __Usage:__
 
 
 `node packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_migrating_vms.js`
+
+
+-----
+
+
+
+
+### Vm_migration.list_replication_cycles
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_replication_cycles.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_replication_cycles.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.list_replication_cycles.js`
 
 
 -----

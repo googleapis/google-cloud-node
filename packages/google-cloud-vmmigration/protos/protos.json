@@ -1060,6 +1060,42 @@
                               }
                             }
                           ]
+                        },
+                        "ListReplicationCycles": {
+                          "requestType": "ListReplicationCyclesRequest",
+                          "responseType": "ListReplicationCyclesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/sources/*/migratingVms/*}/replicationCycles",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/sources/*/migratingVms/*}/replicationCycles"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetReplicationCycle": {
+                          "requestType": "GetReplicationCycleRequest",
+                          "responseType": "ReplicationCycle",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/sources/*/migratingVms/*/replicationCycles/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/sources/*/migratingVms/*/replicationCycles/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1100,16 +1136,122 @@
                       }
                     },
                     "ReplicationCycle": {
+                      "options": {
+                        "(google.api.resource).type": "vmmigration.googleapis.com/ReplicationCycle",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/sources/{source}/migratingVms/{migrating_vm}/replicationCycles/{replication_cycle}"
+                      },
                       "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 13
+                        },
+                        "cycleNumber": {
+                          "type": "int32",
+                          "id": 10
+                        },
                         "startTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 1
                         },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6
+                        },
+                        "totalPauseDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 7
+                        },
                         "progressPercent": {
                           "type": "int32",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "steps": {
+                          "rule": "repeated",
+                          "type": "CycleStep",
+                          "id": 9
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 11
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 12
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "PAUSED": 2,
+                            "FAILED": 3,
+                            "SUCCEEDED": 4
+                          }
                         }
                       }
+                    },
+                    "CycleStep": {
+                      "oneofs": {
+                        "step": {
+                          "oneof": [
+                            "initializingReplication",
+                            "replicating",
+                            "postProcessing"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "initializingReplication": {
+                          "type": "InitializingReplicationStep",
+                          "id": 3
+                        },
+                        "replicating": {
+                          "type": "ReplicatingStep",
+                          "id": 4
+                        },
+                        "postProcessing": {
+                          "type": "PostProcessingStep",
+                          "id": 5
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "InitializingReplicationStep": {
+                      "fields": {}
+                    },
+                    "ReplicatingStep": {
+                      "fields": {
+                        "totalBytes": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "replicatedBytes": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "lastTwoMinutesAverageBytesPerSecond": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "lastThirtyMinutesAverageBytesPerSecond": {
+                          "type": "int64",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "PostProcessingStep": {
+                      "fields": {}
                     },
                     "ReplicationSync": {
                       "fields": {
@@ -1129,12 +1271,24 @@
                           "oneof": [
                             "computeEngineTargetDefaults"
                           ]
+                        },
+                        "sourceVmDetails": {
+                          "oneof": [
+                            "awsSourceVmDetails"
+                          ]
                         }
                       },
                       "fields": {
                         "computeEngineTargetDefaults": {
                           "type": "ComputeEngineTargetDefaults",
                           "id": 26
+                        },
+                        "awsSourceVmDetails": {
+                          "type": "AwsSourceVmDetails",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "name": {
                           "type": "string",
@@ -1318,6 +1472,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "steps": {
+                          "rule": "repeated",
+                          "type": "CloneStep",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1334,6 +1496,48 @@
                           }
                         }
                       }
+                    },
+                    "CloneStep": {
+                      "oneofs": {
+                        "step": {
+                          "oneof": [
+                            "adaptingOs",
+                            "preparingVmDisks",
+                            "instantiatingMigratedVm"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "adaptingOs": {
+                          "type": "AdaptingOSStep",
+                          "id": 3
+                        },
+                        "preparingVmDisks": {
+                          "type": "PreparingVMDisksStep",
+                          "id": 4
+                        },
+                        "instantiatingMigratedVm": {
+                          "type": "InstantiatingMigratedVMStep",
+                          "id": 5
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AdaptingOSStep": {
+                      "fields": {}
+                    },
+                    "PreparingVMDisksStep": {
+                      "fields": {}
+                    },
+                    "InstantiatingMigratedVMStep": {
+                      "fields": {}
                     },
                     "CutoverJob": {
                       "options": {
@@ -1410,6 +1614,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "steps": {
+                          "rule": "repeated",
+                          "type": "CutoverStep",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1426,6 +1638,52 @@
                           }
                         }
                       }
+                    },
+                    "CutoverStep": {
+                      "oneofs": {
+                        "step": {
+                          "oneof": [
+                            "previousReplicationCycle",
+                            "shuttingDownSourceVm",
+                            "finalSync",
+                            "preparingVmDisks",
+                            "instantiatingMigratedVm"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "previousReplicationCycle": {
+                          "type": "ReplicationCycle",
+                          "id": 3
+                        },
+                        "shuttingDownSourceVm": {
+                          "type": "ShuttingDownSourceVMStep",
+                          "id": 4
+                        },
+                        "finalSync": {
+                          "type": "ReplicationCycle",
+                          "id": 5
+                        },
+                        "preparingVmDisks": {
+                          "type": "PreparingVMDisksStep",
+                          "id": 6
+                        },
+                        "instantiatingMigratedVm": {
+                          "type": "InstantiatingMigratedVMStep",
+                          "id": 7
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ShuttingDownSourceVMStep": {
+                      "fields": {}
                     },
                     "CreateCloneJobRequest": {
                       "fields": {
@@ -1559,7 +1817,8 @@
                       "oneofs": {
                         "sourceDetails": {
                           "oneof": [
-                            "vmware"
+                            "vmware",
+                            "aws"
                           ]
                         }
                       },
@@ -1567,6 +1826,10 @@
                         "vmware": {
                           "type": "VmwareSourceDetails",
                           "id": 10
+                        },
+                        "aws": {
+                          "type": "AwsSourceDetails",
+                          "id": 12
                         },
                         "name": {
                           "type": "string",
@@ -1620,6 +1883,101 @@
                         "thumbprint": {
                           "type": "string",
                           "id": 4
+                        }
+                      }
+                    },
+                    "AwsSourceDetails": {
+                      "oneofs": {
+                        "credentialsType": {
+                          "oneof": [
+                            "accessKeyCreds"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "accessKeyCreds": {
+                          "type": "AccessKeyCredentials",
+                          "id": 11
+                        },
+                        "awsRegion": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "inventoryTagList": {
+                          "rule": "repeated",
+                          "type": "Tag",
+                          "id": 10
+                        },
+                        "inventorySecurityGroupNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        },
+                        "migrationResourcesUserTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "publicIp": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AccessKeyCredentials": {
+                          "fields": {
+                            "accessKeyId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "secretAccessKey": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "Tag": {
+                          "fields": {
+                            "key": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "value": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "PENDING": 1,
+                            "FAILED": 2,
+                            "ACTIVE": 3
+                          }
                         }
                       }
                     },
@@ -2035,6 +2393,133 @@
                         }
                       }
                     },
+                    "AwsVmDetails": {
+                      "fields": {
+                        "vmId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "sourceId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "sourceDescription": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "powerState": {
+                          "type": "PowerState",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cpuCount": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "memoryMb": {
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "diskCount": {
+                          "type": "int32",
+                          "id": 8
+                        },
+                        "committedStorageMb": {
+                          "type": "int64",
+                          "id": 9
+                        },
+                        "osDescription": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "bootOption": {
+                          "type": "BootOption",
+                          "id": 11
+                        },
+                        "instanceType": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "vpcId": {
+                          "type": "string",
+                          "id": 13
+                        },
+                        "securityGroups": {
+                          "rule": "repeated",
+                          "type": "AwsSecurityGroup",
+                          "id": 14
+                        },
+                        "tags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 15
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 16
+                        },
+                        "virtualizationType": {
+                          "type": "VmVirtualizationType",
+                          "id": 17
+                        },
+                        "architecture": {
+                          "type": "VmArchitecture",
+                          "id": 18
+                        }
+                      },
+                      "nested": {
+                        "PowerState": {
+                          "values": {
+                            "POWER_STATE_UNSPECIFIED": 0,
+                            "ON": 1,
+                            "OFF": 2,
+                            "SUSPENDED": 3,
+                            "PENDING": 4
+                          }
+                        },
+                        "BootOption": {
+                          "values": {
+                            "BOOT_OPTION_UNSPECIFIED": 0,
+                            "EFI": 1,
+                            "BIOS": 2
+                          }
+                        },
+                        "VmVirtualizationType": {
+                          "values": {
+                            "VM_VIRTUALIZATION_TYPE_UNSPECIFIED": 0,
+                            "HVM": 1,
+                            "PARAVIRTUAL": 2
+                          }
+                        },
+                        "VmArchitecture": {
+                          "values": {
+                            "VM_ARCHITECTURE_UNSPECIFIED": 0,
+                            "I386": 1,
+                            "X86_64": 2,
+                            "ARM64": 3,
+                            "X86_64_MAC": 4
+                          }
+                        }
+                      }
+                    },
+                    "AwsSecurityGroup": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "VmwareVmsDetails": {
                       "fields": {
                         "details": {
@@ -2044,11 +2529,21 @@
                         }
                       }
                     },
+                    "AwsVmsDetails": {
+                      "fields": {
+                        "details": {
+                          "rule": "repeated",
+                          "type": "AwsVmDetails",
+                          "id": 1
+                        }
+                      }
+                    },
                     "FetchInventoryResponse": {
                       "oneofs": {
                         "SourceVms": {
                           "oneof": [
-                            "vmwareVms"
+                            "vmwareVms",
+                            "awsVms"
                           ]
                         }
                       },
@@ -2056,6 +2551,10 @@
                         "vmwareVms": {
                           "type": "VmwareVmsDetails",
                           "id": 1
+                        },
+                        "awsVms": {
+                          "type": "AwsVmsDetails",
+                          "id": 3
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
@@ -3642,6 +4141,106 @@
                             "CUTOVER_ERROR": 7,
                             "UTILIZATION_REPORT_ERROR": 8,
                             "APPLIANCE_UPGRADE_ERROR": 9
+                          }
+                        }
+                      }
+                    },
+                    "AwsSourceVmDetails": {
+                      "fields": {
+                        "firmware": {
+                          "type": "Firmware",
+                          "id": 1
+                        },
+                        "committedStorageBytes": {
+                          "type": "int64",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Firmware": {
+                          "values": {
+                            "FIRMWARE_UNSPECIFIED": 0,
+                            "EFI": 1,
+                            "BIOS": 2
+                          }
+                        }
+                      }
+                    },
+                    "ListReplicationCyclesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "vmmigration.googleapis.com/ReplicationCycle"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListReplicationCyclesResponse": {
+                      "fields": {
+                        "replicationCycles": {
+                          "rule": "repeated",
+                          "type": "ReplicationCycle",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GetReplicationCycleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmmigration.googleapis.com/ReplicationCycle"
                           }
                         }
                       }
