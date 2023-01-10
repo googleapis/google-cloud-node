@@ -2,7 +2,11 @@
   "name": "@google-cloud/run",
   "version": "0.3.0",
   "description": "Cloud Run Admin API",
-  "repository": "googleapis/nodejs-run",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-run",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "license": "Apache-2.0",
   "author": "Google LLC",
   "files": [
@@ -29,9 +33,9 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha build/system-test",
+    "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },
@@ -59,5 +63,6 @@
   },
   "engines": {
     "node": ">=12.0.0"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-run"
 }

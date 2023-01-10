@@ -88,6 +88,7 @@
     "packages/google-cloud-resourcemanager": {},
     "packages/google-cloud-resourcesettings": {},
     "packages/google-cloud-retail": {},
+    "packages/google-cloud-run": {},
     "packages/google-cloud-scheduler": {},
     "packages/google-cloud-secretmanager": {},
     "packages/google-cloud-security-privateca": {},
