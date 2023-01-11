@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,9 +40,10 @@ function main(name) {
    *  *  If `force` is set to false, an error will be returned with message
    *     indicating the referenced resources.
    *  *  If `force` is set to true, Dialogflow will remove the webhook, as well
-   *     as any references to the webhook (i.e. Webhook google.cloud.dialogflow.cx.v3beta1.Fulfillment.webhook 
-   *     and tag google.cloud.dialogflow.cx.v3beta1.Fulfillment.tag in fulfillments that point to this webhook
-   *     will be removed).
+   *     as any references to the webhook (i.e.
+   *     Webhook google.cloud.dialogflow.cx.v3beta1.Fulfillment.webhook  and
+   *     tag google.cloud.dialogflow.cx.v3beta1.Fulfillment.tag in fulfillments
+   *     that point to this webhook will be removed).
    */
   // const force = true
 

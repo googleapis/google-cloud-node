@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -125,6 +125,9 @@ export class FlowsClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -1302,7 +1305,8 @@ export class FlowsClient {
    *
    * - `metadata`: An empty [Struct
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-   * - `response`: {@link google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse|ImportFlowResponse}
+   * - `response`:
+   * {@link google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse|ImportFlowResponse}
    *
    * Note: You should always train a flow prior to sending it queries. See the
    * [training
@@ -1467,7 +1471,8 @@ export class FlowsClient {
    *
    * - `metadata`: An empty [Struct
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-   * - `response`: {@link google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse|ExportFlowResponse}
+   * - `response`:
+   * {@link google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse|ExportFlowResponse}
    *
    * Note that resources (e.g. intents, entities, webhooks) that the flow
    * references will also be exported.
@@ -1479,10 +1484,10 @@ export class FlowsClient {
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/flows/<Flow ID>`.
    * @param {string} [request.flowUri]
-   *   Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to
-   *   export the flow to. The format of this URI must be
-   *   `gs://<bucket-name>/<object-name>`.
-   *   If left unspecified, the serialized flow is returned inline.
+   *   Optional. The [Google Cloud
+   *   Storage](https://cloud.google.com/storage/docs/) URI to export the flow to.
+   *   The format of this URI must be `gs://<bucket-name>/<object-name>`. If left
+   *   unspecified, the serialized flow is returned inline.
    *
    *   Dialogflow performs a write operation for the Cloud Storage object
    *   on the caller's behalf, so your request authentication must
