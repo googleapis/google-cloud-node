@@ -831,6 +831,10 @@ export class ClusterManagerClient {
    *   All the nodes in the node pool will be Confidential VM once enabled.
    * @param {google.container.v1.VirtualNIC} request.gvnic
    *   Enable or disable gvnic on the node pool.
+   * @param {string} request.etag
+   *   The current etag of the node pool.
+   *   If an etag is provided and does not match the current etag of the node
+   *   pool, update will be blocked and an ABORTED error will be returned.
    * @param {google.container.v1.FastSocket} request.fastSocket
    *   Enable or disable NCCL fast socket for the node pool.
    * @param {google.container.v1.NodePoolLoggingConfig} request.loggingConfig

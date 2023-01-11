@@ -110,6 +110,12 @@ function main(nodeVersion, imageType) {
    */
   // const gvnic = {}
   /**
+   *  The current etag of the node pool.
+   *  If an etag is provided and does not match the current etag of the node
+   *  pool, update will be blocked and an ABORTED error will be returned.
+   */
+  // const etag = 'abc123'
+  /**
    *  Enable or disable NCCL fast socket for the node pool.
    */
   // const fastSocket = {}
