@@ -2848,6 +2848,12 @@ export namespace google {
 
                     /** TimeSeriesTable dataSets */
                     dataSets?: (google.monitoring.dashboard.v1.TimeSeriesTable.ITableDataSet[]|null);
+
+                    /** TimeSeriesTable metricVisualization */
+                    metricVisualization?: (google.monitoring.dashboard.v1.TimeSeriesTable.MetricVisualization|keyof typeof google.monitoring.dashboard.v1.TimeSeriesTable.MetricVisualization|null);
+
+                    /** TimeSeriesTable columnSettings */
+                    columnSettings?: (google.monitoring.dashboard.v1.TimeSeriesTable.IColumnSettings[]|null);
                 }
 
                 /** Represents a TimeSeriesTable. */
@@ -2861,6 +2867,12 @@ export namespace google {
 
                     /** TimeSeriesTable dataSets. */
                     public dataSets: google.monitoring.dashboard.v1.TimeSeriesTable.ITableDataSet[];
+
+                    /** TimeSeriesTable metricVisualization. */
+                    public metricVisualization: (google.monitoring.dashboard.v1.TimeSeriesTable.MetricVisualization|keyof typeof google.monitoring.dashboard.v1.TimeSeriesTable.MetricVisualization);
+
+                    /** TimeSeriesTable columnSettings. */
+                    public columnSettings: google.monitoring.dashboard.v1.TimeSeriesTable.IColumnSettings[];
 
                     /**
                      * Creates a new TimeSeriesTable instance using the specified properties.
@@ -3051,6 +3063,116 @@ export namespace google {
 
                         /**
                          * Gets the default type url for TableDataSet
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** MetricVisualization enum. */
+                    enum MetricVisualization {
+                        METRIC_VISUALIZATION_UNSPECIFIED = 0,
+                        NUMBER = 1,
+                        BAR = 2
+                    }
+
+                    /** Properties of a ColumnSettings. */
+                    interface IColumnSettings {
+
+                        /** ColumnSettings column */
+                        column?: (string|null);
+
+                        /** ColumnSettings visible */
+                        visible?: (boolean|null);
+                    }
+
+                    /** Represents a ColumnSettings. */
+                    class ColumnSettings implements IColumnSettings {
+
+                        /**
+                         * Constructs a new ColumnSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.dashboard.v1.TimeSeriesTable.IColumnSettings);
+
+                        /** ColumnSettings column. */
+                        public column: string;
+
+                        /** ColumnSettings visible. */
+                        public visible: boolean;
+
+                        /**
+                         * Creates a new ColumnSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ColumnSettings instance
+                         */
+                        public static create(properties?: google.monitoring.dashboard.v1.TimeSeriesTable.IColumnSettings): google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings;
+
+                        /**
+                         * Encodes the specified ColumnSettings message. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings.verify|verify} messages.
+                         * @param message ColumnSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.dashboard.v1.TimeSeriesTable.IColumnSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ColumnSettings message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings.verify|verify} messages.
+                         * @param message ColumnSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.dashboard.v1.TimeSeriesTable.IColumnSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ColumnSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ColumnSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings;
+
+                        /**
+                         * Decodes a ColumnSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ColumnSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings;
+
+                        /**
+                         * Verifies a ColumnSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ColumnSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ColumnSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings;
+
+                        /**
+                         * Creates a plain object from a ColumnSettings message. Also converts values to other types if specified.
+                         * @param message ColumnSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ColumnSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ColumnSettings
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

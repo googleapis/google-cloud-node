@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -346,8 +346,12 @@ export class DashboardsServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Creates a new custom dashboard. For examples on how you can use this API to create dashboards, see [Managing dashboards by API](https://cloud.google.com/monitoring/dashboards/api-dashboard).
-   * This method requires the `monitoring.dashboards.create` permission on the specified project. For more information about permissions, see [Cloud Identity and Access Management](https://cloud.google.com/iam).
+   * Creates a new custom dashboard. For examples on how you can use this API to
+   * create dashboards, see [Managing dashboards by
+   * API](https://cloud.google.com/monitoring/dashboards/api-dashboard). This
+   * method requires the `monitoring.dashboards.create` permission on the
+   * specified project. For more information about permissions, see [Cloud
+   * Identity and Access Management](https://cloud.google.com/iam).
    *
    * @param {Object} request
    *   The request object that will be sent.

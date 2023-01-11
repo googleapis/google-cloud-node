@@ -7554,6 +7554,8 @@
                          * @memberof google.monitoring.dashboard.v1
                          * @interface ITimeSeriesTable
                          * @property {Array.<google.monitoring.dashboard.v1.TimeSeriesTable.ITableDataSet>|null} [dataSets] TimeSeriesTable dataSets
+                         * @property {google.monitoring.dashboard.v1.TimeSeriesTable.MetricVisualization|null} [metricVisualization] TimeSeriesTable metricVisualization
+                         * @property {Array.<google.monitoring.dashboard.v1.TimeSeriesTable.IColumnSettings>|null} [columnSettings] TimeSeriesTable columnSettings
                          */
     
                         /**
@@ -7566,6 +7568,7 @@
                          */
                         function TimeSeriesTable(properties) {
                             this.dataSets = [];
+                            this.columnSettings = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -7579,6 +7582,22 @@
                          * @instance
                          */
                         TimeSeriesTable.prototype.dataSets = $util.emptyArray;
+    
+                        /**
+                         * TimeSeriesTable metricVisualization.
+                         * @member {google.monitoring.dashboard.v1.TimeSeriesTable.MetricVisualization} metricVisualization
+                         * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                         * @instance
+                         */
+                        TimeSeriesTable.prototype.metricVisualization = 0;
+    
+                        /**
+                         * TimeSeriesTable columnSettings.
+                         * @member {Array.<google.monitoring.dashboard.v1.TimeSeriesTable.IColumnSettings>} columnSettings
+                         * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                         * @instance
+                         */
+                        TimeSeriesTable.prototype.columnSettings = $util.emptyArray;
     
                         /**
                          * Creates a new TimeSeriesTable instance using the specified properties.
@@ -7607,6 +7626,11 @@
                             if (message.dataSets != null && message.dataSets.length)
                                 for (var i = 0; i < message.dataSets.length; ++i)
                                     $root.google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet.encode(message.dataSets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.metricVisualization != null && Object.hasOwnProperty.call(message, "metricVisualization"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.metricVisualization);
+                            if (message.columnSettings != null && message.columnSettings.length)
+                                for (var i = 0; i < message.columnSettings.length; ++i)
+                                    $root.google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings.encode(message.columnSettings[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -7645,6 +7669,16 @@
                                         if (!(message.dataSets && message.dataSets.length))
                                             message.dataSets = [];
                                         message.dataSets.push($root.google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.metricVisualization = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.columnSettings && message.columnSettings.length))
+                                            message.columnSettings = [];
+                                        message.columnSettings.push($root.google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -7691,6 +7725,24 @@
                                         return "dataSets." + error;
                                 }
                             }
+                            if (message.metricVisualization != null && message.hasOwnProperty("metricVisualization"))
+                                switch (message.metricVisualization) {
+                                default:
+                                    return "metricVisualization: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.columnSettings != null && message.hasOwnProperty("columnSettings")) {
+                                if (!Array.isArray(message.columnSettings))
+                                    return "columnSettings: array expected";
+                                for (var i = 0; i < message.columnSettings.length; ++i) {
+                                    var error = $root.google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings.verify(message.columnSettings[i]);
+                                    if (error)
+                                        return "columnSettings." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -7716,6 +7768,36 @@
                                     message.dataSets[i] = $root.google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet.fromObject(object.dataSets[i]);
                                 }
                             }
+                            switch (object.metricVisualization) {
+                            default:
+                                if (typeof object.metricVisualization === "number") {
+                                    message.metricVisualization = object.metricVisualization;
+                                    break;
+                                }
+                                break;
+                            case "METRIC_VISUALIZATION_UNSPECIFIED":
+                            case 0:
+                                message.metricVisualization = 0;
+                                break;
+                            case "NUMBER":
+                            case 1:
+                                message.metricVisualization = 1;
+                                break;
+                            case "BAR":
+                            case 2:
+                                message.metricVisualization = 2;
+                                break;
+                            }
+                            if (object.columnSettings) {
+                                if (!Array.isArray(object.columnSettings))
+                                    throw TypeError(".google.monitoring.dashboard.v1.TimeSeriesTable.columnSettings: array expected");
+                                message.columnSettings = [];
+                                for (var i = 0; i < object.columnSettings.length; ++i) {
+                                    if (typeof object.columnSettings[i] !== "object")
+                                        throw TypeError(".google.monitoring.dashboard.v1.TimeSeriesTable.columnSettings: object expected");
+                                    message.columnSettings[i] = $root.google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings.fromObject(object.columnSettings[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -7732,12 +7814,23 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.dataSets = [];
+                                object.columnSettings = [];
+                            }
+                            if (options.defaults)
+                                object.metricVisualization = options.enums === String ? "METRIC_VISUALIZATION_UNSPECIFIED" : 0;
                             if (message.dataSets && message.dataSets.length) {
                                 object.dataSets = [];
                                 for (var j = 0; j < message.dataSets.length; ++j)
                                     object.dataSets[j] = $root.google.monitoring.dashboard.v1.TimeSeriesTable.TableDataSet.toObject(message.dataSets[j], options);
+                            }
+                            if (message.metricVisualization != null && message.hasOwnProperty("metricVisualization"))
+                                object.metricVisualization = options.enums === String ? $root.google.monitoring.dashboard.v1.TimeSeriesTable.MetricVisualization[message.metricVisualization] === undefined ? message.metricVisualization : $root.google.monitoring.dashboard.v1.TimeSeriesTable.MetricVisualization[message.metricVisualization] : message.metricVisualization;
+                            if (message.columnSettings && message.columnSettings.length) {
+                                object.columnSettings = [];
+                                for (var j = 0; j < message.columnSettings.length; ++j)
+                                    object.columnSettings[j] = $root.google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings.toObject(message.columnSettings[j], options);
                             }
                             return object;
                         };
@@ -8054,6 +8147,249 @@
                             };
     
                             return TableDataSet;
+                        })();
+    
+                        /**
+                         * MetricVisualization enum.
+                         * @name google.monitoring.dashboard.v1.TimeSeriesTable.MetricVisualization
+                         * @enum {number}
+                         * @property {number} METRIC_VISUALIZATION_UNSPECIFIED=0 METRIC_VISUALIZATION_UNSPECIFIED value
+                         * @property {number} NUMBER=1 NUMBER value
+                         * @property {number} BAR=2 BAR value
+                         */
+                        TimeSeriesTable.MetricVisualization = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "METRIC_VISUALIZATION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NUMBER"] = 1;
+                            values[valuesById[2] = "BAR"] = 2;
+                            return values;
+                        })();
+    
+                        TimeSeriesTable.ColumnSettings = (function() {
+    
+                            /**
+                             * Properties of a ColumnSettings.
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                             * @interface IColumnSettings
+                             * @property {string|null} [column] ColumnSettings column
+                             * @property {boolean|null} [visible] ColumnSettings visible
+                             */
+    
+                            /**
+                             * Constructs a new ColumnSettings.
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable
+                             * @classdesc Represents a ColumnSettings.
+                             * @implements IColumnSettings
+                             * @constructor
+                             * @param {google.monitoring.dashboard.v1.TimeSeriesTable.IColumnSettings=} [properties] Properties to set
+                             */
+                            function ColumnSettings(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ColumnSettings column.
+                             * @member {string} column
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings
+                             * @instance
+                             */
+                            ColumnSettings.prototype.column = "";
+    
+                            /**
+                             * ColumnSettings visible.
+                             * @member {boolean} visible
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings
+                             * @instance
+                             */
+                            ColumnSettings.prototype.visible = false;
+    
+                            /**
+                             * Creates a new ColumnSettings instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.TimeSeriesTable.IColumnSettings=} [properties] Properties to set
+                             * @returns {google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings} ColumnSettings instance
+                             */
+                            ColumnSettings.create = function create(properties) {
+                                return new ColumnSettings(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ColumnSettings message. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.TimeSeriesTable.IColumnSettings} message ColumnSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ColumnSettings.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.column != null && Object.hasOwnProperty.call(message, "column"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.column);
+                                if (message.visible != null && Object.hasOwnProperty.call(message, "visible"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.visible);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ColumnSettings message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.TimeSeriesTable.IColumnSettings} message ColumnSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ColumnSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ColumnSettings message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings} ColumnSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ColumnSettings.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.column = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.visible = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ColumnSettings message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings} ColumnSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ColumnSettings.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ColumnSettings message.
+                             * @function verify
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ColumnSettings.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.column != null && message.hasOwnProperty("column"))
+                                    if (!$util.isString(message.column))
+                                        return "column: string expected";
+                                if (message.visible != null && message.hasOwnProperty("visible"))
+                                    if (typeof message.visible !== "boolean")
+                                        return "visible: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ColumnSettings message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings} ColumnSettings
+                             */
+                            ColumnSettings.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings)
+                                    return object;
+                                var message = new $root.google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings();
+                                if (object.column != null)
+                                    message.column = String(object.column);
+                                if (object.visible != null)
+                                    message.visible = Boolean(object.visible);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ColumnSettings message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings} message ColumnSettings
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ColumnSettings.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.column = "";
+                                    object.visible = false;
+                                }
+                                if (message.column != null && message.hasOwnProperty("column"))
+                                    object.column = message.column;
+                                if (message.visible != null && message.hasOwnProperty("visible"))
+                                    object.visible = message.visible;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ColumnSettings to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ColumnSettings.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ColumnSettings
+                             * @function getTypeUrl
+                             * @memberof google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ColumnSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.monitoring.dashboard.v1.TimeSeriesTable.ColumnSettings";
+                            };
+    
+                            return ColumnSettings;
                         })();
     
                         return TimeSeriesTable;
