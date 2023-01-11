@@ -1,0 +1,1671 @@
+{
+    "clientLibrary": {
+        "name": "nodejs-dlp",
+        "version": "4.3.0",
+        "language": "TYPESCRIPT",
+        "apis": [
+            {
+                "id": "google.privacy.dlp.v2",
+                "version": "v2"
+            }
+        ]
+    },
+    "snippets": [
+        {
+            "regionTag": "dlp_v2_generated_DlpService_InspectContent_async",
+            "title": "DlpService inspectContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Finds potentially sensitive info in content. This method has limits on input size, processing time, and output size. When no InfoTypes or CustomInfoTypes are specified in this request, the system will automatically choose what detectors to run. By default this may be all types, but may change over time as detectors are updated. For how to guides, see https://cloud.google.com/dlp/docs/inspecting-images and https://cloud.google.com/dlp/docs/inspecting-text,",
+            "canonical": true,
+            "file": "dlp_service.inspect_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "InspectContent",
+                "fullName": "google.privacy.dlp.v2.DlpService.InspectContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "inspect_config",
+                        "type": ".google.privacy.dlp.v2.InspectConfig"
+                    },
+                    {
+                        "name": "item",
+                        "type": ".google.privacy.dlp.v2.ContentItem"
+                    },
+                    {
+                        "name": "inspect_template_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.InspectContentResponse",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "InspectContent",
+                    "fullName": "google.privacy.dlp.v2.DlpService.InspectContent",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_RedactImage_async",
+            "title": "DlpService redactImage Sample",
+            "origin": "API_DEFINITION",
+            "description": " Redacts potentially sensitive info from an image. This method has limits on input size, processing time, and output size. See https://cloud.google.com/dlp/docs/redacting-sensitive-data-images to learn more. When no InfoTypes or CustomInfoTypes are specified in this request, the system will automatically choose what detectors to run. By default this may be all types, but may change over time as detectors are updated.",
+            "canonical": true,
+            "file": "dlp_service.redact_image.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RedactImage",
+                "fullName": "google.privacy.dlp.v2.DlpService.RedactImage",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "inspect_config",
+                        "type": ".google.privacy.dlp.v2.InspectConfig"
+                    },
+                    {
+                        "name": "image_redaction_configs",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "include_findings",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "byte_item",
+                        "type": ".google.privacy.dlp.v2.ByteContentItem"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.RedactImageResponse",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "RedactImage",
+                    "fullName": "google.privacy.dlp.v2.DlpService.RedactImage",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_DeidentifyContent_async",
+            "title": "DlpService deidentifyContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " De-identifies potentially sensitive info from a ContentItem. This method has limits on input size and output size. See https://cloud.google.com/dlp/docs/deidentify-sensitive-data to learn more. When no InfoTypes or CustomInfoTypes are specified in this request, the system will automatically choose what detectors to run. By default this may be all types, but may change over time as detectors are updated.",
+            "canonical": true,
+            "file": "dlp_service.deidentify_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 101,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeidentifyContent",
+                "fullName": "google.privacy.dlp.v2.DlpService.DeidentifyContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "deidentify_config",
+                        "type": ".google.privacy.dlp.v2.DeidentifyConfig"
+                    },
+                    {
+                        "name": "inspect_config",
+                        "type": ".google.privacy.dlp.v2.InspectConfig"
+                    },
+                    {
+                        "name": "item",
+                        "type": ".google.privacy.dlp.v2.ContentItem"
+                    },
+                    {
+                        "name": "inspect_template_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "deidentify_template_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.DeidentifyContentResponse",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "DeidentifyContent",
+                    "fullName": "google.privacy.dlp.v2.DlpService.DeidentifyContent",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_ReidentifyContent_async",
+            "title": "DlpService reidentifyContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Re-identifies content that has been de-identified. See https://cloud.google.com/dlp/docs/pseudonymization#re-identification_in_free_text_code_example to learn more.",
+            "canonical": true,
+            "file": "dlp_service.reidentify_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 102,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ReidentifyContent",
+                "fullName": "google.privacy.dlp.v2.DlpService.ReidentifyContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "reidentify_config",
+                        "type": ".google.privacy.dlp.v2.DeidentifyConfig"
+                    },
+                    {
+                        "name": "inspect_config",
+                        "type": ".google.privacy.dlp.v2.InspectConfig"
+                    },
+                    {
+                        "name": "item",
+                        "type": ".google.privacy.dlp.v2.ContentItem"
+                    },
+                    {
+                        "name": "inspect_template_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "reidentify_template_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.ReidentifyContentResponse",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "ReidentifyContent",
+                    "fullName": "google.privacy.dlp.v2.DlpService.ReidentifyContent",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_ListInfoTypes_async",
+            "title": "DlpService listInfoTypes Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of the sensitive information types that DLP API supports. See https://cloud.google.com/dlp/docs/infotypes-reference to learn more.",
+            "canonical": true,
+            "file": "dlp_service.list_info_types.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListInfoTypes",
+                "fullName": "google.privacy.dlp.v2.DlpService.ListInfoTypes",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.ListInfoTypesResponse",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "ListInfoTypes",
+                    "fullName": "google.privacy.dlp.v2.DlpService.ListInfoTypes",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_CreateInspectTemplate_async",
+            "title": "DlpService createInspectTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates an InspectTemplate for reusing frequently used configuration for inspecting content, images, and storage. See https://cloud.google.com/dlp/docs/creating-templates to learn more.",
+            "canonical": true,
+            "file": "dlp_service.create_inspect_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateInspectTemplate",
+                "fullName": "google.privacy.dlp.v2.DlpService.CreateInspectTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "inspect_template",
+                        "type": ".google.privacy.dlp.v2.InspectTemplate"
+                    },
+                    {
+                        "name": "template_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.InspectTemplate",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateInspectTemplate",
+                    "fullName": "google.privacy.dlp.v2.DlpService.CreateInspectTemplate",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_UpdateInspectTemplate_async",
+            "title": "DlpService updateInspectTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the InspectTemplate. See https://cloud.google.com/dlp/docs/creating-templates to learn more.",
+            "canonical": true,
+            "file": "dlp_service.update_inspect_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateInspectTemplate",
+                "fullName": "google.privacy.dlp.v2.DlpService.UpdateInspectTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "inspect_template",
+                        "type": ".google.privacy.dlp.v2.InspectTemplate"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.InspectTemplate",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateInspectTemplate",
+                    "fullName": "google.privacy.dlp.v2.DlpService.UpdateInspectTemplate",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_GetInspectTemplate_async",
+            "title": "DlpService getInspectTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets an InspectTemplate. See https://cloud.google.com/dlp/docs/creating-templates to learn more.",
+            "canonical": true,
+            "file": "dlp_service.get_inspect_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetInspectTemplate",
+                "fullName": "google.privacy.dlp.v2.DlpService.GetInspectTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.InspectTemplate",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "GetInspectTemplate",
+                    "fullName": "google.privacy.dlp.v2.DlpService.GetInspectTemplate",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_ListInspectTemplates_async",
+            "title": "DlpService listInspectTemplates Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists InspectTemplates. See https://cloud.google.com/dlp/docs/creating-templates to learn more.",
+            "canonical": true,
+            "file": "dlp_service.list_inspect_templates.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 93,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListInspectTemplates",
+                "fullName": "google.privacy.dlp.v2.DlpService.ListInspectTemplates",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.ListInspectTemplatesResponse",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "ListInspectTemplates",
+                    "fullName": "google.privacy.dlp.v2.DlpService.ListInspectTemplates",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_DeleteInspectTemplate_async",
+            "title": "DlpService deleteInspectTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes an InspectTemplate. See https://cloud.google.com/dlp/docs/creating-templates to learn more.",
+            "canonical": true,
+            "file": "dlp_service.delete_inspect_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteInspectTemplate",
+                "fullName": "google.privacy.dlp.v2.DlpService.DeleteInspectTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteInspectTemplate",
+                    "fullName": "google.privacy.dlp.v2.DlpService.DeleteInspectTemplate",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_CreateDeidentifyTemplate_async",
+            "title": "DlpService createDeidentifyTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a DeidentifyTemplate for reusing frequently used configuration for de-identifying content, images, and storage. See https://cloud.google.com/dlp/docs/creating-templates-deid to learn more.",
+            "canonical": true,
+            "file": "dlp_service.create_deidentify_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateDeidentifyTemplate",
+                "fullName": "google.privacy.dlp.v2.DlpService.CreateDeidentifyTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "deidentify_template",
+                        "type": ".google.privacy.dlp.v2.DeidentifyTemplate"
+                    },
+                    {
+                        "name": "template_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.DeidentifyTemplate",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateDeidentifyTemplate",
+                    "fullName": "google.privacy.dlp.v2.DlpService.CreateDeidentifyTemplate",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_UpdateDeidentifyTemplate_async",
+            "title": "DlpService updateDeidentifyTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the DeidentifyTemplate. See https://cloud.google.com/dlp/docs/creating-templates-deid to learn more.",
+            "canonical": true,
+            "file": "dlp_service.update_deidentify_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateDeidentifyTemplate",
+                "fullName": "google.privacy.dlp.v2.DlpService.UpdateDeidentifyTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "deidentify_template",
+                        "type": ".google.privacy.dlp.v2.DeidentifyTemplate"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.DeidentifyTemplate",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateDeidentifyTemplate",
+                    "fullName": "google.privacy.dlp.v2.DlpService.UpdateDeidentifyTemplate",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_GetDeidentifyTemplate_async",
+            "title": "DlpService getDeidentifyTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a DeidentifyTemplate. See https://cloud.google.com/dlp/docs/creating-templates-deid to learn more.",
+            "canonical": true,
+            "file": "dlp_service.get_deidentify_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetDeidentifyTemplate",
+                "fullName": "google.privacy.dlp.v2.DlpService.GetDeidentifyTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.DeidentifyTemplate",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "GetDeidentifyTemplate",
+                    "fullName": "google.privacy.dlp.v2.DlpService.GetDeidentifyTemplate",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_ListDeidentifyTemplates_async",
+            "title": "DlpService listDeidentifyTemplates Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists DeidentifyTemplates. See https://cloud.google.com/dlp/docs/creating-templates-deid to learn more.",
+            "canonical": true,
+            "file": "dlp_service.list_deidentify_templates.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 93,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListDeidentifyTemplates",
+                "fullName": "google.privacy.dlp.v2.DlpService.ListDeidentifyTemplates",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.ListDeidentifyTemplatesResponse",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "ListDeidentifyTemplates",
+                    "fullName": "google.privacy.dlp.v2.DlpService.ListDeidentifyTemplates",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_DeleteDeidentifyTemplate_async",
+            "title": "DlpService deleteDeidentifyTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a DeidentifyTemplate. See https://cloud.google.com/dlp/docs/creating-templates-deid to learn more.",
+            "canonical": true,
+            "file": "dlp_service.delete_deidentify_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteDeidentifyTemplate",
+                "fullName": "google.privacy.dlp.v2.DlpService.DeleteDeidentifyTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteDeidentifyTemplate",
+                    "fullName": "google.privacy.dlp.v2.DlpService.DeleteDeidentifyTemplate",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_CreateJobTrigger_async",
+            "title": "DlpService createJobTrigger Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a job trigger to run DLP actions such as scanning storage for sensitive information on a set schedule. See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.",
+            "canonical": true,
+            "file": "dlp_service.create_job_trigger.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 76,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateJobTrigger",
+                "fullName": "google.privacy.dlp.v2.DlpService.CreateJobTrigger",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "job_trigger",
+                        "type": ".google.privacy.dlp.v2.JobTrigger"
+                    },
+                    {
+                        "name": "trigger_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.JobTrigger",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateJobTrigger",
+                    "fullName": "google.privacy.dlp.v2.DlpService.CreateJobTrigger",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_UpdateJobTrigger_async",
+            "title": "DlpService updateJobTrigger Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a job trigger. See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.",
+            "canonical": true,
+            "file": "dlp_service.update_job_trigger.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateJobTrigger",
+                "fullName": "google.privacy.dlp.v2.DlpService.UpdateJobTrigger",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "job_trigger",
+                        "type": ".google.privacy.dlp.v2.JobTrigger"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.JobTrigger",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateJobTrigger",
+                    "fullName": "google.privacy.dlp.v2.DlpService.UpdateJobTrigger",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_HybridInspectJobTrigger_async",
+            "title": "DlpService hybridInspectJobTrigger Sample",
+            "origin": "API_DEFINITION",
+            "description": " Inspect hybrid content and store findings to a trigger. The inspection will be processed asynchronously. To review the findings monitor the jobs within the trigger.",
+            "canonical": true,
+            "file": "dlp_service.hybrid_inspect_job_trigger.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "HybridInspectJobTrigger",
+                "fullName": "google.privacy.dlp.v2.DlpService.HybridInspectJobTrigger",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "hybrid_item",
+                        "type": ".google.privacy.dlp.v2.HybridContentItem"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.HybridInspectResponse",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "HybridInspectJobTrigger",
+                    "fullName": "google.privacy.dlp.v2.DlpService.HybridInspectJobTrigger",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_GetJobTrigger_async",
+            "title": "DlpService getJobTrigger Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a job trigger. See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.",
+            "canonical": true,
+            "file": "dlp_service.get_job_trigger.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetJobTrigger",
+                "fullName": "google.privacy.dlp.v2.DlpService.GetJobTrigger",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.JobTrigger",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "GetJobTrigger",
+                    "fullName": "google.privacy.dlp.v2.DlpService.GetJobTrigger",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_ListJobTriggers_async",
+            "title": "DlpService listJobTriggers Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists job triggers. See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.",
+            "canonical": true,
+            "file": "dlp_service.list_job_triggers.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 117,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListJobTriggers",
+                "fullName": "google.privacy.dlp.v2.DlpService.ListJobTriggers",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "type",
+                        "type": ".google.privacy.dlp.v2.DlpJobType"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.ListJobTriggersResponse",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "ListJobTriggers",
+                    "fullName": "google.privacy.dlp.v2.DlpService.ListJobTriggers",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_DeleteJobTrigger_async",
+            "title": "DlpService deleteJobTrigger Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a job trigger. See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.",
+            "canonical": true,
+            "file": "dlp_service.delete_job_trigger.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteJobTrigger",
+                "fullName": "google.privacy.dlp.v2.DlpService.DeleteJobTrigger",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteJobTrigger",
+                    "fullName": "google.privacy.dlp.v2.DlpService.DeleteJobTrigger",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_ActivateJobTrigger_async",
+            "title": "DlpService activateJobTrigger Sample",
+            "origin": "API_DEFINITION",
+            "description": " Activate a job trigger. Causes the immediate execute of a trigger instead of waiting on the trigger event to occur.",
+            "canonical": true,
+            "file": "dlp_service.activate_job_trigger.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ActivateJobTrigger",
+                "fullName": "google.privacy.dlp.v2.DlpService.ActivateJobTrigger",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.DlpJob",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "ActivateJobTrigger",
+                    "fullName": "google.privacy.dlp.v2.DlpService.ActivateJobTrigger",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_CreateDlpJob_async",
+            "title": "DlpService createDlpJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new job to inspect storage or calculate risk metrics. See https://cloud.google.com/dlp/docs/inspecting-storage and https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more. When no InfoTypes or CustomInfoTypes are specified in inspect jobs, the system will automatically choose what detectors to run. By default this may be all types, but may change over time as detectors are updated.",
+            "canonical": true,
+            "file": "dlp_service.create_dlp_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateDlpJob",
+                "fullName": "google.privacy.dlp.v2.DlpService.CreateDlpJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "inspect_job",
+                        "type": ".google.privacy.dlp.v2.InspectJobConfig"
+                    },
+                    {
+                        "name": "risk_job",
+                        "type": ".google.privacy.dlp.v2.RiskAnalysisJobConfig"
+                    },
+                    {
+                        "name": "job_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.DlpJob",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateDlpJob",
+                    "fullName": "google.privacy.dlp.v2.DlpService.CreateDlpJob",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_ListDlpJobs_async",
+            "title": "DlpService listDlpJobs Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists DlpJobs that match the specified filter in the request. See https://cloud.google.com/dlp/docs/inspecting-storage and https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.",
+            "canonical": true,
+            "file": "dlp_service.list_dlp_jobs.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 117,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListDlpJobs",
+                "fullName": "google.privacy.dlp.v2.DlpService.ListDlpJobs",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "type",
+                        "type": ".google.privacy.dlp.v2.DlpJobType"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.ListDlpJobsResponse",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "ListDlpJobs",
+                    "fullName": "google.privacy.dlp.v2.DlpService.ListDlpJobs",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_GetDlpJob_async",
+            "title": "DlpService getDlpJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the latest state of a long-running DlpJob. See https://cloud.google.com/dlp/docs/inspecting-storage and https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.",
+            "canonical": true,
+            "file": "dlp_service.get_dlp_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetDlpJob",
+                "fullName": "google.privacy.dlp.v2.DlpService.GetDlpJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.DlpJob",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "GetDlpJob",
+                    "fullName": "google.privacy.dlp.v2.DlpService.GetDlpJob",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_DeleteDlpJob_async",
+            "title": "DlpService deleteDlpJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a long-running DlpJob. This method indicates that the client is no longer interested in the DlpJob result. The job will be canceled if possible. See https://cloud.google.com/dlp/docs/inspecting-storage and https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.",
+            "canonical": true,
+            "file": "dlp_service.delete_dlp_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteDlpJob",
+                "fullName": "google.privacy.dlp.v2.DlpService.DeleteDlpJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteDlpJob",
+                    "fullName": "google.privacy.dlp.v2.DlpService.DeleteDlpJob",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_CancelDlpJob_async",
+            "title": "DlpService cancelDlpJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Starts asynchronous cancellation on a long-running DlpJob. The server makes a best effort to cancel the DlpJob, but success is not guaranteed. See https://cloud.google.com/dlp/docs/inspecting-storage and https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.",
+            "canonical": true,
+            "file": "dlp_service.cancel_dlp_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CancelDlpJob",
+                "fullName": "google.privacy.dlp.v2.DlpService.CancelDlpJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "CancelDlpJob",
+                    "fullName": "google.privacy.dlp.v2.DlpService.CancelDlpJob",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_CreateStoredInfoType_async",
+            "title": "DlpService createStoredInfoType Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a pre-built stored infoType to be used for inspection. See https://cloud.google.com/dlp/docs/creating-stored-infotypes to learn more.",
+            "canonical": true,
+            "file": "dlp_service.create_stored_info_type.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateStoredInfoType",
+                "fullName": "google.privacy.dlp.v2.DlpService.CreateStoredInfoType",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "config",
+                        "type": ".google.privacy.dlp.v2.StoredInfoTypeConfig"
+                    },
+                    {
+                        "name": "stored_info_type_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.StoredInfoType",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateStoredInfoType",
+                    "fullName": "google.privacy.dlp.v2.DlpService.CreateStoredInfoType",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_UpdateStoredInfoType_async",
+            "title": "DlpService updateStoredInfoType Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the stored infoType by creating a new version. The existing version will continue to be used until the new version is ready. See https://cloud.google.com/dlp/docs/creating-stored-infotypes to learn more.",
+            "canonical": true,
+            "file": "dlp_service.update_stored_info_type.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateStoredInfoType",
+                "fullName": "google.privacy.dlp.v2.DlpService.UpdateStoredInfoType",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "config",
+                        "type": ".google.privacy.dlp.v2.StoredInfoTypeConfig"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.StoredInfoType",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateStoredInfoType",
+                    "fullName": "google.privacy.dlp.v2.DlpService.UpdateStoredInfoType",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_GetStoredInfoType_async",
+            "title": "DlpService getStoredInfoType Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a stored infoType. See https://cloud.google.com/dlp/docs/creating-stored-infotypes to learn more.",
+            "canonical": true,
+            "file": "dlp_service.get_stored_info_type.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetStoredInfoType",
+                "fullName": "google.privacy.dlp.v2.DlpService.GetStoredInfoType",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.StoredInfoType",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "GetStoredInfoType",
+                    "fullName": "google.privacy.dlp.v2.DlpService.GetStoredInfoType",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_ListStoredInfoTypes_async",
+            "title": "DlpService listStoredInfoTypes Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists stored infoTypes. See https://cloud.google.com/dlp/docs/creating-stored-infotypes to learn more.",
+            "canonical": true,
+            "file": "dlp_service.list_stored_info_types.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 90,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListStoredInfoTypes",
+                "fullName": "google.privacy.dlp.v2.DlpService.ListStoredInfoTypes",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.ListStoredInfoTypesResponse",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "ListStoredInfoTypes",
+                    "fullName": "google.privacy.dlp.v2.DlpService.ListStoredInfoTypes",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_DeleteStoredInfoType_async",
+            "title": "DlpService deleteStoredInfoType Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a stored infoType. See https://cloud.google.com/dlp/docs/creating-stored-infotypes to learn more.",
+            "canonical": true,
+            "file": "dlp_service.delete_stored_info_type.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteStoredInfoType",
+                "fullName": "google.privacy.dlp.v2.DlpService.DeleteStoredInfoType",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteStoredInfoType",
+                    "fullName": "google.privacy.dlp.v2.DlpService.DeleteStoredInfoType",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_HybridInspectDlpJob_async",
+            "title": "DlpService hybridInspectDlpJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Inspect hybrid content and store findings to a job. To review the findings, inspect the job. Inspection will occur asynchronously.",
+            "canonical": true,
+            "file": "dlp_service.hybrid_inspect_dlp_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "HybridInspectDlpJob",
+                "fullName": "google.privacy.dlp.v2.DlpService.HybridInspectDlpJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "hybrid_item",
+                        "type": ".google.privacy.dlp.v2.HybridContentItem"
+                    }
+                ],
+                "resultType": ".google.privacy.dlp.v2.HybridInspectResponse",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "HybridInspectDlpJob",
+                    "fullName": "google.privacy.dlp.v2.DlpService.HybridInspectDlpJob",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dlp_v2_generated_DlpService_FinishDlpJob_async",
+            "title": "DlpService finishDlpJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Finish a running hybrid DlpJob. Triggers the finalization steps and running of any enabled actions that have not yet run.",
+            "canonical": true,
+            "file": "dlp_service.finish_dlp_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "FinishDlpJob",
+                "fullName": "google.privacy.dlp.v2.DlpService.FinishDlpJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "DlpServiceClient",
+                    "fullName": "google.privacy.dlp.v2.DlpServiceClient"
+                },
+                "method": {
+                    "shortName": "FinishDlpJob",
+                    "fullName": "google.privacy.dlp.v2.DlpService.FinishDlpJob",
+                    "service": {
+                        "shortName": "DlpService",
+                        "fullName": "google.privacy.dlp.v2.DlpService"
+                    }
+                }
+            }
+        }
+    ]
+}

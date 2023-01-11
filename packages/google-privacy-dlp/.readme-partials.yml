@@ -1,0 +1,4 @@
+introduction: |-
+        The [Data Loss Prevention API](https://cloud.google.com/dlp/docs/) provides programmatic access to a
+        powerful detection engine for personally identifiable information and other privacy-sensitive
+        data in unstructured data streams.
