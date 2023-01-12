@@ -681,6 +681,21 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "metricVisualization": {
+                          "type": "MetricVisualization",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "columnSettings": {
+                          "rule": "repeated",
+                          "type": "ColumnSettings",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -712,6 +727,31 @@
                               "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "MetricVisualization": {
+                          "values": {
+                            "METRIC_VISUALIZATION_UNSPECIFIED": 0,
+                            "NUMBER": 1,
+                            "BAR": 2
+                          }
+                        },
+                        "ColumnSettings": {
+                          "fields": {
+                            "column": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "visible": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
                           }
