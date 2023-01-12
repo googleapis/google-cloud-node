@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,7 +40,8 @@ import * as gapicConfig from './transition_route_groups_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroups}.
+ *  Service for managing
+ *  {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroups}.
  * @class
  * @memberof v3beta1
  */
@@ -123,6 +124,9 @@ export class TransitionRouteGroupsClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -407,12 +411,14 @@ export class TransitionRouteGroupsClient {
   // -- Service calls --
   // -------------------
   /**
-   * Retrieves the specified {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
+   * Retrieves the specified
+   * {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
+   *   Required. The name of the
+   *   {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
    * @param {string} request.languageCode
@@ -523,7 +529,9 @@ export class TransitionRouteGroupsClient {
     );
   }
   /**
-   * Creates an {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup} in the specified flow.
+   * Creates an
+   * {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}
+   * in the specified flow.
    *
    * Note: You should always train a flow prior to sending it queries. See the
    * [training
@@ -532,8 +540,9 @@ export class TransitionRouteGroupsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The flow to create an {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup} for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   Required. The flow to create an
+   *   {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}
+   *   for. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/flows/<Flow ID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup} request.transitionRouteGroup
    *   Required. The transition route group to create.
@@ -644,7 +653,8 @@ export class TransitionRouteGroupsClient {
     );
   }
   /**
-   * Updates the specified {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
+   * Updates the specified
+   * {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
    *
    * Note: You should always train a flow prior to sending it queries. See the
    * [training
@@ -763,7 +773,8 @@ export class TransitionRouteGroupsClient {
     );
   }
   /**
-   * Deletes the specified {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
+   * Deletes the specified
+   * {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
    *
    * Note: You should always train a flow prior to sending it queries. See the
    * [training
@@ -772,9 +783,11 @@ export class TransitionRouteGroupsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup} to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
+   *   Required. The name of the
+   *   {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}
+   *   to delete. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>/flows/<Flow ID>/transitionRouteGroups/<Transition
+   *   Route Group ID>`.
    * @param {boolean} request.force
    *   This field has no effect for transition route group that no page is using.
    *   If the transition route group is referenced by any page:
