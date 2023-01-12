@@ -186,6 +186,9 @@ export class AutoscalingPolicyServiceClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      nodeGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{node_group}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -1098,6 +1101,76 @@ export class AutoscalingPolicyServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified nodeGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} region
+   * @param {string} cluster
+   * @param {string} node_group
+   * @returns {string} Resource name string.
+   */
+  nodeGroupPath(
+    project: string,
+    region: string,
+    cluster: string,
+    nodeGroup: string
+  ) {
+    return this.pathTemplates.nodeGroupPathTemplate.render({
+      project: project,
+      region: region,
+      cluster: cluster,
+      node_group: nodeGroup,
+    });
+  }
+
+  /**
+   * Parse the project from NodeGroup resource.
+   *
+   * @param {string} nodeGroupName
+   *   A fully-qualified path representing NodeGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNodeGroupName(nodeGroupName: string) {
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
+      .project;
+  }
+
+  /**
+   * Parse the region from NodeGroup resource.
+   *
+   * @param {string} nodeGroupName
+   *   A fully-qualified path representing NodeGroup resource.
+   * @returns {string} A string representing the region.
+   */
+  matchRegionFromNodeGroupName(nodeGroupName: string) {
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName).region;
+  }
+
+  /**
+   * Parse the cluster from NodeGroup resource.
+   *
+   * @param {string} nodeGroupName
+   *   A fully-qualified path representing NodeGroup resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromNodeGroupName(nodeGroupName: string) {
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
+      .cluster;
+  }
+
+  /**
+   * Parse the node_group from NodeGroup resource.
+   *
+   * @param {string} nodeGroupName
+   *   A fully-qualified path representing NodeGroup resource.
+   * @returns {string} A string representing the node_group.
+   */
+  matchNodeGroupFromNodeGroupName(nodeGroupName: string) {
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
+      .node_group;
   }
 
   /**

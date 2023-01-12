@@ -1682,6 +1682,82 @@ describe('v1.JobControllerClient', () => {
       });
     });
 
+    describe('nodeGroup', () => {
+      const fakePath = '/rendered/path/nodeGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        region: 'regionValue',
+        cluster: 'clusterValue',
+        node_group: 'nodeGroupValue',
+      };
+      const client = new jobcontrollerModule.v1.JobControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.nodeGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nodeGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nodeGroupPath', () => {
+        const result = client.nodeGroupPath(
+          'projectValue',
+          'regionValue',
+          'clusterValue',
+          'nodeGroupValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nodeGroupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNodeGroupName', () => {
+        const result = client.matchProjectFromNodeGroupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nodeGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRegionFromNodeGroupName', () => {
+        const result = client.matchRegionFromNodeGroupName(fakePath);
+        assert.strictEqual(result, 'regionValue');
+        assert(
+          (client.pathTemplates.nodeGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchClusterFromNodeGroupName', () => {
+        const result = client.matchClusterFromNodeGroupName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.nodeGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNodeGroupFromNodeGroupName', () => {
+        const result = client.matchNodeGroupFromNodeGroupName(fakePath);
+        assert.strictEqual(result, 'nodeGroupValue');
+        assert(
+          (client.pathTemplates.nodeGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationAutoscalingPolicy', () => {
       const fakePath = '/rendered/path/projectLocationAutoscalingPolicy';
       const expectedParameters = {

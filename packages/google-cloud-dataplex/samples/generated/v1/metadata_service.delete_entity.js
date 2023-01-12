@@ -34,8 +34,8 @@ function main(name, etag) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The etag associated with the entity, which can be retrieved with a
-   *  GetEntity   request.
+   *  Required. The etag associated with the entity, which can be retrieved with
+   *  a GetEntity   request.
    */
   // const etag = 'abc123'
 

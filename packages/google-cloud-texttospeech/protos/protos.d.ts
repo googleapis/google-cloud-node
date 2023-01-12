@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1522,6 +1522,25 @@ export namespace google {
                     type SynthesizeSpeechCallback = (error: (Error|null), response?: google.cloud.texttospeech.v1beta1.SynthesizeSpeechResponse) => void;
                 }
 
+                /** SsmlVoiceGender enum. */
+                enum SsmlVoiceGender {
+                    SSML_VOICE_GENDER_UNSPECIFIED = 0,
+                    MALE = 1,
+                    FEMALE = 2,
+                    NEUTRAL = 3
+                }
+
+                /** AudioEncoding enum. */
+                enum AudioEncoding {
+                    AUDIO_ENCODING_UNSPECIFIED = 0,
+                    LINEAR16 = 1,
+                    MP3 = 2,
+                    MP3_64_KBPS = 4,
+                    OGG_OPUS = 3,
+                    MULAW = 5,
+                    ALAW = 6
+                }
+
                 /** Properties of a ListVoicesRequest. */
                 interface IListVoicesRequest {
 
@@ -1617,25 +1636,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** SsmlVoiceGender enum. */
-                enum SsmlVoiceGender {
-                    SSML_VOICE_GENDER_UNSPECIFIED = 0,
-                    MALE = 1,
-                    FEMALE = 2,
-                    NEUTRAL = 3
-                }
-
-                /** AudioEncoding enum. */
-                enum AudioEncoding {
-                    AUDIO_ENCODING_UNSPECIFIED = 0,
-                    LINEAR16 = 1,
-                    MP3 = 2,
-                    MP3_64_KBPS = 4,
-                    OGG_OPUS = 3,
-                    MULAW = 5,
-                    ALAW = 6
                 }
 
                 /** Properties of a ListVoicesResponse. */

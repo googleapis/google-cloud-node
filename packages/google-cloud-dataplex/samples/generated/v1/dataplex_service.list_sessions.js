@@ -34,26 +34,26 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Maximum number of sessions to return. The service may return fewer than
-   *  this value. If unspecified, at most 10 sessions will be returned. The
-   *  maximum value is 1000; values above 1000 will be coerced to 1000.
+   *  Optional. Maximum number of sessions to return. The service may return
+   *  fewer than this value. If unspecified, at most 10 sessions will be
+   *  returned. The maximum value is 1000; values above 1000 will be coerced to
+   *  1000.
    */
   // const pageSize = 1234
   /**
-   *  Optional. Page token received from a previous `ListSessions` call. Provide this to
-   *  retrieve the subsequent page. When paginating, all other parameters
+   *  Optional. Page token received from a previous `ListSessions` call. Provide
+   *  this to retrieve the subsequent page. When paginating, all other parameters
    *  provided to `ListSessions` must match the call that provided the page
    *  token.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Filter request. The following `mode` filter is supported to return only the
-   *  sessions belonging to the requester when the mode is USER and return
-   *  sessions of all the users when the mode is ADMIN. When no filter is sent
-   *  default to USER mode.
-   *  NOTE: When the mode is ADMIN, the requester should have
-   *  `dataplex.environments.listAllSessions` permission to list all sessions,
-   *  in absence of the permission, the request fails.
+   *  Optional. Filter request. The following `mode` filter is supported to
+   *  return only the sessions belonging to the requester when the mode is USER
+   *  and return sessions of all the users when the mode is ADMIN. When no filter
+   *  is sent default to USER mode. NOTE: When the mode is ADMIN, the requester
+   *  should have `dataplex.environments.listAllSessions` permission to list all
+   *  sessions, in absence of the permission, the request fails.
    *  mode = ADMIN | USER
    */
   // const filter = 'abc123'
