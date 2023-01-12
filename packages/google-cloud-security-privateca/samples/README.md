@@ -81,7 +81,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Certificate_authority_service.activate_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.activate_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.activate_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.activate_certificate_authority.js,samples/README.md)
 
@@ -98,7 +98,7 @@ __Usage:__
 
 ### Certificate_authority_service.create_ca_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.create_ca_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.create_ca_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.create_ca_pool.js,samples/README.md)
 
@@ -115,7 +115,7 @@ __Usage:__
 
 ### Certificate_authority_service.create_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.create_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.create_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.create_certificate.js,samples/README.md)
 
@@ -132,7 +132,7 @@ __Usage:__
 
 ### Certificate_authority_service.create_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.create_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.create_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.create_certificate_authority.js,samples/README.md)
 
@@ -149,7 +149,7 @@ __Usage:__
 
 ### Certificate_authority_service.create_certificate_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.create_certificate_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.create_certificate_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.create_certificate_template.js,samples/README.md)
 
@@ -166,7 +166,7 @@ __Usage:__
 
 ### Certificate_authority_service.delete_ca_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.delete_ca_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.delete_ca_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.delete_ca_pool.js,samples/README.md)
 
@@ -183,7 +183,7 @@ __Usage:__
 
 ### Certificate_authority_service.delete_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.delete_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.delete_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.delete_certificate_authority.js,samples/README.md)
 
@@ -200,7 +200,7 @@ __Usage:__
 
 ### Certificate_authority_service.delete_certificate_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.delete_certificate_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.delete_certificate_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.delete_certificate_template.js,samples/README.md)
 
@@ -217,7 +217,7 @@ __Usage:__
 
 ### Certificate_authority_service.disable_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.disable_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.disable_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.disable_certificate_authority.js,samples/README.md)
 
@@ -234,7 +234,7 @@ __Usage:__
 
 ### Certificate_authority_service.enable_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.enable_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.enable_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.enable_certificate_authority.js,samples/README.md)
 
@@ -251,7 +251,7 @@ __Usage:__
 
 ### Certificate_authority_service.fetch_ca_certs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.fetch_ca_certs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.fetch_ca_certs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.fetch_ca_certs.js,samples/README.md)
 
@@ -268,7 +268,7 @@ __Usage:__
 
 ### Certificate_authority_service.fetch_certificate_authority_csr
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.fetch_certificate_authority_csr.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.fetch_certificate_authority_csr.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.fetch_certificate_authority_csr.js,samples/README.md)
 
@@ -285,7 +285,7 @@ __Usage:__
 
 ### Certificate_authority_service.get_ca_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_ca_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_ca_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_ca_pool.js,samples/README.md)
 
@@ -302,7 +302,7 @@ __Usage:__
 
 ### Certificate_authority_service.get_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_certificate.js,samples/README.md)
 
@@ -319,7 +319,7 @@ __Usage:__
 
 ### Certificate_authority_service.get_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_certificate_authority.js,samples/README.md)
 
@@ -336,7 +336,7 @@ __Usage:__
 
 ### Certificate_authority_service.get_certificate_revocation_list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_certificate_revocation_list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_certificate_revocation_list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_certificate_revocation_list.js,samples/README.md)
 
@@ -353,7 +353,7 @@ __Usage:__
 
 ### Certificate_authority_service.get_certificate_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_certificate_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_certificate_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.get_certificate_template.js,samples/README.md)
 
@@ -370,7 +370,7 @@ __Usage:__
 
 ### Certificate_authority_service.list_ca_pools
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_ca_pools.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_ca_pools.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_ca_pools.js,samples/README.md)
 
@@ -387,7 +387,7 @@ __Usage:__
 
 ### Certificate_authority_service.list_certificate_authorities
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_certificate_authorities.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_certificate_authorities.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_certificate_authorities.js,samples/README.md)
 
@@ -404,7 +404,7 @@ __Usage:__
 
 ### Certificate_authority_service.list_certificate_revocation_lists
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_certificate_revocation_lists.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_certificate_revocation_lists.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_certificate_revocation_lists.js,samples/README.md)
 
@@ -421,7 +421,7 @@ __Usage:__
 
 ### Certificate_authority_service.list_certificate_templates
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_certificate_templates.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_certificate_templates.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_certificate_templates.js,samples/README.md)
 
@@ -438,7 +438,7 @@ __Usage:__
 
 ### Certificate_authority_service.list_certificates
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_certificates.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_certificates.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.list_certificates.js,samples/README.md)
 
@@ -455,7 +455,7 @@ __Usage:__
 
 ### Certificate_authority_service.revoke_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.revoke_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.revoke_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.revoke_certificate.js,samples/README.md)
 
@@ -472,7 +472,7 @@ __Usage:__
 
 ### Certificate_authority_service.undelete_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.undelete_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.undelete_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.undelete_certificate_authority.js,samples/README.md)
 
@@ -489,7 +489,7 @@ __Usage:__
 
 ### Certificate_authority_service.update_ca_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_ca_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_ca_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_ca_pool.js,samples/README.md)
 
@@ -506,7 +506,7 @@ __Usage:__
 
 ### Certificate_authority_service.update_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate.js,samples/README.md)
 
@@ -523,7 +523,7 @@ __Usage:__
 
 ### Certificate_authority_service.update_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate_authority.js,samples/README.md)
 
@@ -540,7 +540,7 @@ __Usage:__
 
 ### Certificate_authority_service.update_certificate_revocation_list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate_revocation_list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate_revocation_list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate_revocation_list.js,samples/README.md)
 
@@ -557,7 +557,7 @@ __Usage:__
 
 ### Certificate_authority_service.update_certificate_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate_template.js,samples/README.md)
 
@@ -574,7 +574,7 @@ __Usage:__
 
 ### Certificate_authority_service.activate_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.activate_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.activate_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.activate_certificate_authority.js,samples/README.md)
 
@@ -591,7 +591,7 @@ __Usage:__
 
 ### Certificate_authority_service.create_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.create_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.create_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.create_certificate.js,samples/README.md)
 
@@ -608,7 +608,7 @@ __Usage:__
 
 ### Certificate_authority_service.create_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.create_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.create_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.create_certificate_authority.js,samples/README.md)
 
@@ -625,7 +625,7 @@ __Usage:__
 
 ### Certificate_authority_service.disable_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.disable_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.disable_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.disable_certificate_authority.js,samples/README.md)
 
@@ -642,7 +642,7 @@ __Usage:__
 
 ### Certificate_authority_service.enable_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.enable_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.enable_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.enable_certificate_authority.js,samples/README.md)
 
@@ -659,7 +659,7 @@ __Usage:__
 
 ### Certificate_authority_service.fetch_certificate_authority_csr
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.fetch_certificate_authority_csr.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.fetch_certificate_authority_csr.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.fetch_certificate_authority_csr.js,samples/README.md)
 
@@ -676,7 +676,7 @@ __Usage:__
 
 ### Certificate_authority_service.get_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.get_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.get_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.get_certificate.js,samples/README.md)
 
@@ -693,7 +693,7 @@ __Usage:__
 
 ### Certificate_authority_service.get_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.get_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.get_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.get_certificate_authority.js,samples/README.md)
 
@@ -710,7 +710,7 @@ __Usage:__
 
 ### Certificate_authority_service.get_certificate_revocation_list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.get_certificate_revocation_list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.get_certificate_revocation_list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.get_certificate_revocation_list.js,samples/README.md)
 
@@ -727,7 +727,7 @@ __Usage:__
 
 ### Certificate_authority_service.get_reusable_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.get_reusable_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.get_reusable_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.get_reusable_config.js,samples/README.md)
 
@@ -744,7 +744,7 @@ __Usage:__
 
 ### Certificate_authority_service.list_certificate_authorities
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.list_certificate_authorities.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.list_certificate_authorities.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.list_certificate_authorities.js,samples/README.md)
 
@@ -761,7 +761,7 @@ __Usage:__
 
 ### Certificate_authority_service.list_certificate_revocation_lists
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.list_certificate_revocation_lists.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.list_certificate_revocation_lists.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.list_certificate_revocation_lists.js,samples/README.md)
 
@@ -778,7 +778,7 @@ __Usage:__
 
 ### Certificate_authority_service.list_certificates
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.list_certificates.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.list_certificates.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.list_certificates.js,samples/README.md)
 
@@ -795,7 +795,7 @@ __Usage:__
 
 ### Certificate_authority_service.list_reusable_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.list_reusable_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.list_reusable_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.list_reusable_configs.js,samples/README.md)
 
@@ -812,7 +812,7 @@ __Usage:__
 
 ### Certificate_authority_service.restore_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.restore_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.restore_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.restore_certificate_authority.js,samples/README.md)
 
@@ -829,7 +829,7 @@ __Usage:__
 
 ### Certificate_authority_service.revoke_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.revoke_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.revoke_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.revoke_certificate.js,samples/README.md)
 
@@ -846,7 +846,7 @@ __Usage:__
 
 ### Certificate_authority_service.schedule_delete_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.schedule_delete_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.schedule_delete_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.schedule_delete_certificate_authority.js,samples/README.md)
 
@@ -863,7 +863,7 @@ __Usage:__
 
 ### Certificate_authority_service.update_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.update_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.update_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.update_certificate.js,samples/README.md)
 
@@ -880,7 +880,7 @@ __Usage:__
 
 ### Certificate_authority_service.update_certificate_authority
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.update_certificate_authority.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.update_certificate_authority.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.update_certificate_authority.js,samples/README.md)
 
@@ -897,7 +897,7 @@ __Usage:__
 
 ### Certificate_authority_service.update_certificate_revocation_list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.update_certificate_revocation_list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.update_certificate_revocation_list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.update_certificate_revocation_list.js,samples/README.md)
 
@@ -914,7 +914,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/quickstart.js,samples/README.md)
 
@@ -931,7 +931,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-security-privateca/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-security-privateca/samples/test/quickstart.test.js,samples/README.md)
 

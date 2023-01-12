@@ -52,7 +52,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Data_fusion.create_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.create_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.create_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1/data_fusion.create_instance.js,samples/README.md)
 
@@ -69,7 +69,7 @@ __Usage:__
 
 ### Data_fusion.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1/data_fusion.delete_instance.js,samples/README.md)
 
@@ -86,7 +86,7 @@ __Usage:__
 
 ### Data_fusion.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1/data_fusion.get_instance.js,samples/README.md)
 
@@ -103,7 +103,7 @@ __Usage:__
 
 ### Data_fusion.list_available_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.list_available_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.list_available_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1/data_fusion.list_available_versions.js,samples/README.md)
 
@@ -120,7 +120,7 @@ __Usage:__
 
 ### Data_fusion.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1/data_fusion.list_instances.js,samples/README.md)
 
@@ -137,7 +137,7 @@ __Usage:__
 
 ### Data_fusion.restart_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.restart_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.restart_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1/data_fusion.restart_instance.js,samples/README.md)
 
@@ -154,7 +154,7 @@ __Usage:__
 
 ### Data_fusion.update_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.update_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.update_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1/data_fusion.update_instance.js,samples/README.md)
 
@@ -171,7 +171,7 @@ __Usage:__
 
 ### Data_fusion.add_dns_peering
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.add_dns_peering.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.add_dns_peering.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.add_dns_peering.js,samples/README.md)
 
@@ -188,7 +188,7 @@ __Usage:__
 
 ### Data_fusion.create_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.create_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.create_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.create_instance.js,samples/README.md)
 
@@ -205,7 +205,7 @@ __Usage:__
 
 ### Data_fusion.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.delete_instance.js,samples/README.md)
 
@@ -222,7 +222,7 @@ __Usage:__
 
 ### Data_fusion.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.get_instance.js,samples/README.md)
 
@@ -239,7 +239,7 @@ __Usage:__
 
 ### Data_fusion.list_available_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.list_available_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.list_available_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.list_available_versions.js,samples/README.md)
 
@@ -256,7 +256,7 @@ __Usage:__
 
 ### Data_fusion.list_dns_peerings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.list_dns_peerings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.list_dns_peerings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.list_dns_peerings.js,samples/README.md)
 
@@ -273,7 +273,7 @@ __Usage:__
 
 ### Data_fusion.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.list_instances.js,samples/README.md)
 
@@ -290,7 +290,7 @@ __Usage:__
 
 ### Data_fusion.list_namespaces
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.list_namespaces.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.list_namespaces.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.list_namespaces.js,samples/README.md)
 
@@ -307,7 +307,7 @@ __Usage:__
 
 ### Data_fusion.remove_dns_peering
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.remove_dns_peering.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.remove_dns_peering.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.remove_dns_peering.js,samples/README.md)
 
@@ -324,7 +324,7 @@ __Usage:__
 
 ### Data_fusion.remove_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.remove_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.remove_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.remove_iam_policy.js,samples/README.md)
 
@@ -341,7 +341,7 @@ __Usage:__
 
 ### Data_fusion.restart_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.restart_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.restart_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.restart_instance.js,samples/README.md)
 
@@ -358,7 +358,7 @@ __Usage:__
 
 ### Data_fusion.update_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.update_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.update_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.update_instance.js,samples/README.md)
 
@@ -375,7 +375,7 @@ __Usage:__
 
 ### Data_fusion.upgrade_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.upgrade_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.upgrade_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.upgrade_instance.js,samples/README.md)
 
@@ -392,7 +392,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/quickstart.js,samples/README.md)
 
@@ -409,7 +409,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datafusion/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datafusion/samples/test/quickstart.js,samples/README.md)
 

@@ -38,7 +38,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### App_connectors_service.create_app_connector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.create_app_connector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.create_app_connector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.create_app_connector.js,samples/README.md)
 
@@ -55,7 +55,7 @@ __Usage:__
 
 ### App_connectors_service.delete_app_connector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.delete_app_connector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.delete_app_connector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.delete_app_connector.js,samples/README.md)
 
@@ -72,7 +72,7 @@ __Usage:__
 
 ### App_connectors_service.get_app_connector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.get_app_connector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.get_app_connector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.get_app_connector.js,samples/README.md)
 
@@ -89,7 +89,7 @@ __Usage:__
 
 ### App_connectors_service.list_app_connectors
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.list_app_connectors.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.list_app_connectors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.list_app_connectors.js,samples/README.md)
 
@@ -106,7 +106,7 @@ __Usage:__
 
 ### App_connectors_service.report_status
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.report_status.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.report_status.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.report_status.js,samples/README.md)
 
@@ -123,7 +123,7 @@ __Usage:__
 
 ### App_connectors_service.update_app_connector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.update_app_connector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.update_app_connector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnectors/samples/generated/v1/app_connectors_service.update_app_connector.js,samples/README.md)
 
@@ -140,7 +140,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnectors/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnectors/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnectors/samples/quickstart.js,samples/README.md)
 
@@ -157,7 +157,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnectors/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnectors/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnectors/samples/test/quickstart.js,samples/README.md)
 

@@ -34,7 +34,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Publisher.publish_channel_connection_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_channel_connection_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_channel_connection_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_channel_connection_events.js,samples/README.md)
 
@@ -51,7 +51,7 @@ __Usage:__
 
 ### Publisher.publish_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_events.js,samples/README.md)
 
@@ -68,7 +68,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc-publishing/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc-publishing/samples/quickstart.js,samples/README.md)
 
@@ -85,7 +85,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc-publishing/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc-publishing/samples/test/quickstart.js,samples/README.md)
 

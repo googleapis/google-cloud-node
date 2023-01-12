@@ -38,7 +38,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Video_intelligence_service.annotate_video
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-videointelligence/samples/generated/v1/video_intelligence_service.annotate_video.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1/video_intelligence_service.annotate_video.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1/video_intelligence_service.annotate_video.js,samples/README.md)
 
@@ -55,7 +55,7 @@ __Usage:__
 
 ### Video_intelligence_service.annotate_video
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-videointelligence/samples/generated/v1beta2/video_intelligence_service.annotate_video.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1beta2/video_intelligence_service.annotate_video.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1beta2/video_intelligence_service.annotate_video.js,samples/README.md)
 
@@ -72,7 +72,7 @@ __Usage:__
 
 ### Video_intelligence_service.annotate_video
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-videointelligence/samples/generated/v1p1beta1/video_intelligence_service.annotate_video.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p1beta1/video_intelligence_service.annotate_video.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1p1beta1/video_intelligence_service.annotate_video.js,samples/README.md)
 
@@ -89,7 +89,7 @@ __Usage:__
 
 ### Video_intelligence_service.annotate_video
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-videointelligence/samples/generated/v1p2beta1/video_intelligence_service.annotate_video.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p2beta1/video_intelligence_service.annotate_video.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1p2beta1/video_intelligence_service.annotate_video.js,samples/README.md)
 
@@ -106,7 +106,7 @@ __Usage:__
 
 ### Streaming_video_intelligence_service.streaming_annotate_video
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-videointelligence/samples/generated/v1p3beta1/streaming_video_intelligence_service.streaming_annotate_video.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p3beta1/streaming_video_intelligence_service.streaming_annotate_video.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1p3beta1/streaming_video_intelligence_service.streaming_annotate_video.js,samples/README.md)
 
@@ -123,7 +123,7 @@ __Usage:__
 
 ### Video_intelligence_service.annotate_video
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-videointelligence/samples/generated/v1p3beta1/video_intelligence_service.annotate_video.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/generated/v1p3beta1/video_intelligence_service.annotate_video.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/generated/v1p3beta1/video_intelligence_service.annotate_video.js,samples/README.md)
 
@@ -140,7 +140,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-videointelligence/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/quickstart.js,samples/README.md)
 
@@ -157,7 +157,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-videointelligence/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-videointelligence/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-videointelligence/samples/test/quickstart.test.js,samples/README.md)
 

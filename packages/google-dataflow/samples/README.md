@@ -50,7 +50,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Flex_templates_service.launch_flex_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/flex_templates_service.launch_flex_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/flex_templates_service.launch_flex_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/flex_templates_service.launch_flex_template.js,samples/README.md)
 
@@ -67,7 +67,7 @@ __Usage:__
 
 ### Jobs_v1_beta3.aggregated_list_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.aggregated_list_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.aggregated_list_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.aggregated_list_jobs.js,samples/README.md)
 
@@ -84,7 +84,7 @@ __Usage:__
 
 ### Jobs_v1_beta3.check_active_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.check_active_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.check_active_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.check_active_jobs.js,samples/README.md)
 
@@ -101,7 +101,7 @@ __Usage:__
 
 ### Jobs_v1_beta3.create_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.create_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.create_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.create_job.js,samples/README.md)
 
@@ -118,7 +118,7 @@ __Usage:__
 
 ### Jobs_v1_beta3.get_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.get_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.get_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.get_job.js,samples/README.md)
 
@@ -135,7 +135,7 @@ __Usage:__
 
 ### Jobs_v1_beta3.list_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.list_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.list_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.list_jobs.js,samples/README.md)
 
@@ -152,7 +152,7 @@ __Usage:__
 
 ### Jobs_v1_beta3.snapshot_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.snapshot_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.snapshot_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.snapshot_job.js,samples/README.md)
 
@@ -169,7 +169,7 @@ __Usage:__
 
 ### Jobs_v1_beta3.update_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.update_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.update_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/jobs_v1_beta3.update_job.js,samples/README.md)
 
@@ -186,7 +186,7 @@ __Usage:__
 
 ### Messages_v1_beta3.list_job_messages
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/messages_v1_beta3.list_job_messages.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/messages_v1_beta3.list_job_messages.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/messages_v1_beta3.list_job_messages.js,samples/README.md)
 
@@ -203,7 +203,7 @@ __Usage:__
 
 ### Metrics_v1_beta3.get_job_execution_details
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/metrics_v1_beta3.get_job_execution_details.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/metrics_v1_beta3.get_job_execution_details.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/metrics_v1_beta3.get_job_execution_details.js,samples/README.md)
 
@@ -220,7 +220,7 @@ __Usage:__
 
 ### Metrics_v1_beta3.get_job_metrics
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/metrics_v1_beta3.get_job_metrics.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/metrics_v1_beta3.get_job_metrics.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/metrics_v1_beta3.get_job_metrics.js,samples/README.md)
 
@@ -237,7 +237,7 @@ __Usage:__
 
 ### Metrics_v1_beta3.get_stage_execution_details
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/metrics_v1_beta3.get_stage_execution_details.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/metrics_v1_beta3.get_stage_execution_details.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/metrics_v1_beta3.get_stage_execution_details.js,samples/README.md)
 
@@ -254,7 +254,7 @@ __Usage:__
 
 ### Snapshots_v1_beta3.delete_snapshot
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/snapshots_v1_beta3.delete_snapshot.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/snapshots_v1_beta3.delete_snapshot.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/snapshots_v1_beta3.delete_snapshot.js,samples/README.md)
 
@@ -271,7 +271,7 @@ __Usage:__
 
 ### Snapshots_v1_beta3.get_snapshot
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/snapshots_v1_beta3.get_snapshot.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/snapshots_v1_beta3.get_snapshot.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/snapshots_v1_beta3.get_snapshot.js,samples/README.md)
 
@@ -288,7 +288,7 @@ __Usage:__
 
 ### Snapshots_v1_beta3.list_snapshots
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/snapshots_v1_beta3.list_snapshots.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/snapshots_v1_beta3.list_snapshots.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/snapshots_v1_beta3.list_snapshots.js,samples/README.md)
 
@@ -305,7 +305,7 @@ __Usage:__
 
 ### Templates_service.create_job_from_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/templates_service.create_job_from_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/templates_service.create_job_from_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/templates_service.create_job_from_template.js,samples/README.md)
 
@@ -322,7 +322,7 @@ __Usage:__
 
 ### Templates_service.get_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/templates_service.get_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/templates_service.get_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/templates_service.get_template.js,samples/README.md)
 
@@ -339,7 +339,7 @@ __Usage:__
 
 ### Templates_service.launch_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/generated/v1beta3/templates_service.launch_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/templates_service.launch_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/generated/v1beta3/templates_service.launch_template.js,samples/README.md)
 
@@ -356,7 +356,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/quickstart.js,samples/README.md)
 
@@ -373,7 +373,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-dataflow/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-dataflow/samples/test/quickstart.js,samples/README.md)
 

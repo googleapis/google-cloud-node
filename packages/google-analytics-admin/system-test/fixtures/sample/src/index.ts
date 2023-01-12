@@ -19,7 +19,9 @@
 import {AnalyticsAdminServiceClient} from '@google-analytics/admin';
 
 // check that the client class type name can be used
-function doStuffWithAnalyticsAdminServiceClient(client: AnalyticsAdminServiceClient) {
+function doStuffWithAnalyticsAdminServiceClient(
+  client: AnalyticsAdminServiceClient
+) {
   client.close();
 }
 

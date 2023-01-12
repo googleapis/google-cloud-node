@@ -42,7 +42,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Document_service.create_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.create_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.create_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.create_document.js,samples/README.md)
 
@@ -59,7 +59,7 @@ __Usage:__
 
 ### Document_service.delete_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.delete_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.delete_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.delete_document.js,samples/README.md)
 
@@ -76,7 +76,7 @@ __Usage:__
 
 ### Document_service.get_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.get_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.get_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.get_document.js,samples/README.md)
 
@@ -93,7 +93,7 @@ __Usage:__
 
 ### Document_service.import_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.import_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.import_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.import_documents.js,samples/README.md)
 
@@ -110,7 +110,7 @@ __Usage:__
 
 ### Document_service.list_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.list_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.list_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.list_documents.js,samples/README.md)
 
@@ -127,7 +127,7 @@ __Usage:__
 
 ### Document_service.update_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.update_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.update_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.update_document.js,samples/README.md)
 
@@ -144,7 +144,7 @@ __Usage:__
 
 ### Recommendation_service.recommend
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/recommendation_service.recommend.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/recommendation_service.recommend.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/recommendation_service.recommend.js,samples/README.md)
 
@@ -161,7 +161,7 @@ __Usage:__
 
 ### User_event_service.collect_user_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.collect_user_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.collect_user_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.collect_user_event.js,samples/README.md)
 
@@ -178,7 +178,7 @@ __Usage:__
 
 ### User_event_service.import_user_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.import_user_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.import_user_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.import_user_events.js,samples/README.md)
 
@@ -195,7 +195,7 @@ __Usage:__
 
 ### User_event_service.write_user_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.write_user_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.write_user_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.write_user_event.js,samples/README.md)
 
@@ -212,7 +212,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/quickstart.js,samples/README.md)
 
@@ -229,7 +229,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/test/quickstart.js,samples/README.md)
 

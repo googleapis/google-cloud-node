@@ -226,7 +226,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Agents.delete_agent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/agents.delete_agent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/agents.delete_agent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/agents.delete_agent.js,samples/README.md)
 
@@ -243,7 +243,7 @@ __Usage:__
 
 ### Agents.export_agent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/agents.export_agent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/agents.export_agent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/agents.export_agent.js,samples/README.md)
 
@@ -260,7 +260,7 @@ __Usage:__
 
 ### Agents.get_agent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/agents.get_agent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/agents.get_agent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/agents.get_agent.js,samples/README.md)
 
@@ -277,7 +277,7 @@ __Usage:__
 
 ### Agents.get_validation_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/agents.get_validation_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/agents.get_validation_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/agents.get_validation_result.js,samples/README.md)
 
@@ -294,7 +294,7 @@ __Usage:__
 
 ### Agents.import_agent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/agents.import_agent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/agents.import_agent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/agents.import_agent.js,samples/README.md)
 
@@ -311,7 +311,7 @@ __Usage:__
 
 ### Agents.restore_agent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/agents.restore_agent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/agents.restore_agent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/agents.restore_agent.js,samples/README.md)
 
@@ -328,7 +328,7 @@ __Usage:__
 
 ### Agents.search_agents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/agents.search_agents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/agents.search_agents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/agents.search_agents.js,samples/README.md)
 
@@ -345,7 +345,7 @@ __Usage:__
 
 ### Agents.set_agent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/agents.set_agent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/agents.set_agent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/agents.set_agent.js,samples/README.md)
 
@@ -362,7 +362,7 @@ __Usage:__
 
 ### Agents.train_agent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/agents.train_agent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/agents.train_agent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/agents.train_agent.js,samples/README.md)
 
@@ -379,7 +379,7 @@ __Usage:__
 
 ### Answer_records.list_answer_records
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/answer_records.list_answer_records.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/answer_records.list_answer_records.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/answer_records.list_answer_records.js,samples/README.md)
 
@@ -396,7 +396,7 @@ __Usage:__
 
 ### Answer_records.update_answer_record
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/answer_records.update_answer_record.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/answer_records.update_answer_record.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/answer_records.update_answer_record.js,samples/README.md)
 
@@ -413,7 +413,7 @@ __Usage:__
 
 ### Contexts.create_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/contexts.create_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/contexts.create_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/contexts.create_context.js,samples/README.md)
 
@@ -430,7 +430,7 @@ __Usage:__
 
 ### Contexts.delete_all_contexts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/contexts.delete_all_contexts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/contexts.delete_all_contexts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/contexts.delete_all_contexts.js,samples/README.md)
 
@@ -447,7 +447,7 @@ __Usage:__
 
 ### Contexts.delete_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/contexts.delete_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/contexts.delete_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/contexts.delete_context.js,samples/README.md)
 
@@ -464,7 +464,7 @@ __Usage:__
 
 ### Contexts.get_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/contexts.get_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/contexts.get_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/contexts.get_context.js,samples/README.md)
 
@@ -481,7 +481,7 @@ __Usage:__
 
 ### Contexts.list_contexts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/contexts.list_contexts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/contexts.list_contexts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/contexts.list_contexts.js,samples/README.md)
 
@@ -498,7 +498,7 @@ __Usage:__
 
 ### Contexts.update_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/contexts.update_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/contexts.update_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/contexts.update_context.js,samples/README.md)
 
@@ -515,7 +515,7 @@ __Usage:__
 
 ### Conversation_datasets.create_conversation_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.create_conversation_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.create_conversation_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.create_conversation_dataset.js,samples/README.md)
 
@@ -532,7 +532,7 @@ __Usage:__
 
 ### Conversation_datasets.delete_conversation_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.delete_conversation_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.delete_conversation_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.delete_conversation_dataset.js,samples/README.md)
 
@@ -549,7 +549,7 @@ __Usage:__
 
 ### Conversation_datasets.get_conversation_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.get_conversation_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.get_conversation_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.get_conversation_dataset.js,samples/README.md)
 
@@ -566,7 +566,7 @@ __Usage:__
 
 ### Conversation_datasets.import_conversation_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.import_conversation_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.import_conversation_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.import_conversation_data.js,samples/README.md)
 
@@ -583,7 +583,7 @@ __Usage:__
 
 ### Conversation_datasets.list_conversation_datasets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.list_conversation_datasets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.list_conversation_datasets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_datasets.list_conversation_datasets.js,samples/README.md)
 
@@ -600,7 +600,7 @@ __Usage:__
 
 ### Conversation_models.create_conversation_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.create_conversation_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.create_conversation_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.create_conversation_model.js,samples/README.md)
 
@@ -617,7 +617,7 @@ __Usage:__
 
 ### Conversation_models.create_conversation_model_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.create_conversation_model_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.create_conversation_model_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.create_conversation_model_evaluation.js,samples/README.md)
 
@@ -634,7 +634,7 @@ __Usage:__
 
 ### Conversation_models.delete_conversation_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.delete_conversation_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.delete_conversation_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.delete_conversation_model.js,samples/README.md)
 
@@ -651,7 +651,7 @@ __Usage:__
 
 ### Conversation_models.deploy_conversation_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.deploy_conversation_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.deploy_conversation_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.deploy_conversation_model.js,samples/README.md)
 
@@ -668,7 +668,7 @@ __Usage:__
 
 ### Conversation_models.get_conversation_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.get_conversation_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.get_conversation_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.get_conversation_model.js,samples/README.md)
 
@@ -685,7 +685,7 @@ __Usage:__
 
 ### Conversation_models.get_conversation_model_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.get_conversation_model_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.get_conversation_model_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.get_conversation_model_evaluation.js,samples/README.md)
 
@@ -702,7 +702,7 @@ __Usage:__
 
 ### Conversation_models.list_conversation_model_evaluations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.list_conversation_model_evaluations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.list_conversation_model_evaluations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.list_conversation_model_evaluations.js,samples/README.md)
 
@@ -719,7 +719,7 @@ __Usage:__
 
 ### Conversation_models.list_conversation_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.list_conversation_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.list_conversation_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.list_conversation_models.js,samples/README.md)
 
@@ -736,7 +736,7 @@ __Usage:__
 
 ### Conversation_models.undeploy_conversation_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.undeploy_conversation_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.undeploy_conversation_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_models.undeploy_conversation_model.js,samples/README.md)
 
@@ -753,7 +753,7 @@ __Usage:__
 
 ### Conversation_profiles.clear_suggestion_feature_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.clear_suggestion_feature_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.clear_suggestion_feature_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.clear_suggestion_feature_config.js,samples/README.md)
 
@@ -770,7 +770,7 @@ __Usage:__
 
 ### Conversation_profiles.create_conversation_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.create_conversation_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.create_conversation_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.create_conversation_profile.js,samples/README.md)
 
@@ -787,7 +787,7 @@ __Usage:__
 
 ### Conversation_profiles.delete_conversation_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.delete_conversation_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.delete_conversation_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.delete_conversation_profile.js,samples/README.md)
 
@@ -804,7 +804,7 @@ __Usage:__
 
 ### Conversation_profiles.get_conversation_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.get_conversation_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.get_conversation_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.get_conversation_profile.js,samples/README.md)
 
@@ -821,7 +821,7 @@ __Usage:__
 
 ### Conversation_profiles.list_conversation_profiles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.list_conversation_profiles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.list_conversation_profiles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.list_conversation_profiles.js,samples/README.md)
 
@@ -838,7 +838,7 @@ __Usage:__
 
 ### Conversation_profiles.set_suggestion_feature_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.set_suggestion_feature_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.set_suggestion_feature_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.set_suggestion_feature_config.js,samples/README.md)
 
@@ -855,7 +855,7 @@ __Usage:__
 
 ### Conversation_profiles.update_conversation_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.update_conversation_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.update_conversation_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversation_profiles.update_conversation_profile.js,samples/README.md)
 
@@ -872,7 +872,7 @@ __Usage:__
 
 ### Conversations.complete_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversations.complete_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversations.complete_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversations.complete_conversation.js,samples/README.md)
 
@@ -889,7 +889,7 @@ __Usage:__
 
 ### Conversations.create_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversations.create_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversations.create_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversations.create_conversation.js,samples/README.md)
 
@@ -906,7 +906,7 @@ __Usage:__
 
 ### Conversations.get_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversations.get_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversations.get_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversations.get_conversation.js,samples/README.md)
 
@@ -923,7 +923,7 @@ __Usage:__
 
 ### Conversations.list_conversations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversations.list_conversations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversations.list_conversations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversations.list_conversations.js,samples/README.md)
 
@@ -940,7 +940,7 @@ __Usage:__
 
 ### Conversations.list_messages
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/conversations.list_messages.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversations.list_messages.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversations.list_messages.js,samples/README.md)
 
@@ -957,7 +957,7 @@ __Usage:__
 
 ### Documents.create_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/documents.create_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/documents.create_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/documents.create_document.js,samples/README.md)
 
@@ -974,7 +974,7 @@ __Usage:__
 
 ### Documents.delete_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/documents.delete_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/documents.delete_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/documents.delete_document.js,samples/README.md)
 
@@ -991,7 +991,7 @@ __Usage:__
 
 ### Documents.export_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/documents.export_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/documents.export_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/documents.export_document.js,samples/README.md)
 
@@ -1008,7 +1008,7 @@ __Usage:__
 
 ### Documents.get_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/documents.get_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/documents.get_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/documents.get_document.js,samples/README.md)
 
@@ -1025,7 +1025,7 @@ __Usage:__
 
 ### Documents.import_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/documents.import_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/documents.import_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/documents.import_documents.js,samples/README.md)
 
@@ -1042,7 +1042,7 @@ __Usage:__
 
 ### Documents.list_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/documents.list_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/documents.list_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/documents.list_documents.js,samples/README.md)
 
@@ -1059,7 +1059,7 @@ __Usage:__
 
 ### Documents.reload_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/documents.reload_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/documents.reload_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/documents.reload_document.js,samples/README.md)
 
@@ -1076,7 +1076,7 @@ __Usage:__
 
 ### Documents.update_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/documents.update_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/documents.update_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/documents.update_document.js,samples/README.md)
 
@@ -1093,7 +1093,7 @@ __Usage:__
 
 ### Entity_types.batch_create_entities
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_create_entities.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_create_entities.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_create_entities.js,samples/README.md)
 
@@ -1110,7 +1110,7 @@ __Usage:__
 
 ### Entity_types.batch_delete_entities
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_delete_entities.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_delete_entities.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_delete_entities.js,samples/README.md)
 
@@ -1127,7 +1127,7 @@ __Usage:__
 
 ### Entity_types.batch_delete_entity_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_delete_entity_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_delete_entity_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_delete_entity_types.js,samples/README.md)
 
@@ -1144,7 +1144,7 @@ __Usage:__
 
 ### Entity_types.batch_update_entities
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_update_entities.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_update_entities.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_update_entities.js,samples/README.md)
 
@@ -1161,7 +1161,7 @@ __Usage:__
 
 ### Entity_types.batch_update_entity_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_update_entity_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_update_entity_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/entity_types.batch_update_entity_types.js,samples/README.md)
 
@@ -1178,7 +1178,7 @@ __Usage:__
 
 ### Entity_types.create_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.create_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.create_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/entity_types.create_entity_type.js,samples/README.md)
 
@@ -1195,7 +1195,7 @@ __Usage:__
 
 ### Entity_types.delete_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.delete_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.delete_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/entity_types.delete_entity_type.js,samples/README.md)
 
@@ -1212,7 +1212,7 @@ __Usage:__
 
 ### Entity_types.get_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.get_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.get_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/entity_types.get_entity_type.js,samples/README.md)
 
@@ -1229,7 +1229,7 @@ __Usage:__
 
 ### Entity_types.list_entity_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.list_entity_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.list_entity_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/entity_types.list_entity_types.js,samples/README.md)
 
@@ -1246,7 +1246,7 @@ __Usage:__
 
 ### Entity_types.update_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.update_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/entity_types.update_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/entity_types.update_entity_type.js,samples/README.md)
 
@@ -1263,7 +1263,7 @@ __Usage:__
 
 ### Environments.create_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/environments.create_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/environments.create_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/environments.create_environment.js,samples/README.md)
 
@@ -1280,7 +1280,7 @@ __Usage:__
 
 ### Environments.delete_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/environments.delete_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/environments.delete_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/environments.delete_environment.js,samples/README.md)
 
@@ -1297,7 +1297,7 @@ __Usage:__
 
 ### Environments.get_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/environments.get_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/environments.get_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/environments.get_environment.js,samples/README.md)
 
@@ -1314,7 +1314,7 @@ __Usage:__
 
 ### Environments.get_environment_history
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/environments.get_environment_history.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/environments.get_environment_history.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/environments.get_environment_history.js,samples/README.md)
 
@@ -1331,7 +1331,7 @@ __Usage:__
 
 ### Environments.list_environments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/environments.list_environments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/environments.list_environments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/environments.list_environments.js,samples/README.md)
 
@@ -1348,7 +1348,7 @@ __Usage:__
 
 ### Environments.update_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/environments.update_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/environments.update_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/environments.update_environment.js,samples/README.md)
 
@@ -1365,7 +1365,7 @@ __Usage:__
 
 ### Fulfillments.get_fulfillment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/fulfillments.get_fulfillment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/fulfillments.get_fulfillment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/fulfillments.get_fulfillment.js,samples/README.md)
 
@@ -1382,7 +1382,7 @@ __Usage:__
 
 ### Fulfillments.update_fulfillment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/fulfillments.update_fulfillment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/fulfillments.update_fulfillment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/fulfillments.update_fulfillment.js,samples/README.md)
 
@@ -1399,7 +1399,7 @@ __Usage:__
 
 ### Intents.batch_delete_intents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/intents.batch_delete_intents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/intents.batch_delete_intents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/intents.batch_delete_intents.js,samples/README.md)
 
@@ -1416,7 +1416,7 @@ __Usage:__
 
 ### Intents.batch_update_intents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/intents.batch_update_intents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/intents.batch_update_intents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/intents.batch_update_intents.js,samples/README.md)
 
@@ -1433,7 +1433,7 @@ __Usage:__
 
 ### Intents.create_intent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/intents.create_intent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/intents.create_intent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/intents.create_intent.js,samples/README.md)
 
@@ -1450,7 +1450,7 @@ __Usage:__
 
 ### Intents.delete_intent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/intents.delete_intent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/intents.delete_intent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/intents.delete_intent.js,samples/README.md)
 
@@ -1467,7 +1467,7 @@ __Usage:__
 
 ### Intents.get_intent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/intents.get_intent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/intents.get_intent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/intents.get_intent.js,samples/README.md)
 
@@ -1484,7 +1484,7 @@ __Usage:__
 
 ### Intents.list_intents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/intents.list_intents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/intents.list_intents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/intents.list_intents.js,samples/README.md)
 
@@ -1501,7 +1501,7 @@ __Usage:__
 
 ### Intents.update_intent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/intents.update_intent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/intents.update_intent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/intents.update_intent.js,samples/README.md)
 
@@ -1518,7 +1518,7 @@ __Usage:__
 
 ### Knowledge_bases.create_knowledge_base
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.create_knowledge_base.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.create_knowledge_base.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.create_knowledge_base.js,samples/README.md)
 
@@ -1535,7 +1535,7 @@ __Usage:__
 
 ### Knowledge_bases.delete_knowledge_base
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.delete_knowledge_base.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.delete_knowledge_base.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.delete_knowledge_base.js,samples/README.md)
 
@@ -1552,7 +1552,7 @@ __Usage:__
 
 ### Knowledge_bases.get_knowledge_base
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.get_knowledge_base.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.get_knowledge_base.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.get_knowledge_base.js,samples/README.md)
 
@@ -1569,7 +1569,7 @@ __Usage:__
 
 ### Knowledge_bases.list_knowledge_bases
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.list_knowledge_bases.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.list_knowledge_bases.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.list_knowledge_bases.js,samples/README.md)
 
@@ -1586,7 +1586,7 @@ __Usage:__
 
 ### Knowledge_bases.update_knowledge_base
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.update_knowledge_base.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.update_knowledge_base.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/knowledge_bases.update_knowledge_base.js,samples/README.md)
 
@@ -1603,7 +1603,7 @@ __Usage:__
 
 ### Participants.analyze_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/participants.analyze_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/participants.analyze_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/participants.analyze_content.js,samples/README.md)
 
@@ -1620,7 +1620,7 @@ __Usage:__
 
 ### Participants.create_participant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/participants.create_participant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/participants.create_participant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/participants.create_participant.js,samples/README.md)
 
@@ -1637,7 +1637,7 @@ __Usage:__
 
 ### Participants.get_participant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/participants.get_participant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/participants.get_participant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/participants.get_participant.js,samples/README.md)
 
@@ -1654,7 +1654,7 @@ __Usage:__
 
 ### Participants.list_participants
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/participants.list_participants.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/participants.list_participants.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/participants.list_participants.js,samples/README.md)
 
@@ -1671,7 +1671,7 @@ __Usage:__
 
 ### Participants.streaming_analyze_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/participants.streaming_analyze_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/participants.streaming_analyze_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/participants.streaming_analyze_content.js,samples/README.md)
 
@@ -1688,7 +1688,7 @@ __Usage:__
 
 ### Participants.suggest_articles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/participants.suggest_articles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/participants.suggest_articles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/participants.suggest_articles.js,samples/README.md)
 
@@ -1705,7 +1705,7 @@ __Usage:__
 
 ### Participants.suggest_faq_answers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/participants.suggest_faq_answers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/participants.suggest_faq_answers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/participants.suggest_faq_answers.js,samples/README.md)
 
@@ -1722,7 +1722,7 @@ __Usage:__
 
 ### Participants.suggest_smart_replies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/participants.suggest_smart_replies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/participants.suggest_smart_replies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/participants.suggest_smart_replies.js,samples/README.md)
 
@@ -1739,7 +1739,7 @@ __Usage:__
 
 ### Participants.update_participant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/participants.update_participant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/participants.update_participant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/participants.update_participant.js,samples/README.md)
 
@@ -1756,7 +1756,7 @@ __Usage:__
 
 ### Session_entity_types.create_session_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.create_session_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.create_session_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.create_session_entity_type.js,samples/README.md)
 
@@ -1773,7 +1773,7 @@ __Usage:__
 
 ### Session_entity_types.delete_session_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.delete_session_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.delete_session_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.delete_session_entity_type.js,samples/README.md)
 
@@ -1790,7 +1790,7 @@ __Usage:__
 
 ### Session_entity_types.get_session_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.get_session_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.get_session_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.get_session_entity_type.js,samples/README.md)
 
@@ -1807,7 +1807,7 @@ __Usage:__
 
 ### Session_entity_types.list_session_entity_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.list_session_entity_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.list_session_entity_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.list_session_entity_types.js,samples/README.md)
 
@@ -1824,7 +1824,7 @@ __Usage:__
 
 ### Session_entity_types.update_session_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.update_session_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.update_session_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/session_entity_types.update_session_entity_type.js,samples/README.md)
 
@@ -1841,7 +1841,7 @@ __Usage:__
 
 ### Sessions.detect_intent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/sessions.detect_intent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/sessions.detect_intent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/sessions.detect_intent.js,samples/README.md)
 
@@ -1858,7 +1858,7 @@ __Usage:__
 
 ### Sessions.streaming_detect_intent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/sessions.streaming_detect_intent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/sessions.streaming_detect_intent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/sessions.streaming_detect_intent.js,samples/README.md)
 
@@ -1875,7 +1875,7 @@ __Usage:__
 
 ### Versions.create_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/versions.create_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/versions.create_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/versions.create_version.js,samples/README.md)
 
@@ -1892,7 +1892,7 @@ __Usage:__
 
 ### Versions.delete_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/versions.delete_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/versions.delete_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/versions.delete_version.js,samples/README.md)
 
@@ -1909,7 +1909,7 @@ __Usage:__
 
 ### Versions.get_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/versions.get_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/versions.get_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/versions.get_version.js,samples/README.md)
 
@@ -1926,7 +1926,7 @@ __Usage:__
 
 ### Versions.list_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/versions.list_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/versions.list_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/versions.list_versions.js,samples/README.md)
 
@@ -1943,7 +1943,7 @@ __Usage:__
 
 ### Versions.update_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2/versions.update_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/versions.update_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/versions.update_version.js,samples/README.md)
 
@@ -1960,7 +1960,7 @@ __Usage:__
 
 ### Agents.delete_agent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.delete_agent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.delete_agent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.delete_agent.js,samples/README.md)
 
@@ -1977,7 +1977,7 @@ __Usage:__
 
 ### Agents.export_agent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.export_agent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.export_agent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.export_agent.js,samples/README.md)
 
@@ -1994,7 +1994,7 @@ __Usage:__
 
 ### Agents.get_agent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.get_agent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.get_agent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.get_agent.js,samples/README.md)
 
@@ -2011,7 +2011,7 @@ __Usage:__
 
 ### Agents.get_validation_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.get_validation_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.get_validation_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.get_validation_result.js,samples/README.md)
 
@@ -2028,7 +2028,7 @@ __Usage:__
 
 ### Agents.import_agent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.import_agent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.import_agent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.import_agent.js,samples/README.md)
 
@@ -2045,7 +2045,7 @@ __Usage:__
 
 ### Agents.restore_agent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.restore_agent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.restore_agent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.restore_agent.js,samples/README.md)
 
@@ -2062,7 +2062,7 @@ __Usage:__
 
 ### Agents.search_agents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.search_agents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.search_agents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.search_agents.js,samples/README.md)
 
@@ -2079,7 +2079,7 @@ __Usage:__
 
 ### Agents.set_agent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.set_agent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.set_agent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.set_agent.js,samples/README.md)
 
@@ -2096,7 +2096,7 @@ __Usage:__
 
 ### Agents.train_agent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.train_agent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.train_agent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/agents.train_agent.js,samples/README.md)
 
@@ -2113,7 +2113,7 @@ __Usage:__
 
 ### Answer_records.get_answer_record
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/answer_records.get_answer_record.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/answer_records.get_answer_record.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/answer_records.get_answer_record.js,samples/README.md)
 
@@ -2130,7 +2130,7 @@ __Usage:__
 
 ### Answer_records.list_answer_records
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/answer_records.list_answer_records.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/answer_records.list_answer_records.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/answer_records.list_answer_records.js,samples/README.md)
 
@@ -2147,7 +2147,7 @@ __Usage:__
 
 ### Answer_records.update_answer_record
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/answer_records.update_answer_record.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/answer_records.update_answer_record.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/answer_records.update_answer_record.js,samples/README.md)
 
@@ -2164,7 +2164,7 @@ __Usage:__
 
 ### Contexts.create_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.create_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.create_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.create_context.js,samples/README.md)
 
@@ -2181,7 +2181,7 @@ __Usage:__
 
 ### Contexts.delete_all_contexts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.delete_all_contexts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.delete_all_contexts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.delete_all_contexts.js,samples/README.md)
 
@@ -2198,7 +2198,7 @@ __Usage:__
 
 ### Contexts.delete_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.delete_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.delete_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.delete_context.js,samples/README.md)
 
@@ -2215,7 +2215,7 @@ __Usage:__
 
 ### Contexts.get_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.get_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.get_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.get_context.js,samples/README.md)
 
@@ -2232,7 +2232,7 @@ __Usage:__
 
 ### Contexts.list_contexts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.list_contexts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.list_contexts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.list_contexts.js,samples/README.md)
 
@@ -2249,7 +2249,7 @@ __Usage:__
 
 ### Contexts.update_context
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.update_context.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.update_context.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/contexts.update_context.js,samples/README.md)
 
@@ -2266,7 +2266,7 @@ __Usage:__
 
 ### Conversation_profiles.clear_suggestion_feature_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.clear_suggestion_feature_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.clear_suggestion_feature_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.clear_suggestion_feature_config.js,samples/README.md)
 
@@ -2283,7 +2283,7 @@ __Usage:__
 
 ### Conversation_profiles.create_conversation_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.create_conversation_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.create_conversation_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.create_conversation_profile.js,samples/README.md)
 
@@ -2300,7 +2300,7 @@ __Usage:__
 
 ### Conversation_profiles.delete_conversation_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.delete_conversation_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.delete_conversation_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.delete_conversation_profile.js,samples/README.md)
 
@@ -2317,7 +2317,7 @@ __Usage:__
 
 ### Conversation_profiles.get_conversation_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.get_conversation_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.get_conversation_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.get_conversation_profile.js,samples/README.md)
 
@@ -2334,7 +2334,7 @@ __Usage:__
 
 ### Conversation_profiles.list_conversation_profiles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.list_conversation_profiles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.list_conversation_profiles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.list_conversation_profiles.js,samples/README.md)
 
@@ -2351,7 +2351,7 @@ __Usage:__
 
 ### Conversation_profiles.set_suggestion_feature_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.set_suggestion_feature_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.set_suggestion_feature_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.set_suggestion_feature_config.js,samples/README.md)
 
@@ -2368,7 +2368,7 @@ __Usage:__
 
 ### Conversation_profiles.update_conversation_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.update_conversation_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.update_conversation_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversation_profiles.update_conversation_profile.js,samples/README.md)
 
@@ -2385,7 +2385,7 @@ __Usage:__
 
 ### Conversations.batch_create_messages
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.batch_create_messages.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.batch_create_messages.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.batch_create_messages.js,samples/README.md)
 
@@ -2402,7 +2402,7 @@ __Usage:__
 
 ### Conversations.complete_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.complete_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.complete_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.complete_conversation.js,samples/README.md)
 
@@ -2419,7 +2419,7 @@ __Usage:__
 
 ### Conversations.create_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.create_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.create_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.create_conversation.js,samples/README.md)
 
@@ -2436,7 +2436,7 @@ __Usage:__
 
 ### Conversations.get_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.get_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.get_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.get_conversation.js,samples/README.md)
 
@@ -2453,7 +2453,7 @@ __Usage:__
 
 ### Conversations.list_conversations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.list_conversations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.list_conversations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.list_conversations.js,samples/README.md)
 
@@ -2470,7 +2470,7 @@ __Usage:__
 
 ### Conversations.list_messages
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.list_messages.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.list_messages.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.list_messages.js,samples/README.md)
 
@@ -2487,7 +2487,7 @@ __Usage:__
 
 ### Conversations.suggest_conversation_summary
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.suggest_conversation_summary.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.suggest_conversation_summary.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.suggest_conversation_summary.js,samples/README.md)
 
@@ -2504,7 +2504,7 @@ __Usage:__
 
 ### Documents.create_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.create_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.create_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.create_document.js,samples/README.md)
 
@@ -2521,7 +2521,7 @@ __Usage:__
 
 ### Documents.delete_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.delete_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.delete_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.delete_document.js,samples/README.md)
 
@@ -2538,7 +2538,7 @@ __Usage:__
 
 ### Documents.get_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.get_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.get_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.get_document.js,samples/README.md)
 
@@ -2555,7 +2555,7 @@ __Usage:__
 
 ### Documents.import_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.import_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.import_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.import_documents.js,samples/README.md)
 
@@ -2572,7 +2572,7 @@ __Usage:__
 
 ### Documents.list_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.list_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.list_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.list_documents.js,samples/README.md)
 
@@ -2589,7 +2589,7 @@ __Usage:__
 
 ### Documents.reload_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.reload_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.reload_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.reload_document.js,samples/README.md)
 
@@ -2606,7 +2606,7 @@ __Usage:__
 
 ### Documents.update_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.update_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.update_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.update_document.js,samples/README.md)
 
@@ -2623,7 +2623,7 @@ __Usage:__
 
 ### Entity_types.batch_create_entities
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_create_entities.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_create_entities.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_create_entities.js,samples/README.md)
 
@@ -2640,7 +2640,7 @@ __Usage:__
 
 ### Entity_types.batch_delete_entities
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_delete_entities.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_delete_entities.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_delete_entities.js,samples/README.md)
 
@@ -2657,7 +2657,7 @@ __Usage:__
 
 ### Entity_types.batch_delete_entity_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_delete_entity_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_delete_entity_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_delete_entity_types.js,samples/README.md)
 
@@ -2674,7 +2674,7 @@ __Usage:__
 
 ### Entity_types.batch_update_entities
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_update_entities.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_update_entities.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_update_entities.js,samples/README.md)
 
@@ -2691,7 +2691,7 @@ __Usage:__
 
 ### Entity_types.batch_update_entity_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_update_entity_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_update_entity_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.batch_update_entity_types.js,samples/README.md)
 
@@ -2708,7 +2708,7 @@ __Usage:__
 
 ### Entity_types.create_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.create_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.create_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.create_entity_type.js,samples/README.md)
 
@@ -2725,7 +2725,7 @@ __Usage:__
 
 ### Entity_types.delete_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.delete_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.delete_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.delete_entity_type.js,samples/README.md)
 
@@ -2742,7 +2742,7 @@ __Usage:__
 
 ### Entity_types.get_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.get_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.get_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.get_entity_type.js,samples/README.md)
 
@@ -2759,7 +2759,7 @@ __Usage:__
 
 ### Entity_types.list_entity_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.list_entity_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.list_entity_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.list_entity_types.js,samples/README.md)
 
@@ -2776,7 +2776,7 @@ __Usage:__
 
 ### Entity_types.update_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.update_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.update_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/entity_types.update_entity_type.js,samples/README.md)
 
@@ -2793,7 +2793,7 @@ __Usage:__
 
 ### Environments.create_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.create_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.create_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.create_environment.js,samples/README.md)
 
@@ -2810,7 +2810,7 @@ __Usage:__
 
 ### Environments.delete_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.delete_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.delete_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.delete_environment.js,samples/README.md)
 
@@ -2827,7 +2827,7 @@ __Usage:__
 
 ### Environments.get_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.get_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.get_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.get_environment.js,samples/README.md)
 
@@ -2844,7 +2844,7 @@ __Usage:__
 
 ### Environments.get_environment_history
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.get_environment_history.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.get_environment_history.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.get_environment_history.js,samples/README.md)
 
@@ -2861,7 +2861,7 @@ __Usage:__
 
 ### Environments.list_environments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.list_environments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.list_environments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.list_environments.js,samples/README.md)
 
@@ -2878,7 +2878,7 @@ __Usage:__
 
 ### Environments.update_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.update_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.update_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/environments.update_environment.js,samples/README.md)
 
@@ -2895,7 +2895,7 @@ __Usage:__
 
 ### Fulfillments.get_fulfillment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/fulfillments.get_fulfillment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/fulfillments.get_fulfillment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/fulfillments.get_fulfillment.js,samples/README.md)
 
@@ -2912,7 +2912,7 @@ __Usage:__
 
 ### Fulfillments.update_fulfillment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/fulfillments.update_fulfillment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/fulfillments.update_fulfillment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/fulfillments.update_fulfillment.js,samples/README.md)
 
@@ -2929,7 +2929,7 @@ __Usage:__
 
 ### Intents.batch_delete_intents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.batch_delete_intents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.batch_delete_intents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.batch_delete_intents.js,samples/README.md)
 
@@ -2946,7 +2946,7 @@ __Usage:__
 
 ### Intents.batch_update_intents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.batch_update_intents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.batch_update_intents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.batch_update_intents.js,samples/README.md)
 
@@ -2963,7 +2963,7 @@ __Usage:__
 
 ### Intents.create_intent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.create_intent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.create_intent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.create_intent.js,samples/README.md)
 
@@ -2980,7 +2980,7 @@ __Usage:__
 
 ### Intents.delete_intent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.delete_intent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.delete_intent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.delete_intent.js,samples/README.md)
 
@@ -2997,7 +2997,7 @@ __Usage:__
 
 ### Intents.get_intent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.get_intent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.get_intent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.get_intent.js,samples/README.md)
 
@@ -3014,7 +3014,7 @@ __Usage:__
 
 ### Intents.list_intents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.list_intents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.list_intents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.list_intents.js,samples/README.md)
 
@@ -3031,7 +3031,7 @@ __Usage:__
 
 ### Intents.update_intent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.update_intent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.update_intent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/intents.update_intent.js,samples/README.md)
 
@@ -3048,7 +3048,7 @@ __Usage:__
 
 ### Knowledge_bases.create_knowledge_base
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.create_knowledge_base.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.create_knowledge_base.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.create_knowledge_base.js,samples/README.md)
 
@@ -3065,7 +3065,7 @@ __Usage:__
 
 ### Knowledge_bases.delete_knowledge_base
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.delete_knowledge_base.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.delete_knowledge_base.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.delete_knowledge_base.js,samples/README.md)
 
@@ -3082,7 +3082,7 @@ __Usage:__
 
 ### Knowledge_bases.get_knowledge_base
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.get_knowledge_base.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.get_knowledge_base.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.get_knowledge_base.js,samples/README.md)
 
@@ -3099,7 +3099,7 @@ __Usage:__
 
 ### Knowledge_bases.list_knowledge_bases
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.list_knowledge_bases.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.list_knowledge_bases.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.list_knowledge_bases.js,samples/README.md)
 
@@ -3116,7 +3116,7 @@ __Usage:__
 
 ### Knowledge_bases.update_knowledge_base
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.update_knowledge_base.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.update_knowledge_base.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/knowledge_bases.update_knowledge_base.js,samples/README.md)
 
@@ -3133,7 +3133,7 @@ __Usage:__
 
 ### Participants.analyze_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.analyze_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.analyze_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.analyze_content.js,samples/README.md)
 
@@ -3150,7 +3150,7 @@ __Usage:__
 
 ### Participants.compile_suggestion
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.compile_suggestion.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.compile_suggestion.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.compile_suggestion.js,samples/README.md)
 
@@ -3167,7 +3167,7 @@ __Usage:__
 
 ### Participants.create_participant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.create_participant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.create_participant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.create_participant.js,samples/README.md)
 
@@ -3184,7 +3184,7 @@ __Usage:__
 
 ### Participants.get_participant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.get_participant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.get_participant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.get_participant.js,samples/README.md)
 
@@ -3201,7 +3201,7 @@ __Usage:__
 
 ### Participants.list_participants
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.list_participants.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.list_participants.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.list_participants.js,samples/README.md)
 
@@ -3218,7 +3218,7 @@ __Usage:__
 
 ### Participants.list_suggestions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.list_suggestions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.list_suggestions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.list_suggestions.js,samples/README.md)
 
@@ -3235,7 +3235,7 @@ __Usage:__
 
 ### Participants.streaming_analyze_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.streaming_analyze_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.streaming_analyze_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.streaming_analyze_content.js,samples/README.md)
 
@@ -3252,7 +3252,7 @@ __Usage:__
 
 ### Participants.suggest_articles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.suggest_articles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.suggest_articles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.suggest_articles.js,samples/README.md)
 
@@ -3269,7 +3269,7 @@ __Usage:__
 
 ### Participants.suggest_faq_answers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.suggest_faq_answers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.suggest_faq_answers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.suggest_faq_answers.js,samples/README.md)
 
@@ -3286,7 +3286,7 @@ __Usage:__
 
 ### Participants.suggest_smart_replies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.suggest_smart_replies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.suggest_smart_replies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.suggest_smart_replies.js,samples/README.md)
 
@@ -3303,7 +3303,7 @@ __Usage:__
 
 ### Participants.update_participant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.update_participant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.update_participant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.update_participant.js,samples/README.md)
 
@@ -3320,7 +3320,7 @@ __Usage:__
 
 ### Session_entity_types.create_session_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.create_session_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.create_session_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.create_session_entity_type.js,samples/README.md)
 
@@ -3337,7 +3337,7 @@ __Usage:__
 
 ### Session_entity_types.delete_session_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.delete_session_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.delete_session_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.delete_session_entity_type.js,samples/README.md)
 
@@ -3354,7 +3354,7 @@ __Usage:__
 
 ### Session_entity_types.get_session_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.get_session_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.get_session_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.get_session_entity_type.js,samples/README.md)
 
@@ -3371,7 +3371,7 @@ __Usage:__
 
 ### Session_entity_types.list_session_entity_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.list_session_entity_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.list_session_entity_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.list_session_entity_types.js,samples/README.md)
 
@@ -3388,7 +3388,7 @@ __Usage:__
 
 ### Session_entity_types.update_session_entity_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.update_session_entity_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.update_session_entity_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/session_entity_types.update_session_entity_type.js,samples/README.md)
 
@@ -3405,7 +3405,7 @@ __Usage:__
 
 ### Sessions.detect_intent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/sessions.detect_intent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/sessions.detect_intent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/sessions.detect_intent.js,samples/README.md)
 
@@ -3422,7 +3422,7 @@ __Usage:__
 
 ### Sessions.streaming_detect_intent
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/sessions.streaming_detect_intent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/sessions.streaming_detect_intent.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/sessions.streaming_detect_intent.js,samples/README.md)
 
@@ -3439,7 +3439,7 @@ __Usage:__
 
 ### Versions.create_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.create_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.create_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.create_version.js,samples/README.md)
 
@@ -3456,7 +3456,7 @@ __Usage:__
 
 ### Versions.delete_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.delete_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.delete_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.delete_version.js,samples/README.md)
 
@@ -3473,7 +3473,7 @@ __Usage:__
 
 ### Versions.get_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.get_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.get_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.get_version.js,samples/README.md)
 
@@ -3490,7 +3490,7 @@ __Usage:__
 
 ### Versions.list_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.list_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.list_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.list_versions.js,samples/README.md)
 
@@ -3507,7 +3507,7 @@ __Usage:__
 
 ### Versions.update_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.update_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.update_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.update_version.js,samples/README.md)
 
@@ -3524,7 +3524,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/quickstart.js,samples/README.md)
 
@@ -3541,7 +3541,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dialogflow/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/test/quickstart.test.js,samples/README.md)
 

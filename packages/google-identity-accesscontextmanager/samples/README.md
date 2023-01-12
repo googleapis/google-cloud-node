@@ -58,7 +58,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Access_context_manager.commit_service_perimeters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.commit_service_perimeters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.commit_service_perimeters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.commit_service_perimeters.js,samples/README.md)
 
@@ -75,7 +75,7 @@ __Usage:__
 
 ### Access_context_manager.create_access_level
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.create_access_level.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.create_access_level.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.create_access_level.js,samples/README.md)
 
@@ -92,7 +92,7 @@ __Usage:__
 
 ### Access_context_manager.create_access_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.create_access_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.create_access_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.create_access_policy.js,samples/README.md)
 
@@ -109,7 +109,7 @@ __Usage:__
 
 ### Access_context_manager.create_gcp_user_access_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.create_gcp_user_access_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.create_gcp_user_access_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.create_gcp_user_access_binding.js,samples/README.md)
 
@@ -126,7 +126,7 @@ __Usage:__
 
 ### Access_context_manager.create_service_perimeter
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.create_service_perimeter.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.create_service_perimeter.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.create_service_perimeter.js,samples/README.md)
 
@@ -143,7 +143,7 @@ __Usage:__
 
 ### Access_context_manager.delete_access_level
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.delete_access_level.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.delete_access_level.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.delete_access_level.js,samples/README.md)
 
@@ -160,7 +160,7 @@ __Usage:__
 
 ### Access_context_manager.delete_access_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.delete_access_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.delete_access_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.delete_access_policy.js,samples/README.md)
 
@@ -177,7 +177,7 @@ __Usage:__
 
 ### Access_context_manager.delete_gcp_user_access_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.delete_gcp_user_access_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.delete_gcp_user_access_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.delete_gcp_user_access_binding.js,samples/README.md)
 
@@ -194,7 +194,7 @@ __Usage:__
 
 ### Access_context_manager.delete_service_perimeter
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.delete_service_perimeter.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.delete_service_perimeter.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.delete_service_perimeter.js,samples/README.md)
 
@@ -211,7 +211,7 @@ __Usage:__
 
 ### Access_context_manager.get_access_level
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_access_level.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_access_level.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_access_level.js,samples/README.md)
 
@@ -228,7 +228,7 @@ __Usage:__
 
 ### Access_context_manager.get_access_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_access_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_access_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_access_policy.js,samples/README.md)
 
@@ -245,7 +245,7 @@ __Usage:__
 
 ### Access_context_manager.get_gcp_user_access_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_gcp_user_access_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_gcp_user_access_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_gcp_user_access_binding.js,samples/README.md)
 
@@ -262,7 +262,7 @@ __Usage:__
 
 ### Access_context_manager.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_iam_policy.js,samples/README.md)
 
@@ -279,7 +279,7 @@ __Usage:__
 
 ### Access_context_manager.get_service_perimeter
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_service_perimeter.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_service_perimeter.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.get_service_perimeter.js,samples/README.md)
 
@@ -296,7 +296,7 @@ __Usage:__
 
 ### Access_context_manager.list_access_levels
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.list_access_levels.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.list_access_levels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.list_access_levels.js,samples/README.md)
 
@@ -313,7 +313,7 @@ __Usage:__
 
 ### Access_context_manager.list_access_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.list_access_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.list_access_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.list_access_policies.js,samples/README.md)
 
@@ -330,7 +330,7 @@ __Usage:__
 
 ### Access_context_manager.list_gcp_user_access_bindings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.list_gcp_user_access_bindings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.list_gcp_user_access_bindings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.list_gcp_user_access_bindings.js,samples/README.md)
 
@@ -347,7 +347,7 @@ __Usage:__
 
 ### Access_context_manager.list_service_perimeters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.list_service_perimeters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.list_service_perimeters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.list_service_perimeters.js,samples/README.md)
 
@@ -364,7 +364,7 @@ __Usage:__
 
 ### Access_context_manager.replace_access_levels
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.replace_access_levels.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.replace_access_levels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.replace_access_levels.js,samples/README.md)
 
@@ -381,7 +381,7 @@ __Usage:__
 
 ### Access_context_manager.replace_service_perimeters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.replace_service_perimeters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.replace_service_perimeters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.replace_service_perimeters.js,samples/README.md)
 
@@ -398,7 +398,7 @@ __Usage:__
 
 ### Access_context_manager.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.set_iam_policy.js,samples/README.md)
 
@@ -415,7 +415,7 @@ __Usage:__
 
 ### Access_context_manager.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.test_iam_permissions.js,samples/README.md)
 
@@ -432,7 +432,7 @@ __Usage:__
 
 ### Access_context_manager.update_access_level
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_access_level.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_access_level.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_access_level.js,samples/README.md)
 
@@ -449,7 +449,7 @@ __Usage:__
 
 ### Access_context_manager.update_access_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_access_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_access_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_access_policy.js,samples/README.md)
 
@@ -466,7 +466,7 @@ __Usage:__
 
 ### Access_context_manager.update_gcp_user_access_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_gcp_user_access_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_gcp_user_access_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_gcp_user_access_binding.js,samples/README.md)
 
@@ -483,7 +483,7 @@ __Usage:__
 
 ### Access_context_manager.update_service_perimeter
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_service_perimeter.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_service_perimeter.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_service_perimeter.js,samples/README.md)
 
@@ -500,7 +500,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/quickstart.js,samples/README.md)
 
@@ -517,7 +517,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-identity-accesscontextmanager/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-identity-accesscontextmanager/samples/test/quickstart.js,samples/README.md)
 

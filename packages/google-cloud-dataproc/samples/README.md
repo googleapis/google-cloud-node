@@ -67,7 +67,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Autoscaling_policy_service.create_autoscaling_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.create_autoscaling_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.create_autoscaling_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.create_autoscaling_policy.js,samples/README.md)
 
@@ -84,7 +84,7 @@ __Usage:__
 
 ### Autoscaling_policy_service.delete_autoscaling_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.delete_autoscaling_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.delete_autoscaling_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.delete_autoscaling_policy.js,samples/README.md)
 
@@ -101,7 +101,7 @@ __Usage:__
 
 ### Autoscaling_policy_service.get_autoscaling_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.get_autoscaling_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.get_autoscaling_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.get_autoscaling_policy.js,samples/README.md)
 
@@ -118,7 +118,7 @@ __Usage:__
 
 ### Autoscaling_policy_service.list_autoscaling_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.list_autoscaling_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.list_autoscaling_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.list_autoscaling_policies.js,samples/README.md)
 
@@ -135,7 +135,7 @@ __Usage:__
 
 ### Autoscaling_policy_service.update_autoscaling_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.update_autoscaling_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.update_autoscaling_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/autoscaling_policy_service.update_autoscaling_policy.js,samples/README.md)
 
@@ -152,7 +152,7 @@ __Usage:__
 
 ### Batch_controller.create_batch
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/batch_controller.create_batch.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/batch_controller.create_batch.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/batch_controller.create_batch.js,samples/README.md)
 
@@ -169,7 +169,7 @@ __Usage:__
 
 ### Batch_controller.delete_batch
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/batch_controller.delete_batch.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/batch_controller.delete_batch.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/batch_controller.delete_batch.js,samples/README.md)
 
@@ -186,7 +186,7 @@ __Usage:__
 
 ### Batch_controller.get_batch
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/batch_controller.get_batch.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/batch_controller.get_batch.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/batch_controller.get_batch.js,samples/README.md)
 
@@ -203,7 +203,7 @@ __Usage:__
 
 ### Batch_controller.list_batches
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/batch_controller.list_batches.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/batch_controller.list_batches.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/batch_controller.list_batches.js,samples/README.md)
 
@@ -220,7 +220,7 @@ __Usage:__
 
 ### Cluster_controller.create_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.create_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.create_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.create_cluster.js,samples/README.md)
 
@@ -237,7 +237,7 @@ __Usage:__
 
 ### Cluster_controller.delete_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.delete_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.delete_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.delete_cluster.js,samples/README.md)
 
@@ -254,7 +254,7 @@ __Usage:__
 
 ### Cluster_controller.diagnose_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.diagnose_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.diagnose_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.diagnose_cluster.js,samples/README.md)
 
@@ -271,7 +271,7 @@ __Usage:__
 
 ### Cluster_controller.get_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.get_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.get_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.get_cluster.js,samples/README.md)
 
@@ -288,7 +288,7 @@ __Usage:__
 
 ### Cluster_controller.list_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.list_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.list_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.list_clusters.js,samples/README.md)
 
@@ -305,7 +305,7 @@ __Usage:__
 
 ### Cluster_controller.start_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.start_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.start_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.start_cluster.js,samples/README.md)
 
@@ -322,7 +322,7 @@ __Usage:__
 
 ### Cluster_controller.stop_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.stop_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.stop_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.stop_cluster.js,samples/README.md)
 
@@ -339,7 +339,7 @@ __Usage:__
 
 ### Cluster_controller.update_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.update_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.update_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/cluster_controller.update_cluster.js,samples/README.md)
 
@@ -356,7 +356,7 @@ __Usage:__
 
 ### Job_controller.cancel_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/job_controller.cancel_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/job_controller.cancel_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/job_controller.cancel_job.js,samples/README.md)
 
@@ -373,7 +373,7 @@ __Usage:__
 
 ### Job_controller.delete_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/job_controller.delete_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/job_controller.delete_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/job_controller.delete_job.js,samples/README.md)
 
@@ -390,7 +390,7 @@ __Usage:__
 
 ### Job_controller.get_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/job_controller.get_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/job_controller.get_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/job_controller.get_job.js,samples/README.md)
 
@@ -407,7 +407,7 @@ __Usage:__
 
 ### Job_controller.list_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/job_controller.list_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/job_controller.list_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/job_controller.list_jobs.js,samples/README.md)
 
@@ -424,7 +424,7 @@ __Usage:__
 
 ### Job_controller.submit_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/job_controller.submit_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/job_controller.submit_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/job_controller.submit_job.js,samples/README.md)
 
@@ -441,7 +441,7 @@ __Usage:__
 
 ### Job_controller.submit_job_as_operation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/job_controller.submit_job_as_operation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/job_controller.submit_job_as_operation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/job_controller.submit_job_as_operation.js,samples/README.md)
 
@@ -458,7 +458,7 @@ __Usage:__
 
 ### Job_controller.update_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/job_controller.update_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/job_controller.update_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/job_controller.update_job.js,samples/README.md)
 
@@ -475,7 +475,7 @@ __Usage:__
 
 ### Node_group_controller.create_node_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.create_node_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.create_node_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.create_node_group.js,samples/README.md)
 
@@ -492,7 +492,7 @@ __Usage:__
 
 ### Node_group_controller.get_node_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.get_node_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.get_node_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.get_node_group.js,samples/README.md)
 
@@ -509,7 +509,7 @@ __Usage:__
 
 ### Node_group_controller.resize_node_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.resize_node_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.resize_node_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.resize_node_group.js,samples/README.md)
 
@@ -526,7 +526,7 @@ __Usage:__
 
 ### Workflow_template_service.create_workflow_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.create_workflow_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.create_workflow_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.create_workflow_template.js,samples/README.md)
 
@@ -543,7 +543,7 @@ __Usage:__
 
 ### Workflow_template_service.delete_workflow_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.delete_workflow_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.delete_workflow_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.delete_workflow_template.js,samples/README.md)
 
@@ -560,7 +560,7 @@ __Usage:__
 
 ### Workflow_template_service.get_workflow_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.get_workflow_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.get_workflow_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.get_workflow_template.js,samples/README.md)
 
@@ -577,7 +577,7 @@ __Usage:__
 
 ### Workflow_template_service.instantiate_inline_workflow_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.instantiate_inline_workflow_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.instantiate_inline_workflow_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.instantiate_inline_workflow_template.js,samples/README.md)
 
@@ -594,7 +594,7 @@ __Usage:__
 
 ### Workflow_template_service.instantiate_workflow_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.instantiate_workflow_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.instantiate_workflow_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.instantiate_workflow_template.js,samples/README.md)
 
@@ -611,7 +611,7 @@ __Usage:__
 
 ### Workflow_template_service.list_workflow_templates
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.list_workflow_templates.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.list_workflow_templates.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.list_workflow_templates.js,samples/README.md)
 
@@ -628,7 +628,7 @@ __Usage:__
 
 ### Workflow_template_service.update_workflow_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.update_workflow_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.update_workflow_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/workflow_template_service.update_workflow_template.js,samples/README.md)
 
@@ -645,7 +645,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/quickstart.js,samples/README.md)
 
@@ -662,7 +662,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/test/quickstart.test.js,samples/README.md)
 
@@ -679,7 +679,7 @@ __Usage:__
 
 ### Util
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataproc/samples/test/util.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/test/util.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/test/util.js,samples/README.md)
 

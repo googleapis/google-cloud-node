@@ -18,7 +18,12 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -95,14 +100,22 @@ export class BetaAnalyticsDataClient {
    *     const client = new BetaAnalyticsDataClient({fallback: 'rest'}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof BetaAnalyticsDataClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -128,7 +141,7 @@ export class BetaAnalyticsDataClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -142,10 +155,7 @@ export class BetaAnalyticsDataClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -153,7 +163,7 @@ export class BetaAnalyticsDataClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -173,8 +183,11 @@ export class BetaAnalyticsDataClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.analytics.data.v1beta.BetaAnalyticsData', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.analytics.data.v1beta.BetaAnalyticsData',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -205,31 +218,43 @@ export class BetaAnalyticsDataClient {
     // Put together the "service stub" for
     // google.analytics.data.v1beta.BetaAnalyticsData.
     this.betaAnalyticsDataStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.analytics.data.v1beta.BetaAnalyticsData') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.analytics.data.v1beta.BetaAnalyticsData'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.analytics.data.v1beta.BetaAnalyticsData,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const betaAnalyticsDataStubMethods =
-        ['runReport', 'runPivotReport', 'batchRunReports', 'batchRunPivotReports', 'getMetadata', 'runRealtimeReport', 'checkCompatibility'];
+    const betaAnalyticsDataStubMethods = [
+      'runReport',
+      'runPivotReport',
+      'batchRunReports',
+      'batchRunPivotReports',
+      'getMetadata',
+      'runRealtimeReport',
+      'checkCompatibility',
+    ];
     for (const methodName of betaAnalyticsDataStubMethods) {
       const callPromise = this.betaAnalyticsDataStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -276,7 +301,7 @@ export class BetaAnalyticsDataClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/analytics',
-      'https://www.googleapis.com/auth/analytics.readonly'
+      'https://www.googleapis.com/auth/analytics.readonly',
     ];
   }
 
@@ -286,8 +311,9 @@ export class BetaAnalyticsDataClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -298,748 +324,894 @@ export class BetaAnalyticsDataClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Returns a customized report of your Google Analytics event data. Reports
- * contain statistics derived from data collected by the Google Analytics
- * tracking code. The data returned from the API is as a table with columns
- * for the requested dimensions and metrics. Metrics are individual
- * measurements of user activity on your property, such as active users or
- * event count. Dimensions break down metrics across some common criteria,
- * such as country or event name.
- *
- * For a guide to constructing requests & understanding responses, see
- * [Creating a
- * Report](https://developers.google.com/analytics/devguides/reporting/data/v1/basics).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.property
- *   A Google Analytics GA4 property identifier whose events are tracked.
- *   Specified in the URL path and not the body. To learn more, see [where to
- *   find your Property
- *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
- *   Within a batch request, this property should either be unspecified or
- *   consistent with the batch-level property.
- *
- *   Example: properties/1234
- * @param {number[]} request.dimensions
- *   The dimensions requested and displayed.
- * @param {number[]} request.metrics
- *   The metrics requested and displayed.
- * @param {number[]} request.dateRanges
- *   Date ranges of data to read. If multiple date ranges are requested, each
- *   response row will contain a zero based date range index. If two date
- *   ranges overlap, the event data for the overlapping days is included in the
- *   response rows for both date ranges. In a cohort request, this `dateRanges`
- *   must be unspecified.
- * @param {google.analytics.data.v1beta.FilterExpression} request.dimensionFilter
- *   Dimension filters allow you to ask for only specific dimension values in
- *   the report. To learn more, see [Fundamentals of Dimension
- *   Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
- *   for examples. Metrics cannot be used in this filter.
- * @param {google.analytics.data.v1beta.FilterExpression} request.metricFilter
- *   The filter clause of metrics. Applied after aggregating the report's rows,
- *   similar to SQL having-clause. Dimensions cannot be used in this filter.
- * @param {number} request.offset
- *   The row count of the start row. The first row is counted as row 0.
- *
- *   When paging, the first request does not specify offset; or equivalently,
- *   sets offset to 0; the first request returns the first `limit` of rows. The
- *   second request sets offset to the `limit` of the first request; the second
- *   request returns the second `limit` of rows.
- *
- *   To learn more about this pagination parameter, see
- *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
- * @param {number} request.limit
- *   The number of rows to return. If unspecified, 10,000 rows are returned. The
- *   API returns a maximum of 100,000 rows per request, no matter how many you
- *   ask for. `limit` must be positive.
- *
- *   The API can also return fewer rows than the requested `limit`, if there
- *   aren't as many dimension values as the `limit`. For instance, there are
- *   fewer than 300 possible values for the dimension `country`, so when
- *   reporting on only `country`, you can't get more than 300 rows, even if you
- *   set `limit` to a higher value.
- *
- *   To learn more about this pagination parameter, see
- *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
- * @param {number[]} request.metricAggregations
- *   Aggregation of metrics. Aggregated metric values will be shown in rows
- *   where the dimension_values are set to "RESERVED_(MetricAggregation)".
- * @param {number[]} request.orderBys
- *   Specifies how rows are ordered in the response.
- * @param {string} request.currencyCode
- *   A currency code in ISO4217 format, such as "AED", "USD", "JPY".
- *   If the field is empty, the report uses the property's default currency.
- * @param {google.analytics.data.v1beta.CohortSpec} request.cohortSpec
- *   Cohort group associated with this request. If there is a cohort group
- *   in the request the 'cohort' dimension must be present.
- * @param {boolean} request.keepEmptyRows
- *   If false or unspecified, each row with all metrics equal to 0 will not be
- *   returned. If true, these rows will be returned if they are not separately
- *   removed by a filter.
- * @param {boolean} request.returnPropertyQuota
- *   Toggles whether to return the current state of this Analytics Property's
- *   quota. Quota is returned in [PropertyQuota](#PropertyQuota).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [RunReportResponse]{@link google.analytics.data.v1beta.RunReportResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/beta_analytics_data.run_report.js</caption>
- * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_RunReport_async
- */
+  /**
+   * Returns a customized report of your Google Analytics event data. Reports
+   * contain statistics derived from data collected by the Google Analytics
+   * tracking code. The data returned from the API is as a table with columns
+   * for the requested dimensions and metrics. Metrics are individual
+   * measurements of user activity on your property, such as active users or
+   * event count. Dimensions break down metrics across some common criteria,
+   * such as country or event name.
+   *
+   * For a guide to constructing requests & understanding responses, see
+   * [Creating a
+   * Report](https://developers.google.com/analytics/devguides/reporting/data/v1/basics).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   A Google Analytics GA4 property identifier whose events are tracked.
+   *   Specified in the URL path and not the body. To learn more, see [where to
+   *   find your Property
+   *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+   *   Within a batch request, this property should either be unspecified or
+   *   consistent with the batch-level property.
+   *
+   *   Example: properties/1234
+   * @param {number[]} request.dimensions
+   *   The dimensions requested and displayed.
+   * @param {number[]} request.metrics
+   *   The metrics requested and displayed.
+   * @param {number[]} request.dateRanges
+   *   Date ranges of data to read. If multiple date ranges are requested, each
+   *   response row will contain a zero based date range index. If two date
+   *   ranges overlap, the event data for the overlapping days is included in the
+   *   response rows for both date ranges. In a cohort request, this `dateRanges`
+   *   must be unspecified.
+   * @param {google.analytics.data.v1beta.FilterExpression} request.dimensionFilter
+   *   Dimension filters allow you to ask for only specific dimension values in
+   *   the report. To learn more, see [Fundamentals of Dimension
+   *   Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
+   *   for examples. Metrics cannot be used in this filter.
+   * @param {google.analytics.data.v1beta.FilterExpression} request.metricFilter
+   *   The filter clause of metrics. Applied after aggregating the report's rows,
+   *   similar to SQL having-clause. Dimensions cannot be used in this filter.
+   * @param {number} request.offset
+   *   The row count of the start row. The first row is counted as row 0.
+   *
+   *   When paging, the first request does not specify offset; or equivalently,
+   *   sets offset to 0; the first request returns the first `limit` of rows. The
+   *   second request sets offset to the `limit` of the first request; the second
+   *   request returns the second `limit` of rows.
+   *
+   *   To learn more about this pagination parameter, see
+   *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+   * @param {number} request.limit
+   *   The number of rows to return. If unspecified, 10,000 rows are returned. The
+   *   API returns a maximum of 100,000 rows per request, no matter how many you
+   *   ask for. `limit` must be positive.
+   *
+   *   The API can also return fewer rows than the requested `limit`, if there
+   *   aren't as many dimension values as the `limit`. For instance, there are
+   *   fewer than 300 possible values for the dimension `country`, so when
+   *   reporting on only `country`, you can't get more than 300 rows, even if you
+   *   set `limit` to a higher value.
+   *
+   *   To learn more about this pagination parameter, see
+   *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+   * @param {number[]} request.metricAggregations
+   *   Aggregation of metrics. Aggregated metric values will be shown in rows
+   *   where the dimension_values are set to "RESERVED_(MetricAggregation)".
+   * @param {number[]} request.orderBys
+   *   Specifies how rows are ordered in the response.
+   * @param {string} request.currencyCode
+   *   A currency code in ISO4217 format, such as "AED", "USD", "JPY".
+   *   If the field is empty, the report uses the property's default currency.
+   * @param {google.analytics.data.v1beta.CohortSpec} request.cohortSpec
+   *   Cohort group associated with this request. If there is a cohort group
+   *   in the request the 'cohort' dimension must be present.
+   * @param {boolean} request.keepEmptyRows
+   *   If false or unspecified, each row with all metrics equal to 0 will not be
+   *   returned. If true, these rows will be returned if they are not separately
+   *   removed by a filter.
+   * @param {boolean} request.returnPropertyQuota
+   *   Toggles whether to return the current state of this Analytics Property's
+   *   quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RunReportResponse]{@link google.analytics.data.v1beta.RunReportResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/beta_analytics_data.run_report.js</caption>
+   * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_RunReport_async
+   */
   runReport(
-      request?: protos.google.analytics.data.v1beta.IRunReportRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1beta.IRunReportResponse,
-        protos.google.analytics.data.v1beta.IRunReportRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1beta.IRunReportRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.IRunReportResponse,
+      protos.google.analytics.data.v1beta.IRunReportRequest | undefined,
+      {} | undefined
+    ]
+  >;
   runReport(
-      request: protos.google.analytics.data.v1beta.IRunReportRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1beta.IRunReportResponse,
-          protos.google.analytics.data.v1beta.IRunReportRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1beta.IRunReportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.IRunReportResponse,
+      protos.google.analytics.data.v1beta.IRunReportRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   runReport(
-      request: protos.google.analytics.data.v1beta.IRunReportRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1beta.IRunReportResponse,
-          protos.google.analytics.data.v1beta.IRunReportRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1beta.IRunReportRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.IRunReportResponse,
+      protos.google.analytics.data.v1beta.IRunReportRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   runReport(
-      request?: protos.google.analytics.data.v1beta.IRunReportRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1beta.IRunReportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1beta.IRunReportResponse,
-          protos.google.analytics.data.v1beta.IRunReportRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1beta.IRunReportResponse,
-          protos.google.analytics.data.v1beta.IRunReportRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1beta.IRunReportResponse,
-        protos.google.analytics.data.v1beta.IRunReportRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1beta.IRunReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1beta.IRunReportResponse,
+      protos.google.analytics.data.v1beta.IRunReportRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.IRunReportResponse,
+      protos.google.analytics.data.v1beta.IRunReportRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'property': request.property ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        property: request.property ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.runReport(request, options, callback);
   }
-/**
- * Returns a customized pivot report of your Google Analytics event data.
- * Pivot reports are more advanced and expressive formats than regular
- * reports. In a pivot report, dimensions are only visible if they are
- * included in a pivot. Multiple pivots can be specified to further dissect
- * your data.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.property
- *   A Google Analytics GA4 property identifier whose events are tracked.
- *   Specified in the URL path and not the body. To learn more, see [where to
- *   find your Property
- *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
- *   Within a batch request, this property should either be unspecified or
- *   consistent with the batch-level property.
- *
- *   Example: properties/1234
- * @param {number[]} request.dimensions
- *   The dimensions requested. All defined dimensions must be used by one of the
- *   following: dimension_expression, dimension_filter, pivots, order_bys.
- * @param {number[]} request.metrics
- *   The metrics requested, at least one metric needs to be specified. All
- *   defined metrics must be used by one of the following: metric_expression,
- *   metric_filter, order_bys.
- * @param {number[]} request.dateRanges
- *   The date range to retrieve event data for the report. If multiple date
- *   ranges are specified, event data from each date range is used in the
- *   report. A special dimension with field name "dateRange" can be included in
- *   a Pivot's field names; if included, the report compares between date
- *   ranges. In a cohort request, this `dateRanges` must be unspecified.
- * @param {number[]} request.pivots
- *   Describes the visual format of the report's dimensions in columns or rows.
- *   The union of the fieldNames (dimension names) in all pivots must be a
- *   subset of dimension names defined in Dimensions. No two pivots can share a
- *   dimension. A dimension is only visible if it appears in a pivot.
- * @param {google.analytics.data.v1beta.FilterExpression} request.dimensionFilter
- *   The filter clause of dimensions. Dimensions must be requested to be used in
- *   this filter. Metrics cannot be used in this filter.
- * @param {google.analytics.data.v1beta.FilterExpression} request.metricFilter
- *   The filter clause of metrics. Applied at post aggregation phase, similar to
- *   SQL having-clause. Metrics must be requested to be used in this filter.
- *   Dimensions cannot be used in this filter.
- * @param {string} request.currencyCode
- *   A currency code in ISO4217 format, such as "AED", "USD", "JPY".
- *   If the field is empty, the report uses the property's default currency.
- * @param {google.analytics.data.v1beta.CohortSpec} request.cohortSpec
- *   Cohort group associated with this request. If there is a cohort group
- *   in the request the 'cohort' dimension must be present.
- * @param {boolean} request.keepEmptyRows
- *   If false or unspecified, each row with all metrics equal to 0 will not be
- *   returned. If true, these rows will be returned if they are not separately
- *   removed by a filter.
- * @param {boolean} request.returnPropertyQuota
- *   Toggles whether to return the current state of this Analytics Property's
- *   quota. Quota is returned in [PropertyQuota](#PropertyQuota).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [RunPivotReportResponse]{@link google.analytics.data.v1beta.RunPivotReportResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/beta_analytics_data.run_pivot_report.js</caption>
- * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_RunPivotReport_async
- */
+  /**
+   * Returns a customized pivot report of your Google Analytics event data.
+   * Pivot reports are more advanced and expressive formats than regular
+   * reports. In a pivot report, dimensions are only visible if they are
+   * included in a pivot. Multiple pivots can be specified to further dissect
+   * your data.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   A Google Analytics GA4 property identifier whose events are tracked.
+   *   Specified in the URL path and not the body. To learn more, see [where to
+   *   find your Property
+   *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+   *   Within a batch request, this property should either be unspecified or
+   *   consistent with the batch-level property.
+   *
+   *   Example: properties/1234
+   * @param {number[]} request.dimensions
+   *   The dimensions requested. All defined dimensions must be used by one of the
+   *   following: dimension_expression, dimension_filter, pivots, order_bys.
+   * @param {number[]} request.metrics
+   *   The metrics requested, at least one metric needs to be specified. All
+   *   defined metrics must be used by one of the following: metric_expression,
+   *   metric_filter, order_bys.
+   * @param {number[]} request.dateRanges
+   *   The date range to retrieve event data for the report. If multiple date
+   *   ranges are specified, event data from each date range is used in the
+   *   report. A special dimension with field name "dateRange" can be included in
+   *   a Pivot's field names; if included, the report compares between date
+   *   ranges. In a cohort request, this `dateRanges` must be unspecified.
+   * @param {number[]} request.pivots
+   *   Describes the visual format of the report's dimensions in columns or rows.
+   *   The union of the fieldNames (dimension names) in all pivots must be a
+   *   subset of dimension names defined in Dimensions. No two pivots can share a
+   *   dimension. A dimension is only visible if it appears in a pivot.
+   * @param {google.analytics.data.v1beta.FilterExpression} request.dimensionFilter
+   *   The filter clause of dimensions. Dimensions must be requested to be used in
+   *   this filter. Metrics cannot be used in this filter.
+   * @param {google.analytics.data.v1beta.FilterExpression} request.metricFilter
+   *   The filter clause of metrics. Applied at post aggregation phase, similar to
+   *   SQL having-clause. Metrics must be requested to be used in this filter.
+   *   Dimensions cannot be used in this filter.
+   * @param {string} request.currencyCode
+   *   A currency code in ISO4217 format, such as "AED", "USD", "JPY".
+   *   If the field is empty, the report uses the property's default currency.
+   * @param {google.analytics.data.v1beta.CohortSpec} request.cohortSpec
+   *   Cohort group associated with this request. If there is a cohort group
+   *   in the request the 'cohort' dimension must be present.
+   * @param {boolean} request.keepEmptyRows
+   *   If false or unspecified, each row with all metrics equal to 0 will not be
+   *   returned. If true, these rows will be returned if they are not separately
+   *   removed by a filter.
+   * @param {boolean} request.returnPropertyQuota
+   *   Toggles whether to return the current state of this Analytics Property's
+   *   quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RunPivotReportResponse]{@link google.analytics.data.v1beta.RunPivotReportResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/beta_analytics_data.run_pivot_report.js</caption>
+   * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_RunPivotReport_async
+   */
   runPivotReport(
-      request?: protos.google.analytics.data.v1beta.IRunPivotReportRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1beta.IRunPivotReportResponse,
-        protos.google.analytics.data.v1beta.IRunPivotReportRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1beta.IRunPivotReportRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.IRunPivotReportResponse,
+      protos.google.analytics.data.v1beta.IRunPivotReportRequest | undefined,
+      {} | undefined
+    ]
+  >;
   runPivotReport(
-      request: protos.google.analytics.data.v1beta.IRunPivotReportRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1beta.IRunPivotReportResponse,
-          protos.google.analytics.data.v1beta.IRunPivotReportRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1beta.IRunPivotReportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.IRunPivotReportResponse,
+      | protos.google.analytics.data.v1beta.IRunPivotReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   runPivotReport(
-      request: protos.google.analytics.data.v1beta.IRunPivotReportRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1beta.IRunPivotReportResponse,
-          protos.google.analytics.data.v1beta.IRunPivotReportRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1beta.IRunPivotReportRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.IRunPivotReportResponse,
+      | protos.google.analytics.data.v1beta.IRunPivotReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   runPivotReport(
-      request?: protos.google.analytics.data.v1beta.IRunPivotReportRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1beta.IRunPivotReportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1beta.IRunPivotReportResponse,
-          protos.google.analytics.data.v1beta.IRunPivotReportRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1beta.IRunPivotReportResponse,
-          protos.google.analytics.data.v1beta.IRunPivotReportRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1beta.IRunPivotReportResponse,
-        protos.google.analytics.data.v1beta.IRunPivotReportRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1beta.IRunPivotReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1beta.IRunPivotReportResponse,
+      | protos.google.analytics.data.v1beta.IRunPivotReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.IRunPivotReportResponse,
+      protos.google.analytics.data.v1beta.IRunPivotReportRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'property': request.property ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        property: request.property ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.runPivotReport(request, options, callback);
   }
-/**
- * Returns multiple reports in a batch. All reports must be for the same
- * GA4 Property.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.property
- *   A Google Analytics GA4 property identifier whose events are tracked.
- *   Specified in the URL path and not the body. To learn more, see [where to
- *   find your Property
- *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
- *   This property must be specified for the batch. The property within
- *   RunReportRequest may either be unspecified or consistent with this
- *   property.
- *
- *   Example: properties/1234
- * @param {number[]} request.requests
- *   Individual requests. Each request has a separate report response. Each
- *   batch request is allowed up to 5 requests.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [BatchRunReportsResponse]{@link google.analytics.data.v1beta.BatchRunReportsResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/beta_analytics_data.batch_run_reports.js</caption>
- * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_BatchRunReports_async
- */
+  /**
+   * Returns multiple reports in a batch. All reports must be for the same
+   * GA4 Property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   A Google Analytics GA4 property identifier whose events are tracked.
+   *   Specified in the URL path and not the body. To learn more, see [where to
+   *   find your Property
+   *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+   *   This property must be specified for the batch. The property within
+   *   RunReportRequest may either be unspecified or consistent with this
+   *   property.
+   *
+   *   Example: properties/1234
+   * @param {number[]} request.requests
+   *   Individual requests. Each request has a separate report response. Each
+   *   batch request is allowed up to 5 requests.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchRunReportsResponse]{@link google.analytics.data.v1beta.BatchRunReportsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/beta_analytics_data.batch_run_reports.js</caption>
+   * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_BatchRunReports_async
+   */
   batchRunReports(
-      request?: protos.google.analytics.data.v1beta.IBatchRunReportsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
-        protos.google.analytics.data.v1beta.IBatchRunReportsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1beta.IBatchRunReportsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
+      protos.google.analytics.data.v1beta.IBatchRunReportsRequest | undefined,
+      {} | undefined
+    ]
+  >;
   batchRunReports(
-      request: protos.google.analytics.data.v1beta.IBatchRunReportsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
-          protos.google.analytics.data.v1beta.IBatchRunReportsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1beta.IBatchRunReportsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
+      | protos.google.analytics.data.v1beta.IBatchRunReportsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   batchRunReports(
-      request: protos.google.analytics.data.v1beta.IBatchRunReportsRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
-          protos.google.analytics.data.v1beta.IBatchRunReportsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1beta.IBatchRunReportsRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
+      | protos.google.analytics.data.v1beta.IBatchRunReportsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   batchRunReports(
-      request?: protos.google.analytics.data.v1beta.IBatchRunReportsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1beta.IBatchRunReportsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
-          protos.google.analytics.data.v1beta.IBatchRunReportsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
-          protos.google.analytics.data.v1beta.IBatchRunReportsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
-        protos.google.analytics.data.v1beta.IBatchRunReportsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1beta.IBatchRunReportsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
+      | protos.google.analytics.data.v1beta.IBatchRunReportsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
+      protos.google.analytics.data.v1beta.IBatchRunReportsRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'property': request.property ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        property: request.property ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.batchRunReports(request, options, callback);
   }
-/**
- * Returns multiple pivot reports in a batch. All reports must be for the same
- * GA4 Property.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.property
- *   A Google Analytics GA4 property identifier whose events are tracked.
- *   Specified in the URL path and not the body. To learn more, see [where to
- *   find your Property
- *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
- *   This property must be specified for the batch. The property within
- *   RunPivotReportRequest may either be unspecified or consistent with this
- *   property.
- *
- *   Example: properties/1234
- * @param {number[]} request.requests
- *   Individual requests. Each request has a separate pivot report response.
- *   Each batch request is allowed up to 5 requests.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [BatchRunPivotReportsResponse]{@link google.analytics.data.v1beta.BatchRunPivotReportsResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/beta_analytics_data.batch_run_pivot_reports.js</caption>
- * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_BatchRunPivotReports_async
- */
+  /**
+   * Returns multiple pivot reports in a batch. All reports must be for the same
+   * GA4 Property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   A Google Analytics GA4 property identifier whose events are tracked.
+   *   Specified in the URL path and not the body. To learn more, see [where to
+   *   find your Property
+   *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+   *   This property must be specified for the batch. The property within
+   *   RunPivotReportRequest may either be unspecified or consistent with this
+   *   property.
+   *
+   *   Example: properties/1234
+   * @param {number[]} request.requests
+   *   Individual requests. Each request has a separate pivot report response.
+   *   Each batch request is allowed up to 5 requests.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchRunPivotReportsResponse]{@link google.analytics.data.v1beta.BatchRunPivotReportsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/beta_analytics_data.batch_run_pivot_reports.js</caption>
+   * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_BatchRunPivotReports_async
+   */
   batchRunPivotReports(
-      request?: protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1beta.IBatchRunPivotReportsResponse,
-        protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.IBatchRunPivotReportsResponse,
+      (
+        | protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   batchRunPivotReports(
-      request: protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1beta.IBatchRunPivotReportsResponse,
-          protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.IBatchRunPivotReportsResponse,
+      | protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   batchRunPivotReports(
-      request: protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1beta.IBatchRunPivotReportsResponse,
-          protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.IBatchRunPivotReportsResponse,
+      | protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   batchRunPivotReports(
-      request?: protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1beta.IBatchRunPivotReportsResponse,
-          protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1beta.IBatchRunPivotReportsResponse,
-          protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1beta.IBatchRunPivotReportsResponse,
-        protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1beta.IBatchRunPivotReportsResponse,
+      | protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.IBatchRunPivotReportsResponse,
+      (
+        | protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'property': request.property ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        property: request.property ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.batchRunPivotReports(request, options, callback);
   }
-/**
- * Returns metadata for dimensions and metrics available in reporting methods.
- * Used to explore the dimensions and metrics. In this method, a Google
- * Analytics GA4 Property Identifier is specified in the request, and
- * the metadata response includes Custom dimensions and metrics as well as
- * Universal metadata.
- *
- * For example if a custom metric with parameter name `levels_unlocked` is
- * registered to a property, the Metadata response will contain
- * `customEvent:levels_unlocked`. Universal metadata are dimensions and
- * metrics applicable to any property such as `country` and `totalUsers`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the metadata to retrieve. This name field is
- *   specified in the URL path and not URL parameters. Property is a numeric
- *   Google Analytics GA4 Property identifier. To learn more, see [where to find
- *   your Property
- *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
- *
- *   Example: properties/1234/metadata
- *
- *   Set the Property ID to 0 for dimensions and metrics common to all
- *   properties. In this special mode, this method will not return custom
- *   dimensions and metrics.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Metadata]{@link google.analytics.data.v1beta.Metadata}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/beta_analytics_data.get_metadata.js</caption>
- * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_GetMetadata_async
- */
+  /**
+   * Returns metadata for dimensions and metrics available in reporting methods.
+   * Used to explore the dimensions and metrics. In this method, a Google
+   * Analytics GA4 Property Identifier is specified in the request, and
+   * the metadata response includes Custom dimensions and metrics as well as
+   * Universal metadata.
+   *
+   * For example if a custom metric with parameter name `levels_unlocked` is
+   * registered to a property, the Metadata response will contain
+   * `customEvent:levels_unlocked`. Universal metadata are dimensions and
+   * metrics applicable to any property such as `country` and `totalUsers`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the metadata to retrieve. This name field is
+   *   specified in the URL path and not URL parameters. Property is a numeric
+   *   Google Analytics GA4 Property identifier. To learn more, see [where to find
+   *   your Property
+   *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+   *
+   *   Example: properties/1234/metadata
+   *
+   *   Set the Property ID to 0 for dimensions and metrics common to all
+   *   properties. In this special mode, this method will not return custom
+   *   dimensions and metrics.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Metadata]{@link google.analytics.data.v1beta.Metadata}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/beta_analytics_data.get_metadata.js</caption>
+   * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_GetMetadata_async
+   */
   getMetadata(
-      request?: protos.google.analytics.data.v1beta.IGetMetadataRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1beta.IMetadata,
-        protos.google.analytics.data.v1beta.IGetMetadataRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1beta.IGetMetadataRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.IMetadata,
+      protos.google.analytics.data.v1beta.IGetMetadataRequest | undefined,
+      {} | undefined
+    ]
+  >;
   getMetadata(
-      request: protos.google.analytics.data.v1beta.IGetMetadataRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1beta.IMetadata,
-          protos.google.analytics.data.v1beta.IGetMetadataRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1beta.IGetMetadataRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.IMetadata,
+      | protos.google.analytics.data.v1beta.IGetMetadataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getMetadata(
-      request: protos.google.analytics.data.v1beta.IGetMetadataRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1beta.IMetadata,
-          protos.google.analytics.data.v1beta.IGetMetadataRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1beta.IGetMetadataRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.IMetadata,
+      | protos.google.analytics.data.v1beta.IGetMetadataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getMetadata(
-      request?: protos.google.analytics.data.v1beta.IGetMetadataRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1beta.IGetMetadataRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1beta.IMetadata,
-          protos.google.analytics.data.v1beta.IGetMetadataRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1beta.IMetadata,
-          protos.google.analytics.data.v1beta.IGetMetadataRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1beta.IMetadata,
-        protos.google.analytics.data.v1beta.IGetMetadataRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1beta.IGetMetadataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1beta.IMetadata,
+      | protos.google.analytics.data.v1beta.IGetMetadataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.IMetadata,
+      protos.google.analytics.data.v1beta.IGetMetadataRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.getMetadata(request, options, callback);
   }
-/**
- * Returns a customized report of realtime event data for your property.
- * Events appear in realtime reports seconds after they have been sent to
- * the Google Analytics. Realtime reports show events and usage data for the
- * periods of time ranging from the present moment to 30 minutes ago (up to
- * 60 minutes for Google Analytics 360 properties).
- *
- * For a guide to constructing realtime requests & understanding responses,
- * see [Creating a Realtime
- * Report](https://developers.google.com/analytics/devguides/reporting/data/v1/realtime-basics).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.property
- *   A Google Analytics GA4 property identifier whose events are tracked.
- *   Specified in the URL path and not the body. To learn more, see [where to
- *   find your Property
- *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
- *
- *   Example: properties/1234
- * @param {number[]} request.dimensions
- *   The dimensions requested and displayed.
- * @param {number[]} request.metrics
- *   The metrics requested and displayed.
- * @param {google.analytics.data.v1beta.FilterExpression} request.dimensionFilter
- *   The filter clause of dimensions. Metrics cannot be used in this filter.
- * @param {google.analytics.data.v1beta.FilterExpression} request.metricFilter
- *   The filter clause of metrics. Applied at post aggregation phase, similar to
- *   SQL having-clause. Dimensions cannot be used in this filter.
- * @param {number} request.limit
- *   The number of rows to return. If unspecified, 10,000 rows are returned. The
- *   API returns a maximum of 100,000 rows per request, no matter how many you
- *   ask for. `limit` must be positive.
- *
- *   The API can also return fewer rows than the requested `limit`, if there
- *   aren't as many dimension values as the `limit`. For instance, there are
- *   fewer than 300 possible values for the dimension `country`, so when
- *   reporting on only `country`, you can't get more than 300 rows, even if you
- *   set `limit` to a higher value.
- * @param {number[]} request.metricAggregations
- *   Aggregation of metrics. Aggregated metric values will be shown in rows
- *   where the dimension_values are set to "RESERVED_(MetricAggregation)".
- * @param {number[]} request.orderBys
- *   Specifies how rows are ordered in the response.
- * @param {boolean} request.returnPropertyQuota
- *   Toggles whether to return the current state of this Analytics Property's
- *   Realtime quota. Quota is returned in [PropertyQuota](#PropertyQuota).
- * @param {number[]} request.minuteRanges
- *   The minute ranges of event data to read. If unspecified, one minute range
- *   for the last 30 minutes will be used. If multiple minute ranges are
- *   requested, each response row will contain a zero based minute range index.
- *   If two minute ranges overlap, the event data for the overlapping minutes is
- *   included in the response rows for both minute ranges.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [RunRealtimeReportResponse]{@link google.analytics.data.v1beta.RunRealtimeReportResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/beta_analytics_data.run_realtime_report.js</caption>
- * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_RunRealtimeReport_async
- */
+  /**
+   * Returns a customized report of realtime event data for your property.
+   * Events appear in realtime reports seconds after they have been sent to
+   * the Google Analytics. Realtime reports show events and usage data for the
+   * periods of time ranging from the present moment to 30 minutes ago (up to
+   * 60 minutes for Google Analytics 360 properties).
+   *
+   * For a guide to constructing realtime requests & understanding responses,
+   * see [Creating a Realtime
+   * Report](https://developers.google.com/analytics/devguides/reporting/data/v1/realtime-basics).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   A Google Analytics GA4 property identifier whose events are tracked.
+   *   Specified in the URL path and not the body. To learn more, see [where to
+   *   find your Property
+   *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+   *
+   *   Example: properties/1234
+   * @param {number[]} request.dimensions
+   *   The dimensions requested and displayed.
+   * @param {number[]} request.metrics
+   *   The metrics requested and displayed.
+   * @param {google.analytics.data.v1beta.FilterExpression} request.dimensionFilter
+   *   The filter clause of dimensions. Metrics cannot be used in this filter.
+   * @param {google.analytics.data.v1beta.FilterExpression} request.metricFilter
+   *   The filter clause of metrics. Applied at post aggregation phase, similar to
+   *   SQL having-clause. Dimensions cannot be used in this filter.
+   * @param {number} request.limit
+   *   The number of rows to return. If unspecified, 10,000 rows are returned. The
+   *   API returns a maximum of 100,000 rows per request, no matter how many you
+   *   ask for. `limit` must be positive.
+   *
+   *   The API can also return fewer rows than the requested `limit`, if there
+   *   aren't as many dimension values as the `limit`. For instance, there are
+   *   fewer than 300 possible values for the dimension `country`, so when
+   *   reporting on only `country`, you can't get more than 300 rows, even if you
+   *   set `limit` to a higher value.
+   * @param {number[]} request.metricAggregations
+   *   Aggregation of metrics. Aggregated metric values will be shown in rows
+   *   where the dimension_values are set to "RESERVED_(MetricAggregation)".
+   * @param {number[]} request.orderBys
+   *   Specifies how rows are ordered in the response.
+   * @param {boolean} request.returnPropertyQuota
+   *   Toggles whether to return the current state of this Analytics Property's
+   *   Realtime quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+   * @param {number[]} request.minuteRanges
+   *   The minute ranges of event data to read. If unspecified, one minute range
+   *   for the last 30 minutes will be used. If multiple minute ranges are
+   *   requested, each response row will contain a zero based minute range index.
+   *   If two minute ranges overlap, the event data for the overlapping minutes is
+   *   included in the response rows for both minute ranges.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RunRealtimeReportResponse]{@link google.analytics.data.v1beta.RunRealtimeReportResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/beta_analytics_data.run_realtime_report.js</caption>
+   * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_RunRealtimeReport_async
+   */
   runRealtimeReport(
-      request?: protos.google.analytics.data.v1beta.IRunRealtimeReportRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
-        protos.google.analytics.data.v1beta.IRunRealtimeReportRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1beta.IRunRealtimeReportRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
+      protos.google.analytics.data.v1beta.IRunRealtimeReportRequest | undefined,
+      {} | undefined
+    ]
+  >;
   runRealtimeReport(
-      request: protos.google.analytics.data.v1beta.IRunRealtimeReportRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
-          protos.google.analytics.data.v1beta.IRunRealtimeReportRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1beta.IRunRealtimeReportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
+      | protos.google.analytics.data.v1beta.IRunRealtimeReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   runRealtimeReport(
-      request: protos.google.analytics.data.v1beta.IRunRealtimeReportRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
-          protos.google.analytics.data.v1beta.IRunRealtimeReportRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1beta.IRunRealtimeReportRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
+      | protos.google.analytics.data.v1beta.IRunRealtimeReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   runRealtimeReport(
-      request?: protos.google.analytics.data.v1beta.IRunRealtimeReportRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1beta.IRunRealtimeReportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
-          protos.google.analytics.data.v1beta.IRunRealtimeReportRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
-          protos.google.analytics.data.v1beta.IRunRealtimeReportRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
-        protos.google.analytics.data.v1beta.IRunRealtimeReportRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1beta.IRunRealtimeReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
+      | protos.google.analytics.data.v1beta.IRunRealtimeReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
+      protos.google.analytics.data.v1beta.IRunRealtimeReportRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'property': request.property ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        property: request.property ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.runRealtimeReport(request, options, callback);
   }
-/**
- * This compatibility method lists dimensions and metrics that can be added to
- * a report request and maintain compatibility. This method fails if the
- * request's dimensions and metrics are incompatible.
- *
- * In Google Analytics, reports fail if they request incompatible dimensions
- * and/or metrics; in that case, you will need to remove dimensions and/or
- * metrics from the incompatible report until the report is compatible.
- *
- * The Realtime and Core reports have different compatibility rules. This
- * method checks compatibility for Core reports.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.property
- *   A Google Analytics GA4 property identifier whose events are tracked. To
- *   learn more, see [where to find your Property
- *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
- *   `property` should be the same value as in your `runReport` request.
- *
- *   Example: properties/1234
- *
- *   Set the Property ID to 0 for compatibility checking on dimensions and
- *   metrics common to all properties. In this special mode, this method will
- *   not return custom dimensions and metrics.
- * @param {number[]} request.dimensions
- *   The dimensions in this report. `dimensions` should be the same value as in
- *   your `runReport` request.
- * @param {number[]} request.metrics
- *   The metrics in this report. `metrics` should be the same value as in your
- *   `runReport` request.
- * @param {google.analytics.data.v1beta.FilterExpression} request.dimensionFilter
- *   The filter clause of dimensions. `dimensionFilter` should be the same value
- *   as in your `runReport` request.
- * @param {google.analytics.data.v1beta.FilterExpression} request.metricFilter
- *   The filter clause of metrics. `metricFilter` should be the same value as in
- *   your `runReport` request
- * @param {google.analytics.data.v1beta.Compatibility} request.compatibilityFilter
- *   Filters the dimensions and metrics in the response to just this
- *   compatibility. Commonly used as `”compatibilityFilter”: “COMPATIBLE”`
- *   to only return compatible dimensions & metrics.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [CheckCompatibilityResponse]{@link google.analytics.data.v1beta.CheckCompatibilityResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/beta_analytics_data.check_compatibility.js</caption>
- * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_CheckCompatibility_async
- */
+  /**
+   * This compatibility method lists dimensions and metrics that can be added to
+   * a report request and maintain compatibility. This method fails if the
+   * request's dimensions and metrics are incompatible.
+   *
+   * In Google Analytics, reports fail if they request incompatible dimensions
+   * and/or metrics; in that case, you will need to remove dimensions and/or
+   * metrics from the incompatible report until the report is compatible.
+   *
+   * The Realtime and Core reports have different compatibility rules. This
+   * method checks compatibility for Core reports.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   A Google Analytics GA4 property identifier whose events are tracked. To
+   *   learn more, see [where to find your Property
+   *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+   *   `property` should be the same value as in your `runReport` request.
+   *
+   *   Example: properties/1234
+   *
+   *   Set the Property ID to 0 for compatibility checking on dimensions and
+   *   metrics common to all properties. In this special mode, this method will
+   *   not return custom dimensions and metrics.
+   * @param {number[]} request.dimensions
+   *   The dimensions in this report. `dimensions` should be the same value as in
+   *   your `runReport` request.
+   * @param {number[]} request.metrics
+   *   The metrics in this report. `metrics` should be the same value as in your
+   *   `runReport` request.
+   * @param {google.analytics.data.v1beta.FilterExpression} request.dimensionFilter
+   *   The filter clause of dimensions. `dimensionFilter` should be the same value
+   *   as in your `runReport` request.
+   * @param {google.analytics.data.v1beta.FilterExpression} request.metricFilter
+   *   The filter clause of metrics. `metricFilter` should be the same value as in
+   *   your `runReport` request
+   * @param {google.analytics.data.v1beta.Compatibility} request.compatibilityFilter
+   *   Filters the dimensions and metrics in the response to just this
+   *   compatibility. Commonly used as `”compatibilityFilter”: “COMPATIBLE”`
+   *   to only return compatible dimensions & metrics.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CheckCompatibilityResponse]{@link google.analytics.data.v1beta.CheckCompatibilityResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/beta_analytics_data.check_compatibility.js</caption>
+   * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_CheckCompatibility_async
+   */
   checkCompatibility(
-      request?: protos.google.analytics.data.v1beta.ICheckCompatibilityRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
-        protos.google.analytics.data.v1beta.ICheckCompatibilityRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.analytics.data.v1beta.ICheckCompatibilityRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
+      (
+        | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   checkCompatibility(
-      request: protos.google.analytics.data.v1beta.ICheckCompatibilityRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
-          protos.google.analytics.data.v1beta.ICheckCompatibilityRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1beta.ICheckCompatibilityRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
+      | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   checkCompatibility(
-      request: protos.google.analytics.data.v1beta.ICheckCompatibilityRequest,
-      callback: Callback<
-          protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
-          protos.google.analytics.data.v1beta.ICheckCompatibilityRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.analytics.data.v1beta.ICheckCompatibilityRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
+      | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   checkCompatibility(
-      request?: protos.google.analytics.data.v1beta.ICheckCompatibilityRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.analytics.data.v1beta.ICheckCompatibilityRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
-          protos.google.analytics.data.v1beta.ICheckCompatibilityRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
-          protos.google.analytics.data.v1beta.ICheckCompatibilityRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
-        protos.google.analytics.data.v1beta.ICheckCompatibilityRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
+      | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
+      (
+        | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'property': request.property ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        property: request.property ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.checkCompatibility(request, options, callback);
   }
@@ -1054,7 +1226,7 @@ export class BetaAnalyticsDataClient {
    * @param {string} property
    * @returns {string} Resource name string.
    */
-  metadataPath(property:string) {
+  metadataPath(property: string) {
     return this.pathTemplates.metadataPathTemplate.render({
       property: property,
     });

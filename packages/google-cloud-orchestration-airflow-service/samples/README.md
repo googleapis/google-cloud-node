@@ -50,7 +50,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Environments.create_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.create_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.create_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.create_environment.js,samples/README.md)
 
@@ -67,7 +67,7 @@ __Usage:__
 
 ### Environments.delete_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.delete_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.delete_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.delete_environment.js,samples/README.md)
 
@@ -84,7 +84,7 @@ __Usage:__
 
 ### Environments.get_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.get_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.get_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.get_environment.js,samples/README.md)
 
@@ -101,7 +101,7 @@ __Usage:__
 
 ### Environments.list_environments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.list_environments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.list_environments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.list_environments.js,samples/README.md)
 
@@ -118,7 +118,7 @@ __Usage:__
 
 ### Environments.load_snapshot
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.load_snapshot.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.load_snapshot.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.load_snapshot.js,samples/README.md)
 
@@ -135,7 +135,7 @@ __Usage:__
 
 ### Environments.save_snapshot
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.save_snapshot.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.save_snapshot.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.save_snapshot.js,samples/README.md)
 
@@ -152,7 +152,7 @@ __Usage:__
 
 ### Environments.update_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.update_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.update_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.update_environment.js,samples/README.md)
 
@@ -169,7 +169,7 @@ __Usage:__
 
 ### Image_versions.list_image_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/image_versions.list_image_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/image_versions.list_image_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1/image_versions.list_image_versions.js,samples/README.md)
 
@@ -186,7 +186,7 @@ __Usage:__
 
 ### Environments.check_upgrade
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.check_upgrade.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.check_upgrade.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.check_upgrade.js,samples/README.md)
 
@@ -203,7 +203,7 @@ __Usage:__
 
 ### Environments.create_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.create_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.create_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.create_environment.js,samples/README.md)
 
@@ -220,7 +220,7 @@ __Usage:__
 
 ### Environments.delete_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.delete_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.delete_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.delete_environment.js,samples/README.md)
 
@@ -237,7 +237,7 @@ __Usage:__
 
 ### Environments.get_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.get_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.get_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.get_environment.js,samples/README.md)
 
@@ -254,7 +254,7 @@ __Usage:__
 
 ### Environments.list_environments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.list_environments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.list_environments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.list_environments.js,samples/README.md)
 
@@ -271,7 +271,7 @@ __Usage:__
 
 ### Environments.load_snapshot
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.load_snapshot.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.load_snapshot.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.load_snapshot.js,samples/README.md)
 
@@ -288,7 +288,7 @@ __Usage:__
 
 ### Environments.restart_web_server
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.restart_web_server.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.restart_web_server.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.restart_web_server.js,samples/README.md)
 
@@ -305,7 +305,7 @@ __Usage:__
 
 ### Environments.save_snapshot
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.save_snapshot.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.save_snapshot.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.save_snapshot.js,samples/README.md)
 
@@ -322,7 +322,7 @@ __Usage:__
 
 ### Environments.update_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.update_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.update_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.update_environment.js,samples/README.md)
 
@@ -339,7 +339,7 @@ __Usage:__
 
 ### Image_versions.list_image_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/image_versions.list_image_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/image_versions.list_image_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/image_versions.list_image_versions.js,samples/README.md)
 
@@ -356,7 +356,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/quickstart.js,samples/README.md)
 
@@ -373,7 +373,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-orchestration-airflow-service/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/test/quickstart.js,samples/README.md)
 

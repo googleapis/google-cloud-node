@@ -51,7 +51,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Device_manager.bind_device_to_gateway
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.bind_device_to_gateway.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.bind_device_to_gateway.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.bind_device_to_gateway.js,samples/README.md)
 
@@ -68,7 +68,7 @@ __Usage:__
 
 ### Device_manager.create_device
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.create_device.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.create_device.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.create_device.js,samples/README.md)
 
@@ -85,7 +85,7 @@ __Usage:__
 
 ### Device_manager.create_device_registry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.create_device_registry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.create_device_registry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.create_device_registry.js,samples/README.md)
 
@@ -102,7 +102,7 @@ __Usage:__
 
 ### Device_manager.delete_device
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.delete_device.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.delete_device.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.delete_device.js,samples/README.md)
 
@@ -119,7 +119,7 @@ __Usage:__
 
 ### Device_manager.delete_device_registry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.delete_device_registry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.delete_device_registry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.delete_device_registry.js,samples/README.md)
 
@@ -136,7 +136,7 @@ __Usage:__
 
 ### Device_manager.get_device
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.get_device.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.get_device.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.get_device.js,samples/README.md)
 
@@ -153,7 +153,7 @@ __Usage:__
 
 ### Device_manager.get_device_registry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.get_device_registry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.get_device_registry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.get_device_registry.js,samples/README.md)
 
@@ -170,7 +170,7 @@ __Usage:__
 
 ### Device_manager.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.get_iam_policy.js,samples/README.md)
 
@@ -187,7 +187,7 @@ __Usage:__
 
 ### Device_manager.list_device_config_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.list_device_config_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.list_device_config_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.list_device_config_versions.js,samples/README.md)
 
@@ -204,7 +204,7 @@ __Usage:__
 
 ### Device_manager.list_device_registries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.list_device_registries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.list_device_registries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.list_device_registries.js,samples/README.md)
 
@@ -221,7 +221,7 @@ __Usage:__
 
 ### Device_manager.list_device_states
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.list_device_states.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.list_device_states.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.list_device_states.js,samples/README.md)
 
@@ -238,7 +238,7 @@ __Usage:__
 
 ### Device_manager.list_devices
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.list_devices.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.list_devices.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.list_devices.js,samples/README.md)
 
@@ -255,7 +255,7 @@ __Usage:__
 
 ### Device_manager.modify_cloud_to_device_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.modify_cloud_to_device_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.modify_cloud_to_device_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.modify_cloud_to_device_config.js,samples/README.md)
 
@@ -272,7 +272,7 @@ __Usage:__
 
 ### Device_manager.send_command_to_device
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.send_command_to_device.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.send_command_to_device.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.send_command_to_device.js,samples/README.md)
 
@@ -289,7 +289,7 @@ __Usage:__
 
 ### Device_manager.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.set_iam_policy.js,samples/README.md)
 
@@ -306,7 +306,7 @@ __Usage:__
 
 ### Device_manager.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.test_iam_permissions.js,samples/README.md)
 
@@ -323,7 +323,7 @@ __Usage:__
 
 ### Device_manager.unbind_device_from_gateway
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.unbind_device_from_gateway.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.unbind_device_from_gateway.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.unbind_device_from_gateway.js,samples/README.md)
 
@@ -340,7 +340,7 @@ __Usage:__
 
 ### Device_manager.update_device
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.update_device.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.update_device.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.update_device.js,samples/README.md)
 
@@ -357,7 +357,7 @@ __Usage:__
 
 ### Device_manager.update_device_registry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/generated/v1/device_manager.update_device_registry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/generated/v1/device_manager.update_device_registry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/generated/v1/device_manager.update_device_registry.js,samples/README.md)
 
@@ -374,7 +374,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/quickstart.js,samples/README.md)
 
@@ -391,7 +391,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-iot/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/test/quickstart.test.js,samples/README.md)
 

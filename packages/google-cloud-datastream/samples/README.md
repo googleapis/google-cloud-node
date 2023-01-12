@@ -78,7 +78,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Datastream.create_connection_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.create_connection_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.create_connection_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.create_connection_profile.js,samples/README.md)
 
@@ -95,7 +95,7 @@ __Usage:__
 
 ### Datastream.create_private_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.create_private_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.create_private_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.create_private_connection.js,samples/README.md)
 
@@ -112,7 +112,7 @@ __Usage:__
 
 ### Datastream.create_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.create_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.create_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.create_route.js,samples/README.md)
 
@@ -129,7 +129,7 @@ __Usage:__
 
 ### Datastream.create_stream
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.create_stream.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.create_stream.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.create_stream.js,samples/README.md)
 
@@ -146,7 +146,7 @@ __Usage:__
 
 ### Datastream.delete_connection_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.delete_connection_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.delete_connection_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.delete_connection_profile.js,samples/README.md)
 
@@ -163,7 +163,7 @@ __Usage:__
 
 ### Datastream.delete_private_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.delete_private_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.delete_private_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.delete_private_connection.js,samples/README.md)
 
@@ -180,7 +180,7 @@ __Usage:__
 
 ### Datastream.delete_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.delete_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.delete_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.delete_route.js,samples/README.md)
 
@@ -197,7 +197,7 @@ __Usage:__
 
 ### Datastream.delete_stream
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.delete_stream.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.delete_stream.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.delete_stream.js,samples/README.md)
 
@@ -214,7 +214,7 @@ __Usage:__
 
 ### Datastream.discover_connection_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.discover_connection_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.discover_connection_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.discover_connection_profile.js,samples/README.md)
 
@@ -231,7 +231,7 @@ __Usage:__
 
 ### Datastream.fetch_static_ips
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.fetch_static_ips.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.fetch_static_ips.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.fetch_static_ips.js,samples/README.md)
 
@@ -248,7 +248,7 @@ __Usage:__
 
 ### Datastream.get_connection_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.get_connection_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.get_connection_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.get_connection_profile.js,samples/README.md)
 
@@ -265,7 +265,7 @@ __Usage:__
 
 ### Datastream.get_private_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.get_private_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.get_private_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.get_private_connection.js,samples/README.md)
 
@@ -282,7 +282,7 @@ __Usage:__
 
 ### Datastream.get_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.get_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.get_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.get_route.js,samples/README.md)
 
@@ -299,7 +299,7 @@ __Usage:__
 
 ### Datastream.get_stream
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.get_stream.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.get_stream.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.get_stream.js,samples/README.md)
 
@@ -316,7 +316,7 @@ __Usage:__
 
 ### Datastream.get_stream_object
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.get_stream_object.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.get_stream_object.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.get_stream_object.js,samples/README.md)
 
@@ -333,7 +333,7 @@ __Usage:__
 
 ### Datastream.list_connection_profiles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.list_connection_profiles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.list_connection_profiles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.list_connection_profiles.js,samples/README.md)
 
@@ -350,7 +350,7 @@ __Usage:__
 
 ### Datastream.list_private_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.list_private_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.list_private_connections.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.list_private_connections.js,samples/README.md)
 
@@ -367,7 +367,7 @@ __Usage:__
 
 ### Datastream.list_routes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.list_routes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.list_routes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.list_routes.js,samples/README.md)
 
@@ -384,7 +384,7 @@ __Usage:__
 
 ### Datastream.list_stream_objects
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.list_stream_objects.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.list_stream_objects.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.list_stream_objects.js,samples/README.md)
 
@@ -401,7 +401,7 @@ __Usage:__
 
 ### Datastream.list_streams
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.list_streams.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.list_streams.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.list_streams.js,samples/README.md)
 
@@ -418,7 +418,7 @@ __Usage:__
 
 ### Datastream.lookup_stream_object
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.lookup_stream_object.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.lookup_stream_object.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.lookup_stream_object.js,samples/README.md)
 
@@ -435,7 +435,7 @@ __Usage:__
 
 ### Datastream.start_backfill_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.start_backfill_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.start_backfill_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.start_backfill_job.js,samples/README.md)
 
@@ -452,7 +452,7 @@ __Usage:__
 
 ### Datastream.stop_backfill_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.stop_backfill_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.stop_backfill_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.stop_backfill_job.js,samples/README.md)
 
@@ -469,7 +469,7 @@ __Usage:__
 
 ### Datastream.update_connection_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.update_connection_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.update_connection_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.update_connection_profile.js,samples/README.md)
 
@@ -486,7 +486,7 @@ __Usage:__
 
 ### Datastream.update_stream
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1/datastream.update_stream.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.update_stream.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1/datastream.update_stream.js,samples/README.md)
 
@@ -503,7 +503,7 @@ __Usage:__
 
 ### Datastream.create_connection_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_connection_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_connection_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_connection_profile.js,samples/README.md)
 
@@ -520,7 +520,7 @@ __Usage:__
 
 ### Datastream.create_private_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_private_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_private_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_private_connection.js,samples/README.md)
 
@@ -537,7 +537,7 @@ __Usage:__
 
 ### Datastream.create_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_route.js,samples/README.md)
 
@@ -554,7 +554,7 @@ __Usage:__
 
 ### Datastream.create_stream
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_stream.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_stream.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_stream.js,samples/README.md)
 
@@ -571,7 +571,7 @@ __Usage:__
 
 ### Datastream.delete_connection_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.delete_connection_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.delete_connection_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.delete_connection_profile.js,samples/README.md)
 
@@ -588,7 +588,7 @@ __Usage:__
 
 ### Datastream.delete_private_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.delete_private_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.delete_private_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.delete_private_connection.js,samples/README.md)
 
@@ -605,7 +605,7 @@ __Usage:__
 
 ### Datastream.delete_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.delete_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.delete_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.delete_route.js,samples/README.md)
 
@@ -622,7 +622,7 @@ __Usage:__
 
 ### Datastream.delete_stream
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.delete_stream.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.delete_stream.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.delete_stream.js,samples/README.md)
 
@@ -639,7 +639,7 @@ __Usage:__
 
 ### Datastream.discover_connection_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.discover_connection_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.discover_connection_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.discover_connection_profile.js,samples/README.md)
 
@@ -656,7 +656,7 @@ __Usage:__
 
 ### Datastream.fetch_errors
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.fetch_errors.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.fetch_errors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.fetch_errors.js,samples/README.md)
 
@@ -673,7 +673,7 @@ __Usage:__
 
 ### Datastream.fetch_static_ips
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.fetch_static_ips.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.fetch_static_ips.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.fetch_static_ips.js,samples/README.md)
 
@@ -690,7 +690,7 @@ __Usage:__
 
 ### Datastream.get_connection_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.get_connection_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.get_connection_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.get_connection_profile.js,samples/README.md)
 
@@ -707,7 +707,7 @@ __Usage:__
 
 ### Datastream.get_private_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.get_private_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.get_private_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.get_private_connection.js,samples/README.md)
 
@@ -724,7 +724,7 @@ __Usage:__
 
 ### Datastream.get_route
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.get_route.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.get_route.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.get_route.js,samples/README.md)
 
@@ -741,7 +741,7 @@ __Usage:__
 
 ### Datastream.get_stream
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.get_stream.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.get_stream.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.get_stream.js,samples/README.md)
 
@@ -758,7 +758,7 @@ __Usage:__
 
 ### Datastream.list_connection_profiles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.list_connection_profiles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.list_connection_profiles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.list_connection_profiles.js,samples/README.md)
 
@@ -775,7 +775,7 @@ __Usage:__
 
 ### Datastream.list_private_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.list_private_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.list_private_connections.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.list_private_connections.js,samples/README.md)
 
@@ -792,7 +792,7 @@ __Usage:__
 
 ### Datastream.list_routes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.list_routes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.list_routes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.list_routes.js,samples/README.md)
 
@@ -809,7 +809,7 @@ __Usage:__
 
 ### Datastream.list_streams
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.list_streams.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.list_streams.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.list_streams.js,samples/README.md)
 
@@ -826,7 +826,7 @@ __Usage:__
 
 ### Datastream.update_connection_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.update_connection_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.update_connection_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.update_connection_profile.js,samples/README.md)
 
@@ -843,7 +843,7 @@ __Usage:__
 
 ### Datastream.update_stream
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.update_stream.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.update_stream.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.update_stream.js,samples/README.md)
 
@@ -860,7 +860,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/quickstart.js,samples/README.md)
 
@@ -877,7 +877,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datastream/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datastream/samples/test/quickstart.js,samples/README.md)
 
