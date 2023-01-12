@@ -64,6 +64,7 @@ import {
 import {Transaction} from './transaction';
 import {promisifyAll} from '@google-cloud/promisify';
 import {google} from '../protos/protos';
+import {AggregateQuery} from './aggregate';
 
 const {grpc} = new GrpcClient();
 
@@ -507,6 +508,15 @@ class Datastore extends DatastoreRequest {
     }
 
     this.auth = new GoogleAuth(this.options);
+  }
+
+  /**
+   * Create an aggregation query from a Query.
+   *
+   * @param {Query} query A Query object.
+   */
+  createAggregationQuery(query: Query): AggregateQuery {
+    return new AggregateQuery(query);
   }
 
   /**
@@ -1797,10 +1807,12 @@ class Datastore extends DatastoreRequest {
  */
 promisifyAll(Datastore, {
   exclude: [
+    'createAggregationQuery',
     'double',
     'isDouble',
     'geoPoint',
     'getProjectId',
+    'getSharedQueryOptions',
     'isGeoPoint',
     'index',
     'int',
