@@ -60,7 +60,7 @@ function main(parent, externalAccountKey) {
   }
 
   callCreateExternalAccountKey();
-  // [END publicca_v1beta1_generated_PublicCertificateAuthorityService_CreateExternalAccountKey_async]
+  // [END publicca_quickstart]
 }
 
 process.on('unhandledRejection', err => {
