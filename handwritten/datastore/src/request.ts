@@ -44,6 +44,7 @@ import {
   KeyProto,
   ResponseResult,
   Entities,
+  ValueProto,
 } from './entity';
 import {
   Query,
@@ -55,6 +56,7 @@ import {
 } from './query';
 import {Datastore} from '.';
 import ITimestamp = google.protobuf.ITimestamp;
+import {AggregateQuery} from './aggregate';
 
 /**
  * A map of read consistency values to proto codes.
@@ -564,6 +566,76 @@ class DatastoreRequest {
       );
   }
 
+  runAggregationQuery(
+    query: AggregateQuery,
+    options?: RunQueryOptions
+  ): Promise<RunQueryResponse>;
+  runAggregationQuery(
+    query: AggregateQuery,
+    options: RunQueryOptions,
+    callback: RequestCallback
+  ): void;
+  runAggregationQuery(query: AggregateQuery, callback: RequestCallback): void;
+  runAggregationQuery(
+    query: AggregateQuery,
+    optionsOrCallback?: RunQueryOptions | RequestCallback,
+    cb?: RequestCallback
+  ): void | Promise<RunQueryResponse> {
+    const options =
+      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    const callback =
+      typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
+
+    query.query = extend(true, new Query(), query.query);
+    let queryProto: QueryProto;
+    try {
+      queryProto = entity.queryToQueryProto(query.query);
+    } catch (e) {
+      // using setImmediate here to make sure this doesn't throw a
+      // synchronous error
+      setImmediate(callback, e as Error);
+      return;
+    }
+    const sharedQueryOpts = this.getSharedQueryOptions(query.query, options);
+    const aggregationQueryOptions: AggregationQueryOptions = {
+      nestedQuery: queryProto,
+      aggregations: query.toProto(),
+    };
+    const reqOpts: RunAggregationQueryRequest = Object.assign(sharedQueryOpts, {
+      aggregationQuery: aggregationQueryOptions,
+    });
+    this.request_(
+      {
+        client: 'DatastoreClient',
+        method: 'runAggregationQuery',
+        reqOpts,
+        gaxOpts: options.gaxOptions,
+      },
+      (err, res) => {
+        if (res && res.batch) {
+          const results = res.batch.aggregationResults;
+          const finalResults = results
+            .map(
+              (aggregationResult: any) => aggregationResult.aggregateProperties
+            )
+            .map((aggregateProperties: any) =>
+              Object.fromEntries(
+                new Map(
+                  Object.keys(aggregateProperties).map(key => [
+                    key,
+                    entity.decodeValueProto(aggregateProperties[key]),
+                  ])
+                )
+              )
+            );
+          callback(err, finalResults);
+        } else {
+          callback(err, res);
+        }
+      }
+    );
+  }
+
   /**
    * Datastore allows you to query entities by kind, filter them by property
    * filters, and sort them by a property name. Projection and pagination are
@@ -729,32 +801,20 @@ class DatastoreRequest {
    */
   runQueryStream(query: Query, options: RunQueryStreamOptions = {}): Transform {
     query = extend(true, new Query(), query);
-
     const makeRequest = (query: Query) => {
-      const reqOpts = {} as RequestOptions;
-
+      let queryProto: QueryProto;
       try {
-        reqOpts.query = entity.queryToQueryProto(query);
+        queryProto = entity.queryToQueryProto(query);
       } catch (e) {
         // using setImmediate here to make sure this doesn't throw a
         // synchronous error
         setImmediate(onResultSet, e as Error);
         return;
       }
+      const sharedQueryOpts = this.getSharedQueryOptions(query, options);
 
-      if (options.consistency) {
-        const code = CONSISTENCY_PROTO_CODE[options.consistency.toLowerCase()];
-        reqOpts.readOptions = {
-          readConsistency: code,
-        };
-      }
-
-      if (query.namespace) {
-        reqOpts.partitionId = {
-          namespaceId: query.namespace,
-        };
-      }
-
+      const reqOpts: RequestOptions = sharedQueryOpts;
+      reqOpts.query = queryProto;
       this.request_(
         {
           client: 'DatastoreClient',
@@ -827,6 +887,25 @@ class DatastoreRequest {
     return stream;
   }
 
+  private getSharedQueryOptions(
+    query: Query,
+    options: RunQueryStreamOptions = {}
+  ): SharedQueryOptions {
+    const sharedQueryOpts = {} as SharedQueryOptions;
+    if (options.consistency) {
+      const code = CONSISTENCY_PROTO_CODE[options.consistency.toLowerCase()];
+      sharedQueryOpts.readOptions = {
+        readConsistency: code,
+      };
+    }
+    if (query.namespace) {
+      sharedQueryOpts.partitionId = {
+        namespaceId: query.namespace,
+      };
+    }
+    return sharedQueryOpts;
+  }
+
   /**
    * Merge the specified object(s). If a key is incomplete, its associated object
    * is inserted and the original Key object is updated to contain the generated ID.
@@ -857,7 +936,7 @@ class DatastoreRequest {
     callback?: SaveCallback
   ): void | Promise<CommitResponse> {
     const transaction = this.datastore.transaction();
-    transaction.run(async err => {
+    transaction.run(async (err: any) => {
       if (err) {
         try {
           await transaction.rollback();
@@ -1066,26 +1145,35 @@ export interface RequestConfig {
   prepared?: boolean;
   reqOpts?: RequestOptions;
 }
-export interface RequestOptions {
-  mutations?: google.datastore.v1.IMutation[];
-  keys?: Entity;
+export interface SharedQueryOptions {
+  projectId?: string;
+  partitionId?: google.datastore.v1.IPartitionId | null;
   readOptions?: {
     readConsistency?: number;
     transaction?: string;
     readTime?: ITimestamp;
   };
-  partitionId?: google.datastore.v1.IPartitionId | null;
+}
+export interface RequestOptions extends SharedQueryOptions {
+  mutations?: google.datastore.v1.IMutation[];
+  keys?: Entity;
   transactionOptions?: {
     readOnly?: {};
     readWrite?: {previousTransaction?: string};
   } | null;
   transaction?: string | null;
   mode?: string;
-  projectId?: string;
   query?: QueryProto;
   filter?: string;
   indexId?: string;
   entityFilter?: google.datastore.admin.v1.IEntityFilter;
+}
+export interface RunAggregationQueryRequest extends SharedQueryOptions {
+  aggregationQuery: AggregationQueryOptions;
+}
+export interface AggregationQueryOptions {
+  nestedQuery: QueryProto;
+  aggregations: Array<any>;
 }
 export type RunQueryStreamOptions = RunQueryOptions;
 export interface CommitCallback {
@@ -1102,7 +1190,9 @@ export type DeleteResponse = CommitResponse;
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-promisifyAll(DatastoreRequest);
+promisifyAll(DatastoreRequest, {
+  exclude: ['getSharedQueryOptions'],
+});
 
 /**
  * Reference to the {@link DatastoreRequest} class.

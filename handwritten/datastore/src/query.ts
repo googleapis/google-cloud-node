@@ -21,6 +21,7 @@ import {Entity} from './entity';
 import {Transaction} from './transaction';
 import {CallOptions} from 'google-gax';
 import {RunQueryStreamOptions} from '../src/request';
+import {AggregateField, AggregateQuery} from './aggregate';
 
 export type Operator =
   | '='
@@ -571,6 +572,8 @@ export interface RunQueryCallback {
 }
 
 export type RunQueryResponse = [Entity[], RunQueryInfo];
+
+export type RunAggregateQueryResponse = any;
 
 export interface RunQueryInfo {
   endCursor?: string;

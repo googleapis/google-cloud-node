@@ -18,6 +18,7 @@ import {beforeEach, describe, it} from 'mocha';
 const {Query} = require('../src/query');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import {Datastore} from '../src';
+import {AggregateField, AggregateQuery} from '../src/aggregate';
 
 describe('Query', () => {
   const SCOPE = {} as Datastore;
@@ -54,6 +55,24 @@ describe('Query', () => {
       ].forEach(query => {
         assert.strictEqual(query.namespace, null);
       });
+    });
+
+    it('should create a query with a count aggregation', () => {
+      const query = new Query(['kind1']);
+      const firstAggregation = AggregateField.count().alias('total');
+      const secondAggregation = AggregateField.count().alias('total2');
+      const aggregate = new AggregateQuery(query).addAggregations([
+        firstAggregation,
+        secondAggregation,
+      ]);
+      const aggregate2 = new AggregateQuery(query)
+        .count('total')
+        .count('total2');
+      assert.deepStrictEqual(aggregate.aggregations, aggregate2.aggregations);
+      assert.deepStrictEqual(aggregate.aggregations, [
+        firstAggregation,
+        secondAggregation,
+      ]);
     });
   });
 
