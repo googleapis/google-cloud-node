@@ -6054,6 +6054,9 @@ export namespace google {
 
                         /** ResponseMessage telephonyTransferCall */
                         telephonyTransferCall?: (google.cloud.dialogflow.cx.v3.ResponseMessage.ITelephonyTransferCall|null);
+
+                        /** ResponseMessage channel */
+                        channel?: (string|null);
                     }
 
                     /** Represents a ResponseMessage. */
@@ -6091,6 +6094,9 @@ export namespace google {
 
                         /** ResponseMessage telephonyTransferCall. */
                         public telephonyTransferCall?: (google.cloud.dialogflow.cx.v3.ResponseMessage.ITelephonyTransferCall|null);
+
+                        /** ResponseMessage channel. */
+                        public channel: string;
 
                         /** ResponseMessage message. */
                         public message?: ("text"|"payload"|"conversationSuccess"|"outputAudioText"|"liveAgentHandoff"|"endInteraction"|"playAudio"|"mixedAudio"|"telephonyTransferCall");
@@ -19256,6 +19262,9 @@ export namespace google {
 
                         /** QueryParameters flowVersions */
                         flowVersions?: (string[]|null);
+
+                        /** QueryParameters channel */
+                        channel?: (string|null);
                     }
 
                     /** Represents a QueryParameters. */
@@ -19296,6 +19305,9 @@ export namespace google {
 
                         /** QueryParameters flowVersions. */
                         public flowVersions: string[];
+
+                        /** QueryParameters channel. */
+                        public channel: string;
 
                         /**
                          * Creates a new QueryParameters instance using the specified properties.
