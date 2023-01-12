@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3468,8 +3468,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent to group the assets by. Its format is
-   *   "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -3686,8 +3686,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent to group the assets by. Its format is
-   *   "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -3852,8 +3852,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent to group the assets by. Its format is
-   *   "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -4580,9 +4580,11 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent that the listed assets belong to. Its
-   *   format is "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   Required. The name of the parent resource that contains the assets. The
+   *   value that you can specify on parent depends on the method in which you
+   *   specify parent. You can specify one of the following values:
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -4802,9 +4804,11 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent that the listed assets belong to. Its
-   *   format is "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   Required. The name of the parent resource that contains the assets. The
+   *   value that you can specify on parent depends on the method in which you
+   *   specify parent. You can specify one of the following values:
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -4972,9 +4976,11 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent that the listed assets belong to. Its
-   *   format is "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   Required. The name of the parent resource that contains the assets. The
+   *   value that you can specify on parent depends on the method in which you
+   *   specify parent. You can specify one of the following values:
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -6145,8 +6151,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   be "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -6248,8 +6254,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   be "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -6299,8 +6305,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   be "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
