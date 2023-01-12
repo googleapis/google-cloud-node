@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,7 +40,8 @@ import * as gapicConfig from './deployments_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.cx.v3beta1.Deployment|Deployments}.
+ *  Service for managing
+ *  {@link google.cloud.dialogflow.cx.v3beta1.Deployment|Deployments}.
  * @class
  * @memberof v3beta1
  */
@@ -402,13 +403,15 @@ export class DeploymentsClient {
   // -- Service calls --
   // -------------------
   /**
-   * Retrieves the specified {@link google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}.
+   * Retrieves the specified
+   * {@link google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   Required. The name of the
+   *   {@link google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}. Format:
+   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>/deployments/<Deployment ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -502,14 +505,16 @@ export class DeploymentsClient {
   }
 
   /**
-   * Returns the list of all deployments in the specified {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}.
+   * Returns the list of all deployments in the specified
+   * {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} to list all environments for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
+   *   to list all environments for. Format: `projects/<Project
+   *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
+   *   ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -608,9 +613,10 @@ export class DeploymentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} to list all environments for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
+   *   to list all environments for. Format: `projects/<Project
+   *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
+   *   ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -657,9 +663,10 @@ export class DeploymentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment} to list all environments for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
+   *   to list all environments for. Format: `projects/<Project
+   *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
+   *   ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.

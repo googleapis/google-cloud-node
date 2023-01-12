@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1305,7 +1305,8 @@ export class FlowsClient {
    *
    * - `metadata`: An empty [Struct
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-   * - `response`: {@link google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse|ImportFlowResponse}
+   * - `response`:
+   * {@link google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse|ImportFlowResponse}
    *
    * Note: You should always train a flow prior to sending it queries. See the
    * [training
@@ -1470,7 +1471,8 @@ export class FlowsClient {
    *
    * - `metadata`: An empty [Struct
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-   * - `response`: {@link google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse|ExportFlowResponse}
+   * - `response`:
+   * {@link google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse|ExportFlowResponse}
    *
    * Note that resources (e.g. intents, entities, webhooks) that the flow
    * references will also be exported.
@@ -1482,10 +1484,10 @@ export class FlowsClient {
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/flows/<Flow ID>`.
    * @param {string} [request.flowUri]
-   *   Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to
-   *   export the flow to. The format of this URI must be
-   *   `gs://<bucket-name>/<object-name>`.
-   *   If left unspecified, the serialized flow is returned inline.
+   *   Optional. The [Google Cloud
+   *   Storage](https://cloud.google.com/storage/docs/) URI to export the flow to.
+   *   The format of this URI must be `gs://<bucket-name>/<object-name>`. If left
+   *   unspecified, the serialized flow is returned inline.
    *
    *   Dialogflow performs a write operation for the Cloud Storage object
    *   on the caller's behalf, so your request authentication must
