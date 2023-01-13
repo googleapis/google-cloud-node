@@ -9,9 +9,6 @@
   "files": [
     "*.js"
   ],
-  "scripts": {
-    "test": "mocha system-test --timeout 600000"
-  },
   "dependencies": {
     "@google-cloud/vision": "^3.0.1",
     "natural": "^5.0.0",
