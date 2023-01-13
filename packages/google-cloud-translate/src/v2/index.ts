@@ -591,6 +591,7 @@ export class Translate extends Service {
     }
 
     reqOpts.uri = this.baseUrl + reqOpts.uri;
+    reqOpts.timeout = this.timeout;
     reqOpts = extend(true, {}, reqOpts, {
       qs: {
         key: this.key,
