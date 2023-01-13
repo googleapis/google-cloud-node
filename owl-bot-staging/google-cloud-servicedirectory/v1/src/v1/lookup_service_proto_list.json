@@ -1,7 +1,0 @@
-[
-  "../../protos/google/cloud/servicedirectory/v1/endpoint.proto",
-  "../../protos/google/cloud/servicedirectory/v1/lookup_service.proto",
-  "../../protos/google/cloud/servicedirectory/v1/namespace.proto",
-  "../../protos/google/cloud/servicedirectory/v1/registration_service.proto",
-  "../../protos/google/cloud/servicedirectory/v1/service.proto"
-]

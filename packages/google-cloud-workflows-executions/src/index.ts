@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,15 +16,14 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as executions from './executions';
 import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const ExecutionsClient = v1.ExecutionsClient;
-type ExecutionsClient = v1.ExecutionsClient;
 const WorkflowsClient = v1.WorkflowsClient;
 type WorkflowsClient = v1.WorkflowsClient;
 
-export {v1, v1beta, ExecutionsClient, WorkflowsClient};
-export default {v1, v1beta, ExecutionsClient, WorkflowsClient};
+export {executions, v1, v1beta, WorkflowsClient};
+export default {executions, v1, v1beta, WorkflowsClient};
 import * as protos from '../protos/protos';
 export {protos};
