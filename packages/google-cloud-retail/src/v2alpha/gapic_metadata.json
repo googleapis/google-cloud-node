@@ -55,11 +55,6 @@
                 "removeCatalogAttribute"
               ]
             },
-            "BatchRemoveCatalogAttributes": {
-              "methods": [
-                "batchRemoveCatalogAttributes"
-              ]
-            },
             "ReplaceCatalogAttribute": {
               "methods": [
                 "replaceCatalogAttribute"
@@ -120,11 +115,6 @@
             "RemoveCatalogAttribute": {
               "methods": [
                 "removeCatalogAttribute"
-              ]
-            },
-            "BatchRemoveCatalogAttributes": {
-              "methods": [
-                "batchRemoveCatalogAttributes"
               ]
             },
             "ReplaceCatalogAttribute": {

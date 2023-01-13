@@ -1076,9 +1076,9 @@ export class ProductServiceClient {
    *
    * This process is asynchronous and does not require the
    * {@link google.cloud.retail.v2.Product|Product} to exist before updating
-   * fulfillment information. If the request is valid, the update is enqueued
-   * and processed downstream. As a consequence, when a response is returned,
-   * updates are not immediately manifested in the
+   * fulfillment information. If the request is valid, the update will be
+   * enqueued and processed downstream. As a consequence, when a response is
+   * returned, updates are not immediately manifested in the
    * {@link google.cloud.retail.v2.Product|Product} queried by
    * {@link google.cloud.retail.v2.ProductService.GetProduct|ProductService.GetProduct}
    * or
@@ -1088,10 +1088,10 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2.ProductService.CreateProduct|ProductService.CreateProduct}
    * and
    * {@link google.cloud.retail.v2.ProductService.UpdateProduct|ProductService.UpdateProduct},
-   * the specified inventory field value(s) overwrite any existing value(s)
+   * the specified inventory field value(s) will overwrite any existing value(s)
    * while ignoring the last update time for this field. Furthermore, the last
-   * update times for the specified inventory fields are overwritten by the
-   * times of the
+   * update time for the specified inventory fields will be overwritten to the
+   * time of the
    * {@link google.cloud.retail.v2.ProductService.CreateProduct|ProductService.CreateProduct}
    * or
    * {@link google.cloud.retail.v2.ProductService.UpdateProduct|ProductService.UpdateProduct}
@@ -1099,11 +1099,11 @@ export class ProductServiceClient {
    *
    * If no inventory fields are set in
    * {@link google.cloud.retail.v2.CreateProductRequest.product|CreateProductRequest.product},
-   * then any pre-existing inventory information for this product is used.
+   * then any pre-existing inventory information for this product will be used.
    *
    * If no inventory fields are set in
    * {@link google.cloud.retail.v2.SetInventoryRequest.set_mask|SetInventoryRequest.set_mask},
-   * then any existing inventory information is preserved.
+   * then any existing inventory information will be preserved.
    *
    * Pre-existing inventory information can only be updated with
    * {@link google.cloud.retail.v2.ProductService.SetInventory|ProductService.SetInventory},
@@ -1111,17 +1111,15 @@ export class ProductServiceClient {
    * and
    * {@link google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}.
    *
-   * The returned {@link google.longrunning.Operation|Operation}s is obsolete after
-   * one day, and the {@link google.longrunning.Operations.GetOperation|GetOperation}
-   * API returns `NOT_FOUND` afterwards.
+   * The returned {@link |Operation}s will be obsolete after 1 day, and
+   * {@link |GetOperation} API will return NOT_FOUND afterwards.
    *
-   * If conflicting updates are issued, the
-   * {@link google.longrunning.Operation|Operation}s associated with the stale
-   * updates are not marked as {@link google.longrunning.Operation.done|done} until
-   * they are obsolete.
+   * If conflicting updates are issued, the {@link |Operation}s associated with the
+   * stale updates will not be marked as {@link Operation.done|done} until being
+   * obsolete.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1348,17 +1346,15 @@ export class ProductServiceClient {
    * or
    * {@link google.cloud.retail.v2.ProductService.ListProducts|ProductService.ListProducts}.
    *
-   * The returned {@link google.longrunning.Operation|Operation}s will be obsolete
-   * after 1 day, and {@link google.longrunning.Operations.GetOperation|GetOperation}
-   * API will return NOT_FOUND afterwards.
+   * The returned {@link |Operation}s will be obsolete after 1 day, and
+   * {@link |GetOperation} API will return NOT_FOUND afterwards.
    *
-   * If conflicting updates are issued, the
-   * {@link google.longrunning.Operation|Operation}s associated with the stale
-   * updates will not be marked as {@link google.longrunning.Operation.done|done}
-   * until being obsolete.
+   * If conflicting updates are issued, the {@link |Operation}s associated with the
+   * stale updates will not be marked as {@link Operation.done|done} until being
+   * obsolete.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1563,17 +1559,15 @@ export class ProductServiceClient {
    * or
    * {@link google.cloud.retail.v2.ProductService.ListProducts|ProductService.ListProducts}.
    *
-   * The returned {@link google.longrunning.Operation|Operation}s will be obsolete
-   * after 1 day, and {@link google.longrunning.Operations.GetOperation|GetOperation}
-   * API will return NOT_FOUND afterwards.
+   * The returned {@link |Operation}s will be obsolete after 1 day, and
+   * {@link |GetOperation} API will return NOT_FOUND afterwards.
    *
-   * If conflicting updates are issued, the
-   * {@link google.longrunning.Operation|Operation}s associated with the stale
-   * updates will not be marked as {@link google.longrunning.Operation.done|done}
-   * until being obsolete.
+   * If conflicting updates are issued, the {@link |Operation}s associated with the
+   * stale updates will not be marked as {@link Operation.done|done} until being
+   * obsolete.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1784,17 +1778,15 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2.ProductService.UpdateProduct|ProductService.UpdateProduct}
    * has no effect on local inventories.
    *
-   * The returned {@link google.longrunning.Operation|Operation}s will be obsolete
-   * after 1 day, and {@link google.longrunning.Operations.GetOperation|GetOperation}
-   * API will return NOT_FOUND afterwards.
+   * The returned {@link |Operation}s will be obsolete after 1 day, and
+   * {@link |GetOperation} API will return NOT_FOUND afterwards.
    *
-   * If conflicting updates are issued, the
-   * {@link google.longrunning.Operation|Operation}s associated with the stale
-   * updates will not be marked as {@link google.longrunning.Operation.done|done}
-   * until being obsolete.
+   * If conflicting updates are issued, the {@link |Operation}s associated with the
+   * stale updates will not be marked as {@link Operation.done|done} until being
+   * obsolete.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1986,17 +1978,15 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2.ProductService.UpdateProduct|ProductService.UpdateProduct}
    * has no effect on local inventories.
    *
-   * The returned {@link google.longrunning.Operation|Operation}s will be obsolete
-   * after 1 day, and {@link google.longrunning.Operations.GetOperation|GetOperation}
-   * API will return NOT_FOUND afterwards.
+   * The returned {@link |Operation}s will be obsolete after 1 day, and
+   * {@link |GetOperation} API will return NOT_FOUND afterwards.
    *
-   * If conflicting updates are issued, the
-   * {@link google.longrunning.Operation|Operation}s associated with the stale
-   * updates will not be marked as {@link google.longrunning.Operation.done|done}
-   * until being obsolete.
+   * If conflicting updates are issued, the {@link |Operation}s associated with the
+   * stale updates will not be marked as {@link Operation.done|done} until being
+   * obsolete.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.

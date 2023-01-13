@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -663,256 +663,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of an EndpointVerificationInfo. */
-                interface IEndpointVerificationInfo {
-
-                    /** EndpointVerificationInfo emailAddress */
-                    emailAddress?: (string|null);
-
-                    /** EndpointVerificationInfo phoneNumber */
-                    phoneNumber?: (string|null);
-
-                    /** EndpointVerificationInfo requestToken */
-                    requestToken?: (string|null);
-
-                    /** EndpointVerificationInfo lastVerificationTime */
-                    lastVerificationTime?: (google.protobuf.ITimestamp|null);
-                }
-
-                /** Represents an EndpointVerificationInfo. */
-                class EndpointVerificationInfo implements IEndpointVerificationInfo {
-
-                    /**
-                     * Constructs a new EndpointVerificationInfo.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IEndpointVerificationInfo);
-
-                    /** EndpointVerificationInfo emailAddress. */
-                    public emailAddress?: (string|null);
-
-                    /** EndpointVerificationInfo phoneNumber. */
-                    public phoneNumber?: (string|null);
-
-                    /** EndpointVerificationInfo requestToken. */
-                    public requestToken: string;
-
-                    /** EndpointVerificationInfo lastVerificationTime. */
-                    public lastVerificationTime?: (google.protobuf.ITimestamp|null);
-
-                    /** EndpointVerificationInfo endpoint. */
-                    public endpoint?: ("emailAddress"|"phoneNumber");
-
-                    /**
-                     * Creates a new EndpointVerificationInfo instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns EndpointVerificationInfo instance
-                     */
-                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IEndpointVerificationInfo): google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo;
-
-                    /**
-                     * Encodes the specified EndpointVerificationInfo message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo.verify|verify} messages.
-                     * @param message EndpointVerificationInfo message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.recaptchaenterprise.v1.IEndpointVerificationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified EndpointVerificationInfo message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo.verify|verify} messages.
-                     * @param message EndpointVerificationInfo message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IEndpointVerificationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an EndpointVerificationInfo message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns EndpointVerificationInfo
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo;
-
-                    /**
-                     * Decodes an EndpointVerificationInfo message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns EndpointVerificationInfo
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo;
-
-                    /**
-                     * Verifies an EndpointVerificationInfo message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an EndpointVerificationInfo message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns EndpointVerificationInfo
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo;
-
-                    /**
-                     * Creates a plain object from an EndpointVerificationInfo message. Also converts values to other types if specified.
-                     * @param message EndpointVerificationInfo
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this EndpointVerificationInfo to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for EndpointVerificationInfo
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an AccountVerificationInfo. */
-                interface IAccountVerificationInfo {
-
-                    /** AccountVerificationInfo endpoints */
-                    endpoints?: (google.cloud.recaptchaenterprise.v1.IEndpointVerificationInfo[]|null);
-
-                    /** AccountVerificationInfo languageCode */
-                    languageCode?: (string|null);
-
-                    /** AccountVerificationInfo latestVerificationResult */
-                    latestVerificationResult?: (google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.Result|keyof typeof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.Result|null);
-
-                    /** AccountVerificationInfo username */
-                    username?: (string|null);
-                }
-
-                /** Represents an AccountVerificationInfo. */
-                class AccountVerificationInfo implements IAccountVerificationInfo {
-
-                    /**
-                     * Constructs a new AccountVerificationInfo.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IAccountVerificationInfo);
-
-                    /** AccountVerificationInfo endpoints. */
-                    public endpoints: google.cloud.recaptchaenterprise.v1.IEndpointVerificationInfo[];
-
-                    /** AccountVerificationInfo languageCode. */
-                    public languageCode: string;
-
-                    /** AccountVerificationInfo latestVerificationResult. */
-                    public latestVerificationResult: (google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.Result|keyof typeof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.Result);
-
-                    /** AccountVerificationInfo username. */
-                    public username: string;
-
-                    /**
-                     * Creates a new AccountVerificationInfo instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns AccountVerificationInfo instance
-                     */
-                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IAccountVerificationInfo): google.cloud.recaptchaenterprise.v1.AccountVerificationInfo;
-
-                    /**
-                     * Encodes the specified AccountVerificationInfo message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.verify|verify} messages.
-                     * @param message AccountVerificationInfo message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.recaptchaenterprise.v1.IAccountVerificationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified AccountVerificationInfo message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.verify|verify} messages.
-                     * @param message AccountVerificationInfo message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IAccountVerificationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an AccountVerificationInfo message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns AccountVerificationInfo
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.AccountVerificationInfo;
-
-                    /**
-                     * Decodes an AccountVerificationInfo message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns AccountVerificationInfo
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.AccountVerificationInfo;
-
-                    /**
-                     * Verifies an AccountVerificationInfo message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an AccountVerificationInfo message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns AccountVerificationInfo
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.AccountVerificationInfo;
-
-                    /**
-                     * Creates a plain object from an AccountVerificationInfo message. Also converts values to other types if specified.
-                     * @param message AccountVerificationInfo
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.recaptchaenterprise.v1.AccountVerificationInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this AccountVerificationInfo to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for AccountVerificationInfo
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace AccountVerificationInfo {
-
-                    /** Result enum. */
-                    enum Result {
-                        RESULT_UNSPECIFIED = 0,
-                        SUCCESS_USER_VERIFIED = 1,
-                        ERROR_USER_NOT_VERIFIED = 2,
-                        ERROR_SITE_ONBOARDING_INCOMPLETE = 3,
-                        ERROR_RECIPIENT_NOT_ALLOWED = 4,
-                        ERROR_RECIPIENT_ABUSE_LIMIT_EXHAUSTED = 5,
-                        ERROR_CRITICAL_INTERNAL = 6,
-                        ERROR_CUSTOMER_QUOTA_EXHAUSTED = 7,
-                        ERROR_VERIFICATION_BYPASSED = 8,
-                        ERROR_VERDICT_MISMATCH = 9
-                    }
-                }
-
                 /** Properties of a PrivatePasswordLeakVerification. */
                 interface IPrivatePasswordLeakVerification {
 
@@ -1043,9 +793,6 @@ export namespace google {
                     /** Assessment tokenProperties */
                     tokenProperties?: (google.cloud.recaptchaenterprise.v1.ITokenProperties|null);
 
-                    /** Assessment accountVerification */
-                    accountVerification?: (google.cloud.recaptchaenterprise.v1.IAccountVerificationInfo|null);
-
                     /** Assessment accountDefenderAssessment */
                     accountDefenderAssessment?: (google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment|null);
 
@@ -1073,9 +820,6 @@ export namespace google {
 
                     /** Assessment tokenProperties. */
                     public tokenProperties?: (google.cloud.recaptchaenterprise.v1.ITokenProperties|null);
-
-                    /** Assessment accountVerification. */
-                    public accountVerification?: (google.cloud.recaptchaenterprise.v1.IAccountVerificationInfo|null);
 
                     /** Assessment accountDefenderAssessment. */
                     public accountDefenderAssessment?: (google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment|null);
@@ -1419,12 +1163,6 @@ export namespace google {
                     /** TokenProperties hostname */
                     hostname?: (string|null);
 
-                    /** TokenProperties androidPackageName */
-                    androidPackageName?: (string|null);
-
-                    /** TokenProperties iosBundleId */
-                    iosBundleId?: (string|null);
-
                     /** TokenProperties action */
                     action?: (string|null);
                 }
@@ -1449,12 +1187,6 @@ export namespace google {
 
                     /** TokenProperties hostname. */
                     public hostname: string;
-
-                    /** TokenProperties androidPackageName. */
-                    public androidPackageName: string;
-
-                    /** TokenProperties iosBundleId. */
-                    public iosBundleId: string;
 
                     /** TokenProperties action. */
                     public action: string;
@@ -2374,9 +2106,6 @@ export namespace google {
 
                     /** MigrateKeyRequest name */
                     name?: (string|null);
-
-                    /** MigrateKeyRequest skipBillingCheck */
-                    skipBillingCheck?: (boolean|null);
                 }
 
                 /** Represents a MigrateKeyRequest. */
@@ -2390,9 +2119,6 @@ export namespace google {
 
                     /** MigrateKeyRequest name. */
                     public name: string;
-
-                    /** MigrateKeyRequest skipBillingCheck. */
-                    public skipBillingCheck: boolean;
 
                     /**
                      * Creates a new MigrateKeyRequest instance using the specified properties.

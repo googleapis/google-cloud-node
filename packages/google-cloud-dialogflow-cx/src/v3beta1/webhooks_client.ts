@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -122,6 +122,9 @@ export class WebhooksClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -720,9 +723,10 @@ export class WebhooksClient {
    *   *  If `force` is set to false, an error will be returned with message
    *      indicating the referenced resources.
    *   *  If `force` is set to true, Dialogflow will remove the webhook, as well
-   *      as any references to the webhook (i.e. {@link google.cloud.dialogflow.cx.v3beta1.Fulfillment.webhook|Webhook}
-   *      and {@link google.cloud.dialogflow.cx.v3beta1.Fulfillment.tag|tag}in fulfillments that point to this webhook
-   *      will be removed).
+   *      as any references to the webhook (i.e.
+   *      {@link google.cloud.dialogflow.cx.v3beta1.Fulfillment.webhook|Webhook} and
+   *      {@link google.cloud.dialogflow.cx.v3beta1.Fulfillment.tag|tag}in fulfillments
+   *      that point to this webhook will be removed).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

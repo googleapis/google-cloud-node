@@ -29,9 +29,8 @@ function main(parent, customerRepricingConfig) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the customer that will receive this
-   *  repricing config. Parent uses the format:
-   *  accounts/{account_id}/customers/{customer_id}
+   *  Required. The resource name of the customer that will receive this repricing config.
+   *  Parent uses the format: accounts/{account_id}/customers/{customer_id}
    */
   // const parent = 'abc123'
   /**

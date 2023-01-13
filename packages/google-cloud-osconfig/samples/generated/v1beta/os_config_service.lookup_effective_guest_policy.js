@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START workflows_v1_generated_Workflows_GetWorkflow_async]
+function main(instance) {
+  // [START osconfig_v1beta_generated_OsConfigService_LookupEffectiveGuestPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,30 +29,47 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the workflow which information should be retrieved.
-   *  Format: projects/{project}/locations/{location}/workflows/{workflow}
+   *  Required. The VM instance whose policies are being looked up.
    */
-  // const name = 'abc123'
+  // const instance = 'abc123'
+  /**
+   *  Short name of the OS running on the instance. The OS Config agent only
+   *  provides this field for targeting if OS Inventory is enabled for that
+   *  instance.
+   */
+  // const osShortName = 'abc123'
+  /**
+   *  Version of the OS running on the instance. The OS Config agent only
+   *  provides this field for targeting if OS Inventory is enabled for that
+   *  VM instance.
+   */
+  // const osVersion = 'abc123'
+  /**
+   *  Architecture of OS running on the instance. The OS Config agent only
+   *  provides this field for targeting if OS Inventory is enabled for that
+   *  instance.
+   */
+  // const osArchitecture = 'abc123'
 
-  // Imports the Workflows library
-  const {WorkflowsClient} = require('@google-cloud/workflows').v1;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const workflowsClient = new WorkflowsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callGetWorkflow() {
+  async function callLookupEffectiveGuestPolicy() {
     // Construct request
     const request = {
-      name,
+      instance,
     };
 
     // Run request
-    const response = await workflowsClient.getWorkflow(request);
+    const response = await osconfigClient.lookupEffectiveGuestPolicy(request);
     console.log(response);
   }
 
-  callGetWorkflow();
-  // [END workflows_v1_generated_Workflows_GetWorkflow_async]
+  callLookupEffectiveGuestPolicy();
+  // [END osconfig_v1beta_generated_OsConfigService_LookupEffectiveGuestPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

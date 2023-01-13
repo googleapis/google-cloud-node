@@ -243,9 +243,6 @@ export class CatalogServiceClient {
           get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
           additional_bindings: [
             {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',
-            },
-            {
               get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
             },
             {get: '/v2alpha/{name=projects/*/locations/*/operations/*}'},
@@ -328,7 +325,6 @@ export class CatalogServiceClient {
       'updateAttributesConfig',
       'addCatalogAttribute',
       'removeCatalogAttribute',
-      'batchRemoveCatalogAttributes',
       'replaceCatalogAttribute',
     ];
     for (const methodName of catalogServiceStubMethods) {
@@ -762,7 +758,7 @@ export class CatalogServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Full CompletionConfig resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/completionConfig`
+   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/completionConfig
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1401,115 +1397,6 @@ export class CatalogServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.removeCatalogAttribute(
-      request,
-      options,
-      callback
-    );
-  }
-  /**
-   * Removes all specified
-   * {@link google.cloud.retail.v2alpha.CatalogAttribute|CatalogAttribute}s from the
-   * {@link google.cloud.retail.v2alpha.AttributesConfig|AttributesConfig}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.attributesConfig
-   *   Required. The attributes config resource shared by all catalog attributes
-   *   being deleted. Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig`
-   * @param {string[]} request.attributeKeys
-   *   Required. The attribute name keys of the
-   *   {@link google.cloud.retail.v2alpha.CatalogAttribute|CatalogAttribute}s to
-   *   delete. A maximum of 1000 catalog attributes can be deleted in a batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchRemoveCatalogAttributesResponse]{@link google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/catalog_service.batch_remove_catalog_attributes.js</caption>
-   * region_tag:retail_v2alpha_generated_CatalogService_BatchRemoveCatalogAttributes_async
-   */
-  batchRemoveCatalogAttributes(
-    request?: protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesResponse,
-      (
-        | protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  batchRemoveCatalogAttributes(
-    request: protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesResponse,
-      | protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchRemoveCatalogAttributes(
-    request: protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesResponse,
-      | protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchRemoveCatalogAttributes(
-    request?: protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesResponse,
-          | protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesResponse,
-      | protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesResponse,
-      (
-        | protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        attributes_config: request.attributesConfig ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.batchRemoveCatalogAttributes(
       request,
       options,
       callback

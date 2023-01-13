@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the customer repricing config rule to
-   *  delete. Format:
+   *  Required. The resource name of the customer repricing config rule to delete.
+   *  Format:
    *  accounts/{account_id}/customers/{customer_id}/customerRepricingConfigs/{id}.
    */
   // const name = 'abc123'

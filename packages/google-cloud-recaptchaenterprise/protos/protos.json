@@ -342,83 +342,6 @@
                     "AnnotateAssessmentResponse": {
                       "fields": {}
                     },
-                    "EndpointVerificationInfo": {
-                      "oneofs": {
-                        "endpoint": {
-                          "oneof": [
-                            "emailAddress",
-                            "phoneNumber"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "emailAddress": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "phoneNumber": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "requestToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "lastVerificationTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "AccountVerificationInfo": {
-                      "fields": {
-                        "endpoints": {
-                          "rule": "repeated",
-                          "type": "EndpointVerificationInfo",
-                          "id": 1
-                        },
-                        "languageCode": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "latestVerificationResult": {
-                          "type": "Result",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "username": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "deprecated": true
-                          }
-                        }
-                      },
-                      "nested": {
-                        "Result": {
-                          "values": {
-                            "RESULT_UNSPECIFIED": 0,
-                            "SUCCESS_USER_VERIFIED": 1,
-                            "ERROR_USER_NOT_VERIFIED": 2,
-                            "ERROR_SITE_ONBOARDING_INCOMPLETE": 3,
-                            "ERROR_RECIPIENT_NOT_ALLOWED": 4,
-                            "ERROR_RECIPIENT_ABUSE_LIMIT_EXHAUSTED": 5,
-                            "ERROR_CRITICAL_INTERNAL": 6,
-                            "ERROR_CUSTOMER_QUOTA_EXHAUSTED": 7,
-                            "ERROR_VERIFICATION_BYPASSED": 8,
-                            "ERROR_VERDICT_MISMATCH": 9
-                          }
-                        }
-                      }
-                    },
                     "PrivatePasswordLeakVerification": {
                       "fields": {
                         "lookupHashPrefix": {
@@ -482,10 +405,6 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
-                        },
-                        "accountVerification": {
-                          "type": "AccountVerificationInfo",
-                          "id": 5
                         },
                         "accountDefenderAssessment": {
                           "type": "AccountDefenderAssessment",
@@ -585,14 +504,6 @@
                         "hostname": {
                           "type": "string",
                           "id": 4
-                        },
-                        "androidPackageName": {
-                          "type": "string",
-                          "id": 8
-                        },
-                        "iosBundleId": {
-                          "type": "string",
-                          "id": 9
                         },
                         "action": {
                           "type": "string",
@@ -753,13 +664,6 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
-                          }
-                        },
-                        "skipBillingCheck": {
-                          "type": "bool",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
