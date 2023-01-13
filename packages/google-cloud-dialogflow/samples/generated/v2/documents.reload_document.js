@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,8 +35,8 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. The path of gcs source file for reloading document content. For now,
-   *  only gcs uri is supported.
+   *  Optional. The path of gcs source file for reloading document content. For
+   *  now, only gcs uri is supported.
    *  For documents stored in Google Cloud Storage, these URIs must have
    *  the form `gs://<bucket-name>/<object-name>`.
    */
@@ -47,8 +47,8 @@ function main(name) {
    */
   // const importGcsCustomMetadata = true
   /**
-   *  Optional. When enabled, the reload request is to apply partial update to the smart
-   *  messaging allowlist.
+   *  Optional. When enabled, the reload request is to apply partial update to
+   *  the smart messaging allowlist.
    */
   // const smartMessagingPartialUpdate = true
 
