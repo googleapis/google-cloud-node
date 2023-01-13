@@ -16,14 +16,13 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as executions from './executions';
 import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
 const WorkflowsClient = v1.WorkflowsClient;
 type WorkflowsClient = v1.WorkflowsClient;
 
-export {executions, v1, v1beta, WorkflowsClient};
-export default {executions, v1, v1beta, WorkflowsClient};
+export {v1, v1beta, WorkflowsClient};
+export default {v1, v1beta, WorkflowsClient};
 import * as protos from '../protos/protos';
 export {protos};
