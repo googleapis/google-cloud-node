@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, execution) {
-  // [START workflowexecutions_v1beta_generated_Executions_CreateExecution_async]
+function main(patchDeployment) {
+  // [START osconfig_v1beta_generated_OsConfigService_UpdatePatchDeployment_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,34 @@ function main(parent, execution) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the workflow for which an execution should be created.
-   *  Format: projects/{project}/locations/{location}/workflows/{workflow}
-   *  The latest revision of the workflow will be used.
+   *  Required. The patch deployment to Update.
    */
-  // const parent = 'abc123'
+  // const patchDeployment = {}
   /**
-   *  Required. Execution to be created.
+   *  Optional. Field mask that controls which fields of the patch deployment should be
+   *  updated.
    */
-  // const execution = {}
+  // const updateMask = {}
 
-  // Imports the Executions library
-  const {ExecutionsClient} = require('@google-cloud/workflows-executions').v1beta;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const executionsClient = new ExecutionsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callCreateExecution() {
+  async function callUpdatePatchDeployment() {
     // Construct request
     const request = {
-      parent,
-      execution,
+      patchDeployment,
     };
 
     // Run request
-    const response = await executionsClient.createExecution(request);
+    const response = await osconfigClient.updatePatchDeployment(request);
     console.log(response);
   }
 
-  callCreateExecution();
-  // [END workflowexecutions_v1beta_generated_Executions_CreateExecution_async]
+  callUpdatePatchDeployment();
+  // [END osconfig_v1beta_generated_OsConfigService_UpdatePatchDeployment_async]
 }
 
 process.on('unhandledRejection', err => {

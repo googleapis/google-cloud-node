@@ -37,7 +37,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Dashboards_service.create_dashboard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.create_dashboard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.create_dashboard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.create_dashboard.js,samples/README.md)
 
@@ -54,7 +54,7 @@ __Usage:__
 
 ### Dashboards_service.delete_dashboard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.delete_dashboard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.delete_dashboard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.delete_dashboard.js,samples/README.md)
 
@@ -71,7 +71,7 @@ __Usage:__
 
 ### Dashboards_service.get_dashboard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.get_dashboard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.get_dashboard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.get_dashboard.js,samples/README.md)
 
@@ -88,7 +88,7 @@ __Usage:__
 
 ### Dashboards_service.list_dashboards
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.list_dashboards.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.list_dashboards.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.list_dashboards.js,samples/README.md)
 
@@ -105,7 +105,7 @@ __Usage:__
 
 ### Dashboards_service.update_dashboard
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.update_dashboard.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.update_dashboard.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-monitoring-dashboard/samples/generated/v1/dashboards_service.update_dashboard.js,samples/README.md)
 
@@ -122,7 +122,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-monitoring-dashboard/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-monitoring-dashboard/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-monitoring-dashboard/samples/quickstart.js,samples/README.md)
 
@@ -139,7 +139,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-monitoring-dashboard/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-monitoring-dashboard/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-monitoring-dashboard/samples/test/quickstart.js,samples/README.md)
 

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(workflow) {
-  // [START workflows_v1_generated_Workflows_UpdateWorkflow_async]
+function main(parent) {
+  // [START osconfig_v1beta_generated_OsConfigService_ListGuestPolicies_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,35 +29,41 @@ function main(workflow) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Workflow to be updated.
+   *  Required. The resource name of the parent using one of the following forms:
+   *  `projects/{project_number}`.
    */
-  // const workflow = {}
+  // const parent = 'abc123'
   /**
-   *  List of fields to be updated. If not present, the entire workflow
-   *  will be updated.
+   *  The maximum number of guest policies to return.
    */
-  // const updateMask = {}
+  // const pageSize = 1234
+  /**
+   *  A pagination token returned from a previous call to `ListGuestPolicies`
+   *  that indicates where this listing should continue from.
+   */
+  // const pageToken = 'abc123'
 
-  // Imports the Workflows library
-  const {WorkflowsClient} = require('@google-cloud/workflows').v1;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const workflowsClient = new WorkflowsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callUpdateWorkflow() {
+  async function callListGuestPolicies() {
     // Construct request
     const request = {
-      workflow,
+      parent,
     };
 
     // Run request
-    const [operation] = await workflowsClient.updateWorkflow(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await osconfigClient.listGuestPoliciesAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callUpdateWorkflow();
-  // [END workflows_v1_generated_Workflows_UpdateWorkflow_async]
+  callListGuestPolicies();
+  // [END osconfig_v1beta_generated_OsConfigService_ListGuestPolicies_async]
 }
 
 process.on('unhandledRejection', err => {

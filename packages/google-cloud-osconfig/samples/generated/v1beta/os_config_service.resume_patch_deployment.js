@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, workflow, workflowId) {
-  // [START workflows_v1_generated_Workflows_CreateWorkflow_async]
+function main(name) {
+  // [START osconfig_v1beta_generated_OsConfigService_ResumePatchDeployment_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,47 +29,30 @@ function main(parent, workflow, workflowId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Project and location in which the workflow should be created.
-   *  Format:  projects/{project}/locations/{location}
+   *  Required. The resource name of the patch deployment in the form
+   *  `projects/* /patchDeployments/*`.
    */
-  // const parent = 'abc123'
-  /**
-   *  Required. Workflow to be created.
-   */
-  // const workflow = {}
-  /**
-   *  Required. The ID of the workflow to be created. It has to fulfill the
-   *  following requirements:
-   *  * Must contain only letters, numbers, underscores and hyphens.
-   *  * Must start with a letter.
-   *  * Must be between 1-64 characters.
-   *  * Must end with a number or a letter.
-   *  * Must be unique within the customer project and location.
-   */
-  // const workflowId = 'abc123'
+  // const name = 'abc123'
 
-  // Imports the Workflows library
-  const {WorkflowsClient} = require('@google-cloud/workflows').v1;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const workflowsClient = new WorkflowsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callCreateWorkflow() {
+  async function callResumePatchDeployment() {
     // Construct request
     const request = {
-      parent,
-      workflow,
-      workflowId,
+      name,
     };
 
     // Run request
-    const [operation] = await workflowsClient.createWorkflow(request);
-    const [response] = await operation.promise();
+    const response = await osconfigClient.resumePatchDeployment(request);
     console.log(response);
   }
 
-  callCreateWorkflow();
-  // [END workflows_v1_generated_Workflows_CreateWorkflow_async]
+  callResumePatchDeployment();
+  // [END osconfig_v1beta_generated_OsConfigService_ResumePatchDeployment_async]
 }
 
 process.on('unhandledRejection', err => {

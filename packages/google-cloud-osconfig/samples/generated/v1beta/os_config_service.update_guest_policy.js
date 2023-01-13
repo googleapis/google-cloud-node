@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, workflow, workflowId) {
-  // [START workflows_v1beta_generated_Workflows_CreateWorkflow_async]
+function main(guestPolicy) {
+  // [START osconfig_v1beta_generated_OsConfigService_UpdateGuestPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,47 +29,34 @@ function main(parent, workflow, workflowId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Project and location in which the workflow should be created.
-   *  Format:  projects/{project}/locations/{location}
+   *  Required. The updated GuestPolicy.
    */
-  // const parent = 'abc123'
+  // const guestPolicy = {}
   /**
-   *  Required. Workflow to be created.
+   *  Field mask that controls which fields of the guest policy should be
+   *  updated.
    */
-  // const workflow = {}
-  /**
-   *  Required. The ID of the workflow to be created. It has to fulfill the
-   *  following requirements:
-   *  * Must contain only letters, numbers, underscores and hyphens.
-   *  * Must start with a letter.
-   *  * Must be between 1-64 characters.
-   *  * Must end with a number or a letter.
-   *  * Must be unique within the customer project and location.
-   */
-  // const workflowId = 'abc123'
+  // const updateMask = {}
 
-  // Imports the Workflows library
-  const {WorkflowsClient} = require('@google-cloud/workflows').v1beta;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const workflowsClient = new WorkflowsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callCreateWorkflow() {
+  async function callUpdateGuestPolicy() {
     // Construct request
     const request = {
-      parent,
-      workflow,
-      workflowId,
+      guestPolicy,
     };
 
     // Run request
-    const [operation] = await workflowsClient.createWorkflow(request);
-    const [response] = await operation.promise();
+    const response = await osconfigClient.updateGuestPolicy(request);
     console.log(response);
   }
 
-  callCreateWorkflow();
-  // [END workflows_v1beta_generated_Workflows_CreateWorkflow_async]
+  callUpdateGuestPolicy();
+  // [END osconfig_v1beta_generated_OsConfigService_UpdateGuestPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(workflow) {
-  // [START workflows_v1beta_generated_Workflows_UpdateWorkflow_async]
+function main(name) {
+  // [START osconfig_v1beta_generated_OsConfigService_CancelPatchJob_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,35 +29,29 @@ function main(workflow) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Workflow to be updated.
+   *  Required. Name of the patch in the form `projects/* /patchJobs/*`
    */
-  // const workflow = {}
-  /**
-   *  List of fields to be updated. If not present, the entire workflow
-   *  will be updated.
-   */
-  // const updateMask = {}
+  // const name = 'abc123'
 
-  // Imports the Workflows library
-  const {WorkflowsClient} = require('@google-cloud/workflows').v1beta;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const workflowsClient = new WorkflowsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callUpdateWorkflow() {
+  async function callCancelPatchJob() {
     // Construct request
     const request = {
-      workflow,
+      name,
     };
 
     // Run request
-    const [operation] = await workflowsClient.updateWorkflow(request);
-    const [response] = await operation.promise();
+    const response = await osconfigClient.cancelPatchJob(request);
     console.log(response);
   }
 
-  callUpdateWorkflow();
-  // [END workflows_v1beta_generated_Workflows_UpdateWorkflow_async]
+  callCancelPatchJob();
+  // [END osconfig_v1beta_generated_OsConfigService_CancelPatchJob_async]
 }
 
 process.on('unhandledRejection', err => {

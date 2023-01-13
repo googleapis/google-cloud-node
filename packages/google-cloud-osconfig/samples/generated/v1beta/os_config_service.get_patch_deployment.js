@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START workflows_v1_generated_Workflows_DeleteWorkflow_async]
+  // [START osconfig_v1beta_generated_OsConfigService_GetPatchDeployment_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,30 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the workflow to be deleted.
-   *  Format: projects/{project}/locations/{location}/workflows/{workflow}
+   *  Required. The resource name of the patch deployment in the form
+   *  `projects/* /patchDeployments/*`.
    */
   // const name = 'abc123'
 
-  // Imports the Workflows library
-  const {WorkflowsClient} = require('@google-cloud/workflows').v1;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const workflowsClient = new WorkflowsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callDeleteWorkflow() {
+  async function callGetPatchDeployment() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await workflowsClient.deleteWorkflow(request);
-    const [response] = await operation.promise();
+    const response = await osconfigClient.getPatchDeployment(request);
     console.log(response);
   }
 
-  callDeleteWorkflow();
-  // [END workflows_v1_generated_Workflows_DeleteWorkflow_async]
+  callGetPatchDeployment();
+  // [END osconfig_v1beta_generated_OsConfigService_GetPatchDeployment_async]
 }
 
 process.on('unhandledRejection', err => {

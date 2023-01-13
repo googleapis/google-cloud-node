@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, execution) {
-  // [START workflowexecutions_v1_generated_Executions_CreateExecution_async]
+function main(name) {
+  // [START osconfig_v1beta_generated_OsConfigService_DeletePatchDeployment_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,30 @@ function main(parent, execution) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the workflow for which an execution should be created.
-   *  Format: projects/{project}/locations/{location}/workflows/{workflow}
-   *  The latest revision of the workflow will be used.
+   *  Required. The resource name of the patch deployment in the form
+   *  `projects/* /patchDeployments/*`.
    */
-  // const parent = 'abc123'
-  /**
-   *  Required. Execution to be created.
-   */
-  // const execution = {}
+  // const name = 'abc123'
 
-  // Imports the Executions library
-  const {ExecutionsClient} = require('@google-cloud/workflow-executions').v1;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const executionsClient = new ExecutionsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callCreateExecution() {
+  async function callDeletePatchDeployment() {
     // Construct request
     const request = {
-      parent,
-      execution,
+      name,
     };
 
     // Run request
-    const response = await executionsClient.createExecution(request);
+    const response = await osconfigClient.deletePatchDeployment(request);
     console.log(response);
   }
 
-  callCreateExecution();
-  // [END workflowexecutions_v1_generated_Executions_CreateExecution_async]
+  callDeletePatchDeployment();
+  // [END osconfig_v1beta_generated_OsConfigService_DeletePatchDeployment_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -740,10 +740,6 @@
                             "(google.api.resource_reference).child_type": "cloudscheduler.googleapis.com/Job"
                           }
                         },
-                        "filter": {
-                          "type": "string",
-                          "id": 4
-                        },
                         "pageSize": {
                           "type": "int32",
                           "id": 5
@@ -751,10 +747,6 @@
                         "pageToken": {
                           "type": "string",
                           "id": 6
-                        },
-                        "legacyAppEngineCron": {
-                          "type": "bool",
-                          "id": 7
                         }
                       }
                     },
@@ -826,10 +818,6 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "cloudscheduler.googleapis.com/Job"
                           }
-                        },
-                        "legacyAppEngineCron": {
-                          "type": "bool",
-                          "id": 2
                         }
                       }
                     },
@@ -866,10 +854,6 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "cloudscheduler.googleapis.com/Job"
                           }
-                        },
-                        "legacyAppEngineCron": {
-                          "type": "bool",
-                          "id": 2
                         }
                       }
                     },
@@ -943,13 +927,6 @@
                         "attemptDeadline": {
                           "type": "google.protobuf.Duration",
                           "id": 22
-                        },
-                        "legacyAppEngineCron": {
-                          "type": "bool",
-                          "id": 23,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
                         }
                       },
                       "nested": {

@@ -60,9 +60,8 @@ function main(catalog, query) {
    */
   // const languageCodes = 'abc123'
   /**
-   *  The device type context for completion suggestions. We recommend that you
-   *  leave this field empty.
-   *  It can apply different suggestions on different device types, e.g.
+   *  The device type context for completion suggestions.
+   *  It is useful to apply different suggestions on different device types, e.g.
    *  `DESKTOP`, `MOBILE`. If it is empty, the suggestions are across all device
    *  types.
    *  Supported formats:
@@ -93,11 +92,6 @@ function main(catalog, query) {
    *  capped by 20.
    */
   // const maxSuggestions = 1234
-  /**
-   *  If true, attribute suggestions are enabled and provided in response.
-   *  This field is only available for "cloud-retail" dataset.
-   */
-  // const enableAttributeSuggestions = true
 
   // Imports the Retail library
   const {CompletionServiceClient} = require('@google-cloud/retail').v2alpha;

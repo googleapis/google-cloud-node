@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START workflowexecutions_v1_generated_Executions_CancelExecution_async]
+function main(parent, patchDeploymentId, patchDeployment) {
+  // [START osconfig_v1beta_generated_OsConfigService_CreatePatchDeployment_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,45 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the execution to be cancelled.
-   *  Format:
-   *  projects/{project}/locations/{location}/workflows/{workflow}/executions/{execution}
+   *  Required. The project to apply this patch deployment to in the form `projects/*`.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Required. A name for the patch deployment in the project. When creating a name
+   *  the following rules apply:
+   *  * Must contain only lowercase letters, numbers, and hyphens.
+   *  * Must start with a letter.
+   *  * Must be between 1-63 characters.
+   *  * Must end with a number or a letter.
+   *  * Must be unique within the project.
+   */
+  // const patchDeploymentId = 'abc123'
+  /**
+   *  Required. The patch deployment to create.
+   */
+  // const patchDeployment = {}
 
-  // Imports the Executions library
-  const {ExecutionsClient} = require('@google-cloud/workflow-executions').v1;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const executionsClient = new ExecutionsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callCancelExecution() {
+  async function callCreatePatchDeployment() {
     // Construct request
     const request = {
-      name,
+      parent,
+      patchDeploymentId,
+      patchDeployment,
     };
 
     // Run request
-    const response = await executionsClient.cancelExecution(request);
+    const response = await osconfigClient.createPatchDeployment(request);
     console.log(response);
   }
 
-  callCancelExecution();
-  // [END workflowexecutions_v1_generated_Executions_CancelExecution_async]
+  callCreatePatchDeployment();
+  // [END osconfig_v1beta_generated_OsConfigService_CreatePatchDeployment_async]
 }
 
 process.on('unhandledRejection', err => {

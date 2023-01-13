@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START workflowexecutions_v1_generated_Executions_GetExecution_async]
+function main(parent, guestPolicyId, guestPolicy) {
+  // [START osconfig_v1beta_generated_OsConfigService_CreateGuestPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,46 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the execution to be retrieved.
-   *  Format:
-   *  projects/{project}/locations/{location}/workflows/{workflow}/executions/{execution}
+   *  Required. The resource name of the parent using one of the following forms:
+   *  `projects/{project_number}`.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Optional. A view defining which fields should be filled in the returned execution.
-   *  The API will default to the FULL view.
+   *  Required. The logical name of the guest policy in the project
+   *  with the following restrictions:
+   *  * Must contain only lowercase letters, numbers, and hyphens.
+   *  * Must start with a letter.
+   *  * Must be between 1-63 characters.
+   *  * Must end with a number or a letter.
+   *  * Must be unique within the project.
    */
-  // const view = {}
+  // const guestPolicyId = 'abc123'
+  /**
+   *  Required. The GuestPolicy to create.
+   */
+  // const guestPolicy = {}
 
-  // Imports the Executions library
-  const {ExecutionsClient} = require('@google-cloud/workflow-executions').v1;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const executionsClient = new ExecutionsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callGetExecution() {
+  async function callCreateGuestPolicy() {
     // Construct request
     const request = {
-      name,
+      parent,
+      guestPolicyId,
+      guestPolicy,
     };
 
     // Run request
-    const response = await executionsClient.getExecution(request);
+    const response = await osconfigClient.createGuestPolicy(request);
     console.log(response);
   }
 
-  callGetExecution();
-  // [END workflowexecutions_v1_generated_Executions_GetExecution_async]
+  callCreateGuestPolicy();
+  // [END osconfig_v1beta_generated_OsConfigService_CreateGuestPolicy_async]
 }
 
 process.on('unhandledRejection', err => {
