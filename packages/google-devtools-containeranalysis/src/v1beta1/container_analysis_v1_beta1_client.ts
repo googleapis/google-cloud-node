@@ -40,7 +40,7 @@ const version = require('../../../package.json').version;
 /**
  *  Retrieves analysis results of Cloud components such as Docker container
  *  images. The Container Analysis API is an implementation of the
- *  [Grafeas](grafeas.io) API.
+ *  [Grafeas](https://grafeas.io) API.
  *
  *  Analysis results are stored as a series of occurrences. An `Occurrence`
  *  contains information about a specific analysis instance on a resource. An
@@ -132,9 +132,6 @@ export class ContainerAnalysisV1Beta1Client {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
-
-    // Request numeric enum values if REST transport is used.
-    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {

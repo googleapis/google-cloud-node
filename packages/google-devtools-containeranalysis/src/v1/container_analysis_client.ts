@@ -18,6 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
+import {GrafeasClient} from '@google-cloud/grafeas';
 import type {
   Callback,
   CallOptions,
@@ -129,9 +130,6 @@ export class ContainerAnalysisClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
-
-    // Request numeric enum values if REST transport is used.
-    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -848,5 +846,18 @@ export class ContainerAnalysisClient {
       });
     }
     return Promise.resolve();
+  }
+
+  /**
+   * Returns an instance of a @google-cloud/grafeas client, configured to
+   * connect to Google Cloud's Container Analysis API. For documentation
+   * on this client, see:
+   * <a href="https://googleapis.dev/nodejs/grafeas/latest/index.html">https://googleapis.dev/nodejs/grafeas/latest/index.html</a>
+   *
+   * @returns {GrafeasClient} - An instance of a Grafeas client.
+   *
+   */
+  getGrafeasClient() {
+    return new GrafeasClient(this._opts as {});
   }
 }
