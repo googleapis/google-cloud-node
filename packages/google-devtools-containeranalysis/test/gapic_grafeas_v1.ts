@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as grafeasv1beta1Module from '../src';
+import * as grafeasModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -127,66 +127,64 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta1.GrafeasV1Beta1Client', () => {
+describe('v1.GrafeasClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client.servicePath;
+      const servicePath = grafeasModule.v1.GrafeasClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client.apiEndpoint;
+      const apiEndpoint = grafeasModule.v1.GrafeasClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port = grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client.port;
+      const port = grafeasModule.v1.GrafeasClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client();
+      const client = new grafeasModule.v1.GrafeasClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.grafeasV1Beta1Stub, undefined);
+      assert.strictEqual(client.grafeasStub, undefined);
       await client.initialize();
-      assert(client.grafeasV1Beta1Stub);
+      assert(client.grafeasStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
-      assert(client.grafeasV1Beta1Stub);
+      assert(client.grafeasStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.grafeasV1Beta1Stub, undefined);
+      assert.strictEqual(client.grafeasStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -194,7 +192,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -206,7 +204,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -229,22 +227,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
   describe('getOccurrence', () => {
     it('invokes getOccurrence without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetOccurrenceRequest()
+        new protos.grafeas.v1.GetOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetOccurrenceRequest',
+        '.grafeas.v1.GetOccurrenceRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.Occurrence()
+        new protos.grafeas.v1.Occurrence()
       );
       client.innerApiCalls.getOccurrence = stubSimpleCall(expectedResponse);
       const [response] = await client.getOccurrence(request);
@@ -260,22 +258,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes getOccurrence without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetOccurrenceRequest()
+        new protos.grafeas.v1.GetOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetOccurrenceRequest',
+        '.grafeas.v1.GetOccurrenceRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.Occurrence()
+        new protos.grafeas.v1.Occurrence()
       );
       client.innerApiCalls.getOccurrence =
         stubSimpleCallWithCallback(expectedResponse);
@@ -284,7 +282,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.grafeas.v1beta1.IOccurrence | null
+            result?: protos.grafeas.v1.IOccurrence | null
           ) => {
             if (err) {
               reject(err);
@@ -307,16 +305,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes getOccurrence with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetOccurrenceRequest()
+        new protos.grafeas.v1.GetOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetOccurrenceRequest',
+        '.grafeas.v1.GetOccurrenceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -338,16 +336,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes getOccurrence with closed client', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetOccurrenceRequest()
+        new protos.grafeas.v1.GetOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetOccurrenceRequest',
+        '.grafeas.v1.GetOccurrenceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -359,16 +357,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
   describe('deleteOccurrence', () => {
     it('invokes deleteOccurrence without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.DeleteOccurrenceRequest()
+        new protos.grafeas.v1.DeleteOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.DeleteOccurrenceRequest',
+        '.grafeas.v1.DeleteOccurrenceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -390,16 +388,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes deleteOccurrence without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.DeleteOccurrenceRequest()
+        new protos.grafeas.v1.DeleteOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.DeleteOccurrenceRequest',
+        '.grafeas.v1.DeleteOccurrenceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -437,16 +435,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes deleteOccurrence with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.DeleteOccurrenceRequest()
+        new protos.grafeas.v1.DeleteOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.DeleteOccurrenceRequest',
+        '.grafeas.v1.DeleteOccurrenceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -468,16 +466,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes deleteOccurrence with closed client', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.DeleteOccurrenceRequest()
+        new protos.grafeas.v1.DeleteOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.DeleteOccurrenceRequest',
+        '.grafeas.v1.DeleteOccurrenceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -489,22 +487,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
   describe('createOccurrence', () => {
     it('invokes createOccurrence without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.CreateOccurrenceRequest()
+        new protos.grafeas.v1.CreateOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.CreateOccurrenceRequest',
+        '.grafeas.v1.CreateOccurrenceRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.Occurrence()
+        new protos.grafeas.v1.Occurrence()
       );
       client.innerApiCalls.createOccurrence = stubSimpleCall(expectedResponse);
       const [response] = await client.createOccurrence(request);
@@ -520,22 +518,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes createOccurrence without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.CreateOccurrenceRequest()
+        new protos.grafeas.v1.CreateOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.CreateOccurrenceRequest',
+        '.grafeas.v1.CreateOccurrenceRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.Occurrence()
+        new protos.grafeas.v1.Occurrence()
       );
       client.innerApiCalls.createOccurrence =
         stubSimpleCallWithCallback(expectedResponse);
@@ -544,7 +542,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.grafeas.v1beta1.IOccurrence | null
+            result?: protos.grafeas.v1.IOccurrence | null
           ) => {
             if (err) {
               reject(err);
@@ -567,16 +565,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes createOccurrence with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.CreateOccurrenceRequest()
+        new protos.grafeas.v1.CreateOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.CreateOccurrenceRequest',
+        '.grafeas.v1.CreateOccurrenceRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -598,16 +596,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes createOccurrence with closed client', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.CreateOccurrenceRequest()
+        new protos.grafeas.v1.CreateOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.CreateOccurrenceRequest',
+        '.grafeas.v1.CreateOccurrenceRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -619,22 +617,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
   describe('batchCreateOccurrences', () => {
     it('invokes batchCreateOccurrences without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.BatchCreateOccurrencesRequest()
+        new protos.grafeas.v1.BatchCreateOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.BatchCreateOccurrencesRequest',
+        '.grafeas.v1.BatchCreateOccurrencesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.BatchCreateOccurrencesResponse()
+        new protos.grafeas.v1.BatchCreateOccurrencesResponse()
       );
       client.innerApiCalls.batchCreateOccurrences =
         stubSimpleCall(expectedResponse);
@@ -651,22 +649,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes batchCreateOccurrences without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.BatchCreateOccurrencesRequest()
+        new protos.grafeas.v1.BatchCreateOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.BatchCreateOccurrencesRequest',
+        '.grafeas.v1.BatchCreateOccurrencesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.BatchCreateOccurrencesResponse()
+        new protos.grafeas.v1.BatchCreateOccurrencesResponse()
       );
       client.innerApiCalls.batchCreateOccurrences =
         stubSimpleCallWithCallback(expectedResponse);
@@ -675,7 +673,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.grafeas.v1beta1.IBatchCreateOccurrencesResponse | null
+            result?: protos.grafeas.v1.IBatchCreateOccurrencesResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -698,16 +696,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes batchCreateOccurrences with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.BatchCreateOccurrencesRequest()
+        new protos.grafeas.v1.BatchCreateOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.BatchCreateOccurrencesRequest',
+        '.grafeas.v1.BatchCreateOccurrencesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -732,16 +730,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes batchCreateOccurrences with closed client', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.BatchCreateOccurrencesRequest()
+        new protos.grafeas.v1.BatchCreateOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.BatchCreateOccurrencesRequest',
+        '.grafeas.v1.BatchCreateOccurrencesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -756,22 +754,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
   describe('updateOccurrence', () => {
     it('invokes updateOccurrence without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.UpdateOccurrenceRequest()
+        new protos.grafeas.v1.UpdateOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.UpdateOccurrenceRequest',
+        '.grafeas.v1.UpdateOccurrenceRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.Occurrence()
+        new protos.grafeas.v1.Occurrence()
       );
       client.innerApiCalls.updateOccurrence = stubSimpleCall(expectedResponse);
       const [response] = await client.updateOccurrence(request);
@@ -787,22 +785,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes updateOccurrence without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.UpdateOccurrenceRequest()
+        new protos.grafeas.v1.UpdateOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.UpdateOccurrenceRequest',
+        '.grafeas.v1.UpdateOccurrenceRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.Occurrence()
+        new protos.grafeas.v1.Occurrence()
       );
       client.innerApiCalls.updateOccurrence =
         stubSimpleCallWithCallback(expectedResponse);
@@ -811,7 +809,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.grafeas.v1beta1.IOccurrence | null
+            result?: protos.grafeas.v1.IOccurrence | null
           ) => {
             if (err) {
               reject(err);
@@ -834,16 +832,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes updateOccurrence with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.UpdateOccurrenceRequest()
+        new protos.grafeas.v1.UpdateOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.UpdateOccurrenceRequest',
+        '.grafeas.v1.UpdateOccurrenceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -865,16 +863,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes updateOccurrence with closed client', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.UpdateOccurrenceRequest()
+        new protos.grafeas.v1.UpdateOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.UpdateOccurrenceRequest',
+        '.grafeas.v1.UpdateOccurrenceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -886,22 +884,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
   describe('getOccurrenceNote', () => {
     it('invokes getOccurrenceNote without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetOccurrenceNoteRequest()
+        new protos.grafeas.v1.GetOccurrenceNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetOccurrenceNoteRequest',
+        '.grafeas.v1.GetOccurrenceNoteRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.Note()
+        new protos.grafeas.v1.Note()
       );
       client.innerApiCalls.getOccurrenceNote = stubSimpleCall(expectedResponse);
       const [response] = await client.getOccurrenceNote(request);
@@ -917,32 +915,29 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes getOccurrenceNote without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetOccurrenceNoteRequest()
+        new protos.grafeas.v1.GetOccurrenceNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetOccurrenceNoteRequest',
+        '.grafeas.v1.GetOccurrenceNoteRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.Note()
+        new protos.grafeas.v1.Note()
       );
       client.innerApiCalls.getOccurrenceNote =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getOccurrenceNote(
           request,
-          (
-            err?: Error | null,
-            result?: protos.grafeas.v1beta1.INote | null
-          ) => {
+          (err?: Error | null, result?: protos.grafeas.v1.INote | null) => {
             if (err) {
               reject(err);
             } else {
@@ -964,16 +959,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes getOccurrenceNote with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetOccurrenceNoteRequest()
+        new protos.grafeas.v1.GetOccurrenceNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetOccurrenceNoteRequest',
+        '.grafeas.v1.GetOccurrenceNoteRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -995,16 +990,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes getOccurrenceNote with closed client', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetOccurrenceNoteRequest()
+        new protos.grafeas.v1.GetOccurrenceNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetOccurrenceNoteRequest',
+        '.grafeas.v1.GetOccurrenceNoteRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1016,22 +1011,21 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
   describe('getNote', () => {
     it('invokes getNote without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetNoteRequest()
+        new protos.grafeas.v1.GetNoteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetNoteRequest',
-        ['name']
-      );
+      const defaultValue1 = getTypeDefaultValue('.grafeas.v1.GetNoteRequest', [
+        'name',
+      ]);
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.Note()
+        new protos.grafeas.v1.Note()
       );
       client.innerApiCalls.getNote = stubSimpleCall(expectedResponse);
       const [response] = await client.getNote(request);
@@ -1047,32 +1041,28 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes getNote without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetNoteRequest()
+        new protos.grafeas.v1.GetNoteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetNoteRequest',
-        ['name']
-      );
+      const defaultValue1 = getTypeDefaultValue('.grafeas.v1.GetNoteRequest', [
+        'name',
+      ]);
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.Note()
+        new protos.grafeas.v1.Note()
       );
       client.innerApiCalls.getNote =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getNote(
           request,
-          (
-            err?: Error | null,
-            result?: protos.grafeas.v1beta1.INote | null
-          ) => {
+          (err?: Error | null, result?: protos.grafeas.v1.INote | null) => {
             if (err) {
               reject(err);
             } else {
@@ -1094,18 +1084,17 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes getNote with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetNoteRequest()
+        new protos.grafeas.v1.GetNoteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetNoteRequest',
-        ['name']
-      );
+      const defaultValue1 = getTypeDefaultValue('.grafeas.v1.GetNoteRequest', [
+        'name',
+      ]);
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1122,18 +1111,17 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes getNote with closed client', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetNoteRequest()
+        new protos.grafeas.v1.GetNoteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetNoteRequest',
-        ['name']
-      );
+      const defaultValue1 = getTypeDefaultValue('.grafeas.v1.GetNoteRequest', [
+        'name',
+      ]);
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1143,16 +1131,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
   describe('deleteNote', () => {
     it('invokes deleteNote without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.DeleteNoteRequest()
+        new protos.grafeas.v1.DeleteNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.DeleteNoteRequest',
+        '.grafeas.v1.DeleteNoteRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1174,16 +1162,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes deleteNote without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.DeleteNoteRequest()
+        new protos.grafeas.v1.DeleteNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.DeleteNoteRequest',
+        '.grafeas.v1.DeleteNoteRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1221,16 +1209,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes deleteNote with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.DeleteNoteRequest()
+        new protos.grafeas.v1.DeleteNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.DeleteNoteRequest',
+        '.grafeas.v1.DeleteNoteRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1252,16 +1240,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes deleteNote with closed client', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.DeleteNoteRequest()
+        new protos.grafeas.v1.DeleteNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.DeleteNoteRequest',
+        '.grafeas.v1.DeleteNoteRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1273,22 +1261,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
   describe('createNote', () => {
     it('invokes createNote without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.CreateNoteRequest()
+        new protos.grafeas.v1.CreateNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.CreateNoteRequest',
+        '.grafeas.v1.CreateNoteRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.Note()
+        new protos.grafeas.v1.Note()
       );
       client.innerApiCalls.createNote = stubSimpleCall(expectedResponse);
       const [response] = await client.createNote(request);
@@ -1304,32 +1292,29 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes createNote without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.CreateNoteRequest()
+        new protos.grafeas.v1.CreateNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.CreateNoteRequest',
+        '.grafeas.v1.CreateNoteRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.Note()
+        new protos.grafeas.v1.Note()
       );
       client.innerApiCalls.createNote =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createNote(
           request,
-          (
-            err?: Error | null,
-            result?: protos.grafeas.v1beta1.INote | null
-          ) => {
+          (err?: Error | null, result?: protos.grafeas.v1.INote | null) => {
             if (err) {
               reject(err);
             } else {
@@ -1351,16 +1336,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes createNote with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.CreateNoteRequest()
+        new protos.grafeas.v1.CreateNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.CreateNoteRequest',
+        '.grafeas.v1.CreateNoteRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1382,16 +1367,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes createNote with closed client', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.CreateNoteRequest()
+        new protos.grafeas.v1.CreateNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.CreateNoteRequest',
+        '.grafeas.v1.CreateNoteRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1403,22 +1388,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
   describe('batchCreateNotes', () => {
     it('invokes batchCreateNotes without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.BatchCreateNotesRequest()
+        new protos.grafeas.v1.BatchCreateNotesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.BatchCreateNotesRequest',
+        '.grafeas.v1.BatchCreateNotesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.BatchCreateNotesResponse()
+        new protos.grafeas.v1.BatchCreateNotesResponse()
       );
       client.innerApiCalls.batchCreateNotes = stubSimpleCall(expectedResponse);
       const [response] = await client.batchCreateNotes(request);
@@ -1434,22 +1419,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes batchCreateNotes without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.BatchCreateNotesRequest()
+        new protos.grafeas.v1.BatchCreateNotesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.BatchCreateNotesRequest',
+        '.grafeas.v1.BatchCreateNotesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.BatchCreateNotesResponse()
+        new protos.grafeas.v1.BatchCreateNotesResponse()
       );
       client.innerApiCalls.batchCreateNotes =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1458,7 +1443,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.grafeas.v1beta1.IBatchCreateNotesResponse | null
+            result?: protos.grafeas.v1.IBatchCreateNotesResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -1481,16 +1466,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes batchCreateNotes with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.BatchCreateNotesRequest()
+        new protos.grafeas.v1.BatchCreateNotesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.BatchCreateNotesRequest',
+        '.grafeas.v1.BatchCreateNotesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1512,16 +1497,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes batchCreateNotes with closed client', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.BatchCreateNotesRequest()
+        new protos.grafeas.v1.BatchCreateNotesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.BatchCreateNotesRequest',
+        '.grafeas.v1.BatchCreateNotesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1533,22 +1518,22 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
   describe('updateNote', () => {
     it('invokes updateNote without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.UpdateNoteRequest()
+        new protos.grafeas.v1.UpdateNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.UpdateNoteRequest',
+        '.grafeas.v1.UpdateNoteRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.Note()
+        new protos.grafeas.v1.Note()
       );
       client.innerApiCalls.updateNote = stubSimpleCall(expectedResponse);
       const [response] = await client.updateNote(request);
@@ -1564,32 +1549,29 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes updateNote without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.UpdateNoteRequest()
+        new protos.grafeas.v1.UpdateNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.UpdateNoteRequest',
+        '.grafeas.v1.UpdateNoteRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.Note()
+        new protos.grafeas.v1.Note()
       );
       client.innerApiCalls.updateNote =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateNote(
           request,
-          (
-            err?: Error | null,
-            result?: protos.grafeas.v1beta1.INote | null
-          ) => {
+          (err?: Error | null, result?: protos.grafeas.v1.INote | null) => {
             if (err) {
               reject(err);
             } else {
@@ -1611,16 +1593,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes updateNote with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.UpdateNoteRequest()
+        new protos.grafeas.v1.UpdateNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.UpdateNoteRequest',
+        '.grafeas.v1.UpdateNoteRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1642,16 +1624,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes updateNote with closed client', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.UpdateNoteRequest()
+        new protos.grafeas.v1.UpdateNoteRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.UpdateNoteRequest',
+        '.grafeas.v1.UpdateNoteRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1661,165 +1643,26 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
   });
 
-  describe('getVulnerabilityOccurrencesSummary', () => {
-    it('invokes getVulnerabilityOccurrencesSummary without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetVulnerabilityOccurrencesSummaryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetVulnerabilityOccurrencesSummaryRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.VulnerabilityOccurrencesSummary()
-      );
-      client.innerApiCalls.getVulnerabilityOccurrencesSummary =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getVulnerabilityOccurrencesSummary(
-        request
-      );
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVulnerabilityOccurrencesSummary as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVulnerabilityOccurrencesSummary as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVulnerabilityOccurrencesSummary without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetVulnerabilityOccurrencesSummaryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetVulnerabilityOccurrencesSummaryRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.grafeas.v1beta1.VulnerabilityOccurrencesSummary()
-      );
-      client.innerApiCalls.getVulnerabilityOccurrencesSummary =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getVulnerabilityOccurrencesSummary(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.grafeas.v1beta1.IVulnerabilityOccurrencesSummary | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVulnerabilityOccurrencesSummary as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVulnerabilityOccurrencesSummary as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVulnerabilityOccurrencesSummary with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetVulnerabilityOccurrencesSummaryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetVulnerabilityOccurrencesSummaryRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getVulnerabilityOccurrencesSummary = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getVulnerabilityOccurrencesSummary(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getVulnerabilityOccurrencesSummary as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVulnerabilityOccurrencesSummary as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVulnerabilityOccurrencesSummary with closed client', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.GetVulnerabilityOccurrencesSummaryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.GetVulnerabilityOccurrencesSummaryRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.getVulnerabilityOccurrencesSummary(request),
-        expectedError
-      );
-    });
-  });
-
   describe('listOccurrences', () => {
     it('invokes listOccurrences without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListOccurrencesRequest()
+        new protos.grafeas.v1.ListOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListOccurrencesRequest',
+        '.grafeas.v1.ListOccurrencesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
       client.innerApiCalls.listOccurrences = stubSimpleCall(expectedResponse);
       const [response] = await client.listOccurrences(request);
@@ -1835,24 +1678,24 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes listOccurrences without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListOccurrencesRequest()
+        new protos.grafeas.v1.ListOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListOccurrencesRequest',
+        '.grafeas.v1.ListOccurrencesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
       client.innerApiCalls.listOccurrences =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1861,7 +1704,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.grafeas.v1beta1.IOccurrence[] | null
+            result?: protos.grafeas.v1.IOccurrence[] | null
           ) => {
             if (err) {
               reject(err);
@@ -1884,16 +1727,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes listOccurrences with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListOccurrencesRequest()
+        new protos.grafeas.v1.ListOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListOccurrencesRequest',
+        '.grafeas.v1.ListOccurrencesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1915,31 +1758,31 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes listOccurrencesStream without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListOccurrencesRequest()
+        new protos.grafeas.v1.ListOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListOccurrencesRequest',
+        '.grafeas.v1.ListOccurrencesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
       client.descriptors.page.listOccurrences.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listOccurrencesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.grafeas.v1beta1.Occurrence[] = [];
-        stream.on('data', (response: protos.grafeas.v1beta1.Occurrence) => {
+        const responses: protos.grafeas.v1.Occurrence[] = [];
+        stream.on('data', (response: protos.grafeas.v1.Occurrence) => {
           responses.push(response);
         });
         stream.on('end', () => {
@@ -1966,16 +1809,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes listOccurrencesStream with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListOccurrencesRequest()
+        new protos.grafeas.v1.ListOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListOccurrencesRequest',
+        '.grafeas.v1.ListOccurrencesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1985,8 +1828,8 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         stubPageStreamingCall(undefined, expectedError);
       const stream = client.listOccurrencesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.grafeas.v1beta1.Occurrence[] = [];
-        stream.on('data', (response: protos.grafeas.v1beta1.Occurrence) => {
+        const responses: protos.grafeas.v1.Occurrence[] = [];
+        stream.on('data', (response: protos.grafeas.v1.Occurrence) => {
           responses.push(response);
         });
         stream.on('end', () => {
@@ -2012,28 +1855,28 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('uses async iteration with listOccurrences without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListOccurrencesRequest()
+        new protos.grafeas.v1.ListOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListOccurrencesRequest',
+        '.grafeas.v1.ListOccurrencesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
       client.descriptors.page.listOccurrences.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.grafeas.v1beta1.IOccurrence[] = [];
+      const responses: protos.grafeas.v1.IOccurrence[] = [];
       const iterable = client.listOccurrencesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2055,16 +1898,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('uses async iteration with listOccurrences with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListOccurrencesRequest()
+        new protos.grafeas.v1.ListOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListOccurrencesRequest',
+        '.grafeas.v1.ListOccurrencesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2074,7 +1917,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listOccurrencesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.grafeas.v1beta1.IOccurrence[] = [];
+        const responses: protos.grafeas.v1.IOccurrence[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2097,24 +1940,24 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
   describe('listNotes', () => {
     it('invokes listNotes without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListNotesRequest()
+        new protos.grafeas.v1.ListNotesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListNotesRequest',
+        '.grafeas.v1.ListNotesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.grafeas.v1beta1.Note()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Note()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Note()),
+        generateSampleMessage(new protos.grafeas.v1.Note()),
+        generateSampleMessage(new protos.grafeas.v1.Note()),
+        generateSampleMessage(new protos.grafeas.v1.Note()),
       ];
       client.innerApiCalls.listNotes = stubSimpleCall(expectedResponse);
       const [response] = await client.listNotes(request);
@@ -2130,34 +1973,31 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes listNotes without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListNotesRequest()
+        new protos.grafeas.v1.ListNotesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListNotesRequest',
+        '.grafeas.v1.ListNotesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.grafeas.v1beta1.Note()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Note()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Note()),
+        generateSampleMessage(new protos.grafeas.v1.Note()),
+        generateSampleMessage(new protos.grafeas.v1.Note()),
+        generateSampleMessage(new protos.grafeas.v1.Note()),
       ];
       client.innerApiCalls.listNotes =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listNotes(
           request,
-          (
-            err?: Error | null,
-            result?: protos.grafeas.v1beta1.INote[] | null
-          ) => {
+          (err?: Error | null, result?: protos.grafeas.v1.INote[] | null) => {
             if (err) {
               reject(err);
             } else {
@@ -2179,16 +2019,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes listNotes with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListNotesRequest()
+        new protos.grafeas.v1.ListNotesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListNotesRequest',
+        '.grafeas.v1.ListNotesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2207,31 +2047,31 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes listNotesStream without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListNotesRequest()
+        new protos.grafeas.v1.ListNotesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListNotesRequest',
+        '.grafeas.v1.ListNotesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.grafeas.v1beta1.Note()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Note()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Note()),
+        generateSampleMessage(new protos.grafeas.v1.Note()),
+        generateSampleMessage(new protos.grafeas.v1.Note()),
+        generateSampleMessage(new protos.grafeas.v1.Note()),
       ];
       client.descriptors.page.listNotes.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listNotesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.grafeas.v1beta1.Note[] = [];
-        stream.on('data', (response: protos.grafeas.v1beta1.Note) => {
+        const responses: protos.grafeas.v1.Note[] = [];
+        stream.on('data', (response: protos.grafeas.v1.Note) => {
           responses.push(response);
         });
         stream.on('end', () => {
@@ -2258,16 +2098,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes listNotesStream with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListNotesRequest()
+        new protos.grafeas.v1.ListNotesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListNotesRequest',
+        '.grafeas.v1.ListNotesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2279,8 +2119,8 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
       );
       const stream = client.listNotesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.grafeas.v1beta1.Note[] = [];
-        stream.on('data', (response: protos.grafeas.v1beta1.Note) => {
+        const responses: protos.grafeas.v1.Note[] = [];
+        stream.on('data', (response: protos.grafeas.v1.Note) => {
           responses.push(response);
         });
         stream.on('end', () => {
@@ -2306,28 +2146,28 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('uses async iteration with listNotes without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListNotesRequest()
+        new protos.grafeas.v1.ListNotesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListNotesRequest',
+        '.grafeas.v1.ListNotesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.grafeas.v1beta1.Note()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Note()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Note()),
+        generateSampleMessage(new protos.grafeas.v1.Note()),
+        generateSampleMessage(new protos.grafeas.v1.Note()),
+        generateSampleMessage(new protos.grafeas.v1.Note()),
       ];
       client.descriptors.page.listNotes.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.grafeas.v1beta1.INote[] = [];
+      const responses: protos.grafeas.v1.INote[] = [];
       const iterable = client.listNotesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2348,16 +2188,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('uses async iteration with listNotes with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListNotesRequest()
+        new protos.grafeas.v1.ListNotesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListNotesRequest',
+        '.grafeas.v1.ListNotesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2369,7 +2209,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
       );
       const iterable = client.listNotesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.grafeas.v1beta1.INote[] = [];
+        const responses: protos.grafeas.v1.INote[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2391,24 +2231,24 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
 
   describe('listNoteOccurrences', () => {
     it('invokes listNoteOccurrences without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListNoteOccurrencesRequest()
+        new protos.grafeas.v1.ListNoteOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListNoteOccurrencesRequest',
+        '.grafeas.v1.ListNoteOccurrencesRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
       client.innerApiCalls.listNoteOccurrences =
         stubSimpleCall(expectedResponse);
@@ -2425,24 +2265,24 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes listNoteOccurrences without error using callback', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListNoteOccurrencesRequest()
+        new protos.grafeas.v1.ListNoteOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListNoteOccurrencesRequest',
+        '.grafeas.v1.ListNoteOccurrencesRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
       client.innerApiCalls.listNoteOccurrences =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2451,7 +2291,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.grafeas.v1beta1.IOccurrence[] | null
+            result?: protos.grafeas.v1.IOccurrence[] | null
           ) => {
             if (err) {
               reject(err);
@@ -2474,16 +2314,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes listNoteOccurrences with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListNoteOccurrencesRequest()
+        new protos.grafeas.v1.ListNoteOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListNoteOccurrencesRequest',
+        '.grafeas.v1.ListNoteOccurrencesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2505,31 +2345,31 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes listNoteOccurrencesStream without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListNoteOccurrencesRequest()
+        new protos.grafeas.v1.ListNoteOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListNoteOccurrencesRequest',
+        '.grafeas.v1.ListNoteOccurrencesRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
       client.descriptors.page.listNoteOccurrences.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listNoteOccurrencesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.grafeas.v1beta1.Occurrence[] = [];
-        stream.on('data', (response: protos.grafeas.v1beta1.Occurrence) => {
+        const responses: protos.grafeas.v1.Occurrence[] = [];
+        stream.on('data', (response: protos.grafeas.v1.Occurrence) => {
           responses.push(response);
         });
         stream.on('end', () => {
@@ -2556,16 +2396,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('invokes listNoteOccurrencesStream with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListNoteOccurrencesRequest()
+        new protos.grafeas.v1.ListNoteOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListNoteOccurrencesRequest',
+        '.grafeas.v1.ListNoteOccurrencesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2575,8 +2415,8 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         stubPageStreamingCall(undefined, expectedError);
       const stream = client.listNoteOccurrencesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.grafeas.v1beta1.Occurrence[] = [];
-        stream.on('data', (response: protos.grafeas.v1beta1.Occurrence) => {
+        const responses: protos.grafeas.v1.Occurrence[] = [];
+        stream.on('data', (response: protos.grafeas.v1.Occurrence) => {
           responses.push(response);
         });
         stream.on('end', () => {
@@ -2602,28 +2442,28 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('uses async iteration with listNoteOccurrences without error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListNoteOccurrencesRequest()
+        new protos.grafeas.v1.ListNoteOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListNoteOccurrencesRequest',
+        '.grafeas.v1.ListNoteOccurrencesRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
-        generateSampleMessage(new protos.grafeas.v1beta1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
+        generateSampleMessage(new protos.grafeas.v1.Occurrence()),
       ];
       client.descriptors.page.listNoteOccurrences.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.grafeas.v1beta1.IOccurrence[] = [];
+      const responses: protos.grafeas.v1.IOccurrence[] = [];
       const iterable = client.listNoteOccurrencesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2645,16 +2485,16 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
     });
 
     it('uses async iteration with listNoteOccurrences with error', async () => {
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.grafeas.v1beta1.ListNoteOccurrencesRequest()
+        new protos.grafeas.v1.ListNoteOccurrencesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.grafeas.v1beta1.ListNoteOccurrencesRequest',
+        '.grafeas.v1.ListNoteOccurrencesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2664,7 +2504,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listNoteOccurrencesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.grafeas.v1beta1.IOccurrence[] = [];
+        const responses: protos.grafeas.v1.IOccurrence[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2686,49 +2526,136 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
   });
 
   describe('Path templates', () => {
-    describe('scanConfig', () => {
-      const fakePath = '/rendered/path/scanConfig';
+    describe('note', () => {
+      const fakePath = '/rendered/path/note';
       const expectedParameters = {
         project: 'projectValue',
-        scan_config: 'scanConfigValue',
+        note: 'noteValue',
       };
-      const client = new grafeasv1beta1Module.v1beta1.GrafeasV1Beta1Client({
+      const client = new grafeasModule.v1.GrafeasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.scanConfigPathTemplate.render = sinon
+      client.pathTemplates.notePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.scanConfigPathTemplate.match = sinon
+      client.pathTemplates.notePathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('scanConfigPath', () => {
-        const result = client.scanConfigPath('projectValue', 'scanConfigValue');
+      it('notePath', () => {
+        const result = client.notePath('projectValue', 'noteValue');
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.scanConfigPathTemplate.render as SinonStub)
+          (client.pathTemplates.notePathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromScanConfigName', () => {
-        const result = client.matchProjectFromScanConfigName(fakePath);
+      it('matchProjectFromNoteName', () => {
+        const result = client.matchProjectFromNoteName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.scanConfigPathTemplate.match as SinonStub)
+          (client.pathTemplates.notePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchScanConfigFromScanConfigName', () => {
-        const result = client.matchScanConfigFromScanConfigName(fakePath);
-        assert.strictEqual(result, 'scanConfigValue');
+      it('matchNoteFromNoteName', () => {
+        const result = client.matchNoteFromNoteName(fakePath);
+        assert.strictEqual(result, 'noteValue');
         assert(
-          (client.pathTemplates.scanConfigPathTemplate.match as SinonStub)
+          (client.pathTemplates.notePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('occurrence', () => {
+      const fakePath = '/rendered/path/occurrence';
+      const expectedParameters = {
+        project: 'projectValue',
+        occurrence: 'occurrenceValue',
+      };
+      const client = new grafeasModule.v1.GrafeasClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.occurrencePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.occurrencePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('occurrencePath', () => {
+        const result = client.occurrencePath('projectValue', 'occurrenceValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.occurrencePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromOccurrenceName', () => {
+        const result = client.matchProjectFromOccurrenceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.occurrencePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchOccurrenceFromOccurrenceName', () => {
+        const result = client.matchOccurrenceFromOccurrenceName(fakePath);
+        assert.strictEqual(result, 'occurrenceValue');
+        assert(
+          (client.pathTemplates.occurrencePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('project', () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new grafeasModule.v1.GrafeasClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

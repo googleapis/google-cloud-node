@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,14 +16,13 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v2 from './v2';
 import * as v3 from './v3';
 import * as v3beta1 from './v3beta1';
 
 const TranslationServiceClient = v3.TranslationServiceClient;
 type TranslationServiceClient = v3.TranslationServiceClient;
 
-export {v2, v3, v3beta1, TranslationServiceClient};
-export default {v2, v3, v3beta1, TranslationServiceClient};
+export {v3, v3beta1, TranslationServiceClient};
+export default {v3, v3beta1, TranslationServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
