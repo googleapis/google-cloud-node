@@ -33,8 +33,7 @@ function main(account, serviceAccount) {
    */
   // const account = 'abc123'
   /**
-   *  Required. Service account to unregister from subscriber access to the
-   *  topic.
+   *  Required. Service account to unregister from subscriber access to the topic.
    */
   // const serviceAccount = 'abc123'
 

@@ -250,16 +250,44 @@ export class BatchServiceClient {
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
           get: '/v1alpha/{resource=projects/*/locations/*/jobs/*}:getIamPolicy',
+          additional_bindings: [
+            {
+              get: '/v1alpha/{resource=projects/*/locations/*/tasks/*}:getIamPolicy',
+            },
+            {
+              get: '/v1alpha/{resource=projects/*/locations/*/nodes/*}:getIamPolicy',
+            },
+          ],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
           post: '/v1alpha/{resource=projects/*/locations/*/jobs/*}:setIamPolicy',
           body: '*',
+          additional_bindings: [
+            {
+              post: '/v1alpha/{resource=projects/*/locations/*/tasks/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1alpha/{resource=projects/*/locations/*/nodes/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
           post: '/v1alpha/{resource=projects/*/locations/*/jobs/*}:testIamPermissions',
           body: '*',
+          additional_bindings: [
+            {
+              post: '/v1alpha/{resource=projects/*/locations/*/tasks/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1alpha/{resource=projects/*/locations/*/nodes/*}:testIamPermissions',
+              body: '*',
+            },
+          ],
         },
         {
           selector: 'google.longrunning.Operations.CancelOperation',

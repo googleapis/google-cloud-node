@@ -102,14 +102,6 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
-                        },
-                        "annotations": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 13,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
                         }
                       }
                     },

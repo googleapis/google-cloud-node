@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(name) {
+function main() {
   // [START tpu_v2alpha1_generated_Tpu_StartNode_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name.
+   *  The resource name.
    */
   // const name = 'abc123'
 
@@ -42,7 +42,6 @@ function main(name) {
   async function callStartNode() {
     // Construct request
     const request = {
-      name,
     };
 
     // Run request

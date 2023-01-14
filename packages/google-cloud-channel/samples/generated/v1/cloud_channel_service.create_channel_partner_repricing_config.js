@@ -29,8 +29,8 @@ function main(parent, channelPartnerRepricingConfig) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the ChannelPartner that will receive the
-   *  repricing config. Parent uses the format:
+   *  Required. The resource name of the ChannelPartner that will receive the repricing
+   *  config. Parent uses the format:
    *  accounts/{account_id}/channelPartnerLinks/{channel_partner_id}
    */
   // const parent = 'abc123'

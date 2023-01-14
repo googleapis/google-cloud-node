@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START workflowexecutions_v1_generated_Executions_ListExecutions_async]
+  // [START osconfig_v1beta_generated_OsConfigService_ListPatchDeployments_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,52 +29,40 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the workflow for which the executions should be listed.
-   *  Format: projects/{project}/locations/{location}/workflows/{workflow}
+   *  Required. The resource name of the parent in the form `projects/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Maximum number of executions to return per call.
-   *  Max supported value depends on the selected Execution view: it's 10000 for
-   *  BASIC and 100 for FULL. The default value used if the field is not
-   *  specified is 100, regardless of the selected view. Values greater than
-   *  the max value will be coerced down to it.
+   *  Optional. The maximum number of patch deployments to return. Default is 100.
    */
   // const pageSize = 1234
   /**
-   *  A page token, received from a previous `ListExecutions` call.
-   *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `ListExecutions` must
-   *  match the call that provided the page token.
+   *  Optional. A pagination token returned from a previous call to ListPatchDeployments
+   *  that indicates where this listing should continue from.
    */
   // const pageToken = 'abc123'
-  /**
-   *  Optional. A view defining which fields should be filled in the returned executions.
-   *  The API will default to the BASIC view.
-   */
-  // const view = {}
 
-  // Imports the Executions library
-  const {ExecutionsClient} = require('@google-cloud/workflow-executions').v1;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const executionsClient = new ExecutionsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callListExecutions() {
+  async function callListPatchDeployments() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await executionsClient.listExecutionsAsync(request);
+    const iterable = await osconfigClient.listPatchDeploymentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListExecutions();
-  // [END workflowexecutions_v1_generated_Executions_ListExecutions_async]
+  callListPatchDeployments();
+  // [END osconfig_v1beta_generated_OsConfigService_ListPatchDeployments_async]
 }
 
 process.on('unhandledRejection', err => {

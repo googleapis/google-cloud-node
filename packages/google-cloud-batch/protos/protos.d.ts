@@ -7906,9 +7906,6 @@ export namespace google {
                         /** InstancePolicy accelerators */
                         accelerators?: (google.cloud.batch.v1alpha.AllocationPolicy.IAccelerator[]|null);
 
-                        /** InstancePolicy bootDisk */
-                        bootDisk?: (google.cloud.batch.v1alpha.AllocationPolicy.IDisk|null);
-
                         /** InstancePolicy disks */
                         disks?: (google.cloud.batch.v1alpha.AllocationPolicy.IAttachedDisk[]|null);
 
@@ -7939,9 +7936,6 @@ export namespace google {
 
                         /** InstancePolicy accelerators. */
                         public accelerators: google.cloud.batch.v1alpha.AllocationPolicy.IAccelerator[];
-
-                        /** InstancePolicy bootDisk. */
-                        public bootDisk?: (google.cloud.batch.v1alpha.AllocationPolicy.IDisk|null);
 
                         /** InstancePolicy disks. */
                         public disks: google.cloud.batch.v1alpha.AllocationPolicy.IAttachedDisk[];

@@ -237,9 +237,6 @@ export class ControlServiceClient {
           get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
           additional_bindings: [
             {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',
-            },
-            {
               get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
             },
             {get: '/v2alpha/{name=projects/*/locations/*/operations/*}'},
@@ -603,7 +600,7 @@ export class ControlServiceClient {
    *
    * {@link google.cloud.retail.v2alpha.Control|Control} cannot be set to a different
    * oneof field, if so an INVALID_ARGUMENT is returned. If the
-   * {@link google.cloud.retail.v2alpha.Control|Control} to update does not exist, a
+   * {@link google.cloud.retail.v2alpha.Control|Control} to delete does not exist, a
    * NOT_FOUND error is returned.
    *
    * @param {Object} request
@@ -708,7 +705,7 @@ export class ControlServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the Control to get. Format:
+   *   Required. The resource name of the Control to delete. Format:
    *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/controls/{control_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -790,8 +787,7 @@ export class ControlServiceClient {
   }
 
   /**
-   * Lists all Controls by their parent
-   * {@link google.cloud.retail.v2alpha.Catalog|Catalog}.
+   * Lists all Controls linked to this catalog.
    *
    * @param {Object} request
    *   The request object that will be sent.

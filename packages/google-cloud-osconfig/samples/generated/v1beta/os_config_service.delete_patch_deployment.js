@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START workflowexecutions_v1_generated_Executions_GetExecution_async]
+  // [START osconfig_v1beta_generated_OsConfigService_DeletePatchDeployment_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,30 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the execution to be retrieved.
-   *  Format:
-   *  projects/{project}/locations/{location}/workflows/{workflow}/executions/{execution}
+   *  Required. The resource name of the patch deployment in the form
+   *  `projects/* /patchDeployments/*`.
    */
   // const name = 'abc123'
-  /**
-   *  Optional. A view defining which fields should be filled in the returned execution.
-   *  The API will default to the FULL view.
-   */
-  // const view = {}
 
-  // Imports the Executions library
-  const {ExecutionsClient} = require('@google-cloud/workflow-executions').v1;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const executionsClient = new ExecutionsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callGetExecution() {
+  async function callDeletePatchDeployment() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await executionsClient.getExecution(request);
+    const response = await osconfigClient.deletePatchDeployment(request);
     console.log(response);
   }
 
-  callGetExecution();
-  // [END workflowexecutions_v1_generated_Executions_GetExecution_async]
+  callDeletePatchDeployment();
+  // [END osconfig_v1beta_generated_OsConfigService_DeletePatchDeployment_async]
 }
 
 process.on('unhandledRejection', err => {

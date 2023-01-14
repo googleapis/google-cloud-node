@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,13 +18,20 @@
 
 import * as v1 from './v1';
 import * as v1alpha from './v1alpha';
+import * as v1beta from './v1beta';
 
 const OsConfigServiceClient = v1.OsConfigServiceClient;
 type OsConfigServiceClient = v1.OsConfigServiceClient;
 const OsConfigZonalServiceClient = v1.OsConfigZonalServiceClient;
 type OsConfigZonalServiceClient = v1.OsConfigZonalServiceClient;
 
-export {v1, v1alpha, OsConfigServiceClient, OsConfigZonalServiceClient};
-export default {v1, v1alpha, OsConfigServiceClient, OsConfigZonalServiceClient};
+export {v1, v1alpha, v1beta, OsConfigServiceClient, OsConfigZonalServiceClient};
+export default {
+  v1,
+  v1alpha,
+  v1beta,
+  OsConfigServiceClient,
+  OsConfigZonalServiceClient,
+};
 import * as protos from '../protos/protos';
 export {protos};

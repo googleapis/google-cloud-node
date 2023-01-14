@@ -36,18 +36,16 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of repricing configs to return. The service
-   *  may return fewer than this value. If unspecified, returns a maximum of 50
-   *  rules. The maximum value is 100; values above 100 will be coerced to 100.
+   *  Optional. The maximum number of repricing configs to return. The service may return
+   *  fewer than this value. If unspecified, returns a maximum of 50 rules. The
+   *  maximum value is 100; values above 100 will be coerced to 100.
    */
   // const pageSize = 1234
   /**
    *  Optional. A token identifying a page of results beyond the first page.
    *  Obtained through
-   *  ListCustomerRepricingConfigsResponse.next_page_token google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token 
-   *  of the previous
-   *  CloudChannelService.ListCustomerRepricingConfigs google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs 
-   *  call.
+   *  ListCustomerRepricingConfigsResponse.next_page_token google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token  of the previous
+   *  CloudChannelService.ListCustomerRepricingConfigs google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs  call.
    */
   // const pageToken = 'abc123'
   /**

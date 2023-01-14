@@ -39,10 +39,10 @@ function main(parent, tunnelDestGroup, tunnelDestGroupId) {
    */
   // const tunnelDestGroup = {}
   /**
-   *  Required. The ID to use for the TunnelDestGroup, which becomes the final
-   *  component of the resource name.
+   *  Required. The ID to use for the TunnelDestGroup, which becomes the final component of
+   *  the resource name.
    *  This value must be 4-63 characters, and valid characters
-   *  are `[a-z]-`.
+   *  are `[a-z][0-9]-`.
    */
   // const tunnelDestGroupId = 'abc123'
 
