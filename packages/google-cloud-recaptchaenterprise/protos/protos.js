@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1422,693 +1422,6 @@
                         return AnnotateAssessmentResponse;
                     })();
     
-                    v1.EndpointVerificationInfo = (function() {
-    
-                        /**
-                         * Properties of an EndpointVerificationInfo.
-                         * @memberof google.cloud.recaptchaenterprise.v1
-                         * @interface IEndpointVerificationInfo
-                         * @property {string|null} [emailAddress] EndpointVerificationInfo emailAddress
-                         * @property {string|null} [phoneNumber] EndpointVerificationInfo phoneNumber
-                         * @property {string|null} [requestToken] EndpointVerificationInfo requestToken
-                         * @property {google.protobuf.ITimestamp|null} [lastVerificationTime] EndpointVerificationInfo lastVerificationTime
-                         */
-    
-                        /**
-                         * Constructs a new EndpointVerificationInfo.
-                         * @memberof google.cloud.recaptchaenterprise.v1
-                         * @classdesc Represents an EndpointVerificationInfo.
-                         * @implements IEndpointVerificationInfo
-                         * @constructor
-                         * @param {google.cloud.recaptchaenterprise.v1.IEndpointVerificationInfo=} [properties] Properties to set
-                         */
-                        function EndpointVerificationInfo(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * EndpointVerificationInfo emailAddress.
-                         * @member {string|null|undefined} emailAddress
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @instance
-                         */
-                        EndpointVerificationInfo.prototype.emailAddress = null;
-    
-                        /**
-                         * EndpointVerificationInfo phoneNumber.
-                         * @member {string|null|undefined} phoneNumber
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @instance
-                         */
-                        EndpointVerificationInfo.prototype.phoneNumber = null;
-    
-                        /**
-                         * EndpointVerificationInfo requestToken.
-                         * @member {string} requestToken
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @instance
-                         */
-                        EndpointVerificationInfo.prototype.requestToken = "";
-    
-                        /**
-                         * EndpointVerificationInfo lastVerificationTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} lastVerificationTime
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @instance
-                         */
-                        EndpointVerificationInfo.prototype.lastVerificationTime = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * EndpointVerificationInfo endpoint.
-                         * @member {"emailAddress"|"phoneNumber"|undefined} endpoint
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @instance
-                         */
-                        Object.defineProperty(EndpointVerificationInfo.prototype, "endpoint", {
-                            get: $util.oneOfGetter($oneOfFields = ["emailAddress", "phoneNumber"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new EndpointVerificationInfo instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @static
-                         * @param {google.cloud.recaptchaenterprise.v1.IEndpointVerificationInfo=} [properties] Properties to set
-                         * @returns {google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo} EndpointVerificationInfo instance
-                         */
-                        EndpointVerificationInfo.create = function create(properties) {
-                            return new EndpointVerificationInfo(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified EndpointVerificationInfo message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @static
-                         * @param {google.cloud.recaptchaenterprise.v1.IEndpointVerificationInfo} message EndpointVerificationInfo message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        EndpointVerificationInfo.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.emailAddress != null && Object.hasOwnProperty.call(message, "emailAddress"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.emailAddress);
-                            if (message.phoneNumber != null && Object.hasOwnProperty.call(message, "phoneNumber"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.phoneNumber);
-                            if (message.requestToken != null && Object.hasOwnProperty.call(message, "requestToken"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestToken);
-                            if (message.lastVerificationTime != null && Object.hasOwnProperty.call(message, "lastVerificationTime"))
-                                $root.google.protobuf.Timestamp.encode(message.lastVerificationTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified EndpointVerificationInfo message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @static
-                         * @param {google.cloud.recaptchaenterprise.v1.IEndpointVerificationInfo} message EndpointVerificationInfo message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        EndpointVerificationInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an EndpointVerificationInfo message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo} EndpointVerificationInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        EndpointVerificationInfo.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.emailAddress = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.phoneNumber = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.requestToken = reader.string();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.lastVerificationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an EndpointVerificationInfo message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo} EndpointVerificationInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        EndpointVerificationInfo.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an EndpointVerificationInfo message.
-                         * @function verify
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        EndpointVerificationInfo.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.emailAddress != null && message.hasOwnProperty("emailAddress")) {
-                                properties.endpoint = 1;
-                                if (!$util.isString(message.emailAddress))
-                                    return "emailAddress: string expected";
-                            }
-                            if (message.phoneNumber != null && message.hasOwnProperty("phoneNumber")) {
-                                if (properties.endpoint === 1)
-                                    return "endpoint: multiple values";
-                                properties.endpoint = 1;
-                                if (!$util.isString(message.phoneNumber))
-                                    return "phoneNumber: string expected";
-                            }
-                            if (message.requestToken != null && message.hasOwnProperty("requestToken"))
-                                if (!$util.isString(message.requestToken))
-                                    return "requestToken: string expected";
-                            if (message.lastVerificationTime != null && message.hasOwnProperty("lastVerificationTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.lastVerificationTime);
-                                if (error)
-                                    return "lastVerificationTime." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an EndpointVerificationInfo message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo} EndpointVerificationInfo
-                         */
-                        EndpointVerificationInfo.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo)
-                                return object;
-                            var message = new $root.google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo();
-                            if (object.emailAddress != null)
-                                message.emailAddress = String(object.emailAddress);
-                            if (object.phoneNumber != null)
-                                message.phoneNumber = String(object.phoneNumber);
-                            if (object.requestToken != null)
-                                message.requestToken = String(object.requestToken);
-                            if (object.lastVerificationTime != null) {
-                                if (typeof object.lastVerificationTime !== "object")
-                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo.lastVerificationTime: object expected");
-                                message.lastVerificationTime = $root.google.protobuf.Timestamp.fromObject(object.lastVerificationTime);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an EndpointVerificationInfo message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @static
-                         * @param {google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo} message EndpointVerificationInfo
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        EndpointVerificationInfo.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.requestToken = "";
-                                object.lastVerificationTime = null;
-                            }
-                            if (message.emailAddress != null && message.hasOwnProperty("emailAddress")) {
-                                object.emailAddress = message.emailAddress;
-                                if (options.oneofs)
-                                    object.endpoint = "emailAddress";
-                            }
-                            if (message.phoneNumber != null && message.hasOwnProperty("phoneNumber")) {
-                                object.phoneNumber = message.phoneNumber;
-                                if (options.oneofs)
-                                    object.endpoint = "phoneNumber";
-                            }
-                            if (message.requestToken != null && message.hasOwnProperty("requestToken"))
-                                object.requestToken = message.requestToken;
-                            if (message.lastVerificationTime != null && message.hasOwnProperty("lastVerificationTime"))
-                                object.lastVerificationTime = $root.google.protobuf.Timestamp.toObject(message.lastVerificationTime, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this EndpointVerificationInfo to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        EndpointVerificationInfo.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for EndpointVerificationInfo
-                         * @function getTypeUrl
-                         * @memberof google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        EndpointVerificationInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo";
-                        };
-    
-                        return EndpointVerificationInfo;
-                    })();
-    
-                    v1.AccountVerificationInfo = (function() {
-    
-                        /**
-                         * Properties of an AccountVerificationInfo.
-                         * @memberof google.cloud.recaptchaenterprise.v1
-                         * @interface IAccountVerificationInfo
-                         * @property {Array.<google.cloud.recaptchaenterprise.v1.IEndpointVerificationInfo>|null} [endpoints] AccountVerificationInfo endpoints
-                         * @property {string|null} [languageCode] AccountVerificationInfo languageCode
-                         * @property {google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.Result|null} [latestVerificationResult] AccountVerificationInfo latestVerificationResult
-                         * @property {string|null} [username] AccountVerificationInfo username
-                         */
-    
-                        /**
-                         * Constructs a new AccountVerificationInfo.
-                         * @memberof google.cloud.recaptchaenterprise.v1
-                         * @classdesc Represents an AccountVerificationInfo.
-                         * @implements IAccountVerificationInfo
-                         * @constructor
-                         * @param {google.cloud.recaptchaenterprise.v1.IAccountVerificationInfo=} [properties] Properties to set
-                         */
-                        function AccountVerificationInfo(properties) {
-                            this.endpoints = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * AccountVerificationInfo endpoints.
-                         * @member {Array.<google.cloud.recaptchaenterprise.v1.IEndpointVerificationInfo>} endpoints
-                         * @memberof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo
-                         * @instance
-                         */
-                        AccountVerificationInfo.prototype.endpoints = $util.emptyArray;
-    
-                        /**
-                         * AccountVerificationInfo languageCode.
-                         * @member {string} languageCode
-                         * @memberof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo
-                         * @instance
-                         */
-                        AccountVerificationInfo.prototype.languageCode = "";
-    
-                        /**
-                         * AccountVerificationInfo latestVerificationResult.
-                         * @member {google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.Result} latestVerificationResult
-                         * @memberof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo
-                         * @instance
-                         */
-                        AccountVerificationInfo.prototype.latestVerificationResult = 0;
-    
-                        /**
-                         * AccountVerificationInfo username.
-                         * @member {string} username
-                         * @memberof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo
-                         * @instance
-                         */
-                        AccountVerificationInfo.prototype.username = "";
-    
-                        /**
-                         * Creates a new AccountVerificationInfo instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo
-                         * @static
-                         * @param {google.cloud.recaptchaenterprise.v1.IAccountVerificationInfo=} [properties] Properties to set
-                         * @returns {google.cloud.recaptchaenterprise.v1.AccountVerificationInfo} AccountVerificationInfo instance
-                         */
-                        AccountVerificationInfo.create = function create(properties) {
-                            return new AccountVerificationInfo(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified AccountVerificationInfo message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo
-                         * @static
-                         * @param {google.cloud.recaptchaenterprise.v1.IAccountVerificationInfo} message AccountVerificationInfo message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        AccountVerificationInfo.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.endpoints != null && message.endpoints.length)
-                                for (var i = 0; i < message.endpoints.length; ++i)
-                                    $root.google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo.encode(message.endpoints[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.username != null && Object.hasOwnProperty.call(message, "username"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.username);
-                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.languageCode);
-                            if (message.latestVerificationResult != null && Object.hasOwnProperty.call(message, "latestVerificationResult"))
-                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.latestVerificationResult);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified AccountVerificationInfo message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo
-                         * @static
-                         * @param {google.cloud.recaptchaenterprise.v1.IAccountVerificationInfo} message AccountVerificationInfo message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        AccountVerificationInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an AccountVerificationInfo message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.recaptchaenterprise.v1.AccountVerificationInfo} AccountVerificationInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        AccountVerificationInfo.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.AccountVerificationInfo();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        if (!(message.endpoints && message.endpoints.length))
-                                            message.endpoints = [];
-                                        message.endpoints.push($root.google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 3: {
-                                        message.languageCode = reader.string();
-                                        break;
-                                    }
-                                case 7: {
-                                        message.latestVerificationResult = reader.int32();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.username = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an AccountVerificationInfo message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.recaptchaenterprise.v1.AccountVerificationInfo} AccountVerificationInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        AccountVerificationInfo.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an AccountVerificationInfo message.
-                         * @function verify
-                         * @memberof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        AccountVerificationInfo.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.endpoints != null && message.hasOwnProperty("endpoints")) {
-                                if (!Array.isArray(message.endpoints))
-                                    return "endpoints: array expected";
-                                for (var i = 0; i < message.endpoints.length; ++i) {
-                                    var error = $root.google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo.verify(message.endpoints[i]);
-                                    if (error)
-                                        return "endpoints." + error;
-                                }
-                            }
-                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
-                                if (!$util.isString(message.languageCode))
-                                    return "languageCode: string expected";
-                            if (message.latestVerificationResult != null && message.hasOwnProperty("latestVerificationResult"))
-                                switch (message.latestVerificationResult) {
-                                default:
-                                    return "latestVerificationResult: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 6:
-                                case 7:
-                                case 8:
-                                case 9:
-                                    break;
-                                }
-                            if (message.username != null && message.hasOwnProperty("username"))
-                                if (!$util.isString(message.username))
-                                    return "username: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an AccountVerificationInfo message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.recaptchaenterprise.v1.AccountVerificationInfo} AccountVerificationInfo
-                         */
-                        AccountVerificationInfo.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.AccountVerificationInfo)
-                                return object;
-                            var message = new $root.google.cloud.recaptchaenterprise.v1.AccountVerificationInfo();
-                            if (object.endpoints) {
-                                if (!Array.isArray(object.endpoints))
-                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.endpoints: array expected");
-                                message.endpoints = [];
-                                for (var i = 0; i < object.endpoints.length; ++i) {
-                                    if (typeof object.endpoints[i] !== "object")
-                                        throw TypeError(".google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.endpoints: object expected");
-                                    message.endpoints[i] = $root.google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo.fromObject(object.endpoints[i]);
-                                }
-                            }
-                            if (object.languageCode != null)
-                                message.languageCode = String(object.languageCode);
-                            switch (object.latestVerificationResult) {
-                            default:
-                                if (typeof object.latestVerificationResult === "number") {
-                                    message.latestVerificationResult = object.latestVerificationResult;
-                                    break;
-                                }
-                                break;
-                            case "RESULT_UNSPECIFIED":
-                            case 0:
-                                message.latestVerificationResult = 0;
-                                break;
-                            case "SUCCESS_USER_VERIFIED":
-                            case 1:
-                                message.latestVerificationResult = 1;
-                                break;
-                            case "ERROR_USER_NOT_VERIFIED":
-                            case 2:
-                                message.latestVerificationResult = 2;
-                                break;
-                            case "ERROR_SITE_ONBOARDING_INCOMPLETE":
-                            case 3:
-                                message.latestVerificationResult = 3;
-                                break;
-                            case "ERROR_RECIPIENT_NOT_ALLOWED":
-                            case 4:
-                                message.latestVerificationResult = 4;
-                                break;
-                            case "ERROR_RECIPIENT_ABUSE_LIMIT_EXHAUSTED":
-                            case 5:
-                                message.latestVerificationResult = 5;
-                                break;
-                            case "ERROR_CRITICAL_INTERNAL":
-                            case 6:
-                                message.latestVerificationResult = 6;
-                                break;
-                            case "ERROR_CUSTOMER_QUOTA_EXHAUSTED":
-                            case 7:
-                                message.latestVerificationResult = 7;
-                                break;
-                            case "ERROR_VERIFICATION_BYPASSED":
-                            case 8:
-                                message.latestVerificationResult = 8;
-                                break;
-                            case "ERROR_VERDICT_MISMATCH":
-                            case 9:
-                                message.latestVerificationResult = 9;
-                                break;
-                            }
-                            if (object.username != null)
-                                message.username = String(object.username);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an AccountVerificationInfo message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo
-                         * @static
-                         * @param {google.cloud.recaptchaenterprise.v1.AccountVerificationInfo} message AccountVerificationInfo
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        AccountVerificationInfo.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.endpoints = [];
-                            if (options.defaults) {
-                                object.username = "";
-                                object.languageCode = "";
-                                object.latestVerificationResult = options.enums === String ? "RESULT_UNSPECIFIED" : 0;
-                            }
-                            if (message.endpoints && message.endpoints.length) {
-                                object.endpoints = [];
-                                for (var j = 0; j < message.endpoints.length; ++j)
-                                    object.endpoints[j] = $root.google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo.toObject(message.endpoints[j], options);
-                            }
-                            if (message.username != null && message.hasOwnProperty("username"))
-                                object.username = message.username;
-                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
-                                object.languageCode = message.languageCode;
-                            if (message.latestVerificationResult != null && message.hasOwnProperty("latestVerificationResult"))
-                                object.latestVerificationResult = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.Result[message.latestVerificationResult] === undefined ? message.latestVerificationResult : $root.google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.Result[message.latestVerificationResult] : message.latestVerificationResult;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this AccountVerificationInfo to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        AccountVerificationInfo.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for AccountVerificationInfo
-                         * @function getTypeUrl
-                         * @memberof google.cloud.recaptchaenterprise.v1.AccountVerificationInfo
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        AccountVerificationInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.AccountVerificationInfo";
-                        };
-    
-                        /**
-                         * Result enum.
-                         * @name google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.Result
-                         * @enum {number}
-                         * @property {number} RESULT_UNSPECIFIED=0 RESULT_UNSPECIFIED value
-                         * @property {number} SUCCESS_USER_VERIFIED=1 SUCCESS_USER_VERIFIED value
-                         * @property {number} ERROR_USER_NOT_VERIFIED=2 ERROR_USER_NOT_VERIFIED value
-                         * @property {number} ERROR_SITE_ONBOARDING_INCOMPLETE=3 ERROR_SITE_ONBOARDING_INCOMPLETE value
-                         * @property {number} ERROR_RECIPIENT_NOT_ALLOWED=4 ERROR_RECIPIENT_NOT_ALLOWED value
-                         * @property {number} ERROR_RECIPIENT_ABUSE_LIMIT_EXHAUSTED=5 ERROR_RECIPIENT_ABUSE_LIMIT_EXHAUSTED value
-                         * @property {number} ERROR_CRITICAL_INTERNAL=6 ERROR_CRITICAL_INTERNAL value
-                         * @property {number} ERROR_CUSTOMER_QUOTA_EXHAUSTED=7 ERROR_CUSTOMER_QUOTA_EXHAUSTED value
-                         * @property {number} ERROR_VERIFICATION_BYPASSED=8 ERROR_VERIFICATION_BYPASSED value
-                         * @property {number} ERROR_VERDICT_MISMATCH=9 ERROR_VERDICT_MISMATCH value
-                         */
-                        AccountVerificationInfo.Result = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "RESULT_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "SUCCESS_USER_VERIFIED"] = 1;
-                            values[valuesById[2] = "ERROR_USER_NOT_VERIFIED"] = 2;
-                            values[valuesById[3] = "ERROR_SITE_ONBOARDING_INCOMPLETE"] = 3;
-                            values[valuesById[4] = "ERROR_RECIPIENT_NOT_ALLOWED"] = 4;
-                            values[valuesById[5] = "ERROR_RECIPIENT_ABUSE_LIMIT_EXHAUSTED"] = 5;
-                            values[valuesById[6] = "ERROR_CRITICAL_INTERNAL"] = 6;
-                            values[valuesById[7] = "ERROR_CUSTOMER_QUOTA_EXHAUSTED"] = 7;
-                            values[valuesById[8] = "ERROR_VERIFICATION_BYPASSED"] = 8;
-                            values[valuesById[9] = "ERROR_VERDICT_MISMATCH"] = 9;
-                            return values;
-                        })();
-    
-                        return AccountVerificationInfo;
-                    })();
-    
                     v1.PrivatePasswordLeakVerification = (function() {
     
                         /**
@@ -2439,7 +1752,6 @@
                          * @property {google.cloud.recaptchaenterprise.v1.IEvent|null} [event] Assessment event
                          * @property {google.cloud.recaptchaenterprise.v1.IRiskAnalysis|null} [riskAnalysis] Assessment riskAnalysis
                          * @property {google.cloud.recaptchaenterprise.v1.ITokenProperties|null} [tokenProperties] Assessment tokenProperties
-                         * @property {google.cloud.recaptchaenterprise.v1.IAccountVerificationInfo|null} [accountVerification] Assessment accountVerification
                          * @property {google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment|null} [accountDefenderAssessment] Assessment accountDefenderAssessment
                          * @property {google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification|null} [privatePasswordLeakVerification] Assessment privatePasswordLeakVerification
                          */
@@ -2492,14 +1804,6 @@
                         Assessment.prototype.tokenProperties = null;
     
                         /**
-                         * Assessment accountVerification.
-                         * @member {google.cloud.recaptchaenterprise.v1.IAccountVerificationInfo|null|undefined} accountVerification
-                         * @memberof google.cloud.recaptchaenterprise.v1.Assessment
-                         * @instance
-                         */
-                        Assessment.prototype.accountVerification = null;
-    
-                        /**
                          * Assessment accountDefenderAssessment.
                          * @member {google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment|null|undefined} accountDefenderAssessment
                          * @memberof google.cloud.recaptchaenterprise.v1.Assessment
@@ -2547,8 +1851,6 @@
                                 $root.google.cloud.recaptchaenterprise.v1.RiskAnalysis.encode(message.riskAnalysis, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.tokenProperties != null && Object.hasOwnProperty.call(message, "tokenProperties"))
                                 $root.google.cloud.recaptchaenterprise.v1.TokenProperties.encode(message.tokenProperties, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            if (message.accountVerification != null && Object.hasOwnProperty.call(message, "accountVerification"))
-                                $root.google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.encode(message.accountVerification, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.accountDefenderAssessment != null && Object.hasOwnProperty.call(message, "accountDefenderAssessment"))
                                 $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.encode(message.accountDefenderAssessment, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.privatePasswordLeakVerification != null && Object.hasOwnProperty.call(message, "privatePasswordLeakVerification"))
@@ -2601,10 +1903,6 @@
                                     }
                                 case 4: {
                                         message.tokenProperties = $root.google.cloud.recaptchaenterprise.v1.TokenProperties.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 5: {
-                                        message.accountVerification = $root.google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 6: {
@@ -2668,11 +1966,6 @@
                                 if (error)
                                     return "tokenProperties." + error;
                             }
-                            if (message.accountVerification != null && message.hasOwnProperty("accountVerification")) {
-                                var error = $root.google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.verify(message.accountVerification);
-                                if (error)
-                                    return "accountVerification." + error;
-                            }
                             if (message.accountDefenderAssessment != null && message.hasOwnProperty("accountDefenderAssessment")) {
                                 var error = $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.verify(message.accountDefenderAssessment);
                                 if (error)
@@ -2715,11 +2008,6 @@
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.Assessment.tokenProperties: object expected");
                                 message.tokenProperties = $root.google.cloud.recaptchaenterprise.v1.TokenProperties.fromObject(object.tokenProperties);
                             }
-                            if (object.accountVerification != null) {
-                                if (typeof object.accountVerification !== "object")
-                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.Assessment.accountVerification: object expected");
-                                message.accountVerification = $root.google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.fromObject(object.accountVerification);
-                            }
                             if (object.accountDefenderAssessment != null) {
                                 if (typeof object.accountDefenderAssessment !== "object")
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.Assessment.accountDefenderAssessment: object expected");
@@ -2751,7 +2039,6 @@
                                 object.event = null;
                                 object.riskAnalysis = null;
                                 object.tokenProperties = null;
-                                object.accountVerification = null;
                                 object.accountDefenderAssessment = null;
                                 object.privatePasswordLeakVerification = null;
                             }
@@ -2763,8 +2050,6 @@
                                 object.riskAnalysis = $root.google.cloud.recaptchaenterprise.v1.RiskAnalysis.toObject(message.riskAnalysis, options);
                             if (message.tokenProperties != null && message.hasOwnProperty("tokenProperties"))
                                 object.tokenProperties = $root.google.cloud.recaptchaenterprise.v1.TokenProperties.toObject(message.tokenProperties, options);
-                            if (message.accountVerification != null && message.hasOwnProperty("accountVerification"))
-                                object.accountVerification = $root.google.cloud.recaptchaenterprise.v1.AccountVerificationInfo.toObject(message.accountVerification, options);
                             if (message.accountDefenderAssessment != null && message.hasOwnProperty("accountDefenderAssessment"))
                                 object.accountDefenderAssessment = $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.toObject(message.accountDefenderAssessment, options);
                             if (message.privatePasswordLeakVerification != null && message.hasOwnProperty("privatePasswordLeakVerification"))
@@ -3451,8 +2736,6 @@
                          * @property {google.cloud.recaptchaenterprise.v1.TokenProperties.InvalidReason|null} [invalidReason] TokenProperties invalidReason
                          * @property {google.protobuf.ITimestamp|null} [createTime] TokenProperties createTime
                          * @property {string|null} [hostname] TokenProperties hostname
-                         * @property {string|null} [androidPackageName] TokenProperties androidPackageName
-                         * @property {string|null} [iosBundleId] TokenProperties iosBundleId
                          * @property {string|null} [action] TokenProperties action
                          */
     
@@ -3504,22 +2787,6 @@
                         TokenProperties.prototype.hostname = "";
     
                         /**
-                         * TokenProperties androidPackageName.
-                         * @member {string} androidPackageName
-                         * @memberof google.cloud.recaptchaenterprise.v1.TokenProperties
-                         * @instance
-                         */
-                        TokenProperties.prototype.androidPackageName = "";
-    
-                        /**
-                         * TokenProperties iosBundleId.
-                         * @member {string} iosBundleId
-                         * @memberof google.cloud.recaptchaenterprise.v1.TokenProperties
-                         * @instance
-                         */
-                        TokenProperties.prototype.iosBundleId = "";
-    
-                        /**
                          * TokenProperties action.
                          * @member {string} action
                          * @memberof google.cloud.recaptchaenterprise.v1.TokenProperties
@@ -3561,10 +2828,6 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.hostname);
                             if (message.action != null && Object.hasOwnProperty.call(message, "action"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.action);
-                            if (message.androidPackageName != null && Object.hasOwnProperty.call(message, "androidPackageName"))
-                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.androidPackageName);
-                            if (message.iosBundleId != null && Object.hasOwnProperty.call(message, "iosBundleId"))
-                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.iosBundleId);
                             return writer;
                         };
     
@@ -3613,14 +2876,6 @@
                                     }
                                 case 4: {
                                         message.hostname = reader.string();
-                                        break;
-                                    }
-                                case 8: {
-                                        message.androidPackageName = reader.string();
-                                        break;
-                                    }
-                                case 9: {
-                                        message.iosBundleId = reader.string();
                                         break;
                                     }
                                 case 5: {
@@ -3686,12 +2941,6 @@
                             if (message.hostname != null && message.hasOwnProperty("hostname"))
                                 if (!$util.isString(message.hostname))
                                     return "hostname: string expected";
-                            if (message.androidPackageName != null && message.hasOwnProperty("androidPackageName"))
-                                if (!$util.isString(message.androidPackageName))
-                                    return "androidPackageName: string expected";
-                            if (message.iosBundleId != null && message.hasOwnProperty("iosBundleId"))
-                                if (!$util.isString(message.iosBundleId))
-                                    return "iosBundleId: string expected";
                             if (message.action != null && message.hasOwnProperty("action"))
                                 if (!$util.isString(message.action))
                                     return "action: string expected";
@@ -3755,10 +3004,6 @@
                             }
                             if (object.hostname != null)
                                 message.hostname = String(object.hostname);
-                            if (object.androidPackageName != null)
-                                message.androidPackageName = String(object.androidPackageName);
-                            if (object.iosBundleId != null)
-                                message.iosBundleId = String(object.iosBundleId);
                             if (object.action != null)
                                 message.action = String(object.action);
                             return message;
@@ -3783,8 +3028,6 @@
                                 object.createTime = null;
                                 object.hostname = "";
                                 object.action = "";
-                                object.androidPackageName = "";
-                                object.iosBundleId = "";
                             }
                             if (message.valid != null && message.hasOwnProperty("valid"))
                                 object.valid = message.valid;
@@ -3796,10 +3039,6 @@
                                 object.hostname = message.hostname;
                             if (message.action != null && message.hasOwnProperty("action"))
                                 object.action = message.action;
-                            if (message.androidPackageName != null && message.hasOwnProperty("androidPackageName"))
-                                object.androidPackageName = message.androidPackageName;
-                            if (message.iosBundleId != null && message.hasOwnProperty("iosBundleId"))
-                                object.iosBundleId = message.iosBundleId;
                             return object;
                         };
     
@@ -5720,7 +4959,6 @@
                          * @memberof google.cloud.recaptchaenterprise.v1
                          * @interface IMigrateKeyRequest
                          * @property {string|null} [name] MigrateKeyRequest name
-                         * @property {boolean|null} [skipBillingCheck] MigrateKeyRequest skipBillingCheck
                          */
     
                         /**
@@ -5745,14 +4983,6 @@
                          * @instance
                          */
                         MigrateKeyRequest.prototype.name = "";
-    
-                        /**
-                         * MigrateKeyRequest skipBillingCheck.
-                         * @member {boolean} skipBillingCheck
-                         * @memberof google.cloud.recaptchaenterprise.v1.MigrateKeyRequest
-                         * @instance
-                         */
-                        MigrateKeyRequest.prototype.skipBillingCheck = false;
     
                         /**
                          * Creates a new MigrateKeyRequest instance using the specified properties.
@@ -5780,8 +5010,6 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.skipBillingCheck != null && Object.hasOwnProperty.call(message, "skipBillingCheck"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.skipBillingCheck);
                             return writer;
                         };
     
@@ -5818,10 +5046,6 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.skipBillingCheck = reader.bool();
                                         break;
                                     }
                                 default:
@@ -5862,9 +5086,6 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.skipBillingCheck != null && message.hasOwnProperty("skipBillingCheck"))
-                                if (typeof message.skipBillingCheck !== "boolean")
-                                    return "skipBillingCheck: boolean expected";
                             return null;
                         };
     
@@ -5882,8 +5103,6 @@
                             var message = new $root.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
-                            if (object.skipBillingCheck != null)
-                                message.skipBillingCheck = Boolean(object.skipBillingCheck);
                             return message;
                         };
     
@@ -5900,14 +5119,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.name = "";
-                                object.skipBillingCheck = false;
-                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
-                            if (message.skipBillingCheck != null && message.hasOwnProperty("skipBillingCheck"))
-                                object.skipBillingCheck = message.skipBillingCheck;
                             return object;
                         };
     

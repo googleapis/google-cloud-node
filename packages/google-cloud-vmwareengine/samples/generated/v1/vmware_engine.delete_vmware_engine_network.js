@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -52,10 +52,10 @@ function main(name) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. Checksum used to ensure that the user-provided value is up to date before
-   *  the server processes the request. The server compares provided checksum
-   *  with the current checksum of the resource. If the user-provided value is
-   *  out of date, this request returns an `ABORTED` error.
+   *  Optional. Checksum used to ensure that the user-provided value is up to
+   *  date before the server processes the request. The server compares provided
+   *  checksum with the current checksum of the resource. If the user-provided
+   *  value is out of date, this request returns an `ABORTED` error.
    */
   // const etag = 'abc123'
 

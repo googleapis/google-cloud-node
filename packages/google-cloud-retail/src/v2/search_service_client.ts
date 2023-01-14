@@ -44,7 +44,7 @@ const version = require('../../../package.json').version;
  *  Service for search.
  *
  *  This feature is only available for users who have Retail Search enabled.
- *  Enable Retail Search on Cloud Console before using this feature.
+ *  Please enable Retail Search on Cloud Console before using this feature.
  * @class
  * @memberof v2
  */
@@ -399,7 +399,7 @@ export class SearchServiceClient {
    * Performs a search.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
+   * Please enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -408,7 +408,7 @@ export class SearchServiceClient {
    *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
    *   or the name of the legacy placement resource, such as
    *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
-   *   This field is used to identify the serving config name and the set
+   *   This field is used to identify the serving configuration name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
    *   The branch resource name, such as
@@ -593,7 +593,7 @@ export class SearchServiceClient {
    *   {@link google.cloud.retail.v2.UserEvent.page_categories|UserEvent.page_categories};
    *
    *   To represent full path of category, use '>' sign to separate different
-   *   hierarchies. If '>' is part of the category name, replace it with
+   *   hierarchies. If '>' is part of the category name, please replace it with
    *   other character(s).
    *
    *   Category pages include special pages such as sales or promotions. For
@@ -723,7 +723,7 @@ export class SearchServiceClient {
    *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
    *   or the name of the legacy placement resource, such as
    *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
-   *   This field is used to identify the serving config name and the set
+   *   This field is used to identify the serving configuration name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
    *   The branch resource name, such as
@@ -908,7 +908,7 @@ export class SearchServiceClient {
    *   {@link google.cloud.retail.v2.UserEvent.page_categories|UserEvent.page_categories};
    *
    *   To represent full path of category, use '>' sign to separate different
-   *   hierarchies. If '>' is part of the category name, replace it with
+   *   hierarchies. If '>' is part of the category name, please replace it with
    *   other character(s).
    *
    *   Category pages include special pages such as sales or promotions. For
@@ -994,7 +994,7 @@ export class SearchServiceClient {
    *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
    *   or the name of the legacy placement resource, such as
    *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
-   *   This field is used to identify the serving config name and the set
+   *   This field is used to identify the serving configuration name and the set
    *   of models that will be used to make the search.
    * @param {string} request.branch
    *   The branch resource name, such as
@@ -1179,7 +1179,7 @@ export class SearchServiceClient {
    *   {@link google.cloud.retail.v2.UserEvent.page_categories|UserEvent.page_categories};
    *
    *   To represent full path of category, use '>' sign to separate different
-   *   hierarchies. If '>' is part of the category name, replace it with
+   *   hierarchies. If '>' is part of the category name, please replace it with
    *   other character(s).
    *
    *   Category pages include special pages such as sales or promotions. For

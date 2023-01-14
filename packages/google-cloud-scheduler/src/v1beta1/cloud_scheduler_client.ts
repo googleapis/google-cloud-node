@@ -25,8 +25,6 @@ import type {
   ClientOptions,
   PaginationCallback,
   GaxCall,
-  LocationsClient,
-  LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -62,7 +60,6 @@ export class CloudSchedulerClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
-  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   cloudSchedulerStub?: Promise<{[name: string]: Function}>;
 
@@ -159,10 +156,6 @@ export class CloudSchedulerClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
-    this.locationsClient = new this._gaxModule.LocationsClient(
-      this._gaxGrpc,
-      opts
-    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -445,8 +438,7 @@ export class CloudSchedulerClient {
    *   `projects/PROJECT_ID/locations/LOCATION_ID`.
    * @param {google.cloud.scheduler.v1beta1.Job} request.job
    *   Required. The job to add. The user can optionally specify a name for the
-   *   job in {@link google.cloud.scheduler.v1beta1.Job.name|name}.
-   *   {@link google.cloud.scheduler.v1beta1.Job.name|name} cannot be the same as an
+   *   job in {@link google.cloud.scheduler.v1beta1.Job.name|name}. {@link google.cloud.scheduler.v1beta1.Job.name|name} cannot be the same as an
    *   existing job. If a name is not specified then the system will
    *   generate a random unique name that will be returned
    *   ({@link google.cloud.scheduler.v1beta1.Job.name|name}) in the response.
@@ -537,20 +529,18 @@ export class CloudSchedulerClient {
   /**
    * Updates a job.
    *
-   * If successful, the updated {@link google.cloud.scheduler.v1beta1.Job|Job} is
-   * returned. If the job does not exist, `NOT_FOUND` is returned.
+   * If successful, the updated {@link google.cloud.scheduler.v1beta1.Job|Job} is returned. If the job does
+   * not exist, `NOT_FOUND` is returned.
    *
    * If UpdateJob does not successfully return, it is possible for the
-   * job to be in an
-   * {@link google.cloud.scheduler.v1beta1.Job.State.UPDATE_FAILED|Job.State.UPDATE_FAILED}
-   * state. A job in this state may not be executed. If this happens, retry the
-   * UpdateJob request until a successful response is received.
+   * job to be in an {@link google.cloud.scheduler.v1beta1.Job.State.UPDATE_FAILED|Job.State.UPDATE_FAILED} state. A job in this state may
+   * not be executed. If this happens, retry the UpdateJob request
+   * until a successful response is received.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.scheduler.v1beta1.Job} request.job
-   *   Required. The new job properties.
-   *   {@link google.cloud.scheduler.v1beta1.Job.name|name} must be specified.
+   *   Required. The new job properties. {@link google.cloud.scheduler.v1beta1.Job.name|name} must be specified.
    *
    *   Output only fields cannot be modified using UpdateJob.
    *   Any value specified for an output only field will be ignored.
@@ -648,10 +638,6 @@ export class CloudSchedulerClient {
    * @param {string} request.name
    *   Required. The job name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
-   * @param {boolean} request.legacyAppEngineCron
-   *   This field is used to manage the legacy App Engine Cron jobs using the
-   *   Cloud Scheduler API. If the field is set to true, the job in the __cron
-   *   queue with the corresponding name will be deleted instead.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -740,14 +726,10 @@ export class CloudSchedulerClient {
    * Pauses a job.
    *
    * If a job is paused then the system will stop executing the job
-   * until it is re-enabled via
-   * {@link google.cloud.scheduler.v1beta1.CloudScheduler.ResumeJob|ResumeJob}. The
-   * state of the job is stored in
-   * {@link google.cloud.scheduler.v1beta1.Job.state|state}; if paused it will be set
-   * to {@link google.cloud.scheduler.v1beta1.Job.State.PAUSED|Job.State.PAUSED}. A
-   * job must be in
-   * {@link google.cloud.scheduler.v1beta1.Job.State.ENABLED|Job.State.ENABLED} to be
-   * paused.
+   * until it is re-enabled via {@link google.cloud.scheduler.v1beta1.CloudScheduler.ResumeJob|ResumeJob}. The
+   * state of the job is stored in {@link google.cloud.scheduler.v1beta1.Job.state|state}; if paused it
+   * will be set to {@link google.cloud.scheduler.v1beta1.Job.State.PAUSED|Job.State.PAUSED}. A job must be in {@link google.cloud.scheduler.v1beta1.Job.State.ENABLED|Job.State.ENABLED}
+   * to be paused.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -835,15 +817,10 @@ export class CloudSchedulerClient {
   /**
    * Resume a job.
    *
-   * This method reenables a job after it has been
-   * {@link google.cloud.scheduler.v1beta1.Job.State.PAUSED|Job.State.PAUSED}. The
-   * state of a job is stored in
-   * {@link google.cloud.scheduler.v1beta1.Job.state|Job.state}; after calling this
-   * method it will be set to
-   * {@link google.cloud.scheduler.v1beta1.Job.State.ENABLED|Job.State.ENABLED}. A
-   * job must be in
-   * {@link google.cloud.scheduler.v1beta1.Job.State.PAUSED|Job.State.PAUSED} to be
-   * resumed.
+   * This method reenables a job after it has been {@link google.cloud.scheduler.v1beta1.Job.State.PAUSED|Job.State.PAUSED}. The
+   * state of a job is stored in {@link google.cloud.scheduler.v1beta1.Job.state|Job.state}; after calling this method it
+   * will be set to {@link google.cloud.scheduler.v1beta1.Job.State.ENABLED|Job.State.ENABLED}. A job must be in
+   * {@link google.cloud.scheduler.v1beta1.Job.State.PAUSED|Job.State.PAUSED} to be resumed.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -945,10 +922,6 @@ export class CloudSchedulerClient {
    * @param {string} request.name
    *   Required. The job name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
-   * @param {boolean} request.legacyAppEngineCron
-   *   This field is used to manage the legacy App Engine Cron jobs using the
-   *   Cloud Scheduler API. If the field is set to true, the job in the __cron
-   *   queue with the corresponding name will be forced to run instead.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1036,15 +1009,6 @@ export class CloudSchedulerClient {
    * @param {string} request.parent
    *   Required. The location name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID`.
-   * @param {string} request.filter
-   *   `filter` can be used to specify a subset of jobs.
-   *
-   *   If `filter` equals `target_config="HttpConfig"`, then the http
-   *   target jobs are retrieved. If `filter` equals
-   *   `target_config="PubSubConfig"`, then the Pub/Sub target jobs are
-   *   retrieved. If `filter` equals `labels.foo=value1
-   *   labels.foo=value2` then only jobs which are labeled with
-   *   foo=value1 AND foo=value2 will be returned.
    * @param {number} request.pageSize
    *   Requested page size.
    *
@@ -1056,17 +1020,10 @@ export class CloudSchedulerClient {
    *   A token identifying a page of results the server will return. To
    *   request the first page results, page_token must be empty. To
    *   request the next page of results, page_token must be the value of
-   *   {@link google.cloud.scheduler.v1beta1.ListJobsResponse.next_page_token|next_page_token}
-   *   returned from the previous call to
-   *   {@link google.cloud.scheduler.v1beta1.CloudScheduler.ListJobs|ListJobs}. It is
-   *   an error to switch the value of
-   *   {@link google.cloud.scheduler.v1beta1.ListJobsRequest.filter|filter} or
-   *   {@link google.cloud.scheduler.v1beta1.ListJobsRequest.order_by|order_by} while
-   *   iterating through pages.
-   * @param {boolean} request.legacyAppEngineCron
-   *   This field is used to manage the legacy App Engine Cron jobs using the
-   *   Cloud Scheduler API. If the field is set to true, the jobs in the __cron
-   *   queue will be listed instead.
+   *   {@link google.cloud.scheduler.v1beta1.ListJobsResponse.next_page_token|next_page_token} returned from
+   *   the previous call to {@link google.cloud.scheduler.v1beta1.CloudScheduler.ListJobs|ListJobs}. It is an error to
+   *   switch the value of {@link google.cloud.scheduler.v1beta1.ListJobsRequest.filter|filter} or
+   *   {@link google.cloud.scheduler.v1beta1.ListJobsRequest.order_by|order_by} while iterating through pages.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1162,15 +1119,6 @@ export class CloudSchedulerClient {
    * @param {string} request.parent
    *   Required. The location name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID`.
-   * @param {string} request.filter
-   *   `filter` can be used to specify a subset of jobs.
-   *
-   *   If `filter` equals `target_config="HttpConfig"`, then the http
-   *   target jobs are retrieved. If `filter` equals
-   *   `target_config="PubSubConfig"`, then the Pub/Sub target jobs are
-   *   retrieved. If `filter` equals `labels.foo=value1
-   *   labels.foo=value2` then only jobs which are labeled with
-   *   foo=value1 AND foo=value2 will be returned.
    * @param {number} request.pageSize
    *   Requested page size.
    *
@@ -1182,17 +1130,10 @@ export class CloudSchedulerClient {
    *   A token identifying a page of results the server will return. To
    *   request the first page results, page_token must be empty. To
    *   request the next page of results, page_token must be the value of
-   *   {@link google.cloud.scheduler.v1beta1.ListJobsResponse.next_page_token|next_page_token}
-   *   returned from the previous call to
-   *   {@link google.cloud.scheduler.v1beta1.CloudScheduler.ListJobs|ListJobs}. It is
-   *   an error to switch the value of
-   *   {@link google.cloud.scheduler.v1beta1.ListJobsRequest.filter|filter} or
-   *   {@link google.cloud.scheduler.v1beta1.ListJobsRequest.order_by|order_by} while
-   *   iterating through pages.
-   * @param {boolean} request.legacyAppEngineCron
-   *   This field is used to manage the legacy App Engine Cron jobs using the
-   *   Cloud Scheduler API. If the field is set to true, the jobs in the __cron
-   *   queue will be listed instead.
+   *   {@link google.cloud.scheduler.v1beta1.ListJobsResponse.next_page_token|next_page_token} returned from
+   *   the previous call to {@link google.cloud.scheduler.v1beta1.CloudScheduler.ListJobs|ListJobs}. It is an error to
+   *   switch the value of {@link google.cloud.scheduler.v1beta1.ListJobsRequest.filter|filter} or
+   *   {@link google.cloud.scheduler.v1beta1.ListJobsRequest.order_by|order_by} while iterating through pages.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1236,15 +1177,6 @@ export class CloudSchedulerClient {
    * @param {string} request.parent
    *   Required. The location name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID`.
-   * @param {string} request.filter
-   *   `filter` can be used to specify a subset of jobs.
-   *
-   *   If `filter` equals `target_config="HttpConfig"`, then the http
-   *   target jobs are retrieved. If `filter` equals
-   *   `target_config="PubSubConfig"`, then the Pub/Sub target jobs are
-   *   retrieved. If `filter` equals `labels.foo=value1
-   *   labels.foo=value2` then only jobs which are labeled with
-   *   foo=value1 AND foo=value2 will be returned.
    * @param {number} request.pageSize
    *   Requested page size.
    *
@@ -1256,17 +1188,10 @@ export class CloudSchedulerClient {
    *   A token identifying a page of results the server will return. To
    *   request the first page results, page_token must be empty. To
    *   request the next page of results, page_token must be the value of
-   *   {@link google.cloud.scheduler.v1beta1.ListJobsResponse.next_page_token|next_page_token}
-   *   returned from the previous call to
-   *   {@link google.cloud.scheduler.v1beta1.CloudScheduler.ListJobs|ListJobs}. It is
-   *   an error to switch the value of
-   *   {@link google.cloud.scheduler.v1beta1.ListJobsRequest.filter|filter} or
-   *   {@link google.cloud.scheduler.v1beta1.ListJobsRequest.order_by|order_by} while
-   *   iterating through pages.
-   * @param {boolean} request.legacyAppEngineCron
-   *   This field is used to manage the legacy App Engine Cron jobs using the
-   *   Cloud Scheduler API. If the field is set to true, the jobs in the __cron
-   *   queue will be listed instead.
+   *   {@link google.cloud.scheduler.v1beta1.ListJobsResponse.next_page_token|next_page_token} returned from
+   *   the previous call to {@link google.cloud.scheduler.v1beta1.CloudScheduler.ListJobs|ListJobs}. It is an error to
+   *   switch the value of {@link google.cloud.scheduler.v1beta1.ListJobsRequest.filter|filter} or
+   *   {@link google.cloud.scheduler.v1beta1.ListJobsRequest.order_by|order_by} while iterating through pages.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1301,86 +1226,6 @@ export class CloudSchedulerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.scheduler.v1beta1.IJob>;
   }
-  /**
-   * Gets information about a location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Resource name for the location.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Location]{@link google.cloud.location.Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.getLocation(request);
-   * ```
-   */
-  getLocation(
-    request: LocationProtos.google.cloud.location.IGetLocationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          LocationProtos.google.cloud.location.ILocation,
-          | LocationProtos.google.cloud.location.IGetLocationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LocationProtos.google.cloud.location.ILocation,
-      | LocationProtos.google.cloud.location.IGetLocationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<LocationProtos.google.cloud.location.ILocation> {
-    return this.locationsClient.getLocation(request, options, callback);
-  }
-
-  /**
-   * Lists information about the supported locations for this service. Returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The resource that owns the locations collection, if applicable.
-   * @param {string} request.filter
-   *   The standard list filter.
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [Location]{@link google.cloud.location.Location}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const iterable = client.listLocationsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
-   * ```
-   */
-  listLocationsAsync(
-    request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
-  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
-    return this.locationsClient.listLocationsAsync(request, options);
-  }
-
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1504,7 +1349,6 @@ export class CloudSchedulerClient {
       return this.cloudSchedulerStub.then(stub => {
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
       });
     }
     return Promise.resolve();

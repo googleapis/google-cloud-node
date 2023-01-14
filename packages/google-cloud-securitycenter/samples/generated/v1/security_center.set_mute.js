@@ -29,9 +29,9 @@ function main(name, mute) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The relative resource
-   *  name (https://cloud.google.com/apis/design/resource_names#relative_resource_name)
-   *  of the finding. Example:
+   *  Required. The relative resource name of the finding. See:
+   *  https://cloud.google.com/apis/design/resource_names#relative_resource_name
+   *  Example:
    *  "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}",
    *  "folders/{folder_id}/sources/{source_id}/findings/{finding_id}",
    *  "projects/{project_id}/sources/{source_id}/findings/{finding_id}".

@@ -66,7 +66,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -374,7 +374,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -386,10 +386,6 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "skip_billing_check",
-                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.recaptchaenterprise.v1.Key",
@@ -458,7 +454,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -506,7 +502,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],

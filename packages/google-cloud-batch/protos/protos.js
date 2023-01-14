@@ -20457,7 +20457,6 @@
                              * @property {string|null} [minCpuPlatform] InstancePolicy minCpuPlatform
                              * @property {google.cloud.batch.v1alpha.AllocationPolicy.ProvisioningModel|null} [provisioningModel] InstancePolicy provisioningModel
                              * @property {Array.<google.cloud.batch.v1alpha.AllocationPolicy.IAccelerator>|null} [accelerators] InstancePolicy accelerators
-                             * @property {google.cloud.batch.v1alpha.AllocationPolicy.IDisk|null} [bootDisk] InstancePolicy bootDisk
                              * @property {Array.<google.cloud.batch.v1alpha.AllocationPolicy.IAttachedDisk>|null} [disks] InstancePolicy disks
                              * @property {string|null} [reservation] InstancePolicy reservation
                              */
@@ -20521,14 +20520,6 @@
                             InstancePolicy.prototype.accelerators = $util.emptyArray;
     
                             /**
-                             * InstancePolicy bootDisk.
-                             * @member {google.cloud.batch.v1alpha.AllocationPolicy.IDisk|null|undefined} bootDisk
-                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.InstancePolicy
-                             * @instance
-                             */
-                            InstancePolicy.prototype.bootDisk = null;
-    
-                            /**
                              * InstancePolicy disks.
                              * @member {Array.<google.cloud.batch.v1alpha.AllocationPolicy.IAttachedDisk>} disks
                              * @memberof google.cloud.batch.v1alpha.AllocationPolicy.InstancePolicy
@@ -20585,8 +20576,6 @@
                                         $root.google.cloud.batch.v1alpha.AllocationPolicy.AttachedDisk.encode(message.disks[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 if (message.reservation != null && Object.hasOwnProperty.call(message, "reservation"))
                                     writer.uint32(/* id 7, wireType 2 =*/58).string(message.reservation);
-                                if (message.bootDisk != null && Object.hasOwnProperty.call(message, "bootDisk"))
-                                    $root.google.cloud.batch.v1alpha.AllocationPolicy.Disk.encode(message.bootDisk, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 return writer;
                             };
     
@@ -20643,10 +20632,6 @@
                                             if (!(message.accelerators && message.accelerators.length))
                                                 message.accelerators = [];
                                             message.accelerators.push($root.google.cloud.batch.v1alpha.AllocationPolicy.Accelerator.decode(reader, reader.uint32()));
-                                            break;
-                                        }
-                                    case 8: {
-                                            message.bootDisk = $root.google.cloud.batch.v1alpha.AllocationPolicy.Disk.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 6: {
@@ -20726,11 +20711,6 @@
                                             return "accelerators." + error;
                                     }
                                 }
-                                if (message.bootDisk != null && message.hasOwnProperty("bootDisk")) {
-                                    var error = $root.google.cloud.batch.v1alpha.AllocationPolicy.Disk.verify(message.bootDisk);
-                                    if (error)
-                                        return "bootDisk." + error;
-                                }
                                 if (message.disks != null && message.hasOwnProperty("disks")) {
                                     if (!Array.isArray(message.disks))
                                         return "disks: array expected";
@@ -20803,11 +20783,6 @@
                                         message.accelerators[i] = $root.google.cloud.batch.v1alpha.AllocationPolicy.Accelerator.fromObject(object.accelerators[i]);
                                     }
                                 }
-                                if (object.bootDisk != null) {
-                                    if (typeof object.bootDisk !== "object")
-                                        throw TypeError(".google.cloud.batch.v1alpha.AllocationPolicy.InstancePolicy.bootDisk: object expected");
-                                    message.bootDisk = $root.google.cloud.batch.v1alpha.AllocationPolicy.Disk.fromObject(object.bootDisk);
-                                }
                                 if (object.disks) {
                                     if (!Array.isArray(object.disks))
                                         throw TypeError(".google.cloud.batch.v1alpha.AllocationPolicy.InstancePolicy.disks: array expected");
@@ -20846,7 +20821,6 @@
                                     object.minCpuPlatform = "";
                                     object.provisioningModel = options.enums === String ? "PROVISIONING_MODEL_UNSPECIFIED" : 0;
                                     object.reservation = "";
-                                    object.bootDisk = null;
                                 }
                                 if (message.allowedMachineTypes && message.allowedMachineTypes.length) {
                                     object.allowedMachineTypes = [];
@@ -20871,8 +20845,6 @@
                                 }
                                 if (message.reservation != null && message.hasOwnProperty("reservation"))
                                     object.reservation = message.reservation;
-                                if (message.bootDisk != null && message.hasOwnProperty("bootDisk"))
-                                    object.bootDisk = $root.google.cloud.batch.v1alpha.AllocationPolicy.Disk.toObject(message.bootDisk, options);
                                 return object;
                             };
     

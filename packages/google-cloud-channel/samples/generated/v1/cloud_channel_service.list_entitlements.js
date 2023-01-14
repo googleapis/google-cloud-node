@@ -35,18 +35,16 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Requested page size. Server might return fewer results than
-   *  requested. If unspecified, return at most 50 entitlements. The maximum
-   *  value is 100; the server will coerce values above 100.
+   *  Optional. Requested page size. Server might return fewer results than requested.
+   *  If unspecified, return at most 50 entitlements.
+   *  The maximum value is 100; the server will coerce values above 100.
    */
   // const pageSize = 1234
   /**
    *  Optional. A token for a page of results other than the first page.
    *  Obtained using
-   *  ListEntitlementsResponse.next_page_token google.cloud.channel.v1.ListEntitlementsResponse.next_page_token 
-   *  of the previous
-   *  CloudChannelService.ListEntitlements google.cloud.channel.v1.CloudChannelService.ListEntitlements 
-   *  call.
+   *  ListEntitlementsResponse.next_page_token google.cloud.channel.v1.ListEntitlementsResponse.next_page_token  of the previous
+   *  CloudChannelService.ListEntitlements google.cloud.channel.v1.CloudChannelService.ListEntitlements  call.
    */
   // const pageToken = 'abc123'
 
