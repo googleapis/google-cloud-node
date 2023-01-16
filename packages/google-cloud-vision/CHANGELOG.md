@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [3.1.0](https://github.com/googleapis/nodejs-vision/compare/v3.0.1...v3.1.0) (2023-01-14)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#1081](https://github.com/googleapis/nodejs-vision/issues/1081)) ([e46aaec](https://github.com/googleapis/nodejs-vision/commit/e46aaec37c70c3fa05c7b390bb06fddde30fc4ee))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency natural to v6 ([#1085](https://github.com/googleapis/nodejs-vision/issues/1085)) ([f9bdd84](https://github.com/googleapis/nodejs-vision/commit/f9bdd849ad0e9c0724deeb52eea8791a0186ed9d))
+* **deps:** Update dependency redis to ~4.5.0 ([#1072](https://github.com/googleapis/nodejs-vision/issues/1072)) ([109fed0](https://github.com/googleapis/nodejs-vision/commit/109fed01d6ddefe81e352861f482b207e79fd10b))
+* **deps:** Use google-gax v3.5.2 ([#1073](https://github.com/googleapis/nodejs-vision/issues/1073)) ([47281f6](https://github.com/googleapis/nodejs-vision/commit/47281f6bcf25d8223d065ec99b8db51624c34cbd))
+* Regenerated protos JS and TS definitions ([#1077](https://github.com/googleapis/nodejs-vision/issues/1077)) ([4f7610f](https://github.com/googleapis/nodejs-vision/commit/4f7610f253ceb694abfb41aa2a6a2e02493e1c52))
+
 ## [3.0.1](https://github.com/googleapis/nodejs-vision/compare/v3.0.0...v3.0.1) (2022-09-21)
 
 
