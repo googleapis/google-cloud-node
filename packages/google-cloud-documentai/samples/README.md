@@ -21,6 +21,7 @@
   * [Document_processor_service.enable_processor](#document_processor_service.enable_processor)
   * [Document_processor_service.fetch_processor_types](#document_processor_service.fetch_processor_types)
   * [Document_processor_service.get_processor](#document_processor_service.get_processor)
+  * [Document_processor_service.get_processor_type](#document_processor_service.get_processor_type)
   * [Document_processor_service.get_processor_version](#document_processor_service.get_processor_version)
   * [Document_processor_service.list_processor_types](#document_processor_service.list_processor_types)
   * [Document_processor_service.list_processor_versions](#document_processor_service.list_processor_versions)
@@ -218,6 +219,23 @@ __Usage:__
 
 
 `node packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_processor.js`
+
+
+-----
+
+
+
+
+### Document_processor_service.get_processor_type
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_processor_type.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_processor_type.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_processor_type.js`
 
 
 -----
