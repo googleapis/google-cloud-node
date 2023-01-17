@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,9 +29,10 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Environment google.cloud.dialogflow.cx.v3.Environment  to list all environments for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/environments/<Environment ID>`.
+   *  Required. The Environment google.cloud.dialogflow.cx.v3.Environment  to
+   *  list all environments for. Format: `projects/<Project
+   *  ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
+   *  ID>`.
    */
   // const parent = 'abc123'
   /**
