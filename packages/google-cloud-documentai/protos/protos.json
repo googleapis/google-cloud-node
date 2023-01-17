@@ -5558,6 +5558,24 @@
                             }
                           ]
                         },
+                        "GetProcessorType": {
+                          "requestType": "GetProcessorTypeRequest",
+                          "responseType": "ProcessorType",
+                          "options": {
+                            "(google.api.http).get": "/v1beta3/{name=projects/*/locations/*/processorTypes/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta3/{name=projects/*/locations/*/processorTypes/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "ListProcessors": {
                           "requestType": "ListProcessorsRequest",
                           "responseType": "ListProcessorsResponse",
@@ -6276,6 +6294,18 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "GetProcessorTypeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorType"
+                          }
                         }
                       }
                     },
