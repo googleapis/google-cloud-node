@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,7 +33,8 @@ function main(account, serviceAccount) {
    */
   // const account = 'abc123'
   /**
-   *  Required. Service account that provides subscriber access to the registered topic.
+   *  Required. Service account that provides subscriber access to the registered
+   *  topic.
    */
   // const serviceAccount = 'abc123'
 
