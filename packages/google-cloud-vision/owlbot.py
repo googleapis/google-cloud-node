@@ -15,7 +15,7 @@
 """This script is used to synthesize generated parts of this library."""
 
 import synthtool as s
-import synthtool.languages.node as node
+import synthtool.languages.node_mono_repo as node
 from pathlib import Path
 
 def patch(library: Path):
@@ -26,7 +26,7 @@ def patch(library: Path):
         'export interface ImageAnnotatorClient extends FeaturesMethod {}\n'
     )
 
-node.owlbot_main(
+node.owlbot_main(relative_dir="packages/google-cloud-vision",
     staging_excludes=['src/index.ts', 'package.json'],
     templates_excludes=['src/index.ts'],
     patch_staging=patch
