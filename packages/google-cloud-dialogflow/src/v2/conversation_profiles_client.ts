@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,7 +42,8 @@ import * as gapicConfig from './conversation_profiles_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.v2.ConversationProfile|ConversationProfiles}.
+ *  Service for managing
+ *  {@link google.cloud.dialogflow.v2.ConversationProfile|ConversationProfiles}.
  * @class
  * @memberof v2
  */
@@ -677,7 +678,8 @@ export class ConversationProfilesClient {
    *
    * {@link |ConversationProfile.CreateTime} and {@link |ConversationProfile.UpdateTime}
    * aren't populated in the response. You can retrieve them via
-   * {@link google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile|GetConversationProfile} API.
+   * {@link google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile|GetConversationProfile}
+   * API.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -785,7 +787,8 @@ export class ConversationProfilesClient {
    *
    * {@link |ConversationProfile.CreateTime} and {@link |ConversationProfile.UpdateTime}
    * aren't populated in the response. You can retrieve them via
-   * {@link google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile|GetConversationProfile} API.
+   * {@link google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile|GetConversationProfile}
+   * API.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1001,8 +1004,10 @@ export class ConversationProfilesClient {
    * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata|SetSuggestionFeatureConfigOperationMetadata}
-   * - `response`: {@link google.cloud.dialogflow.v2.ConversationProfile|ConversationProfile}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata|SetSuggestionFeatureConfigOperationMetadata}
+   * - `response`:
+   * {@link google.cloud.dialogflow.v2.ConversationProfile|ConversationProfile}
    *
    * If a long running operation to add or update suggestion feature
    * config for the same conversation profile, participant role and suggestion
@@ -1163,8 +1168,10 @@ export class ConversationProfilesClient {
    * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata|ClearSuggestionFeatureConfigOperationMetadata}
-   * - `response`: {@link google.cloud.dialogflow.v2.ConversationProfile|ConversationProfile}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata|ClearSuggestionFeatureConfigOperationMetadata}
+   * - `response`:
+   * {@link google.cloud.dialogflow.v2.ConversationProfile|ConversationProfile}
    *
    * @param {Object} request
    *   The request object that will be sent.
