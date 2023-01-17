@@ -55,9 +55,6 @@ export namespace google {
 
                     /** Access serviceAccountDelegationInfo */
                     serviceAccountDelegationInfo?: (google.cloud.securitycenter.v1.IServiceAccountDelegationInfo[]|null);
-
-                    /** Access userName */
-                    userName?: (string|null);
                 }
 
                 /** Represents an Access. */
@@ -95,9 +92,6 @@ export namespace google {
 
                     /** Access serviceAccountDelegationInfo. */
                     public serviceAccountDelegationInfo: google.cloud.securitycenter.v1.IServiceAccountDelegationInfo[];
-
-                    /** Access userName. */
-                    public userName: string;
 
                     /**
                      * Creates a new Access instance using the specified properties.
@@ -2446,9 +2440,6 @@ export namespace google {
 
                     /** Finding files */
                     files?: (google.cloud.securitycenter.v1.IFile[]|null);
-
-                    /** Finding kernelRootkit */
-                    kernelRootkit?: (google.cloud.securitycenter.v1.IKernelRootkit|null);
                 }
 
                 /** Represents a Finding. */
@@ -2561,9 +2552,6 @@ export namespace google {
 
                     /** Finding files. */
                     public files: google.cloud.securitycenter.v1.IFile[];
-
-                    /** Finding kernelRootkit. */
-                    public kernelRootkit?: (google.cloud.securitycenter.v1.IKernelRootkit|null);
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -3330,151 +3318,6 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
-                }
-
-                /** Properties of a KernelRootkit. */
-                interface IKernelRootkit {
-
-                    /** KernelRootkit name */
-                    name?: (string|null);
-
-                    /** KernelRootkit unexpectedCodeModification */
-                    unexpectedCodeModification?: (boolean|null);
-
-                    /** KernelRootkit unexpectedReadOnlyDataModification */
-                    unexpectedReadOnlyDataModification?: (boolean|null);
-
-                    /** KernelRootkit unexpectedFtraceHandler */
-                    unexpectedFtraceHandler?: (boolean|null);
-
-                    /** KernelRootkit unexpectedKprobeHandler */
-                    unexpectedKprobeHandler?: (boolean|null);
-
-                    /** KernelRootkit unexpectedKernelCodePages */
-                    unexpectedKernelCodePages?: (boolean|null);
-
-                    /** KernelRootkit unexpectedSystemCallHandler */
-                    unexpectedSystemCallHandler?: (boolean|null);
-
-                    /** KernelRootkit unexpectedInterruptHandler */
-                    unexpectedInterruptHandler?: (boolean|null);
-
-                    /** KernelRootkit unexpectedProcessesInRunqueue */
-                    unexpectedProcessesInRunqueue?: (boolean|null);
-                }
-
-                /** Represents a KernelRootkit. */
-                class KernelRootkit implements IKernelRootkit {
-
-                    /**
-                     * Constructs a new KernelRootkit.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.securitycenter.v1.IKernelRootkit);
-
-                    /** KernelRootkit name. */
-                    public name: string;
-
-                    /** KernelRootkit unexpectedCodeModification. */
-                    public unexpectedCodeModification: boolean;
-
-                    /** KernelRootkit unexpectedReadOnlyDataModification. */
-                    public unexpectedReadOnlyDataModification: boolean;
-
-                    /** KernelRootkit unexpectedFtraceHandler. */
-                    public unexpectedFtraceHandler: boolean;
-
-                    /** KernelRootkit unexpectedKprobeHandler. */
-                    public unexpectedKprobeHandler: boolean;
-
-                    /** KernelRootkit unexpectedKernelCodePages. */
-                    public unexpectedKernelCodePages: boolean;
-
-                    /** KernelRootkit unexpectedSystemCallHandler. */
-                    public unexpectedSystemCallHandler: boolean;
-
-                    /** KernelRootkit unexpectedInterruptHandler. */
-                    public unexpectedInterruptHandler: boolean;
-
-                    /** KernelRootkit unexpectedProcessesInRunqueue. */
-                    public unexpectedProcessesInRunqueue: boolean;
-
-                    /**
-                     * Creates a new KernelRootkit instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns KernelRootkit instance
-                     */
-                    public static create(properties?: google.cloud.securitycenter.v1.IKernelRootkit): google.cloud.securitycenter.v1.KernelRootkit;
-
-                    /**
-                     * Encodes the specified KernelRootkit message. Does not implicitly {@link google.cloud.securitycenter.v1.KernelRootkit.verify|verify} messages.
-                     * @param message KernelRootkit message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.securitycenter.v1.IKernelRootkit, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified KernelRootkit message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.KernelRootkit.verify|verify} messages.
-                     * @param message KernelRootkit message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IKernelRootkit, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a KernelRootkit message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns KernelRootkit
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.KernelRootkit;
-
-                    /**
-                     * Decodes a KernelRootkit message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns KernelRootkit
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.KernelRootkit;
-
-                    /**
-                     * Verifies a KernelRootkit message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a KernelRootkit message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns KernelRootkit
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.KernelRootkit;
-
-                    /**
-                     * Creates a plain object from a KernelRootkit message. Also converts values to other types if specified.
-                     * @param message KernelRootkit
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.securitycenter.v1.KernelRootkit, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this KernelRootkit to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for KernelRootkit
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Kubernetes. */

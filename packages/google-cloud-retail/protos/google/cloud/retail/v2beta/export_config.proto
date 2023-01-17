@@ -81,14 +81,10 @@ message ExportUserEventsResponse {
   OutputResult output_result = 3;
 }
 
-// Output result that stores the information about where the exported data is
-// stored.
+// Output result.
 message OutputResult {
-  // The BigQuery location where the result is stored.
+  // Export result in BigQuery.
   repeated BigQueryOutputResult bigquery_result = 1;
-
-  // The Google Cloud Storage location where the result is stored.
-  repeated GcsOutputResult gcs_result = 2;
 }
 
 // A BigQuery output result.
@@ -98,10 +94,4 @@ message BigQueryOutputResult {
 
   // The ID of a BigQuery Table.
   string table_id = 2;
-}
-
-// A Gcs output result.
-message GcsOutputResult {
-  // The uri of Gcs output
-  string output_uri = 1;
 }

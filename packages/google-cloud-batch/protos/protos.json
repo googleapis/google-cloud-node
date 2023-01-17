@@ -1916,10 +1916,6 @@
                               "type": "Accelerator",
                               "id": 5
                             },
-                            "bootDisk": {
-                              "type": "Disk",
-                              "id": 8
-                            },
                             "disks": {
                               "rule": "repeated",
                               "type": "AttachedDisk",
@@ -2067,7 +2063,10 @@
                         "scopes": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       }
                     },
