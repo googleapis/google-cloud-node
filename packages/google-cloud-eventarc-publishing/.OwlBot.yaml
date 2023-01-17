@@ -17,4 +17,4 @@ deep-remove-regex:
 deep-copy-regex:
   - source: /google/cloud/eventarc/publishing/(.*)/.*-nodejs
     dest: /owl-bot-staging/google-cloud-eventarc-publishing/$1
-api-name: eventarc
+api-name: eventarc-publishing

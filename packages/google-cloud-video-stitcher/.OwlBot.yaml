@@ -17,4 +17,4 @@ deep-remove-regex:
 deep-copy-regex:
   - source: /google/cloud/video/stitcher/(.*)/.*-nodejs
     dest: /owl-bot-staging/google-cloud-video-stitcher/$1
-api-name: video
+api-name: video-stitcher

@@ -17,4 +17,4 @@ deep-remove-regex:
 deep-copy-regex:
   - source: /google/analytics/data/(.*)/.*-nodejs
     dest: /owl-bot-staging/google-analytics-data/$1
-api-name: data
+api-name: analytics-data

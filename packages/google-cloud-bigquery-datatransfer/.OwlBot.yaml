@@ -17,4 +17,4 @@ deep-remove-regex:
 deep-copy-regex:
   - source: /google/cloud/bigquery/datatransfer/(.*)/.*-nodejs
     dest: /owl-bot-staging/google-cloud-bigquery-datatransfer/$1
-api-name: bigquery
+api-name: bigquery-datatransfer

@@ -18,4 +18,4 @@ deep-copy-regex:
   - source: /google/cloud/video/transcoder/(v.*)/.*-nodejs
     dest: /owl-bot-staging/google-cloud-video-transcoder/$1
 begin-after-commit-hash: fb91803ccef5d7c695139b22788b309e2197856b
-api-name: video
+api-name: video-transcoder

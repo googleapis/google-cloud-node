@@ -17,4 +17,4 @@ deep-remove-regex:
 deep-copy-regex:
   - source: /google/iam/credentials/(.*)/.*-nodejs
     dest: /owl-bot-staging/google-iam-credentials/$1
-api-name: credentials
+api-name: iam-credentials

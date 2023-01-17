@@ -17,4 +17,4 @@ deep-remove-regex:
 deep-copy-regex:
   - source: /google/cloud/billing/budgets/(.*)/.*-nodejs
     dest: /owl-bot-staging/google-cloud-billing-budgets/$1
-api-name: billing
+api-name: billing-budgets
