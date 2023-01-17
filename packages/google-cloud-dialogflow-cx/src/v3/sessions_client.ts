@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,8 +40,9 @@ const version = require('../../../package.json').version;
 
 /**
  *  A session represents an interaction with a user. You retrieve user input
- *  and pass it to the {@link google.cloud.dialogflow.cx.v3.Sessions.DetectIntent|DetectIntent} method to determine
- *  user intent and respond.
+ *  and pass it to the
+ *  {@link google.cloud.dialogflow.cx.v3.Sessions.DetectIntent|DetectIntent} method to
+ *  determine user intent and respond.
  * @class
  * @memberof v3
  */
@@ -694,9 +695,13 @@ export class SessionsClient {
     return this.innerApiCalls.matchIntent(request, options, callback);
   }
   /**
-   * Fulfills a matched intent returned by {@link google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}.
-   * Must be called after {@link google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}, with input from
-   * {@link google.cloud.dialogflow.cx.v3.MatchIntentResponse|MatchIntentResponse}. Otherwise, the behavior is undefined.
+   * Fulfills a matched intent returned by
+   * {@link google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}. Must be
+   * called after
+   * {@link google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}, with
+   * input from
+   * {@link google.cloud.dialogflow.cx.v3.MatchIntentResponse|MatchIntentResponse}.
+   * Otherwise, the behavior is undefined.
    *
    * @param {Object} request
    *   The request object that will be sent.
