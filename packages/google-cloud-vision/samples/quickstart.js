@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
+
 'use strict';
 
-function main(name) {
-  // [START vision_quickstart]
+function main(parent) {
+  // [START vision_v1p4beta1_generated_ProductSearch_ListProducts_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -27,11 +29,11 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The ProductSet resource for which to retrieve Products.
-   *  Format is:
-   *  `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
+   *  Required. The project OR ProductSet from which Products should be listed.
+   *  Format:
+   *  `projects/PROJECT_ID/locations/LOC_ID`
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
    *  The maximum number of items to return. Default 10, maximum 100.
    */
@@ -47,21 +49,21 @@ function main(name) {
   // Instantiates a client
   const visionClient = new ProductSearchClient();
 
-  async function callListProductsInProductSet() {
+  async function callListProducts() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const iterable = await visionClient.listProductsInProductSetAsync(request);
+    const iterable = await visionClient.listProductsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
-  callListProductsInProductSet();
-  // [END vision_quickstart]
+  callListProducts();
+  // [END vision_v1p4beta1_generated_ProductSearch_ListProducts_async]
 }
 
 process.on('unhandledRejection', err => {
