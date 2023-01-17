@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The field will contain name of the resource requested, for example:
-   *  `projects/{project_id}/transferConfigs/{config_id}` or
+   *  Required. The field will contain name of the resource requested, for
+   *  example: `projects/{project_id}/transferConfigs/{config_id}` or
    *  `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
    */
   // const name = 'abc123'
