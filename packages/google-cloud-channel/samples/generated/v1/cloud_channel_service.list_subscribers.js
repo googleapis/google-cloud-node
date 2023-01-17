@@ -33,10 +33,10 @@ function main(account) {
    */
   // const account = 'abc123'
   /**
-   *  Optional. The maximum number of service accounts to return. The service may
-   *  return fewer than this value. If unspecified, returns at most 100 service
-   *  accounts. The maximum value is 1000; the server will coerce values above
-   *  1000.
+   *  Optional. The maximum number of service accounts to return. The service may return
+   *  fewer than this value.
+   *  If unspecified, returns at most 100 service accounts.
+   *  The maximum value is 1000; the server will coerce values above 1000.
    */
   // const pageSize = 1234
   /**

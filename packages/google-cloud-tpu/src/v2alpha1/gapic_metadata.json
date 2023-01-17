@@ -15,11 +15,6 @@
                 "getNode"
               ]
             },
-            "GetQueuedResource": {
-              "methods": [
-                "getQueuedResource"
-              ]
-            },
             "GenerateServiceIdentity": {
               "methods": [
                 "generateServiceIdentity"
@@ -65,33 +60,11 @@
                 "updateNode"
               ]
             },
-            "CreateQueuedResource": {
-              "methods": [
-                "createQueuedResource"
-              ]
-            },
-            "DeleteQueuedResource": {
-              "methods": [
-                "deleteQueuedResource"
-              ]
-            },
-            "SimulateMaintenanceEvent": {
-              "methods": [
-                "simulateMaintenanceEvent"
-              ]
-            },
             "ListNodes": {
               "methods": [
                 "listNodes",
                 "listNodesStream",
                 "listNodesAsync"
-              ]
-            },
-            "ListQueuedResources": {
-              "methods": [
-                "listQueuedResources",
-                "listQueuedResourcesStream",
-                "listQueuedResourcesAsync"
               ]
             },
             "ListAcceleratorTypes": {
@@ -118,11 +91,6 @@
                 "getNode"
               ]
             },
-            "GetQueuedResource": {
-              "methods": [
-                "getQueuedResource"
-              ]
-            },
             "GenerateServiceIdentity": {
               "methods": [
                 "generateServiceIdentity"
@@ -168,33 +136,11 @@
                 "updateNode"
               ]
             },
-            "CreateQueuedResource": {
-              "methods": [
-                "createQueuedResource"
-              ]
-            },
-            "DeleteQueuedResource": {
-              "methods": [
-                "deleteQueuedResource"
-              ]
-            },
-            "SimulateMaintenanceEvent": {
-              "methods": [
-                "simulateMaintenanceEvent"
-              ]
-            },
             "ListNodes": {
               "methods": [
                 "listNodes",
                 "listNodesStream",
                 "listNodesAsync"
-              ]
-            },
-            "ListQueuedResources": {
-              "methods": [
-                "listQueuedResources",
-                "listQueuedResourcesStream",
-                "listQueuedResourcesAsync"
               ]
             },
             "ListAcceleratorTypes": {

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START workflows_v1_generated_Workflows_DeleteWorkflow_async]
+function main(parent, patchDeploymentId, patchDeployment) {
+  // [START osconfig_v1beta_generated_OsConfigService_CreatePatchDeployment_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,45 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the workflow to be deleted.
-   *  Format: projects/{project}/locations/{location}/workflows/{workflow}
+   *  Required. The project to apply this patch deployment to in the form `projects/*`.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Required. A name for the patch deployment in the project. When creating a name
+   *  the following rules apply:
+   *  * Must contain only lowercase letters, numbers, and hyphens.
+   *  * Must start with a letter.
+   *  * Must be between 1-63 characters.
+   *  * Must end with a number or a letter.
+   *  * Must be unique within the project.
+   */
+  // const patchDeploymentId = 'abc123'
+  /**
+   *  Required. The patch deployment to create.
+   */
+  // const patchDeployment = {}
 
-  // Imports the Workflows library
-  const {WorkflowsClient} = require('@google-cloud/workflows').v1;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const workflowsClient = new WorkflowsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callDeleteWorkflow() {
+  async function callCreatePatchDeployment() {
     // Construct request
     const request = {
-      name,
+      parent,
+      patchDeploymentId,
+      patchDeployment,
     };
 
     // Run request
-    const [operation] = await workflowsClient.deleteWorkflow(request);
-    const [response] = await operation.promise();
+    const response = await osconfigClient.createPatchDeployment(request);
     console.log(response);
   }
 
-  callDeleteWorkflow();
-  // [END workflows_v1_generated_Workflows_DeleteWorkflow_async]
+  callCreatePatchDeployment();
+  // [END osconfig_v1beta_generated_OsConfigService_CreatePatchDeployment_async]
 }
 
 process.on('unhandledRejection', err => {

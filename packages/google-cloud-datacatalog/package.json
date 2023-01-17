@@ -44,7 +44,7 @@
     "linkinator": "^4.0.0",
     "mocha": "^9.2.2",
     "pack-n-play": "^1.0.0-2",
-    "sinon": "^14.0.0",
+    "sinon": "^15.0.0",
     "typescript": "^4.6.4"
   },
   "scripts": {

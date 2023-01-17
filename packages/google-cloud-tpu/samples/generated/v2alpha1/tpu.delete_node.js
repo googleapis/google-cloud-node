@@ -32,10 +32,6 @@ function main(name) {
    *  Required. The resource name.
    */
   // const name = 'abc123'
-  /**
-   *  Idempotent request UUID.
-   */
-  // const requestId = 'abc123'
 
   // Imports the Tpu library
   const {TpuClient} = require('@google-cloud/tpu').v2alpha1;

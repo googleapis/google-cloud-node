@@ -50,10 +50,8 @@ function main(parent, sku) {
   /**
    *  A token for a page of results other than the first page.
    *  Obtained using
-   *  ListTransferableOffersResponse.next_page_token google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token 
-   *  of the previous
-   *  CloudChannelService.ListTransferableOffers google.cloud.channel.v1.CloudChannelService.ListTransferableOffers 
-   *  call.
+   *  ListTransferableOffersResponse.next_page_token google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token  of the previous
+   *  CloudChannelService.ListTransferableOffers google.cloud.channel.v1.CloudChannelService.ListTransferableOffers  call.
    */
   // const pageToken = 'abc123'
   /**

@@ -44,11 +44,11 @@ const version = require('../../../package.json').version;
 /**
  *  Service for performing CRUD operations on models.
  *  Recommendation models contain all the metadata necessary to generate a set of
- *  models for the `Predict()` API. A model is queried
+ *  models for the Predict() api. A model is queried
  *  indirectly via a ServingConfig, which associates a model with a
  *  given Placement (e.g. Frequently Bought Together on Home Page).
  *
- *  This service allows you to do the following:
+ *  This service allows customers to e.g.:
  *
  *  * Initiate training of a model.
  *  * Pause training of an existing model.
@@ -249,9 +249,6 @@ export class ModelServiceClient {
           get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
           additional_bindings: [
             {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',
-            },
-            {
               get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
             },
             {get: '/v2alpha/{name=projects/*/locations/*/operations/*}'},
@@ -448,7 +445,7 @@ export class ModelServiceClient {
    * @param {string} request.name
    *   Required. The name of the model to pause.
    *   Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`
+   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -535,7 +532,7 @@ export class ModelServiceClient {
    * @param {string} request.name
    *   Required. The name of the model to resume.
    *   Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`
+   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -620,9 +617,9 @@ export class ModelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the
-   *   {@link google.cloud.retail.v2alpha.Model|Model} to delete. Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`
+   *   Required. The resource name of the [Model] to delete.
+   *   Format:
+   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -703,18 +700,16 @@ export class ModelServiceClient {
   }
   /**
    * Update of model metadata. Only fields that
-   * currently can be updated are: `filtering_option` and
-   * `periodic_tuning_state`.
-   * If other values are provided, this API method ignores them.
+   * currently can be updated are: filtering_option, periodic_tuning_state.
+   * If other values are provided, this API method will ignore them.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.retail.v2alpha.Model} request.model
-   *   Required. The body of the updated
-   *   {@link google.cloud.retail.v2alpha.Model|Model}.
+   *   Required. The body of the updated [Model].
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. Indicates which fields in the provided 'model' to
-   *   update. If not set, by default updates all fields.
+   *   update. If not set, will by default update all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -801,12 +796,11 @@ export class ModelServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource under which to create the model. Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
    * @param {google.cloud.retail.v2alpha.Model} request.model
-   *   Required. The payload of the {@link google.cloud.retail.v2alpha.Model|Model}  to
-   *   create.
+   *   Required. The payload of the [Model]  to create.
    * @param {boolean} [request.dryRun]
-   *   Optional. Whether to run a dry run to validate the request (without
+   *   Optional. Whether to run a dry_run to validate the request (without
    *   actually creating the model).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -947,7 +941,7 @@ export class ModelServiceClient {
    * @param {string} request.name
    *   Required. The resource name of the model to tune.
    *   Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`
+   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1087,7 +1081,7 @@ export class ModelServiceClient {
    * @param {string} request.parent
    *   Required. The parent for which to list models.
    *   Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 50. Max allowed value is 1000.
@@ -1183,7 +1177,7 @@ export class ModelServiceClient {
    * @param {string} request.parent
    *   Required. The parent for which to list models.
    *   Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 50. Max allowed value is 1000.
@@ -1233,7 +1227,7 @@ export class ModelServiceClient {
    * @param {string} request.parent
    *   Required. The parent for which to list models.
    *   Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 50. Max allowed value is 1000.

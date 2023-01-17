@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, execution) {
-  // [START workflowexecutions_v1beta_generated_Executions_CreateExecution_async]
+function main(parent, guestPolicyId, guestPolicy) {
+  // [START osconfig_v1beta_generated_OsConfigService_CreateGuestPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,46 @@ function main(parent, execution) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the workflow for which an execution should be created.
-   *  Format: projects/{project}/locations/{location}/workflows/{workflow}
-   *  The latest revision of the workflow will be used.
+   *  Required. The resource name of the parent using one of the following forms:
+   *  `projects/{project_number}`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. Execution to be created.
+   *  Required. The logical name of the guest policy in the project
+   *  with the following restrictions:
+   *  * Must contain only lowercase letters, numbers, and hyphens.
+   *  * Must start with a letter.
+   *  * Must be between 1-63 characters.
+   *  * Must end with a number or a letter.
+   *  * Must be unique within the project.
    */
-  // const execution = {}
+  // const guestPolicyId = 'abc123'
+  /**
+   *  Required. The GuestPolicy to create.
+   */
+  // const guestPolicy = {}
 
-  // Imports the Executions library
-  const {ExecutionsClient} = require('@google-cloud/workflows-executions').v1beta;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const executionsClient = new ExecutionsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callCreateExecution() {
+  async function callCreateGuestPolicy() {
     // Construct request
     const request = {
       parent,
-      execution,
+      guestPolicyId,
+      guestPolicy,
     };
 
     // Run request
-    const response = await executionsClient.createExecution(request);
+    const response = await osconfigClient.createGuestPolicy(request);
     console.log(response);
   }
 
-  callCreateExecution();
-  // [END workflowexecutions_v1beta_generated_Executions_CreateExecution_async]
+  callCreateGuestPolicy();
+  // [END osconfig_v1beta_generated_OsConfigService_CreateGuestPolicy_async]
 }
 
 process.on('unhandledRejection', err => {
