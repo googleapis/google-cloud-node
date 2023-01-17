@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the customer repricing config rule to delete.
-   *  Format:
+   *  Required. The resource name of the customer repricing config rule to
+   *  delete. Format:
    *  accounts/{account_id}/customers/{customer_id}/customerRepricingConfigs/{id}.
    */
   // const name = 'abc123'

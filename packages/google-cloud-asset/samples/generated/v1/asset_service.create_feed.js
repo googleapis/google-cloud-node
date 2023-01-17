@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,9 +42,8 @@ function main(parent, feedId, feed) {
    */
   // const feedId = 'abc123'
   /**
-   *  Required. The feed details. The field `name` must be empty and it will be generated
-   *  in the format of:
-   *  projects/project_number/feeds/feed_id
+   *  Required. The feed details. The field `name` must be empty and it will be
+   *  generated in the format of: projects/project_number/feeds/feed_id
    *  folders/folder_number/feeds/feed_id
    *  organizations/organization_number/feeds/feed_id
    */

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,14 +29,14 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the reseller account from which to list Offers.
-   *  Parent uses the format: accounts/{account_id}.
+   *  Required. The resource name of the reseller account from which to list
+   *  Offers. Parent uses the format: accounts/{account_id}.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Requested page size. Server might return fewer results than requested.
-   *  If unspecified, returns at most 500 Offers.
-   *  The maximum value is 1000; the server will coerce values above 1000.
+   *  Optional. Requested page size. Server might return fewer results than
+   *  requested. If unspecified, returns at most 500 Offers. The maximum value is
+   *  1000; the server will coerce values above 1000.
    */
   // const pageSize = 1234
   /**

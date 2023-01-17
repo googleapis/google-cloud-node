@@ -1491,6 +1491,11 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "conditionalOverrides": {
+                          "rule": "repeated",
+                          "type": "ConditionalOverride",
+                          "id": 6
                         }
                       },
                       "nested": {
@@ -1530,6 +1535,54 @@
                         "percentage": {
                           "type": "google.type.Decimal",
                           "id": 2
+                        }
+                      }
+                    },
+                    "ConditionalOverride": {
+                      "fields": {
+                        "adjustment": {
+                          "type": "RepricingAdjustment",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "rebillingBasis": {
+                          "type": "RebillingBasis",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "repricingCondition": {
+                          "type": "RepricingCondition",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RepricingCondition": {
+                      "oneofs": {
+                        "condition": {
+                          "oneof": [
+                            "skuGroupCondition"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "skuGroupCondition": {
+                          "type": "SkuGroupCondition",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SkuGroupCondition": {
+                      "fields": {
+                        "skuGroup": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
