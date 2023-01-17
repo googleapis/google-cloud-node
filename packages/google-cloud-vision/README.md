@@ -93,7 +93,7 @@ async function callListProductsInProductSet() {
   // Run request
   const iterable = await visionClient.listProductsInProductSetAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
