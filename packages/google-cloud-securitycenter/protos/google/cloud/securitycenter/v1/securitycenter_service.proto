@@ -792,9 +792,9 @@ message GetSourceRequest {
 
 // Request message for grouping by assets.
 message GroupAssetsRequest {
-  // Required. Name of the organization to groupBy. Its format is
-  // "organizations/[organization_id], folders/[folder_id], or
-  // projects/[project_id]".
+  // Required. The name of the parent to group the assets by. Its format is
+  // "organizations/[organization_id]", "folders/[folder_id]", or
+  // "projects/[project_id]".
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -1192,8 +1192,8 @@ message ListNotificationConfigsResponse {
 // Request message for listing sources.
 message ListSourcesRequest {
   // Required. Resource name of the parent of sources to list. Its format should
-  // be "organizations/[organization_id], folders/[folder_id], or
-  // projects/[project_id]".
+  // be "organizations/[organization_id]", "folders/[folder_id]", or
+  // "projects/[project_id]".
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -1223,9 +1223,11 @@ message ListSourcesResponse {
 
 // Request message for listing assets.
 message ListAssetsRequest {
-  // Required. Name of the organization assets should belong to. Its format is
-  // "organizations/[organization_id], folders/[folder_id], or
-  // projects/[project_id]".
+  // Required. The name of the parent resource that contains the assets. The
+  // value that you can specify on parent depends on the method in which you
+  // specify parent. You can specify one of the following values:
+  // "organizations/[organization_id]", "folders/[folder_id]", or
+  // "projects/[project_id]".
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
