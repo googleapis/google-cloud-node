@@ -29,8 +29,8 @@ function main(parent, customer) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of reseller account in which to create the
-   *  customer. Parent uses the format: accounts/{account_id}
+   *  Required. The resource name of reseller account in which to create the customer.
+   *  Parent uses the format: accounts/{account_id}
    */
   // const parent = 'abc123'
   /**

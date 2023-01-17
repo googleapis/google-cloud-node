@@ -987,6 +987,198 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Represents an IdentityAwareProxyOAuthService */
+                class IdentityAwareProxyOAuthService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new IdentityAwareProxyOAuthService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new IdentityAwareProxyOAuthService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): IdentityAwareProxyOAuthService;
+
+                    /**
+                     * Calls ListBrands.
+                     * @param request ListBrandsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListBrandsResponse
+                     */
+                    public listBrands(request: google.cloud.iap.v1.IListBrandsRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListBrandsCallback): void;
+
+                    /**
+                     * Calls ListBrands.
+                     * @param request ListBrandsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listBrands(request: google.cloud.iap.v1.IListBrandsRequest): Promise<google.cloud.iap.v1.ListBrandsResponse>;
+
+                    /**
+                     * Calls CreateBrand.
+                     * @param request CreateBrandRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Brand
+                     */
+                    public createBrand(request: google.cloud.iap.v1.ICreateBrandRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateBrandCallback): void;
+
+                    /**
+                     * Calls CreateBrand.
+                     * @param request CreateBrandRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createBrand(request: google.cloud.iap.v1.ICreateBrandRequest): Promise<google.cloud.iap.v1.Brand>;
+
+                    /**
+                     * Calls GetBrand.
+                     * @param request GetBrandRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Brand
+                     */
+                    public getBrand(request: google.cloud.iap.v1.IGetBrandRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetBrandCallback): void;
+
+                    /**
+                     * Calls GetBrand.
+                     * @param request GetBrandRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getBrand(request: google.cloud.iap.v1.IGetBrandRequest): Promise<google.cloud.iap.v1.Brand>;
+
+                    /**
+                     * Calls CreateIdentityAwareProxyClient.
+                     * @param request CreateIdentityAwareProxyClientRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
+                     */
+                    public createIdentityAwareProxyClient(request: google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateIdentityAwareProxyClientCallback): void;
+
+                    /**
+                     * Calls CreateIdentityAwareProxyClient.
+                     * @param request CreateIdentityAwareProxyClientRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createIdentityAwareProxyClient(request: google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
+
+                    /**
+                     * Calls ListIdentityAwareProxyClients.
+                     * @param request ListIdentityAwareProxyClientsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListIdentityAwareProxyClientsResponse
+                     */
+                    public listIdentityAwareProxyClients(request: google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListIdentityAwareProxyClientsCallback): void;
+
+                    /**
+                     * Calls ListIdentityAwareProxyClients.
+                     * @param request ListIdentityAwareProxyClientsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listIdentityAwareProxyClients(request: google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest): Promise<google.cloud.iap.v1.ListIdentityAwareProxyClientsResponse>;
+
+                    /**
+                     * Calls GetIdentityAwareProxyClient.
+                     * @param request GetIdentityAwareProxyClientRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
+                     */
+                    public getIdentityAwareProxyClient(request: google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetIdentityAwareProxyClientCallback): void;
+
+                    /**
+                     * Calls GetIdentityAwareProxyClient.
+                     * @param request GetIdentityAwareProxyClientRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIdentityAwareProxyClient(request: google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
+
+                    /**
+                     * Calls ResetIdentityAwareProxyClientSecret.
+                     * @param request ResetIdentityAwareProxyClientSecretRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
+                     */
+                    public resetIdentityAwareProxyClientSecret(request: google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ResetIdentityAwareProxyClientSecretCallback): void;
+
+                    /**
+                     * Calls ResetIdentityAwareProxyClientSecret.
+                     * @param request ResetIdentityAwareProxyClientSecretRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resetIdentityAwareProxyClientSecret(request: google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
+
+                    /**
+                     * Calls DeleteIdentityAwareProxyClient.
+                     * @param request DeleteIdentityAwareProxyClientRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteIdentityAwareProxyClient(request: google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.DeleteIdentityAwareProxyClientCallback): void;
+
+                    /**
+                     * Calls DeleteIdentityAwareProxyClient.
+                     * @param request DeleteIdentityAwareProxyClientRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteIdentityAwareProxyClient(request: google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace IdentityAwareProxyOAuthService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|listBrands}.
+                     * @param error Error, if any
+                     * @param [response] ListBrandsResponse
+                     */
+                    type ListBrandsCallback = (error: (Error|null), response?: google.cloud.iap.v1.ListBrandsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|createBrand}.
+                     * @param error Error, if any
+                     * @param [response] Brand
+                     */
+                    type CreateBrandCallback = (error: (Error|null), response?: google.cloud.iap.v1.Brand) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|getBrand}.
+                     * @param error Error, if any
+                     * @param [response] Brand
+                     */
+                    type GetBrandCallback = (error: (Error|null), response?: google.cloud.iap.v1.Brand) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|createIdentityAwareProxyClient}.
+                     * @param error Error, if any
+                     * @param [response] IdentityAwareProxyClient
+                     */
+                    type CreateIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|listIdentityAwareProxyClients}.
+                     * @param error Error, if any
+                     * @param [response] ListIdentityAwareProxyClientsResponse
+                     */
+                    type ListIdentityAwareProxyClientsCallback = (error: (Error|null), response?: google.cloud.iap.v1.ListIdentityAwareProxyClientsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|getIdentityAwareProxyClient}.
+                     * @param error Error, if any
+                     * @param [response] IdentityAwareProxyClient
+                     */
+                    type GetIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|resetIdentityAwareProxyClientSecret}.
+                     * @param error Error, if any
+                     * @param [response] IdentityAwareProxyClient
+                     */
+                    type ResetIdentityAwareProxyClientSecretCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|deleteIdentityAwareProxyClient}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
                 /** Properties of a GetIapSettingsRequest. */
                 interface IGetIapSettingsRequest {
 
@@ -1310,9 +1502,6 @@ export namespace google {
 
                     /** AccessSettings reauthSettings */
                     reauthSettings?: (google.cloud.iap.v1.IReauthSettings|null);
-
-                    /** AccessSettings allowedDomainsSettings */
-                    allowedDomainsSettings?: (google.cloud.iap.v1.IAllowedDomainsSettings|null);
                 }
 
                 /** Represents an AccessSettings. */
@@ -1335,9 +1524,6 @@ export namespace google {
 
                     /** AccessSettings reauthSettings. */
                     public reauthSettings?: (google.cloud.iap.v1.IReauthSettings|null);
-
-                    /** AccessSettings allowedDomainsSettings. */
-                    public allowedDomainsSettings?: (google.cloud.iap.v1.IAllowedDomainsSettings|null);
 
                     /**
                      * Creates a new AccessSettings instance using the specified properties.
@@ -1841,112 +2027,6 @@ export namespace google {
                     }
                 }
 
-                /** Properties of an AllowedDomainsSettings. */
-                interface IAllowedDomainsSettings {
-
-                    /** AllowedDomainsSettings enable */
-                    enable?: (boolean|null);
-
-                    /** AllowedDomainsSettings domains */
-                    domains?: (string[]|null);
-                }
-
-                /** Represents an AllowedDomainsSettings. */
-                class AllowedDomainsSettings implements IAllowedDomainsSettings {
-
-                    /**
-                     * Constructs a new AllowedDomainsSettings.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iap.v1.IAllowedDomainsSettings);
-
-                    /** AllowedDomainsSettings enable. */
-                    public enable?: (boolean|null);
-
-                    /** AllowedDomainsSettings domains. */
-                    public domains: string[];
-
-                    /** AllowedDomainsSettings _enable. */
-                    public _enable?: "enable";
-
-                    /**
-                     * Creates a new AllowedDomainsSettings instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns AllowedDomainsSettings instance
-                     */
-                    public static create(properties?: google.cloud.iap.v1.IAllowedDomainsSettings): google.cloud.iap.v1.AllowedDomainsSettings;
-
-                    /**
-                     * Encodes the specified AllowedDomainsSettings message. Does not implicitly {@link google.cloud.iap.v1.AllowedDomainsSettings.verify|verify} messages.
-                     * @param message AllowedDomainsSettings message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iap.v1.IAllowedDomainsSettings, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified AllowedDomainsSettings message, length delimited. Does not implicitly {@link google.cloud.iap.v1.AllowedDomainsSettings.verify|verify} messages.
-                     * @param message AllowedDomainsSettings message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iap.v1.IAllowedDomainsSettings, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an AllowedDomainsSettings message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns AllowedDomainsSettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iap.v1.AllowedDomainsSettings;
-
-                    /**
-                     * Decodes an AllowedDomainsSettings message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns AllowedDomainsSettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iap.v1.AllowedDomainsSettings;
-
-                    /**
-                     * Verifies an AllowedDomainsSettings message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an AllowedDomainsSettings message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns AllowedDomainsSettings
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iap.v1.AllowedDomainsSettings;
-
-                    /**
-                     * Creates a plain object from an AllowedDomainsSettings message. Also converts values to other types if specified.
-                     * @param message AllowedDomainsSettings
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iap.v1.AllowedDomainsSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this AllowedDomainsSettings to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for AllowedDomainsSettings
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Properties of an ApplicationSettings. */
                 interface IApplicationSettings {
 
@@ -1958,9 +2038,6 @@ export namespace google {
 
                     /** ApplicationSettings cookieDomain */
                     cookieDomain?: (google.protobuf.IStringValue|null);
-
-                    /** ApplicationSettings attributePropagationSettings */
-                    attributePropagationSettings?: (google.cloud.iap.v1.IAttributePropagationSettings|null);
                 }
 
                 /** Represents an ApplicationSettings. */
@@ -1980,9 +2057,6 @@ export namespace google {
 
                     /** ApplicationSettings cookieDomain. */
                     public cookieDomain?: (google.protobuf.IStringValue|null);
-
-                    /** ApplicationSettings attributePropagationSettings. */
-                    public attributePropagationSettings?: (google.cloud.iap.v1.IAttributePropagationSettings|null);
 
                     /**
                      * Creates a new ApplicationSettings instance using the specified properties.
@@ -2167,9 +2241,6 @@ export namespace google {
 
                     /** AccessDeniedPageSettings generateTroubleshootingUri */
                     generateTroubleshootingUri?: (google.protobuf.IBoolValue|null);
-
-                    /** AccessDeniedPageSettings remediationTokenGenerationEnabled */
-                    remediationTokenGenerationEnabled?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents an AccessDeniedPageSettings. */
@@ -2186,12 +2257,6 @@ export namespace google {
 
                     /** AccessDeniedPageSettings generateTroubleshootingUri. */
                     public generateTroubleshootingUri?: (google.protobuf.IBoolValue|null);
-
-                    /** AccessDeniedPageSettings remediationTokenGenerationEnabled. */
-                    public remediationTokenGenerationEnabled?: (google.protobuf.IBoolValue|null);
-
-                    /** AccessDeniedPageSettings _remediationTokenGenerationEnabled. */
-                    public _remediationTokenGenerationEnabled?: "remediationTokenGenerationEnabled";
 
                     /**
                      * Creates a new AccessDeniedPageSettings instance using the specified properties.
@@ -2269,324 +2334,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an AttributePropagationSettings. */
-                interface IAttributePropagationSettings {
-
-                    /** AttributePropagationSettings expression */
-                    expression?: (string|null);
-
-                    /** AttributePropagationSettings outputCredentials */
-                    outputCredentials?: (google.cloud.iap.v1.AttributePropagationSettings.OutputCredentials[]|null);
-
-                    /** AttributePropagationSettings enable */
-                    enable?: (boolean|null);
-                }
-
-                /** Represents an AttributePropagationSettings. */
-                class AttributePropagationSettings implements IAttributePropagationSettings {
-
-                    /**
-                     * Constructs a new AttributePropagationSettings.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iap.v1.IAttributePropagationSettings);
-
-                    /** AttributePropagationSettings expression. */
-                    public expression?: (string|null);
-
-                    /** AttributePropagationSettings outputCredentials. */
-                    public outputCredentials: google.cloud.iap.v1.AttributePropagationSettings.OutputCredentials[];
-
-                    /** AttributePropagationSettings enable. */
-                    public enable?: (boolean|null);
-
-                    /** AttributePropagationSettings _expression. */
-                    public _expression?: "expression";
-
-                    /** AttributePropagationSettings _enable. */
-                    public _enable?: "enable";
-
-                    /**
-                     * Creates a new AttributePropagationSettings instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns AttributePropagationSettings instance
-                     */
-                    public static create(properties?: google.cloud.iap.v1.IAttributePropagationSettings): google.cloud.iap.v1.AttributePropagationSettings;
-
-                    /**
-                     * Encodes the specified AttributePropagationSettings message. Does not implicitly {@link google.cloud.iap.v1.AttributePropagationSettings.verify|verify} messages.
-                     * @param message AttributePropagationSettings message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iap.v1.IAttributePropagationSettings, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified AttributePropagationSettings message, length delimited. Does not implicitly {@link google.cloud.iap.v1.AttributePropagationSettings.verify|verify} messages.
-                     * @param message AttributePropagationSettings message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iap.v1.IAttributePropagationSettings, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an AttributePropagationSettings message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns AttributePropagationSettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iap.v1.AttributePropagationSettings;
-
-                    /**
-                     * Decodes an AttributePropagationSettings message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns AttributePropagationSettings
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iap.v1.AttributePropagationSettings;
-
-                    /**
-                     * Verifies an AttributePropagationSettings message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an AttributePropagationSettings message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns AttributePropagationSettings
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iap.v1.AttributePropagationSettings;
-
-                    /**
-                     * Creates a plain object from an AttributePropagationSettings message. Also converts values to other types if specified.
-                     * @param message AttributePropagationSettings
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iap.v1.AttributePropagationSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this AttributePropagationSettings to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for AttributePropagationSettings
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace AttributePropagationSettings {
-
-                    /** OutputCredentials enum. */
-                    enum OutputCredentials {
-                        OUTPUT_CREDENTIALS_UNSPECIFIED = 0,
-                        HEADER = 1,
-                        JWT = 2,
-                        RCTOKEN = 3
-                    }
-                }
-
-                /** Represents an IdentityAwareProxyOAuthService */
-                class IdentityAwareProxyOAuthService extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new IdentityAwareProxyOAuthService service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new IdentityAwareProxyOAuthService service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): IdentityAwareProxyOAuthService;
-
-                    /**
-                     * Calls ListBrands.
-                     * @param request ListBrandsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListBrandsResponse
-                     */
-                    public listBrands(request: google.cloud.iap.v1.IListBrandsRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListBrandsCallback): void;
-
-                    /**
-                     * Calls ListBrands.
-                     * @param request ListBrandsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listBrands(request: google.cloud.iap.v1.IListBrandsRequest): Promise<google.cloud.iap.v1.ListBrandsResponse>;
-
-                    /**
-                     * Calls CreateBrand.
-                     * @param request CreateBrandRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Brand
-                     */
-                    public createBrand(request: google.cloud.iap.v1.ICreateBrandRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateBrandCallback): void;
-
-                    /**
-                     * Calls CreateBrand.
-                     * @param request CreateBrandRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createBrand(request: google.cloud.iap.v1.ICreateBrandRequest): Promise<google.cloud.iap.v1.Brand>;
-
-                    /**
-                     * Calls GetBrand.
-                     * @param request GetBrandRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Brand
-                     */
-                    public getBrand(request: google.cloud.iap.v1.IGetBrandRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetBrandCallback): void;
-
-                    /**
-                     * Calls GetBrand.
-                     * @param request GetBrandRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getBrand(request: google.cloud.iap.v1.IGetBrandRequest): Promise<google.cloud.iap.v1.Brand>;
-
-                    /**
-                     * Calls CreateIdentityAwareProxyClient.
-                     * @param request CreateIdentityAwareProxyClientRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
-                     */
-                    public createIdentityAwareProxyClient(request: google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateIdentityAwareProxyClientCallback): void;
-
-                    /**
-                     * Calls CreateIdentityAwareProxyClient.
-                     * @param request CreateIdentityAwareProxyClientRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createIdentityAwareProxyClient(request: google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
-
-                    /**
-                     * Calls ListIdentityAwareProxyClients.
-                     * @param request ListIdentityAwareProxyClientsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListIdentityAwareProxyClientsResponse
-                     */
-                    public listIdentityAwareProxyClients(request: google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListIdentityAwareProxyClientsCallback): void;
-
-                    /**
-                     * Calls ListIdentityAwareProxyClients.
-                     * @param request ListIdentityAwareProxyClientsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listIdentityAwareProxyClients(request: google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest): Promise<google.cloud.iap.v1.ListIdentityAwareProxyClientsResponse>;
-
-                    /**
-                     * Calls GetIdentityAwareProxyClient.
-                     * @param request GetIdentityAwareProxyClientRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
-                     */
-                    public getIdentityAwareProxyClient(request: google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetIdentityAwareProxyClientCallback): void;
-
-                    /**
-                     * Calls GetIdentityAwareProxyClient.
-                     * @param request GetIdentityAwareProxyClientRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getIdentityAwareProxyClient(request: google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
-
-                    /**
-                     * Calls ResetIdentityAwareProxyClientSecret.
-                     * @param request ResetIdentityAwareProxyClientSecretRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
-                     */
-                    public resetIdentityAwareProxyClientSecret(request: google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ResetIdentityAwareProxyClientSecretCallback): void;
-
-                    /**
-                     * Calls ResetIdentityAwareProxyClientSecret.
-                     * @param request ResetIdentityAwareProxyClientSecretRequest message or plain object
-                     * @returns Promise
-                     */
-                    public resetIdentityAwareProxyClientSecret(request: google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
-
-                    /**
-                     * Calls DeleteIdentityAwareProxyClient.
-                     * @param request DeleteIdentityAwareProxyClientRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Empty
-                     */
-                    public deleteIdentityAwareProxyClient(request: google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.DeleteIdentityAwareProxyClientCallback): void;
-
-                    /**
-                     * Calls DeleteIdentityAwareProxyClient.
-                     * @param request DeleteIdentityAwareProxyClientRequest message or plain object
-                     * @returns Promise
-                     */
-                    public deleteIdentityAwareProxyClient(request: google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest): Promise<google.protobuf.Empty>;
-                }
-
-                namespace IdentityAwareProxyOAuthService {
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|listBrands}.
-                     * @param error Error, if any
-                     * @param [response] ListBrandsResponse
-                     */
-                    type ListBrandsCallback = (error: (Error|null), response?: google.cloud.iap.v1.ListBrandsResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|createBrand}.
-                     * @param error Error, if any
-                     * @param [response] Brand
-                     */
-                    type CreateBrandCallback = (error: (Error|null), response?: google.cloud.iap.v1.Brand) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|getBrand}.
-                     * @param error Error, if any
-                     * @param [response] Brand
-                     */
-                    type GetBrandCallback = (error: (Error|null), response?: google.cloud.iap.v1.Brand) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|createIdentityAwareProxyClient}.
-                     * @param error Error, if any
-                     * @param [response] IdentityAwareProxyClient
-                     */
-                    type CreateIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|listIdentityAwareProxyClients}.
-                     * @param error Error, if any
-                     * @param [response] ListIdentityAwareProxyClientsResponse
-                     */
-                    type ListIdentityAwareProxyClientsCallback = (error: (Error|null), response?: google.cloud.iap.v1.ListIdentityAwareProxyClientsResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|getIdentityAwareProxyClient}.
-                     * @param error Error, if any
-                     * @param [response] IdentityAwareProxyClient
-                     */
-                    type GetIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|resetIdentityAwareProxyClientSecret}.
-                     * @param error Error, if any
-                     * @param [response] IdentityAwareProxyClient
-                     */
-                    type ResetIdentityAwareProxyClientSecretCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|deleteIdentityAwareProxyClient}.
-                     * @param error Error, if any
-                     * @param [response] Empty
-                     */
-                    type DeleteIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of a ListBrandsRequest. */

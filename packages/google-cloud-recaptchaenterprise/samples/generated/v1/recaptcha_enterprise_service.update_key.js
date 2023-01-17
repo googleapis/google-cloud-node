@@ -33,8 +33,8 @@ function main(key) {
    */
   // const key = {}
   /**
-   *  Optional. The mask to control which fields of the key get updated. If the
-   *  mask is not present, all fields will be updated.
+   *  Optional. The mask to control which fields of the key get updated. If the mask is not
+   *  present, all fields will be updated.
    */
   // const updateMask = {}
 

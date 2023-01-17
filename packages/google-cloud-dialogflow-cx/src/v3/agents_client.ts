@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1074,7 +1074,8 @@ export class AgentsClient {
    *
    * - `metadata`: An empty [Struct
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-   * - `response`: {@link google.cloud.dialogflow.cx.v3.ExportAgentResponse|ExportAgentResponse}
+   * - `response`:
+   * {@link google.cloud.dialogflow.cx.v3.ExportAgentResponse|ExportAgentResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1082,10 +1083,10 @@ export class AgentsClient {
    *   Required. The name of the agent to export.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
    * @param {string} [request.agentUri]
-   *   Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to
-   *   export the agent to. The format of this URI must be
-   *   `gs://<bucket-name>/<object-name>`.
-   *   If left unspecified, the serialized agent is returned inline.
+   *   Optional. The [Google Cloud
+   *   Storage](https://cloud.google.com/storage/docs/) URI to export the agent
+   *   to. The format of this URI must be `gs://<bucket-name>/<object-name>`. If
+   *   left unspecified, the serialized agent is returned inline.
    *
    *   Dialogflow performs a write operation for the Cloud Storage object
    *   on the caller's behalf, so your request authentication must
@@ -1093,7 +1094,8 @@ export class AgentsClient {
    *   [Dialogflow access
    *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
    * @param {google.cloud.dialogflow.cx.v3.ExportAgentRequest.DataFormat} [request.dataFormat]
-   *   Optional. The data format of the exported agent. If not specified, `BLOB` is assumed.
+   *   Optional. The data format of the exported agent. If not specified, `BLOB`
+   *   is assumed.
    * @param {string} [request.environment]
    *   Optional. Environment name. If not set, draft environment is assumed.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent

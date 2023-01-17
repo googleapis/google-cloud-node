@@ -104,13 +104,7 @@ message Product {
 
   oneof expiration {
     // The timestamp when this product becomes unavailable for
-    // [SearchService.Search][google.cloud.retail.v2.SearchService.Search]. Note
-    // that this is only applicable to
-    // [Type.PRIMARY][google.cloud.retail.v2.Product.Type.PRIMARY] and
-    // [Type.COLLECTION][google.cloud.retail.v2.Product.Type.COLLECTION], and
-    // ignored for [Type.VARIANT][google.cloud.retail.v2.Product.Type.VARIANT].
-    // In general, we suggest the users to delete the stale products explicitly,
-    // instead of using this field to determine staleness.
+    // [SearchService.Search][google.cloud.retail.v2.SearchService.Search].
     //
     // If it is set, the [Product][google.cloud.retail.v2.Product] is not
     // available for
@@ -130,13 +124,7 @@ message Product {
     // [expiration_date](https://support.google.com/merchants/answer/6324499).
     google.protobuf.Timestamp expire_time = 16;
 
-    // Input only. The TTL (time to live) of the product. Note that this is only
-    // applicable to [Type.PRIMARY][google.cloud.retail.v2.Product.Type.PRIMARY]
-    // and [Type.COLLECTION][google.cloud.retail.v2.Product.Type.COLLECTION],
-    // and ignored for
-    // [Type.VARIANT][google.cloud.retail.v2.Product.Type.VARIANT]. In general,
-    // we suggest the users to delete the stale products explicitly, instead of
-    // using this field to determine staleness.
+    // Input only. The TTL (time to live) of the product.
     //
     // If it is set, it must be a non-negative value, and
     // [expire_time][google.cloud.retail.v2.Product.expire_time] is set as
@@ -238,7 +226,7 @@ message Product {
   //
   //
   // To represent full path of category, use '>' sign to separate different
-  // hierarchies. If '>' is part of the category name, replace it with
+  // hierarchies. If '>' is part of the category name, please replace it with
   // other character(s).
   //
   // For example, if a shoes product belongs to both
@@ -368,11 +356,7 @@ message Product {
 
   // The timestamp when this [Product][google.cloud.retail.v2.Product] becomes
   // available for
-  // [SearchService.Search][google.cloud.retail.v2.SearchService.Search]. Note
-  // that this is only applicable to
-  // [Type.PRIMARY][google.cloud.retail.v2.Product.Type.PRIMARY] and
-  // [Type.COLLECTION][google.cloud.retail.v2.Product.Type.COLLECTION], and
-  // ignored for [Type.VARIANT][google.cloud.retail.v2.Product.Type.VARIANT].
+  // [SearchService.Search][google.cloud.retail.v2.SearchService.Search].
   google.protobuf.Timestamp available_time = 18;
 
   // The online availability of the [Product][google.cloud.retail.v2.Product].
@@ -558,9 +542,7 @@ message Product {
   // Note: Returning more fields in
   // [SearchResponse][google.cloud.retail.v2.SearchResponse] can increase
   // response payload size and serving latency.
-  //
-  // This field is deprecated. Use the retrievable site-wide control instead.
-  google.protobuf.FieldMask retrievable_fields = 30 [deprecated = true];
+  google.protobuf.FieldMask retrievable_fields = 30;
 
   // Output only. Product variants grouped together on primary product which
   // share similar product attributes. It's automatically grouped by
@@ -577,11 +559,7 @@ message Product {
   // Output only. A list of local inventories specific to different places.
   //
   // This is only available for users who have Retail Search enabled, and it can
-  // be managed by
-  // [ProductService.AddLocalInventories][google.cloud.retail.v2.ProductService.AddLocalInventories]
-  // and
-  // [ProductService.RemoveLocalInventories][google.cloud.retail.v2.ProductService.RemoveLocalInventories]
-  // APIs.
+  // be managed by [AddLocalInventories][] and [RemoveLocalInventories][] APIs.
   repeated LocalInventory local_inventories = 35
       [(google.api.field_behavior) = OUTPUT_ONLY];
 }

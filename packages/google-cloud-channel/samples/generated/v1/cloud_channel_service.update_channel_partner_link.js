@@ -35,8 +35,8 @@ function main(name, channelPartnerLink, updateMask) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The channel partner link to update. Only
-   *  channel_partner_link.link_state is allowed for updates.
+   *  Required. The channel partner link to update. Only channel_partner_link.link_state
+   *  is allowed for updates.
    */
   // const channelPartnerLink = {}
   /**

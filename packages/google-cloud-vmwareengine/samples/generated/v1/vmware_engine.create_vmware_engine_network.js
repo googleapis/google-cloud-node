@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ function main(parent, vmwareEngineNetworkId, vmwareEngineNetwork) {
    *  identifier must meet the following requirements:
    *  * For networks of type LEGACY, adheres to the format:
    *  `{region-id}-default`. Replace `{region-id}` with the region where you want
-   *  to create the VMware Engine network. For example, "us-west1-default".
+   *  to create the VMware Engine network. For example, "us-central1-default".
    *  * Only contains 1-63 alphanumeric characters and hyphens
    *  * Begins with an alphabetical character
    *  * Ends with a non-hyphen character

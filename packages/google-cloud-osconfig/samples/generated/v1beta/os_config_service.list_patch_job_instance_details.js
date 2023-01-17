@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, workflow, workflowId) {
-  // [START workflows_v1beta_generated_Workflows_CreateWorkflow_async]
+function main(parent) {
+  // [START osconfig_v1beta_generated_OsConfigService_ListPatchJobInstanceDetails_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,47 +29,46 @@ function main(parent, workflow, workflowId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Project and location in which the workflow should be created.
-   *  Format:  projects/{project}/locations/{location}
+   *  Required. The parent for the instances are in the form of `projects/* /patchJobs/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. Workflow to be created.
+   *  The maximum number of instance details records to return.  Default is 100.
    */
-  // const workflow = {}
+  // const pageSize = 1234
   /**
-   *  Required. The ID of the workflow to be created. It has to fulfill the
-   *  following requirements:
-   *  * Must contain only letters, numbers, underscores and hyphens.
-   *  * Must start with a letter.
-   *  * Must be between 1-64 characters.
-   *  * Must end with a number or a letter.
-   *  * Must be unique within the customer project and location.
+   *  A pagination token returned from a previous call
+   *  that indicates where this listing should continue from.
    */
-  // const workflowId = 'abc123'
+  // const pageToken = 'abc123'
+  /**
+   *  A filter expression that filters results listed in the response. This
+   *  field supports filtering results by instance zone, name, state, or
+   *  `failure_reason`.
+   */
+  // const filter = 'abc123'
 
-  // Imports the Workflows library
-  const {WorkflowsClient} = require('@google-cloud/workflows').v1beta;
+  // Imports the Osconfig library
+  const {OsConfigServiceClient} = require('@google-cloud/osconfig').v1beta;
 
   // Instantiates a client
-  const workflowsClient = new WorkflowsClient();
+  const osconfigClient = new OsConfigServiceClient();
 
-  async function callCreateWorkflow() {
+  async function callListPatchJobInstanceDetails() {
     // Construct request
     const request = {
       parent,
-      workflow,
-      workflowId,
     };
 
     // Run request
-    const [operation] = await workflowsClient.createWorkflow(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await osconfigClient.listPatchJobInstanceDetailsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callCreateWorkflow();
-  // [END workflows_v1beta_generated_Workflows_CreateWorkflow_async]
+  callListPatchJobInstanceDetails();
+  // [END osconfig_v1beta_generated_OsConfigService_ListPatchJobInstanceDetails_async]
 }
 
 process.on('unhandledRejection', err => {
