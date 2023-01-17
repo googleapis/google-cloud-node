@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -49,7 +49,8 @@ function main(analysisQuery, outputConfig) {
    */
   // const savedAnalysisQuery = 'abc123'
   /**
-   *  Required. Output configuration indicating where the results will be output to.
+   *  Required. Output configuration indicating where the results will be output
+   *  to.
    */
   // const outputConfig = {}
 

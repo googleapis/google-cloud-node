@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -902,8 +902,8 @@ export class EnvironmentsClient {
    *   - `projects/<Project ID>/agent`
    *   - `projects/<Project ID>/locations/<Location ID>/agent`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]
@@ -1005,8 +1005,8 @@ export class EnvironmentsClient {
    *   - `projects/<Project ID>/agent`
    *   - `projects/<Project ID>/locations/<Location ID>/agent`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]
@@ -1056,8 +1056,8 @@ export class EnvironmentsClient {
    *   - `projects/<Project ID>/agent`
    *   - `projects/<Project ID>/locations/<Location ID>/agent`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]
@@ -1109,8 +1109,8 @@ export class EnvironmentsClient {
    *
    *   The environment ID for the default environment is `-`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]
@@ -1209,8 +1209,8 @@ export class EnvironmentsClient {
    *
    *   The environment ID for the default environment is `-`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]
@@ -1263,8 +1263,8 @@ export class EnvironmentsClient {
    *
    *   The environment ID for the default environment is `-`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]
