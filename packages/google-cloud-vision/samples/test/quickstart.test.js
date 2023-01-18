@@ -14,9 +14,9 @@
 
 'use strict';
 
-const {assert} = require('chai');	
-const {describe, it, before} = require('mocha');	
-const cp = require('child_process');	
+const {assert} = require('chai');
+const {describe, it, before} = require('mocha');
+const cp = require('child_process');
 // Imports the Vision library
 const {ProductSearchClient} = require('@google-cloud/vision').v1p4beta1;
 const visionClient = new ProductSearchClient();
@@ -27,9 +27,11 @@ describe('quickstart', async () => {
   let projectId;
   before(async () => {
     projectId = await visionClient.getProjectId();
-  })
-  it('should detect labels in a remote file', async () => {	
-    const stdout = execSync(`node quickstart.js projects/${projectId}/locations/us-west1`);	
-    assert.ok(stdout !== null);	
-  });	
-});	
+  });
+  it('should detect labels in a remote file', async () => {
+    const stdout = execSync(
+      `node quickstart.js projects/${projectId}/locations/us-west1`
+    );
+    assert.ok(stdout !== null);
+  });
+});
