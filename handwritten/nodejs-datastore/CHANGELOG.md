@@ -4,6 +4,31 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [7.1.0](https://github.com/googleapis/nodejs-datastore/compare/v7.0.0...v7.1.0) (2023-01-18)
+
+
+### Features
+
+* Add datastore aggregation query APIs ([#1008](https://github.com/googleapis/nodejs-datastore/issues/1008)) ([d5c2cb1](https://github.com/googleapis/nodejs-datastore/commit/d5c2cb1f0725f3cce1dde5b80ac7aff55b605f9a))
+* Add the count aggregate function ([#972](https://github.com/googleapis/nodejs-datastore/issues/972)) ([76adfc6](https://github.com/googleapis/nodejs-datastore/commit/76adfc6db03a4196999a8d510c0ab1ca15218f24))
+* Snapshot reads ([#963](https://github.com/googleapis/nodejs-datastore/issues/963)) ([0ecca86](https://github.com/googleapis/nodejs-datastore/commit/0ecca862fd93fc668a3dd3f5c93c54724e43f055))
+* Support regapic LRO ([#957](https://github.com/googleapis/nodejs-datastore/issues/957)) ([99778fb](https://github.com/googleapis/nodejs-datastore/commit/99778fb5e031eadd067b1ae9be0f910985966956))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#974](https://github.com/googleapis/nodejs-datastore/issues/974)) ([386b9c7](https://github.com/googleapis/nodejs-datastore/commit/386b9c735d57ce23f004ba3e9b1eb9a9377622dc))
+* Better support for fallback mode ([#967](https://github.com/googleapis/nodejs-datastore/issues/967)) ([0447d87](https://github.com/googleapis/nodejs-datastore/commit/0447d87ec162d64988d47e2fb21715dea78b6720))
+* Bring back LRO mixin ([#1009](https://github.com/googleapis/nodejs-datastore/issues/1009)) ([1d8de5f](https://github.com/googleapis/nodejs-datastore/commit/1d8de5f6bc5015dadd4be635748e799f05bfd325))
+* Change import long to require ([#968](https://github.com/googleapis/nodejs-datastore/issues/968)) ([5e710f2](https://github.com/googleapis/nodejs-datastore/commit/5e710f2c47001114ad087084507ad6d494143f1b))
+* **deps:** Update dependency @google-cloud/promisify to v3 ([#942](https://github.com/googleapis/nodejs-datastore/issues/942)) ([7b35856](https://github.com/googleapis/nodejs-datastore/commit/7b35856b0568571d5bcad70b2464344e6c06a4cb))
+* **deps:** Use google-gax v3.5.2 ([#1013](https://github.com/googleapis/nodejs-datastore/issues/1013)) ([1753eae](https://github.com/googleapis/nodejs-datastore/commit/1753eae467bff477e7991f74acbe3000656a955f))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-datastore/issues/1553)) ([#973](https://github.com/googleapis/nodejs-datastore/issues/973)) ([9550bbc](https://github.com/googleapis/nodejs-datastore/commit/9550bbcc10912ca28b64a89153f3ae8e7862d939))
+* Preserve default values in x-goog-request-params header ([#979](https://github.com/googleapis/nodejs-datastore/issues/979)) ([2b80e1e](https://github.com/googleapis/nodejs-datastore/commit/2b80e1ef691a340ed15e3105983cd34983b57cb1))
+* Regenerated protos JS and TS definitions ([#1016](https://github.com/googleapis/nodejs-datastore/issues/1016)) ([d0ae656](https://github.com/googleapis/nodejs-datastore/commit/d0ae656ca83fbad0be5659d8d4516d8bde879a28))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-datastore/issues/1546)) ([#970](https://github.com/googleapis/nodejs-datastore/issues/970)) ([2225fc7](https://github.com/googleapis/nodejs-datastore/commit/2225fc7753086243778c240a444c4940c29c5499))
+* Use google-gax v3.3.0 ([9550bbc](https://github.com/googleapis/nodejs-datastore/commit/9550bbcc10912ca28b64a89153f3ae8e7862d939))
+
 ## [7.0.0](https://github.com/googleapis/nodejs-datastore/compare/v6.6.2...v7.0.0) (2022-06-13)
 
 
