@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,53 +53,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/vision
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. The ProductSet resource for which to retrieve Products.
- *  Format is:
- *  `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
- */
-// const name = 'abc123'
-/**
- *  The maximum number of items to return. Default 10, maximum 100.
- */
-// const pageSize = 1234
-/**
- *  The next_page_token returned from a previous List request, if any.
- */
-// const pageToken = 'abc123'
-
-// Imports the Vision library
-const {ProductSearchClient} = require('@google-cloud/vision').v1p4beta1;
-
-// Instantiates a client
-const visionClient = new ProductSearchClient();
-
-async function callListProductsInProductSet() {
-  // Construct request
-  const request = {
-    name,
-  };
-
-  // Run request
-  const iterable = await visionClient.listProductsInProductSetAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListProductsInProductSet();
-
-```
 
 
 
@@ -179,6 +132,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Product_search.update_product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product.js,samples/README.md) |
 | Product_search.update_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product_set.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/quickstart.js,samples/README.md) |
+| Quickstart.test | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/test/quickstart.test.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/test/quickstart.test.js,samples/README.md) |
 
 
 
