@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
+import {GrafeasClient} from '@google-cloud/grafeas';
 import type {
   Callback,
   CallOptions,
@@ -848,5 +849,18 @@ export class ContainerAnalysisClient {
       });
     }
     return Promise.resolve();
+  }
+
+  /**
+   * Returns an instance of a @google-cloud/grafeas client, configured to
+   * connect to Google Cloud's Container Analysis API. For documentation
+   * on this client, see:
+   * <a href="https://googleapis.dev/nodejs/grafeas/latest/index.html">https://googleapis.dev/nodejs/grafeas/latest/index.html</a>
+   *
+   * @returns {GrafeasClient} - An instance of a Grafeas client.
+   *
+   */
+  getGrafeasClient() {
+    return new GrafeasClient(this._opts as {});
   }
 }
