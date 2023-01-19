@@ -67,7 +67,7 @@
     "mocha": "^9.2.2",
     "null-loader": "^4.0.0",
     "pack-n-play": "^1.0.0-2",
-    "sinon": "^14.0.0",
+    "sinon": "^15.0.0",
     "ts-loader": "^8.0.0",
     "typescript": "^4.6.4",
     "webpack": "^5.0.0",
