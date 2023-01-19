@@ -18868,6 +18868,7 @@
                          * @property {string|null} [languageCode] ComputeRoutesRequest languageCode
                          * @property {google.maps.routing.v2.Units|null} [units] ComputeRoutesRequest units
                          * @property {Array.<google.maps.routing.v2.ComputeRoutesRequest.ReferenceRoute>|null} [requestedReferenceRoutes] ComputeRoutesRequest requestedReferenceRoutes
+                         * @property {Array.<google.maps.routing.v2.ComputeRoutesRequest.ExtraComputation>|null} [extraComputations] ComputeRoutesRequest extraComputations
                          */
     
                         /**
@@ -18881,6 +18882,7 @@
                         function ComputeRoutesRequest(properties) {
                             this.intermediates = [];
                             this.requestedReferenceRoutes = [];
+                            this.extraComputations = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -18992,6 +18994,14 @@
                         ComputeRoutesRequest.prototype.requestedReferenceRoutes = $util.emptyArray;
     
                         /**
+                         * ComputeRoutesRequest extraComputations.
+                         * @member {Array.<google.maps.routing.v2.ComputeRoutesRequest.ExtraComputation>} extraComputations
+                         * @memberof google.maps.routing.v2.ComputeRoutesRequest
+                         * @instance
+                         */
+                        ComputeRoutesRequest.prototype.extraComputations = $util.emptyArray;
+    
+                        /**
                          * Creates a new ComputeRoutesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.routing.v2.ComputeRoutesRequest
@@ -19044,6 +19054,12 @@
                                 writer.uint32(/* id 14, wireType 2 =*/114).fork();
                                 for (var i = 0; i < message.requestedReferenceRoutes.length; ++i)
                                     writer.int32(message.requestedReferenceRoutes[i]);
+                                writer.ldelim();
+                            }
+                            if (message.extraComputations != null && message.extraComputations.length) {
+                                writer.uint32(/* id 15, wireType 2 =*/122).fork();
+                                for (var i = 0; i < message.extraComputations.length; ++i)
+                                    writer.int32(message.extraComputations[i]);
                                 writer.ldelim();
                             }
                             return writer;
@@ -19139,6 +19155,17 @@
                                                 message.requestedReferenceRoutes.push(reader.int32());
                                         } else
                                             message.requestedReferenceRoutes.push(reader.int32());
+                                        break;
+                                    }
+                                case 15: {
+                                        if (!(message.extraComputations && message.extraComputations.length))
+                                            message.extraComputations = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.extraComputations.push(reader.int32());
+                                        } else
+                                            message.extraComputations.push(reader.int32());
                                         break;
                                     }
                                 default:
@@ -19268,6 +19295,20 @@
                                         return "requestedReferenceRoutes: enum value[] expected";
                                     case 0:
                                     case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.extraComputations != null && message.hasOwnProperty("extraComputations")) {
+                                if (!Array.isArray(message.extraComputations))
+                                    return "extraComputations: array expected";
+                                for (var i = 0; i < message.extraComputations.length; ++i)
+                                    switch (message.extraComputations[i]) {
+                                    default:
+                                        return "extraComputations: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
                                         break;
                                     }
                             }
@@ -19453,6 +19494,35 @@
                                         break;
                                     }
                             }
+                            if (object.extraComputations) {
+                                if (!Array.isArray(object.extraComputations))
+                                    throw TypeError(".google.maps.routing.v2.ComputeRoutesRequest.extraComputations: array expected");
+                                message.extraComputations = [];
+                                for (var i = 0; i < object.extraComputations.length; ++i)
+                                    switch (object.extraComputations[i]) {
+                                    default:
+                                        if (typeof object.extraComputations[i] === "number") {
+                                            message.extraComputations[i] = object.extraComputations[i];
+                                            break;
+                                        }
+                                    case "EXTRA_COMPUTATION_UNSPECIFIED":
+                                    case 0:
+                                        message.extraComputations[i] = 0;
+                                        break;
+                                    case "TOLLS":
+                                    case 1:
+                                        message.extraComputations[i] = 1;
+                                        break;
+                                    case "FUEL_CONSUMPTION":
+                                    case 2:
+                                        message.extraComputations[i] = 2;
+                                        break;
+                                    case "TRAFFIC_ON_POLYLINE":
+                                    case 3:
+                                        message.extraComputations[i] = 3;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -19472,6 +19542,7 @@
                             if (options.arrays || options.defaults) {
                                 object.intermediates = [];
                                 object.requestedReferenceRoutes = [];
+                                object.extraComputations = [];
                             }
                             if (options.defaults) {
                                 object.origin = null;
@@ -19518,6 +19589,11 @@
                                 for (var j = 0; j < message.requestedReferenceRoutes.length; ++j)
                                     object.requestedReferenceRoutes[j] = options.enums === String ? $root.google.maps.routing.v2.ComputeRoutesRequest.ReferenceRoute[message.requestedReferenceRoutes[j]] === undefined ? message.requestedReferenceRoutes[j] : $root.google.maps.routing.v2.ComputeRoutesRequest.ReferenceRoute[message.requestedReferenceRoutes[j]] : message.requestedReferenceRoutes[j];
                             }
+                            if (message.extraComputations && message.extraComputations.length) {
+                                object.extraComputations = [];
+                                for (var j = 0; j < message.extraComputations.length; ++j)
+                                    object.extraComputations[j] = options.enums === String ? $root.google.maps.routing.v2.ComputeRoutesRequest.ExtraComputation[message.extraComputations[j]] === undefined ? message.extraComputations[j] : $root.google.maps.routing.v2.ComputeRoutesRequest.ExtraComputation[message.extraComputations[j]] : message.extraComputations[j];
+                            }
                             return object;
                         };
     
@@ -19558,6 +19634,24 @@
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "REFERENCE_ROUTE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "FUEL_EFFICIENT"] = 1;
+                            return values;
+                        })();
+    
+                        /**
+                         * ExtraComputation enum.
+                         * @name google.maps.routing.v2.ComputeRoutesRequest.ExtraComputation
+                         * @enum {number}
+                         * @property {number} EXTRA_COMPUTATION_UNSPECIFIED=0 EXTRA_COMPUTATION_UNSPECIFIED value
+                         * @property {number} TOLLS=1 TOLLS value
+                         * @property {number} FUEL_CONSUMPTION=2 FUEL_CONSUMPTION value
+                         * @property {number} TRAFFIC_ON_POLYLINE=3 TRAFFIC_ON_POLYLINE value
+                         */
+                        ComputeRoutesRequest.ExtraComputation = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "EXTRA_COMPUTATION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "TOLLS"] = 1;
+                            values[valuesById[2] = "FUEL_CONSUMPTION"] = 2;
+                            values[valuesById[3] = "TRAFFIC_ON_POLYLINE"] = 3;
                             return values;
                         })();
     
@@ -19828,6 +19922,7 @@
                          * @property {google.maps.routing.v2.RouteTravelMode|null} [travelMode] ComputeRouteMatrixRequest travelMode
                          * @property {google.maps.routing.v2.RoutingPreference|null} [routingPreference] ComputeRouteMatrixRequest routingPreference
                          * @property {google.protobuf.ITimestamp|null} [departureTime] ComputeRouteMatrixRequest departureTime
+                         * @property {Array.<google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation>|null} [extraComputations] ComputeRouteMatrixRequest extraComputations
                          */
     
                         /**
@@ -19841,6 +19936,7 @@
                         function ComputeRouteMatrixRequest(properties) {
                             this.origins = [];
                             this.destinations = [];
+                            this.extraComputations = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -19888,6 +19984,14 @@
                         ComputeRouteMatrixRequest.prototype.departureTime = null;
     
                         /**
+                         * ComputeRouteMatrixRequest extraComputations.
+                         * @member {Array.<google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation>} extraComputations
+                         * @memberof google.maps.routing.v2.ComputeRouteMatrixRequest
+                         * @instance
+                         */
+                        ComputeRouteMatrixRequest.prototype.extraComputations = $util.emptyArray;
+    
+                        /**
                          * Creates a new ComputeRouteMatrixRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.routing.v2.ComputeRouteMatrixRequest
@@ -19923,6 +20027,12 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.routingPreference);
                             if (message.departureTime != null && Object.hasOwnProperty.call(message, "departureTime"))
                                 $root.google.protobuf.Timestamp.encode(message.departureTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.extraComputations != null && message.extraComputations.length) {
+                                writer.uint32(/* id 8, wireType 2 =*/66).fork();
+                                for (var i = 0; i < message.extraComputations.length; ++i)
+                                    writer.int32(message.extraComputations[i]);
+                                writer.ldelim();
+                            }
                             return writer;
                         };
     
@@ -19979,6 +20089,17 @@
                                     }
                                 case 5: {
                                         message.departureTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.extraComputations && message.extraComputations.length))
+                                            message.extraComputations = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.extraComputations.push(reader.int32());
+                                        } else
+                                            message.extraComputations.push(reader.int32());
                                         break;
                                     }
                                 default:
@@ -20059,6 +20180,18 @@
                                 var error = $root.google.protobuf.Timestamp.verify(message.departureTime);
                                 if (error)
                                     return "departureTime." + error;
+                            }
+                            if (message.extraComputations != null && message.hasOwnProperty("extraComputations")) {
+                                if (!Array.isArray(message.extraComputations))
+                                    return "extraComputations: array expected";
+                                for (var i = 0; i < message.extraComputations.length; ++i)
+                                    switch (message.extraComputations[i]) {
+                                    default:
+                                        return "extraComputations: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
                             }
                             return null;
                         };
@@ -20152,6 +20285,27 @@
                                     throw TypeError(".google.maps.routing.v2.ComputeRouteMatrixRequest.departureTime: object expected");
                                 message.departureTime = $root.google.protobuf.Timestamp.fromObject(object.departureTime);
                             }
+                            if (object.extraComputations) {
+                                if (!Array.isArray(object.extraComputations))
+                                    throw TypeError(".google.maps.routing.v2.ComputeRouteMatrixRequest.extraComputations: array expected");
+                                message.extraComputations = [];
+                                for (var i = 0; i < object.extraComputations.length; ++i)
+                                    switch (object.extraComputations[i]) {
+                                    default:
+                                        if (typeof object.extraComputations[i] === "number") {
+                                            message.extraComputations[i] = object.extraComputations[i];
+                                            break;
+                                        }
+                                    case "EXTRA_COMPUTATION_UNSPECIFIED":
+                                    case 0:
+                                        message.extraComputations[i] = 0;
+                                        break;
+                                    case "TOLLS":
+                                    case 1:
+                                        message.extraComputations[i] = 1;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -20171,6 +20325,7 @@
                             if (options.arrays || options.defaults) {
                                 object.origins = [];
                                 object.destinations = [];
+                                object.extraComputations = [];
                             }
                             if (options.defaults) {
                                 object.travelMode = options.enums === String ? "TRAVEL_MODE_UNSPECIFIED" : 0;
@@ -20193,6 +20348,11 @@
                                 object.routingPreference = options.enums === String ? $root.google.maps.routing.v2.RoutingPreference[message.routingPreference] === undefined ? message.routingPreference : $root.google.maps.routing.v2.RoutingPreference[message.routingPreference] : message.routingPreference;
                             if (message.departureTime != null && message.hasOwnProperty("departureTime"))
                                 object.departureTime = $root.google.protobuf.Timestamp.toObject(message.departureTime, options);
+                            if (message.extraComputations && message.extraComputations.length) {
+                                object.extraComputations = [];
+                                for (var j = 0; j < message.extraComputations.length; ++j)
+                                    object.extraComputations[j] = options.enums === String ? $root.google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation[message.extraComputations[j]] === undefined ? message.extraComputations[j] : $root.google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation[message.extraComputations[j]] : message.extraComputations[j];
+                            }
                             return object;
                         };
     
@@ -20221,6 +20381,20 @@
                             }
                             return typeUrlPrefix + "/google.maps.routing.v2.ComputeRouteMatrixRequest";
                         };
+    
+                        /**
+                         * ExtraComputation enum.
+                         * @name google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation
+                         * @enum {number}
+                         * @property {number} EXTRA_COMPUTATION_UNSPECIFIED=0 EXTRA_COMPUTATION_UNSPECIFIED value
+                         * @property {number} TOLLS=1 TOLLS value
+                         */
+                        ComputeRouteMatrixRequest.ExtraComputation = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "EXTRA_COMPUTATION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "TOLLS"] = 1;
+                            return values;
+                        })();
     
                         return ComputeRouteMatrixRequest;
                     })();
