@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,6 +34,16 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
+   *  `filter` can be used to specify a subset of jobs.
+   *  If `filter` equals `target_config="HttpConfig"`, then the http
+   *  target jobs are retrieved. If `filter` equals
+   *  `target_config="PubSubConfig"`, then the Pub/Sub target jobs are
+   *  retrieved. If `filter` equals `labels.foo=value1
+   *  labels.foo=value2` then only jobs which are labeled with
+   *  foo=value1 AND foo=value2 will be returned.
+   */
+  // const filter = 'abc123'
+  /**
    *  Requested page size.
    *  The maximum page size is 500. If unspecified, the page size will
    *  be the maximum. Fewer jobs than requested might be returned,
@@ -45,12 +55,21 @@ function main(parent) {
    *  A token identifying a page of results the server will return. To
    *  request the first page results, page_token must be empty. To
    *  request the next page of results, page_token must be the value of
-   *  next_page_token google.cloud.scheduler.v1beta1.ListJobsResponse.next_page_token  returned from
-   *  the previous call to ListJobs google.cloud.scheduler.v1beta1.CloudScheduler.ListJobs. It is an error to
-   *  switch the value of filter google.cloud.scheduler.v1beta1.ListJobsRequest.filter  or
-   *  order_by google.cloud.scheduler.v1beta1.ListJobsRequest.order_by  while iterating through pages.
+   *  next_page_token google.cloud.scheduler.v1beta1.ListJobsResponse.next_page_token 
+   *  returned from the previous call to
+   *  ListJobs google.cloud.scheduler.v1beta1.CloudScheduler.ListJobs. It is
+   *  an error to switch the value of
+   *  filter google.cloud.scheduler.v1beta1.ListJobsRequest.filter  or
+   *  order_by google.cloud.scheduler.v1beta1.ListJobsRequest.order_by  while
+   *  iterating through pages.
    */
   // const pageToken = 'abc123'
+  /**
+   *  This field is used to manage the legacy App Engine Cron jobs using the
+   *  Cloud Scheduler API. If the field is set to true, the jobs in the __cron
+   *  queue will be listed instead.
+   */
+  // const legacyAppEngineCron = true
 
   // Imports the Scheduler library
   const {CloudSchedulerClient} = require('@google-cloud/scheduler').v1beta1;
