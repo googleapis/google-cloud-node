@@ -339,8 +339,8 @@ export class EventServiceClient {
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/foo/tenants/bar".
    * @param {google.cloud.talent.v4.ClientEvent} request.clientEvent
-   *   Required. Events issued when end user interacts with customer's application that
-   *   uses Cloud Talent Solution.
+   *   Required. Events issued when end user interacts with customer's application
+   *   that uses Cloud Talent Solution.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
