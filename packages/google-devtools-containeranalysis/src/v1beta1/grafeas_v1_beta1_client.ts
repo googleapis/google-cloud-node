@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ import * as gapicConfig from './grafeas_v1_beta1_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  [Grafeas](grafeas.io) API.
+ *  [Grafeas](https://grafeas.io) API.
  *
  *  Retrieves analysis results of Cloud components such as Docker container
  *  images.
@@ -133,9 +133,6 @@ export class GrafeasV1Beta1Client {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
-    // Request numeric enum values if REST transport is used.
-    opts.numericEnums = true;
-
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -219,7 +216,7 @@ export class GrafeasV1Beta1Client {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.devtools.containeranalysis.v1beta1.GrafeasV1Beta1',
+      'grafeas.v1beta1.GrafeasV1Beta1',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -252,15 +249,14 @@ export class GrafeasV1Beta1Client {
     }
 
     // Put together the "service stub" for
-    // google.devtools.containeranalysis.v1beta1.GrafeasV1Beta1.
+    // grafeas.v1beta1.GrafeasV1Beta1.
     this.grafeasV1Beta1Stub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.devtools.containeranalysis.v1beta1.GrafeasV1Beta1'
+            'grafeas.v1beta1.GrafeasV1Beta1'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.devtools.containeranalysis.v1beta1
-            .GrafeasV1Beta1,
+          (this._protos as any).grafeas.v1beta1.GrafeasV1Beta1,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
