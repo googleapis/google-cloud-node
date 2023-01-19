@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1887,6 +1887,140 @@ describe('v1.ContactCenterInsightsClient', () => {
     });
   });
 
+  describe('deleteIssue', () => {
+    it('invokes deleteIssue without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteIssueRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteIssueRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteIssue = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteIssue(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteIssue as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteIssue as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteIssue without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteIssueRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteIssueRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteIssue =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteIssue(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteIssue as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteIssue as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteIssue with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteIssueRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteIssueRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteIssue = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteIssue(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteIssue as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteIssue as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteIssue with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteIssueRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteIssueRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteIssue(request), expectedError);
+    });
+  });
+
   describe('calculateIssueModelStats', () => {
     it('invokes calculateIssueModelStats without error', async () => {
       const client =
@@ -3708,6 +3842,410 @@ describe('v1.ContactCenterInsightsClient', () => {
       );
       await assert.rejects(
         client.checkCreateAnalysisProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('bulkAnalyzeConversations', () => {
+    it('invokes bulkAnalyzeConversations without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.bulkAnalyzeConversations =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.bulkAnalyzeConversations(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bulkAnalyzeConversations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkAnalyzeConversations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkAnalyzeConversations without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.bulkAnalyzeConversations =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.bulkAnalyzeConversations(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsResponse,
+              protos.google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bulkAnalyzeConversations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkAnalyzeConversations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkAnalyzeConversations with call error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.bulkAnalyzeConversations = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.bulkAnalyzeConversations(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.bulkAnalyzeConversations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkAnalyzeConversations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkAnalyzeConversations with LRO error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.bulkAnalyzeConversations = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.bulkAnalyzeConversations(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.bulkAnalyzeConversations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkAnalyzeConversations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkBulkAnalyzeConversationsProgress without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkBulkAnalyzeConversationsProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBulkAnalyzeConversationsProgress with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBulkAnalyzeConversationsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('ingestConversations', () => {
+    it('invokes ingestConversations without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.IngestConversationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.IngestConversationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.ingestConversations =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.ingestConversations(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.ingestConversations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.ingestConversations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes ingestConversations without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.IngestConversationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.IngestConversationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.ingestConversations =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.ingestConversations(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.contactcenterinsights.v1.IIngestConversationsResponse,
+              protos.google.cloud.contactcenterinsights.v1.IIngestConversationsMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IIngestConversationsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IIngestConversationsMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.ingestConversations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.ingestConversations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes ingestConversations with call error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.IngestConversationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.IngestConversationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.ingestConversations = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.ingestConversations(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.ingestConversations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.ingestConversations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes ingestConversations with LRO error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.IngestConversationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.IngestConversationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.ingestConversations = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.ingestConversations(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.ingestConversations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.ingestConversations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkIngestConversationsProgress without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkIngestConversationsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkIngestConversationsProgress with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkIngestConversationsProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));

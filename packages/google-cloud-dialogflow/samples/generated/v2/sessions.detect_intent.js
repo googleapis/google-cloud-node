@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -65,11 +65,13 @@ function main(session, queryInput) {
    */
   // const outputAudioConfig = {}
   /**
-   *  Mask for output_audio_config google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config  indicating which settings in this
-   *  request-level config should override speech synthesizer settings defined at
-   *  agent-level.
-   *  If unspecified or empty, output_audio_config google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config  replaces the agent-level
-   *  config in its entirety.
+   *  Mask for
+   *  output_audio_config google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config 
+   *  indicating which settings in this request-level config should override
+   *  speech synthesizer settings defined at agent-level.
+   *  If unspecified or empty,
+   *  output_audio_config google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config 
+   *  replaces the agent-level config in its entirety.
    */
   // const outputAudioConfigMask = {}
   /**

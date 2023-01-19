@@ -424,6 +424,110 @@
             }
         },
         {
+            "regionTag": "contactcenterinsights_v1_generated_ContactCenterInsights_BulkAnalyzeConversations_async",
+            "title": "ContactCenterInsights bulkAnalyzeConversations Sample",
+            "origin": "API_DEFINITION",
+            "description": " Analyzes multiple conversations in a single request.",
+            "canonical": true,
+            "file": "contact_center_insights.bulk_analyze_conversations.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BulkAnalyzeConversations",
+                "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.BulkAnalyzeConversations",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "analysis_percentage",
+                        "type": "TYPE_FLOAT"
+                    },
+                    {
+                        "name": "annotator_selector",
+                        "type": ".google.cloud.contactcenterinsights.v1.AnnotatorSelector"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ContactCenterInsightsClient",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient"
+                },
+                "method": {
+                    "shortName": "BulkAnalyzeConversations",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.BulkAnalyzeConversations",
+                    "service": {
+                        "shortName": "ContactCenterInsights",
+                        "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "contactcenterinsights_v1_generated_ContactCenterInsights_IngestConversations_async",
+            "title": "ContactCenterInsights ingestConversations Sample",
+            "origin": "API_DEFINITION",
+            "description": " Imports conversations and processes them according to the user's configuration.",
+            "canonical": true,
+            "file": "contact_center_insights.ingest_conversations.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "IngestConversations",
+                "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.IngestConversations",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "gcs_source",
+                        "type": ".google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource"
+                    },
+                    {
+                        "name": "transcript_object_config",
+                        "type": ".google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig"
+                    },
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "conversation_config",
+                        "type": ".google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ContactCenterInsightsClient",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient"
+                },
+                "method": {
+                    "shortName": "IngestConversations",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.IngestConversations",
+                    "service": {
+                        "shortName": "ContactCenterInsights",
+                        "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "contactcenterinsights_v1_generated_ContactCenterInsights_ExportInsightsData_async",
             "title": "ContactCenterInsights exportInsightsData Sample",
             "origin": "API_DEFINITION",
@@ -884,6 +988,46 @@
                 "method": {
                     "shortName": "UpdateIssue",
                     "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdateIssue",
+                    "service": {
+                        "shortName": "ContactCenterInsights",
+                        "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeleteIssue_async",
+            "title": "ContactCenterInsights deleteIssue Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes an issue.",
+            "canonical": true,
+            "file": "contact_center_insights.delete_issue.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteIssue",
+                "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteIssue",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "ContactCenterInsightsClient",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient"
+                },
+                "method": {
+                    "shortName": "DeleteIssue",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteIssue",
                     "service": {
                         "shortName": "ContactCenterInsights",
                         "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"

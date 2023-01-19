@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -718,7 +718,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -813,7 +813,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud/clusters/my-cluster`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/clusters/my-cluster`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -902,7 +902,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-proj/locations/us-west1-a/nodeTypes/standard-72`
+   *   `projects/my-proj/locations/us-central1-a/nodeTypes/standard-72`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -998,7 +998,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1100,7 +1100,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1205,7 +1205,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1/privateClouds/my-cloud/hcxActivationKeys/my-key`
+   *   `projects/my-project/locations/us-central1/privateClouds/my-cloud/hcxActivationKeys/my-key`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1516,7 +1516,7 @@ export class VmwareEngineClient {
    *   private cloud in. Resource names are schemeless URIs that follow the
    *   conventions in https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a`
+   *   `projects/my-project/locations/us-central1-a`
    * @param {string} request.privateCloudId
    *   Required. The user-provided identifier of the private cloud to be created.
    *   This identifier must be unique among each `PrivateCloud` within the parent
@@ -1532,11 +1532,11 @@ export class VmwareEngineClient {
    * @param {google.cloud.vmwareengine.v1.PrivateCloud} request.privateCloud
    *   Required. The initial description of the new private cloud.
    * @param {string} [request.requestId]
-   *   Optional. The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
+   *   Optional. The request ID must be a valid UUID with the exception that zero
+   *   UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. True if you want the request to be validated and not executed; false
-   *   otherwise.
+   *   Optional. True if you want the request to be validated and not executed;
+   *   false otherwise.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1689,8 +1689,8 @@ export class VmwareEngineClient {
    *   overwritten if it is in the mask. If the user does not provide a mask then
    *   all fields will be overwritten.
    * @param {string} [request.requestId]
-   *   Optional. The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
+   *   Optional. The request ID must be a valid UUID with the exception that zero
+   *   UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1846,24 +1846,25 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    * @param {string} [request.requestId]
-   *   Optional. The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
+   *   Optional. The request ID must be a valid UUID with the exception that zero
+   *   UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.force]
-   *   Optional. If set to true, cascade delete is enabled and all children of this private
-   *   cloud resource are also deleted. When this flag is set to false, the
-   *   private cloud will not be deleted if there are any children other than the
-   *   management cluster. The management cluster is always deleted.
+   *   Optional. If set to true, cascade delete is enabled and all children of
+   *   this private cloud resource are also deleted. When this flag is set to
+   *   false, the private cloud will not be deleted if there are any children
+   *   other than the management cluster. The management cluster is always
+   *   deleted.
    * @param {number} [request.delayHours]
    *   Optional. Time delay of the deletion specified in hours. The default value
    *   is `3`. Specifying a non-zero value for this field changes the value of
    *   `PrivateCloud.state` to `DELETED` and sets `expire_time` to the planned
    *   deletion time. Deletion can be cancelled before `expire_time` elapses using
-   *   {@link google.cloud.vmwareengine.v1.VmwareEngine.UndeletePrivateCloud|VmwareEngine.UndeletePrivateCloud}. Specifying a value of `0` for
-   *   this field instead begins the deletion process and ceases billing
-   *   immediately. During the final deletion process, the value of
-   *   `PrivateCloud.state` becomes `PURGING`.
+   *   {@link google.cloud.vmwareengine.v1.VmwareEngine.UndeletePrivateCloud|VmwareEngine.UndeletePrivateCloud}.
+   *   Specifying a value of `0` for this field instead begins the deletion
+   *   process and ceases billing immediately. During the final deletion process,
+   *   the value of `PrivateCloud.state` becomes `PURGING`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2008,10 +2009,10 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    * @param {string} [request.requestId]
-   *   Optional. The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
+   *   Optional. The request ID must be a valid UUID with the exception that zero
+   *   UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2156,7 +2157,7 @@ export class VmwareEngineClient {
    *   in. Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    * @param {string} request.clusterId
    *   Required. The user-provided identifier of the new `Cluster`.
    *   This identifier must be unique among clusters within the parent and becomes
@@ -2172,11 +2173,11 @@ export class VmwareEngineClient {
    * @param {google.cloud.vmwareengine.v1.Cluster} request.cluster
    *   Required. The initial description of the new cluster.
    * @param {string} [request.requestId]
-   *   Optional. The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
+   *   Optional. The request ID must be a valid UUID with the exception that zero
+   *   UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. True if you want the request to be validated and not executed; false
-   *   otherwise.
+   *   Optional. True if you want the request to be validated and not executed;
+   *   false otherwise.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2332,8 +2333,8 @@ export class VmwareEngineClient {
    *   Optional. The request ID must be a valid UUID with the exception that
    *   zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. True if you want the request to be validated and not executed; false
-   *   otherwise.
+   *   Optional. True if you want the request to be validated and not executed;
+   *   false otherwise.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2478,10 +2479,10 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud/clusters/my-cluster`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/clusters/my-cluster`
    * @param {string} [request.requestId]
-   *   Optional. The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
+   *   Optional. The request ID must be a valid UUID with the exception that zero
+   *   UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2624,7 +2625,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    * @param {string} [request.requestId]
    *   Optional. A request ID to identify requests. Specify a unique request ID
    *   so that if you must retry your request, the server will know to ignore
@@ -2782,7 +2783,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    * @param {string} [request.requestId]
    *   Optional. A request ID to identify requests. Specify a unique request ID
    *   so that if you must retry your request, the server will know to ignore
@@ -3634,7 +3635,7 @@ export class VmwareEngineClient {
    *
    *   * For networks of type LEGACY, adheres to the format:
    *   `{region-id}-default`. Replace `{region-id}` with the region where you want
-   *   to create the VMware Engine network. For example, "us-west1-default".
+   *   to create the VMware Engine network. For example, "us-central1-default".
    *   * Only contains 1-63 alphanumeric characters and hyphens
    *   * Begins with an alphabetical character
    *   * Ends with a non-hyphen character
@@ -3989,10 +3990,10 @@ export class VmwareEngineClient {
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {string} [request.etag]
-   *   Optional. Checksum used to ensure that the user-provided value is up to date before
-   *   the server processes the request. The server compares provided checksum
-   *   with the current checksum of the resource. If the user-provided value is
-   *   out of date, this request returns an `ABORTED` error.
+   *   Optional. Checksum used to ensure that the user-provided value is up to
+   *   date before the server processes the request. The server compares provided
+   *   checksum with the current checksum of the resource. If the user-provided
+   *   value is out of date, this request returns an `ABORTED` error.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4138,7 +4139,7 @@ export class VmwareEngineClient {
    *   clusters. Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a`
+   *   `projects/my-project/locations/us-central1-a`
    * @param {number} request.pageSize
    *   The maximum number of private clouds to return in one page.
    *   The service may return fewer than this value.
@@ -4280,7 +4281,7 @@ export class VmwareEngineClient {
    *   clusters. Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a`
+   *   `projects/my-project/locations/us-central1-a`
    * @param {number} request.pageSize
    *   The maximum number of private clouds to return in one page.
    *   The service may return fewer than this value.
@@ -4370,7 +4371,7 @@ export class VmwareEngineClient {
    *   clusters. Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a`
+   *   `projects/my-project/locations/us-central1-a`
    * @param {number} request.pageSize
    *   The maximum number of private clouds to return in one page.
    *   The service may return fewer than this value.
@@ -4459,7 +4460,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    * @param {number} request.pageSize
    *   The maximum number of clusters to return in one page.
    *   The service may return fewer than this value.
@@ -4589,7 +4590,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    * @param {number} request.pageSize
    *   The maximum number of clusters to return in one page.
    *   The service may return fewer than this value.
@@ -4667,7 +4668,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    * @param {number} request.pageSize
    *   The maximum number of clusters to return in one page.
    *   The service may return fewer than this value.
@@ -4745,7 +4746,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    * @param {number} request.pageSize
    *   The maximum number of subnets to return in one page.
    *   The service may return fewer than this value.
@@ -4855,7 +4856,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    * @param {number} request.pageSize
    *   The maximum number of subnets to return in one page.
    *   The service may return fewer than this value.
@@ -4913,7 +4914,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    * @param {number} request.pageSize
    *   The maximum number of subnets to return in one page.
    *   The service may return fewer than this value.
@@ -4969,7 +4970,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a`
+   *   `projects/my-project/locations/us-central1-a`
    * @param {number} request.pageSize
    *   The maximum number of node types to return in one page.
    *   The service may return fewer than this value.
@@ -5104,7 +5105,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a`
+   *   `projects/my-project/locations/us-central1-a`
    * @param {number} request.pageSize
    *   The maximum number of node types to return in one page.
    *   The service may return fewer than this value.
@@ -5187,7 +5188,7 @@ export class VmwareEngineClient {
    *   Resource names are schemeless URIs that follow the conventions in
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
-   *   `projects/my-project/locations/us-west1-a`
+   *   `projects/my-project/locations/us-central1-a`
    * @param {number} request.pageSize
    *   The maximum number of node types to return in one page.
    *   The service may return fewer than this value.

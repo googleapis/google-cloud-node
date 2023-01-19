@@ -1,0 +1,205 @@
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `python -m synthtool`."
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
+
+# [Google Cloud Vision API: Node.js Client](https://github.com/googleapis/google-cloud-node)
+
+[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/vision.svg)](https://www.npmjs.org/package/@google-cloud/vision)
+
+
+
+
+Google Cloud Vision API client for Node.js
+
+
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-vision/CHANGELOG.md).
+
+* [Google Cloud Vision API Node.js Client API Reference][client-docs]
+* [Google Cloud Vision API Documentation][product-docs]
+* [github.com/googleapis/google-cloud-node/packages/google-cloud-vision](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-vision)
+
+Read more about the client libraries for Cloud APIs, including the older
+Google APIs Client Libraries, in [Client Libraries Explained][explained].
+
+[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
+
+**Table of contents:**
+
+
+* [Quickstart](#quickstart)
+  * [Before you begin](#before-you-begin)
+  * [Installing the client library](#installing-the-client-library)
+
+* [Samples](#samples)
+* [Versioning](#versioning)
+* [Contributing](#contributing)
+* [License](#license)
+
+## Quickstart
+
+### Before you begin
+
+1.  [Select or create a Cloud Platform project][projects].
+1.  [Enable billing for your project][billing].
+1.  [Enable the Google Cloud Vision API API][enable_api].
+1.  [Set up authentication with a service account][auth] so you can access the
+    API from your local workstation.
+
+### Installing the client library
+
+```bash
+npm install @google-cloud/vision
+```
+
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Image_annotator.async_batch_annotate_files | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/image_annotator.async_batch_annotate_files.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/image_annotator.async_batch_annotate_files.js,samples/README.md) |
+| Image_annotator.async_batch_annotate_images | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/image_annotator.async_batch_annotate_images.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/image_annotator.async_batch_annotate_images.js,samples/README.md) |
+| Image_annotator.batch_annotate_files | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/image_annotator.batch_annotate_files.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/image_annotator.batch_annotate_files.js,samples/README.md) |
+| Image_annotator.batch_annotate_images | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/image_annotator.batch_annotate_images.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/image_annotator.batch_annotate_images.js,samples/README.md) |
+| Product_search.add_product_to_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.add_product_to_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.add_product_to_product_set.js,samples/README.md) |
+| Product_search.create_product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.create_product.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.create_product.js,samples/README.md) |
+| Product_search.create_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.create_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.create_product_set.js,samples/README.md) |
+| Product_search.create_reference_image | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.create_reference_image.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.create_reference_image.js,samples/README.md) |
+| Product_search.delete_product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.delete_product.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.delete_product.js,samples/README.md) |
+| Product_search.delete_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.delete_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.delete_product_set.js,samples/README.md) |
+| Product_search.delete_reference_image | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.delete_reference_image.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.delete_reference_image.js,samples/README.md) |
+| Product_search.get_product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.get_product.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.get_product.js,samples/README.md) |
+| Product_search.get_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.get_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.get_product_set.js,samples/README.md) |
+| Product_search.get_reference_image | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.get_reference_image.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.get_reference_image.js,samples/README.md) |
+| Product_search.import_product_sets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.import_product_sets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.import_product_sets.js,samples/README.md) |
+| Product_search.list_product_sets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.list_product_sets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.list_product_sets.js,samples/README.md) |
+| Product_search.list_products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.list_products.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.list_products.js,samples/README.md) |
+| Product_search.list_products_in_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.list_products_in_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.list_products_in_product_set.js,samples/README.md) |
+| Product_search.list_reference_images | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.list_reference_images.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.list_reference_images.js,samples/README.md) |
+| Product_search.purge_products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.purge_products.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.purge_products.js,samples/README.md) |
+| Product_search.remove_product_from_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.remove_product_from_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.remove_product_from_product_set.js,samples/README.md) |
+| Product_search.update_product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.update_product.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.update_product.js,samples/README.md) |
+| Product_search.update_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.update_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.update_product_set.js,samples/README.md) |
+| Image_annotator.batch_annotate_images | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p1beta1/image_annotator.batch_annotate_images.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p1beta1/image_annotator.batch_annotate_images.js,samples/README.md) |
+| Image_annotator.async_batch_annotate_files | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p2beta1/image_annotator.async_batch_annotate_files.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p2beta1/image_annotator.async_batch_annotate_files.js,samples/README.md) |
+| Image_annotator.batch_annotate_images | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p2beta1/image_annotator.batch_annotate_images.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p2beta1/image_annotator.batch_annotate_images.js,samples/README.md) |
+| Image_annotator.async_batch_annotate_files | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/image_annotator.async_batch_annotate_files.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/image_annotator.async_batch_annotate_files.js,samples/README.md) |
+| Image_annotator.batch_annotate_images | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/image_annotator.batch_annotate_images.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/image_annotator.batch_annotate_images.js,samples/README.md) |
+| Product_search.add_product_to_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.add_product_to_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.add_product_to_product_set.js,samples/README.md) |
+| Product_search.create_product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_product.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_product.js,samples/README.md) |
+| Product_search.create_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_product_set.js,samples/README.md) |
+| Product_search.create_reference_image | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_reference_image.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_reference_image.js,samples/README.md) |
+| Product_search.delete_product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_product.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_product.js,samples/README.md) |
+| Product_search.delete_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_product_set.js,samples/README.md) |
+| Product_search.delete_reference_image | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_reference_image.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_reference_image.js,samples/README.md) |
+| Product_search.get_product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_product.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_product.js,samples/README.md) |
+| Product_search.get_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_product_set.js,samples/README.md) |
+| Product_search.get_reference_image | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_reference_image.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_reference_image.js,samples/README.md) |
+| Product_search.import_product_sets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.import_product_sets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.import_product_sets.js,samples/README.md) |
+| Product_search.list_product_sets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_product_sets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_product_sets.js,samples/README.md) |
+| Product_search.list_products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_products.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_products.js,samples/README.md) |
+| Product_search.list_products_in_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_products_in_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_products_in_product_set.js,samples/README.md) |
+| Product_search.list_reference_images | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_reference_images.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_reference_images.js,samples/README.md) |
+| Product_search.remove_product_from_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.remove_product_from_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.remove_product_from_product_set.js,samples/README.md) |
+| Product_search.update_product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.update_product.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.update_product.js,samples/README.md) |
+| Product_search.update_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.update_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.update_product_set.js,samples/README.md) |
+| Image_annotator.async_batch_annotate_files | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.async_batch_annotate_files.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.async_batch_annotate_files.js,samples/README.md) |
+| Image_annotator.async_batch_annotate_images | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.async_batch_annotate_images.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.async_batch_annotate_images.js,samples/README.md) |
+| Image_annotator.batch_annotate_files | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.batch_annotate_files.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.batch_annotate_files.js,samples/README.md) |
+| Image_annotator.batch_annotate_images | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.batch_annotate_images.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.batch_annotate_images.js,samples/README.md) |
+| Product_search.add_product_to_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.add_product_to_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.add_product_to_product_set.js,samples/README.md) |
+| Product_search.create_product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_product.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_product.js,samples/README.md) |
+| Product_search.create_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_product_set.js,samples/README.md) |
+| Product_search.create_reference_image | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_reference_image.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_reference_image.js,samples/README.md) |
+| Product_search.delete_product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_product.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_product.js,samples/README.md) |
+| Product_search.delete_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_product_set.js,samples/README.md) |
+| Product_search.delete_reference_image | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_reference_image.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_reference_image.js,samples/README.md) |
+| Product_search.get_product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_product.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_product.js,samples/README.md) |
+| Product_search.get_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_product_set.js,samples/README.md) |
+| Product_search.get_reference_image | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_reference_image.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_reference_image.js,samples/README.md) |
+| Product_search.import_product_sets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.import_product_sets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.import_product_sets.js,samples/README.md) |
+| Product_search.list_product_sets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_product_sets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_product_sets.js,samples/README.md) |
+| Product_search.list_products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_products.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_products.js,samples/README.md) |
+| Product_search.list_products_in_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_products_in_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_products_in_product_set.js,samples/README.md) |
+| Product_search.list_reference_images | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_reference_images.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_reference_images.js,samples/README.md) |
+| Product_search.purge_products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.purge_products.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.purge_products.js,samples/README.md) |
+| Product_search.remove_product_from_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.remove_product_from_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.remove_product_from_product_set.js,samples/README.md) |
+| Product_search.update_product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product.js,samples/README.md) |
+| Product_search.update_product_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product_set.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/quickstart.js,samples/README.md) |
+| Quickstart.test | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/test/quickstart.test.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/test/quickstart.test.js,samples/README.md) |
+
+
+
+The [Google Cloud Vision API Node.js Client API Reference][client-docs] documentation
+also contains samples.
+
+## Supported Node.js Versions
+
+Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
+Libraries are compatible with all current _active_ and _maintenance_ versions of
+Node.js.
+If you are using an end-of-life version of Node.js, we recommend that you update
+as soon as possible to an actively supported LTS version.
+
+Google's client libraries support legacy versions of Node.js runtimes on a
+best-efforts basis with the following warnings:
+
+* Legacy versions are not tested in continuous integration.
+* Some security patches and features cannot be backported.
+* Dependencies cannot be kept up-to-date.
+
+Client libraries targeting some end-of-life versions of Node.js are available, and
+can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
+The dist-tags follow the naming convention `legacy-(version)`.
+For example, `npm install @google-cloud/vision@legacy-8` installs client libraries
+for versions compatible with Node.js 8.
+
+## Versioning
+
+This library follows [Semantic Versioning](http://semver.org/).
+
+
+
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority.
+
+
+
+
+
+
+More Information: [Google Cloud Platform Launch Stages][launch_stages]
+
+[launch_stages]: https://cloud.google.com/terms/launch-stages
+
+## Contributing
+
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+
+Please note that this `README.md`, the `samples/README.md`,
+and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
+are generated from a central template. To edit one of these files, make an edit
+to its templates in
+[directory](https://github.com/googleapis/synthtool).
+
+## License
+
+Apache Version 2.0
+
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/vision/latest
+[product-docs]: https://cloud.google.com/vision
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=vision.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started

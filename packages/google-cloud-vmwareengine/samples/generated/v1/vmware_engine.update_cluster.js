@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -46,8 +46,8 @@ function main(updateMask, cluster) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. True if you want the request to be validated and not executed; false
-   *  otherwise.
+   *  Optional. True if you want the request to be validated and not executed;
+   *  false otherwise.
    */
   // const validateOnly = true
 
