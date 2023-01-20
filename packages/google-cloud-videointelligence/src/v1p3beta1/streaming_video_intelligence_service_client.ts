@@ -25,6 +25,7 @@ import type {
   ClientOptions,
 } from 'google-gax';
 import {PassThrough} from 'stream';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
