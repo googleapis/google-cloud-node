@@ -1374,6 +1374,12 @@ export namespace google {
 
                     /** RecognizeResponse totalBilledTime */
                     totalBilledTime?: (google.protobuf.IDuration|null);
+
+                    /** RecognizeResponse speechAdaptationInfo */
+                    speechAdaptationInfo?: (google.cloud.speech.v1.ISpeechAdaptationInfo|null);
+
+                    /** RecognizeResponse requestId */
+                    requestId?: (number|Long|string|null);
                 }
 
                 /** Represents a RecognizeResponse. */
@@ -1390,6 +1396,12 @@ export namespace google {
 
                     /** RecognizeResponse totalBilledTime. */
                     public totalBilledTime?: (google.protobuf.IDuration|null);
+
+                    /** RecognizeResponse speechAdaptationInfo. */
+                    public speechAdaptationInfo?: (google.cloud.speech.v1.ISpeechAdaptationInfo|null);
+
+                    /** RecognizeResponse requestId. */
+                    public requestId: (number|Long|string);
 
                     /**
                      * Creates a new RecognizeResponse instance using the specified properties.
@@ -1483,6 +1495,12 @@ export namespace google {
 
                     /** LongRunningRecognizeResponse outputError */
                     outputError?: (google.rpc.IStatus|null);
+
+                    /** LongRunningRecognizeResponse speechAdaptationInfo */
+                    speechAdaptationInfo?: (google.cloud.speech.v1.ISpeechAdaptationInfo|null);
+
+                    /** LongRunningRecognizeResponse requestId */
+                    requestId?: (number|Long|string|null);
                 }
 
                 /** Represents a LongRunningRecognizeResponse. */
@@ -1505,6 +1523,12 @@ export namespace google {
 
                     /** LongRunningRecognizeResponse outputError. */
                     public outputError?: (google.rpc.IStatus|null);
+
+                    /** LongRunningRecognizeResponse speechAdaptationInfo. */
+                    public speechAdaptationInfo?: (google.cloud.speech.v1.ISpeechAdaptationInfo|null);
+
+                    /** LongRunningRecognizeResponse requestId. */
+                    public requestId: (number|Long|string);
 
                     /**
                      * Creates a new LongRunningRecognizeResponse instance using the specified properties.
@@ -1713,6 +1737,12 @@ export namespace google {
 
                     /** StreamingRecognizeResponse totalBilledTime */
                     totalBilledTime?: (google.protobuf.IDuration|null);
+
+                    /** StreamingRecognizeResponse speechAdaptationInfo */
+                    speechAdaptationInfo?: (google.cloud.speech.v1.ISpeechAdaptationInfo|null);
+
+                    /** StreamingRecognizeResponse requestId */
+                    requestId?: (number|Long|string|null);
                 }
 
                 /** Represents a StreamingRecognizeResponse. */
@@ -1735,6 +1765,12 @@ export namespace google {
 
                     /** StreamingRecognizeResponse totalBilledTime. */
                     public totalBilledTime?: (google.protobuf.IDuration|null);
+
+                    /** StreamingRecognizeResponse speechAdaptationInfo. */
+                    public speechAdaptationInfo?: (google.cloud.speech.v1.ISpeechAdaptationInfo|null);
+
+                    /** StreamingRecognizeResponse requestId. */
+                    public requestId: (number|Long|string);
 
                     /**
                      * Creates a new StreamingRecognizeResponse instance using the specified properties.
@@ -2295,6 +2331,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SpeechAdaptationInfo. */
+                interface ISpeechAdaptationInfo {
+
+                    /** SpeechAdaptationInfo adaptationTimeout */
+                    adaptationTimeout?: (boolean|null);
+
+                    /** SpeechAdaptationInfo timeoutMessage */
+                    timeoutMessage?: (string|null);
+                }
+
+                /** Represents a SpeechAdaptationInfo. */
+                class SpeechAdaptationInfo implements ISpeechAdaptationInfo {
+
+                    /**
+                     * Constructs a new SpeechAdaptationInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v1.ISpeechAdaptationInfo);
+
+                    /** SpeechAdaptationInfo adaptationTimeout. */
+                    public adaptationTimeout: boolean;
+
+                    /** SpeechAdaptationInfo timeoutMessage. */
+                    public timeoutMessage: string;
+
+                    /**
+                     * Creates a new SpeechAdaptationInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpeechAdaptationInfo instance
+                     */
+                    public static create(properties?: google.cloud.speech.v1.ISpeechAdaptationInfo): google.cloud.speech.v1.SpeechAdaptationInfo;
+
+                    /**
+                     * Encodes the specified SpeechAdaptationInfo message. Does not implicitly {@link google.cloud.speech.v1.SpeechAdaptationInfo.verify|verify} messages.
+                     * @param message SpeechAdaptationInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v1.ISpeechAdaptationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpeechAdaptationInfo message, length delimited. Does not implicitly {@link google.cloud.speech.v1.SpeechAdaptationInfo.verify|verify} messages.
+                     * @param message SpeechAdaptationInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v1.ISpeechAdaptationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpeechAdaptationInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpeechAdaptationInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1.SpeechAdaptationInfo;
+
+                    /**
+                     * Decodes a SpeechAdaptationInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpeechAdaptationInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1.SpeechAdaptationInfo;
+
+                    /**
+                     * Verifies a SpeechAdaptationInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpeechAdaptationInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpeechAdaptationInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1.SpeechAdaptationInfo;
+
+                    /**
+                     * Creates a plain object from a SpeechAdaptationInfo message. Also converts values to other types if specified.
+                     * @param message SpeechAdaptationInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v1.SpeechAdaptationInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpeechAdaptationInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SpeechAdaptationInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CustomClass. */
                 interface ICustomClass {
 
@@ -2730,6 +2869,9 @@ export namespace google {
 
                     /** SpeechAdaptation customClasses */
                     customClasses?: (google.cloud.speech.v1.ICustomClass[]|null);
+
+                    /** SpeechAdaptation abnfGrammar */
+                    abnfGrammar?: (google.cloud.speech.v1.SpeechAdaptation.IABNFGrammar|null);
                 }
 
                 /** Represents a SpeechAdaptation. */
@@ -2749,6 +2891,9 @@ export namespace google {
 
                     /** SpeechAdaptation customClasses. */
                     public customClasses: google.cloud.speech.v1.ICustomClass[];
+
+                    /** SpeechAdaptation abnfGrammar. */
+                    public abnfGrammar?: (google.cloud.speech.v1.SpeechAdaptation.IABNFGrammar|null);
 
                     /**
                      * Creates a new SpeechAdaptation instance using the specified properties.
@@ -2826,6 +2971,106 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SpeechAdaptation {
+
+                    /** Properties of a ABNFGrammar. */
+                    interface IABNFGrammar {
+
+                        /** ABNFGrammar abnfStrings */
+                        abnfStrings?: (string[]|null);
+                    }
+
+                    /** Represents a ABNFGrammar. */
+                    class ABNFGrammar implements IABNFGrammar {
+
+                        /**
+                         * Constructs a new ABNFGrammar.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.speech.v1.SpeechAdaptation.IABNFGrammar);
+
+                        /** ABNFGrammar abnfStrings. */
+                        public abnfStrings: string[];
+
+                        /**
+                         * Creates a new ABNFGrammar instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ABNFGrammar instance
+                         */
+                        public static create(properties?: google.cloud.speech.v1.SpeechAdaptation.IABNFGrammar): google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar;
+
+                        /**
+                         * Encodes the specified ABNFGrammar message. Does not implicitly {@link google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar.verify|verify} messages.
+                         * @param message ABNFGrammar message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.speech.v1.SpeechAdaptation.IABNFGrammar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ABNFGrammar message, length delimited. Does not implicitly {@link google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar.verify|verify} messages.
+                         * @param message ABNFGrammar message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.speech.v1.SpeechAdaptation.IABNFGrammar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ABNFGrammar message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ABNFGrammar
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar;
+
+                        /**
+                         * Decodes a ABNFGrammar message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ABNFGrammar
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar;
+
+                        /**
+                         * Verifies a ABNFGrammar message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ABNFGrammar message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ABNFGrammar
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar;
+
+                        /**
+                         * Creates a plain object from a ABNFGrammar message. Also converts values to other types if specified.
+                         * @param message ABNFGrammar
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ABNFGrammar to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ABNFGrammar
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Represents an Adaptation */
@@ -5675,6 +5920,12 @@ export namespace google {
 
                     /** RecognizeResponse totalBilledTime */
                     totalBilledTime?: (google.protobuf.IDuration|null);
+
+                    /** RecognizeResponse speechAdaptationInfo */
+                    speechAdaptationInfo?: (google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo|null);
+
+                    /** RecognizeResponse requestId */
+                    requestId?: (number|Long|string|null);
                 }
 
                 /** Represents a RecognizeResponse. */
@@ -5691,6 +5942,12 @@ export namespace google {
 
                     /** RecognizeResponse totalBilledTime. */
                     public totalBilledTime?: (google.protobuf.IDuration|null);
+
+                    /** RecognizeResponse speechAdaptationInfo. */
+                    public speechAdaptationInfo?: (google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo|null);
+
+                    /** RecognizeResponse requestId. */
+                    public requestId: (number|Long|string);
 
                     /**
                      * Creates a new RecognizeResponse instance using the specified properties.
@@ -5784,6 +6041,12 @@ export namespace google {
 
                     /** LongRunningRecognizeResponse outputError */
                     outputError?: (google.rpc.IStatus|null);
+
+                    /** LongRunningRecognizeResponse speechAdaptationInfo */
+                    speechAdaptationInfo?: (google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo|null);
+
+                    /** LongRunningRecognizeResponse requestId */
+                    requestId?: (number|Long|string|null);
                 }
 
                 /** Represents a LongRunningRecognizeResponse. */
@@ -5806,6 +6069,12 @@ export namespace google {
 
                     /** LongRunningRecognizeResponse outputError. */
                     public outputError?: (google.rpc.IStatus|null);
+
+                    /** LongRunningRecognizeResponse speechAdaptationInfo. */
+                    public speechAdaptationInfo?: (google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo|null);
+
+                    /** LongRunningRecognizeResponse requestId. */
+                    public requestId: (number|Long|string);
 
                     /**
                      * Creates a new LongRunningRecognizeResponse instance using the specified properties.
@@ -6020,6 +6289,12 @@ export namespace google {
 
                     /** StreamingRecognizeResponse totalBilledTime */
                     totalBilledTime?: (google.protobuf.IDuration|null);
+
+                    /** StreamingRecognizeResponse speechAdaptationInfo */
+                    speechAdaptationInfo?: (google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo|null);
+
+                    /** StreamingRecognizeResponse requestId */
+                    requestId?: (number|Long|string|null);
                 }
 
                 /** Represents a StreamingRecognizeResponse. */
@@ -6042,6 +6317,12 @@ export namespace google {
 
                     /** StreamingRecognizeResponse totalBilledTime. */
                     public totalBilledTime?: (google.protobuf.IDuration|null);
+
+                    /** StreamingRecognizeResponse speechAdaptationInfo. */
+                    public speechAdaptationInfo?: (google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo|null);
+
+                    /** StreamingRecognizeResponse requestId. */
+                    public requestId: (number|Long|string);
 
                     /**
                      * Creates a new StreamingRecognizeResponse instance using the specified properties.
@@ -6602,6 +6883,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SpeechAdaptationInfo. */
+                interface ISpeechAdaptationInfo {
+
+                    /** SpeechAdaptationInfo adaptationTimeout */
+                    adaptationTimeout?: (boolean|null);
+
+                    /** SpeechAdaptationInfo timeoutMessage */
+                    timeoutMessage?: (string|null);
+                }
+
+                /** Represents a SpeechAdaptationInfo. */
+                class SpeechAdaptationInfo implements ISpeechAdaptationInfo {
+
+                    /**
+                     * Constructs a new SpeechAdaptationInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo);
+
+                    /** SpeechAdaptationInfo adaptationTimeout. */
+                    public adaptationTimeout: boolean;
+
+                    /** SpeechAdaptationInfo timeoutMessage. */
+                    public timeoutMessage: string;
+
+                    /**
+                     * Creates a new SpeechAdaptationInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpeechAdaptationInfo instance
+                     */
+                    public static create(properties?: google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo): google.cloud.speech.v1p1beta1.SpeechAdaptationInfo;
+
+                    /**
+                     * Encodes the specified SpeechAdaptationInfo message. Does not implicitly {@link google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.verify|verify} messages.
+                     * @param message SpeechAdaptationInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpeechAdaptationInfo message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.verify|verify} messages.
+                     * @param message SpeechAdaptationInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpeechAdaptationInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpeechAdaptationInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1p1beta1.SpeechAdaptationInfo;
+
+                    /**
+                     * Decodes a SpeechAdaptationInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpeechAdaptationInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1p1beta1.SpeechAdaptationInfo;
+
+                    /**
+                     * Verifies a SpeechAdaptationInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpeechAdaptationInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpeechAdaptationInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1p1beta1.SpeechAdaptationInfo;
+
+                    /**
+                     * Creates a plain object from a SpeechAdaptationInfo message. Also converts values to other types if specified.
+                     * @param message SpeechAdaptationInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v1p1beta1.SpeechAdaptationInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpeechAdaptationInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SpeechAdaptationInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CustomClass. */
                 interface ICustomClass {
 
@@ -7037,6 +7421,9 @@ export namespace google {
 
                     /** SpeechAdaptation customClasses */
                     customClasses?: (google.cloud.speech.v1p1beta1.ICustomClass[]|null);
+
+                    /** SpeechAdaptation abnfGrammar */
+                    abnfGrammar?: (google.cloud.speech.v1p1beta1.SpeechAdaptation.IABNFGrammar|null);
                 }
 
                 /** Represents a SpeechAdaptation. */
@@ -7056,6 +7443,9 @@ export namespace google {
 
                     /** SpeechAdaptation customClasses. */
                     public customClasses: google.cloud.speech.v1p1beta1.ICustomClass[];
+
+                    /** SpeechAdaptation abnfGrammar. */
+                    public abnfGrammar?: (google.cloud.speech.v1p1beta1.SpeechAdaptation.IABNFGrammar|null);
 
                     /**
                      * Creates a new SpeechAdaptation instance using the specified properties.
@@ -7133,6 +7523,106 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SpeechAdaptation {
+
+                    /** Properties of a ABNFGrammar. */
+                    interface IABNFGrammar {
+
+                        /** ABNFGrammar abnfStrings */
+                        abnfStrings?: (string[]|null);
+                    }
+
+                    /** Represents a ABNFGrammar. */
+                    class ABNFGrammar implements IABNFGrammar {
+
+                        /**
+                         * Constructs a new ABNFGrammar.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.speech.v1p1beta1.SpeechAdaptation.IABNFGrammar);
+
+                        /** ABNFGrammar abnfStrings. */
+                        public abnfStrings: string[];
+
+                        /**
+                         * Creates a new ABNFGrammar instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ABNFGrammar instance
+                         */
+                        public static create(properties?: google.cloud.speech.v1p1beta1.SpeechAdaptation.IABNFGrammar): google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar;
+
+                        /**
+                         * Encodes the specified ABNFGrammar message. Does not implicitly {@link google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar.verify|verify} messages.
+                         * @param message ABNFGrammar message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.speech.v1p1beta1.SpeechAdaptation.IABNFGrammar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ABNFGrammar message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar.verify|verify} messages.
+                         * @param message ABNFGrammar message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.speech.v1p1beta1.SpeechAdaptation.IABNFGrammar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ABNFGrammar message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ABNFGrammar
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar;
+
+                        /**
+                         * Decodes a ABNFGrammar message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ABNFGrammar
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar;
+
+                        /**
+                         * Verifies a ABNFGrammar message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ABNFGrammar message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ABNFGrammar
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar;
+
+                        /**
+                         * Creates a plain object from a ABNFGrammar message. Also converts values to other types if specified.
+                         * @param message ABNFGrammar
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ABNFGrammar to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ABNFGrammar
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a TranscriptNormalization. */

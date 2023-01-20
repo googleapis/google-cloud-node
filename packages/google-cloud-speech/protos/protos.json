@@ -422,6 +422,14 @@
                         "totalBilledTime": {
                           "type": "google.protobuf.Duration",
                           "id": 3
+                        },
+                        "speechAdaptationInfo": {
+                          "type": "SpeechAdaptationInfo",
+                          "id": 7
+                        },
+                        "requestId": {
+                          "type": "int64",
+                          "id": 8
                         }
                       }
                     },
@@ -443,6 +451,14 @@
                         "outputError": {
                           "type": "google.rpc.Status",
                           "id": 7
+                        },
+                        "speechAdaptationInfo": {
+                          "type": "SpeechAdaptationInfo",
+                          "id": 8
+                        },
+                        "requestId": {
+                          "type": "int64",
+                          "id": 9
                         }
                       }
                     },
@@ -487,6 +503,14 @@
                         "totalBilledTime": {
                           "type": "google.protobuf.Duration",
                           "id": 5
+                        },
+                        "speechAdaptationInfo": {
+                          "type": "SpeechAdaptationInfo",
+                          "id": 9
+                        },
+                        "requestId": {
+                          "type": "int64",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -598,6 +622,18 @@
                         }
                       }
                     },
+                    "SpeechAdaptationInfo": {
+                      "fields": {
+                        "adaptationTimeout": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "timeoutMessage": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
                     "CustomClass": {
                       "options": {
                         "(google.api.resource).type": "speech.googleapis.com/CustomClass",
@@ -683,6 +719,21 @@
                           "rule": "repeated",
                           "type": "CustomClass",
                           "id": 3
+                        },
+                        "abnfGrammar": {
+                          "type": "ABNFGrammar",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "ABNFGrammar": {
+                          "fields": {
+                            "abnfStrings": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },
@@ -1522,6 +1573,14 @@
                         "totalBilledTime": {
                           "type": "google.protobuf.Duration",
                           "id": 3
+                        },
+                        "speechAdaptationInfo": {
+                          "type": "SpeechAdaptationInfo",
+                          "id": 7
+                        },
+                        "requestId": {
+                          "type": "int64",
+                          "id": 8
                         }
                       }
                     },
@@ -1543,6 +1602,14 @@
                         "outputError": {
                           "type": "google.rpc.Status",
                           "id": 7
+                        },
+                        "speechAdaptationInfo": {
+                          "type": "SpeechAdaptationInfo",
+                          "id": 8
+                        },
+                        "requestId": {
+                          "type": "int64",
+                          "id": 9
                         }
                       }
                     },
@@ -1594,6 +1661,14 @@
                         "totalBilledTime": {
                           "type": "google.protobuf.Duration",
                           "id": 5
+                        },
+                        "speechAdaptationInfo": {
+                          "type": "SpeechAdaptationInfo",
+                          "id": 9
+                        },
+                        "requestId": {
+                          "type": "int64",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -1705,6 +1780,18 @@
                         }
                       }
                     },
+                    "SpeechAdaptationInfo": {
+                      "fields": {
+                        "adaptationTimeout": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "timeoutMessage": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
                     "CustomClass": {
                       "options": {
                         "(google.api.resource).type": "speech.googleapis.com/CustomClass",
@@ -1790,6 +1877,21 @@
                           "rule": "repeated",
                           "type": "CustomClass",
                           "id": 3
+                        },
+                        "abnfGrammar": {
+                          "type": "ABNFGrammar",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "ABNFGrammar": {
+                          "fields": {
+                            "abnfStrings": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },

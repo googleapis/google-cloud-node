@@ -3580,6 +3580,8 @@
                          * @interface IRecognizeResponse
                          * @property {Array.<google.cloud.speech.v1.ISpeechRecognitionResult>|null} [results] RecognizeResponse results
                          * @property {google.protobuf.IDuration|null} [totalBilledTime] RecognizeResponse totalBilledTime
+                         * @property {google.cloud.speech.v1.ISpeechAdaptationInfo|null} [speechAdaptationInfo] RecognizeResponse speechAdaptationInfo
+                         * @property {number|Long|null} [requestId] RecognizeResponse requestId
                          */
     
                         /**
@@ -3615,6 +3617,22 @@
                         RecognizeResponse.prototype.totalBilledTime = null;
     
                         /**
+                         * RecognizeResponse speechAdaptationInfo.
+                         * @member {google.cloud.speech.v1.ISpeechAdaptationInfo|null|undefined} speechAdaptationInfo
+                         * @memberof google.cloud.speech.v1.RecognizeResponse
+                         * @instance
+                         */
+                        RecognizeResponse.prototype.speechAdaptationInfo = null;
+    
+                        /**
+                         * RecognizeResponse requestId.
+                         * @member {number|Long} requestId
+                         * @memberof google.cloud.speech.v1.RecognizeResponse
+                         * @instance
+                         */
+                        RecognizeResponse.prototype.requestId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
                          * Creates a new RecognizeResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1.RecognizeResponse
@@ -3643,6 +3661,10 @@
                                     $root.google.cloud.speech.v1.SpeechRecognitionResult.encode(message.results[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.totalBilledTime != null && Object.hasOwnProperty.call(message, "totalBilledTime"))
                                 $root.google.protobuf.Duration.encode(message.totalBilledTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.speechAdaptationInfo != null && Object.hasOwnProperty.call(message, "speechAdaptationInfo"))
+                                $root.google.cloud.speech.v1.SpeechAdaptationInfo.encode(message.speechAdaptationInfo, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.requestId);
                             return writer;
                         };
     
@@ -3685,6 +3707,14 @@
                                     }
                                 case 3: {
                                         message.totalBilledTime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.speechAdaptationInfo = $root.google.cloud.speech.v1.SpeechAdaptationInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.requestId = reader.int64();
                                         break;
                                     }
                                 default:
@@ -3736,6 +3766,14 @@
                                 if (error)
                                     return "totalBilledTime." + error;
                             }
+                            if (message.speechAdaptationInfo != null && message.hasOwnProperty("speechAdaptationInfo")) {
+                                var error = $root.google.cloud.speech.v1.SpeechAdaptationInfo.verify(message.speechAdaptationInfo);
+                                if (error)
+                                    return "speechAdaptationInfo." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isInteger(message.requestId) && !(message.requestId && $util.isInteger(message.requestId.low) && $util.isInteger(message.requestId.high)))
+                                    return "requestId: integer|Long expected";
                             return null;
                         };
     
@@ -3766,6 +3804,20 @@
                                     throw TypeError(".google.cloud.speech.v1.RecognizeResponse.totalBilledTime: object expected");
                                 message.totalBilledTime = $root.google.protobuf.Duration.fromObject(object.totalBilledTime);
                             }
+                            if (object.speechAdaptationInfo != null) {
+                                if (typeof object.speechAdaptationInfo !== "object")
+                                    throw TypeError(".google.cloud.speech.v1.RecognizeResponse.speechAdaptationInfo: object expected");
+                                message.speechAdaptationInfo = $root.google.cloud.speech.v1.SpeechAdaptationInfo.fromObject(object.speechAdaptationInfo);
+                            }
+                            if (object.requestId != null)
+                                if ($util.Long)
+                                    (message.requestId = $util.Long.fromValue(object.requestId)).unsigned = false;
+                                else if (typeof object.requestId === "string")
+                                    message.requestId = parseInt(object.requestId, 10);
+                                else if (typeof object.requestId === "number")
+                                    message.requestId = object.requestId;
+                                else if (typeof object.requestId === "object")
+                                    message.requestId = new $util.LongBits(object.requestId.low >>> 0, object.requestId.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -3784,8 +3836,15 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.results = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.totalBilledTime = null;
+                                object.speechAdaptationInfo = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.requestId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.requestId = options.longs === String ? "0" : 0;
+                            }
                             if (message.results && message.results.length) {
                                 object.results = [];
                                 for (var j = 0; j < message.results.length; ++j)
@@ -3793,6 +3852,13 @@
                             }
                             if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime"))
                                 object.totalBilledTime = $root.google.protobuf.Duration.toObject(message.totalBilledTime, options);
+                            if (message.speechAdaptationInfo != null && message.hasOwnProperty("speechAdaptationInfo"))
+                                object.speechAdaptationInfo = $root.google.cloud.speech.v1.SpeechAdaptationInfo.toObject(message.speechAdaptationInfo, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (typeof message.requestId === "number")
+                                    object.requestId = options.longs === String ? String(message.requestId) : message.requestId;
+                                else
+                                    object.requestId = options.longs === String ? $util.Long.prototype.toString.call(message.requestId) : options.longs === Number ? new $util.LongBits(message.requestId.low >>> 0, message.requestId.high >>> 0).toNumber() : message.requestId;
                             return object;
                         };
     
@@ -3835,6 +3901,8 @@
                          * @property {google.protobuf.IDuration|null} [totalBilledTime] LongRunningRecognizeResponse totalBilledTime
                          * @property {google.cloud.speech.v1.ITranscriptOutputConfig|null} [outputConfig] LongRunningRecognizeResponse outputConfig
                          * @property {google.rpc.IStatus|null} [outputError] LongRunningRecognizeResponse outputError
+                         * @property {google.cloud.speech.v1.ISpeechAdaptationInfo|null} [speechAdaptationInfo] LongRunningRecognizeResponse speechAdaptationInfo
+                         * @property {number|Long|null} [requestId] LongRunningRecognizeResponse requestId
                          */
     
                         /**
@@ -3886,6 +3954,22 @@
                         LongRunningRecognizeResponse.prototype.outputError = null;
     
                         /**
+                         * LongRunningRecognizeResponse speechAdaptationInfo.
+                         * @member {google.cloud.speech.v1.ISpeechAdaptationInfo|null|undefined} speechAdaptationInfo
+                         * @memberof google.cloud.speech.v1.LongRunningRecognizeResponse
+                         * @instance
+                         */
+                        LongRunningRecognizeResponse.prototype.speechAdaptationInfo = null;
+    
+                        /**
+                         * LongRunningRecognizeResponse requestId.
+                         * @member {number|Long} requestId
+                         * @memberof google.cloud.speech.v1.LongRunningRecognizeResponse
+                         * @instance
+                         */
+                        LongRunningRecognizeResponse.prototype.requestId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
                          * Creates a new LongRunningRecognizeResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1.LongRunningRecognizeResponse
@@ -3918,6 +4002,10 @@
                                 $root.google.cloud.speech.v1.TranscriptOutputConfig.encode(message.outputConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.outputError != null && Object.hasOwnProperty.call(message, "outputError"))
                                 $root.google.rpc.Status.encode(message.outputError, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.speechAdaptationInfo != null && Object.hasOwnProperty.call(message, "speechAdaptationInfo"))
+                                $root.google.cloud.speech.v1.SpeechAdaptationInfo.encode(message.speechAdaptationInfo, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.requestId);
                             return writer;
                         };
     
@@ -3968,6 +4056,14 @@
                                     }
                                 case 7: {
                                         message.outputError = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.speechAdaptationInfo = $root.google.cloud.speech.v1.SpeechAdaptationInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.requestId = reader.int64();
                                         break;
                                     }
                                 default:
@@ -4029,6 +4125,14 @@
                                 if (error)
                                     return "outputError." + error;
                             }
+                            if (message.speechAdaptationInfo != null && message.hasOwnProperty("speechAdaptationInfo")) {
+                                var error = $root.google.cloud.speech.v1.SpeechAdaptationInfo.verify(message.speechAdaptationInfo);
+                                if (error)
+                                    return "speechAdaptationInfo." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isInteger(message.requestId) && !(message.requestId && $util.isInteger(message.requestId.low) && $util.isInteger(message.requestId.high)))
+                                    return "requestId: integer|Long expected";
                             return null;
                         };
     
@@ -4069,6 +4173,20 @@
                                     throw TypeError(".google.cloud.speech.v1.LongRunningRecognizeResponse.outputError: object expected");
                                 message.outputError = $root.google.rpc.Status.fromObject(object.outputError);
                             }
+                            if (object.speechAdaptationInfo != null) {
+                                if (typeof object.speechAdaptationInfo !== "object")
+                                    throw TypeError(".google.cloud.speech.v1.LongRunningRecognizeResponse.speechAdaptationInfo: object expected");
+                                message.speechAdaptationInfo = $root.google.cloud.speech.v1.SpeechAdaptationInfo.fromObject(object.speechAdaptationInfo);
+                            }
+                            if (object.requestId != null)
+                                if ($util.Long)
+                                    (message.requestId = $util.Long.fromValue(object.requestId)).unsigned = false;
+                                else if (typeof object.requestId === "string")
+                                    message.requestId = parseInt(object.requestId, 10);
+                                else if (typeof object.requestId === "number")
+                                    message.requestId = object.requestId;
+                                else if (typeof object.requestId === "object")
+                                    message.requestId = new $util.LongBits(object.requestId.low >>> 0, object.requestId.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -4091,6 +4209,12 @@
                                 object.totalBilledTime = null;
                                 object.outputConfig = null;
                                 object.outputError = null;
+                                object.speechAdaptationInfo = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.requestId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.requestId = options.longs === String ? "0" : 0;
                             }
                             if (message.results && message.results.length) {
                                 object.results = [];
@@ -4103,6 +4227,13 @@
                                 object.outputConfig = $root.google.cloud.speech.v1.TranscriptOutputConfig.toObject(message.outputConfig, options);
                             if (message.outputError != null && message.hasOwnProperty("outputError"))
                                 object.outputError = $root.google.rpc.Status.toObject(message.outputError, options);
+                            if (message.speechAdaptationInfo != null && message.hasOwnProperty("speechAdaptationInfo"))
+                                object.speechAdaptationInfo = $root.google.cloud.speech.v1.SpeechAdaptationInfo.toObject(message.speechAdaptationInfo, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (typeof message.requestId === "number")
+                                    object.requestId = options.longs === String ? String(message.requestId) : message.requestId;
+                                else
+                                    object.requestId = options.longs === String ? $util.Long.prototype.toString.call(message.requestId) : options.longs === Number ? new $util.LongBits(message.requestId.low >>> 0, message.requestId.high >>> 0).toNumber() : message.requestId;
                             return object;
                         };
     
@@ -4428,6 +4559,8 @@
                          * @property {Array.<google.cloud.speech.v1.IStreamingRecognitionResult>|null} [results] StreamingRecognizeResponse results
                          * @property {google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType|null} [speechEventType] StreamingRecognizeResponse speechEventType
                          * @property {google.protobuf.IDuration|null} [totalBilledTime] StreamingRecognizeResponse totalBilledTime
+                         * @property {google.cloud.speech.v1.ISpeechAdaptationInfo|null} [speechAdaptationInfo] StreamingRecognizeResponse speechAdaptationInfo
+                         * @property {number|Long|null} [requestId] StreamingRecognizeResponse requestId
                          */
     
                         /**
@@ -4479,6 +4612,22 @@
                         StreamingRecognizeResponse.prototype.totalBilledTime = null;
     
                         /**
+                         * StreamingRecognizeResponse speechAdaptationInfo.
+                         * @member {google.cloud.speech.v1.ISpeechAdaptationInfo|null|undefined} speechAdaptationInfo
+                         * @memberof google.cloud.speech.v1.StreamingRecognizeResponse
+                         * @instance
+                         */
+                        StreamingRecognizeResponse.prototype.speechAdaptationInfo = null;
+    
+                        /**
+                         * StreamingRecognizeResponse requestId.
+                         * @member {number|Long} requestId
+                         * @memberof google.cloud.speech.v1.StreamingRecognizeResponse
+                         * @instance
+                         */
+                        StreamingRecognizeResponse.prototype.requestId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
                          * Creates a new StreamingRecognizeResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1.StreamingRecognizeResponse
@@ -4511,6 +4660,10 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.speechEventType);
                             if (message.totalBilledTime != null && Object.hasOwnProperty.call(message, "totalBilledTime"))
                                 $root.google.protobuf.Duration.encode(message.totalBilledTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.speechAdaptationInfo != null && Object.hasOwnProperty.call(message, "speechAdaptationInfo"))
+                                $root.google.cloud.speech.v1.SpeechAdaptationInfo.encode(message.speechAdaptationInfo, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int64(message.requestId);
                             return writer;
                         };
     
@@ -4561,6 +4714,14 @@
                                     }
                                 case 5: {
                                         message.totalBilledTime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.speechAdaptationInfo = $root.google.cloud.speech.v1.SpeechAdaptationInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.requestId = reader.int64();
                                         break;
                                     }
                                 default:
@@ -4625,6 +4786,14 @@
                                 if (error)
                                     return "totalBilledTime." + error;
                             }
+                            if (message.speechAdaptationInfo != null && message.hasOwnProperty("speechAdaptationInfo")) {
+                                var error = $root.google.cloud.speech.v1.SpeechAdaptationInfo.verify(message.speechAdaptationInfo);
+                                if (error)
+                                    return "speechAdaptationInfo." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isInteger(message.requestId) && !(message.requestId && $util.isInteger(message.requestId.low) && $util.isInteger(message.requestId.high)))
+                                    return "requestId: integer|Long expected";
                             return null;
                         };
     
@@ -4676,6 +4845,20 @@
                                     throw TypeError(".google.cloud.speech.v1.StreamingRecognizeResponse.totalBilledTime: object expected");
                                 message.totalBilledTime = $root.google.protobuf.Duration.fromObject(object.totalBilledTime);
                             }
+                            if (object.speechAdaptationInfo != null) {
+                                if (typeof object.speechAdaptationInfo !== "object")
+                                    throw TypeError(".google.cloud.speech.v1.StreamingRecognizeResponse.speechAdaptationInfo: object expected");
+                                message.speechAdaptationInfo = $root.google.cloud.speech.v1.SpeechAdaptationInfo.fromObject(object.speechAdaptationInfo);
+                            }
+                            if (object.requestId != null)
+                                if ($util.Long)
+                                    (message.requestId = $util.Long.fromValue(object.requestId)).unsigned = false;
+                                else if (typeof object.requestId === "string")
+                                    message.requestId = parseInt(object.requestId, 10);
+                                else if (typeof object.requestId === "number")
+                                    message.requestId = object.requestId;
+                                else if (typeof object.requestId === "object")
+                                    message.requestId = new $util.LongBits(object.requestId.low >>> 0, object.requestId.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -4698,6 +4881,12 @@
                                 object.error = null;
                                 object.speechEventType = options.enums === String ? "SPEECH_EVENT_UNSPECIFIED" : 0;
                                 object.totalBilledTime = null;
+                                object.speechAdaptationInfo = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.requestId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.requestId = options.longs === String ? "0" : 0;
                             }
                             if (message.error != null && message.hasOwnProperty("error"))
                                 object.error = $root.google.rpc.Status.toObject(message.error, options);
@@ -4710,6 +4899,13 @@
                                 object.speechEventType = options.enums === String ? $root.google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] === undefined ? message.speechEventType : $root.google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] : message.speechEventType;
                             if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime"))
                                 object.totalBilledTime = $root.google.protobuf.Duration.toObject(message.totalBilledTime, options);
+                            if (message.speechAdaptationInfo != null && message.hasOwnProperty("speechAdaptationInfo"))
+                                object.speechAdaptationInfo = $root.google.cloud.speech.v1.SpeechAdaptationInfo.toObject(message.speechAdaptationInfo, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (typeof message.requestId === "number")
+                                    object.requestId = options.longs === String ? String(message.requestId) : message.requestId;
+                                else
+                                    object.requestId = options.longs === String ? $util.Long.prototype.toString.call(message.requestId) : options.longs === Number ? new $util.LongBits(message.requestId.low >>> 0, message.requestId.high >>> 0).toNumber() : message.requestId;
                             return object;
                         };
     
@@ -5980,6 +6176,233 @@
                         return WordInfo;
                     })();
     
+                    v1.SpeechAdaptationInfo = (function() {
+    
+                        /**
+                         * Properties of a SpeechAdaptationInfo.
+                         * @memberof google.cloud.speech.v1
+                         * @interface ISpeechAdaptationInfo
+                         * @property {boolean|null} [adaptationTimeout] SpeechAdaptationInfo adaptationTimeout
+                         * @property {string|null} [timeoutMessage] SpeechAdaptationInfo timeoutMessage
+                         */
+    
+                        /**
+                         * Constructs a new SpeechAdaptationInfo.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents a SpeechAdaptationInfo.
+                         * @implements ISpeechAdaptationInfo
+                         * @constructor
+                         * @param {google.cloud.speech.v1.ISpeechAdaptationInfo=} [properties] Properties to set
+                         */
+                        function SpeechAdaptationInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SpeechAdaptationInfo adaptationTimeout.
+                         * @member {boolean} adaptationTimeout
+                         * @memberof google.cloud.speech.v1.SpeechAdaptationInfo
+                         * @instance
+                         */
+                        SpeechAdaptationInfo.prototype.adaptationTimeout = false;
+    
+                        /**
+                         * SpeechAdaptationInfo timeoutMessage.
+                         * @member {string} timeoutMessage
+                         * @memberof google.cloud.speech.v1.SpeechAdaptationInfo
+                         * @instance
+                         */
+                        SpeechAdaptationInfo.prototype.timeoutMessage = "";
+    
+                        /**
+                         * Creates a new SpeechAdaptationInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.SpeechAdaptationInfo
+                         * @static
+                         * @param {google.cloud.speech.v1.ISpeechAdaptationInfo=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1.SpeechAdaptationInfo} SpeechAdaptationInfo instance
+                         */
+                        SpeechAdaptationInfo.create = function create(properties) {
+                            return new SpeechAdaptationInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SpeechAdaptationInfo message. Does not implicitly {@link google.cloud.speech.v1.SpeechAdaptationInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1.SpeechAdaptationInfo
+                         * @static
+                         * @param {google.cloud.speech.v1.ISpeechAdaptationInfo} message SpeechAdaptationInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpeechAdaptationInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.adaptationTimeout != null && Object.hasOwnProperty.call(message, "adaptationTimeout"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.adaptationTimeout);
+                            if (message.timeoutMessage != null && Object.hasOwnProperty.call(message, "timeoutMessage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.timeoutMessage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SpeechAdaptationInfo message, length delimited. Does not implicitly {@link google.cloud.speech.v1.SpeechAdaptationInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1.SpeechAdaptationInfo
+                         * @static
+                         * @param {google.cloud.speech.v1.ISpeechAdaptationInfo} message SpeechAdaptationInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpeechAdaptationInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SpeechAdaptationInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1.SpeechAdaptationInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1.SpeechAdaptationInfo} SpeechAdaptationInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpeechAdaptationInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.SpeechAdaptationInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.adaptationTimeout = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.timeoutMessage = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SpeechAdaptationInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1.SpeechAdaptationInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1.SpeechAdaptationInfo} SpeechAdaptationInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpeechAdaptationInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SpeechAdaptationInfo message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1.SpeechAdaptationInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SpeechAdaptationInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.adaptationTimeout != null && message.hasOwnProperty("adaptationTimeout"))
+                                if (typeof message.adaptationTimeout !== "boolean")
+                                    return "adaptationTimeout: boolean expected";
+                            if (message.timeoutMessage != null && message.hasOwnProperty("timeoutMessage"))
+                                if (!$util.isString(message.timeoutMessage))
+                                    return "timeoutMessage: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SpeechAdaptationInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1.SpeechAdaptationInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1.SpeechAdaptationInfo} SpeechAdaptationInfo
+                         */
+                        SpeechAdaptationInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1.SpeechAdaptationInfo)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1.SpeechAdaptationInfo();
+                            if (object.adaptationTimeout != null)
+                                message.adaptationTimeout = Boolean(object.adaptationTimeout);
+                            if (object.timeoutMessage != null)
+                                message.timeoutMessage = String(object.timeoutMessage);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SpeechAdaptationInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1.SpeechAdaptationInfo
+                         * @static
+                         * @param {google.cloud.speech.v1.SpeechAdaptationInfo} message SpeechAdaptationInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SpeechAdaptationInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.adaptationTimeout = false;
+                                object.timeoutMessage = "";
+                            }
+                            if (message.adaptationTimeout != null && message.hasOwnProperty("adaptationTimeout"))
+                                object.adaptationTimeout = message.adaptationTimeout;
+                            if (message.timeoutMessage != null && message.hasOwnProperty("timeoutMessage"))
+                                object.timeoutMessage = message.timeoutMessage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SpeechAdaptationInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1.SpeechAdaptationInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SpeechAdaptationInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SpeechAdaptationInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v1.SpeechAdaptationInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SpeechAdaptationInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v1.SpeechAdaptationInfo";
+                        };
+    
+                        return SpeechAdaptationInfo;
+                    })();
+    
                     v1.CustomClass = (function() {
     
                         /**
@@ -6963,6 +7386,7 @@
                          * @property {Array.<google.cloud.speech.v1.IPhraseSet>|null} [phraseSets] SpeechAdaptation phraseSets
                          * @property {Array.<string>|null} [phraseSetReferences] SpeechAdaptation phraseSetReferences
                          * @property {Array.<google.cloud.speech.v1.ICustomClass>|null} [customClasses] SpeechAdaptation customClasses
+                         * @property {google.cloud.speech.v1.SpeechAdaptation.IABNFGrammar|null} [abnfGrammar] SpeechAdaptation abnfGrammar
                          */
     
                         /**
@@ -7008,6 +7432,14 @@
                         SpeechAdaptation.prototype.customClasses = $util.emptyArray;
     
                         /**
+                         * SpeechAdaptation abnfGrammar.
+                         * @member {google.cloud.speech.v1.SpeechAdaptation.IABNFGrammar|null|undefined} abnfGrammar
+                         * @memberof google.cloud.speech.v1.SpeechAdaptation
+                         * @instance
+                         */
+                        SpeechAdaptation.prototype.abnfGrammar = null;
+    
+                        /**
                          * Creates a new SpeechAdaptation instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1.SpeechAdaptation
@@ -7040,6 +7472,8 @@
                             if (message.customClasses != null && message.customClasses.length)
                                 for (var i = 0; i < message.customClasses.length; ++i)
                                     $root.google.cloud.speech.v1.CustomClass.encode(message.customClasses[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.abnfGrammar != null && Object.hasOwnProperty.call(message, "abnfGrammar"))
+                                $root.google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar.encode(message.abnfGrammar, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -7090,6 +7524,10 @@
                                         if (!(message.customClasses && message.customClasses.length))
                                             message.customClasses = [];
                                         message.customClasses.push($root.google.cloud.speech.v1.CustomClass.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        message.abnfGrammar = $root.google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -7152,6 +7590,11 @@
                                         return "customClasses." + error;
                                 }
                             }
+                            if (message.abnfGrammar != null && message.hasOwnProperty("abnfGrammar")) {
+                                var error = $root.google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar.verify(message.abnfGrammar);
+                                if (error)
+                                    return "abnfGrammar." + error;
+                            }
                             return null;
                         };
     
@@ -7194,6 +7637,11 @@
                                     message.customClasses[i] = $root.google.cloud.speech.v1.CustomClass.fromObject(object.customClasses[i]);
                                 }
                             }
+                            if (object.abnfGrammar != null) {
+                                if (typeof object.abnfGrammar !== "object")
+                                    throw TypeError(".google.cloud.speech.v1.SpeechAdaptation.abnfGrammar: object expected");
+                                message.abnfGrammar = $root.google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar.fromObject(object.abnfGrammar);
+                            }
                             return message;
                         };
     
@@ -7215,6 +7663,8 @@
                                 object.phraseSetReferences = [];
                                 object.customClasses = [];
                             }
+                            if (options.defaults)
+                                object.abnfGrammar = null;
                             if (message.phraseSets && message.phraseSets.length) {
                                 object.phraseSets = [];
                                 for (var j = 0; j < message.phraseSets.length; ++j)
@@ -7230,6 +7680,8 @@
                                 for (var j = 0; j < message.customClasses.length; ++j)
                                     object.customClasses[j] = $root.google.cloud.speech.v1.CustomClass.toObject(message.customClasses[j], options);
                             }
+                            if (message.abnfGrammar != null && message.hasOwnProperty("abnfGrammar"))
+                                object.abnfGrammar = $root.google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar.toObject(message.abnfGrammar, options);
                             return object;
                         };
     
@@ -7258,6 +7710,225 @@
                             }
                             return typeUrlPrefix + "/google.cloud.speech.v1.SpeechAdaptation";
                         };
+    
+                        SpeechAdaptation.ABNFGrammar = (function() {
+    
+                            /**
+                             * Properties of a ABNFGrammar.
+                             * @memberof google.cloud.speech.v1.SpeechAdaptation
+                             * @interface IABNFGrammar
+                             * @property {Array.<string>|null} [abnfStrings] ABNFGrammar abnfStrings
+                             */
+    
+                            /**
+                             * Constructs a new ABNFGrammar.
+                             * @memberof google.cloud.speech.v1.SpeechAdaptation
+                             * @classdesc Represents a ABNFGrammar.
+                             * @implements IABNFGrammar
+                             * @constructor
+                             * @param {google.cloud.speech.v1.SpeechAdaptation.IABNFGrammar=} [properties] Properties to set
+                             */
+                            function ABNFGrammar(properties) {
+                                this.abnfStrings = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ABNFGrammar abnfStrings.
+                             * @member {Array.<string>} abnfStrings
+                             * @memberof google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar
+                             * @instance
+                             */
+                            ABNFGrammar.prototype.abnfStrings = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ABNFGrammar instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {google.cloud.speech.v1.SpeechAdaptation.IABNFGrammar=} [properties] Properties to set
+                             * @returns {google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar} ABNFGrammar instance
+                             */
+                            ABNFGrammar.create = function create(properties) {
+                                return new ABNFGrammar(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ABNFGrammar message. Does not implicitly {@link google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {google.cloud.speech.v1.SpeechAdaptation.IABNFGrammar} message ABNFGrammar message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ABNFGrammar.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.abnfStrings != null && message.abnfStrings.length)
+                                    for (var i = 0; i < message.abnfStrings.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.abnfStrings[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ABNFGrammar message, length delimited. Does not implicitly {@link google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {google.cloud.speech.v1.SpeechAdaptation.IABNFGrammar} message ABNFGrammar message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ABNFGrammar.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ABNFGrammar message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar} ABNFGrammar
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ABNFGrammar.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.abnfStrings && message.abnfStrings.length))
+                                                message.abnfStrings = [];
+                                            message.abnfStrings.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ABNFGrammar message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar} ABNFGrammar
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ABNFGrammar.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ABNFGrammar message.
+                             * @function verify
+                             * @memberof google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ABNFGrammar.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.abnfStrings != null && message.hasOwnProperty("abnfStrings")) {
+                                    if (!Array.isArray(message.abnfStrings))
+                                        return "abnfStrings: array expected";
+                                    for (var i = 0; i < message.abnfStrings.length; ++i)
+                                        if (!$util.isString(message.abnfStrings[i]))
+                                            return "abnfStrings: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ABNFGrammar message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar} ABNFGrammar
+                             */
+                            ABNFGrammar.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar)
+                                    return object;
+                                var message = new $root.google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar();
+                                if (object.abnfStrings) {
+                                    if (!Array.isArray(object.abnfStrings))
+                                        throw TypeError(".google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar.abnfStrings: array expected");
+                                    message.abnfStrings = [];
+                                    for (var i = 0; i < object.abnfStrings.length; ++i)
+                                        message.abnfStrings[i] = String(object.abnfStrings[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ABNFGrammar message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar} message ABNFGrammar
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ABNFGrammar.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.abnfStrings = [];
+                                if (message.abnfStrings && message.abnfStrings.length) {
+                                    object.abnfStrings = [];
+                                    for (var j = 0; j < message.abnfStrings.length; ++j)
+                                        object.abnfStrings[j] = message.abnfStrings[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ABNFGrammar to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ABNFGrammar.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ABNFGrammar
+                             * @function getTypeUrl
+                             * @memberof google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ABNFGrammar.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.speech.v1.SpeechAdaptation.ABNFGrammar";
+                            };
+    
+                            return ABNFGrammar;
+                        })();
     
                         return SpeechAdaptation;
                     })();
@@ -14063,6 +14734,8 @@
                          * @interface IRecognizeResponse
                          * @property {Array.<google.cloud.speech.v1p1beta1.ISpeechRecognitionResult>|null} [results] RecognizeResponse results
                          * @property {google.protobuf.IDuration|null} [totalBilledTime] RecognizeResponse totalBilledTime
+                         * @property {google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo|null} [speechAdaptationInfo] RecognizeResponse speechAdaptationInfo
+                         * @property {number|Long|null} [requestId] RecognizeResponse requestId
                          */
     
                         /**
@@ -14098,6 +14771,22 @@
                         RecognizeResponse.prototype.totalBilledTime = null;
     
                         /**
+                         * RecognizeResponse speechAdaptationInfo.
+                         * @member {google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo|null|undefined} speechAdaptationInfo
+                         * @memberof google.cloud.speech.v1p1beta1.RecognizeResponse
+                         * @instance
+                         */
+                        RecognizeResponse.prototype.speechAdaptationInfo = null;
+    
+                        /**
+                         * RecognizeResponse requestId.
+                         * @member {number|Long} requestId
+                         * @memberof google.cloud.speech.v1p1beta1.RecognizeResponse
+                         * @instance
+                         */
+                        RecognizeResponse.prototype.requestId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
                          * Creates a new RecognizeResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1p1beta1.RecognizeResponse
@@ -14126,6 +14815,10 @@
                                     $root.google.cloud.speech.v1p1beta1.SpeechRecognitionResult.encode(message.results[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.totalBilledTime != null && Object.hasOwnProperty.call(message, "totalBilledTime"))
                                 $root.google.protobuf.Duration.encode(message.totalBilledTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.speechAdaptationInfo != null && Object.hasOwnProperty.call(message, "speechAdaptationInfo"))
+                                $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.encode(message.speechAdaptationInfo, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.requestId);
                             return writer;
                         };
     
@@ -14168,6 +14861,14 @@
                                     }
                                 case 3: {
                                         message.totalBilledTime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.speechAdaptationInfo = $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.requestId = reader.int64();
                                         break;
                                     }
                                 default:
@@ -14219,6 +14920,14 @@
                                 if (error)
                                     return "totalBilledTime." + error;
                             }
+                            if (message.speechAdaptationInfo != null && message.hasOwnProperty("speechAdaptationInfo")) {
+                                var error = $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.verify(message.speechAdaptationInfo);
+                                if (error)
+                                    return "speechAdaptationInfo." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isInteger(message.requestId) && !(message.requestId && $util.isInteger(message.requestId.low) && $util.isInteger(message.requestId.high)))
+                                    return "requestId: integer|Long expected";
                             return null;
                         };
     
@@ -14249,6 +14958,20 @@
                                     throw TypeError(".google.cloud.speech.v1p1beta1.RecognizeResponse.totalBilledTime: object expected");
                                 message.totalBilledTime = $root.google.protobuf.Duration.fromObject(object.totalBilledTime);
                             }
+                            if (object.speechAdaptationInfo != null) {
+                                if (typeof object.speechAdaptationInfo !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.RecognizeResponse.speechAdaptationInfo: object expected");
+                                message.speechAdaptationInfo = $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.fromObject(object.speechAdaptationInfo);
+                            }
+                            if (object.requestId != null)
+                                if ($util.Long)
+                                    (message.requestId = $util.Long.fromValue(object.requestId)).unsigned = false;
+                                else if (typeof object.requestId === "string")
+                                    message.requestId = parseInt(object.requestId, 10);
+                                else if (typeof object.requestId === "number")
+                                    message.requestId = object.requestId;
+                                else if (typeof object.requestId === "object")
+                                    message.requestId = new $util.LongBits(object.requestId.low >>> 0, object.requestId.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -14267,8 +14990,15 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.results = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.totalBilledTime = null;
+                                object.speechAdaptationInfo = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.requestId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.requestId = options.longs === String ? "0" : 0;
+                            }
                             if (message.results && message.results.length) {
                                 object.results = [];
                                 for (var j = 0; j < message.results.length; ++j)
@@ -14276,6 +15006,13 @@
                             }
                             if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime"))
                                 object.totalBilledTime = $root.google.protobuf.Duration.toObject(message.totalBilledTime, options);
+                            if (message.speechAdaptationInfo != null && message.hasOwnProperty("speechAdaptationInfo"))
+                                object.speechAdaptationInfo = $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.toObject(message.speechAdaptationInfo, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (typeof message.requestId === "number")
+                                    object.requestId = options.longs === String ? String(message.requestId) : message.requestId;
+                                else
+                                    object.requestId = options.longs === String ? $util.Long.prototype.toString.call(message.requestId) : options.longs === Number ? new $util.LongBits(message.requestId.low >>> 0, message.requestId.high >>> 0).toNumber() : message.requestId;
                             return object;
                         };
     
@@ -14318,6 +15055,8 @@
                          * @property {google.protobuf.IDuration|null} [totalBilledTime] LongRunningRecognizeResponse totalBilledTime
                          * @property {google.cloud.speech.v1p1beta1.ITranscriptOutputConfig|null} [outputConfig] LongRunningRecognizeResponse outputConfig
                          * @property {google.rpc.IStatus|null} [outputError] LongRunningRecognizeResponse outputError
+                         * @property {google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo|null} [speechAdaptationInfo] LongRunningRecognizeResponse speechAdaptationInfo
+                         * @property {number|Long|null} [requestId] LongRunningRecognizeResponse requestId
                          */
     
                         /**
@@ -14369,6 +15108,22 @@
                         LongRunningRecognizeResponse.prototype.outputError = null;
     
                         /**
+                         * LongRunningRecognizeResponse speechAdaptationInfo.
+                         * @member {google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo|null|undefined} speechAdaptationInfo
+                         * @memberof google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse
+                         * @instance
+                         */
+                        LongRunningRecognizeResponse.prototype.speechAdaptationInfo = null;
+    
+                        /**
+                         * LongRunningRecognizeResponse requestId.
+                         * @member {number|Long} requestId
+                         * @memberof google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse
+                         * @instance
+                         */
+                        LongRunningRecognizeResponse.prototype.requestId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
                          * Creates a new LongRunningRecognizeResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse
@@ -14401,6 +15156,10 @@
                                 $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.encode(message.outputConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.outputError != null && Object.hasOwnProperty.call(message, "outputError"))
                                 $root.google.rpc.Status.encode(message.outputError, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.speechAdaptationInfo != null && Object.hasOwnProperty.call(message, "speechAdaptationInfo"))
+                                $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.encode(message.speechAdaptationInfo, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.requestId);
                             return writer;
                         };
     
@@ -14451,6 +15210,14 @@
                                     }
                                 case 7: {
                                         message.outputError = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.speechAdaptationInfo = $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.requestId = reader.int64();
                                         break;
                                     }
                                 default:
@@ -14512,6 +15279,14 @@
                                 if (error)
                                     return "outputError." + error;
                             }
+                            if (message.speechAdaptationInfo != null && message.hasOwnProperty("speechAdaptationInfo")) {
+                                var error = $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.verify(message.speechAdaptationInfo);
+                                if (error)
+                                    return "speechAdaptationInfo." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isInteger(message.requestId) && !(message.requestId && $util.isInteger(message.requestId.low) && $util.isInteger(message.requestId.high)))
+                                    return "requestId: integer|Long expected";
                             return null;
                         };
     
@@ -14552,6 +15327,20 @@
                                     throw TypeError(".google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse.outputError: object expected");
                                 message.outputError = $root.google.rpc.Status.fromObject(object.outputError);
                             }
+                            if (object.speechAdaptationInfo != null) {
+                                if (typeof object.speechAdaptationInfo !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse.speechAdaptationInfo: object expected");
+                                message.speechAdaptationInfo = $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.fromObject(object.speechAdaptationInfo);
+                            }
+                            if (object.requestId != null)
+                                if ($util.Long)
+                                    (message.requestId = $util.Long.fromValue(object.requestId)).unsigned = false;
+                                else if (typeof object.requestId === "string")
+                                    message.requestId = parseInt(object.requestId, 10);
+                                else if (typeof object.requestId === "number")
+                                    message.requestId = object.requestId;
+                                else if (typeof object.requestId === "object")
+                                    message.requestId = new $util.LongBits(object.requestId.low >>> 0, object.requestId.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -14574,6 +15363,12 @@
                                 object.totalBilledTime = null;
                                 object.outputConfig = null;
                                 object.outputError = null;
+                                object.speechAdaptationInfo = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.requestId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.requestId = options.longs === String ? "0" : 0;
                             }
                             if (message.results && message.results.length) {
                                 object.results = [];
@@ -14586,6 +15381,13 @@
                                 object.outputConfig = $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.toObject(message.outputConfig, options);
                             if (message.outputError != null && message.hasOwnProperty("outputError"))
                                 object.outputError = $root.google.rpc.Status.toObject(message.outputError, options);
+                            if (message.speechAdaptationInfo != null && message.hasOwnProperty("speechAdaptationInfo"))
+                                object.speechAdaptationInfo = $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.toObject(message.speechAdaptationInfo, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (typeof message.requestId === "number")
+                                    object.requestId = options.longs === String ? String(message.requestId) : message.requestId;
+                                else
+                                    object.requestId = options.longs === String ? $util.Long.prototype.toString.call(message.requestId) : options.longs === Number ? new $util.LongBits(message.requestId.low >>> 0, message.requestId.high >>> 0).toNumber() : message.requestId;
                             return object;
                         };
     
@@ -14939,6 +15741,8 @@
                          * @property {Array.<google.cloud.speech.v1p1beta1.IStreamingRecognitionResult>|null} [results] StreamingRecognizeResponse results
                          * @property {google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType|null} [speechEventType] StreamingRecognizeResponse speechEventType
                          * @property {google.protobuf.IDuration|null} [totalBilledTime] StreamingRecognizeResponse totalBilledTime
+                         * @property {google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo|null} [speechAdaptationInfo] StreamingRecognizeResponse speechAdaptationInfo
+                         * @property {number|Long|null} [requestId] StreamingRecognizeResponse requestId
                          */
     
                         /**
@@ -14990,6 +15794,22 @@
                         StreamingRecognizeResponse.prototype.totalBilledTime = null;
     
                         /**
+                         * StreamingRecognizeResponse speechAdaptationInfo.
+                         * @member {google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo|null|undefined} speechAdaptationInfo
+                         * @memberof google.cloud.speech.v1p1beta1.StreamingRecognizeResponse
+                         * @instance
+                         */
+                        StreamingRecognizeResponse.prototype.speechAdaptationInfo = null;
+    
+                        /**
+                         * StreamingRecognizeResponse requestId.
+                         * @member {number|Long} requestId
+                         * @memberof google.cloud.speech.v1p1beta1.StreamingRecognizeResponse
+                         * @instance
+                         */
+                        StreamingRecognizeResponse.prototype.requestId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
                          * Creates a new StreamingRecognizeResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1p1beta1.StreamingRecognizeResponse
@@ -15022,6 +15842,10 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.speechEventType);
                             if (message.totalBilledTime != null && Object.hasOwnProperty.call(message, "totalBilledTime"))
                                 $root.google.protobuf.Duration.encode(message.totalBilledTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.speechAdaptationInfo != null && Object.hasOwnProperty.call(message, "speechAdaptationInfo"))
+                                $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.encode(message.speechAdaptationInfo, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int64(message.requestId);
                             return writer;
                         };
     
@@ -15072,6 +15896,14 @@
                                     }
                                 case 5: {
                                         message.totalBilledTime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.speechAdaptationInfo = $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.requestId = reader.int64();
                                         break;
                                     }
                                 default:
@@ -15136,6 +15968,14 @@
                                 if (error)
                                     return "totalBilledTime." + error;
                             }
+                            if (message.speechAdaptationInfo != null && message.hasOwnProperty("speechAdaptationInfo")) {
+                                var error = $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.verify(message.speechAdaptationInfo);
+                                if (error)
+                                    return "speechAdaptationInfo." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isInteger(message.requestId) && !(message.requestId && $util.isInteger(message.requestId.low) && $util.isInteger(message.requestId.high)))
+                                    return "requestId: integer|Long expected";
                             return null;
                         };
     
@@ -15187,6 +16027,20 @@
                                     throw TypeError(".google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.totalBilledTime: object expected");
                                 message.totalBilledTime = $root.google.protobuf.Duration.fromObject(object.totalBilledTime);
                             }
+                            if (object.speechAdaptationInfo != null) {
+                                if (typeof object.speechAdaptationInfo !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.speechAdaptationInfo: object expected");
+                                message.speechAdaptationInfo = $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.fromObject(object.speechAdaptationInfo);
+                            }
+                            if (object.requestId != null)
+                                if ($util.Long)
+                                    (message.requestId = $util.Long.fromValue(object.requestId)).unsigned = false;
+                                else if (typeof object.requestId === "string")
+                                    message.requestId = parseInt(object.requestId, 10);
+                                else if (typeof object.requestId === "number")
+                                    message.requestId = object.requestId;
+                                else if (typeof object.requestId === "object")
+                                    message.requestId = new $util.LongBits(object.requestId.low >>> 0, object.requestId.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -15209,6 +16063,12 @@
                                 object.error = null;
                                 object.speechEventType = options.enums === String ? "SPEECH_EVENT_UNSPECIFIED" : 0;
                                 object.totalBilledTime = null;
+                                object.speechAdaptationInfo = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.requestId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.requestId = options.longs === String ? "0" : 0;
                             }
                             if (message.error != null && message.hasOwnProperty("error"))
                                 object.error = $root.google.rpc.Status.toObject(message.error, options);
@@ -15221,6 +16081,13 @@
                                 object.speechEventType = options.enums === String ? $root.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] === undefined ? message.speechEventType : $root.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] : message.speechEventType;
                             if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime"))
                                 object.totalBilledTime = $root.google.protobuf.Duration.toObject(message.totalBilledTime, options);
+                            if (message.speechAdaptationInfo != null && message.hasOwnProperty("speechAdaptationInfo"))
+                                object.speechAdaptationInfo = $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.toObject(message.speechAdaptationInfo, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (typeof message.requestId === "number")
+                                    object.requestId = options.longs === String ? String(message.requestId) : message.requestId;
+                                else
+                                    object.requestId = options.longs === String ? $util.Long.prototype.toString.call(message.requestId) : options.longs === Number ? new $util.LongBits(message.requestId.low >>> 0, message.requestId.high >>> 0).toNumber() : message.requestId;
                             return object;
                         };
     
@@ -16491,6 +17358,233 @@
                         return WordInfo;
                     })();
     
+                    v1p1beta1.SpeechAdaptationInfo = (function() {
+    
+                        /**
+                         * Properties of a SpeechAdaptationInfo.
+                         * @memberof google.cloud.speech.v1p1beta1
+                         * @interface ISpeechAdaptationInfo
+                         * @property {boolean|null} [adaptationTimeout] SpeechAdaptationInfo adaptationTimeout
+                         * @property {string|null} [timeoutMessage] SpeechAdaptationInfo timeoutMessage
+                         */
+    
+                        /**
+                         * Constructs a new SpeechAdaptationInfo.
+                         * @memberof google.cloud.speech.v1p1beta1
+                         * @classdesc Represents a SpeechAdaptationInfo.
+                         * @implements ISpeechAdaptationInfo
+                         * @constructor
+                         * @param {google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo=} [properties] Properties to set
+                         */
+                        function SpeechAdaptationInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SpeechAdaptationInfo adaptationTimeout.
+                         * @member {boolean} adaptationTimeout
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptationInfo
+                         * @instance
+                         */
+                        SpeechAdaptationInfo.prototype.adaptationTimeout = false;
+    
+                        /**
+                         * SpeechAdaptationInfo timeoutMessage.
+                         * @member {string} timeoutMessage
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptationInfo
+                         * @instance
+                         */
+                        SpeechAdaptationInfo.prototype.timeoutMessage = "";
+    
+                        /**
+                         * Creates a new SpeechAdaptationInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptationInfo
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1p1beta1.SpeechAdaptationInfo} SpeechAdaptationInfo instance
+                         */
+                        SpeechAdaptationInfo.create = function create(properties) {
+                            return new SpeechAdaptationInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SpeechAdaptationInfo message. Does not implicitly {@link google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptationInfo
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo} message SpeechAdaptationInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpeechAdaptationInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.adaptationTimeout != null && Object.hasOwnProperty.call(message, "adaptationTimeout"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.adaptationTimeout);
+                            if (message.timeoutMessage != null && Object.hasOwnProperty.call(message, "timeoutMessage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.timeoutMessage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SpeechAdaptationInfo message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptationInfo
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo} message SpeechAdaptationInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpeechAdaptationInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SpeechAdaptationInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptationInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1p1beta1.SpeechAdaptationInfo} SpeechAdaptationInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpeechAdaptationInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.adaptationTimeout = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.timeoutMessage = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SpeechAdaptationInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptationInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1p1beta1.SpeechAdaptationInfo} SpeechAdaptationInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpeechAdaptationInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SpeechAdaptationInfo message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptationInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SpeechAdaptationInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.adaptationTimeout != null && message.hasOwnProperty("adaptationTimeout"))
+                                if (typeof message.adaptationTimeout !== "boolean")
+                                    return "adaptationTimeout: boolean expected";
+                            if (message.timeoutMessage != null && message.hasOwnProperty("timeoutMessage"))
+                                if (!$util.isString(message.timeoutMessage))
+                                    return "timeoutMessage: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SpeechAdaptationInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptationInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1p1beta1.SpeechAdaptationInfo} SpeechAdaptationInfo
+                         */
+                        SpeechAdaptationInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo();
+                            if (object.adaptationTimeout != null)
+                                message.adaptationTimeout = Boolean(object.adaptationTimeout);
+                            if (object.timeoutMessage != null)
+                                message.timeoutMessage = String(object.timeoutMessage);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SpeechAdaptationInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptationInfo
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.SpeechAdaptationInfo} message SpeechAdaptationInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SpeechAdaptationInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.adaptationTimeout = false;
+                                object.timeoutMessage = "";
+                            }
+                            if (message.adaptationTimeout != null && message.hasOwnProperty("adaptationTimeout"))
+                                object.adaptationTimeout = message.adaptationTimeout;
+                            if (message.timeoutMessage != null && message.hasOwnProperty("timeoutMessage"))
+                                object.timeoutMessage = message.timeoutMessage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SpeechAdaptationInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptationInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SpeechAdaptationInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SpeechAdaptationInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptationInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SpeechAdaptationInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v1p1beta1.SpeechAdaptationInfo";
+                        };
+    
+                        return SpeechAdaptationInfo;
+                    })();
+    
                     v1p1beta1.CustomClass = (function() {
     
                         /**
@@ -17474,6 +18568,7 @@
                          * @property {Array.<google.cloud.speech.v1p1beta1.IPhraseSet>|null} [phraseSets] SpeechAdaptation phraseSets
                          * @property {Array.<string>|null} [phraseSetReferences] SpeechAdaptation phraseSetReferences
                          * @property {Array.<google.cloud.speech.v1p1beta1.ICustomClass>|null} [customClasses] SpeechAdaptation customClasses
+                         * @property {google.cloud.speech.v1p1beta1.SpeechAdaptation.IABNFGrammar|null} [abnfGrammar] SpeechAdaptation abnfGrammar
                          */
     
                         /**
@@ -17519,6 +18614,14 @@
                         SpeechAdaptation.prototype.customClasses = $util.emptyArray;
     
                         /**
+                         * SpeechAdaptation abnfGrammar.
+                         * @member {google.cloud.speech.v1p1beta1.SpeechAdaptation.IABNFGrammar|null|undefined} abnfGrammar
+                         * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
+                         * @instance
+                         */
+                        SpeechAdaptation.prototype.abnfGrammar = null;
+    
+                        /**
                          * Creates a new SpeechAdaptation instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
@@ -17551,6 +18654,8 @@
                             if (message.customClasses != null && message.customClasses.length)
                                 for (var i = 0; i < message.customClasses.length; ++i)
                                     $root.google.cloud.speech.v1p1beta1.CustomClass.encode(message.customClasses[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.abnfGrammar != null && Object.hasOwnProperty.call(message, "abnfGrammar"))
+                                $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar.encode(message.abnfGrammar, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -17601,6 +18706,10 @@
                                         if (!(message.customClasses && message.customClasses.length))
                                             message.customClasses = [];
                                         message.customClasses.push($root.google.cloud.speech.v1p1beta1.CustomClass.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        message.abnfGrammar = $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -17663,6 +18772,11 @@
                                         return "customClasses." + error;
                                 }
                             }
+                            if (message.abnfGrammar != null && message.hasOwnProperty("abnfGrammar")) {
+                                var error = $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar.verify(message.abnfGrammar);
+                                if (error)
+                                    return "abnfGrammar." + error;
+                            }
                             return null;
                         };
     
@@ -17705,6 +18819,11 @@
                                     message.customClasses[i] = $root.google.cloud.speech.v1p1beta1.CustomClass.fromObject(object.customClasses[i]);
                                 }
                             }
+                            if (object.abnfGrammar != null) {
+                                if (typeof object.abnfGrammar !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.SpeechAdaptation.abnfGrammar: object expected");
+                                message.abnfGrammar = $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar.fromObject(object.abnfGrammar);
+                            }
                             return message;
                         };
     
@@ -17726,6 +18845,8 @@
                                 object.phraseSetReferences = [];
                                 object.customClasses = [];
                             }
+                            if (options.defaults)
+                                object.abnfGrammar = null;
                             if (message.phraseSets && message.phraseSets.length) {
                                 object.phraseSets = [];
                                 for (var j = 0; j < message.phraseSets.length; ++j)
@@ -17741,6 +18862,8 @@
                                 for (var j = 0; j < message.customClasses.length; ++j)
                                     object.customClasses[j] = $root.google.cloud.speech.v1p1beta1.CustomClass.toObject(message.customClasses[j], options);
                             }
+                            if (message.abnfGrammar != null && message.hasOwnProperty("abnfGrammar"))
+                                object.abnfGrammar = $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar.toObject(message.abnfGrammar, options);
                             return object;
                         };
     
@@ -17769,6 +18892,225 @@
                             }
                             return typeUrlPrefix + "/google.cloud.speech.v1p1beta1.SpeechAdaptation";
                         };
+    
+                        SpeechAdaptation.ABNFGrammar = (function() {
+    
+                            /**
+                             * Properties of a ABNFGrammar.
+                             * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
+                             * @interface IABNFGrammar
+                             * @property {Array.<string>|null} [abnfStrings] ABNFGrammar abnfStrings
+                             */
+    
+                            /**
+                             * Constructs a new ABNFGrammar.
+                             * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation
+                             * @classdesc Represents a ABNFGrammar.
+                             * @implements IABNFGrammar
+                             * @constructor
+                             * @param {google.cloud.speech.v1p1beta1.SpeechAdaptation.IABNFGrammar=} [properties] Properties to set
+                             */
+                            function ABNFGrammar(properties) {
+                                this.abnfStrings = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ABNFGrammar abnfStrings.
+                             * @member {Array.<string>} abnfStrings
+                             * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar
+                             * @instance
+                             */
+                            ABNFGrammar.prototype.abnfStrings = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ABNFGrammar instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.SpeechAdaptation.IABNFGrammar=} [properties] Properties to set
+                             * @returns {google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar} ABNFGrammar instance
+                             */
+                            ABNFGrammar.create = function create(properties) {
+                                return new ABNFGrammar(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ABNFGrammar message. Does not implicitly {@link google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.SpeechAdaptation.IABNFGrammar} message ABNFGrammar message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ABNFGrammar.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.abnfStrings != null && message.abnfStrings.length)
+                                    for (var i = 0; i < message.abnfStrings.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.abnfStrings[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ABNFGrammar message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.SpeechAdaptation.IABNFGrammar} message ABNFGrammar message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ABNFGrammar.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ABNFGrammar message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar} ABNFGrammar
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ABNFGrammar.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.abnfStrings && message.abnfStrings.length))
+                                                message.abnfStrings = [];
+                                            message.abnfStrings.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ABNFGrammar message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar} ABNFGrammar
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ABNFGrammar.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ABNFGrammar message.
+                             * @function verify
+                             * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ABNFGrammar.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.abnfStrings != null && message.hasOwnProperty("abnfStrings")) {
+                                    if (!Array.isArray(message.abnfStrings))
+                                        return "abnfStrings: array expected";
+                                    for (var i = 0; i < message.abnfStrings.length; ++i)
+                                        if (!$util.isString(message.abnfStrings[i]))
+                                            return "abnfStrings: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ABNFGrammar message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar} ABNFGrammar
+                             */
+                            ABNFGrammar.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar)
+                                    return object;
+                                var message = new $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar();
+                                if (object.abnfStrings) {
+                                    if (!Array.isArray(object.abnfStrings))
+                                        throw TypeError(".google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar.abnfStrings: array expected");
+                                    message.abnfStrings = [];
+                                    for (var i = 0; i < object.abnfStrings.length; ++i)
+                                        message.abnfStrings[i] = String(object.abnfStrings[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ABNFGrammar message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar} message ABNFGrammar
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ABNFGrammar.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.abnfStrings = [];
+                                if (message.abnfStrings && message.abnfStrings.length) {
+                                    object.abnfStrings = [];
+                                    for (var j = 0; j < message.abnfStrings.length; ++j)
+                                        object.abnfStrings[j] = message.abnfStrings[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ABNFGrammar to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ABNFGrammar.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ABNFGrammar
+                             * @function getTypeUrl
+                             * @memberof google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ABNFGrammar.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.speech.v1p1beta1.SpeechAdaptation.ABNFGrammar";
+                            };
+    
+                            return ABNFGrammar;
+                        })();
     
                         return SpeechAdaptation;
                     })();
