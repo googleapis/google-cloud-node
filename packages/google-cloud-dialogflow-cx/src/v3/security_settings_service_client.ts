@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -481,7 +481,8 @@ export class SecuritySettingsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The location to create an {@link google.cloud.dialogflow.cx.v3.SecuritySettings|SecuritySettings} for.
+   *   Required. The location to create an
+   *   {@link google.cloud.dialogflow.cx.v3.SecuritySettings|SecuritySettings} for.
    *   Format: `projects/<Project ID>/locations/<Location ID>`.
    * @param {google.cloud.dialogflow.cx.v3.SecuritySettings} request.securitySettings
    *   Required. The security settings to create.
@@ -580,8 +581,9 @@ export class SecuritySettingsServiceClient {
     );
   }
   /**
-   * Retrieves the specified {@link google.cloud.dialogflow.cx.v3.SecuritySettings|SecuritySettings}.
-   * The returned settings may be stale by up to 1 minute.
+   * Retrieves the specified
+   * {@link google.cloud.dialogflow.cx.v3.SecuritySettings|SecuritySettings}. The
+   * returned settings may be stale by up to 1 minute.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -680,7 +682,8 @@ export class SecuritySettingsServiceClient {
     return this.innerApiCalls.getSecuritySettings(request, options, callback);
   }
   /**
-   * Updates the specified {@link google.cloud.dialogflow.cx.v3.SecuritySettings|SecuritySettings}.
+   * Updates the specified
+   * {@link google.cloud.dialogflow.cx.v3.SecuritySettings|SecuritySettings}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -688,8 +691,8 @@ export class SecuritySettingsServiceClient {
    *   Required. [SecuritySettings] object that contains values for each of the
    *   fields to update.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The mask to control which fields get updated. If the mask is not present,
-   *   all fields will be updated.
+   *   Required. The mask to control which fields get updated. If the mask is not
+   *   present, all fields will be updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -785,13 +788,15 @@ export class SecuritySettingsServiceClient {
     );
   }
   /**
-   * Deletes the specified {@link google.cloud.dialogflow.cx.v3.SecuritySettings|SecuritySettings}.
+   * Deletes the specified
+   * {@link google.cloud.dialogflow.cx.v3.SecuritySettings|SecuritySettings}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3.SecuritySettings|SecuritySettings} to delete.
-   *   Format: `projects/<Project ID>/locations/<Location
+   *   Required. The name of the
+   *   {@link google.cloud.dialogflow.cx.v3.SecuritySettings|SecuritySettings} to
+   *   delete. Format: `projects/<Project ID>/locations/<Location
    *   ID>/securitySettings/<Security Settings ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.

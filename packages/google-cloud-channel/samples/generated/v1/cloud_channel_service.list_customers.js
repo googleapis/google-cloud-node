@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,20 +34,23 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of customers to return. The service may return fewer
-   *  than this value. If unspecified, returns at most 10 customers. The
+   *  Optional. The maximum number of customers to return. The service may return
+   *  fewer than this value. If unspecified, returns at most 10 customers. The
    *  maximum value is 50.
    */
   // const pageSize = 1234
   /**
    *  Optional. A token identifying a page of results other than the first page.
    *  Obtained through
-   *  ListCustomersResponse.next_page_token google.cloud.channel.v1.ListCustomersResponse.next_page_token  of the previous
-   *  CloudChannelService.ListCustomers google.cloud.channel.v1.CloudChannelService.ListCustomers  call.
+   *  ListCustomersResponse.next_page_token google.cloud.channel.v1.ListCustomersResponse.next_page_token 
+   *  of the previous
+   *  CloudChannelService.ListCustomers google.cloud.channel.v1.CloudChannelService.ListCustomers 
+   *  call.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Filters applied to the CloudChannelService.ListCustomers  results. See
+   *  Optional. Filters applied to the CloudChannelService.ListCustomers 
+   *  results. See
    *  https://cloud.google.com/channel/docs/concepts/google-cloud/filter-customers
    *  for more information.
    */

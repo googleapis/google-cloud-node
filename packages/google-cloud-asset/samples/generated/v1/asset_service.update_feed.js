@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,8 @@ function main(feed, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The new values of feed details. It must match an existing feed and the
-   *  field `name` must be in the format of:
+   *  Required. The new values of feed details. It must match an existing feed
+   *  and the field `name` must be in the format of:
    *  projects/project_number/feeds/feed_id or
    *  folders/folder_number/feeds/feed_id or
    *  organizations/organization_number/feeds/feed_id.
