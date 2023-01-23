@@ -104,6 +104,7 @@
   "packages/google-cloud-video-stitcher": "0.3.0",
   "packages/google-cloud-video-transcoder": "2.3.0",
   "packages/google-cloud-videointelligence": "4.1.1",
+  "packages/google-cloud-vision": "3.1.0",
   "packages/google-cloud-vmmigration": "2.2.1",
   "packages/google-cloud-vmwareengine": "0.1.0",
   "packages/google-cloud-vpcaccess": "2.1.3",

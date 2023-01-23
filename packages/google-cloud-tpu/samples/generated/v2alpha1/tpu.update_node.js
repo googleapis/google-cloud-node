@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,8 @@ function main(updateMask, node) {
    */
   /**
    *  Required. Mask of fields from Node Tpu.Node  to update.
-   *  Supported fields: None.
+   *  Supported fields: description, tags, labels, metadata,
+   *  network_config.enable_external_ips.
    */
   // const updateMask = {}
   /**
