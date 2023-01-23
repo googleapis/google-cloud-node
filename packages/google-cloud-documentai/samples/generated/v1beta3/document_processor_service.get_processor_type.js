@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START documentai_v1_generated_DocumentProcessorService_DeleteProcessorVersion_async]
+  // [START documentai_v1beta3_generated_DocumentProcessorService_GetProcessorType_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,30 +29,29 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The processor version resource name to be deleted.
+   *  Required. The processor type resource name.
    */
   // const name = 'abc123'
 
   // Imports the Documentai library
-  const {DocumentProcessorServiceClient} = require('@google-cloud/documentai').v1;
+  const {DocumentProcessorServiceClient} = require('@google-cloud/documentai').v1beta3;
 
   // Instantiates a client
   const documentaiClient = new DocumentProcessorServiceClient();
 
-  async function callDeleteProcessorVersion() {
+  async function callGetProcessorType() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await documentaiClient.deleteProcessorVersion(request);
-    const [response] = await operation.promise();
+    const response = await documentaiClient.getProcessorType(request);
     console.log(response);
   }
 
-  callDeleteProcessorVersion();
-  // [END documentai_v1_generated_DocumentProcessorService_DeleteProcessorVersion_async]
+  callGetProcessorType();
+  // [END documentai_v1beta3_generated_DocumentProcessorService_GetProcessorType_async]
 }
 
 process.on('unhandledRejection', err => {
