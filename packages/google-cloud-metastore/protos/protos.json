@@ -2292,6 +2292,94 @@
                               }
                             }
                           ]
+                        },
+                        "RemoveIamPolicy": {
+                          "requestType": "RemoveIamPolicyRequest",
+                          "responseType": "RemoveIamPolicyResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{resource=projects/*/locations/*/services/*/**}:removeIamPolicy",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{resource=projects/*/locations/*/services/*/**}:removeIamPolicy",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "QueryMetadata": {
+                          "requestType": "QueryMetadataRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{service=projects/*/locations/*/services/*}:queryMetadata",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "QueryMetadataResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{service=projects/*/locations/*/services/*}:queryMetadata",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "QueryMetadataResponse",
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "MoveTableToDatabase": {
+                          "requestType": "MoveTableToDatabaseRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{service=projects/*/locations/*/services/*}:moveTableToDatabase",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "MoveTableToDatabaseResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{service=projects/*/locations/*/services/*}:moveTableToDatabase",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "MoveTableToDatabaseResponse",
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "AlterMetadataResourceLocation": {
+                          "requestType": "AlterMetadataResourceLocationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{service=projects/*/locations/*/services/*}:alterLocation",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "AlterMetadataResourceLocationResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{service=projects/*/locations/*/services/*}:alterLocation",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AlterMetadataResourceLocationResponse",
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -3549,6 +3637,125 @@
                           }
                         }
                       }
+                    },
+                    "RemoveIamPolicyRequest": {
+                      "fields": {
+                        "resource": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "*"
+                          }
+                        },
+                        "asynchronous": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RemoveIamPolicyResponse": {
+                      "fields": {
+                        "success": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "QueryMetadataRequest": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "QueryMetadataResponse": {
+                      "fields": {
+                        "resultManifestUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "MoveTableToDatabaseRequest": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                          }
+                        },
+                        "tableName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "dbName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "destinationDbName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MoveTableToDatabaseResponse": {
+                      "fields": {}
+                    },
+                    "AlterMetadataResourceLocationRequest": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                          }
+                        },
+                        "resourceName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "locationUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AlterMetadataResourceLocationResponse": {
+                      "fields": {}
                     },
                     "DataprocMetastoreFederation": {
                       "options": {
@@ -4300,6 +4507,94 @@
                               }
                             }
                           ]
+                        },
+                        "RemoveIamPolicy": {
+                          "requestType": "RemoveIamPolicyRequest",
+                          "responseType": "RemoveIamPolicyResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{resource=projects/*/locations/*/services/*/**}:removeIamPolicy",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{resource=projects/*/locations/*/services/*/**}:removeIamPolicy",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "QueryMetadata": {
+                          "requestType": "QueryMetadataRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{service=projects/*/locations/*/services/*}:queryMetadata",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "QueryMetadataResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{service=projects/*/locations/*/services/*}:queryMetadata",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "QueryMetadataResponse",
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "MoveTableToDatabase": {
+                          "requestType": "MoveTableToDatabaseRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{service=projects/*/locations/*/services/*}:moveTableToDatabase",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "MoveTableToDatabaseResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{service=projects/*/locations/*/services/*}:moveTableToDatabase",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "MoveTableToDatabaseResponse",
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "AlterMetadataResourceLocation": {
+                          "requestType": "AlterMetadataResourceLocationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{service=projects/*/locations/*/services/*}:alterLocation",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "AlterMetadataResourceLocationResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{service=projects/*/locations/*/services/*}:alterLocation",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AlterMetadataResourceLocationResponse",
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -5557,6 +5852,125 @@
                           }
                         }
                       }
+                    },
+                    "RemoveIamPolicyRequest": {
+                      "fields": {
+                        "resource": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "*"
+                          }
+                        },
+                        "asynchronous": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RemoveIamPolicyResponse": {
+                      "fields": {
+                        "success": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "QueryMetadataRequest": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "QueryMetadataResponse": {
+                      "fields": {
+                        "resultManifestUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "MoveTableToDatabaseRequest": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                          }
+                        },
+                        "tableName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "dbName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "destinationDbName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MoveTableToDatabaseResponse": {
+                      "fields": {}
+                    },
+                    "AlterMetadataResourceLocationRequest": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                          }
+                        },
+                        "resourceName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "locationUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AlterMetadataResourceLocationResponse": {
+                      "fields": {}
                     },
                     "DataprocMetastoreFederation": {
                       "options": {
