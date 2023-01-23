@@ -201,6 +201,62 @@
                             }
                           ]
                         },
+                        "BulkAnalyzeConversations": {
+                          "requestType": "BulkAnalyzeConversationsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/conversations:bulkAnalyze",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,filter,analysis_percentage",
+                            "(google.longrunning.operation_info).response_type": "BulkAnalyzeConversationsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "BulkAnalyzeConversationsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/conversations:bulkAnalyze",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter,analysis_percentage"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BulkAnalyzeConversationsResponse",
+                                "metadata_type": "BulkAnalyzeConversationsMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "IngestConversations": {
+                          "requestType": "IngestConversationsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/conversations:ingest",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent",
+                            "(google.longrunning.operation_info).response_type": "IngestConversationsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "IngestConversationsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/conversations:ingest",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "IngestConversationsResponse",
+                                "metadata_type": "IngestConversationsMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ExportInsightsData": {
                           "requestType": "ExportInsightsDataRequest",
                           "responseType": "google.longrunning.Operation",
@@ -448,6 +504,24 @@
                             },
                             {
                               "(google.api.method_signature)": "issue,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteIssue": {
+                          "requestType": "DeleteIssueRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/issueModels/*/issues/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/issueModels/*/issues/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -833,6 +907,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/Conversation"
                           }
+                        },
+                        "annotatorSelector": {
+                          "type": "AnnotatorSelector",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -947,6 +1028,110 @@
                         }
                       }
                     },
+                    "IngestConversationsRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource"
+                          ]
+                        },
+                        "objectConfig": {
+                          "oneof": [
+                            "transcriptObjectConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 2
+                        },
+                        "transcriptObjectConfig": {
+                          "type": "TranscriptObjectConfig",
+                          "id": 3
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "conversationConfig": {
+                          "type": "ConversationConfig",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "GcsSource": {
+                          "fields": {
+                            "bucketUri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "TranscriptObjectConfig": {
+                          "fields": {
+                            "medium": {
+                              "type": "Conversation.Medium",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ConversationConfig": {
+                          "fields": {
+                            "agentId": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "IngestConversationsMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "request": {
+                          "type": "IngestConversationsRequest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "partialErrors": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "IngestConversationsResponse": {
+                      "fields": {}
+                    },
                     "CreateAnalysisRequest": {
                       "fields": {
                         "parent": {
@@ -1024,6 +1209,76 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/Analysis"
                           }
+                        }
+                      }
+                    },
+                    "BulkAnalyzeConversationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "analysisPercentage": {
+                          "type": "float",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "annotatorSelector": {
+                          "type": "AnnotatorSelector",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "BulkAnalyzeConversationsMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "request": {
+                          "type": "BulkAnalyzeConversationsRequest",
+                          "id": 3
+                        },
+                        "completedAnalysesCount": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "failedAnalysesCount": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "totalRequestedAnalysesCount": {
+                          "type": "int32",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "BulkAnalyzeConversationsResponse": {
+                      "fields": {
+                        "successfulAnalysisCount": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "failedAnalysisCount": {
+                          "type": "int32",
+                          "id": 2
                         }
                       }
                     },
@@ -1362,6 +1617,18 @@
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
                           "id": 2
+                        }
+                      }
+                    },
+                    "DeleteIssueRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/Issue"
+                          }
                         }
                       }
                     },
@@ -1870,6 +2137,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "annotatorSelector": {
+                          "type": "AnnotatorSelector",
+                          "id": 8
                         }
                       }
                     },
@@ -2034,7 +2305,8 @@
                             "holdData",
                             "entityMentionData",
                             "intentMatchData",
-                            "phraseMatchData"
+                            "phraseMatchData",
+                            "issueMatchData"
                           ]
                         }
                       },
@@ -2066,6 +2338,10 @@
                         "phraseMatchData": {
                           "type": "PhraseMatchData",
                           "id": 17
+                        },
+                        "issueMatchData": {
+                          "type": "IssueMatchData",
+                          "id": 18
                         },
                         "channelTag": {
                           "type": "int32",
@@ -2230,6 +2506,14 @@
                         }
                       }
                     },
+                    "IssueMatchData": {
+                      "fields": {
+                        "issueAssignment": {
+                          "type": "IssueAssignment",
+                          "id": 1
+                        }
+                      }
+                    },
                     "IssueModel": {
                       "options": {
                         "(google.api.resource).type": "contactcenterinsights.googleapis.com/IssueModel",
@@ -2342,6 +2626,14 @@
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sampleUtterances": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -2578,6 +2870,10 @@
                             "runtimeIntegrationAnalysisPercentage": {
                               "type": "double",
                               "id": 1
+                            },
+                            "annotatorSelector": {
+                              "type": "AnnotatorSelector",
+                              "id": 5
                             }
                           }
                         }
@@ -2859,6 +3155,54 @@
                         "value": {
                           "type": "string",
                           "id": 5
+                        }
+                      }
+                    },
+                    "AnnotatorSelector": {
+                      "fields": {
+                        "runInterruptionAnnotator": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "runSilenceAnnotator": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "runPhraseMatcherAnnotator": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "phraseMatchers": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/PhraseMatcher"
+                          }
+                        },
+                        "runSentimentAnnotator": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "runEntityAnnotator": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "runIntentAnnotator": {
+                          "type": "bool",
+                          "id": 7
+                        },
+                        "runIssueModelAnnotator": {
+                          "type": "bool",
+                          "id": 8
+                        },
+                        "issueModels": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/IssueModel"
+                          }
                         }
                       }
                     }

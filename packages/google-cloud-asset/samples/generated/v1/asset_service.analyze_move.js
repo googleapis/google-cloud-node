@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,16 +30,16 @@ function main(resource, destinationParent) {
    */
   /**
    *  Required. Name of the resource to perform the analysis against.
-   *  Only GCP Project are supported as of today. Hence, this can only be Project
-   *  ID (such as "projects/my-project-id") or a Project Number (such as
-   *  "projects/12345").
+   *  Only Google Cloud projects are supported as of today. Hence, this can only
+   *  be a project ID (such as "projects/my-project-id") or a project number
+   *  (such as "projects/12345").
    */
   // const resource = 'abc123'
   /**
-   *  Required. Name of the GCP Folder or Organization to reparent the target
-   *  resource. The analysis will be performed against hypothetically moving the
-   *  resource to this specified desitination parent. This can only be a Folder
-   *  number (such as "folders/123") or an Organization number (such as
+   *  Required. Name of the Google Cloud folder or organization to reparent the
+   *  target resource. The analysis will be performed against hypothetically
+   *  moving the resource to this specified desitination parent. This can only be
+   *  a folder number (such as "folders/123") or an organization number (such as
    *  "organizations/123").
    */
   // const destinationParent = 'abc123'

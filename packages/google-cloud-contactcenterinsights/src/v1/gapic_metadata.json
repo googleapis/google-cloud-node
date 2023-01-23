@@ -70,6 +70,11 @@
                 "updateIssue"
               ]
             },
+            "DeleteIssue": {
+              "methods": [
+                "deleteIssue"
+              ]
+            },
             "CalculateIssueModelStats": {
               "methods": [
                 "calculateIssueModelStats"
@@ -133,6 +138,16 @@
             "CreateAnalysis": {
               "methods": [
                 "createAnalysis"
+              ]
+            },
+            "BulkAnalyzeConversations": {
+              "methods": [
+                "bulkAnalyzeConversations"
+              ]
+            },
+            "IngestConversations": {
+              "methods": [
+                "ingestConversations"
               ]
             },
             "ExportInsightsData": {
@@ -253,6 +268,11 @@
                 "updateIssue"
               ]
             },
+            "DeleteIssue": {
+              "methods": [
+                "deleteIssue"
+              ]
+            },
             "CalculateIssueModelStats": {
               "methods": [
                 "calculateIssueModelStats"
@@ -316,6 +336,16 @@
             "CreateAnalysis": {
               "methods": [
                 "createAnalysis"
+              ]
+            },
+            "BulkAnalyzeConversations": {
+              "methods": [
+                "bulkAnalyzeConversations"
+              ]
+            },
+            "IngestConversations": {
+              "methods": [
+                "ingestConversations"
               ]
             },
             "ExportInsightsData": {
