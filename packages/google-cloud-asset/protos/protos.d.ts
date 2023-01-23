@@ -325,6 +325,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public batchGetEffectiveIamPolicies(request: google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest): Promise<google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse>;
+
+                    /**
+                     * Calls AnalyzeOrgPolicies.
+                     * @param request AnalyzeOrgPoliciesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AnalyzeOrgPoliciesResponse
+                     */
+                    public analyzeOrgPolicies(request: google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest, callback: google.cloud.asset.v1.AssetService.AnalyzeOrgPoliciesCallback): void;
+
+                    /**
+                     * Calls AnalyzeOrgPolicies.
+                     * @param request AnalyzeOrgPoliciesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public analyzeOrgPolicies(request: google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest): Promise<google.cloud.asset.v1.AnalyzeOrgPoliciesResponse>;
+
+                    /**
+                     * Calls AnalyzeOrgPolicyGovernedContainers.
+                     * @param request AnalyzeOrgPolicyGovernedContainersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AnalyzeOrgPolicyGovernedContainersResponse
+                     */
+                    public analyzeOrgPolicyGovernedContainers(request: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest, callback: google.cloud.asset.v1.AssetService.AnalyzeOrgPolicyGovernedContainersCallback): void;
+
+                    /**
+                     * Calls AnalyzeOrgPolicyGovernedContainers.
+                     * @param request AnalyzeOrgPolicyGovernedContainersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public analyzeOrgPolicyGovernedContainers(request: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest): Promise<google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse>;
+
+                    /**
+                     * Calls AnalyzeOrgPolicyGovernedAssets.
+                     * @param request AnalyzeOrgPolicyGovernedAssetsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AnalyzeOrgPolicyGovernedAssetsResponse
+                     */
+                    public analyzeOrgPolicyGovernedAssets(request: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest, callback: google.cloud.asset.v1.AssetService.AnalyzeOrgPolicyGovernedAssetsCallback): void;
+
+                    /**
+                     * Calls AnalyzeOrgPolicyGovernedAssets.
+                     * @param request AnalyzeOrgPolicyGovernedAssetsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public analyzeOrgPolicyGovernedAssets(request: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest): Promise<google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse>;
                 }
 
                 namespace AssetService {
@@ -468,6 +510,27 @@ export namespace google {
                      * @param [response] BatchGetEffectiveIamPoliciesResponse
                      */
                     type BatchGetEffectiveIamPoliciesCallback = (error: (Error|null), response?: google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|analyzeOrgPolicies}.
+                     * @param error Error, if any
+                     * @param [response] AnalyzeOrgPoliciesResponse
+                     */
+                    type AnalyzeOrgPoliciesCallback = (error: (Error|null), response?: google.cloud.asset.v1.AnalyzeOrgPoliciesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|analyzeOrgPolicyGovernedContainers}.
+                     * @param error Error, if any
+                     * @param [response] AnalyzeOrgPolicyGovernedContainersResponse
+                     */
+                    type AnalyzeOrgPolicyGovernedContainersCallback = (error: (Error|null), response?: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService|analyzeOrgPolicyGovernedAssets}.
+                     * @param error Error, if any
+                     * @param [response] AnalyzeOrgPolicyGovernedAssetsResponse
+                     */
+                    type AnalyzeOrgPolicyGovernedAssetsCallback = (error: (Error|null), response?: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse) => void;
                 }
 
                 /** Properties of an AnalyzeIamPolicyLongrunningMetadata. */
@@ -7430,6 +7493,2240 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+                    }
+                }
+
+                /** Properties of an AnalyzerOrgPolicy. */
+                interface IAnalyzerOrgPolicy {
+
+                    /** AnalyzerOrgPolicy attachedResource */
+                    attachedResource?: (string|null);
+
+                    /** AnalyzerOrgPolicy appliedResource */
+                    appliedResource?: (string|null);
+
+                    /** AnalyzerOrgPolicy rules */
+                    rules?: (google.cloud.asset.v1.AnalyzerOrgPolicy.IRule[]|null);
+
+                    /** AnalyzerOrgPolicy inheritFromParent */
+                    inheritFromParent?: (boolean|null);
+
+                    /** AnalyzerOrgPolicy reset */
+                    reset?: (boolean|null);
+                }
+
+                /** Represents an AnalyzerOrgPolicy. */
+                class AnalyzerOrgPolicy implements IAnalyzerOrgPolicy {
+
+                    /**
+                     * Constructs a new AnalyzerOrgPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IAnalyzerOrgPolicy);
+
+                    /** AnalyzerOrgPolicy attachedResource. */
+                    public attachedResource: string;
+
+                    /** AnalyzerOrgPolicy appliedResource. */
+                    public appliedResource: string;
+
+                    /** AnalyzerOrgPolicy rules. */
+                    public rules: google.cloud.asset.v1.AnalyzerOrgPolicy.IRule[];
+
+                    /** AnalyzerOrgPolicy inheritFromParent. */
+                    public inheritFromParent: boolean;
+
+                    /** AnalyzerOrgPolicy reset. */
+                    public reset: boolean;
+
+                    /**
+                     * Creates a new AnalyzerOrgPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnalyzerOrgPolicy instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IAnalyzerOrgPolicy): google.cloud.asset.v1.AnalyzerOrgPolicy;
+
+                    /**
+                     * Encodes the specified AnalyzerOrgPolicy message. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicy.verify|verify} messages.
+                     * @param message AnalyzerOrgPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IAnalyzerOrgPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnalyzerOrgPolicy message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicy.verify|verify} messages.
+                     * @param message AnalyzerOrgPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IAnalyzerOrgPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnalyzerOrgPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnalyzerOrgPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzerOrgPolicy;
+
+                    /**
+                     * Decodes an AnalyzerOrgPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnalyzerOrgPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzerOrgPolicy;
+
+                    /**
+                     * Verifies an AnalyzerOrgPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnalyzerOrgPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnalyzerOrgPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzerOrgPolicy;
+
+                    /**
+                     * Creates a plain object from an AnalyzerOrgPolicy message. Also converts values to other types if specified.
+                     * @param message AnalyzerOrgPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.AnalyzerOrgPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnalyzerOrgPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzerOrgPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AnalyzerOrgPolicy {
+
+                    /** Properties of a Rule. */
+                    interface IRule {
+
+                        /** Rule values */
+                        values?: (google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.IStringValues|null);
+
+                        /** Rule allowAll */
+                        allowAll?: (boolean|null);
+
+                        /** Rule denyAll */
+                        denyAll?: (boolean|null);
+
+                        /** Rule enforce */
+                        enforce?: (boolean|null);
+
+                        /** Rule condition */
+                        condition?: (google.type.IExpr|null);
+                    }
+
+                    /** Represents a Rule. */
+                    class Rule implements IRule {
+
+                        /**
+                         * Constructs a new Rule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.asset.v1.AnalyzerOrgPolicy.IRule);
+
+                        /** Rule values. */
+                        public values?: (google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.IStringValues|null);
+
+                        /** Rule allowAll. */
+                        public allowAll?: (boolean|null);
+
+                        /** Rule denyAll. */
+                        public denyAll?: (boolean|null);
+
+                        /** Rule enforce. */
+                        public enforce?: (boolean|null);
+
+                        /** Rule condition. */
+                        public condition?: (google.type.IExpr|null);
+
+                        /** Rule kind. */
+                        public kind?: ("values"|"allowAll"|"denyAll"|"enforce");
+
+                        /**
+                         * Creates a new Rule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Rule instance
+                         */
+                        public static create(properties?: google.cloud.asset.v1.AnalyzerOrgPolicy.IRule): google.cloud.asset.v1.AnalyzerOrgPolicy.Rule;
+
+                        /**
+                         * Encodes the specified Rule message. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.verify|verify} messages.
+                         * @param message Rule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.asset.v1.AnalyzerOrgPolicy.IRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Rule message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.verify|verify} messages.
+                         * @param message Rule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.asset.v1.AnalyzerOrgPolicy.IRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Rule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Rule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzerOrgPolicy.Rule;
+
+                        /**
+                         * Decodes a Rule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Rule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzerOrgPolicy.Rule;
+
+                        /**
+                         * Verifies a Rule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Rule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Rule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzerOrgPolicy.Rule;
+
+                        /**
+                         * Creates a plain object from a Rule message. Also converts values to other types if specified.
+                         * @param message Rule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.asset.v1.AnalyzerOrgPolicy.Rule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Rule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Rule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Rule {
+
+                        /** Properties of a StringValues. */
+                        interface IStringValues {
+
+                            /** StringValues allowedValues */
+                            allowedValues?: (string[]|null);
+
+                            /** StringValues deniedValues */
+                            deniedValues?: (string[]|null);
+                        }
+
+                        /** Represents a StringValues. */
+                        class StringValues implements IStringValues {
+
+                            /**
+                             * Constructs a new StringValues.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.IStringValues);
+
+                            /** StringValues allowedValues. */
+                            public allowedValues: string[];
+
+                            /** StringValues deniedValues. */
+                            public deniedValues: string[];
+
+                            /**
+                             * Creates a new StringValues instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StringValues instance
+                             */
+                            public static create(properties?: google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.IStringValues): google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.StringValues;
+
+                            /**
+                             * Encodes the specified StringValues message. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.StringValues.verify|verify} messages.
+                             * @param message StringValues message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.IStringValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StringValues message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.StringValues.verify|verify} messages.
+                             * @param message StringValues message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.IStringValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StringValues message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StringValues
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.StringValues;
+
+                            /**
+                             * Decodes a StringValues message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StringValues
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.StringValues;
+
+                            /**
+                             * Verifies a StringValues message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StringValues message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StringValues
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.StringValues;
+
+                            /**
+                             * Creates a plain object from a StringValues message. Also converts values to other types if specified.
+                             * @param message StringValues
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.StringValues, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StringValues to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StringValues
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of an AnalyzerOrgPolicyConstraint. */
+                interface IAnalyzerOrgPolicyConstraint {
+
+                    /** AnalyzerOrgPolicyConstraint googleDefinedConstraint */
+                    googleDefinedConstraint?: (google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.IConstraint|null);
+
+                    /** AnalyzerOrgPolicyConstraint customConstraint */
+                    customConstraint?: (google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.ICustomConstraint|null);
+                }
+
+                /** Represents an AnalyzerOrgPolicyConstraint. */
+                class AnalyzerOrgPolicyConstraint implements IAnalyzerOrgPolicyConstraint {
+
+                    /**
+                     * Constructs a new AnalyzerOrgPolicyConstraint.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IAnalyzerOrgPolicyConstraint);
+
+                    /** AnalyzerOrgPolicyConstraint googleDefinedConstraint. */
+                    public googleDefinedConstraint?: (google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.IConstraint|null);
+
+                    /** AnalyzerOrgPolicyConstraint customConstraint. */
+                    public customConstraint?: (google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.ICustomConstraint|null);
+
+                    /** AnalyzerOrgPolicyConstraint constraintDefinition. */
+                    public constraintDefinition?: ("googleDefinedConstraint"|"customConstraint");
+
+                    /**
+                     * Creates a new AnalyzerOrgPolicyConstraint instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnalyzerOrgPolicyConstraint instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IAnalyzerOrgPolicyConstraint): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint;
+
+                    /**
+                     * Encodes the specified AnalyzerOrgPolicyConstraint message. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.verify|verify} messages.
+                     * @param message AnalyzerOrgPolicyConstraint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IAnalyzerOrgPolicyConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnalyzerOrgPolicyConstraint message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.verify|verify} messages.
+                     * @param message AnalyzerOrgPolicyConstraint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IAnalyzerOrgPolicyConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnalyzerOrgPolicyConstraint message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnalyzerOrgPolicyConstraint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint;
+
+                    /**
+                     * Decodes an AnalyzerOrgPolicyConstraint message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnalyzerOrgPolicyConstraint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint;
+
+                    /**
+                     * Verifies an AnalyzerOrgPolicyConstraint message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnalyzerOrgPolicyConstraint message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnalyzerOrgPolicyConstraint
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint;
+
+                    /**
+                     * Creates a plain object from an AnalyzerOrgPolicyConstraint message. Also converts values to other types if specified.
+                     * @param message AnalyzerOrgPolicyConstraint
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnalyzerOrgPolicyConstraint to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzerOrgPolicyConstraint
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AnalyzerOrgPolicyConstraint {
+
+                    /** Properties of a Constraint. */
+                    interface IConstraint {
+
+                        /** Constraint name */
+                        name?: (string|null);
+
+                        /** Constraint displayName */
+                        displayName?: (string|null);
+
+                        /** Constraint description */
+                        description?: (string|null);
+
+                        /** Constraint constraintDefault */
+                        constraintDefault?: (google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.ConstraintDefault|keyof typeof google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.ConstraintDefault|null);
+
+                        /** Constraint listConstraint */
+                        listConstraint?: (google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.IListConstraint|null);
+
+                        /** Constraint booleanConstraint */
+                        booleanConstraint?: (google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.IBooleanConstraint|null);
+                    }
+
+                    /** Represents a Constraint. */
+                    class Constraint implements IConstraint {
+
+                        /**
+                         * Constructs a new Constraint.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.IConstraint);
+
+                        /** Constraint name. */
+                        public name: string;
+
+                        /** Constraint displayName. */
+                        public displayName: string;
+
+                        /** Constraint description. */
+                        public description: string;
+
+                        /** Constraint constraintDefault. */
+                        public constraintDefault: (google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.ConstraintDefault|keyof typeof google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.ConstraintDefault);
+
+                        /** Constraint listConstraint. */
+                        public listConstraint?: (google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.IListConstraint|null);
+
+                        /** Constraint booleanConstraint. */
+                        public booleanConstraint?: (google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.IBooleanConstraint|null);
+
+                        /** Constraint constraintType. */
+                        public constraintType?: ("listConstraint"|"booleanConstraint");
+
+                        /**
+                         * Creates a new Constraint instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Constraint instance
+                         */
+                        public static create(properties?: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.IConstraint): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint;
+
+                        /**
+                         * Encodes the specified Constraint message. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.verify|verify} messages.
+                         * @param message Constraint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.IConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Constraint message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.verify|verify} messages.
+                         * @param message Constraint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.IConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Constraint message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Constraint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint;
+
+                        /**
+                         * Decodes a Constraint message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Constraint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint;
+
+                        /**
+                         * Verifies a Constraint message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Constraint message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Constraint
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint;
+
+                        /**
+                         * Creates a plain object from a Constraint message. Also converts values to other types if specified.
+                         * @param message Constraint
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Constraint to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Constraint
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Constraint {
+
+                        /** ConstraintDefault enum. */
+                        enum ConstraintDefault {
+                            CONSTRAINT_DEFAULT_UNSPECIFIED = 0,
+                            ALLOW = 1,
+                            DENY = 2
+                        }
+
+                        /** Properties of a ListConstraint. */
+                        interface IListConstraint {
+
+                            /** ListConstraint supportsIn */
+                            supportsIn?: (boolean|null);
+
+                            /** ListConstraint supportsUnder */
+                            supportsUnder?: (boolean|null);
+                        }
+
+                        /** Represents a ListConstraint. */
+                        class ListConstraint implements IListConstraint {
+
+                            /**
+                             * Constructs a new ListConstraint.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.IListConstraint);
+
+                            /** ListConstraint supportsIn. */
+                            public supportsIn: boolean;
+
+                            /** ListConstraint supportsUnder. */
+                            public supportsUnder: boolean;
+
+                            /**
+                             * Creates a new ListConstraint instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ListConstraint instance
+                             */
+                            public static create(properties?: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.IListConstraint): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.ListConstraint;
+
+                            /**
+                             * Encodes the specified ListConstraint message. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.ListConstraint.verify|verify} messages.
+                             * @param message ListConstraint message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.IListConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ListConstraint message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.ListConstraint.verify|verify} messages.
+                             * @param message ListConstraint message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.IListConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ListConstraint message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ListConstraint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.ListConstraint;
+
+                            /**
+                             * Decodes a ListConstraint message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ListConstraint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.ListConstraint;
+
+                            /**
+                             * Verifies a ListConstraint message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ListConstraint message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ListConstraint
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.ListConstraint;
+
+                            /**
+                             * Creates a plain object from a ListConstraint message. Also converts values to other types if specified.
+                             * @param message ListConstraint
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.ListConstraint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ListConstraint to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ListConstraint
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a BooleanConstraint. */
+                        interface IBooleanConstraint {
+                        }
+
+                        /** Represents a BooleanConstraint. */
+                        class BooleanConstraint implements IBooleanConstraint {
+
+                            /**
+                             * Constructs a new BooleanConstraint.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.IBooleanConstraint);
+
+                            /**
+                             * Creates a new BooleanConstraint instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns BooleanConstraint instance
+                             */
+                            public static create(properties?: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.IBooleanConstraint): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.BooleanConstraint;
+
+                            /**
+                             * Encodes the specified BooleanConstraint message. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.BooleanConstraint.verify|verify} messages.
+                             * @param message BooleanConstraint message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.IBooleanConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified BooleanConstraint message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.BooleanConstraint.verify|verify} messages.
+                             * @param message BooleanConstraint message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.IBooleanConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a BooleanConstraint message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns BooleanConstraint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.BooleanConstraint;
+
+                            /**
+                             * Decodes a BooleanConstraint message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns BooleanConstraint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.BooleanConstraint;
+
+                            /**
+                             * Verifies a BooleanConstraint message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a BooleanConstraint message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns BooleanConstraint
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.BooleanConstraint;
+
+                            /**
+                             * Creates a plain object from a BooleanConstraint message. Also converts values to other types if specified.
+                             * @param message BooleanConstraint
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.BooleanConstraint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this BooleanConstraint to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for BooleanConstraint
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a CustomConstraint. */
+                    interface ICustomConstraint {
+
+                        /** CustomConstraint name */
+                        name?: (string|null);
+
+                        /** CustomConstraint resourceTypes */
+                        resourceTypes?: (string[]|null);
+
+                        /** CustomConstraint methodTypes */
+                        methodTypes?: (google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.CustomConstraint.MethodType[]|null);
+
+                        /** CustomConstraint condition */
+                        condition?: (string|null);
+
+                        /** CustomConstraint actionType */
+                        actionType?: (google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.CustomConstraint.ActionType|keyof typeof google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.CustomConstraint.ActionType|null);
+
+                        /** CustomConstraint displayName */
+                        displayName?: (string|null);
+
+                        /** CustomConstraint description */
+                        description?: (string|null);
+                    }
+
+                    /** Represents a CustomConstraint. */
+                    class CustomConstraint implements ICustomConstraint {
+
+                        /**
+                         * Constructs a new CustomConstraint.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.ICustomConstraint);
+
+                        /** CustomConstraint name. */
+                        public name: string;
+
+                        /** CustomConstraint resourceTypes. */
+                        public resourceTypes: string[];
+
+                        /** CustomConstraint methodTypes. */
+                        public methodTypes: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.CustomConstraint.MethodType[];
+
+                        /** CustomConstraint condition. */
+                        public condition: string;
+
+                        /** CustomConstraint actionType. */
+                        public actionType: (google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.CustomConstraint.ActionType|keyof typeof google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.CustomConstraint.ActionType);
+
+                        /** CustomConstraint displayName. */
+                        public displayName: string;
+
+                        /** CustomConstraint description. */
+                        public description: string;
+
+                        /**
+                         * Creates a new CustomConstraint instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomConstraint instance
+                         */
+                        public static create(properties?: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.ICustomConstraint): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.CustomConstraint;
+
+                        /**
+                         * Encodes the specified CustomConstraint message. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.CustomConstraint.verify|verify} messages.
+                         * @param message CustomConstraint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.ICustomConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomConstraint message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.CustomConstraint.verify|verify} messages.
+                         * @param message CustomConstraint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.ICustomConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomConstraint message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomConstraint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.CustomConstraint;
+
+                        /**
+                         * Decodes a CustomConstraint message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomConstraint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.CustomConstraint;
+
+                        /**
+                         * Verifies a CustomConstraint message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomConstraint message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomConstraint
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.CustomConstraint;
+
+                        /**
+                         * Creates a plain object from a CustomConstraint message. Also converts values to other types if specified.
+                         * @param message CustomConstraint
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.CustomConstraint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomConstraint to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CustomConstraint
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CustomConstraint {
+
+                        /** MethodType enum. */
+                        enum MethodType {
+                            METHOD_TYPE_UNSPECIFIED = 0,
+                            CREATE = 1,
+                            UPDATE = 2,
+                            DELETE = 3
+                        }
+
+                        /** ActionType enum. */
+                        enum ActionType {
+                            ACTION_TYPE_UNSPECIFIED = 0,
+                            ALLOW = 1,
+                            DENY = 2
+                        }
+                    }
+                }
+
+                /** Properties of an AnalyzeOrgPoliciesRequest. */
+                interface IAnalyzeOrgPoliciesRequest {
+
+                    /** AnalyzeOrgPoliciesRequest scope */
+                    scope?: (string|null);
+
+                    /** AnalyzeOrgPoliciesRequest constraint */
+                    constraint?: (string|null);
+
+                    /** AnalyzeOrgPoliciesRequest filter */
+                    filter?: (string|null);
+
+                    /** AnalyzeOrgPoliciesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** AnalyzeOrgPoliciesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents an AnalyzeOrgPoliciesRequest. */
+                class AnalyzeOrgPoliciesRequest implements IAnalyzeOrgPoliciesRequest {
+
+                    /**
+                     * Constructs a new AnalyzeOrgPoliciesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest);
+
+                    /** AnalyzeOrgPoliciesRequest scope. */
+                    public scope: string;
+
+                    /** AnalyzeOrgPoliciesRequest constraint. */
+                    public constraint: string;
+
+                    /** AnalyzeOrgPoliciesRequest filter. */
+                    public filter: string;
+
+                    /** AnalyzeOrgPoliciesRequest pageSize. */
+                    public pageSize?: (number|null);
+
+                    /** AnalyzeOrgPoliciesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** AnalyzeOrgPoliciesRequest _pageSize. */
+                    public _pageSize?: "pageSize";
+
+                    /**
+                     * Creates a new AnalyzeOrgPoliciesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnalyzeOrgPoliciesRequest instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest): google.cloud.asset.v1.AnalyzeOrgPoliciesRequest;
+
+                    /**
+                     * Encodes the specified AnalyzeOrgPoliciesRequest message. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPoliciesRequest.verify|verify} messages.
+                     * @param message AnalyzeOrgPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnalyzeOrgPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPoliciesRequest.verify|verify} messages.
+                     * @param message AnalyzeOrgPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnalyzeOrgPoliciesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnalyzeOrgPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzeOrgPoliciesRequest;
+
+                    /**
+                     * Decodes an AnalyzeOrgPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnalyzeOrgPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzeOrgPoliciesRequest;
+
+                    /**
+                     * Verifies an AnalyzeOrgPoliciesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnalyzeOrgPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnalyzeOrgPoliciesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzeOrgPoliciesRequest;
+
+                    /**
+                     * Creates a plain object from an AnalyzeOrgPoliciesRequest message. Also converts values to other types if specified.
+                     * @param message AnalyzeOrgPoliciesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.AnalyzeOrgPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnalyzeOrgPoliciesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeOrgPoliciesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AnalyzeOrgPoliciesResponse. */
+                interface IAnalyzeOrgPoliciesResponse {
+
+                    /** AnalyzeOrgPoliciesResponse orgPolicyResults */
+                    orgPolicyResults?: (google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult[]|null);
+
+                    /** AnalyzeOrgPoliciesResponse constraint */
+                    constraint?: (google.cloud.asset.v1.IAnalyzerOrgPolicyConstraint|null);
+
+                    /** AnalyzeOrgPoliciesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents an AnalyzeOrgPoliciesResponse. */
+                class AnalyzeOrgPoliciesResponse implements IAnalyzeOrgPoliciesResponse {
+
+                    /**
+                     * Constructs a new AnalyzeOrgPoliciesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse);
+
+                    /** AnalyzeOrgPoliciesResponse orgPolicyResults. */
+                    public orgPolicyResults: google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult[];
+
+                    /** AnalyzeOrgPoliciesResponse constraint. */
+                    public constraint?: (google.cloud.asset.v1.IAnalyzerOrgPolicyConstraint|null);
+
+                    /** AnalyzeOrgPoliciesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new AnalyzeOrgPoliciesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnalyzeOrgPoliciesResponse instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse): google.cloud.asset.v1.AnalyzeOrgPoliciesResponse;
+
+                    /**
+                     * Encodes the specified AnalyzeOrgPoliciesResponse message. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.verify|verify} messages.
+                     * @param message AnalyzeOrgPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnalyzeOrgPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.verify|verify} messages.
+                     * @param message AnalyzeOrgPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnalyzeOrgPoliciesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnalyzeOrgPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzeOrgPoliciesResponse;
+
+                    /**
+                     * Decodes an AnalyzeOrgPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnalyzeOrgPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzeOrgPoliciesResponse;
+
+                    /**
+                     * Verifies an AnalyzeOrgPoliciesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnalyzeOrgPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnalyzeOrgPoliciesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzeOrgPoliciesResponse;
+
+                    /**
+                     * Creates a plain object from an AnalyzeOrgPoliciesResponse message. Also converts values to other types if specified.
+                     * @param message AnalyzeOrgPoliciesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.AnalyzeOrgPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnalyzeOrgPoliciesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeOrgPoliciesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AnalyzeOrgPoliciesResponse {
+
+                    /** Properties of an OrgPolicyResult. */
+                    interface IOrgPolicyResult {
+
+                        /** OrgPolicyResult consolidatedPolicy */
+                        consolidatedPolicy?: (google.cloud.asset.v1.IAnalyzerOrgPolicy|null);
+
+                        /** OrgPolicyResult policyBundle */
+                        policyBundle?: (google.cloud.asset.v1.IAnalyzerOrgPolicy[]|null);
+                    }
+
+                    /** Represents an OrgPolicyResult. */
+                    class OrgPolicyResult implements IOrgPolicyResult {
+
+                        /**
+                         * Constructs a new OrgPolicyResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult);
+
+                        /** OrgPolicyResult consolidatedPolicy. */
+                        public consolidatedPolicy?: (google.cloud.asset.v1.IAnalyzerOrgPolicy|null);
+
+                        /** OrgPolicyResult policyBundle. */
+                        public policyBundle: google.cloud.asset.v1.IAnalyzerOrgPolicy[];
+
+                        /**
+                         * Creates a new OrgPolicyResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OrgPolicyResult instance
+                         */
+                        public static create(properties?: google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult): google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult;
+
+                        /**
+                         * Encodes the specified OrgPolicyResult message. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult.verify|verify} messages.
+                         * @param message OrgPolicyResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OrgPolicyResult message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult.verify|verify} messages.
+                         * @param message OrgPolicyResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OrgPolicyResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OrgPolicyResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult;
+
+                        /**
+                         * Decodes an OrgPolicyResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OrgPolicyResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult;
+
+                        /**
+                         * Verifies an OrgPolicyResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OrgPolicyResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OrgPolicyResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult;
+
+                        /**
+                         * Creates a plain object from an OrgPolicyResult message. Also converts values to other types if specified.
+                         * @param message OrgPolicyResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OrgPolicyResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OrgPolicyResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an AnalyzeOrgPolicyGovernedContainersRequest. */
+                interface IAnalyzeOrgPolicyGovernedContainersRequest {
+
+                    /** AnalyzeOrgPolicyGovernedContainersRequest scope */
+                    scope?: (string|null);
+
+                    /** AnalyzeOrgPolicyGovernedContainersRequest constraint */
+                    constraint?: (string|null);
+
+                    /** AnalyzeOrgPolicyGovernedContainersRequest filter */
+                    filter?: (string|null);
+
+                    /** AnalyzeOrgPolicyGovernedContainersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** AnalyzeOrgPolicyGovernedContainersRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents an AnalyzeOrgPolicyGovernedContainersRequest. */
+                class AnalyzeOrgPolicyGovernedContainersRequest implements IAnalyzeOrgPolicyGovernedContainersRequest {
+
+                    /**
+                     * Constructs a new AnalyzeOrgPolicyGovernedContainersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest);
+
+                    /** AnalyzeOrgPolicyGovernedContainersRequest scope. */
+                    public scope: string;
+
+                    /** AnalyzeOrgPolicyGovernedContainersRequest constraint. */
+                    public constraint: string;
+
+                    /** AnalyzeOrgPolicyGovernedContainersRequest filter. */
+                    public filter: string;
+
+                    /** AnalyzeOrgPolicyGovernedContainersRequest pageSize. */
+                    public pageSize?: (number|null);
+
+                    /** AnalyzeOrgPolicyGovernedContainersRequest pageToken. */
+                    public pageToken: string;
+
+                    /** AnalyzeOrgPolicyGovernedContainersRequest _pageSize. */
+                    public _pageSize?: "pageSize";
+
+                    /**
+                     * Creates a new AnalyzeOrgPolicyGovernedContainersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnalyzeOrgPolicyGovernedContainersRequest instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest;
+
+                    /**
+                     * Encodes the specified AnalyzeOrgPolicyGovernedContainersRequest message. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest.verify|verify} messages.
+                     * @param message AnalyzeOrgPolicyGovernedContainersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnalyzeOrgPolicyGovernedContainersRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest.verify|verify} messages.
+                     * @param message AnalyzeOrgPolicyGovernedContainersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnalyzeOrgPolicyGovernedContainersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnalyzeOrgPolicyGovernedContainersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest;
+
+                    /**
+                     * Decodes an AnalyzeOrgPolicyGovernedContainersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnalyzeOrgPolicyGovernedContainersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest;
+
+                    /**
+                     * Verifies an AnalyzeOrgPolicyGovernedContainersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnalyzeOrgPolicyGovernedContainersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnalyzeOrgPolicyGovernedContainersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest;
+
+                    /**
+                     * Creates a plain object from an AnalyzeOrgPolicyGovernedContainersRequest message. Also converts values to other types if specified.
+                     * @param message AnalyzeOrgPolicyGovernedContainersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnalyzeOrgPolicyGovernedContainersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeOrgPolicyGovernedContainersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AnalyzeOrgPolicyGovernedContainersResponse. */
+                interface IAnalyzeOrgPolicyGovernedContainersResponse {
+
+                    /** AnalyzeOrgPolicyGovernedContainersResponse governedContainers */
+                    governedContainers?: (google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer[]|null);
+
+                    /** AnalyzeOrgPolicyGovernedContainersResponse constraint */
+                    constraint?: (google.cloud.asset.v1.IAnalyzerOrgPolicyConstraint|null);
+
+                    /** AnalyzeOrgPolicyGovernedContainersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents an AnalyzeOrgPolicyGovernedContainersResponse. */
+                class AnalyzeOrgPolicyGovernedContainersResponse implements IAnalyzeOrgPolicyGovernedContainersResponse {
+
+                    /**
+                     * Constructs a new AnalyzeOrgPolicyGovernedContainersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse);
+
+                    /** AnalyzeOrgPolicyGovernedContainersResponse governedContainers. */
+                    public governedContainers: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer[];
+
+                    /** AnalyzeOrgPolicyGovernedContainersResponse constraint. */
+                    public constraint?: (google.cloud.asset.v1.IAnalyzerOrgPolicyConstraint|null);
+
+                    /** AnalyzeOrgPolicyGovernedContainersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new AnalyzeOrgPolicyGovernedContainersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnalyzeOrgPolicyGovernedContainersResponse instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse;
+
+                    /**
+                     * Encodes the specified AnalyzeOrgPolicyGovernedContainersResponse message. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.verify|verify} messages.
+                     * @param message AnalyzeOrgPolicyGovernedContainersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnalyzeOrgPolicyGovernedContainersResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.verify|verify} messages.
+                     * @param message AnalyzeOrgPolicyGovernedContainersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnalyzeOrgPolicyGovernedContainersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnalyzeOrgPolicyGovernedContainersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse;
+
+                    /**
+                     * Decodes an AnalyzeOrgPolicyGovernedContainersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnalyzeOrgPolicyGovernedContainersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse;
+
+                    /**
+                     * Verifies an AnalyzeOrgPolicyGovernedContainersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnalyzeOrgPolicyGovernedContainersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnalyzeOrgPolicyGovernedContainersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse;
+
+                    /**
+                     * Creates a plain object from an AnalyzeOrgPolicyGovernedContainersResponse message. Also converts values to other types if specified.
+                     * @param message AnalyzeOrgPolicyGovernedContainersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnalyzeOrgPolicyGovernedContainersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeOrgPolicyGovernedContainersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AnalyzeOrgPolicyGovernedContainersResponse {
+
+                    /** Properties of a GovernedContainer. */
+                    interface IGovernedContainer {
+
+                        /** GovernedContainer fullResourceName */
+                        fullResourceName?: (string|null);
+
+                        /** GovernedContainer parent */
+                        parent?: (string|null);
+
+                        /** GovernedContainer consolidatedPolicy */
+                        consolidatedPolicy?: (google.cloud.asset.v1.IAnalyzerOrgPolicy|null);
+
+                        /** GovernedContainer policyBundle */
+                        policyBundle?: (google.cloud.asset.v1.IAnalyzerOrgPolicy[]|null);
+                    }
+
+                    /** Represents a GovernedContainer. */
+                    class GovernedContainer implements IGovernedContainer {
+
+                        /**
+                         * Constructs a new GovernedContainer.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer);
+
+                        /** GovernedContainer fullResourceName. */
+                        public fullResourceName: string;
+
+                        /** GovernedContainer parent. */
+                        public parent: string;
+
+                        /** GovernedContainer consolidatedPolicy. */
+                        public consolidatedPolicy?: (google.cloud.asset.v1.IAnalyzerOrgPolicy|null);
+
+                        /** GovernedContainer policyBundle. */
+                        public policyBundle: google.cloud.asset.v1.IAnalyzerOrgPolicy[];
+
+                        /**
+                         * Creates a new GovernedContainer instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GovernedContainer instance
+                         */
+                        public static create(properties?: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer;
+
+                        /**
+                         * Encodes the specified GovernedContainer message. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer.verify|verify} messages.
+                         * @param message GovernedContainer message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GovernedContainer message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer.verify|verify} messages.
+                         * @param message GovernedContainer message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GovernedContainer message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GovernedContainer
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer;
+
+                        /**
+                         * Decodes a GovernedContainer message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GovernedContainer
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer;
+
+                        /**
+                         * Verifies a GovernedContainer message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GovernedContainer message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GovernedContainer
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer;
+
+                        /**
+                         * Creates a plain object from a GovernedContainer message. Also converts values to other types if specified.
+                         * @param message GovernedContainer
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GovernedContainer to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GovernedContainer
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an AnalyzeOrgPolicyGovernedAssetsRequest. */
+                interface IAnalyzeOrgPolicyGovernedAssetsRequest {
+
+                    /** AnalyzeOrgPolicyGovernedAssetsRequest scope */
+                    scope?: (string|null);
+
+                    /** AnalyzeOrgPolicyGovernedAssetsRequest constraint */
+                    constraint?: (string|null);
+
+                    /** AnalyzeOrgPolicyGovernedAssetsRequest filter */
+                    filter?: (string|null);
+
+                    /** AnalyzeOrgPolicyGovernedAssetsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** AnalyzeOrgPolicyGovernedAssetsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents an AnalyzeOrgPolicyGovernedAssetsRequest. */
+                class AnalyzeOrgPolicyGovernedAssetsRequest implements IAnalyzeOrgPolicyGovernedAssetsRequest {
+
+                    /**
+                     * Constructs a new AnalyzeOrgPolicyGovernedAssetsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest);
+
+                    /** AnalyzeOrgPolicyGovernedAssetsRequest scope. */
+                    public scope: string;
+
+                    /** AnalyzeOrgPolicyGovernedAssetsRequest constraint. */
+                    public constraint: string;
+
+                    /** AnalyzeOrgPolicyGovernedAssetsRequest filter. */
+                    public filter: string;
+
+                    /** AnalyzeOrgPolicyGovernedAssetsRequest pageSize. */
+                    public pageSize?: (number|null);
+
+                    /** AnalyzeOrgPolicyGovernedAssetsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** AnalyzeOrgPolicyGovernedAssetsRequest _pageSize. */
+                    public _pageSize?: "pageSize";
+
+                    /**
+                     * Creates a new AnalyzeOrgPolicyGovernedAssetsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnalyzeOrgPolicyGovernedAssetsRequest instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest;
+
+                    /**
+                     * Encodes the specified AnalyzeOrgPolicyGovernedAssetsRequest message. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest.verify|verify} messages.
+                     * @param message AnalyzeOrgPolicyGovernedAssetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnalyzeOrgPolicyGovernedAssetsRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest.verify|verify} messages.
+                     * @param message AnalyzeOrgPolicyGovernedAssetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnalyzeOrgPolicyGovernedAssetsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnalyzeOrgPolicyGovernedAssetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest;
+
+                    /**
+                     * Decodes an AnalyzeOrgPolicyGovernedAssetsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnalyzeOrgPolicyGovernedAssetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest;
+
+                    /**
+                     * Verifies an AnalyzeOrgPolicyGovernedAssetsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnalyzeOrgPolicyGovernedAssetsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnalyzeOrgPolicyGovernedAssetsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest;
+
+                    /**
+                     * Creates a plain object from an AnalyzeOrgPolicyGovernedAssetsRequest message. Also converts values to other types if specified.
+                     * @param message AnalyzeOrgPolicyGovernedAssetsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnalyzeOrgPolicyGovernedAssetsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeOrgPolicyGovernedAssetsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AnalyzeOrgPolicyGovernedAssetsResponse. */
+                interface IAnalyzeOrgPolicyGovernedAssetsResponse {
+
+                    /** AnalyzeOrgPolicyGovernedAssetsResponse governedAssets */
+                    governedAssets?: (google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset[]|null);
+
+                    /** AnalyzeOrgPolicyGovernedAssetsResponse constraint */
+                    constraint?: (google.cloud.asset.v1.IAnalyzerOrgPolicyConstraint|null);
+
+                    /** AnalyzeOrgPolicyGovernedAssetsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents an AnalyzeOrgPolicyGovernedAssetsResponse. */
+                class AnalyzeOrgPolicyGovernedAssetsResponse implements IAnalyzeOrgPolicyGovernedAssetsResponse {
+
+                    /**
+                     * Constructs a new AnalyzeOrgPolicyGovernedAssetsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse);
+
+                    /** AnalyzeOrgPolicyGovernedAssetsResponse governedAssets. */
+                    public governedAssets: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset[];
+
+                    /** AnalyzeOrgPolicyGovernedAssetsResponse constraint. */
+                    public constraint?: (google.cloud.asset.v1.IAnalyzerOrgPolicyConstraint|null);
+
+                    /** AnalyzeOrgPolicyGovernedAssetsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new AnalyzeOrgPolicyGovernedAssetsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnalyzeOrgPolicyGovernedAssetsResponse instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse;
+
+                    /**
+                     * Encodes the specified AnalyzeOrgPolicyGovernedAssetsResponse message. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.verify|verify} messages.
+                     * @param message AnalyzeOrgPolicyGovernedAssetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnalyzeOrgPolicyGovernedAssetsResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.verify|verify} messages.
+                     * @param message AnalyzeOrgPolicyGovernedAssetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnalyzeOrgPolicyGovernedAssetsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnalyzeOrgPolicyGovernedAssetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse;
+
+                    /**
+                     * Decodes an AnalyzeOrgPolicyGovernedAssetsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnalyzeOrgPolicyGovernedAssetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse;
+
+                    /**
+                     * Verifies an AnalyzeOrgPolicyGovernedAssetsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnalyzeOrgPolicyGovernedAssetsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnalyzeOrgPolicyGovernedAssetsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse;
+
+                    /**
+                     * Creates a plain object from an AnalyzeOrgPolicyGovernedAssetsResponse message. Also converts values to other types if specified.
+                     * @param message AnalyzeOrgPolicyGovernedAssetsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnalyzeOrgPolicyGovernedAssetsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzeOrgPolicyGovernedAssetsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AnalyzeOrgPolicyGovernedAssetsResponse {
+
+                    /** Properties of a GovernedResource. */
+                    interface IGovernedResource {
+
+                        /** GovernedResource fullResourceName */
+                        fullResourceName?: (string|null);
+
+                        /** GovernedResource parent */
+                        parent?: (string|null);
+
+                        /** GovernedResource project */
+                        project?: (string|null);
+
+                        /** GovernedResource folders */
+                        folders?: (string[]|null);
+
+                        /** GovernedResource organization */
+                        organization?: (string|null);
+                    }
+
+                    /** Represents a GovernedResource. */
+                    class GovernedResource implements IGovernedResource {
+
+                        /**
+                         * Constructs a new GovernedResource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedResource);
+
+                        /** GovernedResource fullResourceName. */
+                        public fullResourceName: string;
+
+                        /** GovernedResource parent. */
+                        public parent: string;
+
+                        /** GovernedResource project. */
+                        public project: string;
+
+                        /** GovernedResource folders. */
+                        public folders: string[];
+
+                        /** GovernedResource organization. */
+                        public organization: string;
+
+                        /**
+                         * Creates a new GovernedResource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GovernedResource instance
+                         */
+                        public static create(properties?: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedResource): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource;
+
+                        /**
+                         * Encodes the specified GovernedResource message. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource.verify|verify} messages.
+                         * @param message GovernedResource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GovernedResource message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource.verify|verify} messages.
+                         * @param message GovernedResource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GovernedResource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GovernedResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource;
+
+                        /**
+                         * Decodes a GovernedResource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GovernedResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource;
+
+                        /**
+                         * Verifies a GovernedResource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GovernedResource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GovernedResource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource;
+
+                        /**
+                         * Creates a plain object from a GovernedResource message. Also converts values to other types if specified.
+                         * @param message GovernedResource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GovernedResource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GovernedResource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GovernedIamPolicy. */
+                    interface IGovernedIamPolicy {
+
+                        /** GovernedIamPolicy attachedResource */
+                        attachedResource?: (string|null);
+
+                        /** GovernedIamPolicy policy */
+                        policy?: (google.iam.v1.IPolicy|null);
+
+                        /** GovernedIamPolicy project */
+                        project?: (string|null);
+
+                        /** GovernedIamPolicy folders */
+                        folders?: (string[]|null);
+
+                        /** GovernedIamPolicy organization */
+                        organization?: (string|null);
+                    }
+
+                    /** Represents a GovernedIamPolicy. */
+                    class GovernedIamPolicy implements IGovernedIamPolicy {
+
+                        /**
+                         * Constructs a new GovernedIamPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedIamPolicy);
+
+                        /** GovernedIamPolicy attachedResource. */
+                        public attachedResource: string;
+
+                        /** GovernedIamPolicy policy. */
+                        public policy?: (google.iam.v1.IPolicy|null);
+
+                        /** GovernedIamPolicy project. */
+                        public project: string;
+
+                        /** GovernedIamPolicy folders. */
+                        public folders: string[];
+
+                        /** GovernedIamPolicy organization. */
+                        public organization: string;
+
+                        /**
+                         * Creates a new GovernedIamPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GovernedIamPolicy instance
+                         */
+                        public static create(properties?: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedIamPolicy): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedIamPolicy;
+
+                        /**
+                         * Encodes the specified GovernedIamPolicy message. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedIamPolicy.verify|verify} messages.
+                         * @param message GovernedIamPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedIamPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GovernedIamPolicy message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedIamPolicy.verify|verify} messages.
+                         * @param message GovernedIamPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedIamPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GovernedIamPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GovernedIamPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedIamPolicy;
+
+                        /**
+                         * Decodes a GovernedIamPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GovernedIamPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedIamPolicy;
+
+                        /**
+                         * Verifies a GovernedIamPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GovernedIamPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GovernedIamPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedIamPolicy;
+
+                        /**
+                         * Creates a plain object from a GovernedIamPolicy message. Also converts values to other types if specified.
+                         * @param message GovernedIamPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedIamPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GovernedIamPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GovernedIamPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GovernedAsset. */
+                    interface IGovernedAsset {
+
+                        /** GovernedAsset governedResource */
+                        governedResource?: (google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedResource|null);
+
+                        /** GovernedAsset governedIamPolicy */
+                        governedIamPolicy?: (google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedIamPolicy|null);
+
+                        /** GovernedAsset consolidatedPolicy */
+                        consolidatedPolicy?: (google.cloud.asset.v1.IAnalyzerOrgPolicy|null);
+
+                        /** GovernedAsset policyBundle */
+                        policyBundle?: (google.cloud.asset.v1.IAnalyzerOrgPolicy[]|null);
+                    }
+
+                    /** Represents a GovernedAsset. */
+                    class GovernedAsset implements IGovernedAsset {
+
+                        /**
+                         * Constructs a new GovernedAsset.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset);
+
+                        /** GovernedAsset governedResource. */
+                        public governedResource?: (google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedResource|null);
+
+                        /** GovernedAsset governedIamPolicy. */
+                        public governedIamPolicy?: (google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedIamPolicy|null);
+
+                        /** GovernedAsset consolidatedPolicy. */
+                        public consolidatedPolicy?: (google.cloud.asset.v1.IAnalyzerOrgPolicy|null);
+
+                        /** GovernedAsset policyBundle. */
+                        public policyBundle: google.cloud.asset.v1.IAnalyzerOrgPolicy[];
+
+                        /** GovernedAsset governedAsset. */
+                        public governedAsset?: ("governedResource"|"governedIamPolicy");
+
+                        /**
+                         * Creates a new GovernedAsset instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GovernedAsset instance
+                         */
+                        public static create(properties?: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset;
+
+                        /**
+                         * Encodes the specified GovernedAsset message. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset.verify|verify} messages.
+                         * @param message GovernedAsset message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GovernedAsset message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset.verify|verify} messages.
+                         * @param message GovernedAsset message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GovernedAsset message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GovernedAsset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset;
+
+                        /**
+                         * Decodes a GovernedAsset message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GovernedAsset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset;
+
+                        /**
+                         * Verifies a GovernedAsset message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GovernedAsset message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GovernedAsset
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset;
+
+                        /**
+                         * Creates a plain object from a GovernedAsset message. Also converts values to other types if specified.
+                         * @param message GovernedAsset
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GovernedAsset to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GovernedAsset
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -15482,15 +17779,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** ContentType enum. */
-                enum ContentType {
-                    CONTENT_TYPE_UNSPECIFIED = 0,
-                    RESOURCE = 1,
-                    IAM_POLICY = 2,
-                    ORG_POLICY = 4,
-                    ACCESS_POLICY = 5
-                }
-
                 /** Properties of a ListAssetsResponse. */
                 interface IListAssetsResponse {
 
@@ -15598,6 +17886,15 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** ContentType enum. */
+                enum ContentType {
+                    CONTENT_TYPE_UNSPECIFIED = 0,
+                    RESOURCE = 1,
+                    IAM_POLICY = 2,
+                    ORG_POLICY = 4,
+                    ACCESS_POLICY = 5
                 }
 
                 /** Properties of an Asset. */

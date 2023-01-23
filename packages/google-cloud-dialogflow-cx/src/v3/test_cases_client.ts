@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -817,7 +817,8 @@ export class TestCasesClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The mask to specify which fields should be updated. The
    *   {@link google.cloud.dialogflow.cx.v3.TestCase.creation_time|`creationTime`} and
-   *   {@link google.cloud.dialogflow.cx.v3.TestCase.last_test_result|`lastTestResult`} cannot be updated.
+   *   {@link google.cloud.dialogflow.cx.v3.TestCase.last_test_result|`lastTestResult`}
+   *   cannot be updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1109,14 +1110,16 @@ export class TestCasesClient {
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.cx.v3.RunTestCaseMetadata|RunTestCaseMetadata}
-   * - `response`: {@link google.cloud.dialogflow.cx.v3.RunTestCaseResponse|RunTestCaseResponse}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.cx.v3.RunTestCaseMetadata|RunTestCaseMetadata}
+   * - `response`:
+   * {@link google.cloud.dialogflow.cx.v3.RunTestCaseResponse|RunTestCaseResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Format of test case name to run: `projects/<Project ID>/locations/
-   *   <Location ID>/agents/<AgentID>/testCases/<TestCase ID>`.
+   *   Required. Format of test case name to run: `projects/<Project
+   *   ID>/locations/ <Location ID>/agents/<AgentID>/testCases/<TestCase ID>`.
    * @param {string} [request.environment]
    *   Optional. Environment name. If not set, draft environment is assumed.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
@@ -1259,21 +1262,23 @@ export class TestCasesClient {
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.cx.v3.BatchRunTestCasesMetadata|BatchRunTestCasesMetadata}
-   * - `response`: {@link google.cloud.dialogflow.cx.v3.BatchRunTestCasesResponse|BatchRunTestCasesResponse}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.cx.v3.BatchRunTestCasesMetadata|BatchRunTestCasesMetadata}
+   * - `response`:
+   * {@link google.cloud.dialogflow.cx.v3.BatchRunTestCasesResponse|BatchRunTestCasesResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Agent name. Format: `projects/<Project ID>/locations/<Location ID>/agents/
-   *   <AgentID>`.
+   *   Required. Agent name. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/agents/ <AgentID>`.
    * @param {string} [request.environment]
-   *   Optional. If not set, draft environment is assumed. Format: `projects/<Project
-   *   ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
-   *   ID>`.
+   *   Optional. If not set, draft environment is assumed. Format:
+   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/environments/<Environment ID>`.
    * @param {string[]} request.testCases
-   *   Required. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/testCases/<TestCase ID>`.
+   *   Required. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>/testCases/<TestCase ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1414,8 +1419,10 @@ export class TestCasesClient {
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.cx.v3.ImportTestCasesMetadata|ImportTestCasesMetadata}
-   * - `response`: {@link google.cloud.dialogflow.cx.v3.ImportTestCasesResponse|ImportTestCasesResponse}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.cx.v3.ImportTestCasesMetadata|ImportTestCasesMetadata}
+   * - `response`:
+   * {@link google.cloud.dialogflow.cx.v3.ImportTestCasesResponse|ImportTestCasesResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1573,8 +1580,10 @@ export class TestCasesClient {
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.cx.v3.ExportTestCasesMetadata|ExportTestCasesMetadata}
-   * - `response`: {@link google.cloud.dialogflow.cx.v3.ExportTestCasesResponse|ExportTestCasesResponse}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.cx.v3.ExportTestCasesMetadata|ExportTestCasesMetadata}
+   * - `response`:
+   * {@link google.cloud.dialogflow.cx.v3.ExportTestCasesResponse|ExportTestCasesResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,8 +35,8 @@ function main(name, channelPartnerLink, updateMask) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The channel partner link to update. Only channel_partner_link.link_state
-   *  is allowed for updates.
+   *  Required. The channel partner link to update. Only
+   *  channel_partner_link.link_state is allowed for updates.
    */
   // const channelPartnerLink = {}
   /**
