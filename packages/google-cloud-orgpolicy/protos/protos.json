@@ -314,6 +314,10 @@
                           "options": {
                             "deprecated": true
                           }
+                        },
+                        "dryRunSpec": {
+                          "type": "PolicySpec",
+                          "id": 4
                         }
                       }
                     },
@@ -526,6 +530,10 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 3
                         }
                       }
                     },
@@ -1688,9 +1696,6 @@
                 }
               }
             },
-            "Empty": {
-              "fields": {}
-            },
             "Timestamp": {
               "fields": {
                 "seconds": {
@@ -1700,6 +1705,18 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
                 }
               }
             }

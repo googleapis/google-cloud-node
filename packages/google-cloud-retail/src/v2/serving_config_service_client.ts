@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -509,7 +509,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the ServingConfig to delete. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -702,7 +702,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the ServingConfig to get. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -794,7 +794,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.servingConfig
    *   Required. The source ServingConfig resource name . Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
    * @param {string} request.controlId
    *   Required. The id of the control to apply. Assumed to be in the same catalog
    *   as the serving config - if id is not found a NOT_FOUND error is returned.
@@ -884,7 +884,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.servingConfig
    *   Required. The source ServingConfig resource name . Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
    * @param {string} request.controlId
    *   Required. The id of the control to apply. Assumed to be in the same catalog
    *   as the serving config.
@@ -974,7 +974,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The catalog resource name. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are
@@ -1076,7 +1076,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The catalog resource name. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are
@@ -1126,7 +1126,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The catalog resource name. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are

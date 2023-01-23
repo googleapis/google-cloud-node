@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,8 @@ function main(origins, destinations) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Array of origins, which determines the rows of the response matrix.
-   *  Several size restrictions apply to the cardinality of origins and
+   *  Required. Array of origins, which determines the rows of the response
+   *  matrix. Several size restrictions apply to the cardinality of origins and
    *  destinations:
    *  * The number of elements (origins × destinations) must be no greater than
    *  625 in any case.
@@ -41,7 +41,8 @@ function main(origins, destinations) {
    */
   // const origins = 1234
   /**
-   *  Required. Array of destinations, which determines the columns of the response matrix.
+   *  Required. Array of destinations, which determines the columns of the
+   *  response matrix.
    */
   // const destinations = 1234
   /**
@@ -49,19 +50,17 @@ function main(origins, destinations) {
    */
   // const travelMode = {}
   /**
-   *  Optional. Specifies how to compute the route. The server attempts to use the selected
-   *  routing preference to compute the route. If the routing preference results
-   *  in an error or an extra long latency, an error is returned. In the future,
-   *  we might implement a fallback mechanism to use a different option when the
-   *  preferred option does not give a valid result. You can specify this option
-   *  only when the `travel_mode` is `DRIVE` or `TWO_WHEELER`, otherwise the
-   *  request fails.
+   *  Optional. Specifies how to compute the route. The server attempts to use
+   *  the selected routing preference to compute the route. If the routing
+   *  preference results in an error or an extra long latency, an error is
+   *  returned. You can specify this option only when the `travel_mode` is
+   *  `DRIVE` or `TWO_WHEELER`, otherwise the request fails.
    */
   // const routingPreference = {}
   /**
-   *  Optional. The departure time. If you don't set this value, this defaults to the time
-   *  that you made the request. If you set this value to a time that has already
-   *  occurred, the request fails.
+   *  Optional. The departure time. If you don't set this value, this defaults to
+   *  the time that you made the request. If you set this value to a time that
+   *  has already occurred, the request fails.
    */
   // const departureTime = {}
 

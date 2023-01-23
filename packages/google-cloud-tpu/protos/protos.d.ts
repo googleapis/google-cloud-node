@@ -6836,6 +6836,62 @@ export namespace google {
                     public updateNode(request: google.cloud.tpu.v2alpha1.IUpdateNodeRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ListQueuedResources.
+                     * @param request ListQueuedResourcesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListQueuedResourcesResponse
+                     */
+                    public listQueuedResources(request: google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest, callback: google.cloud.tpu.v2alpha1.Tpu.ListQueuedResourcesCallback): void;
+
+                    /**
+                     * Calls ListQueuedResources.
+                     * @param request ListQueuedResourcesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listQueuedResources(request: google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest): Promise<google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse>;
+
+                    /**
+                     * Calls GetQueuedResource.
+                     * @param request GetQueuedResourceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QueuedResource
+                     */
+                    public getQueuedResource(request: google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest, callback: google.cloud.tpu.v2alpha1.Tpu.GetQueuedResourceCallback): void;
+
+                    /**
+                     * Calls GetQueuedResource.
+                     * @param request GetQueuedResourceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getQueuedResource(request: google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest): Promise<google.cloud.tpu.v2alpha1.QueuedResource>;
+
+                    /**
+                     * Calls CreateQueuedResource.
+                     * @param request CreateQueuedResourceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createQueuedResource(request: google.cloud.tpu.v2alpha1.ICreateQueuedResourceRequest, callback: google.cloud.tpu.v2alpha1.Tpu.CreateQueuedResourceCallback): void;
+
+                    /**
+                     * Calls CreateQueuedResource.
+                     * @param request CreateQueuedResourceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createQueuedResource(request: google.cloud.tpu.v2alpha1.ICreateQueuedResourceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteQueuedResource.
+                     * @param request DeleteQueuedResourceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteQueuedResource(request: google.cloud.tpu.v2alpha1.IDeleteQueuedResourceRequest, callback: google.cloud.tpu.v2alpha1.Tpu.DeleteQueuedResourceCallback): void;
+
+                    /**
+                     * Calls DeleteQueuedResource.
+                     * @param request DeleteQueuedResourceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteQueuedResource(request: google.cloud.tpu.v2alpha1.IDeleteQueuedResourceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls GenerateServiceIdentity.
                      * @param request GenerateServiceIdentityRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and GenerateServiceIdentityResponse
@@ -6918,6 +6974,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public getGuestAttributes(request: google.cloud.tpu.v2alpha1.IGetGuestAttributesRequest): Promise<google.cloud.tpu.v2alpha1.GetGuestAttributesResponse>;
+
+                    /**
+                     * Calls SimulateMaintenanceEvent.
+                     * @param request SimulateMaintenanceEventRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public simulateMaintenanceEvent(request: google.cloud.tpu.v2alpha1.ISimulateMaintenanceEventRequest, callback: google.cloud.tpu.v2alpha1.Tpu.SimulateMaintenanceEventCallback): void;
+
+                    /**
+                     * Calls SimulateMaintenanceEvent.
+                     * @param request SimulateMaintenanceEventRequest message or plain object
+                     * @returns Promise
+                     */
+                    public simulateMaintenanceEvent(request: google.cloud.tpu.v2alpha1.ISimulateMaintenanceEventRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace Tpu {
@@ -6972,6 +7042,34 @@ export namespace google {
                     type UpdateNodeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|listQueuedResources}.
+                     * @param error Error, if any
+                     * @param [response] ListQueuedResourcesResponse
+                     */
+                    type ListQueuedResourcesCallback = (error: (Error|null), response?: google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|getQueuedResource}.
+                     * @param error Error, if any
+                     * @param [response] QueuedResource
+                     */
+                    type GetQueuedResourceCallback = (error: (Error|null), response?: google.cloud.tpu.v2alpha1.QueuedResource) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|createQueuedResource}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateQueuedResourceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|deleteQueuedResource}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteQueuedResourceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|generateServiceIdentity}.
                      * @param error Error, if any
                      * @param [response] GenerateServiceIdentityResponse
@@ -7012,6 +7110,13 @@ export namespace google {
                      * @param [response] GetGuestAttributesResponse
                      */
                     type GetGuestAttributesCallback = (error: (Error|null), response?: google.cloud.tpu.v2alpha1.GetGuestAttributesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|simulateMaintenanceEvent}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SimulateMaintenanceEventCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a GuestAttributes. */
@@ -7756,6 +7861,9 @@ export namespace google {
 
                     /** NetworkConfig enableExternalIps */
                     enableExternalIps?: (boolean|null);
+
+                    /** NetworkConfig canIpForward */
+                    canIpForward?: (boolean|null);
                 }
 
                 /** Represents a NetworkConfig. */
@@ -7775,6 +7883,9 @@ export namespace google {
 
                     /** NetworkConfig enableExternalIps. */
                     public enableExternalIps: boolean;
+
+                    /** NetworkConfig canIpForward. */
+                    public canIpForward: boolean;
 
                     /**
                      * Creates a new NetworkConfig instance using the specified properties.
@@ -8020,6 +8131,9 @@ export namespace google {
                     /** Node symptoms */
                     symptoms?: (google.cloud.tpu.v2alpha1.ISymptom[]|null);
 
+                    /** Node queuedResource */
+                    queuedResource?: (string|null);
+
                     /** Node shieldedInstanceConfig */
                     shieldedInstanceConfig?: (google.cloud.tpu.v2alpha1.IShieldedInstanceConfig|null);
                 }
@@ -8092,6 +8206,9 @@ export namespace google {
 
                     /** Node symptoms. */
                     public symptoms: google.cloud.tpu.v2alpha1.ISymptom[];
+
+                    /** Node queuedResource. */
+                    public queuedResource: string;
 
                     /** Node shieldedInstanceConfig. */
                     public shieldedInstanceConfig?: (google.cloud.tpu.v2alpha1.IShieldedInstanceConfig|null);
@@ -8210,6 +8327,1567 @@ export namespace google {
                         V1_ALPHA1 = 1,
                         V1 = 2,
                         V2_ALPHA1 = 3
+                    }
+                }
+
+                /** Properties of a QueuedResource. */
+                interface IQueuedResource {
+
+                    /** QueuedResource name */
+                    name?: (string|null);
+
+                    /** QueuedResource tpu */
+                    tpu?: (google.cloud.tpu.v2alpha1.QueuedResource.ITpu|null);
+
+                    /** QueuedResource bestEffort */
+                    bestEffort?: (google.cloud.tpu.v2alpha1.QueuedResource.IBestEffort|null);
+
+                    /** QueuedResource guaranteed */
+                    guaranteed?: (google.cloud.tpu.v2alpha1.QueuedResource.IGuaranteed|null);
+
+                    /** QueuedResource queueingPolicy */
+                    queueingPolicy?: (google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy|null);
+
+                    /** QueuedResource state */
+                    state?: (google.cloud.tpu.v2alpha1.IQueuedResourceState|null);
+                }
+
+                /** Represents a QueuedResource. */
+                class QueuedResource implements IQueuedResource {
+
+                    /**
+                     * Constructs a new QueuedResource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tpu.v2alpha1.IQueuedResource);
+
+                    /** QueuedResource name. */
+                    public name: string;
+
+                    /** QueuedResource tpu. */
+                    public tpu?: (google.cloud.tpu.v2alpha1.QueuedResource.ITpu|null);
+
+                    /** QueuedResource bestEffort. */
+                    public bestEffort?: (google.cloud.tpu.v2alpha1.QueuedResource.IBestEffort|null);
+
+                    /** QueuedResource guaranteed. */
+                    public guaranteed?: (google.cloud.tpu.v2alpha1.QueuedResource.IGuaranteed|null);
+
+                    /** QueuedResource queueingPolicy. */
+                    public queueingPolicy?: (google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy|null);
+
+                    /** QueuedResource state. */
+                    public state?: (google.cloud.tpu.v2alpha1.IQueuedResourceState|null);
+
+                    /** QueuedResource resource. */
+                    public resource?: "tpu";
+
+                    /** QueuedResource tier. */
+                    public tier?: ("bestEffort"|"guaranteed");
+
+                    /**
+                     * Creates a new QueuedResource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueuedResource instance
+                     */
+                    public static create(properties?: google.cloud.tpu.v2alpha1.IQueuedResource): google.cloud.tpu.v2alpha1.QueuedResource;
+
+                    /**
+                     * Encodes the specified QueuedResource message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.verify|verify} messages.
+                     * @param message QueuedResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tpu.v2alpha1.IQueuedResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueuedResource message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.verify|verify} messages.
+                     * @param message QueuedResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.IQueuedResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueuedResource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueuedResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResource;
+
+                    /**
+                     * Decodes a QueuedResource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueuedResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResource;
+
+                    /**
+                     * Verifies a QueuedResource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueuedResource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueuedResource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResource;
+
+                    /**
+                     * Creates a plain object from a QueuedResource message. Also converts values to other types if specified.
+                     * @param message QueuedResource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueuedResource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueuedResource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QueuedResource {
+
+                    /** Properties of a Tpu. */
+                    interface ITpu {
+
+                        /** Tpu nodeSpec */
+                        nodeSpec?: (google.cloud.tpu.v2alpha1.QueuedResource.Tpu.INodeSpec[]|null);
+                    }
+
+                    /** Represents a Tpu. */
+                    class Tpu implements ITpu {
+
+                        /**
+                         * Constructs a new Tpu.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.tpu.v2alpha1.QueuedResource.ITpu);
+
+                        /** Tpu nodeSpec. */
+                        public nodeSpec: google.cloud.tpu.v2alpha1.QueuedResource.Tpu.INodeSpec[];
+
+                        /**
+                         * Creates a new Tpu instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Tpu instance
+                         */
+                        public static create(properties?: google.cloud.tpu.v2alpha1.QueuedResource.ITpu): google.cloud.tpu.v2alpha1.QueuedResource.Tpu;
+
+                        /**
+                         * Encodes the specified Tpu message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Tpu.verify|verify} messages.
+                         * @param message Tpu message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.tpu.v2alpha1.QueuedResource.ITpu, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Tpu message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Tpu.verify|verify} messages.
+                         * @param message Tpu message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.tpu.v2alpha1.QueuedResource.ITpu, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Tpu message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Tpu
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResource.Tpu;
+
+                        /**
+                         * Decodes a Tpu message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Tpu
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResource.Tpu;
+
+                        /**
+                         * Verifies a Tpu message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Tpu message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Tpu
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResource.Tpu;
+
+                        /**
+                         * Creates a plain object from a Tpu message. Also converts values to other types if specified.
+                         * @param message Tpu
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResource.Tpu, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Tpu to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Tpu
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Tpu {
+
+                        /** Properties of a NodeSpec. */
+                        interface INodeSpec {
+
+                            /** NodeSpec parent */
+                            parent?: (string|null);
+
+                            /** NodeSpec nodeId */
+                            nodeId?: (string|null);
+
+                            /** NodeSpec node */
+                            node?: (google.cloud.tpu.v2alpha1.INode|null);
+                        }
+
+                        /** Represents a NodeSpec. */
+                        class NodeSpec implements INodeSpec {
+
+                            /**
+                             * Constructs a new NodeSpec.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.tpu.v2alpha1.QueuedResource.Tpu.INodeSpec);
+
+                            /** NodeSpec parent. */
+                            public parent: string;
+
+                            /** NodeSpec nodeId. */
+                            public nodeId: string;
+
+                            /** NodeSpec node. */
+                            public node?: (google.cloud.tpu.v2alpha1.INode|null);
+
+                            /**
+                             * Creates a new NodeSpec instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns NodeSpec instance
+                             */
+                            public static create(properties?: google.cloud.tpu.v2alpha1.QueuedResource.Tpu.INodeSpec): google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec;
+
+                            /**
+                             * Encodes the specified NodeSpec message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.verify|verify} messages.
+                             * @param message NodeSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.tpu.v2alpha1.QueuedResource.Tpu.INodeSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified NodeSpec message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.verify|verify} messages.
+                             * @param message NodeSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.tpu.v2alpha1.QueuedResource.Tpu.INodeSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a NodeSpec message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns NodeSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec;
+
+                            /**
+                             * Decodes a NodeSpec message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns NodeSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec;
+
+                            /**
+                             * Verifies a NodeSpec message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a NodeSpec message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns NodeSpec
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec;
+
+                            /**
+                             * Creates a plain object from a NodeSpec message. Also converts values to other types if specified.
+                             * @param message NodeSpec
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this NodeSpec to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for NodeSpec
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a BestEffort. */
+                    interface IBestEffort {
+                    }
+
+                    /** Represents a BestEffort. */
+                    class BestEffort implements IBestEffort {
+
+                        /**
+                         * Constructs a new BestEffort.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.tpu.v2alpha1.QueuedResource.IBestEffort);
+
+                        /**
+                         * Creates a new BestEffort instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BestEffort instance
+                         */
+                        public static create(properties?: google.cloud.tpu.v2alpha1.QueuedResource.IBestEffort): google.cloud.tpu.v2alpha1.QueuedResource.BestEffort;
+
+                        /**
+                         * Encodes the specified BestEffort message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.BestEffort.verify|verify} messages.
+                         * @param message BestEffort message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.tpu.v2alpha1.QueuedResource.IBestEffort, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BestEffort message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.BestEffort.verify|verify} messages.
+                         * @param message BestEffort message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.tpu.v2alpha1.QueuedResource.IBestEffort, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BestEffort message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BestEffort
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResource.BestEffort;
+
+                        /**
+                         * Decodes a BestEffort message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BestEffort
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResource.BestEffort;
+
+                        /**
+                         * Verifies a BestEffort message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BestEffort message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BestEffort
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResource.BestEffort;
+
+                        /**
+                         * Creates a plain object from a BestEffort message. Also converts values to other types if specified.
+                         * @param message BestEffort
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResource.BestEffort, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BestEffort to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BestEffort
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Guaranteed. */
+                    interface IGuaranteed {
+
+                        /** Guaranteed minDuration */
+                        minDuration?: (google.protobuf.IDuration|null);
+
+                        /** Guaranteed reserved */
+                        reserved?: (boolean|null);
+                    }
+
+                    /** Represents a Guaranteed. */
+                    class Guaranteed implements IGuaranteed {
+
+                        /**
+                         * Constructs a new Guaranteed.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.tpu.v2alpha1.QueuedResource.IGuaranteed);
+
+                        /** Guaranteed minDuration. */
+                        public minDuration?: (google.protobuf.IDuration|null);
+
+                        /** Guaranteed reserved. */
+                        public reserved: boolean;
+
+                        /**
+                         * Creates a new Guaranteed instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Guaranteed instance
+                         */
+                        public static create(properties?: google.cloud.tpu.v2alpha1.QueuedResource.IGuaranteed): google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed;
+
+                        /**
+                         * Encodes the specified Guaranteed message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed.verify|verify} messages.
+                         * @param message Guaranteed message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.tpu.v2alpha1.QueuedResource.IGuaranteed, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Guaranteed message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed.verify|verify} messages.
+                         * @param message Guaranteed message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.tpu.v2alpha1.QueuedResource.IGuaranteed, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Guaranteed message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Guaranteed
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed;
+
+                        /**
+                         * Decodes a Guaranteed message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Guaranteed
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed;
+
+                        /**
+                         * Verifies a Guaranteed message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Guaranteed message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Guaranteed
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed;
+
+                        /**
+                         * Creates a plain object from a Guaranteed message. Also converts values to other types if specified.
+                         * @param message Guaranteed
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Guaranteed to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Guaranteed
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a QueueingPolicy. */
+                    interface IQueueingPolicy {
+
+                        /** QueueingPolicy validUntilDuration */
+                        validUntilDuration?: (google.protobuf.IDuration|null);
+
+                        /** QueueingPolicy validUntilTime */
+                        validUntilTime?: (google.protobuf.ITimestamp|null);
+
+                        /** QueueingPolicy validAfterDuration */
+                        validAfterDuration?: (google.protobuf.IDuration|null);
+
+                        /** QueueingPolicy validAfterTime */
+                        validAfterTime?: (google.protobuf.ITimestamp|null);
+
+                        /** QueueingPolicy validInterval */
+                        validInterval?: (google.type.IInterval|null);
+                    }
+
+                    /** Represents a QueueingPolicy. */
+                    class QueueingPolicy implements IQueueingPolicy {
+
+                        /**
+                         * Constructs a new QueueingPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy);
+
+                        /** QueueingPolicy validUntilDuration. */
+                        public validUntilDuration?: (google.protobuf.IDuration|null);
+
+                        /** QueueingPolicy validUntilTime. */
+                        public validUntilTime?: (google.protobuf.ITimestamp|null);
+
+                        /** QueueingPolicy validAfterDuration. */
+                        public validAfterDuration?: (google.protobuf.IDuration|null);
+
+                        /** QueueingPolicy validAfterTime. */
+                        public validAfterTime?: (google.protobuf.ITimestamp|null);
+
+                        /** QueueingPolicy validInterval. */
+                        public validInterval?: (google.type.IInterval|null);
+
+                        /** QueueingPolicy startTimingConstraints. */
+                        public startTimingConstraints?: ("validUntilDuration"|"validUntilTime"|"validAfterDuration"|"validAfterTime"|"validInterval");
+
+                        /**
+                         * Creates a new QueueingPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QueueingPolicy instance
+                         */
+                        public static create(properties?: google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy): google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy;
+
+                        /**
+                         * Encodes the specified QueueingPolicy message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.verify|verify} messages.
+                         * @param message QueueingPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QueueingPolicy message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.verify|verify} messages.
+                         * @param message QueueingPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QueueingPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QueueingPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy;
+
+                        /**
+                         * Decodes a QueueingPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QueueingPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy;
+
+                        /**
+                         * Verifies a QueueingPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QueueingPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QueueingPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy;
+
+                        /**
+                         * Creates a plain object from a QueueingPolicy message. Also converts values to other types if specified.
+                         * @param message QueueingPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QueueingPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QueueingPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a QueuedResourceState. */
+                interface IQueuedResourceState {
+
+                    /** QueuedResourceState state */
+                    state?: (google.cloud.tpu.v2alpha1.QueuedResourceState.State|keyof typeof google.cloud.tpu.v2alpha1.QueuedResourceState.State|null);
+
+                    /** QueuedResourceState creatingData */
+                    creatingData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.ICreatingData|null);
+
+                    /** QueuedResourceState acceptedData */
+                    acceptedData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.IAcceptedData|null);
+
+                    /** QueuedResourceState provisioningData */
+                    provisioningData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.IProvisioningData|null);
+
+                    /** QueuedResourceState failedData */
+                    failedData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.IFailedData|null);
+
+                    /** QueuedResourceState deletingData */
+                    deletingData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.IDeletingData|null);
+
+                    /** QueuedResourceState activeData */
+                    activeData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.IActiveData|null);
+
+                    /** QueuedResourceState suspendingData */
+                    suspendingData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendingData|null);
+
+                    /** QueuedResourceState suspendedData */
+                    suspendedData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData|null);
+                }
+
+                /** Represents a QueuedResourceState. */
+                class QueuedResourceState implements IQueuedResourceState {
+
+                    /**
+                     * Constructs a new QueuedResourceState.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tpu.v2alpha1.IQueuedResourceState);
+
+                    /** QueuedResourceState state. */
+                    public state: (google.cloud.tpu.v2alpha1.QueuedResourceState.State|keyof typeof google.cloud.tpu.v2alpha1.QueuedResourceState.State);
+
+                    /** QueuedResourceState creatingData. */
+                    public creatingData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.ICreatingData|null);
+
+                    /** QueuedResourceState acceptedData. */
+                    public acceptedData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.IAcceptedData|null);
+
+                    /** QueuedResourceState provisioningData. */
+                    public provisioningData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.IProvisioningData|null);
+
+                    /** QueuedResourceState failedData. */
+                    public failedData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.IFailedData|null);
+
+                    /** QueuedResourceState deletingData. */
+                    public deletingData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.IDeletingData|null);
+
+                    /** QueuedResourceState activeData. */
+                    public activeData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.IActiveData|null);
+
+                    /** QueuedResourceState suspendingData. */
+                    public suspendingData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendingData|null);
+
+                    /** QueuedResourceState suspendedData. */
+                    public suspendedData?: (google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData|null);
+
+                    /** QueuedResourceState stateData. */
+                    public stateData?: ("creatingData"|"acceptedData"|"provisioningData"|"failedData"|"deletingData"|"activeData"|"suspendingData"|"suspendedData");
+
+                    /**
+                     * Creates a new QueuedResourceState instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueuedResourceState instance
+                     */
+                    public static create(properties?: google.cloud.tpu.v2alpha1.IQueuedResourceState): google.cloud.tpu.v2alpha1.QueuedResourceState;
+
+                    /**
+                     * Encodes the specified QueuedResourceState message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.verify|verify} messages.
+                     * @param message QueuedResourceState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tpu.v2alpha1.IQueuedResourceState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueuedResourceState message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.verify|verify} messages.
+                     * @param message QueuedResourceState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.IQueuedResourceState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueuedResourceState message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueuedResourceState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResourceState;
+
+                    /**
+                     * Decodes a QueuedResourceState message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueuedResourceState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResourceState;
+
+                    /**
+                     * Verifies a QueuedResourceState message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueuedResourceState message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueuedResourceState
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResourceState;
+
+                    /**
+                     * Creates a plain object from a QueuedResourceState message. Also converts values to other types if specified.
+                     * @param message QueuedResourceState
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResourceState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueuedResourceState to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueuedResourceState
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QueuedResourceState {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACCEPTED = 2,
+                        PROVISIONING = 3,
+                        FAILED = 4,
+                        DELETING = 5,
+                        ACTIVE = 6,
+                        SUSPENDING = 7,
+                        SUSPENDED = 8
+                    }
+
+                    /** Properties of a CreatingData. */
+                    interface ICreatingData {
+                    }
+
+                    /** Represents a CreatingData. */
+                    class CreatingData implements ICreatingData {
+
+                        /**
+                         * Constructs a new CreatingData.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.ICreatingData);
+
+                        /**
+                         * Creates a new CreatingData instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreatingData instance
+                         */
+                        public static create(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.ICreatingData): google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData;
+
+                        /**
+                         * Encodes the specified CreatingData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData.verify|verify} messages.
+                         * @param message CreatingData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.tpu.v2alpha1.QueuedResourceState.ICreatingData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreatingData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData.verify|verify} messages.
+                         * @param message CreatingData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.tpu.v2alpha1.QueuedResourceState.ICreatingData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreatingData message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreatingData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData;
+
+                        /**
+                         * Decodes a CreatingData message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreatingData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData;
+
+                        /**
+                         * Verifies a CreatingData message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreatingData message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreatingData
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData;
+
+                        /**
+                         * Creates a plain object from a CreatingData message. Also converts values to other types if specified.
+                         * @param message CreatingData
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreatingData to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreatingData
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AcceptedData. */
+                    interface IAcceptedData {
+                    }
+
+                    /** Represents an AcceptedData. */
+                    class AcceptedData implements IAcceptedData {
+
+                        /**
+                         * Constructs a new AcceptedData.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.IAcceptedData);
+
+                        /**
+                         * Creates a new AcceptedData instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AcceptedData instance
+                         */
+                        public static create(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.IAcceptedData): google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData;
+
+                        /**
+                         * Encodes the specified AcceptedData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData.verify|verify} messages.
+                         * @param message AcceptedData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.tpu.v2alpha1.QueuedResourceState.IAcceptedData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AcceptedData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData.verify|verify} messages.
+                         * @param message AcceptedData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.tpu.v2alpha1.QueuedResourceState.IAcceptedData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AcceptedData message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AcceptedData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData;
+
+                        /**
+                         * Decodes an AcceptedData message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AcceptedData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData;
+
+                        /**
+                         * Verifies an AcceptedData message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AcceptedData message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AcceptedData
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData;
+
+                        /**
+                         * Creates a plain object from an AcceptedData message. Also converts values to other types if specified.
+                         * @param message AcceptedData
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AcceptedData to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AcceptedData
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ProvisioningData. */
+                    interface IProvisioningData {
+                    }
+
+                    /** Represents a ProvisioningData. */
+                    class ProvisioningData implements IProvisioningData {
+
+                        /**
+                         * Constructs a new ProvisioningData.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.IProvisioningData);
+
+                        /**
+                         * Creates a new ProvisioningData instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProvisioningData instance
+                         */
+                        public static create(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.IProvisioningData): google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData;
+
+                        /**
+                         * Encodes the specified ProvisioningData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData.verify|verify} messages.
+                         * @param message ProvisioningData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.tpu.v2alpha1.QueuedResourceState.IProvisioningData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProvisioningData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData.verify|verify} messages.
+                         * @param message ProvisioningData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.tpu.v2alpha1.QueuedResourceState.IProvisioningData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProvisioningData message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProvisioningData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData;
+
+                        /**
+                         * Decodes a ProvisioningData message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProvisioningData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData;
+
+                        /**
+                         * Verifies a ProvisioningData message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProvisioningData message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProvisioningData
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData;
+
+                        /**
+                         * Creates a plain object from a ProvisioningData message. Also converts values to other types if specified.
+                         * @param message ProvisioningData
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProvisioningData to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProvisioningData
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FailedData. */
+                    interface IFailedData {
+
+                        /** FailedData error */
+                        error?: (google.rpc.IStatus|null);
+                    }
+
+                    /** Represents a FailedData. */
+                    class FailedData implements IFailedData {
+
+                        /**
+                         * Constructs a new FailedData.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.IFailedData);
+
+                        /** FailedData error. */
+                        public error?: (google.rpc.IStatus|null);
+
+                        /**
+                         * Creates a new FailedData instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FailedData instance
+                         */
+                        public static create(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.IFailedData): google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData;
+
+                        /**
+                         * Encodes the specified FailedData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData.verify|verify} messages.
+                         * @param message FailedData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.tpu.v2alpha1.QueuedResourceState.IFailedData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FailedData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData.verify|verify} messages.
+                         * @param message FailedData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.tpu.v2alpha1.QueuedResourceState.IFailedData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FailedData message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FailedData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData;
+
+                        /**
+                         * Decodes a FailedData message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FailedData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData;
+
+                        /**
+                         * Verifies a FailedData message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FailedData message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FailedData
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData;
+
+                        /**
+                         * Creates a plain object from a FailedData message. Also converts values to other types if specified.
+                         * @param message FailedData
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FailedData to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FailedData
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeletingData. */
+                    interface IDeletingData {
+                    }
+
+                    /** Represents a DeletingData. */
+                    class DeletingData implements IDeletingData {
+
+                        /**
+                         * Constructs a new DeletingData.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.IDeletingData);
+
+                        /**
+                         * Creates a new DeletingData instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeletingData instance
+                         */
+                        public static create(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.IDeletingData): google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData;
+
+                        /**
+                         * Encodes the specified DeletingData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData.verify|verify} messages.
+                         * @param message DeletingData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.tpu.v2alpha1.QueuedResourceState.IDeletingData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeletingData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData.verify|verify} messages.
+                         * @param message DeletingData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.tpu.v2alpha1.QueuedResourceState.IDeletingData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeletingData message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeletingData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData;
+
+                        /**
+                         * Decodes a DeletingData message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeletingData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData;
+
+                        /**
+                         * Verifies a DeletingData message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeletingData message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeletingData
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData;
+
+                        /**
+                         * Creates a plain object from a DeletingData message. Also converts values to other types if specified.
+                         * @param message DeletingData
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeletingData to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeletingData
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ActiveData. */
+                    interface IActiveData {
+                    }
+
+                    /** Represents an ActiveData. */
+                    class ActiveData implements IActiveData {
+
+                        /**
+                         * Constructs a new ActiveData.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.IActiveData);
+
+                        /**
+                         * Creates a new ActiveData instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ActiveData instance
+                         */
+                        public static create(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.IActiveData): google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData;
+
+                        /**
+                         * Encodes the specified ActiveData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData.verify|verify} messages.
+                         * @param message ActiveData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.tpu.v2alpha1.QueuedResourceState.IActiveData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ActiveData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData.verify|verify} messages.
+                         * @param message ActiveData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.tpu.v2alpha1.QueuedResourceState.IActiveData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ActiveData message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ActiveData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData;
+
+                        /**
+                         * Decodes an ActiveData message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ActiveData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData;
+
+                        /**
+                         * Verifies an ActiveData message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ActiveData message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ActiveData
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData;
+
+                        /**
+                         * Creates a plain object from an ActiveData message. Also converts values to other types if specified.
+                         * @param message ActiveData
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ActiveData to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ActiveData
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SuspendingData. */
+                    interface ISuspendingData {
+                    }
+
+                    /** Represents a SuspendingData. */
+                    class SuspendingData implements ISuspendingData {
+
+                        /**
+                         * Constructs a new SuspendingData.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendingData);
+
+                        /**
+                         * Creates a new SuspendingData instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SuspendingData instance
+                         */
+                        public static create(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendingData): google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData;
+
+                        /**
+                         * Encodes the specified SuspendingData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData.verify|verify} messages.
+                         * @param message SuspendingData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendingData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SuspendingData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData.verify|verify} messages.
+                         * @param message SuspendingData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendingData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SuspendingData message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SuspendingData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData;
+
+                        /**
+                         * Decodes a SuspendingData message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SuspendingData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData;
+
+                        /**
+                         * Verifies a SuspendingData message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SuspendingData message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SuspendingData
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData;
+
+                        /**
+                         * Creates a plain object from a SuspendingData message. Also converts values to other types if specified.
+                         * @param message SuspendingData
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SuspendingData to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SuspendingData
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SuspendedData. */
+                    interface ISuspendedData {
+                    }
+
+                    /** Represents a SuspendedData. */
+                    class SuspendedData implements ISuspendedData {
+
+                        /**
+                         * Constructs a new SuspendedData.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData);
+
+                        /**
+                         * Creates a new SuspendedData instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SuspendedData instance
+                         */
+                        public static create(properties?: google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData): google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData;
+
+                        /**
+                         * Encodes the specified SuspendedData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData.verify|verify} messages.
+                         * @param message SuspendedData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SuspendedData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData.verify|verify} messages.
+                         * @param message SuspendedData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SuspendedData message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SuspendedData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData;
+
+                        /**
+                         * Decodes a SuspendedData message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SuspendedData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData;
+
+                        /**
+                         * Verifies a SuspendedData message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SuspendedData message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SuspendedData
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData;
+
+                        /**
+                         * Creates a plain object from a SuspendedData message. Also converts values to other types if specified.
+                         * @param message SuspendedData
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SuspendedData to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SuspendedData
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -8539,6 +10217,9 @@ export namespace google {
 
                     /** CreateNodeRequest node */
                     node?: (google.cloud.tpu.v2alpha1.INode|null);
+
+                    /** CreateNodeRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents a CreateNodeRequest. */
@@ -8558,6 +10239,9 @@ export namespace google {
 
                     /** CreateNodeRequest node. */
                     public node?: (google.cloud.tpu.v2alpha1.INode|null);
+
+                    /** CreateNodeRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new CreateNodeRequest instance using the specified properties.
@@ -8642,6 +10326,9 @@ export namespace google {
 
                     /** DeleteNodeRequest name */
                     name?: (string|null);
+
+                    /** DeleteNodeRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents a DeleteNodeRequest. */
@@ -8655,6 +10342,9 @@ export namespace google {
 
                     /** DeleteNodeRequest name. */
                     public name: string;
+
+                    /** DeleteNodeRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new DeleteNodeRequest instance using the specified properties.
@@ -9025,6 +10715,539 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateNodeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListQueuedResourcesRequest. */
+                interface IListQueuedResourcesRequest {
+
+                    /** ListQueuedResourcesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListQueuedResourcesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListQueuedResourcesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListQueuedResourcesRequest. */
+                class ListQueuedResourcesRequest implements IListQueuedResourcesRequest {
+
+                    /**
+                     * Constructs a new ListQueuedResourcesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest);
+
+                    /** ListQueuedResourcesRequest parent. */
+                    public parent: string;
+
+                    /** ListQueuedResourcesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListQueuedResourcesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListQueuedResourcesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListQueuedResourcesRequest instance
+                     */
+                    public static create(properties?: google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest): google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest;
+
+                    /**
+                     * Encodes the specified ListQueuedResourcesRequest message. Does not implicitly {@link google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest.verify|verify} messages.
+                     * @param message ListQueuedResourcesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListQueuedResourcesRequest message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest.verify|verify} messages.
+                     * @param message ListQueuedResourcesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListQueuedResourcesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListQueuedResourcesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest;
+
+                    /**
+                     * Decodes a ListQueuedResourcesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListQueuedResourcesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest;
+
+                    /**
+                     * Verifies a ListQueuedResourcesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListQueuedResourcesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListQueuedResourcesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest;
+
+                    /**
+                     * Creates a plain object from a ListQueuedResourcesRequest message. Also converts values to other types if specified.
+                     * @param message ListQueuedResourcesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListQueuedResourcesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListQueuedResourcesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListQueuedResourcesResponse. */
+                interface IListQueuedResourcesResponse {
+
+                    /** ListQueuedResourcesResponse queuedResources */
+                    queuedResources?: (google.cloud.tpu.v2alpha1.IQueuedResource[]|null);
+
+                    /** ListQueuedResourcesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListQueuedResourcesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListQueuedResourcesResponse. */
+                class ListQueuedResourcesResponse implements IListQueuedResourcesResponse {
+
+                    /**
+                     * Constructs a new ListQueuedResourcesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse);
+
+                    /** ListQueuedResourcesResponse queuedResources. */
+                    public queuedResources: google.cloud.tpu.v2alpha1.IQueuedResource[];
+
+                    /** ListQueuedResourcesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListQueuedResourcesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListQueuedResourcesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListQueuedResourcesResponse instance
+                     */
+                    public static create(properties?: google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse): google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse;
+
+                    /**
+                     * Encodes the specified ListQueuedResourcesResponse message. Does not implicitly {@link google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse.verify|verify} messages.
+                     * @param message ListQueuedResourcesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListQueuedResourcesResponse message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse.verify|verify} messages.
+                     * @param message ListQueuedResourcesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListQueuedResourcesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListQueuedResourcesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse;
+
+                    /**
+                     * Decodes a ListQueuedResourcesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListQueuedResourcesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse;
+
+                    /**
+                     * Verifies a ListQueuedResourcesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListQueuedResourcesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListQueuedResourcesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse;
+
+                    /**
+                     * Creates a plain object from a ListQueuedResourcesResponse message. Also converts values to other types if specified.
+                     * @param message ListQueuedResourcesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListQueuedResourcesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListQueuedResourcesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetQueuedResourceRequest. */
+                interface IGetQueuedResourceRequest {
+
+                    /** GetQueuedResourceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetQueuedResourceRequest. */
+                class GetQueuedResourceRequest implements IGetQueuedResourceRequest {
+
+                    /**
+                     * Constructs a new GetQueuedResourceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest);
+
+                    /** GetQueuedResourceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetQueuedResourceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetQueuedResourceRequest instance
+                     */
+                    public static create(properties?: google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest): google.cloud.tpu.v2alpha1.GetQueuedResourceRequest;
+
+                    /**
+                     * Encodes the specified GetQueuedResourceRequest message. Does not implicitly {@link google.cloud.tpu.v2alpha1.GetQueuedResourceRequest.verify|verify} messages.
+                     * @param message GetQueuedResourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetQueuedResourceRequest message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.GetQueuedResourceRequest.verify|verify} messages.
+                     * @param message GetQueuedResourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetQueuedResourceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetQueuedResourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.GetQueuedResourceRequest;
+
+                    /**
+                     * Decodes a GetQueuedResourceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetQueuedResourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.GetQueuedResourceRequest;
+
+                    /**
+                     * Verifies a GetQueuedResourceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetQueuedResourceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetQueuedResourceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.GetQueuedResourceRequest;
+
+                    /**
+                     * Creates a plain object from a GetQueuedResourceRequest message. Also converts values to other types if specified.
+                     * @param message GetQueuedResourceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tpu.v2alpha1.GetQueuedResourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetQueuedResourceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetQueuedResourceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateQueuedResourceRequest. */
+                interface ICreateQueuedResourceRequest {
+
+                    /** CreateQueuedResourceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateQueuedResourceRequest queuedResourceId */
+                    queuedResourceId?: (string|null);
+
+                    /** CreateQueuedResourceRequest queuedResource */
+                    queuedResource?: (google.cloud.tpu.v2alpha1.IQueuedResource|null);
+
+                    /** CreateQueuedResourceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateQueuedResourceRequest. */
+                class CreateQueuedResourceRequest implements ICreateQueuedResourceRequest {
+
+                    /**
+                     * Constructs a new CreateQueuedResourceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tpu.v2alpha1.ICreateQueuedResourceRequest);
+
+                    /** CreateQueuedResourceRequest parent. */
+                    public parent: string;
+
+                    /** CreateQueuedResourceRequest queuedResourceId. */
+                    public queuedResourceId: string;
+
+                    /** CreateQueuedResourceRequest queuedResource. */
+                    public queuedResource?: (google.cloud.tpu.v2alpha1.IQueuedResource|null);
+
+                    /** CreateQueuedResourceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateQueuedResourceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateQueuedResourceRequest instance
+                     */
+                    public static create(properties?: google.cloud.tpu.v2alpha1.ICreateQueuedResourceRequest): google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest;
+
+                    /**
+                     * Encodes the specified CreateQueuedResourceRequest message. Does not implicitly {@link google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest.verify|verify} messages.
+                     * @param message CreateQueuedResourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tpu.v2alpha1.ICreateQueuedResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateQueuedResourceRequest message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest.verify|verify} messages.
+                     * @param message CreateQueuedResourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.ICreateQueuedResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateQueuedResourceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateQueuedResourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest;
+
+                    /**
+                     * Decodes a CreateQueuedResourceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateQueuedResourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest;
+
+                    /**
+                     * Verifies a CreateQueuedResourceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateQueuedResourceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateQueuedResourceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateQueuedResourceRequest message. Also converts values to other types if specified.
+                     * @param message CreateQueuedResourceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateQueuedResourceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateQueuedResourceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteQueuedResourceRequest. */
+                interface IDeleteQueuedResourceRequest {
+
+                    /** DeleteQueuedResourceRequest name */
+                    name?: (string|null);
+
+                    /** DeleteQueuedResourceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteQueuedResourceRequest. */
+                class DeleteQueuedResourceRequest implements IDeleteQueuedResourceRequest {
+
+                    /**
+                     * Constructs a new DeleteQueuedResourceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tpu.v2alpha1.IDeleteQueuedResourceRequest);
+
+                    /** DeleteQueuedResourceRequest name. */
+                    public name: string;
+
+                    /** DeleteQueuedResourceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteQueuedResourceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteQueuedResourceRequest instance
+                     */
+                    public static create(properties?: google.cloud.tpu.v2alpha1.IDeleteQueuedResourceRequest): google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest;
+
+                    /**
+                     * Encodes the specified DeleteQueuedResourceRequest message. Does not implicitly {@link google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest.verify|verify} messages.
+                     * @param message DeleteQueuedResourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tpu.v2alpha1.IDeleteQueuedResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteQueuedResourceRequest message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest.verify|verify} messages.
+                     * @param message DeleteQueuedResourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.IDeleteQueuedResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteQueuedResourceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteQueuedResourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest;
+
+                    /**
+                     * Decodes a DeleteQueuedResourceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteQueuedResourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest;
+
+                    /**
+                     * Verifies a DeleteQueuedResourceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteQueuedResourceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteQueuedResourceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteQueuedResourceRequest message. Also converts values to other types if specified.
+                     * @param message DeleteQueuedResourceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteQueuedResourceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteQueuedResourceRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -9752,139 +11975,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of an OperationMetadata. */
-                interface IOperationMetadata {
-
-                    /** OperationMetadata createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** OperationMetadata endTime */
-                    endTime?: (google.protobuf.ITimestamp|null);
-
-                    /** OperationMetadata target */
-                    target?: (string|null);
-
-                    /** OperationMetadata verb */
-                    verb?: (string|null);
-
-                    /** OperationMetadata statusDetail */
-                    statusDetail?: (string|null);
-
-                    /** OperationMetadata cancelRequested */
-                    cancelRequested?: (boolean|null);
-
-                    /** OperationMetadata apiVersion */
-                    apiVersion?: (string|null);
-                }
-
-                /** Represents an OperationMetadata. */
-                class OperationMetadata implements IOperationMetadata {
-
-                    /**
-                     * Constructs a new OperationMetadata.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.tpu.v2alpha1.IOperationMetadata);
-
-                    /** OperationMetadata createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** OperationMetadata endTime. */
-                    public endTime?: (google.protobuf.ITimestamp|null);
-
-                    /** OperationMetadata target. */
-                    public target: string;
-
-                    /** OperationMetadata verb. */
-                    public verb: string;
-
-                    /** OperationMetadata statusDetail. */
-                    public statusDetail: string;
-
-                    /** OperationMetadata cancelRequested. */
-                    public cancelRequested: boolean;
-
-                    /** OperationMetadata apiVersion. */
-                    public apiVersion: string;
-
-                    /**
-                     * Creates a new OperationMetadata instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns OperationMetadata instance
-                     */
-                    public static create(properties?: google.cloud.tpu.v2alpha1.IOperationMetadata): google.cloud.tpu.v2alpha1.OperationMetadata;
-
-                    /**
-                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.tpu.v2alpha1.OperationMetadata.verify|verify} messages.
-                     * @param message OperationMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.tpu.v2alpha1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.OperationMetadata.verify|verify} messages.
-                     * @param message OperationMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an OperationMetadata message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns OperationMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.OperationMetadata;
-
-                    /**
-                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns OperationMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.OperationMetadata;
-
-                    /**
-                     * Verifies an OperationMetadata message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns OperationMetadata
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.OperationMetadata;
-
-                    /**
-                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
-                     * @param message OperationMetadata
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.tpu.v2alpha1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this OperationMetadata to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for OperationMetadata
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Properties of a RuntimeVersion. */
                 interface IRuntimeVersion {
 
@@ -10315,6 +12405,139 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusDetail */
+                    statusDetail?: (string|null);
+
+                    /** OperationMetadata cancelRequested */
+                    cancelRequested?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tpu.v2alpha1.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusDetail. */
+                    public statusDetail: string;
+
+                    /** OperationMetadata cancelRequested. */
+                    public cancelRequested: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.tpu.v2alpha1.IOperationMetadata): google.cloud.tpu.v2alpha1.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.tpu.v2alpha1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tpu.v2alpha1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tpu.v2alpha1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Symptom. */
                 interface ISymptom {
 
@@ -10644,6 +12867,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetGuestAttributesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SimulateMaintenanceEventRequest. */
+                interface ISimulateMaintenanceEventRequest {
+
+                    /** SimulateMaintenanceEventRequest name */
+                    name?: (string|null);
+
+                    /** SimulateMaintenanceEventRequest workerIds */
+                    workerIds?: (string[]|null);
+                }
+
+                /** Represents a SimulateMaintenanceEventRequest. */
+                class SimulateMaintenanceEventRequest implements ISimulateMaintenanceEventRequest {
+
+                    /**
+                     * Constructs a new SimulateMaintenanceEventRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tpu.v2alpha1.ISimulateMaintenanceEventRequest);
+
+                    /** SimulateMaintenanceEventRequest name. */
+                    public name: string;
+
+                    /** SimulateMaintenanceEventRequest workerIds. */
+                    public workerIds: string[];
+
+                    /**
+                     * Creates a new SimulateMaintenanceEventRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SimulateMaintenanceEventRequest instance
+                     */
+                    public static create(properties?: google.cloud.tpu.v2alpha1.ISimulateMaintenanceEventRequest): google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest;
+
+                    /**
+                     * Encodes the specified SimulateMaintenanceEventRequest message. Does not implicitly {@link google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest.verify|verify} messages.
+                     * @param message SimulateMaintenanceEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tpu.v2alpha1.ISimulateMaintenanceEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SimulateMaintenanceEventRequest message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest.verify|verify} messages.
+                     * @param message SimulateMaintenanceEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.ISimulateMaintenanceEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SimulateMaintenanceEventRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SimulateMaintenanceEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest;
+
+                    /**
+                     * Decodes a SimulateMaintenanceEventRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SimulateMaintenanceEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest;
+
+                    /**
+                     * Verifies a SimulateMaintenanceEventRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SimulateMaintenanceEventRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SimulateMaintenanceEventRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest;
+
+                    /**
+                     * Creates a plain object from a SimulateMaintenanceEventRequest message. Also converts values to other types if specified.
+                     * @param message SimulateMaintenanceEventRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SimulateMaintenanceEventRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SimulateMaintenanceEventRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -16303,6 +18629,113 @@ export namespace google {
 
             /**
              * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of an Interval. */
+        interface IInterval {
+
+            /** Interval startTime */
+            startTime?: (google.protobuf.ITimestamp|null);
+
+            /** Interval endTime */
+            endTime?: (google.protobuf.ITimestamp|null);
+        }
+
+        /** Represents an Interval. */
+        class Interval implements IInterval {
+
+            /**
+             * Constructs a new Interval.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IInterval);
+
+            /** Interval startTime. */
+            public startTime?: (google.protobuf.ITimestamp|null);
+
+            /** Interval endTime. */
+            public endTime?: (google.protobuf.ITimestamp|null);
+
+            /**
+             * Creates a new Interval instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Interval instance
+             */
+            public static create(properties?: google.type.IInterval): google.type.Interval;
+
+            /**
+             * Encodes the specified Interval message. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+             * @param message Interval message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+             * @param message Interval message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Interval message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Interval
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Interval;
+
+            /**
+             * Decodes an Interval message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Interval
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Interval;
+
+            /**
+             * Verifies an Interval message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Interval
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Interval;
+
+            /**
+             * Creates a plain object from an Interval message. Also converts values to other types if specified.
+             * @param message Interval
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Interval, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Interval to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Interval
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

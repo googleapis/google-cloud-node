@@ -118,7 +118,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -242,7 +242,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -254,6 +254,10 @@
                     {
                         "name": "policy",
                         "type": ".google.cloud.orgpolicy.v2.Policy"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
                     }
                 ],
                 "resultType": ".google.cloud.orgpolicy.v2.Policy",
