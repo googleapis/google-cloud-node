@@ -25,6 +25,11 @@
                 "getBackup"
               ]
             },
+            "RemoveIamPolicy": {
+              "methods": [
+                "removeIamPolicy"
+              ]
+            },
             "CreateService": {
               "methods": [
                 "createService"
@@ -68,6 +73,21 @@
             "DeleteBackup": {
               "methods": [
                 "deleteBackup"
+              ]
+            },
+            "QueryMetadata": {
+              "methods": [
+                "queryMetadata"
+              ]
+            },
+            "MoveTableToDatabase": {
+              "methods": [
+                "moveTableToDatabase"
+              ]
+            },
+            "AlterMetadataResourceLocation": {
+              "methods": [
+                "alterMetadataResourceLocation"
               ]
             },
             "ListServices": {
@@ -111,6 +131,11 @@
                 "getBackup"
               ]
             },
+            "RemoveIamPolicy": {
+              "methods": [
+                "removeIamPolicy"
+              ]
+            },
             "CreateService": {
               "methods": [
                 "createService"
@@ -154,6 +179,21 @@
             "DeleteBackup": {
               "methods": [
                 "deleteBackup"
+              ]
+            },
+            "QueryMetadata": {
+              "methods": [
+                "queryMetadata"
+              ]
+            },
+            "MoveTableToDatabase": {
+              "methods": [
+                "moveTableToDatabase"
+              ]
+            },
+            "AlterMetadataResourceLocation": {
+              "methods": [
+                "alterMetadataResourceLocation"
               ]
             },
             "ListServices": {

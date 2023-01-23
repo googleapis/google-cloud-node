@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -5630,6 +5630,20 @@ export namespace google {
                     public listProcessorTypes(request: google.cloud.documentai.v1.IListProcessorTypesRequest): Promise<google.cloud.documentai.v1.ListProcessorTypesResponse>;
 
                     /**
+                     * Calls GetProcessorType.
+                     * @param request GetProcessorTypeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ProcessorType
+                     */
+                    public getProcessorType(request: google.cloud.documentai.v1.IGetProcessorTypeRequest, callback: google.cloud.documentai.v1.DocumentProcessorService.GetProcessorTypeCallback): void;
+
+                    /**
+                     * Calls GetProcessorType.
+                     * @param request GetProcessorTypeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getProcessorType(request: google.cloud.documentai.v1.IGetProcessorTypeRequest): Promise<google.cloud.documentai.v1.ProcessorType>;
+
+                    /**
                      * Calls ListProcessors.
                      * @param request ListProcessorsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListProcessorsResponse
@@ -5841,6 +5855,13 @@ export namespace google {
                      * @param [response] ListProcessorTypesResponse
                      */
                     type ListProcessorTypesCallback = (error: (Error|null), response?: google.cloud.documentai.v1.ListProcessorTypesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1.DocumentProcessorService|getProcessorType}.
+                     * @param error Error, if any
+                     * @param [response] ProcessorType
+                     */
+                    type GetProcessorTypeCallback = (error: (Error|null), response?: google.cloud.documentai.v1.ProcessorType) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.documentai.v1.DocumentProcessorService|listProcessors}.
@@ -7350,6 +7371,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListProcessorsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetProcessorTypeRequest. */
+                interface IGetProcessorTypeRequest {
+
+                    /** GetProcessorTypeRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetProcessorTypeRequest. */
+                class GetProcessorTypeRequest implements IGetProcessorTypeRequest {
+
+                    /**
+                     * Constructs a new GetProcessorTypeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1.IGetProcessorTypeRequest);
+
+                    /** GetProcessorTypeRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetProcessorTypeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetProcessorTypeRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1.IGetProcessorTypeRequest): google.cloud.documentai.v1.GetProcessorTypeRequest;
+
+                    /**
+                     * Encodes the specified GetProcessorTypeRequest message. Does not implicitly {@link google.cloud.documentai.v1.GetProcessorTypeRequest.verify|verify} messages.
+                     * @param message GetProcessorTypeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1.IGetProcessorTypeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetProcessorTypeRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.GetProcessorTypeRequest.verify|verify} messages.
+                     * @param message GetProcessorTypeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1.IGetProcessorTypeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetProcessorTypeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetProcessorTypeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.GetProcessorTypeRequest;
+
+                    /**
+                     * Decodes a GetProcessorTypeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetProcessorTypeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.GetProcessorTypeRequest;
+
+                    /**
+                     * Verifies a GetProcessorTypeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetProcessorTypeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetProcessorTypeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.GetProcessorTypeRequest;
+
+                    /**
+                     * Creates a plain object from a GetProcessorTypeRequest message. Also converts values to other types if specified.
+                     * @param message GetProcessorTypeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1.GetProcessorTypeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetProcessorTypeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetProcessorTypeRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -26578,6 +26696,20 @@ export namespace google {
                     public listProcessorTypes(request: google.cloud.documentai.v1beta3.IListProcessorTypesRequest): Promise<google.cloud.documentai.v1beta3.ListProcessorTypesResponse>;
 
                     /**
+                     * Calls GetProcessorType.
+                     * @param request GetProcessorTypeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ProcessorType
+                     */
+                    public getProcessorType(request: google.cloud.documentai.v1beta3.IGetProcessorTypeRequest, callback: google.cloud.documentai.v1beta3.DocumentProcessorService.GetProcessorTypeCallback): void;
+
+                    /**
+                     * Calls GetProcessorType.
+                     * @param request GetProcessorTypeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getProcessorType(request: google.cloud.documentai.v1beta3.IGetProcessorTypeRequest): Promise<google.cloud.documentai.v1beta3.ProcessorType>;
+
+                    /**
                      * Calls ListProcessors.
                      * @param request ListProcessorsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListProcessorsResponse
@@ -26845,6 +26977,13 @@ export namespace google {
                      * @param [response] ListProcessorTypesResponse
                      */
                     type ListProcessorTypesCallback = (error: (Error|null), response?: google.cloud.documentai.v1beta3.ListProcessorTypesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1beta3.DocumentProcessorService|getProcessorType}.
+                     * @param error Error, if any
+                     * @param [response] ProcessorType
+                     */
+                    type GetProcessorTypeCallback = (error: (Error|null), response?: google.cloud.documentai.v1beta3.ProcessorType) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.documentai.v1beta3.DocumentProcessorService|listProcessors}.
@@ -28724,6 +28863,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListProcessorsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetProcessorTypeRequest. */
+                interface IGetProcessorTypeRequest {
+
+                    /** GetProcessorTypeRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetProcessorTypeRequest. */
+                class GetProcessorTypeRequest implements IGetProcessorTypeRequest {
+
+                    /**
+                     * Constructs a new GetProcessorTypeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IGetProcessorTypeRequest);
+
+                    /** GetProcessorTypeRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetProcessorTypeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetProcessorTypeRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IGetProcessorTypeRequest): google.cloud.documentai.v1beta3.GetProcessorTypeRequest;
+
+                    /**
+                     * Encodes the specified GetProcessorTypeRequest message. Does not implicitly {@link google.cloud.documentai.v1beta3.GetProcessorTypeRequest.verify|verify} messages.
+                     * @param message GetProcessorTypeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IGetProcessorTypeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetProcessorTypeRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.GetProcessorTypeRequest.verify|verify} messages.
+                     * @param message GetProcessorTypeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IGetProcessorTypeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetProcessorTypeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetProcessorTypeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.GetProcessorTypeRequest;
+
+                    /**
+                     * Decodes a GetProcessorTypeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetProcessorTypeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.GetProcessorTypeRequest;
+
+                    /**
+                     * Verifies a GetProcessorTypeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetProcessorTypeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetProcessorTypeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.GetProcessorTypeRequest;
+
+                    /**
+                     * Creates a plain object from a GetProcessorTypeRequest message. Also converts values to other types if specified.
+                     * @param message GetProcessorTypeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.GetProcessorTypeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetProcessorTypeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetProcessorTypeRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
