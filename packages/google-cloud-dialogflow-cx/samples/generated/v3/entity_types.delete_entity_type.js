@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,9 +41,11 @@ function main(name) {
    *     indicating the referencing resources.
    *  *  If `force` is set to true, Dialogflow will remove the entity type, as
    *     well as any references to the entity type (i.e. Page
-   *     parameter google.cloud.dialogflow.cx.v3.Form.Parameter  of the entity type will be changed to
-   *     '@sys.any' and intent parameter google.cloud.dialogflow.cx.v3.Intent.Parameter  of the entity type
-   *     will be removed).
+   *     parameter google.cloud.dialogflow.cx.v3.Form.Parameter  of the entity
+   *     type will be changed to
+   *     '@sys.any' and intent
+   *     parameter google.cloud.dialogflow.cx.v3.Intent.Parameter  of the
+   *     entity type will be removed).
    */
   // const force = true
 

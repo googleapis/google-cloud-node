@@ -517,6 +517,11 @@
                 "completeConversation"
               ]
             },
+            "SuggestConversationSummary": {
+              "methods": [
+                "suggestConversationSummary"
+              ]
+            },
             "ListConversations": {
               "methods": [
                 "listConversations",
@@ -549,6 +554,11 @@
             "CompleteConversation": {
               "methods": [
                 "completeConversation"
+              ]
+            },
+            "SuggestConversationSummary": {
+              "methods": [
+                "suggestConversationSummary"
               ]
             },
             "ListConversations": {

@@ -5955,6 +5955,62 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteBackup(request: google.cloud.metastore.v1alpha.IDeleteBackupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RemoveIamPolicy.
+                     * @param request RemoveIamPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RemoveIamPolicyResponse
+                     */
+                    public removeIamPolicy(request: google.cloud.metastore.v1alpha.IRemoveIamPolicyRequest, callback: google.cloud.metastore.v1alpha.DataprocMetastore.RemoveIamPolicyCallback): void;
+
+                    /**
+                     * Calls RemoveIamPolicy.
+                     * @param request RemoveIamPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public removeIamPolicy(request: google.cloud.metastore.v1alpha.IRemoveIamPolicyRequest): Promise<google.cloud.metastore.v1alpha.RemoveIamPolicyResponse>;
+
+                    /**
+                     * Calls QueryMetadata.
+                     * @param request QueryMetadataRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public queryMetadata(request: google.cloud.metastore.v1alpha.IQueryMetadataRequest, callback: google.cloud.metastore.v1alpha.DataprocMetastore.QueryMetadataCallback): void;
+
+                    /**
+                     * Calls QueryMetadata.
+                     * @param request QueryMetadataRequest message or plain object
+                     * @returns Promise
+                     */
+                    public queryMetadata(request: google.cloud.metastore.v1alpha.IQueryMetadataRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls MoveTableToDatabase.
+                     * @param request MoveTableToDatabaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public moveTableToDatabase(request: google.cloud.metastore.v1alpha.IMoveTableToDatabaseRequest, callback: google.cloud.metastore.v1alpha.DataprocMetastore.MoveTableToDatabaseCallback): void;
+
+                    /**
+                     * Calls MoveTableToDatabase.
+                     * @param request MoveTableToDatabaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public moveTableToDatabase(request: google.cloud.metastore.v1alpha.IMoveTableToDatabaseRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls AlterMetadataResourceLocation.
+                     * @param request AlterMetadataResourceLocationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public alterMetadataResourceLocation(request: google.cloud.metastore.v1alpha.IAlterMetadataResourceLocationRequest, callback: google.cloud.metastore.v1alpha.DataprocMetastore.AlterMetadataResourceLocationCallback): void;
+
+                    /**
+                     * Calls AlterMetadataResourceLocation.
+                     * @param request AlterMetadataResourceLocationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public alterMetadataResourceLocation(request: google.cloud.metastore.v1alpha.IAlterMetadataResourceLocationRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace DataprocMetastore {
@@ -6063,6 +6119,34 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteBackupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|removeIamPolicy}.
+                     * @param error Error, if any
+                     * @param [response] RemoveIamPolicyResponse
+                     */
+                    type RemoveIamPolicyCallback = (error: (Error|null), response?: google.cloud.metastore.v1alpha.RemoveIamPolicyResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|queryMetadata}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type QueryMetadataCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|moveTableToDatabase}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type MoveTableToDatabaseCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1alpha.DataprocMetastore|alterMetadataResourceLocation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type AlterMetadataResourceLocationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a Service. */
@@ -10900,6 +10984,812 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a RemoveIamPolicyRequest. */
+                interface IRemoveIamPolicyRequest {
+
+                    /** RemoveIamPolicyRequest resource */
+                    resource?: (string|null);
+
+                    /** RemoveIamPolicyRequest asynchronous */
+                    asynchronous?: (boolean|null);
+                }
+
+                /** Represents a RemoveIamPolicyRequest. */
+                class RemoveIamPolicyRequest implements IRemoveIamPolicyRequest {
+
+                    /**
+                     * Constructs a new RemoveIamPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1alpha.IRemoveIamPolicyRequest);
+
+                    /** RemoveIamPolicyRequest resource. */
+                    public resource: string;
+
+                    /** RemoveIamPolicyRequest asynchronous. */
+                    public asynchronous: boolean;
+
+                    /**
+                     * Creates a new RemoveIamPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoveIamPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1alpha.IRemoveIamPolicyRequest): google.cloud.metastore.v1alpha.RemoveIamPolicyRequest;
+
+                    /**
+                     * Encodes the specified RemoveIamPolicyRequest message. Does not implicitly {@link google.cloud.metastore.v1alpha.RemoveIamPolicyRequest.verify|verify} messages.
+                     * @param message RemoveIamPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1alpha.IRemoveIamPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoveIamPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.RemoveIamPolicyRequest.verify|verify} messages.
+                     * @param message RemoveIamPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1alpha.IRemoveIamPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoveIamPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoveIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1alpha.RemoveIamPolicyRequest;
+
+                    /**
+                     * Decodes a RemoveIamPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoveIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1alpha.RemoveIamPolicyRequest;
+
+                    /**
+                     * Verifies a RemoveIamPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoveIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoveIamPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1alpha.RemoveIamPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a RemoveIamPolicyRequest message. Also converts values to other types if specified.
+                     * @param message RemoveIamPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1alpha.RemoveIamPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoveIamPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoveIamPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RemoveIamPolicyResponse. */
+                interface IRemoveIamPolicyResponse {
+
+                    /** RemoveIamPolicyResponse success */
+                    success?: (boolean|null);
+                }
+
+                /** Represents a RemoveIamPolicyResponse. */
+                class RemoveIamPolicyResponse implements IRemoveIamPolicyResponse {
+
+                    /**
+                     * Constructs a new RemoveIamPolicyResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1alpha.IRemoveIamPolicyResponse);
+
+                    /** RemoveIamPolicyResponse success. */
+                    public success: boolean;
+
+                    /**
+                     * Creates a new RemoveIamPolicyResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoveIamPolicyResponse instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1alpha.IRemoveIamPolicyResponse): google.cloud.metastore.v1alpha.RemoveIamPolicyResponse;
+
+                    /**
+                     * Encodes the specified RemoveIamPolicyResponse message. Does not implicitly {@link google.cloud.metastore.v1alpha.RemoveIamPolicyResponse.verify|verify} messages.
+                     * @param message RemoveIamPolicyResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1alpha.IRemoveIamPolicyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoveIamPolicyResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.RemoveIamPolicyResponse.verify|verify} messages.
+                     * @param message RemoveIamPolicyResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1alpha.IRemoveIamPolicyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoveIamPolicyResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoveIamPolicyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1alpha.RemoveIamPolicyResponse;
+
+                    /**
+                     * Decodes a RemoveIamPolicyResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoveIamPolicyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1alpha.RemoveIamPolicyResponse;
+
+                    /**
+                     * Verifies a RemoveIamPolicyResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoveIamPolicyResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoveIamPolicyResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1alpha.RemoveIamPolicyResponse;
+
+                    /**
+                     * Creates a plain object from a RemoveIamPolicyResponse message. Also converts values to other types if specified.
+                     * @param message RemoveIamPolicyResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1alpha.RemoveIamPolicyResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoveIamPolicyResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoveIamPolicyResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryMetadataRequest. */
+                interface IQueryMetadataRequest {
+
+                    /** QueryMetadataRequest service */
+                    service?: (string|null);
+
+                    /** QueryMetadataRequest query */
+                    query?: (string|null);
+                }
+
+                /** Represents a QueryMetadataRequest. */
+                class QueryMetadataRequest implements IQueryMetadataRequest {
+
+                    /**
+                     * Constructs a new QueryMetadataRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1alpha.IQueryMetadataRequest);
+
+                    /** QueryMetadataRequest service. */
+                    public service: string;
+
+                    /** QueryMetadataRequest query. */
+                    public query: string;
+
+                    /**
+                     * Creates a new QueryMetadataRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryMetadataRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1alpha.IQueryMetadataRequest): google.cloud.metastore.v1alpha.QueryMetadataRequest;
+
+                    /**
+                     * Encodes the specified QueryMetadataRequest message. Does not implicitly {@link google.cloud.metastore.v1alpha.QueryMetadataRequest.verify|verify} messages.
+                     * @param message QueryMetadataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1alpha.IQueryMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryMetadataRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.QueryMetadataRequest.verify|verify} messages.
+                     * @param message QueryMetadataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1alpha.IQueryMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryMetadataRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryMetadataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1alpha.QueryMetadataRequest;
+
+                    /**
+                     * Decodes a QueryMetadataRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryMetadataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1alpha.QueryMetadataRequest;
+
+                    /**
+                     * Verifies a QueryMetadataRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryMetadataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryMetadataRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1alpha.QueryMetadataRequest;
+
+                    /**
+                     * Creates a plain object from a QueryMetadataRequest message. Also converts values to other types if specified.
+                     * @param message QueryMetadataRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1alpha.QueryMetadataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryMetadataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryMetadataRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryMetadataResponse. */
+                interface IQueryMetadataResponse {
+
+                    /** QueryMetadataResponse resultManifestUri */
+                    resultManifestUri?: (string|null);
+                }
+
+                /** Represents a QueryMetadataResponse. */
+                class QueryMetadataResponse implements IQueryMetadataResponse {
+
+                    /**
+                     * Constructs a new QueryMetadataResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1alpha.IQueryMetadataResponse);
+
+                    /** QueryMetadataResponse resultManifestUri. */
+                    public resultManifestUri: string;
+
+                    /**
+                     * Creates a new QueryMetadataResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryMetadataResponse instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1alpha.IQueryMetadataResponse): google.cloud.metastore.v1alpha.QueryMetadataResponse;
+
+                    /**
+                     * Encodes the specified QueryMetadataResponse message. Does not implicitly {@link google.cloud.metastore.v1alpha.QueryMetadataResponse.verify|verify} messages.
+                     * @param message QueryMetadataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1alpha.IQueryMetadataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryMetadataResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.QueryMetadataResponse.verify|verify} messages.
+                     * @param message QueryMetadataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1alpha.IQueryMetadataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryMetadataResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryMetadataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1alpha.QueryMetadataResponse;
+
+                    /**
+                     * Decodes a QueryMetadataResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryMetadataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1alpha.QueryMetadataResponse;
+
+                    /**
+                     * Verifies a QueryMetadataResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryMetadataResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryMetadataResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1alpha.QueryMetadataResponse;
+
+                    /**
+                     * Creates a plain object from a QueryMetadataResponse message. Also converts values to other types if specified.
+                     * @param message QueryMetadataResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1alpha.QueryMetadataResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryMetadataResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryMetadataResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MoveTableToDatabaseRequest. */
+                interface IMoveTableToDatabaseRequest {
+
+                    /** MoveTableToDatabaseRequest service */
+                    service?: (string|null);
+
+                    /** MoveTableToDatabaseRequest tableName */
+                    tableName?: (string|null);
+
+                    /** MoveTableToDatabaseRequest dbName */
+                    dbName?: (string|null);
+
+                    /** MoveTableToDatabaseRequest destinationDbName */
+                    destinationDbName?: (string|null);
+                }
+
+                /** Represents a MoveTableToDatabaseRequest. */
+                class MoveTableToDatabaseRequest implements IMoveTableToDatabaseRequest {
+
+                    /**
+                     * Constructs a new MoveTableToDatabaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1alpha.IMoveTableToDatabaseRequest);
+
+                    /** MoveTableToDatabaseRequest service. */
+                    public service: string;
+
+                    /** MoveTableToDatabaseRequest tableName. */
+                    public tableName: string;
+
+                    /** MoveTableToDatabaseRequest dbName. */
+                    public dbName: string;
+
+                    /** MoveTableToDatabaseRequest destinationDbName. */
+                    public destinationDbName: string;
+
+                    /**
+                     * Creates a new MoveTableToDatabaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MoveTableToDatabaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1alpha.IMoveTableToDatabaseRequest): google.cloud.metastore.v1alpha.MoveTableToDatabaseRequest;
+
+                    /**
+                     * Encodes the specified MoveTableToDatabaseRequest message. Does not implicitly {@link google.cloud.metastore.v1alpha.MoveTableToDatabaseRequest.verify|verify} messages.
+                     * @param message MoveTableToDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1alpha.IMoveTableToDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MoveTableToDatabaseRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.MoveTableToDatabaseRequest.verify|verify} messages.
+                     * @param message MoveTableToDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1alpha.IMoveTableToDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MoveTableToDatabaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MoveTableToDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1alpha.MoveTableToDatabaseRequest;
+
+                    /**
+                     * Decodes a MoveTableToDatabaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MoveTableToDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1alpha.MoveTableToDatabaseRequest;
+
+                    /**
+                     * Verifies a MoveTableToDatabaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MoveTableToDatabaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MoveTableToDatabaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1alpha.MoveTableToDatabaseRequest;
+
+                    /**
+                     * Creates a plain object from a MoveTableToDatabaseRequest message. Also converts values to other types if specified.
+                     * @param message MoveTableToDatabaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1alpha.MoveTableToDatabaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MoveTableToDatabaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MoveTableToDatabaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MoveTableToDatabaseResponse. */
+                interface IMoveTableToDatabaseResponse {
+                }
+
+                /** Represents a MoveTableToDatabaseResponse. */
+                class MoveTableToDatabaseResponse implements IMoveTableToDatabaseResponse {
+
+                    /**
+                     * Constructs a new MoveTableToDatabaseResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1alpha.IMoveTableToDatabaseResponse);
+
+                    /**
+                     * Creates a new MoveTableToDatabaseResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MoveTableToDatabaseResponse instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1alpha.IMoveTableToDatabaseResponse): google.cloud.metastore.v1alpha.MoveTableToDatabaseResponse;
+
+                    /**
+                     * Encodes the specified MoveTableToDatabaseResponse message. Does not implicitly {@link google.cloud.metastore.v1alpha.MoveTableToDatabaseResponse.verify|verify} messages.
+                     * @param message MoveTableToDatabaseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1alpha.IMoveTableToDatabaseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MoveTableToDatabaseResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.MoveTableToDatabaseResponse.verify|verify} messages.
+                     * @param message MoveTableToDatabaseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1alpha.IMoveTableToDatabaseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MoveTableToDatabaseResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MoveTableToDatabaseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1alpha.MoveTableToDatabaseResponse;
+
+                    /**
+                     * Decodes a MoveTableToDatabaseResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MoveTableToDatabaseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1alpha.MoveTableToDatabaseResponse;
+
+                    /**
+                     * Verifies a MoveTableToDatabaseResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MoveTableToDatabaseResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MoveTableToDatabaseResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1alpha.MoveTableToDatabaseResponse;
+
+                    /**
+                     * Creates a plain object from a MoveTableToDatabaseResponse message. Also converts values to other types if specified.
+                     * @param message MoveTableToDatabaseResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1alpha.MoveTableToDatabaseResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MoveTableToDatabaseResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MoveTableToDatabaseResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AlterMetadataResourceLocationRequest. */
+                interface IAlterMetadataResourceLocationRequest {
+
+                    /** AlterMetadataResourceLocationRequest service */
+                    service?: (string|null);
+
+                    /** AlterMetadataResourceLocationRequest resourceName */
+                    resourceName?: (string|null);
+
+                    /** AlterMetadataResourceLocationRequest locationUri */
+                    locationUri?: (string|null);
+                }
+
+                /** Represents an AlterMetadataResourceLocationRequest. */
+                class AlterMetadataResourceLocationRequest implements IAlterMetadataResourceLocationRequest {
+
+                    /**
+                     * Constructs a new AlterMetadataResourceLocationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1alpha.IAlterMetadataResourceLocationRequest);
+
+                    /** AlterMetadataResourceLocationRequest service. */
+                    public service: string;
+
+                    /** AlterMetadataResourceLocationRequest resourceName. */
+                    public resourceName: string;
+
+                    /** AlterMetadataResourceLocationRequest locationUri. */
+                    public locationUri: string;
+
+                    /**
+                     * Creates a new AlterMetadataResourceLocationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AlterMetadataResourceLocationRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1alpha.IAlterMetadataResourceLocationRequest): google.cloud.metastore.v1alpha.AlterMetadataResourceLocationRequest;
+
+                    /**
+                     * Encodes the specified AlterMetadataResourceLocationRequest message. Does not implicitly {@link google.cloud.metastore.v1alpha.AlterMetadataResourceLocationRequest.verify|verify} messages.
+                     * @param message AlterMetadataResourceLocationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1alpha.IAlterMetadataResourceLocationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AlterMetadataResourceLocationRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.AlterMetadataResourceLocationRequest.verify|verify} messages.
+                     * @param message AlterMetadataResourceLocationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1alpha.IAlterMetadataResourceLocationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AlterMetadataResourceLocationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AlterMetadataResourceLocationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1alpha.AlterMetadataResourceLocationRequest;
+
+                    /**
+                     * Decodes an AlterMetadataResourceLocationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AlterMetadataResourceLocationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1alpha.AlterMetadataResourceLocationRequest;
+
+                    /**
+                     * Verifies an AlterMetadataResourceLocationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AlterMetadataResourceLocationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AlterMetadataResourceLocationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1alpha.AlterMetadataResourceLocationRequest;
+
+                    /**
+                     * Creates a plain object from an AlterMetadataResourceLocationRequest message. Also converts values to other types if specified.
+                     * @param message AlterMetadataResourceLocationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1alpha.AlterMetadataResourceLocationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AlterMetadataResourceLocationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AlterMetadataResourceLocationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AlterMetadataResourceLocationResponse. */
+                interface IAlterMetadataResourceLocationResponse {
+                }
+
+                /** Represents an AlterMetadataResourceLocationResponse. */
+                class AlterMetadataResourceLocationResponse implements IAlterMetadataResourceLocationResponse {
+
+                    /**
+                     * Constructs a new AlterMetadataResourceLocationResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1alpha.IAlterMetadataResourceLocationResponse);
+
+                    /**
+                     * Creates a new AlterMetadataResourceLocationResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AlterMetadataResourceLocationResponse instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1alpha.IAlterMetadataResourceLocationResponse): google.cloud.metastore.v1alpha.AlterMetadataResourceLocationResponse;
+
+                    /**
+                     * Encodes the specified AlterMetadataResourceLocationResponse message. Does not implicitly {@link google.cloud.metastore.v1alpha.AlterMetadataResourceLocationResponse.verify|verify} messages.
+                     * @param message AlterMetadataResourceLocationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1alpha.IAlterMetadataResourceLocationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AlterMetadataResourceLocationResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1alpha.AlterMetadataResourceLocationResponse.verify|verify} messages.
+                     * @param message AlterMetadataResourceLocationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1alpha.IAlterMetadataResourceLocationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AlterMetadataResourceLocationResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AlterMetadataResourceLocationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1alpha.AlterMetadataResourceLocationResponse;
+
+                    /**
+                     * Decodes an AlterMetadataResourceLocationResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AlterMetadataResourceLocationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1alpha.AlterMetadataResourceLocationResponse;
+
+                    /**
+                     * Verifies an AlterMetadataResourceLocationResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AlterMetadataResourceLocationResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AlterMetadataResourceLocationResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1alpha.AlterMetadataResourceLocationResponse;
+
+                    /**
+                     * Creates a plain object from an AlterMetadataResourceLocationResponse message. Also converts values to other types if specified.
+                     * @param message AlterMetadataResourceLocationResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1alpha.AlterMetadataResourceLocationResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AlterMetadataResourceLocationResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AlterMetadataResourceLocationResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a DataprocMetastoreFederation */
                 class DataprocMetastoreFederation extends $protobuf.rpc.Service {
 
@@ -12193,6 +13083,62 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteBackup(request: google.cloud.metastore.v1beta.IDeleteBackupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RemoveIamPolicy.
+                     * @param request RemoveIamPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RemoveIamPolicyResponse
+                     */
+                    public removeIamPolicy(request: google.cloud.metastore.v1beta.IRemoveIamPolicyRequest, callback: google.cloud.metastore.v1beta.DataprocMetastore.RemoveIamPolicyCallback): void;
+
+                    /**
+                     * Calls RemoveIamPolicy.
+                     * @param request RemoveIamPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public removeIamPolicy(request: google.cloud.metastore.v1beta.IRemoveIamPolicyRequest): Promise<google.cloud.metastore.v1beta.RemoveIamPolicyResponse>;
+
+                    /**
+                     * Calls QueryMetadata.
+                     * @param request QueryMetadataRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public queryMetadata(request: google.cloud.metastore.v1beta.IQueryMetadataRequest, callback: google.cloud.metastore.v1beta.DataprocMetastore.QueryMetadataCallback): void;
+
+                    /**
+                     * Calls QueryMetadata.
+                     * @param request QueryMetadataRequest message or plain object
+                     * @returns Promise
+                     */
+                    public queryMetadata(request: google.cloud.metastore.v1beta.IQueryMetadataRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls MoveTableToDatabase.
+                     * @param request MoveTableToDatabaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public moveTableToDatabase(request: google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest, callback: google.cloud.metastore.v1beta.DataprocMetastore.MoveTableToDatabaseCallback): void;
+
+                    /**
+                     * Calls MoveTableToDatabase.
+                     * @param request MoveTableToDatabaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public moveTableToDatabase(request: google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls AlterMetadataResourceLocation.
+                     * @param request AlterMetadataResourceLocationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public alterMetadataResourceLocation(request: google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest, callback: google.cloud.metastore.v1beta.DataprocMetastore.AlterMetadataResourceLocationCallback): void;
+
+                    /**
+                     * Calls AlterMetadataResourceLocation.
+                     * @param request AlterMetadataResourceLocationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public alterMetadataResourceLocation(request: google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace DataprocMetastore {
@@ -12301,6 +13247,34 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteBackupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|removeIamPolicy}.
+                     * @param error Error, if any
+                     * @param [response] RemoveIamPolicyResponse
+                     */
+                    type RemoveIamPolicyCallback = (error: (Error|null), response?: google.cloud.metastore.v1beta.RemoveIamPolicyResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|queryMetadata}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type QueryMetadataCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|moveTableToDatabase}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type MoveTableToDatabaseCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1beta.DataprocMetastore|alterMetadataResourceLocation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type AlterMetadataResourceLocationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a Service. */
@@ -17136,6 +18110,812 @@ export namespace google {
                         MYSQL = 1,
                         AVRO = 2
                     }
+                }
+
+                /** Properties of a RemoveIamPolicyRequest. */
+                interface IRemoveIamPolicyRequest {
+
+                    /** RemoveIamPolicyRequest resource */
+                    resource?: (string|null);
+
+                    /** RemoveIamPolicyRequest asynchronous */
+                    asynchronous?: (boolean|null);
+                }
+
+                /** Represents a RemoveIamPolicyRequest. */
+                class RemoveIamPolicyRequest implements IRemoveIamPolicyRequest {
+
+                    /**
+                     * Constructs a new RemoveIamPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1beta.IRemoveIamPolicyRequest);
+
+                    /** RemoveIamPolicyRequest resource. */
+                    public resource: string;
+
+                    /** RemoveIamPolicyRequest asynchronous. */
+                    public asynchronous: boolean;
+
+                    /**
+                     * Creates a new RemoveIamPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoveIamPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1beta.IRemoveIamPolicyRequest): google.cloud.metastore.v1beta.RemoveIamPolicyRequest;
+
+                    /**
+                     * Encodes the specified RemoveIamPolicyRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.RemoveIamPolicyRequest.verify|verify} messages.
+                     * @param message RemoveIamPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1beta.IRemoveIamPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoveIamPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.RemoveIamPolicyRequest.verify|verify} messages.
+                     * @param message RemoveIamPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1beta.IRemoveIamPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoveIamPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoveIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1beta.RemoveIamPolicyRequest;
+
+                    /**
+                     * Decodes a RemoveIamPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoveIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1beta.RemoveIamPolicyRequest;
+
+                    /**
+                     * Verifies a RemoveIamPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoveIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoveIamPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1beta.RemoveIamPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a RemoveIamPolicyRequest message. Also converts values to other types if specified.
+                     * @param message RemoveIamPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1beta.RemoveIamPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoveIamPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoveIamPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RemoveIamPolicyResponse. */
+                interface IRemoveIamPolicyResponse {
+
+                    /** RemoveIamPolicyResponse success */
+                    success?: (boolean|null);
+                }
+
+                /** Represents a RemoveIamPolicyResponse. */
+                class RemoveIamPolicyResponse implements IRemoveIamPolicyResponse {
+
+                    /**
+                     * Constructs a new RemoveIamPolicyResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1beta.IRemoveIamPolicyResponse);
+
+                    /** RemoveIamPolicyResponse success. */
+                    public success: boolean;
+
+                    /**
+                     * Creates a new RemoveIamPolicyResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoveIamPolicyResponse instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1beta.IRemoveIamPolicyResponse): google.cloud.metastore.v1beta.RemoveIamPolicyResponse;
+
+                    /**
+                     * Encodes the specified RemoveIamPolicyResponse message. Does not implicitly {@link google.cloud.metastore.v1beta.RemoveIamPolicyResponse.verify|verify} messages.
+                     * @param message RemoveIamPolicyResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1beta.IRemoveIamPolicyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoveIamPolicyResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.RemoveIamPolicyResponse.verify|verify} messages.
+                     * @param message RemoveIamPolicyResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1beta.IRemoveIamPolicyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoveIamPolicyResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoveIamPolicyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1beta.RemoveIamPolicyResponse;
+
+                    /**
+                     * Decodes a RemoveIamPolicyResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoveIamPolicyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1beta.RemoveIamPolicyResponse;
+
+                    /**
+                     * Verifies a RemoveIamPolicyResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoveIamPolicyResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoveIamPolicyResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1beta.RemoveIamPolicyResponse;
+
+                    /**
+                     * Creates a plain object from a RemoveIamPolicyResponse message. Also converts values to other types if specified.
+                     * @param message RemoveIamPolicyResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1beta.RemoveIamPolicyResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoveIamPolicyResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoveIamPolicyResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryMetadataRequest. */
+                interface IQueryMetadataRequest {
+
+                    /** QueryMetadataRequest service */
+                    service?: (string|null);
+
+                    /** QueryMetadataRequest query */
+                    query?: (string|null);
+                }
+
+                /** Represents a QueryMetadataRequest. */
+                class QueryMetadataRequest implements IQueryMetadataRequest {
+
+                    /**
+                     * Constructs a new QueryMetadataRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1beta.IQueryMetadataRequest);
+
+                    /** QueryMetadataRequest service. */
+                    public service: string;
+
+                    /** QueryMetadataRequest query. */
+                    public query: string;
+
+                    /**
+                     * Creates a new QueryMetadataRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryMetadataRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1beta.IQueryMetadataRequest): google.cloud.metastore.v1beta.QueryMetadataRequest;
+
+                    /**
+                     * Encodes the specified QueryMetadataRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.QueryMetadataRequest.verify|verify} messages.
+                     * @param message QueryMetadataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1beta.IQueryMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryMetadataRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.QueryMetadataRequest.verify|verify} messages.
+                     * @param message QueryMetadataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1beta.IQueryMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryMetadataRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryMetadataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1beta.QueryMetadataRequest;
+
+                    /**
+                     * Decodes a QueryMetadataRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryMetadataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1beta.QueryMetadataRequest;
+
+                    /**
+                     * Verifies a QueryMetadataRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryMetadataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryMetadataRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1beta.QueryMetadataRequest;
+
+                    /**
+                     * Creates a plain object from a QueryMetadataRequest message. Also converts values to other types if specified.
+                     * @param message QueryMetadataRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1beta.QueryMetadataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryMetadataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryMetadataRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryMetadataResponse. */
+                interface IQueryMetadataResponse {
+
+                    /** QueryMetadataResponse resultManifestUri */
+                    resultManifestUri?: (string|null);
+                }
+
+                /** Represents a QueryMetadataResponse. */
+                class QueryMetadataResponse implements IQueryMetadataResponse {
+
+                    /**
+                     * Constructs a new QueryMetadataResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1beta.IQueryMetadataResponse);
+
+                    /** QueryMetadataResponse resultManifestUri. */
+                    public resultManifestUri: string;
+
+                    /**
+                     * Creates a new QueryMetadataResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryMetadataResponse instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1beta.IQueryMetadataResponse): google.cloud.metastore.v1beta.QueryMetadataResponse;
+
+                    /**
+                     * Encodes the specified QueryMetadataResponse message. Does not implicitly {@link google.cloud.metastore.v1beta.QueryMetadataResponse.verify|verify} messages.
+                     * @param message QueryMetadataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1beta.IQueryMetadataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryMetadataResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.QueryMetadataResponse.verify|verify} messages.
+                     * @param message QueryMetadataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1beta.IQueryMetadataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryMetadataResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryMetadataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1beta.QueryMetadataResponse;
+
+                    /**
+                     * Decodes a QueryMetadataResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryMetadataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1beta.QueryMetadataResponse;
+
+                    /**
+                     * Verifies a QueryMetadataResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryMetadataResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryMetadataResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1beta.QueryMetadataResponse;
+
+                    /**
+                     * Creates a plain object from a QueryMetadataResponse message. Also converts values to other types if specified.
+                     * @param message QueryMetadataResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1beta.QueryMetadataResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryMetadataResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryMetadataResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MoveTableToDatabaseRequest. */
+                interface IMoveTableToDatabaseRequest {
+
+                    /** MoveTableToDatabaseRequest service */
+                    service?: (string|null);
+
+                    /** MoveTableToDatabaseRequest tableName */
+                    tableName?: (string|null);
+
+                    /** MoveTableToDatabaseRequest dbName */
+                    dbName?: (string|null);
+
+                    /** MoveTableToDatabaseRequest destinationDbName */
+                    destinationDbName?: (string|null);
+                }
+
+                /** Represents a MoveTableToDatabaseRequest. */
+                class MoveTableToDatabaseRequest implements IMoveTableToDatabaseRequest {
+
+                    /**
+                     * Constructs a new MoveTableToDatabaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest);
+
+                    /** MoveTableToDatabaseRequest service. */
+                    public service: string;
+
+                    /** MoveTableToDatabaseRequest tableName. */
+                    public tableName: string;
+
+                    /** MoveTableToDatabaseRequest dbName. */
+                    public dbName: string;
+
+                    /** MoveTableToDatabaseRequest destinationDbName. */
+                    public destinationDbName: string;
+
+                    /**
+                     * Creates a new MoveTableToDatabaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MoveTableToDatabaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest): google.cloud.metastore.v1beta.MoveTableToDatabaseRequest;
+
+                    /**
+                     * Encodes the specified MoveTableToDatabaseRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.MoveTableToDatabaseRequest.verify|verify} messages.
+                     * @param message MoveTableToDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MoveTableToDatabaseRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.MoveTableToDatabaseRequest.verify|verify} messages.
+                     * @param message MoveTableToDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1beta.IMoveTableToDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MoveTableToDatabaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MoveTableToDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1beta.MoveTableToDatabaseRequest;
+
+                    /**
+                     * Decodes a MoveTableToDatabaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MoveTableToDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1beta.MoveTableToDatabaseRequest;
+
+                    /**
+                     * Verifies a MoveTableToDatabaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MoveTableToDatabaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MoveTableToDatabaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1beta.MoveTableToDatabaseRequest;
+
+                    /**
+                     * Creates a plain object from a MoveTableToDatabaseRequest message. Also converts values to other types if specified.
+                     * @param message MoveTableToDatabaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1beta.MoveTableToDatabaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MoveTableToDatabaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MoveTableToDatabaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MoveTableToDatabaseResponse. */
+                interface IMoveTableToDatabaseResponse {
+                }
+
+                /** Represents a MoveTableToDatabaseResponse. */
+                class MoveTableToDatabaseResponse implements IMoveTableToDatabaseResponse {
+
+                    /**
+                     * Constructs a new MoveTableToDatabaseResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse);
+
+                    /**
+                     * Creates a new MoveTableToDatabaseResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MoveTableToDatabaseResponse instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse): google.cloud.metastore.v1beta.MoveTableToDatabaseResponse;
+
+                    /**
+                     * Encodes the specified MoveTableToDatabaseResponse message. Does not implicitly {@link google.cloud.metastore.v1beta.MoveTableToDatabaseResponse.verify|verify} messages.
+                     * @param message MoveTableToDatabaseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MoveTableToDatabaseResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.MoveTableToDatabaseResponse.verify|verify} messages.
+                     * @param message MoveTableToDatabaseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MoveTableToDatabaseResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MoveTableToDatabaseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1beta.MoveTableToDatabaseResponse;
+
+                    /**
+                     * Decodes a MoveTableToDatabaseResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MoveTableToDatabaseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1beta.MoveTableToDatabaseResponse;
+
+                    /**
+                     * Verifies a MoveTableToDatabaseResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MoveTableToDatabaseResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MoveTableToDatabaseResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1beta.MoveTableToDatabaseResponse;
+
+                    /**
+                     * Creates a plain object from a MoveTableToDatabaseResponse message. Also converts values to other types if specified.
+                     * @param message MoveTableToDatabaseResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1beta.MoveTableToDatabaseResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MoveTableToDatabaseResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MoveTableToDatabaseResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AlterMetadataResourceLocationRequest. */
+                interface IAlterMetadataResourceLocationRequest {
+
+                    /** AlterMetadataResourceLocationRequest service */
+                    service?: (string|null);
+
+                    /** AlterMetadataResourceLocationRequest resourceName */
+                    resourceName?: (string|null);
+
+                    /** AlterMetadataResourceLocationRequest locationUri */
+                    locationUri?: (string|null);
+                }
+
+                /** Represents an AlterMetadataResourceLocationRequest. */
+                class AlterMetadataResourceLocationRequest implements IAlterMetadataResourceLocationRequest {
+
+                    /**
+                     * Constructs a new AlterMetadataResourceLocationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest);
+
+                    /** AlterMetadataResourceLocationRequest service. */
+                    public service: string;
+
+                    /** AlterMetadataResourceLocationRequest resourceName. */
+                    public resourceName: string;
+
+                    /** AlterMetadataResourceLocationRequest locationUri. */
+                    public locationUri: string;
+
+                    /**
+                     * Creates a new AlterMetadataResourceLocationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AlterMetadataResourceLocationRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest): google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest;
+
+                    /**
+                     * Encodes the specified AlterMetadataResourceLocationRequest message. Does not implicitly {@link google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest.verify|verify} messages.
+                     * @param message AlterMetadataResourceLocationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AlterMetadataResourceLocationRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest.verify|verify} messages.
+                     * @param message AlterMetadataResourceLocationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1beta.IAlterMetadataResourceLocationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AlterMetadataResourceLocationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AlterMetadataResourceLocationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest;
+
+                    /**
+                     * Decodes an AlterMetadataResourceLocationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AlterMetadataResourceLocationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest;
+
+                    /**
+                     * Verifies an AlterMetadataResourceLocationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AlterMetadataResourceLocationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AlterMetadataResourceLocationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest;
+
+                    /**
+                     * Creates a plain object from an AlterMetadataResourceLocationRequest message. Also converts values to other types if specified.
+                     * @param message AlterMetadataResourceLocationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AlterMetadataResourceLocationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AlterMetadataResourceLocationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AlterMetadataResourceLocationResponse. */
+                interface IAlterMetadataResourceLocationResponse {
+                }
+
+                /** Represents an AlterMetadataResourceLocationResponse. */
+                class AlterMetadataResourceLocationResponse implements IAlterMetadataResourceLocationResponse {
+
+                    /**
+                     * Constructs a new AlterMetadataResourceLocationResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse);
+
+                    /**
+                     * Creates a new AlterMetadataResourceLocationResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AlterMetadataResourceLocationResponse instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse): google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse;
+
+                    /**
+                     * Encodes the specified AlterMetadataResourceLocationResponse message. Does not implicitly {@link google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse.verify|verify} messages.
+                     * @param message AlterMetadataResourceLocationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AlterMetadataResourceLocationResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse.verify|verify} messages.
+                     * @param message AlterMetadataResourceLocationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AlterMetadataResourceLocationResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AlterMetadataResourceLocationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse;
+
+                    /**
+                     * Decodes an AlterMetadataResourceLocationResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AlterMetadataResourceLocationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse;
+
+                    /**
+                     * Verifies an AlterMetadataResourceLocationResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AlterMetadataResourceLocationResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AlterMetadataResourceLocationResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse;
+
+                    /**
+                     * Creates a plain object from an AlterMetadataResourceLocationResponse message. Also converts values to other types if specified.
+                     * @param message AlterMetadataResourceLocationResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AlterMetadataResourceLocationResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AlterMetadataResourceLocationResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a DataprocMetastoreFederation */

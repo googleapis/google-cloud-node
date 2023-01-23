@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The report's resource name. Specifies the account and report used to
-   *  generate report data. The report_id identifier is a UID (for example,
+   *  Required. The report's resource name. Specifies the account and report used
+   *  to generate report data. The report_id identifier is a UID (for example,
    *  `613bf59q`).
    *  Name uses the format:
    *  accounts/{account_id}/reports/{report_id}
@@ -41,8 +41,8 @@ function main(name) {
    */
   // const dateRange = {}
   /**
-   *  Optional. A structured string that defines conditions on dimension columns to
-   *  restrict the report output.
+   *  Optional. A structured string that defines conditions on dimension columns
+   *  to restrict the report output.
    *  Filters support logical operators (AND, OR, NOT) and conditional operators
    *  (=, !=, <, >, <=, and >=) using `column_id` as keys.
    *  For example:

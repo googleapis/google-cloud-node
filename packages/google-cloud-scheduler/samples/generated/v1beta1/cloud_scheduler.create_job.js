@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,7 +35,8 @@ function main(parent, job) {
   // const parent = 'abc123'
   /**
    *  Required. The job to add. The user can optionally specify a name for the
-   *  job in name google.cloud.scheduler.v1beta1.Job.name. name google.cloud.scheduler.v1beta1.Job.name cannot be the same as an
+   *  job in name google.cloud.scheduler.v1beta1.Job.name.
+   *  name google.cloud.scheduler.v1beta1.Job.name  cannot be the same as an
    *  existing job. If a name is not specified then the system will
    *  generate a random unique name that will be returned
    *  (name google.cloud.scheduler.v1beta1.Job.name) in the response.

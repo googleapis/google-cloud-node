@@ -16305,6 +16305,138 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|listQueuedResources}.
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @typedef ListQueuedResourcesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse} [response] ListQueuedResourcesResponse
+                         */
+    
+                        /**
+                         * Calls ListQueuedResources.
+                         * @function listQueuedResources
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @instance
+                         * @param {google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest} request ListQueuedResourcesRequest message or plain object
+                         * @param {google.cloud.tpu.v2alpha1.Tpu.ListQueuedResourcesCallback} callback Node-style callback called with the error, if any, and ListQueuedResourcesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Tpu.prototype.listQueuedResources = function listQueuedResources(request, callback) {
+                            return this.rpcCall(listQueuedResources, $root.google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest, $root.google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse, request, callback);
+                        }, "name", { value: "ListQueuedResources" });
+    
+                        /**
+                         * Calls ListQueuedResources.
+                         * @function listQueuedResources
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @instance
+                         * @param {google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest} request ListQueuedResourcesRequest message or plain object
+                         * @returns {Promise<google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|getQueuedResource}.
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @typedef GetQueuedResourceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.tpu.v2alpha1.QueuedResource} [response] QueuedResource
+                         */
+    
+                        /**
+                         * Calls GetQueuedResource.
+                         * @function getQueuedResource
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @instance
+                         * @param {google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest} request GetQueuedResourceRequest message or plain object
+                         * @param {google.cloud.tpu.v2alpha1.Tpu.GetQueuedResourceCallback} callback Node-style callback called with the error, if any, and QueuedResource
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Tpu.prototype.getQueuedResource = function getQueuedResource(request, callback) {
+                            return this.rpcCall(getQueuedResource, $root.google.cloud.tpu.v2alpha1.GetQueuedResourceRequest, $root.google.cloud.tpu.v2alpha1.QueuedResource, request, callback);
+                        }, "name", { value: "GetQueuedResource" });
+    
+                        /**
+                         * Calls GetQueuedResource.
+                         * @function getQueuedResource
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @instance
+                         * @param {google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest} request GetQueuedResourceRequest message or plain object
+                         * @returns {Promise<google.cloud.tpu.v2alpha1.QueuedResource>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|createQueuedResource}.
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @typedef CreateQueuedResourceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateQueuedResource.
+                         * @function createQueuedResource
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @instance
+                         * @param {google.cloud.tpu.v2alpha1.ICreateQueuedResourceRequest} request CreateQueuedResourceRequest message or plain object
+                         * @param {google.cloud.tpu.v2alpha1.Tpu.CreateQueuedResourceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Tpu.prototype.createQueuedResource = function createQueuedResource(request, callback) {
+                            return this.rpcCall(createQueuedResource, $root.google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateQueuedResource" });
+    
+                        /**
+                         * Calls CreateQueuedResource.
+                         * @function createQueuedResource
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @instance
+                         * @param {google.cloud.tpu.v2alpha1.ICreateQueuedResourceRequest} request CreateQueuedResourceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|deleteQueuedResource}.
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @typedef DeleteQueuedResourceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteQueuedResource.
+                         * @function deleteQueuedResource
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @instance
+                         * @param {google.cloud.tpu.v2alpha1.IDeleteQueuedResourceRequest} request DeleteQueuedResourceRequest message or plain object
+                         * @param {google.cloud.tpu.v2alpha1.Tpu.DeleteQueuedResourceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Tpu.prototype.deleteQueuedResource = function deleteQueuedResource(request, callback) {
+                            return this.rpcCall(deleteQueuedResource, $root.google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteQueuedResource" });
+    
+                        /**
+                         * Calls DeleteQueuedResource.
+                         * @function deleteQueuedResource
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @instance
+                         * @param {google.cloud.tpu.v2alpha1.IDeleteQueuedResourceRequest} request DeleteQueuedResourceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|generateServiceIdentity}.
                          * @memberof google.cloud.tpu.v2alpha1.Tpu
                          * @typedef GenerateServiceIdentityCallback
@@ -16499,6 +16631,39 @@
                          * @instance
                          * @param {google.cloud.tpu.v2alpha1.IGetGuestAttributesRequest} request GetGuestAttributesRequest message or plain object
                          * @returns {Promise<google.cloud.tpu.v2alpha1.GetGuestAttributesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|simulateMaintenanceEvent}.
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @typedef SimulateMaintenanceEventCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls SimulateMaintenanceEvent.
+                         * @function simulateMaintenanceEvent
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @instance
+                         * @param {google.cloud.tpu.v2alpha1.ISimulateMaintenanceEventRequest} request SimulateMaintenanceEventRequest message or plain object
+                         * @param {google.cloud.tpu.v2alpha1.Tpu.SimulateMaintenanceEventCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Tpu.prototype.simulateMaintenanceEvent = function simulateMaintenanceEvent(request, callback) {
+                            return this.rpcCall(simulateMaintenanceEvent, $root.google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "SimulateMaintenanceEvent" });
+    
+                        /**
+                         * Calls SimulateMaintenanceEvent.
+                         * @function simulateMaintenanceEvent
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @instance
+                         * @param {google.cloud.tpu.v2alpha1.ISimulateMaintenanceEventRequest} request SimulateMaintenanceEventRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
     
@@ -18172,6 +18337,7 @@
                          * @property {string|null} [network] NetworkConfig network
                          * @property {string|null} [subnetwork] NetworkConfig subnetwork
                          * @property {boolean|null} [enableExternalIps] NetworkConfig enableExternalIps
+                         * @property {boolean|null} [canIpForward] NetworkConfig canIpForward
                          */
     
                         /**
@@ -18214,6 +18380,14 @@
                         NetworkConfig.prototype.enableExternalIps = false;
     
                         /**
+                         * NetworkConfig canIpForward.
+                         * @member {boolean} canIpForward
+                         * @memberof google.cloud.tpu.v2alpha1.NetworkConfig
+                         * @instance
+                         */
+                        NetworkConfig.prototype.canIpForward = false;
+    
+                        /**
                          * Creates a new NetworkConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.tpu.v2alpha1.NetworkConfig
@@ -18243,6 +18417,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.subnetwork);
                             if (message.enableExternalIps != null && Object.hasOwnProperty.call(message, "enableExternalIps"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enableExternalIps);
+                            if (message.canIpForward != null && Object.hasOwnProperty.call(message, "canIpForward"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.canIpForward);
                             return writer;
                         };
     
@@ -18289,6 +18465,10 @@
                                         message.enableExternalIps = reader.bool();
                                         break;
                                     }
+                                case 4: {
+                                        message.canIpForward = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18333,6 +18513,9 @@
                             if (message.enableExternalIps != null && message.hasOwnProperty("enableExternalIps"))
                                 if (typeof message.enableExternalIps !== "boolean")
                                     return "enableExternalIps: boolean expected";
+                            if (message.canIpForward != null && message.hasOwnProperty("canIpForward"))
+                                if (typeof message.canIpForward !== "boolean")
+                                    return "canIpForward: boolean expected";
                             return null;
                         };
     
@@ -18354,6 +18537,8 @@
                                 message.subnetwork = String(object.subnetwork);
                             if (object.enableExternalIps != null)
                                 message.enableExternalIps = Boolean(object.enableExternalIps);
+                            if (object.canIpForward != null)
+                                message.canIpForward = Boolean(object.canIpForward);
                             return message;
                         };
     
@@ -18374,6 +18559,7 @@
                                 object.network = "";
                                 object.subnetwork = "";
                                 object.enableExternalIps = false;
+                                object.canIpForward = false;
                             }
                             if (message.network != null && message.hasOwnProperty("network"))
                                 object.network = message.network;
@@ -18381,6 +18567,8 @@
                                 object.subnetwork = message.subnetwork;
                             if (message.enableExternalIps != null && message.hasOwnProperty("enableExternalIps"))
                                 object.enableExternalIps = message.enableExternalIps;
+                            if (message.canIpForward != null && message.hasOwnProperty("canIpForward"))
+                                object.canIpForward = message.canIpForward;
                             return object;
                         };
     
@@ -18682,6 +18870,7 @@
                          * @property {Array.<google.cloud.tpu.v2alpha1.IAttachedDisk>|null} [dataDisks] Node dataDisks
                          * @property {google.cloud.tpu.v2alpha1.Node.ApiVersion|null} [apiVersion] Node apiVersion
                          * @property {Array.<google.cloud.tpu.v2alpha1.ISymptom>|null} [symptoms] Node symptoms
+                         * @property {string|null} [queuedResource] Node queuedResource
                          * @property {google.cloud.tpu.v2alpha1.IShieldedInstanceConfig|null} [shieldedInstanceConfig] Node shieldedInstanceConfig
                          */
     
@@ -18867,6 +19056,14 @@
                         Node.prototype.symptoms = $util.emptyArray;
     
                         /**
+                         * Node queuedResource.
+                         * @member {string} queuedResource
+                         * @memberof google.cloud.tpu.v2alpha1.Node
+                         * @instance
+                         */
+                        Node.prototype.queuedResource = "";
+    
+                        /**
                          * Node shieldedInstanceConfig.
                          * @member {google.cloud.tpu.v2alpha1.IShieldedInstanceConfig|null|undefined} shieldedInstanceConfig
                          * @memberof google.cloud.tpu.v2alpha1.Node
@@ -18944,6 +19141,8 @@
                             if (message.dataDisks != null && message.dataDisks.length)
                                 for (var i = 0; i < message.dataDisks.length; ++i)
                                     $root.google.cloud.tpu.v2alpha1.AttachedDisk.encode(message.dataDisks[i], writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
+                            if (message.queuedResource != null && Object.hasOwnProperty.call(message, "queuedResource"))
+                                writer.uint32(/* id 43, wireType 2 =*/346).string(message.queuedResource);
                             if (message.shieldedInstanceConfig != null && Object.hasOwnProperty.call(message, "shieldedInstanceConfig"))
                                 $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.encode(message.shieldedInstanceConfig, writer.uint32(/* id 45, wireType 2 =*/362).fork()).ldelim();
                             return writer;
@@ -19104,6 +19303,10 @@
                                         if (!(message.symptoms && message.symptoms.length))
                                             message.symptoms = [];
                                         message.symptoms.push($root.google.cloud.tpu.v2alpha1.Symptom.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 43: {
+                                        message.queuedResource = reader.string();
                                         break;
                                     }
                                 case 45: {
@@ -19278,6 +19481,9 @@
                                         return "symptoms." + error;
                                 }
                             }
+                            if (message.queuedResource != null && message.hasOwnProperty("queuedResource"))
+                                if (!$util.isString(message.queuedResource))
+                                    return "queuedResource: string expected";
                             if (message.shieldedInstanceConfig != null && message.hasOwnProperty("shieldedInstanceConfig")) {
                                 var error = $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.verify(message.shieldedInstanceConfig);
                                 if (error)
@@ -19510,6 +19716,8 @@
                                     message.symptoms[i] = $root.google.cloud.tpu.v2alpha1.Symptom.fromObject(object.symptoms[i]);
                                 }
                             }
+                            if (object.queuedResource != null)
+                                message.queuedResource = String(object.queuedResource);
                             if (object.shieldedInstanceConfig != null) {
                                 if (typeof object.shieldedInstanceConfig !== "object")
                                     throw TypeError(".google.cloud.tpu.v2alpha1.Node.shieldedInstanceConfig: object expected");
@@ -19560,6 +19768,7 @@
                                 object.networkConfig = null;
                                 object.serviceAccount = null;
                                 object.apiVersion = options.enums === String ? "API_VERSION_UNSPECIFIED" : 0;
+                                object.queuedResource = "";
                                 object.shieldedInstanceConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -19624,6 +19833,8 @@
                                 for (var j = 0; j < message.dataDisks.length; ++j)
                                     object.dataDisks[j] = $root.google.cloud.tpu.v2alpha1.AttachedDisk.toObject(message.dataDisks[j], options);
                             }
+                            if (message.queuedResource != null && message.hasOwnProperty("queuedResource"))
+                                object.queuedResource = message.queuedResource;
                             if (message.shieldedInstanceConfig != null && message.hasOwnProperty("shieldedInstanceConfig"))
                                 object.shieldedInstanceConfig = $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.toObject(message.shieldedInstanceConfig, options);
                             return object;
@@ -19734,6 +19945,3657 @@
                         })();
     
                         return Node;
+                    })();
+    
+                    v2alpha1.QueuedResource = (function() {
+    
+                        /**
+                         * Properties of a QueuedResource.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @interface IQueuedResource
+                         * @property {string|null} [name] QueuedResource name
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResource.ITpu|null} [tpu] QueuedResource tpu
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResource.IBestEffort|null} [bestEffort] QueuedResource bestEffort
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResource.IGuaranteed|null} [guaranteed] QueuedResource guaranteed
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy|null} [queueingPolicy] QueuedResource queueingPolicy
+                         * @property {google.cloud.tpu.v2alpha1.IQueuedResourceState|null} [state] QueuedResource state
+                         */
+    
+                        /**
+                         * Constructs a new QueuedResource.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @classdesc Represents a QueuedResource.
+                         * @implements IQueuedResource
+                         * @constructor
+                         * @param {google.cloud.tpu.v2alpha1.IQueuedResource=} [properties] Properties to set
+                         */
+                        function QueuedResource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueuedResource name.
+                         * @member {string} name
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @instance
+                         */
+                        QueuedResource.prototype.name = "";
+    
+                        /**
+                         * QueuedResource tpu.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResource.ITpu|null|undefined} tpu
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @instance
+                         */
+                        QueuedResource.prototype.tpu = null;
+    
+                        /**
+                         * QueuedResource bestEffort.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResource.IBestEffort|null|undefined} bestEffort
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @instance
+                         */
+                        QueuedResource.prototype.bestEffort = null;
+    
+                        /**
+                         * QueuedResource guaranteed.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResource.IGuaranteed|null|undefined} guaranteed
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @instance
+                         */
+                        QueuedResource.prototype.guaranteed = null;
+    
+                        /**
+                         * QueuedResource queueingPolicy.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy|null|undefined} queueingPolicy
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @instance
+                         */
+                        QueuedResource.prototype.queueingPolicy = null;
+    
+                        /**
+                         * QueuedResource state.
+                         * @member {google.cloud.tpu.v2alpha1.IQueuedResourceState|null|undefined} state
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @instance
+                         */
+                        QueuedResource.prototype.state = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * QueuedResource resource.
+                         * @member {"tpu"|undefined} resource
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @instance
+                         */
+                        Object.defineProperty(QueuedResource.prototype, "resource", {
+                            get: $util.oneOfGetter($oneOfFields = ["tpu"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * QueuedResource tier.
+                         * @member {"bestEffort"|"guaranteed"|undefined} tier
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @instance
+                         */
+                        Object.defineProperty(QueuedResource.prototype, "tier", {
+                            get: $util.oneOfGetter($oneOfFields = ["bestEffort", "guaranteed"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new QueuedResource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IQueuedResource=} [properties] Properties to set
+                         * @returns {google.cloud.tpu.v2alpha1.QueuedResource} QueuedResource instance
+                         */
+                        QueuedResource.create = function create(properties) {
+                            return new QueuedResource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueuedResource message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IQueuedResource} message QueuedResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueuedResource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.tpu != null && Object.hasOwnProperty.call(message, "tpu"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.encode(message.tpu, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.bestEffort != null && Object.hasOwnProperty.call(message, "bestEffort"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResource.BestEffort.encode(message.bestEffort, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.guaranteed != null && Object.hasOwnProperty.call(message, "guaranteed"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed.encode(message.guaranteed, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.queueingPolicy != null && Object.hasOwnProperty.call(message, "queueingPolicy"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.encode(message.queueingPolicy, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResourceState.encode(message.state, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueuedResource message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IQueuedResource} message QueuedResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueuedResource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueuedResource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tpu.v2alpha1.QueuedResource} QueuedResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueuedResource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.tpu = $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.bestEffort = $root.google.cloud.tpu.v2alpha1.QueuedResource.BestEffort.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.guaranteed = $root.google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.queueingPolicy = $root.google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.state = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueuedResource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tpu.v2alpha1.QueuedResource} QueuedResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueuedResource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueuedResource message.
+                         * @function verify
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueuedResource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.tpu != null && message.hasOwnProperty("tpu")) {
+                                properties.resource = 1;
+                                {
+                                    var error = $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.verify(message.tpu);
+                                    if (error)
+                                        return "tpu." + error;
+                                }
+                            }
+                            if (message.bestEffort != null && message.hasOwnProperty("bestEffort")) {
+                                properties.tier = 1;
+                                {
+                                    var error = $root.google.cloud.tpu.v2alpha1.QueuedResource.BestEffort.verify(message.bestEffort);
+                                    if (error)
+                                        return "bestEffort." + error;
+                                }
+                            }
+                            if (message.guaranteed != null && message.hasOwnProperty("guaranteed")) {
+                                if (properties.tier === 1)
+                                    return "tier: multiple values";
+                                properties.tier = 1;
+                                {
+                                    var error = $root.google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed.verify(message.guaranteed);
+                                    if (error)
+                                        return "guaranteed." + error;
+                                }
+                            }
+                            if (message.queueingPolicy != null && message.hasOwnProperty("queueingPolicy")) {
+                                var error = $root.google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.verify(message.queueingPolicy);
+                                if (error)
+                                    return "queueingPolicy." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state")) {
+                                var error = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.verify(message.state);
+                                if (error)
+                                    return "state." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueuedResource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tpu.v2alpha1.QueuedResource} QueuedResource
+                         */
+                        QueuedResource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResource)
+                                return object;
+                            var message = new $root.google.cloud.tpu.v2alpha1.QueuedResource();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.tpu != null) {
+                                if (typeof object.tpu !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.tpu: object expected");
+                                message.tpu = $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.fromObject(object.tpu);
+                            }
+                            if (object.bestEffort != null) {
+                                if (typeof object.bestEffort !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.bestEffort: object expected");
+                                message.bestEffort = $root.google.cloud.tpu.v2alpha1.QueuedResource.BestEffort.fromObject(object.bestEffort);
+                            }
+                            if (object.guaranteed != null) {
+                                if (typeof object.guaranteed !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.guaranteed: object expected");
+                                message.guaranteed = $root.google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed.fromObject(object.guaranteed);
+                            }
+                            if (object.queueingPolicy != null) {
+                                if (typeof object.queueingPolicy !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.queueingPolicy: object expected");
+                                message.queueingPolicy = $root.google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.fromObject(object.queueingPolicy);
+                            }
+                            if (object.state != null) {
+                                if (typeof object.state !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.state: object expected");
+                                message.state = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.fromObject(object.state);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueuedResource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.QueuedResource} message QueuedResource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueuedResource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.queueingPolicy = null;
+                                object.state = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.tpu != null && message.hasOwnProperty("tpu")) {
+                                object.tpu = $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.toObject(message.tpu, options);
+                                if (options.oneofs)
+                                    object.resource = "tpu";
+                            }
+                            if (message.bestEffort != null && message.hasOwnProperty("bestEffort")) {
+                                object.bestEffort = $root.google.cloud.tpu.v2alpha1.QueuedResource.BestEffort.toObject(message.bestEffort, options);
+                                if (options.oneofs)
+                                    object.tier = "bestEffort";
+                            }
+                            if (message.guaranteed != null && message.hasOwnProperty("guaranteed")) {
+                                object.guaranteed = $root.google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed.toObject(message.guaranteed, options);
+                                if (options.oneofs)
+                                    object.tier = "guaranteed";
+                            }
+                            if (message.queueingPolicy != null && message.hasOwnProperty("queueingPolicy"))
+                                object.queueingPolicy = $root.google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.toObject(message.queueingPolicy, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.toObject(message.state, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueuedResource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueuedResource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueuedResource
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueuedResource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResource";
+                        };
+    
+                        QueuedResource.Tpu = (function() {
+    
+                            /**
+                             * Properties of a Tpu.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                             * @interface ITpu
+                             * @property {Array.<google.cloud.tpu.v2alpha1.QueuedResource.Tpu.INodeSpec>|null} [nodeSpec] Tpu nodeSpec
+                             */
+    
+                            /**
+                             * Constructs a new Tpu.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                             * @classdesc Represents a Tpu.
+                             * @implements ITpu
+                             * @constructor
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.ITpu=} [properties] Properties to set
+                             */
+                            function Tpu(properties) {
+                                this.nodeSpec = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Tpu nodeSpec.
+                             * @member {Array.<google.cloud.tpu.v2alpha1.QueuedResource.Tpu.INodeSpec>} nodeSpec
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu
+                             * @instance
+                             */
+                            Tpu.prototype.nodeSpec = $util.emptyArray;
+    
+                            /**
+                             * Creates a new Tpu instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.ITpu=} [properties] Properties to set
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Tpu} Tpu instance
+                             */
+                            Tpu.create = function create(properties) {
+                                return new Tpu(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Tpu message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Tpu.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.ITpu} message Tpu message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Tpu.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.nodeSpec != null && message.nodeSpec.length)
+                                    for (var i = 0; i < message.nodeSpec.length; ++i)
+                                        $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.encode(message.nodeSpec[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Tpu message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Tpu.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.ITpu} message Tpu message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Tpu.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Tpu message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Tpu} Tpu
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Tpu.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.nodeSpec && message.nodeSpec.length))
+                                                message.nodeSpec = [];
+                                            message.nodeSpec.push($root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Tpu message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Tpu} Tpu
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Tpu.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Tpu message.
+                             * @function verify
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Tpu.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.nodeSpec != null && message.hasOwnProperty("nodeSpec")) {
+                                    if (!Array.isArray(message.nodeSpec))
+                                        return "nodeSpec: array expected";
+                                    for (var i = 0; i < message.nodeSpec.length; ++i) {
+                                        var error = $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.verify(message.nodeSpec[i]);
+                                        if (error)
+                                            return "nodeSpec." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Tpu message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Tpu} Tpu
+                             */
+                            Tpu.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu)
+                                    return object;
+                                var message = new $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu();
+                                if (object.nodeSpec) {
+                                    if (!Array.isArray(object.nodeSpec))
+                                        throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.Tpu.nodeSpec: array expected");
+                                    message.nodeSpec = [];
+                                    for (var i = 0; i < object.nodeSpec.length; ++i) {
+                                        if (typeof object.nodeSpec[i] !== "object")
+                                            throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.Tpu.nodeSpec: object expected");
+                                        message.nodeSpec[i] = $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.fromObject(object.nodeSpec[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Tpu message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.Tpu} message Tpu
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Tpu.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.nodeSpec = [];
+                                if (message.nodeSpec && message.nodeSpec.length) {
+                                    object.nodeSpec = [];
+                                    for (var j = 0; j < message.nodeSpec.length; ++j)
+                                        object.nodeSpec[j] = $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.toObject(message.nodeSpec[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Tpu to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Tpu.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Tpu
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Tpu.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResource.Tpu";
+                            };
+    
+                            Tpu.NodeSpec = (function() {
+    
+                                /**
+                                 * Properties of a NodeSpec.
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu
+                                 * @interface INodeSpec
+                                 * @property {string|null} [parent] NodeSpec parent
+                                 * @property {string|null} [nodeId] NodeSpec nodeId
+                                 * @property {google.cloud.tpu.v2alpha1.INode|null} [node] NodeSpec node
+                                 */
+    
+                                /**
+                                 * Constructs a new NodeSpec.
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu
+                                 * @classdesc Represents a NodeSpec.
+                                 * @implements INodeSpec
+                                 * @constructor
+                                 * @param {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.INodeSpec=} [properties] Properties to set
+                                 */
+                                function NodeSpec(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * NodeSpec parent.
+                                 * @member {string} parent
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                 * @instance
+                                 */
+                                NodeSpec.prototype.parent = "";
+    
+                                /**
+                                 * NodeSpec nodeId.
+                                 * @member {string} nodeId
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                 * @instance
+                                 */
+                                NodeSpec.prototype.nodeId = "";
+    
+                                /**
+                                 * NodeSpec node.
+                                 * @member {google.cloud.tpu.v2alpha1.INode|null|undefined} node
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                 * @instance
+                                 */
+                                NodeSpec.prototype.node = null;
+    
+                                /**
+                                 * Creates a new NodeSpec instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                 * @static
+                                 * @param {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.INodeSpec=} [properties] Properties to set
+                                 * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec} NodeSpec instance
+                                 */
+                                NodeSpec.create = function create(properties) {
+                                    return new NodeSpec(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified NodeSpec message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                 * @static
+                                 * @param {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.INodeSpec} message NodeSpec message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                NodeSpec.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                    if (message.nodeId != null && Object.hasOwnProperty.call(message, "nodeId"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.nodeId);
+                                    if (message.node != null && Object.hasOwnProperty.call(message, "node"))
+                                        $root.google.cloud.tpu.v2alpha1.Node.encode(message.node, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified NodeSpec message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                 * @static
+                                 * @param {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.INodeSpec} message NodeSpec message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                NodeSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a NodeSpec message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec} NodeSpec
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                NodeSpec.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.parent = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.nodeId = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.node = $root.google.cloud.tpu.v2alpha1.Node.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a NodeSpec message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec} NodeSpec
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                NodeSpec.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a NodeSpec message.
+                                 * @function verify
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                NodeSpec.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.parent != null && message.hasOwnProperty("parent"))
+                                        if (!$util.isString(message.parent))
+                                            return "parent: string expected";
+                                    if (message.nodeId != null && message.hasOwnProperty("nodeId"))
+                                        if (!$util.isString(message.nodeId))
+                                            return "nodeId: string expected";
+                                    if (message.node != null && message.hasOwnProperty("node")) {
+                                        var error = $root.google.cloud.tpu.v2alpha1.Node.verify(message.node);
+                                        if (error)
+                                            return "node." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a NodeSpec message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec} NodeSpec
+                                 */
+                                NodeSpec.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec)
+                                        return object;
+                                    var message = new $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec();
+                                    if (object.parent != null)
+                                        message.parent = String(object.parent);
+                                    if (object.nodeId != null)
+                                        message.nodeId = String(object.nodeId);
+                                    if (object.node != null) {
+                                        if (typeof object.node !== "object")
+                                            throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.node: object expected");
+                                        message.node = $root.google.cloud.tpu.v2alpha1.Node.fromObject(object.node);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a NodeSpec message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                 * @static
+                                 * @param {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec} message NodeSpec
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                NodeSpec.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.parent = "";
+                                        object.nodeId = "";
+                                        object.node = null;
+                                    }
+                                    if (message.parent != null && message.hasOwnProperty("parent"))
+                                        object.parent = message.parent;
+                                    if (message.nodeId != null && message.hasOwnProperty("nodeId"))
+                                        object.nodeId = message.nodeId;
+                                    if (message.node != null && message.hasOwnProperty("node"))
+                                        object.node = $root.google.cloud.tpu.v2alpha1.Node.toObject(message.node, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this NodeSpec to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                NodeSpec.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for NodeSpec
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                NodeSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec";
+                                };
+    
+                                return NodeSpec;
+                            })();
+    
+                            return Tpu;
+                        })();
+    
+                        QueuedResource.BestEffort = (function() {
+    
+                            /**
+                             * Properties of a BestEffort.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                             * @interface IBestEffort
+                             */
+    
+                            /**
+                             * Constructs a new BestEffort.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                             * @classdesc Represents a BestEffort.
+                             * @implements IBestEffort
+                             * @constructor
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.IBestEffort=} [properties] Properties to set
+                             */
+                            function BestEffort(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new BestEffort instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.BestEffort
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.IBestEffort=} [properties] Properties to set
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.BestEffort} BestEffort instance
+                             */
+                            BestEffort.create = function create(properties) {
+                                return new BestEffort(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BestEffort message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.BestEffort.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.BestEffort
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.IBestEffort} message BestEffort message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BestEffort.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BestEffort message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.BestEffort.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.BestEffort
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.IBestEffort} message BestEffort message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BestEffort.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BestEffort message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.BestEffort
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.BestEffort} BestEffort
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BestEffort.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResource.BestEffort();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BestEffort message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.BestEffort
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.BestEffort} BestEffort
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BestEffort.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BestEffort message.
+                             * @function verify
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.BestEffort
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BestEffort.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BestEffort message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.BestEffort
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.BestEffort} BestEffort
+                             */
+                            BestEffort.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResource.BestEffort)
+                                    return object;
+                                return new $root.google.cloud.tpu.v2alpha1.QueuedResource.BestEffort();
+                            };
+    
+                            /**
+                             * Creates a plain object from a BestEffort message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.BestEffort
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.BestEffort} message BestEffort
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BestEffort.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this BestEffort to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.BestEffort
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BestEffort.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BestEffort
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.BestEffort
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BestEffort.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResource.BestEffort";
+                            };
+    
+                            return BestEffort;
+                        })();
+    
+                        QueuedResource.Guaranteed = (function() {
+    
+                            /**
+                             * Properties of a Guaranteed.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                             * @interface IGuaranteed
+                             * @property {google.protobuf.IDuration|null} [minDuration] Guaranteed minDuration
+                             * @property {boolean|null} [reserved] Guaranteed reserved
+                             */
+    
+                            /**
+                             * Constructs a new Guaranteed.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                             * @classdesc Represents a Guaranteed.
+                             * @implements IGuaranteed
+                             * @constructor
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.IGuaranteed=} [properties] Properties to set
+                             */
+                            function Guaranteed(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Guaranteed minDuration.
+                             * @member {google.protobuf.IDuration|null|undefined} minDuration
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed
+                             * @instance
+                             */
+                            Guaranteed.prototype.minDuration = null;
+    
+                            /**
+                             * Guaranteed reserved.
+                             * @member {boolean} reserved
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed
+                             * @instance
+                             */
+                            Guaranteed.prototype.reserved = false;
+    
+                            /**
+                             * Creates a new Guaranteed instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.IGuaranteed=} [properties] Properties to set
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed} Guaranteed instance
+                             */
+                            Guaranteed.create = function create(properties) {
+                                return new Guaranteed(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Guaranteed message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.IGuaranteed} message Guaranteed message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Guaranteed.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.minDuration != null && Object.hasOwnProperty.call(message, "minDuration"))
+                                    $root.google.protobuf.Duration.encode(message.minDuration, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.reserved != null && Object.hasOwnProperty.call(message, "reserved"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.reserved);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Guaranteed message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.IGuaranteed} message Guaranteed message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Guaranteed.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Guaranteed message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed} Guaranteed
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Guaranteed.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.minDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.reserved = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Guaranteed message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed} Guaranteed
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Guaranteed.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Guaranteed message.
+                             * @function verify
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Guaranteed.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.minDuration != null && message.hasOwnProperty("minDuration")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.minDuration);
+                                    if (error)
+                                        return "minDuration." + error;
+                                }
+                                if (message.reserved != null && message.hasOwnProperty("reserved"))
+                                    if (typeof message.reserved !== "boolean")
+                                        return "reserved: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Guaranteed message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed} Guaranteed
+                             */
+                            Guaranteed.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed)
+                                    return object;
+                                var message = new $root.google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed();
+                                if (object.minDuration != null) {
+                                    if (typeof object.minDuration !== "object")
+                                        throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed.minDuration: object expected");
+                                    message.minDuration = $root.google.protobuf.Duration.fromObject(object.minDuration);
+                                }
+                                if (object.reserved != null)
+                                    message.reserved = Boolean(object.reserved);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Guaranteed message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed} message Guaranteed
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Guaranteed.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.minDuration = null;
+                                    object.reserved = false;
+                                }
+                                if (message.minDuration != null && message.hasOwnProperty("minDuration"))
+                                    object.minDuration = $root.google.protobuf.Duration.toObject(message.minDuration, options);
+                                if (message.reserved != null && message.hasOwnProperty("reserved"))
+                                    object.reserved = message.reserved;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Guaranteed to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Guaranteed.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Guaranteed
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Guaranteed.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResource.Guaranteed";
+                            };
+    
+                            return Guaranteed;
+                        })();
+    
+                        QueuedResource.QueueingPolicy = (function() {
+    
+                            /**
+                             * Properties of a QueueingPolicy.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                             * @interface IQueueingPolicy
+                             * @property {google.protobuf.IDuration|null} [validUntilDuration] QueueingPolicy validUntilDuration
+                             * @property {google.protobuf.ITimestamp|null} [validUntilTime] QueueingPolicy validUntilTime
+                             * @property {google.protobuf.IDuration|null} [validAfterDuration] QueueingPolicy validAfterDuration
+                             * @property {google.protobuf.ITimestamp|null} [validAfterTime] QueueingPolicy validAfterTime
+                             * @property {google.type.IInterval|null} [validInterval] QueueingPolicy validInterval
+                             */
+    
+                            /**
+                             * Constructs a new QueueingPolicy.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource
+                             * @classdesc Represents a QueueingPolicy.
+                             * @implements IQueueingPolicy
+                             * @constructor
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy=} [properties] Properties to set
+                             */
+                            function QueueingPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * QueueingPolicy validUntilDuration.
+                             * @member {google.protobuf.IDuration|null|undefined} validUntilDuration
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @instance
+                             */
+                            QueueingPolicy.prototype.validUntilDuration = null;
+    
+                            /**
+                             * QueueingPolicy validUntilTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} validUntilTime
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @instance
+                             */
+                            QueueingPolicy.prototype.validUntilTime = null;
+    
+                            /**
+                             * QueueingPolicy validAfterDuration.
+                             * @member {google.protobuf.IDuration|null|undefined} validAfterDuration
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @instance
+                             */
+                            QueueingPolicy.prototype.validAfterDuration = null;
+    
+                            /**
+                             * QueueingPolicy validAfterTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} validAfterTime
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @instance
+                             */
+                            QueueingPolicy.prototype.validAfterTime = null;
+    
+                            /**
+                             * QueueingPolicy validInterval.
+                             * @member {google.type.IInterval|null|undefined} validInterval
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @instance
+                             */
+                            QueueingPolicy.prototype.validInterval = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * QueueingPolicy startTimingConstraints.
+                             * @member {"validUntilDuration"|"validUntilTime"|"validAfterDuration"|"validAfterTime"|"validInterval"|undefined} startTimingConstraints
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @instance
+                             */
+                            Object.defineProperty(QueueingPolicy.prototype, "startTimingConstraints", {
+                                get: $util.oneOfGetter($oneOfFields = ["validUntilDuration", "validUntilTime", "validAfterDuration", "validAfterTime", "validInterval"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new QueueingPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy} QueueingPolicy instance
+                             */
+                            QueueingPolicy.create = function create(properties) {
+                                return new QueueingPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified QueueingPolicy message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy} message QueueingPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QueueingPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.validUntilDuration != null && Object.hasOwnProperty.call(message, "validUntilDuration"))
+                                    $root.google.protobuf.Duration.encode(message.validUntilDuration, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.validUntilTime != null && Object.hasOwnProperty.call(message, "validUntilTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.validUntilTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.validAfterDuration != null && Object.hasOwnProperty.call(message, "validAfterDuration"))
+                                    $root.google.protobuf.Duration.encode(message.validAfterDuration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.validAfterTime != null && Object.hasOwnProperty.call(message, "validAfterTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.validAfterTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.validInterval != null && Object.hasOwnProperty.call(message, "validInterval"))
+                                    $root.google.type.Interval.encode(message.validInterval, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified QueueingPolicy message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.IQueueingPolicy} message QueueingPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QueueingPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a QueueingPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy} QueueingPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QueueingPolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.validUntilDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.validUntilTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.validAfterDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.validAfterTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.validInterval = $root.google.type.Interval.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a QueueingPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy} QueueingPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QueueingPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a QueueingPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            QueueingPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.validUntilDuration != null && message.hasOwnProperty("validUntilDuration")) {
+                                    properties.startTimingConstraints = 1;
+                                    {
+                                        var error = $root.google.protobuf.Duration.verify(message.validUntilDuration);
+                                        if (error)
+                                            return "validUntilDuration." + error;
+                                    }
+                                }
+                                if (message.validUntilTime != null && message.hasOwnProperty("validUntilTime")) {
+                                    if (properties.startTimingConstraints === 1)
+                                        return "startTimingConstraints: multiple values";
+                                    properties.startTimingConstraints = 1;
+                                    {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.validUntilTime);
+                                        if (error)
+                                            return "validUntilTime." + error;
+                                    }
+                                }
+                                if (message.validAfterDuration != null && message.hasOwnProperty("validAfterDuration")) {
+                                    if (properties.startTimingConstraints === 1)
+                                        return "startTimingConstraints: multiple values";
+                                    properties.startTimingConstraints = 1;
+                                    {
+                                        var error = $root.google.protobuf.Duration.verify(message.validAfterDuration);
+                                        if (error)
+                                            return "validAfterDuration." + error;
+                                    }
+                                }
+                                if (message.validAfterTime != null && message.hasOwnProperty("validAfterTime")) {
+                                    if (properties.startTimingConstraints === 1)
+                                        return "startTimingConstraints: multiple values";
+                                    properties.startTimingConstraints = 1;
+                                    {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.validAfterTime);
+                                        if (error)
+                                            return "validAfterTime." + error;
+                                    }
+                                }
+                                if (message.validInterval != null && message.hasOwnProperty("validInterval")) {
+                                    if (properties.startTimingConstraints === 1)
+                                        return "startTimingConstraints: multiple values";
+                                    properties.startTimingConstraints = 1;
+                                    {
+                                        var error = $root.google.type.Interval.verify(message.validInterval);
+                                        if (error)
+                                            return "validInterval." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a QueueingPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy} QueueingPolicy
+                             */
+                            QueueingPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy();
+                                if (object.validUntilDuration != null) {
+                                    if (typeof object.validUntilDuration !== "object")
+                                        throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.validUntilDuration: object expected");
+                                    message.validUntilDuration = $root.google.protobuf.Duration.fromObject(object.validUntilDuration);
+                                }
+                                if (object.validUntilTime != null) {
+                                    if (typeof object.validUntilTime !== "object")
+                                        throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.validUntilTime: object expected");
+                                    message.validUntilTime = $root.google.protobuf.Timestamp.fromObject(object.validUntilTime);
+                                }
+                                if (object.validAfterDuration != null) {
+                                    if (typeof object.validAfterDuration !== "object")
+                                        throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.validAfterDuration: object expected");
+                                    message.validAfterDuration = $root.google.protobuf.Duration.fromObject(object.validAfterDuration);
+                                }
+                                if (object.validAfterTime != null) {
+                                    if (typeof object.validAfterTime !== "object")
+                                        throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.validAfterTime: object expected");
+                                    message.validAfterTime = $root.google.protobuf.Timestamp.fromObject(object.validAfterTime);
+                                }
+                                if (object.validInterval != null) {
+                                    if (typeof object.validInterval !== "object")
+                                        throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy.validInterval: object expected");
+                                    message.validInterval = $root.google.type.Interval.fromObject(object.validInterval);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a QueueingPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy} message QueueingPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            QueueingPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.validUntilDuration != null && message.hasOwnProperty("validUntilDuration")) {
+                                    object.validUntilDuration = $root.google.protobuf.Duration.toObject(message.validUntilDuration, options);
+                                    if (options.oneofs)
+                                        object.startTimingConstraints = "validUntilDuration";
+                                }
+                                if (message.validUntilTime != null && message.hasOwnProperty("validUntilTime")) {
+                                    object.validUntilTime = $root.google.protobuf.Timestamp.toObject(message.validUntilTime, options);
+                                    if (options.oneofs)
+                                        object.startTimingConstraints = "validUntilTime";
+                                }
+                                if (message.validAfterDuration != null && message.hasOwnProperty("validAfterDuration")) {
+                                    object.validAfterDuration = $root.google.protobuf.Duration.toObject(message.validAfterDuration, options);
+                                    if (options.oneofs)
+                                        object.startTimingConstraints = "validAfterDuration";
+                                }
+                                if (message.validAfterTime != null && message.hasOwnProperty("validAfterTime")) {
+                                    object.validAfterTime = $root.google.protobuf.Timestamp.toObject(message.validAfterTime, options);
+                                    if (options.oneofs)
+                                        object.startTimingConstraints = "validAfterTime";
+                                }
+                                if (message.validInterval != null && message.hasOwnProperty("validInterval")) {
+                                    object.validInterval = $root.google.type.Interval.toObject(message.validInterval, options);
+                                    if (options.oneofs)
+                                        object.startTimingConstraints = "validInterval";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this QueueingPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            QueueingPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for QueueingPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            QueueingPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResource.QueueingPolicy";
+                            };
+    
+                            return QueueingPolicy;
+                        })();
+    
+                        return QueuedResource;
+                    })();
+    
+                    v2alpha1.QueuedResourceState = (function() {
+    
+                        /**
+                         * Properties of a QueuedResourceState.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @interface IQueuedResourceState
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResourceState.State|null} [state] QueuedResourceState state
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResourceState.ICreatingData|null} [creatingData] QueuedResourceState creatingData
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResourceState.IAcceptedData|null} [acceptedData] QueuedResourceState acceptedData
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResourceState.IProvisioningData|null} [provisioningData] QueuedResourceState provisioningData
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResourceState.IFailedData|null} [failedData] QueuedResourceState failedData
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResourceState.IDeletingData|null} [deletingData] QueuedResourceState deletingData
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResourceState.IActiveData|null} [activeData] QueuedResourceState activeData
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendingData|null} [suspendingData] QueuedResourceState suspendingData
+                         * @property {google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData|null} [suspendedData] QueuedResourceState suspendedData
+                         */
+    
+                        /**
+                         * Constructs a new QueuedResourceState.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @classdesc Represents a QueuedResourceState.
+                         * @implements IQueuedResourceState
+                         * @constructor
+                         * @param {google.cloud.tpu.v2alpha1.IQueuedResourceState=} [properties] Properties to set
+                         */
+                        function QueuedResourceState(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueuedResourceState state.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResourceState.State} state
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @instance
+                         */
+                        QueuedResourceState.prototype.state = 0;
+    
+                        /**
+                         * QueuedResourceState creatingData.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResourceState.ICreatingData|null|undefined} creatingData
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @instance
+                         */
+                        QueuedResourceState.prototype.creatingData = null;
+    
+                        /**
+                         * QueuedResourceState acceptedData.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResourceState.IAcceptedData|null|undefined} acceptedData
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @instance
+                         */
+                        QueuedResourceState.prototype.acceptedData = null;
+    
+                        /**
+                         * QueuedResourceState provisioningData.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResourceState.IProvisioningData|null|undefined} provisioningData
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @instance
+                         */
+                        QueuedResourceState.prototype.provisioningData = null;
+    
+                        /**
+                         * QueuedResourceState failedData.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResourceState.IFailedData|null|undefined} failedData
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @instance
+                         */
+                        QueuedResourceState.prototype.failedData = null;
+    
+                        /**
+                         * QueuedResourceState deletingData.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResourceState.IDeletingData|null|undefined} deletingData
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @instance
+                         */
+                        QueuedResourceState.prototype.deletingData = null;
+    
+                        /**
+                         * QueuedResourceState activeData.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResourceState.IActiveData|null|undefined} activeData
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @instance
+                         */
+                        QueuedResourceState.prototype.activeData = null;
+    
+                        /**
+                         * QueuedResourceState suspendingData.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendingData|null|undefined} suspendingData
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @instance
+                         */
+                        QueuedResourceState.prototype.suspendingData = null;
+    
+                        /**
+                         * QueuedResourceState suspendedData.
+                         * @member {google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData|null|undefined} suspendedData
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @instance
+                         */
+                        QueuedResourceState.prototype.suspendedData = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * QueuedResourceState stateData.
+                         * @member {"creatingData"|"acceptedData"|"provisioningData"|"failedData"|"deletingData"|"activeData"|"suspendingData"|"suspendedData"|undefined} stateData
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @instance
+                         */
+                        Object.defineProperty(QueuedResourceState.prototype, "stateData", {
+                            get: $util.oneOfGetter($oneOfFields = ["creatingData", "acceptedData", "provisioningData", "failedData", "deletingData", "activeData", "suspendingData", "suspendedData"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new QueuedResourceState instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IQueuedResourceState=} [properties] Properties to set
+                         * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState} QueuedResourceState instance
+                         */
+                        QueuedResourceState.create = function create(properties) {
+                            return new QueuedResourceState(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueuedResourceState message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IQueuedResourceState} message QueuedResourceState message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueuedResourceState.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            if (message.creatingData != null && Object.hasOwnProperty.call(message, "creatingData"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData.encode(message.creatingData, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.acceptedData != null && Object.hasOwnProperty.call(message, "acceptedData"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData.encode(message.acceptedData, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.provisioningData != null && Object.hasOwnProperty.call(message, "provisioningData"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData.encode(message.provisioningData, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.failedData != null && Object.hasOwnProperty.call(message, "failedData"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData.encode(message.failedData, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.deletingData != null && Object.hasOwnProperty.call(message, "deletingData"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData.encode(message.deletingData, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.activeData != null && Object.hasOwnProperty.call(message, "activeData"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData.encode(message.activeData, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.suspendingData != null && Object.hasOwnProperty.call(message, "suspendingData"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData.encode(message.suspendingData, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.suspendedData != null && Object.hasOwnProperty.call(message, "suspendedData"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData.encode(message.suspendedData, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueuedResourceState message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IQueuedResourceState} message QueuedResourceState message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueuedResourceState.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueuedResourceState message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState} QueuedResourceState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueuedResourceState.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResourceState();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.creatingData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.acceptedData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.provisioningData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.failedData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.deletingData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.activeData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.suspendingData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.suspendedData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueuedResourceState message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState} QueuedResourceState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueuedResourceState.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueuedResourceState message.
+                         * @function verify
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueuedResourceState.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                    break;
+                                }
+                            if (message.creatingData != null && message.hasOwnProperty("creatingData")) {
+                                properties.stateData = 1;
+                                {
+                                    var error = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData.verify(message.creatingData);
+                                    if (error)
+                                        return "creatingData." + error;
+                                }
+                            }
+                            if (message.acceptedData != null && message.hasOwnProperty("acceptedData")) {
+                                if (properties.stateData === 1)
+                                    return "stateData: multiple values";
+                                properties.stateData = 1;
+                                {
+                                    var error = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData.verify(message.acceptedData);
+                                    if (error)
+                                        return "acceptedData." + error;
+                                }
+                            }
+                            if (message.provisioningData != null && message.hasOwnProperty("provisioningData")) {
+                                if (properties.stateData === 1)
+                                    return "stateData: multiple values";
+                                properties.stateData = 1;
+                                {
+                                    var error = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData.verify(message.provisioningData);
+                                    if (error)
+                                        return "provisioningData." + error;
+                                }
+                            }
+                            if (message.failedData != null && message.hasOwnProperty("failedData")) {
+                                if (properties.stateData === 1)
+                                    return "stateData: multiple values";
+                                properties.stateData = 1;
+                                {
+                                    var error = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData.verify(message.failedData);
+                                    if (error)
+                                        return "failedData." + error;
+                                }
+                            }
+                            if (message.deletingData != null && message.hasOwnProperty("deletingData")) {
+                                if (properties.stateData === 1)
+                                    return "stateData: multiple values";
+                                properties.stateData = 1;
+                                {
+                                    var error = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData.verify(message.deletingData);
+                                    if (error)
+                                        return "deletingData." + error;
+                                }
+                            }
+                            if (message.activeData != null && message.hasOwnProperty("activeData")) {
+                                if (properties.stateData === 1)
+                                    return "stateData: multiple values";
+                                properties.stateData = 1;
+                                {
+                                    var error = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData.verify(message.activeData);
+                                    if (error)
+                                        return "activeData." + error;
+                                }
+                            }
+                            if (message.suspendingData != null && message.hasOwnProperty("suspendingData")) {
+                                if (properties.stateData === 1)
+                                    return "stateData: multiple values";
+                                properties.stateData = 1;
+                                {
+                                    var error = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData.verify(message.suspendingData);
+                                    if (error)
+                                        return "suspendingData." + error;
+                                }
+                            }
+                            if (message.suspendedData != null && message.hasOwnProperty("suspendedData")) {
+                                if (properties.stateData === 1)
+                                    return "stateData: multiple values";
+                                properties.stateData = 1;
+                                {
+                                    var error = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData.verify(message.suspendedData);
+                                    if (error)
+                                        return "suspendedData." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueuedResourceState message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState} QueuedResourceState
+                         */
+                        QueuedResourceState.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResourceState)
+                                return object;
+                            var message = new $root.google.cloud.tpu.v2alpha1.QueuedResourceState();
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "ACCEPTED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "PROVISIONING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "FAILED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "DELETING":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "ACTIVE":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "SUSPENDING":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "SUSPENDED":
+                            case 8:
+                                message.state = 8;
+                                break;
+                            }
+                            if (object.creatingData != null) {
+                                if (typeof object.creatingData !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResourceState.creatingData: object expected");
+                                message.creatingData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData.fromObject(object.creatingData);
+                            }
+                            if (object.acceptedData != null) {
+                                if (typeof object.acceptedData !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResourceState.acceptedData: object expected");
+                                message.acceptedData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData.fromObject(object.acceptedData);
+                            }
+                            if (object.provisioningData != null) {
+                                if (typeof object.provisioningData !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResourceState.provisioningData: object expected");
+                                message.provisioningData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData.fromObject(object.provisioningData);
+                            }
+                            if (object.failedData != null) {
+                                if (typeof object.failedData !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResourceState.failedData: object expected");
+                                message.failedData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData.fromObject(object.failedData);
+                            }
+                            if (object.deletingData != null) {
+                                if (typeof object.deletingData !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResourceState.deletingData: object expected");
+                                message.deletingData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData.fromObject(object.deletingData);
+                            }
+                            if (object.activeData != null) {
+                                if (typeof object.activeData !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResourceState.activeData: object expected");
+                                message.activeData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData.fromObject(object.activeData);
+                            }
+                            if (object.suspendingData != null) {
+                                if (typeof object.suspendingData !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResourceState.suspendingData: object expected");
+                                message.suspendingData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData.fromObject(object.suspendingData);
+                            }
+                            if (object.suspendedData != null) {
+                                if (typeof object.suspendedData !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResourceState.suspendedData: object expected");
+                                message.suspendedData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData.fromObject(object.suspendedData);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueuedResourceState message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.QueuedResourceState} message QueuedResourceState
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueuedResourceState.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.tpu.v2alpha1.QueuedResourceState.State[message.state] === undefined ? message.state : $root.google.cloud.tpu.v2alpha1.QueuedResourceState.State[message.state] : message.state;
+                            if (message.creatingData != null && message.hasOwnProperty("creatingData")) {
+                                object.creatingData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData.toObject(message.creatingData, options);
+                                if (options.oneofs)
+                                    object.stateData = "creatingData";
+                            }
+                            if (message.acceptedData != null && message.hasOwnProperty("acceptedData")) {
+                                object.acceptedData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData.toObject(message.acceptedData, options);
+                                if (options.oneofs)
+                                    object.stateData = "acceptedData";
+                            }
+                            if (message.provisioningData != null && message.hasOwnProperty("provisioningData")) {
+                                object.provisioningData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData.toObject(message.provisioningData, options);
+                                if (options.oneofs)
+                                    object.stateData = "provisioningData";
+                            }
+                            if (message.failedData != null && message.hasOwnProperty("failedData")) {
+                                object.failedData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData.toObject(message.failedData, options);
+                                if (options.oneofs)
+                                    object.stateData = "failedData";
+                            }
+                            if (message.deletingData != null && message.hasOwnProperty("deletingData")) {
+                                object.deletingData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData.toObject(message.deletingData, options);
+                                if (options.oneofs)
+                                    object.stateData = "deletingData";
+                            }
+                            if (message.activeData != null && message.hasOwnProperty("activeData")) {
+                                object.activeData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData.toObject(message.activeData, options);
+                                if (options.oneofs)
+                                    object.stateData = "activeData";
+                            }
+                            if (message.suspendingData != null && message.hasOwnProperty("suspendingData")) {
+                                object.suspendingData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData.toObject(message.suspendingData, options);
+                                if (options.oneofs)
+                                    object.stateData = "suspendingData";
+                            }
+                            if (message.suspendedData != null && message.hasOwnProperty("suspendedData")) {
+                                object.suspendedData = $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData.toObject(message.suspendedData, options);
+                                if (options.oneofs)
+                                    object.stateData = "suspendedData";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueuedResourceState to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueuedResourceState.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueuedResourceState
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueuedResourceState.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResourceState";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.tpu.v2alpha1.QueuedResourceState.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} ACCEPTED=2 ACCEPTED value
+                         * @property {number} PROVISIONING=3 PROVISIONING value
+                         * @property {number} FAILED=4 FAILED value
+                         * @property {number} DELETING=5 DELETING value
+                         * @property {number} ACTIVE=6 ACTIVE value
+                         * @property {number} SUSPENDING=7 SUSPENDING value
+                         * @property {number} SUSPENDED=8 SUSPENDED value
+                         */
+                        QueuedResourceState.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "ACCEPTED"] = 2;
+                            values[valuesById[3] = "PROVISIONING"] = 3;
+                            values[valuesById[4] = "FAILED"] = 4;
+                            values[valuesById[5] = "DELETING"] = 5;
+                            values[valuesById[6] = "ACTIVE"] = 6;
+                            values[valuesById[7] = "SUSPENDING"] = 7;
+                            values[valuesById[8] = "SUSPENDED"] = 8;
+                            return values;
+                        })();
+    
+                        QueuedResourceState.CreatingData = (function() {
+    
+                            /**
+                             * Properties of a CreatingData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @interface ICreatingData
+                             */
+    
+                            /**
+                             * Constructs a new CreatingData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @classdesc Represents a CreatingData.
+                             * @implements ICreatingData
+                             * @constructor
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.ICreatingData=} [properties] Properties to set
+                             */
+                            function CreatingData(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new CreatingData instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.ICreatingData=} [properties] Properties to set
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData} CreatingData instance
+                             */
+                            CreatingData.create = function create(properties) {
+                                return new CreatingData(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreatingData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.ICreatingData} message CreatingData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreatingData.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreatingData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.ICreatingData} message CreatingData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreatingData.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreatingData message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData} CreatingData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreatingData.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreatingData message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData} CreatingData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreatingData.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreatingData message.
+                             * @function verify
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreatingData.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreatingData message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData} CreatingData
+                             */
+                            CreatingData.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData)
+                                    return object;
+                                return new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData();
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreatingData message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData} message CreatingData
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreatingData.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this CreatingData to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreatingData.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreatingData
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreatingData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResourceState.CreatingData";
+                            };
+    
+                            return CreatingData;
+                        })();
+    
+                        QueuedResourceState.AcceptedData = (function() {
+    
+                            /**
+                             * Properties of an AcceptedData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @interface IAcceptedData
+                             */
+    
+                            /**
+                             * Constructs a new AcceptedData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @classdesc Represents an AcceptedData.
+                             * @implements IAcceptedData
+                             * @constructor
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IAcceptedData=} [properties] Properties to set
+                             */
+                            function AcceptedData(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new AcceptedData instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IAcceptedData=} [properties] Properties to set
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData} AcceptedData instance
+                             */
+                            AcceptedData.create = function create(properties) {
+                                return new AcceptedData(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AcceptedData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IAcceptedData} message AcceptedData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AcceptedData.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AcceptedData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IAcceptedData} message AcceptedData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AcceptedData.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AcceptedData message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData} AcceptedData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AcceptedData.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AcceptedData message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData} AcceptedData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AcceptedData.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AcceptedData message.
+                             * @function verify
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AcceptedData.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AcceptedData message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData} AcceptedData
+                             */
+                            AcceptedData.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData)
+                                    return object;
+                                return new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData();
+                            };
+    
+                            /**
+                             * Creates a plain object from an AcceptedData message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData} message AcceptedData
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AcceptedData.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this AcceptedData to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AcceptedData.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AcceptedData
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AcceptedData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResourceState.AcceptedData";
+                            };
+    
+                            return AcceptedData;
+                        })();
+    
+                        QueuedResourceState.ProvisioningData = (function() {
+    
+                            /**
+                             * Properties of a ProvisioningData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @interface IProvisioningData
+                             */
+    
+                            /**
+                             * Constructs a new ProvisioningData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @classdesc Represents a ProvisioningData.
+                             * @implements IProvisioningData
+                             * @constructor
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IProvisioningData=} [properties] Properties to set
+                             */
+                            function ProvisioningData(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new ProvisioningData instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IProvisioningData=} [properties] Properties to set
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData} ProvisioningData instance
+                             */
+                            ProvisioningData.create = function create(properties) {
+                                return new ProvisioningData(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ProvisioningData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IProvisioningData} message ProvisioningData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProvisioningData.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ProvisioningData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IProvisioningData} message ProvisioningData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProvisioningData.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ProvisioningData message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData} ProvisioningData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProvisioningData.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ProvisioningData message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData} ProvisioningData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProvisioningData.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ProvisioningData message.
+                             * @function verify
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ProvisioningData.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ProvisioningData message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData} ProvisioningData
+                             */
+                            ProvisioningData.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData)
+                                    return object;
+                                return new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData();
+                            };
+    
+                            /**
+                             * Creates a plain object from a ProvisioningData message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData} message ProvisioningData
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ProvisioningData.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this ProvisioningData to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ProvisioningData.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ProvisioningData
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ProvisioningData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResourceState.ProvisioningData";
+                            };
+    
+                            return ProvisioningData;
+                        })();
+    
+                        QueuedResourceState.FailedData = (function() {
+    
+                            /**
+                             * Properties of a FailedData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @interface IFailedData
+                             * @property {google.rpc.IStatus|null} [error] FailedData error
+                             */
+    
+                            /**
+                             * Constructs a new FailedData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @classdesc Represents a FailedData.
+                             * @implements IFailedData
+                             * @constructor
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IFailedData=} [properties] Properties to set
+                             */
+                            function FailedData(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FailedData error.
+                             * @member {google.rpc.IStatus|null|undefined} error
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData
+                             * @instance
+                             */
+                            FailedData.prototype.error = null;
+    
+                            /**
+                             * Creates a new FailedData instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IFailedData=} [properties] Properties to set
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData} FailedData instance
+                             */
+                            FailedData.create = function create(properties) {
+                                return new FailedData(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FailedData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IFailedData} message FailedData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FailedData.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                    $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FailedData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IFailedData} message FailedData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FailedData.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FailedData message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData} FailedData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FailedData.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FailedData message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData} FailedData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FailedData.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FailedData message.
+                             * @function verify
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FailedData.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.error != null && message.hasOwnProperty("error")) {
+                                    var error = $root.google.rpc.Status.verify(message.error);
+                                    if (error)
+                                        return "error." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FailedData message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData} FailedData
+                             */
+                            FailedData.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData)
+                                    return object;
+                                var message = new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData();
+                                if (object.error != null) {
+                                    if (typeof object.error !== "object")
+                                        throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData.error: object expected");
+                                    message.error = $root.google.rpc.Status.fromObject(object.error);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FailedData message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData} message FailedData
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FailedData.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.error = null;
+                                if (message.error != null && message.hasOwnProperty("error"))
+                                    object.error = $root.google.rpc.Status.toObject(message.error, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FailedData to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FailedData.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FailedData
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FailedData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResourceState.FailedData";
+                            };
+    
+                            return FailedData;
+                        })();
+    
+                        QueuedResourceState.DeletingData = (function() {
+    
+                            /**
+                             * Properties of a DeletingData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @interface IDeletingData
+                             */
+    
+                            /**
+                             * Constructs a new DeletingData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @classdesc Represents a DeletingData.
+                             * @implements IDeletingData
+                             * @constructor
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IDeletingData=} [properties] Properties to set
+                             */
+                            function DeletingData(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new DeletingData instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IDeletingData=} [properties] Properties to set
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData} DeletingData instance
+                             */
+                            DeletingData.create = function create(properties) {
+                                return new DeletingData(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeletingData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IDeletingData} message DeletingData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeletingData.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeletingData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IDeletingData} message DeletingData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeletingData.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeletingData message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData} DeletingData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeletingData.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeletingData message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData} DeletingData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeletingData.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeletingData message.
+                             * @function verify
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeletingData.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeletingData message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData} DeletingData
+                             */
+                            DeletingData.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData)
+                                    return object;
+                                return new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData();
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeletingData message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData} message DeletingData
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeletingData.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this DeletingData to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeletingData.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeletingData
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeletingData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResourceState.DeletingData";
+                            };
+    
+                            return DeletingData;
+                        })();
+    
+                        QueuedResourceState.ActiveData = (function() {
+    
+                            /**
+                             * Properties of an ActiveData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @interface IActiveData
+                             */
+    
+                            /**
+                             * Constructs a new ActiveData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @classdesc Represents an ActiveData.
+                             * @implements IActiveData
+                             * @constructor
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IActiveData=} [properties] Properties to set
+                             */
+                            function ActiveData(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new ActiveData instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IActiveData=} [properties] Properties to set
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData} ActiveData instance
+                             */
+                            ActiveData.create = function create(properties) {
+                                return new ActiveData(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ActiveData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IActiveData} message ActiveData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ActiveData.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ActiveData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.IActiveData} message ActiveData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ActiveData.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ActiveData message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData} ActiveData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ActiveData.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ActiveData message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData} ActiveData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ActiveData.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ActiveData message.
+                             * @function verify
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ActiveData.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ActiveData message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData} ActiveData
+                             */
+                            ActiveData.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData)
+                                    return object;
+                                return new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData();
+                            };
+    
+                            /**
+                             * Creates a plain object from an ActiveData message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData} message ActiveData
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ActiveData.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this ActiveData to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ActiveData.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ActiveData
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ActiveData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResourceState.ActiveData";
+                            };
+    
+                            return ActiveData;
+                        })();
+    
+                        QueuedResourceState.SuspendingData = (function() {
+    
+                            /**
+                             * Properties of a SuspendingData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @interface ISuspendingData
+                             */
+    
+                            /**
+                             * Constructs a new SuspendingData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @classdesc Represents a SuspendingData.
+                             * @implements ISuspendingData
+                             * @constructor
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendingData=} [properties] Properties to set
+                             */
+                            function SuspendingData(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new SuspendingData instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendingData=} [properties] Properties to set
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData} SuspendingData instance
+                             */
+                            SuspendingData.create = function create(properties) {
+                                return new SuspendingData(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SuspendingData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendingData} message SuspendingData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SuspendingData.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SuspendingData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendingData} message SuspendingData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SuspendingData.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SuspendingData message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData} SuspendingData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SuspendingData.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SuspendingData message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData} SuspendingData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SuspendingData.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SuspendingData message.
+                             * @function verify
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SuspendingData.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SuspendingData message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData} SuspendingData
+                             */
+                            SuspendingData.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData)
+                                    return object;
+                                return new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData();
+                            };
+    
+                            /**
+                             * Creates a plain object from a SuspendingData message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData} message SuspendingData
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SuspendingData.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this SuspendingData to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SuspendingData.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SuspendingData
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SuspendingData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendingData";
+                            };
+    
+                            return SuspendingData;
+                        })();
+    
+                        QueuedResourceState.SuspendedData = (function() {
+    
+                            /**
+                             * Properties of a SuspendedData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @interface ISuspendedData
+                             */
+    
+                            /**
+                             * Constructs a new SuspendedData.
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState
+                             * @classdesc Represents a SuspendedData.
+                             * @implements ISuspendedData
+                             * @constructor
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData=} [properties] Properties to set
+                             */
+                            function SuspendedData(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new SuspendedData instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData=} [properties] Properties to set
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData} SuspendedData instance
+                             */
+                            SuspendedData.create = function create(properties) {
+                                return new SuspendedData(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SuspendedData message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData} message SuspendedData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SuspendedData.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SuspendedData message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.ISuspendedData} message SuspendedData message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SuspendedData.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SuspendedData message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData} SuspendedData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SuspendedData.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SuspendedData message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData} SuspendedData
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SuspendedData.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SuspendedData message.
+                             * @function verify
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SuspendedData.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SuspendedData message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData} SuspendedData
+                             */
+                            SuspendedData.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData)
+                                    return object;
+                                return new $root.google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData();
+                            };
+    
+                            /**
+                             * Creates a plain object from a SuspendedData message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData
+                             * @static
+                             * @param {google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData} message SuspendedData
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SuspendedData.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this SuspendedData to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SuspendedData.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SuspendedData
+                             * @function getTypeUrl
+                             * @memberof google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SuspendedData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResourceState.SuspendedData";
+                            };
+    
+                            return SuspendedData;
+                        })();
+    
+                        return QueuedResourceState;
                     })();
     
                     v2alpha1.ListNodesRequest = (function() {
@@ -20486,6 +24348,7 @@
                          * @property {string|null} [parent] CreateNodeRequest parent
                          * @property {string|null} [nodeId] CreateNodeRequest nodeId
                          * @property {google.cloud.tpu.v2alpha1.INode|null} [node] CreateNodeRequest node
+                         * @property {string|null} [requestId] CreateNodeRequest requestId
                          */
     
                         /**
@@ -20528,6 +24391,14 @@
                         CreateNodeRequest.prototype.node = null;
     
                         /**
+                         * CreateNodeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.tpu.v2alpha1.CreateNodeRequest
+                         * @instance
+                         */
+                        CreateNodeRequest.prototype.requestId = "";
+    
+                        /**
                          * Creates a new CreateNodeRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.tpu.v2alpha1.CreateNodeRequest
@@ -20557,6 +24428,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nodeId);
                             if (message.node != null && Object.hasOwnProperty.call(message, "node"))
                                 $root.google.cloud.tpu.v2alpha1.Node.encode(message.node, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.requestId);
                             return writer;
                         };
     
@@ -20601,6 +24474,10 @@
                                     }
                                 case 3: {
                                         message.node = $root.google.cloud.tpu.v2alpha1.Node.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.requestId = reader.string();
                                         break;
                                     }
                                 default:
@@ -20649,6 +24526,9 @@
                                 if (error)
                                     return "node." + error;
                             }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
                             return null;
                         };
     
@@ -20673,6 +24553,8 @@
                                     throw TypeError(".google.cloud.tpu.v2alpha1.CreateNodeRequest.node: object expected");
                                 message.node = $root.google.cloud.tpu.v2alpha1.Node.fromObject(object.node);
                             }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
                             return message;
                         };
     
@@ -20693,6 +24575,7 @@
                                 object.parent = "";
                                 object.nodeId = "";
                                 object.node = null;
+                                object.requestId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -20700,6 +24583,8 @@
                                 object.nodeId = message.nodeId;
                             if (message.node != null && message.hasOwnProperty("node"))
                                 object.node = $root.google.cloud.tpu.v2alpha1.Node.toObject(message.node, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
                             return object;
                         };
     
@@ -20739,6 +24624,7 @@
                          * @memberof google.cloud.tpu.v2alpha1
                          * @interface IDeleteNodeRequest
                          * @property {string|null} [name] DeleteNodeRequest name
+                         * @property {string|null} [requestId] DeleteNodeRequest requestId
                          */
     
                         /**
@@ -20763,6 +24649,14 @@
                          * @instance
                          */
                         DeleteNodeRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteNodeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.tpu.v2alpha1.DeleteNodeRequest
+                         * @instance
+                         */
+                        DeleteNodeRequest.prototype.requestId = "";
     
                         /**
                          * Creates a new DeleteNodeRequest instance using the specified properties.
@@ -20790,6 +24684,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
                             return writer;
                         };
     
@@ -20826,6 +24722,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
                                         break;
                                     }
                                 default:
@@ -20866,6 +24766,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
                             return null;
                         };
     
@@ -20883,6 +24786,8 @@
                             var message = new $root.google.cloud.tpu.v2alpha1.DeleteNodeRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
                             return message;
                         };
     
@@ -20899,10 +24804,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.requestId = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
                             return object;
                         };
     
@@ -21576,6 +25485,1252 @@
                         };
     
                         return UpdateNodeRequest;
+                    })();
+    
+                    v2alpha1.ListQueuedResourcesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListQueuedResourcesRequest.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @interface IListQueuedResourcesRequest
+                         * @property {string|null} [parent] ListQueuedResourcesRequest parent
+                         * @property {number|null} [pageSize] ListQueuedResourcesRequest pageSize
+                         * @property {string|null} [pageToken] ListQueuedResourcesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListQueuedResourcesRequest.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @classdesc Represents a ListQueuedResourcesRequest.
+                         * @implements IListQueuedResourcesRequest
+                         * @constructor
+                         * @param {google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest=} [properties] Properties to set
+                         */
+                        function ListQueuedResourcesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListQueuedResourcesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest
+                         * @instance
+                         */
+                        ListQueuedResourcesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListQueuedResourcesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest
+                         * @instance
+                         */
+                        ListQueuedResourcesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListQueuedResourcesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest
+                         * @instance
+                         */
+                        ListQueuedResourcesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListQueuedResourcesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest} ListQueuedResourcesRequest instance
+                         */
+                        ListQueuedResourcesRequest.create = function create(properties) {
+                            return new ListQueuedResourcesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListQueuedResourcesRequest message. Does not implicitly {@link google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest} message ListQueuedResourcesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQueuedResourcesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListQueuedResourcesRequest message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest} message ListQueuedResourcesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQueuedResourcesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListQueuedResourcesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest} ListQueuedResourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQueuedResourcesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListQueuedResourcesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest} ListQueuedResourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQueuedResourcesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListQueuedResourcesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListQueuedResourcesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListQueuedResourcesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest} ListQueuedResourcesRequest
+                         */
+                        ListQueuedResourcesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest)
+                                return object;
+                            var message = new $root.google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListQueuedResourcesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest} message ListQueuedResourcesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListQueuedResourcesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListQueuedResourcesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListQueuedResourcesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListQueuedResourcesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListQueuedResourcesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest";
+                        };
+    
+                        return ListQueuedResourcesRequest;
+                    })();
+    
+                    v2alpha1.ListQueuedResourcesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListQueuedResourcesResponse.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @interface IListQueuedResourcesResponse
+                         * @property {Array.<google.cloud.tpu.v2alpha1.IQueuedResource>|null} [queuedResources] ListQueuedResourcesResponse queuedResources
+                         * @property {string|null} [nextPageToken] ListQueuedResourcesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListQueuedResourcesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListQueuedResourcesResponse.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @classdesc Represents a ListQueuedResourcesResponse.
+                         * @implements IListQueuedResourcesResponse
+                         * @constructor
+                         * @param {google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse=} [properties] Properties to set
+                         */
+                        function ListQueuedResourcesResponse(properties) {
+                            this.queuedResources = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListQueuedResourcesResponse queuedResources.
+                         * @member {Array.<google.cloud.tpu.v2alpha1.IQueuedResource>} queuedResources
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse
+                         * @instance
+                         */
+                        ListQueuedResourcesResponse.prototype.queuedResources = $util.emptyArray;
+    
+                        /**
+                         * ListQueuedResourcesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse
+                         * @instance
+                         */
+                        ListQueuedResourcesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListQueuedResourcesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse
+                         * @instance
+                         */
+                        ListQueuedResourcesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListQueuedResourcesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse} ListQueuedResourcesResponse instance
+                         */
+                        ListQueuedResourcesResponse.create = function create(properties) {
+                            return new ListQueuedResourcesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListQueuedResourcesResponse message. Does not implicitly {@link google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse} message ListQueuedResourcesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQueuedResourcesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.queuedResources != null && message.queuedResources.length)
+                                for (var i = 0; i < message.queuedResources.length; ++i)
+                                    $root.google.cloud.tpu.v2alpha1.QueuedResource.encode(message.queuedResources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListQueuedResourcesResponse message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse} message ListQueuedResourcesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListQueuedResourcesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListQueuedResourcesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse} ListQueuedResourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQueuedResourcesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.queuedResources && message.queuedResources.length))
+                                            message.queuedResources = [];
+                                        message.queuedResources.push($root.google.cloud.tpu.v2alpha1.QueuedResource.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListQueuedResourcesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse} ListQueuedResourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListQueuedResourcesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListQueuedResourcesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListQueuedResourcesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.queuedResources != null && message.hasOwnProperty("queuedResources")) {
+                                if (!Array.isArray(message.queuedResources))
+                                    return "queuedResources: array expected";
+                                for (var i = 0; i < message.queuedResources.length; ++i) {
+                                    var error = $root.google.cloud.tpu.v2alpha1.QueuedResource.verify(message.queuedResources[i]);
+                                    if (error)
+                                        return "queuedResources." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListQueuedResourcesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse} ListQueuedResourcesResponse
+                         */
+                        ListQueuedResourcesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse)
+                                return object;
+                            var message = new $root.google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse();
+                            if (object.queuedResources) {
+                                if (!Array.isArray(object.queuedResources))
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse.queuedResources: array expected");
+                                message.queuedResources = [];
+                                for (var i = 0; i < object.queuedResources.length; ++i) {
+                                    if (typeof object.queuedResources[i] !== "object")
+                                        throw TypeError(".google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse.queuedResources: object expected");
+                                    message.queuedResources[i] = $root.google.cloud.tpu.v2alpha1.QueuedResource.fromObject(object.queuedResources[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListQueuedResourcesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse} message ListQueuedResourcesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListQueuedResourcesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.queuedResources = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.queuedResources && message.queuedResources.length) {
+                                object.queuedResources = [];
+                                for (var j = 0; j < message.queuedResources.length; ++j)
+                                    object.queuedResources[j] = $root.google.cloud.tpu.v2alpha1.QueuedResource.toObject(message.queuedResources[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListQueuedResourcesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListQueuedResourcesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListQueuedResourcesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListQueuedResourcesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse";
+                        };
+    
+                        return ListQueuedResourcesResponse;
+                    })();
+    
+                    v2alpha1.GetQueuedResourceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetQueuedResourceRequest.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @interface IGetQueuedResourceRequest
+                         * @property {string|null} [name] GetQueuedResourceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetQueuedResourceRequest.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @classdesc Represents a GetQueuedResourceRequest.
+                         * @implements IGetQueuedResourceRequest
+                         * @constructor
+                         * @param {google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest=} [properties] Properties to set
+                         */
+                        function GetQueuedResourceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetQueuedResourceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.tpu.v2alpha1.GetQueuedResourceRequest
+                         * @instance
+                         */
+                        GetQueuedResourceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetQueuedResourceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tpu.v2alpha1.GetQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.tpu.v2alpha1.GetQueuedResourceRequest} GetQueuedResourceRequest instance
+                         */
+                        GetQueuedResourceRequest.create = function create(properties) {
+                            return new GetQueuedResourceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetQueuedResourceRequest message. Does not implicitly {@link google.cloud.tpu.v2alpha1.GetQueuedResourceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tpu.v2alpha1.GetQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest} message GetQueuedResourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetQueuedResourceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetQueuedResourceRequest message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.GetQueuedResourceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.GetQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest} message GetQueuedResourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetQueuedResourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetQueuedResourceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tpu.v2alpha1.GetQueuedResourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tpu.v2alpha1.GetQueuedResourceRequest} GetQueuedResourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetQueuedResourceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.GetQueuedResourceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetQueuedResourceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.GetQueuedResourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tpu.v2alpha1.GetQueuedResourceRequest} GetQueuedResourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetQueuedResourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetQueuedResourceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.tpu.v2alpha1.GetQueuedResourceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetQueuedResourceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetQueuedResourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tpu.v2alpha1.GetQueuedResourceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tpu.v2alpha1.GetQueuedResourceRequest} GetQueuedResourceRequest
+                         */
+                        GetQueuedResourceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tpu.v2alpha1.GetQueuedResourceRequest)
+                                return object;
+                            var message = new $root.google.cloud.tpu.v2alpha1.GetQueuedResourceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetQueuedResourceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tpu.v2alpha1.GetQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.GetQueuedResourceRequest} message GetQueuedResourceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetQueuedResourceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetQueuedResourceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tpu.v2alpha1.GetQueuedResourceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetQueuedResourceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetQueuedResourceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tpu.v2alpha1.GetQueuedResourceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetQueuedResourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.GetQueuedResourceRequest";
+                        };
+    
+                        return GetQueuedResourceRequest;
+                    })();
+    
+                    v2alpha1.CreateQueuedResourceRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateQueuedResourceRequest.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @interface ICreateQueuedResourceRequest
+                         * @property {string|null} [parent] CreateQueuedResourceRequest parent
+                         * @property {string|null} [queuedResourceId] CreateQueuedResourceRequest queuedResourceId
+                         * @property {google.cloud.tpu.v2alpha1.IQueuedResource|null} [queuedResource] CreateQueuedResourceRequest queuedResource
+                         * @property {string|null} [requestId] CreateQueuedResourceRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateQueuedResourceRequest.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @classdesc Represents a CreateQueuedResourceRequest.
+                         * @implements ICreateQueuedResourceRequest
+                         * @constructor
+                         * @param {google.cloud.tpu.v2alpha1.ICreateQueuedResourceRequest=} [properties] Properties to set
+                         */
+                        function CreateQueuedResourceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateQueuedResourceRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest
+                         * @instance
+                         */
+                        CreateQueuedResourceRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateQueuedResourceRequest queuedResourceId.
+                         * @member {string} queuedResourceId
+                         * @memberof google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest
+                         * @instance
+                         */
+                        CreateQueuedResourceRequest.prototype.queuedResourceId = "";
+    
+                        /**
+                         * CreateQueuedResourceRequest queuedResource.
+                         * @member {google.cloud.tpu.v2alpha1.IQueuedResource|null|undefined} queuedResource
+                         * @memberof google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest
+                         * @instance
+                         */
+                        CreateQueuedResourceRequest.prototype.queuedResource = null;
+    
+                        /**
+                         * CreateQueuedResourceRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest
+                         * @instance
+                         */
+                        CreateQueuedResourceRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateQueuedResourceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.ICreateQueuedResourceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest} CreateQueuedResourceRequest instance
+                         */
+                        CreateQueuedResourceRequest.create = function create(properties) {
+                            return new CreateQueuedResourceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateQueuedResourceRequest message. Does not implicitly {@link google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.ICreateQueuedResourceRequest} message CreateQueuedResourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateQueuedResourceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.queuedResourceId != null && Object.hasOwnProperty.call(message, "queuedResourceId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.queuedResourceId);
+                            if (message.queuedResource != null && Object.hasOwnProperty.call(message, "queuedResource"))
+                                $root.google.cloud.tpu.v2alpha1.QueuedResource.encode(message.queuedResource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateQueuedResourceRequest message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.ICreateQueuedResourceRequest} message CreateQueuedResourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateQueuedResourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateQueuedResourceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest} CreateQueuedResourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateQueuedResourceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.queuedResourceId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.queuedResource = $root.google.cloud.tpu.v2alpha1.QueuedResource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateQueuedResourceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest} CreateQueuedResourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateQueuedResourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateQueuedResourceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateQueuedResourceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.queuedResourceId != null && message.hasOwnProperty("queuedResourceId"))
+                                if (!$util.isString(message.queuedResourceId))
+                                    return "queuedResourceId: string expected";
+                            if (message.queuedResource != null && message.hasOwnProperty("queuedResource")) {
+                                var error = $root.google.cloud.tpu.v2alpha1.QueuedResource.verify(message.queuedResource);
+                                if (error)
+                                    return "queuedResource." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateQueuedResourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest} CreateQueuedResourceRequest
+                         */
+                        CreateQueuedResourceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest)
+                                return object;
+                            var message = new $root.google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.queuedResourceId != null)
+                                message.queuedResourceId = String(object.queuedResourceId);
+                            if (object.queuedResource != null) {
+                                if (typeof object.queuedResource !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest.queuedResource: object expected");
+                                message.queuedResource = $root.google.cloud.tpu.v2alpha1.QueuedResource.fromObject(object.queuedResource);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateQueuedResourceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest} message CreateQueuedResourceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateQueuedResourceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.queuedResourceId = "";
+                                object.queuedResource = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.queuedResourceId != null && message.hasOwnProperty("queuedResourceId"))
+                                object.queuedResourceId = message.queuedResourceId;
+                            if (message.queuedResource != null && message.hasOwnProperty("queuedResource"))
+                                object.queuedResource = $root.google.cloud.tpu.v2alpha1.QueuedResource.toObject(message.queuedResource, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateQueuedResourceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateQueuedResourceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateQueuedResourceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateQueuedResourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest";
+                        };
+    
+                        return CreateQueuedResourceRequest;
+                    })();
+    
+                    v2alpha1.DeleteQueuedResourceRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteQueuedResourceRequest.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @interface IDeleteQueuedResourceRequest
+                         * @property {string|null} [name] DeleteQueuedResourceRequest name
+                         * @property {string|null} [requestId] DeleteQueuedResourceRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteQueuedResourceRequest.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @classdesc Represents a DeleteQueuedResourceRequest.
+                         * @implements IDeleteQueuedResourceRequest
+                         * @constructor
+                         * @param {google.cloud.tpu.v2alpha1.IDeleteQueuedResourceRequest=} [properties] Properties to set
+                         */
+                        function DeleteQueuedResourceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteQueuedResourceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest
+                         * @instance
+                         */
+                        DeleteQueuedResourceRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteQueuedResourceRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest
+                         * @instance
+                         */
+                        DeleteQueuedResourceRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteQueuedResourceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IDeleteQueuedResourceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest} DeleteQueuedResourceRequest instance
+                         */
+                        DeleteQueuedResourceRequest.create = function create(properties) {
+                            return new DeleteQueuedResourceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteQueuedResourceRequest message. Does not implicitly {@link google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IDeleteQueuedResourceRequest} message DeleteQueuedResourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteQueuedResourceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteQueuedResourceRequest message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IDeleteQueuedResourceRequest} message DeleteQueuedResourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteQueuedResourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteQueuedResourceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest} DeleteQueuedResourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteQueuedResourceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteQueuedResourceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest} DeleteQueuedResourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteQueuedResourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteQueuedResourceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteQueuedResourceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteQueuedResourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest} DeleteQueuedResourceRequest
+                         */
+                        DeleteQueuedResourceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest)
+                                return object;
+                            var message = new $root.google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteQueuedResourceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest} message DeleteQueuedResourceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteQueuedResourceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteQueuedResourceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteQueuedResourceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteQueuedResourceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteQueuedResourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest";
+                        };
+    
+                        return DeleteQueuedResourceRequest;
                     })();
     
                     v2alpha1.ServiceIdentity = (function() {
@@ -23206,358 +28361,6 @@
                         return ListAcceleratorTypesResponse;
                     })();
     
-                    v2alpha1.OperationMetadata = (function() {
-    
-                        /**
-                         * Properties of an OperationMetadata.
-                         * @memberof google.cloud.tpu.v2alpha1
-                         * @interface IOperationMetadata
-                         * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
-                         * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
-                         * @property {string|null} [target] OperationMetadata target
-                         * @property {string|null} [verb] OperationMetadata verb
-                         * @property {string|null} [statusDetail] OperationMetadata statusDetail
-                         * @property {boolean|null} [cancelRequested] OperationMetadata cancelRequested
-                         * @property {string|null} [apiVersion] OperationMetadata apiVersion
-                         */
-    
-                        /**
-                         * Constructs a new OperationMetadata.
-                         * @memberof google.cloud.tpu.v2alpha1
-                         * @classdesc Represents an OperationMetadata.
-                         * @implements IOperationMetadata
-                         * @constructor
-                         * @param {google.cloud.tpu.v2alpha1.IOperationMetadata=} [properties] Properties to set
-                         */
-                        function OperationMetadata(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * OperationMetadata createTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @instance
-                         */
-                        OperationMetadata.prototype.createTime = null;
-    
-                        /**
-                         * OperationMetadata endTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @instance
-                         */
-                        OperationMetadata.prototype.endTime = null;
-    
-                        /**
-                         * OperationMetadata target.
-                         * @member {string} target
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @instance
-                         */
-                        OperationMetadata.prototype.target = "";
-    
-                        /**
-                         * OperationMetadata verb.
-                         * @member {string} verb
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @instance
-                         */
-                        OperationMetadata.prototype.verb = "";
-    
-                        /**
-                         * OperationMetadata statusDetail.
-                         * @member {string} statusDetail
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @instance
-                         */
-                        OperationMetadata.prototype.statusDetail = "";
-    
-                        /**
-                         * OperationMetadata cancelRequested.
-                         * @member {boolean} cancelRequested
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @instance
-                         */
-                        OperationMetadata.prototype.cancelRequested = false;
-    
-                        /**
-                         * OperationMetadata apiVersion.
-                         * @member {string} apiVersion
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @instance
-                         */
-                        OperationMetadata.prototype.apiVersion = "";
-    
-                        /**
-                         * Creates a new OperationMetadata instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @static
-                         * @param {google.cloud.tpu.v2alpha1.IOperationMetadata=} [properties] Properties to set
-                         * @returns {google.cloud.tpu.v2alpha1.OperationMetadata} OperationMetadata instance
-                         */
-                        OperationMetadata.create = function create(properties) {
-                            return new OperationMetadata(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.tpu.v2alpha1.OperationMetadata.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @static
-                         * @param {google.cloud.tpu.v2alpha1.IOperationMetadata} message OperationMetadata message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        OperationMetadata.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
-                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
-                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
-                            if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.verb);
-                            if (message.statusDetail != null && Object.hasOwnProperty.call(message, "statusDetail"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.statusDetail);
-                            if (message.cancelRequested != null && Object.hasOwnProperty.call(message, "cancelRequested"))
-                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.cancelRequested);
-                            if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
-                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.apiVersion);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.OperationMetadata.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @static
-                         * @param {google.cloud.tpu.v2alpha1.IOperationMetadata} message OperationMetadata message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an OperationMetadata message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.tpu.v2alpha1.OperationMetadata} OperationMetadata
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        OperationMetadata.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.OperationMetadata();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 2: {
-                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.target = reader.string();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.verb = reader.string();
-                                        break;
-                                    }
-                                case 5: {
-                                        message.statusDetail = reader.string();
-                                        break;
-                                    }
-                                case 6: {
-                                        message.cancelRequested = reader.bool();
-                                        break;
-                                    }
-                                case 7: {
-                                        message.apiVersion = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.tpu.v2alpha1.OperationMetadata} OperationMetadata
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an OperationMetadata message.
-                         * @function verify
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        OperationMetadata.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
-                                if (error)
-                                    return "createTime." + error;
-                            }
-                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
-                                if (error)
-                                    return "endTime." + error;
-                            }
-                            if (message.target != null && message.hasOwnProperty("target"))
-                                if (!$util.isString(message.target))
-                                    return "target: string expected";
-                            if (message.verb != null && message.hasOwnProperty("verb"))
-                                if (!$util.isString(message.verb))
-                                    return "verb: string expected";
-                            if (message.statusDetail != null && message.hasOwnProperty("statusDetail"))
-                                if (!$util.isString(message.statusDetail))
-                                    return "statusDetail: string expected";
-                            if (message.cancelRequested != null && message.hasOwnProperty("cancelRequested"))
-                                if (typeof message.cancelRequested !== "boolean")
-                                    return "cancelRequested: boolean expected";
-                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
-                                if (!$util.isString(message.apiVersion))
-                                    return "apiVersion: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.tpu.v2alpha1.OperationMetadata} OperationMetadata
-                         */
-                        OperationMetadata.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.tpu.v2alpha1.OperationMetadata)
-                                return object;
-                            var message = new $root.google.cloud.tpu.v2alpha1.OperationMetadata();
-                            if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
-                                    throw TypeError(".google.cloud.tpu.v2alpha1.OperationMetadata.createTime: object expected");
-                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
-                            }
-                            if (object.endTime != null) {
-                                if (typeof object.endTime !== "object")
-                                    throw TypeError(".google.cloud.tpu.v2alpha1.OperationMetadata.endTime: object expected");
-                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
-                            }
-                            if (object.target != null)
-                                message.target = String(object.target);
-                            if (object.verb != null)
-                                message.verb = String(object.verb);
-                            if (object.statusDetail != null)
-                                message.statusDetail = String(object.statusDetail);
-                            if (object.cancelRequested != null)
-                                message.cancelRequested = Boolean(object.cancelRequested);
-                            if (object.apiVersion != null)
-                                message.apiVersion = String(object.apiVersion);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @static
-                         * @param {google.cloud.tpu.v2alpha1.OperationMetadata} message OperationMetadata
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        OperationMetadata.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.createTime = null;
-                                object.endTime = null;
-                                object.target = "";
-                                object.verb = "";
-                                object.statusDetail = "";
-                                object.cancelRequested = false;
-                                object.apiVersion = "";
-                            }
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
-                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
-                            if (message.endTime != null && message.hasOwnProperty("endTime"))
-                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
-                            if (message.target != null && message.hasOwnProperty("target"))
-                                object.target = message.target;
-                            if (message.verb != null && message.hasOwnProperty("verb"))
-                                object.verb = message.verb;
-                            if (message.statusDetail != null && message.hasOwnProperty("statusDetail"))
-                                object.statusDetail = message.statusDetail;
-                            if (message.cancelRequested != null && message.hasOwnProperty("cancelRequested"))
-                                object.cancelRequested = message.cancelRequested;
-                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
-                                object.apiVersion = message.apiVersion;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this OperationMetadata to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        OperationMetadata.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for OperationMetadata
-                         * @function getTypeUrl
-                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.OperationMetadata";
-                        };
-    
-                        return OperationMetadata;
-                    })();
-    
                     v2alpha1.RuntimeVersion = (function() {
     
                         /**
@@ -24572,6 +29375,358 @@
                         return ListRuntimeVersionsResponse;
                     })();
     
+                    v2alpha1.OperationMetadata = (function() {
+    
+                        /**
+                         * Properties of an OperationMetadata.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @interface IOperationMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
+                         * @property {string|null} [target] OperationMetadata target
+                         * @property {string|null} [verb] OperationMetadata verb
+                         * @property {string|null} [statusDetail] OperationMetadata statusDetail
+                         * @property {boolean|null} [cancelRequested] OperationMetadata cancelRequested
+                         * @property {string|null} [apiVersion] OperationMetadata apiVersion
+                         */
+    
+                        /**
+                         * Constructs a new OperationMetadata.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @classdesc Represents an OperationMetadata.
+                         * @implements IOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.tpu.v2alpha1.IOperationMetadata=} [properties] Properties to set
+                         */
+                        function OperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OperationMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.createTime = null;
+    
+                        /**
+                         * OperationMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.endTime = null;
+    
+                        /**
+                         * OperationMetadata target.
+                         * @member {string} target
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.target = "";
+    
+                        /**
+                         * OperationMetadata verb.
+                         * @member {string} verb
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.verb = "";
+    
+                        /**
+                         * OperationMetadata statusDetail.
+                         * @member {string} statusDetail
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.statusDetail = "";
+    
+                        /**
+                         * OperationMetadata cancelRequested.
+                         * @member {boolean} cancelRequested
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.cancelRequested = false;
+    
+                        /**
+                         * OperationMetadata apiVersion.
+                         * @member {string} apiVersion
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.apiVersion = "";
+    
+                        /**
+                         * Creates a new OperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.tpu.v2alpha1.OperationMetadata} OperationMetadata instance
+                         */
+                        OperationMetadata.create = function create(properties) {
+                            return new OperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.tpu.v2alpha1.OperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
+                            if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.verb);
+                            if (message.statusDetail != null && Object.hasOwnProperty.call(message, "statusDetail"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.statusDetail);
+                            if (message.cancelRequested != null && Object.hasOwnProperty.call(message, "cancelRequested"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.cancelRequested);
+                            if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.apiVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.OperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tpu.v2alpha1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.OperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.verb = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.statusDetail = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.cancelRequested = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.apiVersion = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tpu.v2alpha1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                if (!$util.isString(message.verb))
+                                    return "verb: string expected";
+                            if (message.statusDetail != null && message.hasOwnProperty("statusDetail"))
+                                if (!$util.isString(message.statusDetail))
+                                    return "statusDetail: string expected";
+                            if (message.cancelRequested != null && message.hasOwnProperty("cancelRequested"))
+                                if (typeof message.cancelRequested !== "boolean")
+                                    return "cancelRequested: boolean expected";
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                if (!$util.isString(message.apiVersion))
+                                    return "apiVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tpu.v2alpha1.OperationMetadata} OperationMetadata
+                         */
+                        OperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tpu.v2alpha1.OperationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.tpu.v2alpha1.OperationMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.OperationMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.OperationMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            if (object.verb != null)
+                                message.verb = String(object.verb);
+                            if (object.statusDetail != null)
+                                message.statusDetail = String(object.statusDetail);
+                            if (object.cancelRequested != null)
+                                message.cancelRequested = Boolean(object.cancelRequested);
+                            if (object.apiVersion != null)
+                                message.apiVersion = String(object.apiVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.OperationMetadata} message OperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OperationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.target = "";
+                                object.verb = "";
+                                object.statusDetail = "";
+                                object.cancelRequested = false;
+                                object.apiVersion = "";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                object.verb = message.verb;
+                            if (message.statusDetail != null && message.hasOwnProperty("statusDetail"))
+                                object.statusDetail = message.statusDetail;
+                            if (message.cancelRequested != null && message.hasOwnProperty("cancelRequested"))
+                                object.cancelRequested = message.cancelRequested;
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                object.apiVersion = message.apiVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OperationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tpu.v2alpha1.OperationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.OperationMetadata";
+                        };
+    
+                        return OperationMetadata;
+                    })();
+    
                     v2alpha1.Symptom = (function() {
     
                         /**
@@ -25407,6 +30562,249 @@
                         };
     
                         return GetGuestAttributesResponse;
+                    })();
+    
+                    v2alpha1.SimulateMaintenanceEventRequest = (function() {
+    
+                        /**
+                         * Properties of a SimulateMaintenanceEventRequest.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @interface ISimulateMaintenanceEventRequest
+                         * @property {string|null} [name] SimulateMaintenanceEventRequest name
+                         * @property {Array.<string>|null} [workerIds] SimulateMaintenanceEventRequest workerIds
+                         */
+    
+                        /**
+                         * Constructs a new SimulateMaintenanceEventRequest.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @classdesc Represents a SimulateMaintenanceEventRequest.
+                         * @implements ISimulateMaintenanceEventRequest
+                         * @constructor
+                         * @param {google.cloud.tpu.v2alpha1.ISimulateMaintenanceEventRequest=} [properties] Properties to set
+                         */
+                        function SimulateMaintenanceEventRequest(properties) {
+                            this.workerIds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SimulateMaintenanceEventRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest
+                         * @instance
+                         */
+                        SimulateMaintenanceEventRequest.prototype.name = "";
+    
+                        /**
+                         * SimulateMaintenanceEventRequest workerIds.
+                         * @member {Array.<string>} workerIds
+                         * @memberof google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest
+                         * @instance
+                         */
+                        SimulateMaintenanceEventRequest.prototype.workerIds = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SimulateMaintenanceEventRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.ISimulateMaintenanceEventRequest=} [properties] Properties to set
+                         * @returns {google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest} SimulateMaintenanceEventRequest instance
+                         */
+                        SimulateMaintenanceEventRequest.create = function create(properties) {
+                            return new SimulateMaintenanceEventRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SimulateMaintenanceEventRequest message. Does not implicitly {@link google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.ISimulateMaintenanceEventRequest} message SimulateMaintenanceEventRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SimulateMaintenanceEventRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.workerIds != null && message.workerIds.length)
+                                for (var i = 0; i < message.workerIds.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.workerIds[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SimulateMaintenanceEventRequest message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.ISimulateMaintenanceEventRequest} message SimulateMaintenanceEventRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SimulateMaintenanceEventRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SimulateMaintenanceEventRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest} SimulateMaintenanceEventRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SimulateMaintenanceEventRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.workerIds && message.workerIds.length))
+                                            message.workerIds = [];
+                                        message.workerIds.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SimulateMaintenanceEventRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest} SimulateMaintenanceEventRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SimulateMaintenanceEventRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SimulateMaintenanceEventRequest message.
+                         * @function verify
+                         * @memberof google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SimulateMaintenanceEventRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.workerIds != null && message.hasOwnProperty("workerIds")) {
+                                if (!Array.isArray(message.workerIds))
+                                    return "workerIds: array expected";
+                                for (var i = 0; i < message.workerIds.length; ++i)
+                                    if (!$util.isString(message.workerIds[i]))
+                                        return "workerIds: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SimulateMaintenanceEventRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest} SimulateMaintenanceEventRequest
+                         */
+                        SimulateMaintenanceEventRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest)
+                                return object;
+                            var message = new $root.google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.workerIds) {
+                                if (!Array.isArray(object.workerIds))
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest.workerIds: array expected");
+                                message.workerIds = [];
+                                for (var i = 0; i < object.workerIds.length; ++i)
+                                    message.workerIds[i] = String(object.workerIds[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SimulateMaintenanceEventRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest} message SimulateMaintenanceEventRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SimulateMaintenanceEventRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.workerIds = [];
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.workerIds && message.workerIds.length) {
+                                object.workerIds = [];
+                                for (var j = 0; j < message.workerIds.length; ++j)
+                                    object.workerIds[j] = message.workerIds[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SimulateMaintenanceEventRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SimulateMaintenanceEventRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SimulateMaintenanceEventRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SimulateMaintenanceEventRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest";
+                        };
+    
+                        return SimulateMaintenanceEventRequest;
                     })();
     
                     v2alpha1.ShieldedInstanceConfig = (function() {
@@ -40251,6 +45649,255 @@
             })();
     
             return rpc;
+        })();
+    
+        google.type = (function() {
+    
+            /**
+             * Namespace type.
+             * @memberof google
+             * @namespace
+             */
+            var type = {};
+    
+            type.Interval = (function() {
+    
+                /**
+                 * Properties of an Interval.
+                 * @memberof google.type
+                 * @interface IInterval
+                 * @property {google.protobuf.ITimestamp|null} [startTime] Interval startTime
+                 * @property {google.protobuf.ITimestamp|null} [endTime] Interval endTime
+                 */
+    
+                /**
+                 * Constructs a new Interval.
+                 * @memberof google.type
+                 * @classdesc Represents an Interval.
+                 * @implements IInterval
+                 * @constructor
+                 * @param {google.type.IInterval=} [properties] Properties to set
+                 */
+                function Interval(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Interval startTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                 * @memberof google.type.Interval
+                 * @instance
+                 */
+                Interval.prototype.startTime = null;
+    
+                /**
+                 * Interval endTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                 * @memberof google.type.Interval
+                 * @instance
+                 */
+                Interval.prototype.endTime = null;
+    
+                /**
+                 * Creates a new Interval instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.IInterval=} [properties] Properties to set
+                 * @returns {google.type.Interval} Interval instance
+                 */
+                Interval.create = function create(properties) {
+                    return new Interval(properties);
+                };
+    
+                /**
+                 * Encodes the specified Interval message. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.IInterval} message Interval message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Interval.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                        $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                        $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.IInterval} message Interval message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Interval.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Interval message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Interval} Interval
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Interval.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Interval();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Interval message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Interval} Interval
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Interval.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Interval message.
+                 * @function verify
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Interval.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                        if (error)
+                            return "startTime." + error;
+                    }
+                    if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                        if (error)
+                            return "endTime." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Interval} Interval
+                 */
+                Interval.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Interval)
+                        return object;
+                    var message = new $root.google.type.Interval();
+                    if (object.startTime != null) {
+                        if (typeof object.startTime !== "object")
+                            throw TypeError(".google.type.Interval.startTime: object expected");
+                        message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                    }
+                    if (object.endTime != null) {
+                        if (typeof object.endTime !== "object")
+                            throw TypeError(".google.type.Interval.endTime: object expected");
+                        message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Interval message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.Interval} message Interval
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Interval.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.startTime = null;
+                        object.endTime = null;
+                    }
+                    if (message.startTime != null && message.hasOwnProperty("startTime"))
+                        object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                    if (message.endTime != null && message.hasOwnProperty("endTime"))
+                        object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this Interval to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Interval
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Interval.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Interval
+                 * @function getTypeUrl
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Interval.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.Interval";
+                };
+    
+                return Interval;
+            })();
+    
+            return type;
         })();
     
         return google;
