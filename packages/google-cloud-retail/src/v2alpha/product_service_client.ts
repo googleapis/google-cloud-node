@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -241,6 +241,9 @@ export class ProductServiceClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
           additional_bindings: [
+            {
+              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',
+            },
             {
               get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
             },
@@ -1157,31 +1160,26 @@ export class ProductServiceClient {
    * @param {google.cloud.retail.v2alpha.ImportErrorsConfig} request.errorsConfig
    *   The desired location of errors incurred during the Import.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Indicates which fields in the provided imported 'products' to update. If
-   *   not set, will by default update all fields.
+   *   Indicates which fields in the provided imported `products` to update. If
+   *   not set, all fields are updated.
    * @param {google.cloud.retail.v2alpha.ImportProductsRequest.ReconciliationMode} request.reconciliationMode
    *   The mode of reconciliation between existing products and the products to be
    *   imported. Defaults to
    *   {@link google.cloud.retail.v2alpha.ImportProductsRequest.ReconciliationMode.INCREMENTAL|ReconciliationMode.INCREMENTAL}.
    * @param {string} request.notificationPubsubTopic
    *   Full Pub/Sub topic name for receiving notification. If this field is set,
-   *   when the import is finished, a notification will be sent to
-   *   specified Pub/Sub topic. The message data will be JSON string of a
+   *   when the import is finished, a notification is sent to
+   *   specified Pub/Sub topic. The message data is JSON string of a
    *   {@link google.longrunning.Operation|Operation}.
    *
    *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
    *   to be within the same project as
    *   {@link google.cloud.retail.v2alpha.ImportProductsRequest.parent|ImportProductsRequest.parent}.
-   *   Make sure that both
-   *   `cloud-retail-customer-data-access@system.gserviceaccount.com` and
-   *   `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
-   *   have the `pubsub.topics.publish` IAM permission on the topic.
-   *
-   *   Only supported when
-   *   {@link google.cloud.retail.v2alpha.ImportProductsRequest.reconciliation_mode|ImportProductsRequest.reconciliation_mode}
-   *   is set to `FULL`.
+   *   Make sure that `service-<project
+   *   number>@gcp-sa-retail.iam.gserviceaccount.com` has the
+   *   `pubsub.topics.publish` IAM permission on the topic.
    * @param {boolean} request.skipDefaultBranchProtection
-   *   If true, will perform the FULL import even if it would delete a large
+   *   If true, this performs the FULL import even if it would delete a large
    *   proportion of the products in the default branch, which could potentially
    *   cause outages if you have live predict/search traffic.
    *
@@ -1326,9 +1324,9 @@ export class ProductServiceClient {
    *
    * This process is asynchronous and does not require the
    * {@link google.cloud.retail.v2alpha.Product|Product} to exist before updating
-   * fulfillment information. If the request is valid, the update will be
-   * enqueued and processed downstream. As a consequence, when a response is
-   * returned, updates are not immediately manifested in the
+   * fulfillment information. If the request is valid, the update is enqueued
+   * and processed downstream. As a consequence, when a response is returned,
+   * updates are not immediately manifested in the
    * {@link google.cloud.retail.v2alpha.Product|Product} queried by
    * {@link google.cloud.retail.v2alpha.ProductService.GetProduct|ProductService.GetProduct}
    * or
@@ -1338,10 +1336,10 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2alpha.ProductService.CreateProduct|ProductService.CreateProduct}
    * and
    * {@link google.cloud.retail.v2alpha.ProductService.UpdateProduct|ProductService.UpdateProduct},
-   * the specified inventory field value(s) will overwrite any existing value(s)
+   * the specified inventory field value(s) overwrite any existing value(s)
    * while ignoring the last update time for this field. Furthermore, the last
-   * update time for the specified inventory fields will be overwritten to the
-   * time of the
+   * update times for the specified inventory fields are overwritten by the
+   * times of the
    * {@link google.cloud.retail.v2alpha.ProductService.CreateProduct|ProductService.CreateProduct}
    * or
    * {@link google.cloud.retail.v2alpha.ProductService.UpdateProduct|ProductService.UpdateProduct}
@@ -1349,11 +1347,11 @@ export class ProductServiceClient {
    *
    * If no inventory fields are set in
    * {@link google.cloud.retail.v2alpha.CreateProductRequest.product|CreateProductRequest.product},
-   * then any pre-existing inventory information for this product will be used.
+   * then any pre-existing inventory information for this product is used.
    *
    * If no inventory fields are set in
    * {@link google.cloud.retail.v2alpha.SetInventoryRequest.set_mask|SetInventoryRequest.set_mask},
-   * then any existing inventory information will be preserved.
+   * then any existing inventory information is preserved.
    *
    * Pre-existing inventory information can only be updated with
    * {@link google.cloud.retail.v2alpha.ProductService.SetInventory|ProductService.SetInventory},
@@ -1361,8 +1359,17 @@ export class ProductServiceClient {
    * and
    * {@link google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}.
    *
+   * The returned {@link google.longrunning.Operation|Operation}s is obsolete after
+   * one day, and the {@link google.longrunning.Operations.GetOperation|GetOperation}
+   * API returns `NOT_FOUND` afterwards.
+   *
+   * If conflicting updates are issued, the
+   * {@link google.longrunning.Operation|Operation}s associated with the stale
+   * updates are not marked as {@link google.longrunning.Operation.done|done} until
+   * they are obsolete.
+   *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1589,8 +1596,17 @@ export class ProductServiceClient {
    * or
    * {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ProductService.ListProducts}.
    *
+   * The returned {@link google.longrunning.Operation|Operation}s will be obsolete
+   * after 1 day, and {@link google.longrunning.Operations.GetOperation|GetOperation}
+   * API will return NOT_FOUND afterwards.
+   *
+   * If conflicting updates are issued, the
+   * {@link google.longrunning.Operation|Operation}s associated with the stale
+   * updates will not be marked as {@link google.longrunning.Operation.done|done}
+   * until being obsolete.
+   *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1795,8 +1811,17 @@ export class ProductServiceClient {
    * or
    * {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ProductService.ListProducts}.
    *
+   * The returned {@link google.longrunning.Operation|Operation}s will be obsolete
+   * after 1 day, and {@link google.longrunning.Operations.GetOperation|GetOperation}
+   * API will return NOT_FOUND afterwards.
+   *
+   * If conflicting updates are issued, the
+   * {@link google.longrunning.Operation|Operation}s associated with the stale
+   * updates will not be marked as {@link google.longrunning.Operation.done|done}
+   * until being obsolete.
+   *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2007,8 +2032,17 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2alpha.ProductService.UpdateProduct|ProductService.UpdateProduct}
    * has no effect on local inventories.
    *
+   * The returned {@link google.longrunning.Operation|Operation}s will be obsolete
+   * after 1 day, and {@link google.longrunning.Operations.GetOperation|GetOperation}
+   * API will return NOT_FOUND afterwards.
+   *
+   * If conflicting updates are issued, the
+   * {@link google.longrunning.Operation|Operation}s associated with the stale
+   * updates will not be marked as {@link google.longrunning.Operation.done|done}
+   * until being obsolete.
+   *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2201,8 +2235,17 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2alpha.ProductService.UpdateProduct|ProductService.UpdateProduct}
    * has no effect on local inventories.
    *
+   * The returned {@link google.longrunning.Operation|Operation}s will be obsolete
+   * after 1 day, and {@link google.longrunning.Operations.GetOperation|GetOperation}
+   * API will return NOT_FOUND afterwards.
+   *
+   * If conflicting updates are issued, the
+   * {@link google.longrunning.Operation|Operation}s associated with the stale
+   * updates will not be marked as {@link google.longrunning.Operation.done|done}
+   * until being obsolete.
+   *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
