@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,6 +40,10 @@ function main(parent, node) {
    *  Required. The node.
    */
   // const node = {}
+  /**
+   *  Idempotent request UUID.
+   */
+  // const requestId = 'abc123'
 
   // Imports the Tpu library
   const {TpuClient} = require('@google-cloud/tpu').v2alpha1;

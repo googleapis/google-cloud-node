@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main() {
+function main(name) {
   // [START tpu_v2alpha1_generated_Tpu_StopNode_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,7 +29,7 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The resource name.
+   *  Required. The resource name.
    */
   // const name = 'abc123'
 
@@ -42,6 +42,7 @@ function main() {
   async function callStopNode() {
     // Construct request
     const request = {
+      name,
     };
 
     // Run request

@@ -5505,8 +5505,10 @@
                          * @memberof google.cloud.scheduler.v1beta1
                          * @interface IListJobsRequest
                          * @property {string|null} [parent] ListJobsRequest parent
+                         * @property {string|null} [filter] ListJobsRequest filter
                          * @property {number|null} [pageSize] ListJobsRequest pageSize
                          * @property {string|null} [pageToken] ListJobsRequest pageToken
+                         * @property {boolean|null} [legacyAppEngineCron] ListJobsRequest legacyAppEngineCron
                          */
     
                         /**
@@ -5533,6 +5535,14 @@
                         ListJobsRequest.prototype.parent = "";
     
                         /**
+                         * ListJobsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.scheduler.v1beta1.ListJobsRequest
+                         * @instance
+                         */
+                        ListJobsRequest.prototype.filter = "";
+    
+                        /**
                          * ListJobsRequest pageSize.
                          * @member {number} pageSize
                          * @memberof google.cloud.scheduler.v1beta1.ListJobsRequest
@@ -5547,6 +5557,14 @@
                          * @instance
                          */
                         ListJobsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListJobsRequest legacyAppEngineCron.
+                         * @member {boolean} legacyAppEngineCron
+                         * @memberof google.cloud.scheduler.v1beta1.ListJobsRequest
+                         * @instance
+                         */
+                        ListJobsRequest.prototype.legacyAppEngineCron = false;
     
                         /**
                          * Creates a new ListJobsRequest instance using the specified properties.
@@ -5574,10 +5592,14 @@
                                 writer = $Writer.create();
                             if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
                             if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.pageToken);
+                            if (message.legacyAppEngineCron != null && Object.hasOwnProperty.call(message, "legacyAppEngineCron"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.legacyAppEngineCron);
                             return writer;
                         };
     
@@ -5616,12 +5638,20 @@
                                         message.parent = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
                                 case 5: {
                                         message.pageSize = reader.int32();
                                         break;
                                     }
                                 case 6: {
                                         message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.legacyAppEngineCron = reader.bool();
                                         break;
                                     }
                                 default:
@@ -5662,12 +5692,18 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
                             if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                                 if (!$util.isInteger(message.pageSize))
                                     return "pageSize: integer expected";
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.legacyAppEngineCron != null && message.hasOwnProperty("legacyAppEngineCron"))
+                                if (typeof message.legacyAppEngineCron !== "boolean")
+                                    return "legacyAppEngineCron: boolean expected";
                             return null;
                         };
     
@@ -5685,10 +5721,14 @@
                             var message = new $root.google.cloud.scheduler.v1beta1.ListJobsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
                             if (object.pageSize != null)
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.legacyAppEngineCron != null)
+                                message.legacyAppEngineCron = Boolean(object.legacyAppEngineCron);
                             return message;
                         };
     
@@ -5707,15 +5747,21 @@
                             var object = {};
                             if (options.defaults) {
                                 object.parent = "";
+                                object.filter = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.legacyAppEngineCron = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
                             if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.legacyAppEngineCron != null && message.hasOwnProperty("legacyAppEngineCron"))
+                                object.legacyAppEngineCron = message.legacyAppEngineCron;
                             return object;
                         };
     
@@ -6675,6 +6721,7 @@
                          * @memberof google.cloud.scheduler.v1beta1
                          * @interface IDeleteJobRequest
                          * @property {string|null} [name] DeleteJobRequest name
+                         * @property {boolean|null} [legacyAppEngineCron] DeleteJobRequest legacyAppEngineCron
                          */
     
                         /**
@@ -6699,6 +6746,14 @@
                          * @instance
                          */
                         DeleteJobRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteJobRequest legacyAppEngineCron.
+                         * @member {boolean} legacyAppEngineCron
+                         * @memberof google.cloud.scheduler.v1beta1.DeleteJobRequest
+                         * @instance
+                         */
+                        DeleteJobRequest.prototype.legacyAppEngineCron = false;
     
                         /**
                          * Creates a new DeleteJobRequest instance using the specified properties.
@@ -6726,6 +6781,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.legacyAppEngineCron != null && Object.hasOwnProperty.call(message, "legacyAppEngineCron"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.legacyAppEngineCron);
                             return writer;
                         };
     
@@ -6762,6 +6819,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.legacyAppEngineCron = reader.bool();
                                         break;
                                     }
                                 default:
@@ -6802,6 +6863,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.legacyAppEngineCron != null && message.hasOwnProperty("legacyAppEngineCron"))
+                                if (typeof message.legacyAppEngineCron !== "boolean")
+                                    return "legacyAppEngineCron: boolean expected";
                             return null;
                         };
     
@@ -6819,6 +6883,8 @@
                             var message = new $root.google.cloud.scheduler.v1beta1.DeleteJobRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.legacyAppEngineCron != null)
+                                message.legacyAppEngineCron = Boolean(object.legacyAppEngineCron);
                             return message;
                         };
     
@@ -6835,10 +6901,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.legacyAppEngineCron = false;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.legacyAppEngineCron != null && message.hasOwnProperty("legacyAppEngineCron"))
+                                object.legacyAppEngineCron = message.legacyAppEngineCron;
                             return object;
                         };
     
@@ -7284,6 +7354,7 @@
                          * @memberof google.cloud.scheduler.v1beta1
                          * @interface IRunJobRequest
                          * @property {string|null} [name] RunJobRequest name
+                         * @property {boolean|null} [legacyAppEngineCron] RunJobRequest legacyAppEngineCron
                          */
     
                         /**
@@ -7308,6 +7379,14 @@
                          * @instance
                          */
                         RunJobRequest.prototype.name = "";
+    
+                        /**
+                         * RunJobRequest legacyAppEngineCron.
+                         * @member {boolean} legacyAppEngineCron
+                         * @memberof google.cloud.scheduler.v1beta1.RunJobRequest
+                         * @instance
+                         */
+                        RunJobRequest.prototype.legacyAppEngineCron = false;
     
                         /**
                          * Creates a new RunJobRequest instance using the specified properties.
@@ -7335,6 +7414,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.legacyAppEngineCron != null && Object.hasOwnProperty.call(message, "legacyAppEngineCron"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.legacyAppEngineCron);
                             return writer;
                         };
     
@@ -7371,6 +7452,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.legacyAppEngineCron = reader.bool();
                                         break;
                                     }
                                 default:
@@ -7411,6 +7496,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.legacyAppEngineCron != null && message.hasOwnProperty("legacyAppEngineCron"))
+                                if (typeof message.legacyAppEngineCron !== "boolean")
+                                    return "legacyAppEngineCron: boolean expected";
                             return null;
                         };
     
@@ -7428,6 +7516,8 @@
                             var message = new $root.google.cloud.scheduler.v1beta1.RunJobRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.legacyAppEngineCron != null)
+                                message.legacyAppEngineCron = Boolean(object.legacyAppEngineCron);
                             return message;
                         };
     
@@ -7444,10 +7534,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.legacyAppEngineCron = false;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.legacyAppEngineCron != null && message.hasOwnProperty("legacyAppEngineCron"))
+                                object.legacyAppEngineCron = message.legacyAppEngineCron;
                             return object;
                         };
     
@@ -7500,6 +7594,7 @@
                          * @property {google.protobuf.ITimestamp|null} [lastAttemptTime] Job lastAttemptTime
                          * @property {google.cloud.scheduler.v1beta1.IRetryConfig|null} [retryConfig] Job retryConfig
                          * @property {google.protobuf.IDuration|null} [attemptDeadline] Job attemptDeadline
+                         * @property {boolean|null} [legacyAppEngineCron] Job legacyAppEngineCron
                          */
     
                         /**
@@ -7629,6 +7724,14 @@
                          */
                         Job.prototype.attemptDeadline = null;
     
+                        /**
+                         * Job legacyAppEngineCron.
+                         * @member {boolean} legacyAppEngineCron
+                         * @memberof google.cloud.scheduler.v1beta1.Job
+                         * @instance
+                         */
+                        Job.prototype.legacyAppEngineCron = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -7695,6 +7798,8 @@
                                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.timeZone);
                             if (message.attemptDeadline != null && Object.hasOwnProperty.call(message, "attemptDeadline"))
                                 $root.google.protobuf.Duration.encode(message.attemptDeadline, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                            if (message.legacyAppEngineCron != null && Object.hasOwnProperty.call(message, "legacyAppEngineCron"))
+                                writer.uint32(/* id 23, wireType 0 =*/184).bool(message.legacyAppEngineCron);
                             return writer;
                         };
     
@@ -7783,6 +7888,10 @@
                                     }
                                 case 22: {
                                         message.attemptDeadline = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 23: {
+                                        message.legacyAppEngineCron = reader.bool();
                                         break;
                                     }
                                 default:
@@ -7902,6 +8011,9 @@
                                 if (error)
                                     return "attemptDeadline." + error;
                             }
+                            if (message.legacyAppEngineCron != null && message.hasOwnProperty("legacyAppEngineCron"))
+                                if (typeof message.legacyAppEngineCron !== "boolean")
+                                    return "legacyAppEngineCron: boolean expected";
                             return null;
                         };
     
@@ -7998,6 +8110,8 @@
                                     throw TypeError(".google.cloud.scheduler.v1beta1.Job.attemptDeadline: object expected");
                                 message.attemptDeadline = $root.google.protobuf.Duration.fromObject(object.attemptDeadline);
                             }
+                            if (object.legacyAppEngineCron != null)
+                                message.legacyAppEngineCron = Boolean(object.legacyAppEngineCron);
                             return message;
                         };
     
@@ -8026,6 +8140,7 @@
                                 object.schedule = "";
                                 object.timeZone = "";
                                 object.attemptDeadline = null;
+                                object.legacyAppEngineCron = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -8064,6 +8179,8 @@
                                 object.timeZone = message.timeZone;
                             if (message.attemptDeadline != null && message.hasOwnProperty("attemptDeadline"))
                                 object.attemptDeadline = $root.google.protobuf.Duration.toObject(message.attemptDeadline, options);
+                            if (message.legacyAppEngineCron != null && message.hasOwnProperty("legacyAppEngineCron"))
+                                object.legacyAppEngineCron = message.legacyAppEngineCron;
                             return object;
                         };
     

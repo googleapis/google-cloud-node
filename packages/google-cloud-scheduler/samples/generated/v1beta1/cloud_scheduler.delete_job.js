@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,12 @@ function main(name) {
    *  `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
    */
   // const name = 'abc123'
+  /**
+   *  This field is used to manage the legacy App Engine Cron jobs using the
+   *  Cloud Scheduler API. If the field is set to true, the job in the __cron
+   *  queue with the corresponding name will be deleted instead.
+   */
+  // const legacyAppEngineCron = true
 
   // Imports the Scheduler library
   const {CloudSchedulerClient} = require('@google-cloud/scheduler').v1beta1;
