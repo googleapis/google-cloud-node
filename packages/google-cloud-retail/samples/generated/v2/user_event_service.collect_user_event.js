@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,6 +29,11 @@ function main(parent, userEvent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
+   *  The prebuilt rule name that can convert a specific type of raw_json.
+   *  For example: "default_schema/v1.0"
+   */
+  // const prebuiltRule = 'abc123'
+  /**
    *  Required. The parent catalog name, such as
    *  `projects/1234/locations/global/catalogs/default_catalog`.
    */
@@ -51,6 +56,13 @@ function main(parent, userEvent) {
    *  payload bytes.
    */
   // const ets = 1234
+  /**
+   *  An arbitrary serialized JSON string that contains necessary information
+   *  that can comprise a user event. When this field is specified, the
+   *  user_event field will be ignored. Note: line-delimited JSON is not
+   *  supported, a single JSON only.
+   */
+  // const rawJson = 'abc123'
 
   // Imports the Retail library
   const {UserEventServiceClient} = require('@google-cloud/retail').v2;
