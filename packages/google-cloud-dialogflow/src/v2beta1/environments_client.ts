@@ -40,7 +40,8 @@ import * as gapicConfig from './environments_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.v2beta1.Environment|Environments}.
+ *  Service for managing
+ *  {@link google.cloud.dialogflow.v2beta1.Environment|Environments}.
  * @class
  * @memberof v2beta1
  */
@@ -894,8 +895,8 @@ export class EnvironmentsClient {
    *   - `projects/<Project Number / ID>/agent`
    *   - `projects/<Project Number / ID>/locations/<Location ID>/agent`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]
@@ -996,8 +997,8 @@ export class EnvironmentsClient {
    *   - `projects/<Project Number / ID>/agent`
    *   - `projects/<Project Number / ID>/locations/<Location ID>/agent`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]
@@ -1046,8 +1047,8 @@ export class EnvironmentsClient {
    *   - `projects/<Project Number / ID>/agent`
    *   - `projects/<Project Number / ID>/locations/<Location ID>/agent`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]
@@ -1096,8 +1097,8 @@ export class EnvironmentsClient {
    *   - `projects/<Project Number / ID>/locations/<Location
    *     ID>/agent/environments/<Environment ID>`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]
@@ -1199,8 +1200,8 @@ export class EnvironmentsClient {
    *   - `projects/<Project Number / ID>/locations/<Location
    *     ID>/agent/environments/<Environment ID>`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]
@@ -1250,8 +1251,8 @@ export class EnvironmentsClient {
    *   - `projects/<Project Number / ID>/locations/<Location
    *     ID>/agent/environments/<Environment ID>`
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]

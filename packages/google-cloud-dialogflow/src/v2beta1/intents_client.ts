@@ -970,7 +970,8 @@ export class IntentsClient {
    *
    * - `metadata`: An empty [Struct
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-   * - `response`: {@link google.cloud.dialogflow.v2beta1.BatchUpdateIntentsResponse|BatchUpdateIntentsResponse}
+   * - `response`:
+   * {@link google.cloud.dialogflow.v2beta1.BatchUpdateIntentsResponse|BatchUpdateIntentsResponse}
    *
    * Note: You should always train an agent prior to sending it queries. See the
    * [training
