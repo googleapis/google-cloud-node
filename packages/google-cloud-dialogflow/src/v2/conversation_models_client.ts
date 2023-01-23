@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -828,8 +828,10 @@ export class ConversationModelsClient {
    * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata|CreateConversationModelOperationMetadata}
-   * - `response`: {@link google.cloud.dialogflow.v2.ConversationModel|ConversationModel}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata|CreateConversationModelOperationMetadata}
+   * - `response`:
+   * {@link google.cloud.dialogflow.v2.ConversationModel|ConversationModel}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -980,7 +982,8 @@ export class ConversationModelsClient {
    * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.v2.DeleteConversationModelOperationMetadata|DeleteConversationModelOperationMetadata}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.v2.DeleteConversationModelOperationMetadata|DeleteConversationModelOperationMetadata}
    * - `response`: An [Empty
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
    *
@@ -1134,7 +1137,8 @@ export class ConversationModelsClient {
    * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.v2.DeployConversationModelOperationMetadata|DeployConversationModelOperationMetadata}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.v2.DeployConversationModelOperationMetadata|DeployConversationModelOperationMetadata}
    * - `response`: An [Empty
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
    *
@@ -1288,7 +1292,8 @@ export class ConversationModelsClient {
    * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.v2.UndeployConversationModelOperationMetadata|UndeployConversationModelOperationMetadata}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.v2.UndeployConversationModelOperationMetadata|UndeployConversationModelOperationMetadata}
    * - `response`: An [Empty
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
    *

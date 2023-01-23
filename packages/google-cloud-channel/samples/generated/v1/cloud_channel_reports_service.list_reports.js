@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,22 +29,23 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the partner account to list available reports for.
-   *  Parent uses the format:
-   *  accounts/{account_id}
+   *  Required. The resource name of the partner account to list available
+   *  reports for. Parent uses the format: accounts/{account_id}
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Requested page size of the report. The server might return fewer results
-   *  than requested. If unspecified, returns 20 reports.
-   *  The maximum value is 100.
+   *  Optional. Requested page size of the report. The server might return fewer
+   *  results than requested. If unspecified, returns 20 reports. The maximum
+   *  value is 100.
    */
   // const pageSize = 1234
   /**
    *  Optional. A token that specifies a page of results beyond the first page.
    *  Obtained through
-   *  ListReportsResponse.next_page_token google.cloud.channel.v1.ListReportsResponse.next_page_token  of the previous
-   *  CloudChannelReportsService.ListReports google.cloud.channel.v1.CloudChannelReportsService.ListReports  call.
+   *  ListReportsResponse.next_page_token google.cloud.channel.v1.ListReportsResponse.next_page_token 
+   *  of the previous
+   *  CloudChannelReportsService.ListReports google.cloud.channel.v1.CloudChannelReportsService.ListReports 
+   *  call.
    */
   // const pageToken = 'abc123'
   /**

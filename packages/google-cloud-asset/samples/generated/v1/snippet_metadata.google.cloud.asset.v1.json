@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 110,
+                    "end": 111,
                     "type": "FULL"
                 }
             ],
@@ -202,7 +202,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -407,14 +407,14 @@
             "regionTag": "cloudasset_v1_generated_AssetService_SearchAllResources_async",
             "title": "AssetService searchAllResources Sample",
             "origin": "API_DEFINITION",
-            "description": " Searches all Cloud resources within the specified scope, such as a project, folder, or organization. The caller must be granted the `cloudasset.assets.searchAllResources` permission on the desired scope, otherwise the request will be rejected.",
+            "description": " Searches all Google Cloud resources within the specified scope, such as a project, folder, or organization. The caller must be granted the `cloudasset.assets.searchAllResources` permission on the desired scope, otherwise the request will be rejected.",
             "canonical": true,
             "file": "asset_service.search_all_resources.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 199,
+                    "end": 201,
                     "type": "FULL"
                 }
             ],
@@ -478,7 +478,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 150,
+                    "end": 152,
                     "type": "FULL"
                 }
             ],
@@ -538,7 +538,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 81,
                     "type": "FULL"
                 }
             ],
@@ -586,7 +586,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 75,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -682,7 +682,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 113,
+                    "end": 115,
                     "type": "FULL"
                 }
             ],
@@ -842,7 +842,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -938,7 +938,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 57,
                     "type": "FULL"
                 }
             ],
@@ -1004,6 +1004,174 @@
                 "method": {
                     "shortName": "BatchGetEffectiveIamPolicies",
                     "fullName": "google.cloud.asset.v1.AssetService.BatchGetEffectiveIamPolicies",
+                    "service": {
+                        "shortName": "AssetService",
+                        "fullName": "google.cloud.asset.v1.AssetService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudasset_v1_generated_AssetService_AnalyzeOrgPolicies_async",
+            "title": "AssetService analyzeOrgPolicies Sample",
+            "origin": "API_DEFINITION",
+            "description": " Analyzes organization policies under a scope.",
+            "canonical": true,
+            "file": "asset_service.analyze_org_policies.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 84,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AnalyzeOrgPolicies",
+                "fullName": "google.cloud.asset.v1.AssetService.AnalyzeOrgPolicies",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "scope",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "constraint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.asset.v1.AnalyzeOrgPoliciesResponse",
+                "client": {
+                    "shortName": "AssetServiceClient",
+                    "fullName": "google.cloud.asset.v1.AssetServiceClient"
+                },
+                "method": {
+                    "shortName": "AnalyzeOrgPolicies",
+                    "fullName": "google.cloud.asset.v1.AssetService.AnalyzeOrgPolicies",
+                    "service": {
+                        "shortName": "AssetService",
+                        "fullName": "google.cloud.asset.v1.AssetService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudasset_v1_generated_AssetService_AnalyzeOrgPolicyGovernedContainers_async",
+            "title": "AssetService analyzeOrgPolicyGovernedContainers Sample",
+            "origin": "API_DEFINITION",
+            "description": " Analyzes organization policies governed containers (projects, folders or organization) under a scope.",
+            "canonical": true,
+            "file": "asset_service.analyze_org_policy_governed_containers.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 85,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AnalyzeOrgPolicyGovernedContainers",
+                "fullName": "google.cloud.asset.v1.AssetService.AnalyzeOrgPolicyGovernedContainers",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "scope",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "constraint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse",
+                "client": {
+                    "shortName": "AssetServiceClient",
+                    "fullName": "google.cloud.asset.v1.AssetServiceClient"
+                },
+                "method": {
+                    "shortName": "AnalyzeOrgPolicyGovernedContainers",
+                    "fullName": "google.cloud.asset.v1.AssetService.AnalyzeOrgPolicyGovernedContainers",
+                    "service": {
+                        "shortName": "AssetService",
+                        "fullName": "google.cloud.asset.v1.AssetService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudasset_v1_generated_AssetService_AnalyzeOrgPolicyGovernedAssets_async",
+            "title": "AssetService analyzeOrgPolicyGovernedAssets Sample",
+            "origin": "API_DEFINITION",
+            "description": " Analyzes organization policies governed assets (Google Cloud resources or policies) under a scope. This RPC supports custom constraints and the following 10 canned constraints: * storage.uniformBucketLevelAccess * iam.disableServiceAccountKeyCreation * iam.allowedPolicyMemberDomains * compute.vmExternalIpAccess * appengine.enforceServiceAccountActAsCheck * gcp.resourceLocations * compute.trustedImageProjects * compute.skipDefaultNetworkCreation * compute.requireOsLogin * compute.disableNestedVirtualization This RPC only returns either resources of types supported by [searchable asset types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types), or IAM policies.",
+            "canonical": true,
+            "file": "asset_service.analyze_org_policy_governed_assets.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 89,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AnalyzeOrgPolicyGovernedAssets",
+                "fullName": "google.cloud.asset.v1.AssetService.AnalyzeOrgPolicyGovernedAssets",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "scope",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "constraint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse",
+                "client": {
+                    "shortName": "AssetServiceClient",
+                    "fullName": "google.cloud.asset.v1.AssetServiceClient"
+                },
+                "method": {
+                    "shortName": "AnalyzeOrgPolicyGovernedAssets",
+                    "fullName": "google.cloud.asset.v1.AssetService.AnalyzeOrgPolicyGovernedAssets",
                     "service": {
                         "shortName": "AssetService",
                         "fullName": "google.cloud.asset.v1.AssetService"
