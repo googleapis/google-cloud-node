@@ -355,9 +355,11 @@ export class CompletionClient {
    *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
    *   example, "projects/foo/tenants/bar/companies/baz".
    * @param {google.cloud.talent.v4.CompleteQueryRequest.CompletionScope} request.scope
-   *   The scope of the completion. The defaults is {@link google.cloud.talent.v4.CompleteQueryRequest.CompletionScope.PUBLIC|CompletionScope.PUBLIC}.
+   *   The scope of the completion. The defaults is
+   *   {@link google.cloud.talent.v4.CompleteQueryRequest.CompletionScope.PUBLIC|CompletionScope.PUBLIC}.
    * @param {google.cloud.talent.v4.CompleteQueryRequest.CompletionType} request.type
-   *   The completion topic. The default is {@link google.cloud.talent.v4.CompleteQueryRequest.CompletionType.COMBINED|CompletionType.COMBINED}.
+   *   The completion topic. The default is
+   *   {@link google.cloud.talent.v4.CompleteQueryRequest.CompletionType.COMBINED|CompletionType.COMBINED}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

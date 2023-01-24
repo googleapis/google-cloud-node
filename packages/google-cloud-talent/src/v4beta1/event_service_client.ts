@@ -349,8 +349,8 @@ export class EventServiceClient {
    *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
    *   is created, for example, "projects/foo".
    * @param {google.cloud.talent.v4beta1.ClientEvent} request.clientEvent
-   *   Required. Events issued when end user interacts with customer's application that
-   *   uses Cloud Talent Solution.
+   *   Required. Events issued when end user interacts with customer's application
+   *   that uses Cloud Talent Solution.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
