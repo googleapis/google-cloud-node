@@ -31339,7 +31339,8 @@ export namespace google {
                         /** DataFormat enum. */
                         enum DataFormat {
                             DATA_FORMAT_UNSPECIFIED = 0,
-                            BLOB = 1
+                            BLOB = 1,
+                            JSON_PACKAGE = 4
                         }
                     }
 
