@@ -58,6 +58,9 @@ export namespace google {
 
                     /** Secret versionAliases */
                     versionAliases?: ({ [k: string]: (number|Long|string) }|null);
+
+                    /** Secret annotations */
+                    annotations?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Secret. */
@@ -98,6 +101,9 @@ export namespace google {
 
                     /** Secret versionAliases. */
                     public versionAliases: { [k: string]: (number|Long|string) };
+
+                    /** Secret annotations. */
+                    public annotations: { [k: string]: string };
 
                     /** Secret expiration. */
                     public expiration?: ("expireTime"|"ttl");

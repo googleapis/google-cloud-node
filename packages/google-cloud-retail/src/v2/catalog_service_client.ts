@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -737,7 +737,7 @@ export class CatalogServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Full CompletionConfig resource name. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/completionConfig
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/completionConfig`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

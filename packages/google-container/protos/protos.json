@@ -1691,6 +1691,20 @@
                     "ipv6AccessType": {
                       "type": "IPv6AccessType",
                       "id": 17
+                    },
+                    "subnetIpv6CidrBlock": {
+                      "type": "string",
+                      "id": 22,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "servicesIpv6CidrBlock": {
+                      "type": "string",
+                      "id": 23,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
