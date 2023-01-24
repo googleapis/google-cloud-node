@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1428,6 +1428,143 @@ describe('v2alpha.CatalogServiceClient', () => {
       client.close();
       await assert.rejects(
         client.removeCatalogAttribute(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('batchRemoveCatalogAttributes', () => {
+    it('invokes batchRemoveCatalogAttributes without error', async () => {
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest',
+        ['attributesConfig']
+      );
+      request.attributesConfig = defaultValue1;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesResponse()
+      );
+      client.innerApiCalls.batchRemoveCatalogAttributes =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchRemoveCatalogAttributes(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRemoveCatalogAttributes without error using callback', async () => {
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest',
+        ['attributesConfig']
+      );
+      request.attributesConfig = defaultValue1;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesResponse()
+      );
+      client.innerApiCalls.batchRemoveCatalogAttributes =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchRemoveCatalogAttributes(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.retail.v2alpha.IBatchRemoveCatalogAttributesResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRemoveCatalogAttributes with error', async () => {
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest',
+        ['attributesConfig']
+      );
+      request.attributesConfig = defaultValue1;
+      const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchRemoveCatalogAttributes = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.batchRemoveCatalogAttributes(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchRemoveCatalogAttributes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchRemoveCatalogAttributes with closed client', async () => {
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.BatchRemoveCatalogAttributesRequest',
+        ['attributesConfig']
+      );
+      request.attributesConfig = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.batchRemoveCatalogAttributes(request),
         expectedError
       );
     });

@@ -536,12 +536,14 @@ export class SessionsClient {
    *   audio. If this field is not set and agent-level speech synthesizer is not
    *   configured, no output audio is generated.
    * @param {google.protobuf.FieldMask} request.outputAudioConfigMask
-   *   Mask for {@link google.cloud.dialogflow.v2beta1.DetectIntentRequest.output_audio_config|output_audio_config} indicating which settings in this
-   *   request-level config should override speech synthesizer settings defined at
-   *   agent-level.
+   *   Mask for
+   *   {@link google.cloud.dialogflow.v2beta1.DetectIntentRequest.output_audio_config|output_audio_config}
+   *   indicating which settings in this request-level config should override
+   *   speech synthesizer settings defined at agent-level.
    *
-   *   If unspecified or empty, {@link google.cloud.dialogflow.v2beta1.DetectIntentRequest.output_audio_config|output_audio_config} replaces the agent-level
-   *   config in its entirety.
+   *   If unspecified or empty,
+   *   {@link google.cloud.dialogflow.v2beta1.DetectIntentRequest.output_audio_config|output_audio_config}
+   *   replaces the agent-level config in its entirety.
    * @param {Buffer} request.inputAudio
    *   The natural language speech audio to be processed. This field
    *   should be populated iff `query_input` is set to an input audio config.
