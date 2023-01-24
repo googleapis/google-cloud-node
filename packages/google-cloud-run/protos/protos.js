@@ -10943,6 +10943,7 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 12:
                                     break;
                                 }
                             }
@@ -11159,6 +11160,10 @@
                             case 11:
                                 message.revisionReason = 11;
                                 break;
+                            case "MIN_INSTANCES_WARMING":
+                            case 12:
+                                message.revisionReason = 12;
+                                break;
                             }
                             switch (object.executionReason) {
                             default:
@@ -11355,6 +11360,7 @@
                          * @property {number} ACTIVE_REVISION_LIMIT_REACHED=9 ACTIVE_REVISION_LIMIT_REACHED value
                          * @property {number} NO_DEPLOYMENT=10 NO_DEPLOYMENT value
                          * @property {number} HEALTH_CHECK_SKIPPED=11 HEALTH_CHECK_SKIPPED value
+                         * @property {number} MIN_INSTANCES_WARMING=12 MIN_INSTANCES_WARMING value
                          */
                         Condition.RevisionReason = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -11370,6 +11376,7 @@
                             values[valuesById[9] = "ACTIVE_REVISION_LIMIT_REACHED"] = 9;
                             values[valuesById[10] = "NO_DEPLOYMENT"] = 10;
                             values[valuesById[11] = "HEALTH_CHECK_SKIPPED"] = 11;
+                            values[valuesById[12] = "MIN_INSTANCES_WARMING"] = 12;
                             return values;
                         })();
     
@@ -12530,6 +12537,9 @@
                          * @property {number|null} [runningCount] Execution runningCount
                          * @property {number|null} [succeededCount] Execution succeededCount
                          * @property {number|null} [failedCount] Execution failedCount
+                         * @property {number|null} [cancelledCount] Execution cancelledCount
+                         * @property {number|null} [retriedCount] Execution retriedCount
+                         * @property {string|null} [logUri] Execution logUri
                          * @property {string|null} [etag] Execution etag
                          */
     
@@ -12728,6 +12738,30 @@
                         Execution.prototype.failedCount = 0;
     
                         /**
+                         * Execution cancelledCount.
+                         * @member {number} cancelledCount
+                         * @memberof google.cloud.run.v2.Execution
+                         * @instance
+                         */
+                        Execution.prototype.cancelledCount = 0;
+    
+                        /**
+                         * Execution retriedCount.
+                         * @member {number} retriedCount
+                         * @memberof google.cloud.run.v2.Execution
+                         * @instance
+                         */
+                        Execution.prototype.retriedCount = 0;
+    
+                        /**
+                         * Execution logUri.
+                         * @member {string} logUri
+                         * @memberof google.cloud.run.v2.Execution
+                         * @instance
+                         */
+                        Execution.prototype.logUri = "";
+    
+                        /**
                          * Execution etag.
                          * @member {string} etag
                          * @memberof google.cloud.run.v2.Execution
@@ -12806,6 +12840,12 @@
                                 writer.uint32(/* id 21, wireType 0 =*/168).int32(message.failedCount);
                             if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
                                 $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                            if (message.cancelledCount != null && Object.hasOwnProperty.call(message, "cancelledCount"))
+                                writer.uint32(/* id 24, wireType 0 =*/192).int32(message.cancelledCount);
+                            if (message.retriedCount != null && Object.hasOwnProperty.call(message, "retriedCount"))
+                                writer.uint32(/* id 25, wireType 0 =*/200).int32(message.retriedCount);
+                            if (message.logUri != null && Object.hasOwnProperty.call(message, "logUri"))
+                                writer.uint32(/* id 26, wireType 2 =*/210).string(message.logUri);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 99, wireType 2 =*/794).string(message.etag);
                             return writer;
@@ -12970,6 +13010,18 @@
                                         message.failedCount = reader.int32();
                                         break;
                                     }
+                                case 24: {
+                                        message.cancelledCount = reader.int32();
+                                        break;
+                                    }
+                                case 25: {
+                                        message.retriedCount = reader.int32();
+                                        break;
+                                    }
+                                case 26: {
+                                        message.logUri = reader.string();
+                                        break;
+                                    }
                                 case 99: {
                                         message.etag = reader.string();
                                         break;
@@ -13116,6 +13168,15 @@
                             if (message.failedCount != null && message.hasOwnProperty("failedCount"))
                                 if (!$util.isInteger(message.failedCount))
                                     return "failedCount: integer expected";
+                            if (message.cancelledCount != null && message.hasOwnProperty("cancelledCount"))
+                                if (!$util.isInteger(message.cancelledCount))
+                                    return "cancelledCount: integer expected";
+                            if (message.retriedCount != null && message.hasOwnProperty("retriedCount"))
+                                if (!$util.isInteger(message.retriedCount))
+                                    return "retriedCount: integer expected";
+                            if (message.logUri != null && message.hasOwnProperty("logUri"))
+                                if (!$util.isString(message.logUri))
+                                    return "logUri: string expected";
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
@@ -13269,6 +13330,12 @@
                                 message.succeededCount = object.succeededCount | 0;
                             if (object.failedCount != null)
                                 message.failedCount = object.failedCount | 0;
+                            if (object.cancelledCount != null)
+                                message.cancelledCount = object.cancelledCount | 0;
+                            if (object.retriedCount != null)
+                                message.retriedCount = object.retriedCount | 0;
+                            if (object.logUri != null)
+                                message.logUri = String(object.logUri);
                             if (object.etag != null)
                                 message.etag = String(object.etag);
                             return message;
@@ -13321,6 +13388,9 @@
                                 object.succeededCount = 0;
                                 object.failedCount = 0;
                                 object.startTime = null;
+                                object.cancelledCount = 0;
+                                object.retriedCount = 0;
+                                object.logUri = "";
                                 object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -13383,6 +13453,12 @@
                                 object.failedCount = message.failedCount;
                             if (message.startTime != null && message.hasOwnProperty("startTime"))
                                 object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.cancelledCount != null && message.hasOwnProperty("cancelledCount"))
+                                object.cancelledCount = message.cancelledCount;
+                            if (message.retriedCount != null && message.hasOwnProperty("retriedCount"))
+                                object.retriedCount = message.retriedCount;
+                            if (message.logUri != null && message.hasOwnProperty("logUri"))
+                                object.logUri = message.logUri;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             return object;
@@ -18952,6 +19028,22 @@
                         return values;
                     })();
     
+                    /**
+                     * EncryptionKeyRevocationAction enum.
+                     * @name google.cloud.run.v2.EncryptionKeyRevocationAction
+                     * @enum {number}
+                     * @property {number} ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED=0 ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED value
+                     * @property {number} PREVENT_NEW=1 PREVENT_NEW value
+                     * @property {number} SHUTDOWN=2 SHUTDOWN value
+                     */
+                    v2.EncryptionKeyRevocationAction = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "PREVENT_NEW"] = 1;
+                        values[valuesById[2] = "SHUTDOWN"] = 2;
+                        return values;
+                    })();
+    
                     v2.ExecutionTemplate = (function() {
     
                         /**
@@ -23727,6 +23819,8 @@
                          * @property {Array.<google.cloud.run.v2.IVolume>|null} [volumes] Revision volumes
                          * @property {google.cloud.run.v2.ExecutionEnvironment|null} [executionEnvironment] Revision executionEnvironment
                          * @property {string|null} [encryptionKey] Revision encryptionKey
+                         * @property {google.cloud.run.v2.EncryptionKeyRevocationAction|null} [encryptionKeyRevocationAction] Revision encryptionKeyRevocationAction
+                         * @property {google.protobuf.IDuration|null} [encryptionKeyShutdownDuration] Revision encryptionKeyShutdownDuration
                          * @property {boolean|null} [reconciling] Revision reconciling
                          * @property {Array.<google.cloud.run.v2.ICondition>|null} [conditions] Revision conditions
                          * @property {number|Long|null} [observedGeneration] Revision observedGeneration
@@ -23915,6 +24009,22 @@
                         Revision.prototype.encryptionKey = "";
     
                         /**
+                         * Revision encryptionKeyRevocationAction.
+                         * @member {google.cloud.run.v2.EncryptionKeyRevocationAction} encryptionKeyRevocationAction
+                         * @memberof google.cloud.run.v2.Revision
+                         * @instance
+                         */
+                        Revision.prototype.encryptionKeyRevocationAction = 0;
+    
+                        /**
+                         * Revision encryptionKeyShutdownDuration.
+                         * @member {google.protobuf.IDuration|null|undefined} encryptionKeyShutdownDuration
+                         * @memberof google.cloud.run.v2.Revision
+                         * @instance
+                         */
+                        Revision.prototype.encryptionKeyShutdownDuration = null;
+    
+                        /**
                          * Revision reconciling.
                          * @member {boolean} reconciling
                          * @memberof google.cloud.run.v2.Revision
@@ -24020,6 +24130,10 @@
                                 writer.uint32(/* id 20, wireType 0 =*/160).int32(message.executionEnvironment);
                             if (message.encryptionKey != null && Object.hasOwnProperty.call(message, "encryptionKey"))
                                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.encryptionKey);
+                            if (message.encryptionKeyRevocationAction != null && Object.hasOwnProperty.call(message, "encryptionKeyRevocationAction"))
+                                writer.uint32(/* id 23, wireType 0 =*/184).int32(message.encryptionKeyRevocationAction);
+                            if (message.encryptionKeyShutdownDuration != null && Object.hasOwnProperty.call(message, "encryptionKeyShutdownDuration"))
+                                $root.google.protobuf.Duration.encode(message.encryptionKeyShutdownDuration, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
                                 writer.uint32(/* id 30, wireType 0 =*/240).bool(message.reconciling);
                             if (message.conditions != null && message.conditions.length)
@@ -24187,6 +24301,14 @@
                                     }
                                 case 21: {
                                         message.encryptionKey = reader.string();
+                                        break;
+                                    }
+                                case 23: {
+                                        message.encryptionKeyRevocationAction = reader.int32();
+                                        break;
+                                    }
+                                case 24: {
+                                        message.encryptionKeyShutdownDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 30: {
@@ -24359,6 +24481,20 @@
                             if (message.encryptionKey != null && message.hasOwnProperty("encryptionKey"))
                                 if (!$util.isString(message.encryptionKey))
                                     return "encryptionKey: string expected";
+                            if (message.encryptionKeyRevocationAction != null && message.hasOwnProperty("encryptionKeyRevocationAction"))
+                                switch (message.encryptionKeyRevocationAction) {
+                                default:
+                                    return "encryptionKeyRevocationAction: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.encryptionKeyShutdownDuration != null && message.hasOwnProperty("encryptionKeyShutdownDuration")) {
+                                var error = $root.google.protobuf.Duration.verify(message.encryptionKeyShutdownDuration);
+                                if (error)
+                                    return "encryptionKeyShutdownDuration." + error;
+                            }
                             if (message.reconciling != null && message.hasOwnProperty("reconciling"))
                                 if (typeof message.reconciling !== "boolean")
                                     return "reconciling: boolean expected";
@@ -24545,6 +24681,31 @@
                             }
                             if (object.encryptionKey != null)
                                 message.encryptionKey = String(object.encryptionKey);
+                            switch (object.encryptionKeyRevocationAction) {
+                            default:
+                                if (typeof object.encryptionKeyRevocationAction === "number") {
+                                    message.encryptionKeyRevocationAction = object.encryptionKeyRevocationAction;
+                                    break;
+                                }
+                                break;
+                            case "ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED":
+                            case 0:
+                                message.encryptionKeyRevocationAction = 0;
+                                break;
+                            case "PREVENT_NEW":
+                            case 1:
+                                message.encryptionKeyRevocationAction = 1;
+                                break;
+                            case "SHUTDOWN":
+                            case 2:
+                                message.encryptionKeyRevocationAction = 2;
+                                break;
+                            }
+                            if (object.encryptionKeyShutdownDuration != null) {
+                                if (typeof object.encryptionKeyShutdownDuration !== "object")
+                                    throw TypeError(".google.cloud.run.v2.Revision.encryptionKeyShutdownDuration: object expected");
+                                message.encryptionKeyShutdownDuration = $root.google.protobuf.Duration.fromObject(object.encryptionKeyShutdownDuration);
+                            }
                             if (object.reconciling != null)
                                 message.reconciling = Boolean(object.reconciling);
                             if (object.conditions) {
@@ -24615,6 +24776,8 @@
                                 object.serviceAccount = "";
                                 object.executionEnvironment = options.enums === String ? "EXECUTION_ENVIRONMENT_UNSPECIFIED" : 0;
                                 object.encryptionKey = "";
+                                object.encryptionKeyRevocationAction = options.enums === String ? "ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED" : 0;
+                                object.encryptionKeyShutdownDuration = null;
                                 object.reconciling = false;
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
@@ -24679,6 +24842,10 @@
                                 object.executionEnvironment = options.enums === String ? $root.google.cloud.run.v2.ExecutionEnvironment[message.executionEnvironment] === undefined ? message.executionEnvironment : $root.google.cloud.run.v2.ExecutionEnvironment[message.executionEnvironment] : message.executionEnvironment;
                             if (message.encryptionKey != null && message.hasOwnProperty("encryptionKey"))
                                 object.encryptionKey = message.encryptionKey;
+                            if (message.encryptionKeyRevocationAction != null && message.hasOwnProperty("encryptionKeyRevocationAction"))
+                                object.encryptionKeyRevocationAction = options.enums === String ? $root.google.cloud.run.v2.EncryptionKeyRevocationAction[message.encryptionKeyRevocationAction] === undefined ? message.encryptionKeyRevocationAction : $root.google.cloud.run.v2.EncryptionKeyRevocationAction[message.encryptionKeyRevocationAction] : message.encryptionKeyRevocationAction;
+                            if (message.encryptionKeyShutdownDuration != null && message.hasOwnProperty("encryptionKeyShutdownDuration"))
+                                object.encryptionKeyShutdownDuration = $root.google.protobuf.Duration.toObject(message.encryptionKeyShutdownDuration, options);
                             if (message.reconciling != null && message.hasOwnProperty("reconciling"))
                                 object.reconciling = message.reconciling;
                             if (message.conditions && message.conditions.length) {
@@ -29739,6 +29906,7 @@
                          * @property {google.cloud.run.v2.ITaskAttemptResult|null} [lastAttemptResult] Task lastAttemptResult
                          * @property {string|null} [encryptionKey] Task encryptionKey
                          * @property {google.cloud.run.v2.IVpcAccess|null} [vpcAccess] Task vpcAccess
+                         * @property {string|null} [logUri] Task logUri
                          * @property {string|null} [etag] Task etag
                          */
     
@@ -29979,6 +30147,14 @@
                         Task.prototype.vpcAccess = null;
     
                         /**
+                         * Task logUri.
+                         * @member {string} logUri
+                         * @memberof google.cloud.run.v2.Task
+                         * @instance
+                         */
+                        Task.prototype.logUri = "";
+    
+                        /**
                          * Task etag.
                          * @member {string} etag
                          * @memberof google.cloud.run.v2.Task
@@ -30069,6 +30245,8 @@
                                 writer.uint32(/* id 28, wireType 2 =*/226).string(message.encryptionKey);
                             if (message.vpcAccess != null && Object.hasOwnProperty.call(message, "vpcAccess"))
                                 $root.google.cloud.run.v2.VpcAccess.encode(message.vpcAccess, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
+                            if (message.logUri != null && Object.hasOwnProperty.call(message, "logUri"))
+                                writer.uint32(/* id 32, wireType 2 =*/258).string(message.logUri);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 99, wireType 2 =*/794).string(message.etag);
                             return writer;
@@ -30257,6 +30435,10 @@
                                         message.vpcAccess = $root.google.cloud.run.v2.VpcAccess.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 32: {
+                                        message.logUri = reader.string();
+                                        break;
+                                    }
                                 case 99: {
                                         message.etag = reader.string();
                                         break;
@@ -30429,6 +30611,9 @@
                                 if (error)
                                     return "vpcAccess." + error;
                             }
+                            if (message.logUri != null && message.hasOwnProperty("logUri"))
+                                if (!$util.isString(message.logUri))
+                                    return "logUri: string expected";
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
@@ -30594,6 +30779,8 @@
                                     throw TypeError(".google.cloud.run.v2.Task.vpcAccess: object expected");
                                 message.vpcAccess = $root.google.cloud.run.v2.VpcAccess.fromObject(object.vpcAccess);
                             }
+                            if (object.logUri != null)
+                                message.logUri = String(object.logUri);
                             if (object.etag != null)
                                 message.etag = String(object.etag);
                             return message;
@@ -30652,6 +30839,7 @@
                                 object.startTime = null;
                                 object.encryptionKey = "";
                                 object.vpcAccess = null;
+                                object.logUri = "";
                                 object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -30730,6 +30918,8 @@
                                 object.encryptionKey = message.encryptionKey;
                             if (message.vpcAccess != null && message.hasOwnProperty("vpcAccess"))
                                 object.vpcAccess = $root.google.cloud.run.v2.VpcAccess.toObject(message.vpcAccess, options);
+                            if (message.logUri != null && message.hasOwnProperty("logUri"))
+                                object.logUri = message.logUri;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             return object;

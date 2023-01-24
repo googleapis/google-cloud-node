@@ -245,6 +245,11 @@ export class ExecutionsClient {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v2/{name=projects/*/locations/*}/operations',
         },
+        {
+          selector: 'google.longrunning.Operations.WaitOperation',
+          post: '/v2/{name=projects/*/locations/*/operations/*}:wait',
+          body: '*',
+        },
       ];
     }
     this.operationsClient = this._gaxModule
