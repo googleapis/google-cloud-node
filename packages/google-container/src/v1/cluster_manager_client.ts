@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1292,8 +1292,8 @@ export class ClusterManagerClient {
    *   Deprecated. The name of the cluster to upgrade.
    *   This field has been deprecated and replaced by the name field.
    * @param {google.container.v1.AddonsConfig} request.addonsConfig
-   *   Required. The desired configurations for the various addons available to run in the
-   *   cluster.
+   *   Required. The desired configurations for the various addons available to
+   *   run in the cluster.
    * @param {string} request.name
    *   The name (project, location, cluster) of the cluster to set addons.
    *   Specified in the format `projects/* /locations/* /clusters/*`.
