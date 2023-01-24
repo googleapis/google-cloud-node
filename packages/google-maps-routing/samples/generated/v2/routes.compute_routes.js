@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50,10 +50,8 @@ function main(origin, destination) {
    *  Optional. Specifies how to compute the route. The server
    *  attempts to use the selected routing preference to compute the route. If
    *   the routing preference results in an error or an extra long latency, then
-   *  an error is returned. In the future, we might implement a fallback
-   *  mechanism to use a different option when the preferred option does not give
-   *  a valid result. You can specify this option only when the `travel_mode` is
-   *  `DRIVE` or `TWO_WHEELER`, otherwise the request fails.
+   *  an error is returned. You can specify this option only when the
+   *  `travel_mode` is `DRIVE` or `TWO_WHEELER`, otherwise the request fails.
    */
   // const routingPreference = {}
   /**
@@ -71,7 +69,8 @@ function main(origin, destination) {
    */
   // const departureTime = {}
   /**
-   *  Optional. Specifies whether to calculate alternate routes in addition to the route.
+   *  Optional. Specifies whether to calculate alternate routes in addition to
+   *  the route.
    */
   // const computeAlternativeRoutes = true
   /**
@@ -97,14 +96,20 @@ function main(origin, destination) {
    */
   // const units = {}
   /**
-   *  Optional. Specifies what reference routes to calculate as part of the request in
-   *  addition to the default route.
-   *  A reference route is a route with a different route calculation objective
-   *  than the default route. For example an FUEL_EFFICIENT reference route
-   *  calculation takes into account various parameters that would generate an
-   *  optimal fuel efficient route.
+   *  Optional. Specifies what reference routes to calculate as part of the
+   *  request in addition to the default route. A reference route is a route with
+   *  a different route calculation objective than the default route. For example
+   *  an FUEL_EFFICIENT reference route calculation takes into account various
+   *  parameters that would generate an optimal fuel efficient route.
    */
   // const requestedReferenceRoutes = 1234
+  /**
+   *  Optional. A list of extra computations which may be used to complete the
+   *  request. Note: These extra computations may return extra fields on the
+   *  response. These extra fields must also be specified in the field mask to be
+   *  returned in the response.
+   */
+  // const extraComputations = 1234
 
   // Imports the Routing library
   const {RoutesClient} = require('@googlemaps/routing').v2;
