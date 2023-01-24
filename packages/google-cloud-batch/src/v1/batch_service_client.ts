@@ -250,40 +250,16 @@ export class BatchServiceClient {
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
           get: '/v1/{resource=projects/*/locations/*/jobs/*}:getIamPolicy',
-          additional_bindings: [
-            {get: '/v1/{resource=projects/*/locations/*/tasks/*}:getIamPolicy'},
-            {get: '/v1/{resource=projects/*/locations/*/nodes/*}:getIamPolicy'},
-          ],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
           post: '/v1/{resource=projects/*/locations/*/jobs/*}:setIamPolicy',
           body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/tasks/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/nodes/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
           post: '/v1/{resource=projects/*/locations/*/jobs/*}:testIamPermissions',
           body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/tasks/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/nodes/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
         },
         {
           selector: 'google.longrunning.Operations.CancelOperation',
@@ -485,10 +461,10 @@ export class BatchServiceClient {
    * @param {google.cloud.batch.v1.Job} request.job
    *   Required. The Job to create.
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and t
    *   he request times out. If you make the request again with the same request
@@ -751,10 +727,10 @@ export class BatchServiceClient {
    * @param {string} [request.reason]
    *   Optional. Reason for this deletion.
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
    *
    *   For example, consider a situation where you make an initial request and t
    *   he request times out. If you make the request again with the same request
