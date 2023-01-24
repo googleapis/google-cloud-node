@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -814,11 +814,11 @@ export class IdentityAwareProxyAdminServiceClient {
    * @param {google.cloud.iap.v1.TunnelDestGroup} request.tunnelDestGroup
    *   Required. The TunnelDestGroup to create.
    * @param {string} request.tunnelDestGroupId
-   *   Required. The ID to use for the TunnelDestGroup, which becomes the final component of
-   *   the resource name.
+   *   Required. The ID to use for the TunnelDestGroup, which becomes the final
+   *   component of the resource name.
    *
    *   This value must be 4-63 characters, and valid characters
-   *   are `{@link 0-9|a-z}-`.
+   *   are `[a-z]-`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

@@ -60,11 +60,13 @@ function main(tenant, query, pageSize) {
    */
   // const company = 'abc123'
   /**
-   *  The scope of the completion. The defaults is CompletionScope.PUBLIC google.cloud.talent.v4.CompleteQueryRequest.CompletionScope.PUBLIC.
+   *  The scope of the completion. The defaults is
+   *  CompletionScope.PUBLIC google.cloud.talent.v4.CompleteQueryRequest.CompletionScope.PUBLIC.
    */
   // const scope = {}
   /**
-   *  The completion topic. The default is CompletionType.COMBINED google.cloud.talent.v4.CompleteQueryRequest.CompletionType.COMBINED.
+   *  The completion topic. The default is
+   *  CompletionType.COMBINED google.cloud.talent.v4.CompleteQueryRequest.CompletionType.COMBINED.
    */
   // const type = {}
 

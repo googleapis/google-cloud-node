@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ function main(placement, visitorId) {
    *  `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
    *  or the name of the legacy placement resource, such as
    *  `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
-   *  This field is used to identify the serving configuration name and the set
+   *  This field is used to identify the serving config name and the set
    *  of models that will be used to make the search.
    */
   // const placement = 'abc123'
