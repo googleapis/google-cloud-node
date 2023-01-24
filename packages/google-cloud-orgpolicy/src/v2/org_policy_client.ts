@@ -386,7 +386,8 @@ export class OrgPolicyClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the policy. See `Policy` for naming requirements.
+   *   Required. Resource name of the policy. See `Policy` for naming
+   *   requirements.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -570,8 +571,8 @@ export class OrgPolicyClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The Cloud resource that will parent the new Policy. Must be in one of the
-   *   following forms:
+   *   Required. The Cloud resource that will parent the new Policy. Must be in
+   *   one of the following forms:
    *   * `projects/{project_number}`
    *   * `projects/{project_id}`
    *   * `folders/{folder_id}`
@@ -671,6 +672,10 @@ export class OrgPolicyClient {
    *   The request object that will be sent.
    * @param {google.cloud.orgpolicy.v2.Policy} request.policy
    *   Required. `Policy` to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask used to specify the fields to be overwritten in the policy
+   *   by the set. The fields specified in the update_mask are relative to the
+   *   policy, not the full request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -845,8 +850,8 @@ export class OrgPolicyClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The Cloud resource that parents the constraint. Must be in one of the
-   *   following forms:
+   *   Required. The Cloud resource that parents the constraint. Must be in one of
+   *   the following forms:
    *   * `projects/{project_number}`
    *   * `projects/{project_id}`
    *   * `folders/{folder_id}`
@@ -951,8 +956,8 @@ export class OrgPolicyClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The Cloud resource that parents the constraint. Must be in one of the
-   *   following forms:
+   *   Required. The Cloud resource that parents the constraint. Must be in one of
+   *   the following forms:
    *   * `projects/{project_number}`
    *   * `projects/{project_id}`
    *   * `folders/{folder_id}`
@@ -1005,8 +1010,8 @@ export class OrgPolicyClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The Cloud resource that parents the constraint. Must be in one of the
-   *   following forms:
+   *   Required. The Cloud resource that parents the constraint. Must be in one of
+   *   the following forms:
    *   * `projects/{project_number}`
    *   * `projects/{project_id}`
    *   * `folders/{folder_id}`
@@ -1058,9 +1063,9 @@ export class OrgPolicyClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The target Cloud resource that parents the set of constraints and policies
-   *   that will be returned from this call. Must be in one of the following
-   *   forms:
+   *   Required. The target Cloud resource that parents the set of constraints and
+   *   policies that will be returned from this call. Must be in one of the
+   *   following forms:
    *   * `projects/{project_number}`
    *   * `projects/{project_id}`
    *   * `folders/{folder_id}`
@@ -1159,9 +1164,9 @@ export class OrgPolicyClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The target Cloud resource that parents the set of constraints and policies
-   *   that will be returned from this call. Must be in one of the following
-   *   forms:
+   *   Required. The target Cloud resource that parents the set of constraints and
+   *   policies that will be returned from this call. Must be in one of the
+   *   following forms:
    *   * `projects/{project_number}`
    *   * `projects/{project_id}`
    *   * `folders/{folder_id}`
@@ -1214,9 +1219,9 @@ export class OrgPolicyClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The target Cloud resource that parents the set of constraints and policies
-   *   that will be returned from this call. Must be in one of the following
-   *   forms:
+   *   Required. The target Cloud resource that parents the set of constraints and
+   *   policies that will be returned from this call. Must be in one of the
+   *   following forms:
    *   * `projects/{project_number}`
    *   * `projects/{project_id}`
    *   * `folders/{folder_id}`
