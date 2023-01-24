@@ -42,7 +42,8 @@ import * as gapicConfig from './entity_types_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.v2beta1.EntityType|EntityTypes}.
+ *  Service for managing
+ *  {@link google.cloud.dialogflow.v2beta1.EntityType|EntityTypes}.
  * @class
  * @memberof v2beta1
  */
@@ -1023,7 +1024,8 @@ export class EntityTypesClient {
    *
    * - `metadata`: An empty [Struct
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-   * - `response`: {@link google.cloud.dialogflow.v2beta1.BatchUpdateEntityTypesResponse|BatchUpdateEntityTypesResponse}
+   * - `response`:
+   * {@link google.cloud.dialogflow.v2beta1.BatchUpdateEntityTypesResponse|BatchUpdateEntityTypesResponse}
    *
    * Note: You should always train an agent prior to sending it queries. See the
    * [training

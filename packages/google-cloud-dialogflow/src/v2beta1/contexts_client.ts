@@ -879,7 +879,8 @@ export class ContextsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the session to delete all contexts from. Supported formats:
+   *   Required. The name of the session to delete all contexts from. Supported
+   *   formats:
    *   - `projects/<Project ID>/agent/sessions/<Session ID>,
    *   - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
    *     ID>`,

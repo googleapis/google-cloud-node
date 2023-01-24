@@ -29,7 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the session to delete all contexts from. Supported formats:
+   *  Required. The name of the session to delete all contexts from. Supported
+   *  formats:
    *  - `projects/<Project ID>/agent/sessions/<Session ID>,
    *  - `projects/<Project ID>/locations/<Location ID>/agent/sessions/<Session
    *    ID>`,

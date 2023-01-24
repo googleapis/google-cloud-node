@@ -40,7 +40,8 @@ import * as gapicConfig from './knowledge_bases_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.v2beta1.KnowledgeBase|KnowledgeBases}.
+ *  Service for managing
+ *  {@link google.cloud.dialogflow.v2beta1.KnowledgeBase|KnowledgeBases}.
  * @class
  * @memberof v2beta1
  */
