@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [5.2.0](https://github.com/googleapis/nodejs-speech/compare/v5.1.1...v5.2.0) (2023-01-20)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#978](https://github.com/googleapis/nodejs-speech/issues/978)) ([f1fc857](https://github.com/googleapis/nodejs-speech/commit/f1fc857f521959dd2b4906b2f0f60b97276fd00c))
+
 ## [5.1.1](https://github.com/googleapis/nodejs-speech/compare/v5.1.0...v5.1.1) (2022-12-19)
 
 
