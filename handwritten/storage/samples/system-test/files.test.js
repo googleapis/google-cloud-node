@@ -432,7 +432,7 @@ describe('file', () => {
       modified: '1900-01-01',
     };
     const output = execSync(
-      `node fileSetMetadata.js ${bucketName} ${copiedFileName} ${metadata.generation} `
+      `node fileSetMetadata.js ${bucketName} ${copiedFileName} ${metadata.metageneration} `
     );
 
     assert.match(

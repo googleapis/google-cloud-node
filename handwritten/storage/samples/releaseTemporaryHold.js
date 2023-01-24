@@ -23,7 +23,7 @@
 function main(
   bucketName = 'my-bucket',
   fileName = 'test.txt',
-  generationMatchPrecondition = 0
+  metagenerationMatchPrecondition = 0
 ) {
   // [START storage_release_temporary_hold]
   /**
@@ -42,11 +42,11 @@ function main(
   const storage = new Storage();
 
   async function releaseTemporaryHold() {
-    // Optional: set a generation-match precondition to avoid potential race
-    // conditions and data corruptions. The request to upload is aborted if the
-    // object's generation number does not match your precondition.
+    // Optional: set a meta-generation-match precondition to avoid potential race
+    // conditions and data corruptions. The request to set metadata is aborted if the
+    // object's metageneration number does not match your precondition.
     const options = {
-      ifGenerationMatch: generationMatchPrecondition,
+      ifMetagenerationMatch: metagenerationMatchPrecondition,
     };
 
     await storage.bucket(bucketName).file(fileName).setMetadata(
