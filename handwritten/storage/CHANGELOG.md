@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.9.1](https://github.com/googleapis/nodejs-storage/compare/v6.9.0...v6.9.1) (2023-01-24)
+
+
+### Bug Fixes
+
+* Setting file metadata is conditionally idempotent on ifmetagenerationmatch not ifgenerationmatch ([#2131](https://github.com/googleapis/nodejs-storage/issues/2131)) ([f20c28c](https://github.com/googleapis/nodejs-storage/commit/f20c28c5875c9a7095b028912550512459fbf844))
+
 ## [6.9.0](https://github.com/googleapis/nodejs-storage/compare/v6.8.0...v6.9.0) (2023-01-04)
 
 
