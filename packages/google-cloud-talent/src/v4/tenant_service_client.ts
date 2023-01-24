@@ -524,12 +524,15 @@ export class TenantServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.talent.v4.Tenant} request.tenant
-   *   Required. The tenant resource to replace the current resource in the system.
+   *   Required. The tenant resource to replace the current resource in the
+   *   system.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Strongly recommended for the best service experience.
    *
-   *   If {@link google.cloud.talent.v4.UpdateTenantRequest.update_mask|update_mask} is provided, only the specified fields in
-   *   {@link google.cloud.talent.v4.UpdateTenantRequest.tenant|tenant} are updated. Otherwise all the fields are updated.
+   *   If {@link google.cloud.talent.v4.UpdateTenantRequest.update_mask|update_mask} is
+   *   provided, only the specified fields in
+   *   {@link google.cloud.talent.v4.UpdateTenantRequest.tenant|tenant} are updated.
+   *   Otherwise all the fields are updated.
    *
    *   A field mask to specify the tenant fields to be updated. Only
    *   top level fields of {@link google.cloud.talent.v4.Tenant|Tenant} are supported.

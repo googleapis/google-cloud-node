@@ -1802,6 +1802,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "extraComputations": {
+                          "rule": "repeated",
+                          "type": "ExtraComputation",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1809,6 +1817,14 @@
                           "values": {
                             "REFERENCE_ROUTE_UNSPECIFIED": 0,
                             "FUEL_EFFICIENT": 1
+                          }
+                        },
+                        "ExtraComputation": {
+                          "values": {
+                            "EXTRA_COMPUTATION_UNSPECIFIED": 0,
+                            "TOLLS": 1,
+                            "FUEL_CONSUMPTION": 2,
+                            "TRAFFIC_ON_POLYLINE": 3
                           }
                         }
                       }
@@ -1863,6 +1879,22 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "extraComputations": {
+                          "rule": "repeated",
+                          "type": "ExtraComputation",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ExtraComputation": {
+                          "values": {
+                            "EXTRA_COMPUTATION_UNSPECIFIED": 0,
+                            "TOLLS": 1
                           }
                         }
                       }
