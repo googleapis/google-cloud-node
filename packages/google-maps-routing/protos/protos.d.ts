@@ -7082,6 +7082,9 @@ export namespace google {
 
                     /** ComputeRoutesRequest requestedReferenceRoutes */
                     requestedReferenceRoutes?: (google.maps.routing.v2.ComputeRoutesRequest.ReferenceRoute[]|null);
+
+                    /** ComputeRoutesRequest extraComputations */
+                    extraComputations?: (google.maps.routing.v2.ComputeRoutesRequest.ExtraComputation[]|null);
                 }
 
                 /** Represents a ComputeRoutesRequest. */
@@ -7131,6 +7134,9 @@ export namespace google {
 
                     /** ComputeRoutesRequest requestedReferenceRoutes. */
                     public requestedReferenceRoutes: google.maps.routing.v2.ComputeRoutesRequest.ReferenceRoute[];
+
+                    /** ComputeRoutesRequest extraComputations. */
+                    public extraComputations: google.maps.routing.v2.ComputeRoutesRequest.ExtraComputation[];
 
                     /**
                      * Creates a new ComputeRoutesRequest instance using the specified properties.
@@ -7216,6 +7222,14 @@ export namespace google {
                     enum ReferenceRoute {
                         REFERENCE_ROUTE_UNSPECIFIED = 0,
                         FUEL_EFFICIENT = 1
+                    }
+
+                    /** ExtraComputation enum. */
+                    enum ExtraComputation {
+                        EXTRA_COMPUTATION_UNSPECIFIED = 0,
+                        TOLLS = 1,
+                        FUEL_CONSUMPTION = 2,
+                        TRAFFIC_ON_POLYLINE = 3
                     }
                 }
 
@@ -7339,6 +7353,9 @@ export namespace google {
 
                     /** ComputeRouteMatrixRequest departureTime */
                     departureTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ComputeRouteMatrixRequest extraComputations */
+                    extraComputations?: (google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation[]|null);
                 }
 
                 /** Represents a ComputeRouteMatrixRequest. */
@@ -7364,6 +7381,9 @@ export namespace google {
 
                     /** ComputeRouteMatrixRequest departureTime. */
                     public departureTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ComputeRouteMatrixRequest extraComputations. */
+                    public extraComputations: google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation[];
 
                     /**
                      * Creates a new ComputeRouteMatrixRequest instance using the specified properties.
@@ -7441,6 +7461,15 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ComputeRouteMatrixRequest {
+
+                    /** ExtraComputation enum. */
+                    enum ExtraComputation {
+                        EXTRA_COMPUTATION_UNSPECIFIED = 0,
+                        TOLLS = 1
+                    }
                 }
 
                 /** Properties of a RouteMatrixOrigin. */

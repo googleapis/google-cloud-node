@@ -1313,8 +1313,8 @@ export class ClusterManagerClient {
    *   Required. Deprecated. The name of the cluster to upgrade.
    *   This field has been deprecated and replaced by the name field.
    * @param {google.container.v1beta1.AddonsConfig} request.addonsConfig
-   *   Required. The desired configurations for the various addons available to run in the
-   *   cluster.
+   *   Required. The desired configurations for the various addons available to
+   *   run in the cluster.
    * @param {string} request.name
    *   The name (project, location, cluster) of the cluster to set addons.
    *   Specified in the format `projects/* /locations/* /clusters/*`.
