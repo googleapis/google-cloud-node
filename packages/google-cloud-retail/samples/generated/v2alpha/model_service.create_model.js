@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,15 +30,16 @@ function main(parent, model) {
    */
   /**
    *  Required. The parent resource under which to create the model. Format:
-   *  projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
+   *  `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
    */
   // const parent = 'abc123'
   /**
-   *  Required. The payload of the Model   to create.
+   *  Required. The payload of the Model google.cloud.retail.v2alpha.Model   to
+   *  create.
    */
   // const model = {}
   /**
-   *  Optional. Whether to run a dry_run to validate the request (without
+   *  Optional. Whether to run a dry run to validate the request (without
    *  actually creating the model).
    */
   // const dryRun = true

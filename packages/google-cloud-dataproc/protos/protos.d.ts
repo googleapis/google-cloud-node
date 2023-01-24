@@ -5879,7 +5879,8 @@ export namespace google {
                     enum Preemptibility {
                         PREEMPTIBILITY_UNSPECIFIED = 0,
                         NON_PREEMPTIBLE = 1,
-                        PREEMPTIBLE = 2
+                        PREEMPTIBLE = 2,
+                        SPOT = 3
                     }
                 }
 

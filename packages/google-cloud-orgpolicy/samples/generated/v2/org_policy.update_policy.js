@@ -32,6 +32,12 @@ function main(policy) {
    *  Required. `Policy` to update.
    */
   // const policy = {}
+  /**
+   *  Field mask used to specify the fields to be overwritten in the policy
+   *  by the set. The fields specified in the update_mask are relative to the
+   *  policy, not the full request.
+   */
+  // const updateMask = {}
 
   // Imports the Orgpolicy library
   const {OrgPolicyClient} = require('@google-cloud/org-policy').v2;

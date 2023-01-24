@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import type {
   ClientOptions,
 } from 'google-gax';
 import {PassThrough} from 'stream';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
