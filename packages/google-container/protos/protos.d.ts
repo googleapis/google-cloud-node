@@ -4927,6 +4927,12 @@ export namespace google {
 
                 /** IPAllocationPolicy ipv6AccessType */
                 ipv6AccessType?: (google.container.v1.IPv6AccessType|keyof typeof google.container.v1.IPv6AccessType|null);
+
+                /** IPAllocationPolicy subnetIpv6CidrBlock */
+                subnetIpv6CidrBlock?: (string|null);
+
+                /** IPAllocationPolicy servicesIpv6CidrBlock */
+                servicesIpv6CidrBlock?: (string|null);
             }
 
             /** Represents a IPAllocationPolicy. */
@@ -4982,6 +4988,12 @@ export namespace google {
 
                 /** IPAllocationPolicy ipv6AccessType. */
                 public ipv6AccessType: (google.container.v1.IPv6AccessType|keyof typeof google.container.v1.IPv6AccessType);
+
+                /** IPAllocationPolicy subnetIpv6CidrBlock. */
+                public subnetIpv6CidrBlock: string;
+
+                /** IPAllocationPolicy servicesIpv6CidrBlock. */
+                public servicesIpv6CidrBlock: string;
 
                 /**
                  * Creates a new IPAllocationPolicy instance using the specified properties.
