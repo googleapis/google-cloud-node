@@ -551,7 +551,7 @@ export async function fileMakePrivate(options: ConformanceTestOptions) {
   if (options.preconditionRequired) {
     await options.file!.makePrivate({
       preconditionOpts: {
-        ifGenerationMatch: options.file!.metadata.generation,
+        ifMetagenerationMatch: options.file!.metadata.metageneration,
       },
     });
   } else {
@@ -675,7 +675,7 @@ export async function setMetadata(options: ConformanceTestOptions) {
   };
   if (options.preconditionRequired) {
     await options.file!.setMetadata(metadata, {
-      ifGenerationMatch: options.file!.metadata.generation,
+      ifMetagenerationMatch: options.file!.metadata.metageneration,
     });
   } else {
     await options.file!.setMetadata(metadata);

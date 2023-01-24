@@ -3111,8 +3111,9 @@ class File extends ServiceObject<File> {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any;
 
-    if (options.preconditionOpts?.ifGenerationMatch !== undefined) {
-      query.ifGenerationMatch = options.preconditionOpts?.ifGenerationMatch;
+    if (options.preconditionOpts?.ifMetagenerationMatch !== undefined) {
+      query.ifMetagenerationMatch =
+        options.preconditionOpts?.ifMetagenerationMatch;
       delete options.preconditionOpts;
     }
 
@@ -4016,8 +4017,20 @@ class File extends ServiceObject<File> {
       (typeof coreOpts === 'object' &&
         coreOpts?.reqOpts?.qs?.ifGenerationMatch === undefined &&
         localPreconditionOptions?.ifGenerationMatch === undefined &&
-        (methodType === AvailableServiceObjectMethods.setMetadata ||
-          methodType === AvailableServiceObjectMethods.delete) &&
+        methodType === AvailableServiceObjectMethods.delete &&
+        this.storage.retryOptions.idempotencyStrategy ===
+          IdempotencyStrategy.RetryConditional) ||
+      this.storage.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryNever
+    ) {
+      this.storage.retryOptions.autoRetry = false;
+    }
+
+    if (
+      (typeof coreOpts === 'object' &&
+        coreOpts?.reqOpts?.qs?.ifMetagenerationMatch === undefined &&
+        localPreconditionOptions?.ifMetagenerationMatch === undefined &&
+        methodType === AvailableServiceObjectMethods.setMetadata &&
         this.storage.retryOptions.idempotencyStrategy ===
           IdempotencyStrategy.RetryConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===
