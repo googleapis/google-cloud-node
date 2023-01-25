@@ -14,6 +14,4 @@
 
 import synthtool.languages.node as node
 
-node.owlbot_main(templates_excludes=[
-README.md'
-])
+node.owlbot_main(templates_excludes=['README.md'])
