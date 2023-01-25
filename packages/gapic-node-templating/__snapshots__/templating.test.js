@@ -16,6 +16,8 @@ exports['tests for templates it should create the templates in the directory 1']
 deep-copy-regex:
     - source: /google/cloud/kms/(.*)/.*-nodejs
       dest: /owl-bot-staging/google-cloud-kms/$1
+
+api-name: kms
 `
 
 exports['tests for templates it should create the templates in the directory 2'] = `

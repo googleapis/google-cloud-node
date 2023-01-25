@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,13 +14,10 @@
 
 deep-remove-regex:
   - /owl-bot-staging
-
 deep-preserve-regex:
-  - /owl-bot-staging/v1beta1  
-
+  - /owl-bot-staging/v1beta1
 deep-copy-regex:
   - source: /google/cloud/bigquery/connection/(.*)/.*-nodejs
     dest: /owl-bot-staging/google-cloud-bigquery-connection/$1
-
 begin-after-commit-hash: fb91803ccef5d7c695139b22788b309e2197856b
-
+api-name: bigquery-connection

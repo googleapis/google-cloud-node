@@ -432,9 +432,9 @@ export class OsLoginServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. A reference to the POSIX account to update. POSIX accounts are identified
-   *   by the project ID they are associated with. A reference to the POSIX
-   *   account is in format `users/{user}/projects/{project}`.
+   *   Required. A reference to the POSIX account to update. POSIX accounts are
+   *   identified by the project ID they are associated with. A reference to the
+   *   POSIX account is in format `users/{user}/projects/{project}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -525,9 +525,9 @@ export class OsLoginServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The fingerprint of the public key to update. Public keys are identified by
-   *   their SHA-256 fingerprint. The fingerprint of the public key is in format
-   *   `users/{user}/sshPublicKeys/{fingerprint}`.
+   *   Required. The fingerprint of the public key to update. Public keys are
+   *   identified by their SHA-256 fingerprint. The fingerprint of the public key
+   *   is in format `users/{user}/sshPublicKeys/{fingerprint}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -716,9 +716,9 @@ export class OsLoginServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The fingerprint of the public key to retrieve. Public keys are identified
-   *   by their SHA-256 fingerprint. The fingerprint of the public key is in
-   *   format `users/{user}/sshPublicKeys/{fingerprint}`.
+   *   Required. The fingerprint of the public key to retrieve. Public keys are
+   *   identified by their SHA-256 fingerprint. The fingerprint of the public key
+   *   is in format `users/{user}/sshPublicKeys/{fingerprint}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -909,9 +909,9 @@ export class OsLoginServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The fingerprint of the public key to update. Public keys are identified by
-   *   their SHA-256 fingerprint. The fingerprint of the public key is in format
-   *   `users/{user}/sshPublicKeys/{fingerprint}`.
+   *   Required. The fingerprint of the public key to update. Public keys are
+   *   identified by their SHA-256 fingerprint. The fingerprint of the public key
+   *   is in format `users/{user}/sshPublicKeys/{fingerprint}`.
    * @param {google.cloud.oslogin.common.SshPublicKey} request.sshPublicKey
    *   Required. The SSH public key and expiration time.
    * @param {google.protobuf.FieldMask} request.updateMask
