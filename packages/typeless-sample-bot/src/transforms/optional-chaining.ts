@@ -22,13 +22,18 @@ export default function optionalChaining(): VisitorPlugin {
     visitor: {
       OptionalCallExpression(path: NodePathSingle) {
         const node = path.node as Babel.OptionalCallExpression;
-        path.replaceWith(
-          Babel.callExpression(node.callee, node.arguments)
-        );
+        path.replaceWith(Babel.callExpression(node.callee, node.arguments));
       },
       OptionalMemberExpression(path: NodePathSingle) {
         const node = path.node as Babel.OptionalMemberExpression;
-        path.replaceWith(Babel.memberExpression(node.object, node.property, node.computed, node.optional))
+        path.replaceWith(
+          Babel.memberExpression(
+            node.object,
+            node.property,
+            node.computed,
+            node.optional
+          )
+        );
       },
       LogicalExpression(path: NodePathSingle) {
         const node = path.node as Babel.LogicalExpression;
