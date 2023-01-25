@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/nodejs-ai-platform/compare/v2.3.0...v2.4.0) (2023-01-25)
+
+
+### Features
+
+* Add enable_dashboard_access in aiplatform v1 and v1beta1 ([#460](https://github.com/googleapis/nodejs-ai-platform/issues/460)) ([685cfed](https://github.com/googleapis/nodejs-ai-platform/commit/685cfedc6bb69fe8b118ce613f13eea6dc5d2b0b))
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#458](https://github.com/googleapis/nodejs-ai-platform/issues/458)) ([9345b15](https://github.com/googleapis/nodejs-ai-platform/commit/9345b15fcc22f60f00cd50442403fc1af4fabe71))
+* Removing migrated samples (to nodejs-docs-samples) from repo ([#555](https://github.com/googleapis/nodejs-ai-platform/issues/555)) ([0864901](https://github.com/googleapis/nodejs-ai-platform/commit/08649013609e9ba39de734f8a496dd082d3cf76d))
+
 ## [2.3.0](https://github.com/googleapis/nodejs-ai-platform/compare/v2.2.0...v2.3.0) (2022-09-21)
 
 
