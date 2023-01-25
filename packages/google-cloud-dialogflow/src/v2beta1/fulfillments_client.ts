@@ -38,7 +38,8 @@ import * as gapicConfig from './fulfillments_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.v2beta1.Fulfillment|Fulfillments}.
+ *  Service for managing
+ *  {@link google.cloud.dialogflow.v2beta1.Fulfillment|Fulfillments}.
  * @class
  * @memberof v2beta1
  */
