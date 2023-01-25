@@ -5483,6 +5483,11 @@
                         "enableNativePdfParsing": {
                           "type": "bool",
                           "id": 3
+                        },
+                        "advancedOcrOptions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
