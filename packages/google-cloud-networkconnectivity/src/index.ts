@@ -21,15 +21,8 @@ import * as v1alpha1 from './v1alpha1';
 
 const HubServiceClient = v1.HubServiceClient;
 type HubServiceClient = v1.HubServiceClient;
-const PolicyBasedRoutingServiceClient = v1.PolicyBasedRoutingServiceClient;
-type PolicyBasedRoutingServiceClient = v1.PolicyBasedRoutingServiceClient;
 
-export {v1, v1alpha1, HubServiceClient, PolicyBasedRoutingServiceClient};
-export default {
-  v1,
-  v1alpha1,
-  HubServiceClient,
-  PolicyBasedRoutingServiceClient,
-};
+export {v1, v1alpha1, HubServiceClient};
+export default {v1, v1alpha1, HubServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
