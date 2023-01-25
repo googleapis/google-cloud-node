@@ -34,8 +34,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -57,6 +57,55 @@ npm install @google-cloud/aiplatform
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+// const projectId = 'YOUR_PROJECT_ID';
+// const location = 'YOUR_PROJECT_LOCATION';
+
+const {EndpointServiceClient} = require('@google-cloud/aiplatform');
+
+// Specifies the location of the api endpoint
+const clientOptions = {
+  apiEndpoint: 'us-central1-aiplatform.googleapis.com',
+};
+const client = new EndpointServiceClient(clientOptions);
+
+async function listEndpoints() {
+  // Configure the parent resource
+  const parent = `projects/${projectId}/locations/${location}`;
+  const request = {
+    parent,
+  };
+
+  // Get and print out a list of all the endpoints for this resource
+  const [result] = await client.listEndpoints(request);
+  for (const endpoint of result) {
+    console.log(`\nEndpoint name: ${endpoint.name}`);
+    console.log(`Display name: ${endpoint.displayName}`);
+    if (endpoint.deployedModels[0]) {
+      console.log(
+        `First deployed model: ${endpoint.deployedModels[0].model}`
+      );
+    }
+  }
+}
+listEndpoints();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-ai-platform/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 

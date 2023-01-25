@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -355,8 +355,14 @@ export class JobServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
@@ -364,9 +370,17 @@ export class JobServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
           body: '*',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+              body: '*',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
               body: '*',
@@ -375,8 +389,14 @@ export class JobServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
             },
@@ -1725,12 +1745,15 @@ export class JobServiceClient {
    * Cancels a CustomJob.
    * Starts asynchronous cancellation on the CustomJob. The server
    * makes a best effort to cancel the job, but success is not
-   * guaranteed. Clients can use {@link google.cloud.aiplatform.v1.JobService.GetCustomJob|JobService.GetCustomJob} or
-   * other methods to check whether the cancellation succeeded or whether the
+   * guaranteed. Clients can use
+   * {@link google.cloud.aiplatform.v1.JobService.GetCustomJob|JobService.GetCustomJob}
+   * or other methods to check whether the cancellation succeeded or whether the
    * job completed despite cancellation. On successful cancellation,
    * the CustomJob is not deleted; instead it becomes a job with
-   * a {@link google.cloud.aiplatform.v1.CustomJob.error|CustomJob.error} value with a {@link google.rpc.Status.code|google.rpc.Status.code} of 1,
-   * corresponding to `Code.CANCELLED`, and {@link google.cloud.aiplatform.v1.CustomJob.state|CustomJob.state} is set to
+   * a {@link google.cloud.aiplatform.v1.CustomJob.error|CustomJob.error} value with
+   * a {@link google.rpc.Status.code|google.rpc.Status.code} of 1, corresponding to
+   * `Code.CANCELLED`, and
+   * {@link google.cloud.aiplatform.v1.CustomJob.state|CustomJob.state} is set to
    * `CANCELLED`.
    *
    * @param {Object} request
@@ -2121,8 +2144,9 @@ export class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to create the HyperparameterTuningJob in.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location to create the
+   *   HyperparameterTuningJob in. Format:
+   *   `projects/{project}/locations/{location}`
    * @param {google.cloud.aiplatform.v1.HyperparameterTuningJob} request.hyperparameterTuningJob
    *   Required. The HyperparameterTuningJob to create.
    * @param {object} [options]
@@ -2326,13 +2350,17 @@ export class JobServiceClient {
    * Cancels a HyperparameterTuningJob.
    * Starts asynchronous cancellation on the HyperparameterTuningJob. The server
    * makes a best effort to cancel the job, but success is not
-   * guaranteed. Clients can use {@link google.cloud.aiplatform.v1.JobService.GetHyperparameterTuningJob|JobService.GetHyperparameterTuningJob} or
-   * other methods to check whether the cancellation succeeded or whether the
+   * guaranteed. Clients can use
+   * {@link google.cloud.aiplatform.v1.JobService.GetHyperparameterTuningJob|JobService.GetHyperparameterTuningJob}
+   * or other methods to check whether the cancellation succeeded or whether the
    * job completed despite cancellation. On successful cancellation,
    * the HyperparameterTuningJob is not deleted; instead it becomes a job with
-   * a {@link google.cloud.aiplatform.v1.HyperparameterTuningJob.error|HyperparameterTuningJob.error} value with a {@link google.rpc.Status.code|google.rpc.Status.code}
-   * of 1, corresponding to `Code.CANCELLED`, and
-   * {@link google.cloud.aiplatform.v1.HyperparameterTuningJob.state|HyperparameterTuningJob.state} is set to `CANCELLED`.
+   * a
+   * {@link google.cloud.aiplatform.v1.HyperparameterTuningJob.error|HyperparameterTuningJob.error}
+   * value with a {@link google.rpc.Status.code|google.rpc.Status.code} of 1,
+   * corresponding to `Code.CANCELLED`, and
+   * {@link google.cloud.aiplatform.v1.HyperparameterTuningJob.state|HyperparameterTuningJob.state}
+   * is set to `CANCELLED`.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2441,8 +2469,8 @@ export class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to create the BatchPredictionJob in.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location to create the
+   *   BatchPredictionJob in. Format: `projects/{project}/locations/{location}`
    * @param {google.cloud.aiplatform.v1.BatchPredictionJob} request.batchPredictionJob
    *   Required. The BatchPredictionJob to create.
    * @param {object} [options]
@@ -2643,12 +2671,14 @@ export class JobServiceClient {
    *
    * Starts asynchronous cancellation on the BatchPredictionJob. The server
    * makes the best effort to cancel the job, but success is not
-   * guaranteed. Clients can use {@link google.cloud.aiplatform.v1.JobService.GetBatchPredictionJob|JobService.GetBatchPredictionJob} or
-   * other methods to check whether the cancellation succeeded or whether the
+   * guaranteed. Clients can use
+   * {@link google.cloud.aiplatform.v1.JobService.GetBatchPredictionJob|JobService.GetBatchPredictionJob}
+   * or other methods to check whether the cancellation succeeded or whether the
    * job completed despite cancellation. On a successful cancellation,
    * the BatchPredictionJob is not deleted;instead its
-   * {@link google.cloud.aiplatform.v1.BatchPredictionJob.state|BatchPredictionJob.state} is set to `CANCELLED`. Any files already
-   * outputted by the job are not deleted.
+   * {@link google.cloud.aiplatform.v1.BatchPredictionJob.state|BatchPredictionJob.state}
+   * is set to `CANCELLED`. Any files already outputted by the job are not
+   * deleted.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2961,7 +2991,8 @@ export class JobServiceClient {
   /**
    * Pauses a ModelDeploymentMonitoringJob. If the job is running, the server
    * makes a best effort to cancel the job. Will mark
-   * {@link google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.state|ModelDeploymentMonitoringJob.state} to 'PAUSED'.
+   * {@link google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.state|ModelDeploymentMonitoringJob.state}
+   * to 'PAUSED'.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3744,17 +3775,16 @@ export class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob} request.modelDeploymentMonitoringJob
-   *   Required. The model monitoring configuration which replaces the resource on the
-   *   server.
+   *   Required. The model monitoring configuration which replaces the resource on
+   *   the server.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask is used to specify the fields to be overwritten in the
-   *   ModelDeploymentMonitoringJob resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then only the non-empty fields present in the
-   *   request will be overwritten. Set the update_mask to `*` to override all
-   *   fields.
-   *   For the objective config, the user can either provide the update mask for
+   *   Required. The update mask is used to specify the fields to be overwritten
+   *   in the ModelDeploymentMonitoringJob resource by the update. The fields
+   *   specified in the update_mask are relative to the resource, not the full
+   *   request. A field will be overwritten if it is in the mask. If the user does
+   *   not provide a mask then only the non-empty fields present in the request
+   *   will be overwritten. Set the update_mask to `*` to override all fields. For
+   *   the objective config, the user can either provide the update mask for
    *   model_deployment_monitoring_objective_configs or any combination of its
    *   nested fields, such as:
    *   model_deployment_monitoring_objective_configs.objective_config.training_dataset.
@@ -4088,8 +4118,10 @@ export class JobServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListCustomJobsResponse.next_page_token|ListCustomJobsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.JobService.ListCustomJobs|JobService.ListCustomJobs} call.
+   *   {@link google.cloud.aiplatform.v1.ListCustomJobsResponse.next_page_token|ListCustomJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListCustomJobs|JobService.ListCustomJobs}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -4213,8 +4245,10 @@ export class JobServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListCustomJobsResponse.next_page_token|ListCustomJobsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.JobService.ListCustomJobs|JobService.ListCustomJobs} call.
+   *   {@link google.cloud.aiplatform.v1.ListCustomJobsResponse.next_page_token|ListCustomJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListCustomJobs|JobService.ListCustomJobs}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -4286,8 +4320,10 @@ export class JobServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListCustomJobsResponse.next_page_token|ListCustomJobsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.JobService.ListCustomJobs|JobService.ListCustomJobs} call.
+   *   {@link google.cloud.aiplatform.v1.ListCustomJobsResponse.next_page_token|ListCustomJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListCustomJobs|JobService.ListCustomJobs}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -4612,8 +4648,9 @@ export class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the HyperparameterTuningJobs
-   *   from. Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location to list the
+   *   HyperparameterTuningJobs from. Format:
+   *   `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
    *
@@ -4640,8 +4677,10 @@ export class JobServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse.next_page_token|ListHyperparameterTuningJobsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs|JobService.ListHyperparameterTuningJobs} call.
+   *   {@link google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse.next_page_token|ListHyperparameterTuningJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs|JobService.ListHyperparameterTuningJobs}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -4741,8 +4780,9 @@ export class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the HyperparameterTuningJobs
-   *   from. Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location to list the
+   *   HyperparameterTuningJobs from. Format:
+   *   `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
    *
@@ -4769,8 +4809,10 @@ export class JobServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse.next_page_token|ListHyperparameterTuningJobsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs|JobService.ListHyperparameterTuningJobs} call.
+   *   {@link google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse.next_page_token|ListHyperparameterTuningJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs|JobService.ListHyperparameterTuningJobs}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -4814,8 +4856,9 @@ export class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the HyperparameterTuningJobs
-   *   from. Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location to list the
+   *   HyperparameterTuningJobs from. Format:
+   *   `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
    *
@@ -4842,8 +4885,10 @@ export class JobServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse.next_page_token|ListHyperparameterTuningJobsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs|JobService.ListHyperparameterTuningJobs} call.
+   *   {@link google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse.next_page_token|ListHyperparameterTuningJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs|JobService.ListHyperparameterTuningJobs}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -4915,8 +4960,10 @@ export class JobServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token|ListBatchPredictionJobsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs|JobService.ListBatchPredictionJobs} call.
+   *   {@link google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token|ListBatchPredictionJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs|JobService.ListBatchPredictionJobs}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -5045,8 +5092,10 @@ export class JobServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token|ListBatchPredictionJobsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs|JobService.ListBatchPredictionJobs} call.
+   *   {@link google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token|ListBatchPredictionJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs|JobService.ListBatchPredictionJobs}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -5119,8 +5168,10 @@ export class JobServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token|ListBatchPredictionJobsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs|JobService.ListBatchPredictionJobs} call.
+   *   {@link google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token|ListBatchPredictionJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs|JobService.ListBatchPredictionJobs}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -350,6 +350,7 @@ export class FeaturestoreOnlineServingServiceClient {
     const featurestoreOnlineServingServiceStubMethods = [
       'readFeatureValues',
       'streamingReadFeatureValues',
+      'writeFeatureValues',
     ];
     for (const methodName of featurestoreOnlineServingServiceStubMethods) {
       const callPromise = this.featurestoreOnlineServingServiceStub.then(
@@ -548,6 +549,109 @@ export class FeaturestoreOnlineServingServiceClient {
     this.initialize();
     return this.innerApiCalls.readFeatureValues(request, options, callback);
   }
+  /**
+   * Writes Feature values of one or more entities of an EntityType.
+   *
+   * The Feature values are merged into existing entities if any. The Feature
+   * values to be written must have timestamp within the online storage
+   * retention.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.entityType
+   *   Required. The resource name of the EntityType for the entities being
+   *   written. Value format:
+   *   `projects/{project}/locations/{location}/featurestores/
+   *   {featurestore}/entityTypes/{entityType}`. For example,
+   *   for a machine learning model predicting user clicks on a website, an
+   *   EntityType ID could be `user`.
+   * @param {number[]} request.payloads
+   *   Required. The entities to be written. Up to 100,000 feature values can be
+   *   written across all `payloads`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [WriteFeatureValuesResponse]{@link google.cloud.aiplatform.v1.WriteFeatureValuesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/featurestore_online_serving_service.write_feature_values.js</caption>
+   * region_tag:aiplatform_v1_generated_FeaturestoreOnlineServingService_WriteFeatureValues_async
+   */
+  writeFeatureValues(
+    request?: protos.google.cloud.aiplatform.v1.IWriteFeatureValuesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IWriteFeatureValuesResponse,
+      protos.google.cloud.aiplatform.v1.IWriteFeatureValuesRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  writeFeatureValues(
+    request: protos.google.cloud.aiplatform.v1.IWriteFeatureValuesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IWriteFeatureValuesResponse,
+      | protos.google.cloud.aiplatform.v1.IWriteFeatureValuesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  writeFeatureValues(
+    request: protos.google.cloud.aiplatform.v1.IWriteFeatureValuesRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IWriteFeatureValuesResponse,
+      | protos.google.cloud.aiplatform.v1.IWriteFeatureValuesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  writeFeatureValues(
+    request?: protos.google.cloud.aiplatform.v1.IWriteFeatureValuesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IWriteFeatureValuesResponse,
+          | protos.google.cloud.aiplatform.v1.IWriteFeatureValuesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IWriteFeatureValuesResponse,
+      | protos.google.cloud.aiplatform.v1.IWriteFeatureValuesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IWriteFeatureValuesResponse,
+      protos.google.cloud.aiplatform.v1.IWriteFeatureValuesRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        entity_type: request.entityType ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.writeFeatureValues(request, options, callback);
+  }
 
   /**
    * Reads Feature values for multiple entities. Depending on their size, data
@@ -564,12 +668,12 @@ export class FeaturestoreOnlineServingServiceClient {
    *   for a machine learning model predicting user clicks on a website, an
    *   EntityType ID could be `user`.
    * @param {string[]} request.entityIds
-   *   Required. IDs of entities to read Feature values of. The maximum number of IDs is
-   *   100. For example, for a machine learning model predicting user clicks on a
-   *   website, an entity ID could be `user_123`.
+   *   Required. IDs of entities to read Feature values of. The maximum number of
+   *   IDs is 100. For example, for a machine learning model predicting user
+   *   clicks on a website, an entity ID could be `user_123`.
    * @param {google.cloud.aiplatform.v1.FeatureSelector} request.featureSelector
-   *   Required. Selector choosing Features of the target EntityType. Feature IDs will be
-   *   deduplicated.
+   *   Required. Selector choosing Features of the target EntityType. Feature IDs
+   *   will be deduplicated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}

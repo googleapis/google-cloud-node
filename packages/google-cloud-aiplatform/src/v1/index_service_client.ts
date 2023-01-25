@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -329,8 +329,14 @@ export class IndexServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
@@ -338,9 +344,17 @@ export class IndexServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
           body: '*',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+              body: '*',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
               body: '*',
@@ -349,8 +363,14 @@ export class IndexServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
             },
@@ -1865,7 +1885,8 @@ export class IndexServiceClient {
    *   Required. The Index which updates the resource on the server.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   The update mask applies to the resource.
-   *   For the `FieldMask` definition, see {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
+   *   For the `FieldMask` definition, see
+   *   {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2000,7 +2021,8 @@ export class IndexServiceClient {
   /**
    * Deletes an Index.
    * An Index can only be deleted when all its
-   * {@link google.cloud.aiplatform.v1.Index.deployed_indexes|DeployedIndexes} had been undeployed.
+   * {@link google.cloud.aiplatform.v1.Index.deployed_indexes|DeployedIndexes} had
+   * been undeployed.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2154,8 +2176,10 @@ export class IndexServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.IndexService.ListIndexes|IndexService.ListIndexes} call.
+   *   {@link google.cloud.aiplatform.v1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.IndexService.ListIndexes|IndexService.ListIndexes}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -2254,8 +2278,10 @@ export class IndexServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.IndexService.ListIndexes|IndexService.ListIndexes} call.
+   *   {@link google.cloud.aiplatform.v1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.IndexService.ListIndexes|IndexService.ListIndexes}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -2308,8 +2334,10 @@ export class IndexServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.IndexService.ListIndexes|IndexService.ListIndexes} call.
+   *   {@link google.cloud.aiplatform.v1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.IndexService.ListIndexes|IndexService.ListIndexes}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]

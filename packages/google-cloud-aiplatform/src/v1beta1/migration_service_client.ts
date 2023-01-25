@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -539,6 +539,9 @@ export class MigrationServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
             },
             {
@@ -549,6 +552,9 @@ export class MigrationServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
@@ -767,6 +773,10 @@ export class MigrationServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -780,6 +790,10 @@ export class MigrationServiceClient {
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               delete:
@@ -949,6 +963,9 @@ export class MigrationServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -959,6 +976,9 @@ export class MigrationServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
@@ -1114,6 +1134,9 @@ export class MigrationServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
             },
             {
@@ -1124,6 +1147,9 @@ export class MigrationServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
@@ -1295,6 +1321,9 @@ export class MigrationServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
             },
             {
@@ -1305,6 +1334,9 @@ export class MigrationServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
@@ -1637,10 +1669,9 @@ export class MigrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The location that the migratable resources should be searched from.
-   *   It's the Vertex AI location that the resources can be migrated to, not
-   *   the resources' original location.
-   *   Format:
+   *   Required. The location that the migratable resources should be searched
+   *   from. It's the Vertex AI location that the resources can be migrated to,
+   *   not the resources' original location. Format:
    *   `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The standard page size.
@@ -1651,7 +1682,8 @@ export class MigrationServiceClient {
    *   A filter for your search. You can use the following types of filters:
    *
    *   *   Resource type filters. The following strings filter for a specific type
-   *       of {@link google.cloud.aiplatform.v1beta1.MigratableResource|MigratableResource}:
+   *       of
+   *       {@link google.cloud.aiplatform.v1beta1.MigratableResource|MigratableResource}:
    *       *   `ml_engine_model_version:*`
    *       *   `automl_model:*`
    *       *   `automl_dataset:*`
@@ -1757,10 +1789,9 @@ export class MigrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The location that the migratable resources should be searched from.
-   *   It's the Vertex AI location that the resources can be migrated to, not
-   *   the resources' original location.
-   *   Format:
+   *   Required. The location that the migratable resources should be searched
+   *   from. It's the Vertex AI location that the resources can be migrated to,
+   *   not the resources' original location. Format:
    *   `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The standard page size.
@@ -1771,7 +1802,8 @@ export class MigrationServiceClient {
    *   A filter for your search. You can use the following types of filters:
    *
    *   *   Resource type filters. The following strings filter for a specific type
-   *       of {@link google.cloud.aiplatform.v1beta1.MigratableResource|MigratableResource}:
+   *       of
+   *       {@link google.cloud.aiplatform.v1beta1.MigratableResource|MigratableResource}:
    *       *   `ml_engine_model_version:*`
    *       *   `automl_model:*`
    *       *   `automl_dataset:*`
@@ -1821,10 +1853,9 @@ export class MigrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The location that the migratable resources should be searched from.
-   *   It's the Vertex AI location that the resources can be migrated to, not
-   *   the resources' original location.
-   *   Format:
+   *   Required. The location that the migratable resources should be searched
+   *   from. It's the Vertex AI location that the resources can be migrated to,
+   *   not the resources' original location. Format:
    *   `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The standard page size.
@@ -1835,7 +1866,8 @@ export class MigrationServiceClient {
    *   A filter for your search. You can use the following types of filters:
    *
    *   *   Resource type filters. The following strings filter for a specific type
-   *       of {@link google.cloud.aiplatform.v1beta1.MigratableResource|MigratableResource}:
+   *       of
+   *       {@link google.cloud.aiplatform.v1beta1.MigratableResource|MigratableResource}:
    *       *   `ml_engine_model_version:*`
    *       *   `automl_model:*`
    *       *   `automl_dataset:*`

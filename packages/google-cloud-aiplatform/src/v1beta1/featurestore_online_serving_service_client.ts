@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -568,14 +568,15 @@ export class FeaturestoreOnlineServingServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.entityType
-   *   Required. The resource name of the EntityType for the entities being written.
-   *   Value format: `projects/{project}/locations/{location}/featurestores/
+   *   Required. The resource name of the EntityType for the entities being
+   *   written. Value format:
+   *   `projects/{project}/locations/{location}/featurestores/
    *   {featurestore}/entityTypes/{entityType}`. For example,
    *   for a machine learning model predicting user clicks on a website, an
    *   EntityType ID could be `user`.
    * @param {number[]} request.payloads
-   *   Required. The entities to be written. Up to 100,000 feature values can be written
-   *   across all `payloads`.
+   *   Required. The entities to be written. Up to 100,000 feature values can be
+   *   written across all `payloads`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -682,12 +683,12 @@ export class FeaturestoreOnlineServingServiceClient {
    *   for a machine learning model predicting user clicks on a website, an
    *   EntityType ID could be `user`.
    * @param {string[]} request.entityIds
-   *   Required. IDs of entities to read Feature values of. The maximum number of IDs is
-   *   100. For example, for a machine learning model predicting user clicks on a
-   *   website, an entity ID could be `user_123`.
+   *   Required. IDs of entities to read Feature values of. The maximum number of
+   *   IDs is 100. For example, for a machine learning model predicting user
+   *   clicks on a website, an entity ID could be `user_123`.
    * @param {google.cloud.aiplatform.v1beta1.FeatureSelector} request.featureSelector
-   *   Required. Selector choosing Features of the target EntityType. Feature IDs will be
-   *   deduplicated.
+   *   Required. Selector choosing Features of the target EntityType. Feature IDs
+   *   will be deduplicated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}

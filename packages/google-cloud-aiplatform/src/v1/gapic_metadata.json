@@ -59,6 +59,13 @@
                 "listDataItemsAsync"
               ]
             },
+            "SearchDataItems": {
+              "methods": [
+                "searchDataItems",
+                "searchDataItemsStream",
+                "searchDataItemsAsync"
+              ]
+            },
             "ListSavedQueries": {
               "methods": [
                 "listSavedQueries",
@@ -125,6 +132,13 @@
                 "listDataItems",
                 "listDataItemsStream",
                 "listDataItemsAsync"
+              ]
+            },
+            "SearchDataItems": {
+              "methods": [
+                "searchDataItems",
+                "searchDataItemsStream",
+                "searchDataItemsAsync"
               ]
             },
             "ListSavedQueries": {
@@ -243,6 +257,11 @@
                 "readFeatureValues"
               ]
             },
+            "WriteFeatureValues": {
+              "methods": [
+                "writeFeatureValues"
+              ]
+            },
             "StreamingReadFeatureValues": {
               "methods": [
                 "streamingReadFeatureValues"
@@ -256,6 +275,11 @@
             "ReadFeatureValues": {
               "methods": [
                 "readFeatureValues"
+              ]
+            },
+            "WriteFeatureValues": {
+              "methods": [
+                "writeFeatureValues"
               ]
             }
           }
@@ -1812,6 +1836,11 @@
                 "getTensorboard"
               ]
             },
+            "ReadTensorboardUsage": {
+              "methods": [
+                "readTensorboardUsage"
+              ]
+            },
             "CreateTensorboardExperiment": {
               "methods": [
                 "createTensorboardExperiment"
@@ -1965,6 +1994,11 @@
             "GetTensorboard": {
               "methods": [
                 "getTensorboard"
+              ]
+            },
+            "ReadTensorboardUsage": {
+              "methods": [
+                "readTensorboardUsage"
               ]
             },
             "CreateTensorboardExperiment": {

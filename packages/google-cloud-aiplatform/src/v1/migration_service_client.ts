@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -330,8 +330,14 @@ export class MigrationServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
@@ -339,9 +345,17 @@ export class MigrationServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
           body: '*',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+              body: '*',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
               body: '*',
@@ -350,8 +364,14 @@ export class MigrationServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
             },
@@ -1568,10 +1588,9 @@ export class MigrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The location that the migratable resources should be searched from.
-   *   It's the Vertex AI location that the resources can be migrated to, not
-   *   the resources' original location.
-   *   Format:
+   *   Required. The location that the migratable resources should be searched
+   *   from. It's the Vertex AI location that the resources can be migrated to,
+   *   not the resources' original location. Format:
    *   `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The standard page size.
@@ -1688,10 +1707,9 @@ export class MigrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The location that the migratable resources should be searched from.
-   *   It's the Vertex AI location that the resources can be migrated to, not
-   *   the resources' original location.
-   *   Format:
+   *   Required. The location that the migratable resources should be searched
+   *   from. It's the Vertex AI location that the resources can be migrated to,
+   *   not the resources' original location. Format:
    *   `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The standard page size.
@@ -1752,10 +1770,9 @@ export class MigrationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The location that the migratable resources should be searched from.
-   *   It's the Vertex AI location that the resources can be migrated to, not
-   *   the resources' original location.
-   *   Format:
+   *   Required. The location that the migratable resources should be searched
+   *   from. It's the Vertex AI location that the resources can be migrated to,
+   *   not the resources' original location. Format:
    *   `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The standard page size.

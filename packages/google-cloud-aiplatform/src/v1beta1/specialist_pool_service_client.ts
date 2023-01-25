@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -544,6 +544,9 @@ export class SpecialistPoolServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
             },
             {
@@ -554,6 +557,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
@@ -772,6 +778,10 @@ export class SpecialistPoolServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -785,6 +795,10 @@ export class SpecialistPoolServiceClient {
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               delete:
@@ -954,6 +968,9 @@ export class SpecialistPoolServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -964,6 +981,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
@@ -1119,6 +1139,9 @@ export class SpecialistPoolServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
             },
             {
@@ -1129,6 +1152,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
@@ -1300,6 +1326,9 @@ export class SpecialistPoolServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
             },
             {
@@ -1310,6 +1339,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
@@ -2048,9 +2080,11 @@ export class SpecialistPoolServiceClient {
    *   The standard list page size.
    * @param {string} request.pageToken
    *   The standard list page token.
-   *   Typically obtained by {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token} of
-   *   the previous {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools} call. Return
-   *   first page if empty.
+   *   Typically obtained by
+   *   {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
+   *   call. Return first page if empty.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read. FieldMask represents a set of
    * @param {object} [options]
@@ -2152,9 +2186,11 @@ export class SpecialistPoolServiceClient {
    *   The standard list page size.
    * @param {string} request.pageToken
    *   The standard list page token.
-   *   Typically obtained by {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token} of
-   *   the previous {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools} call. Return
-   *   first page if empty.
+   *   Typically obtained by
+   *   {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
+   *   call. Return first page if empty.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read. FieldMask represents a set of
    * @param {object} [options]
@@ -2204,9 +2240,11 @@ export class SpecialistPoolServiceClient {
    *   The standard list page size.
    * @param {string} request.pageToken
    *   The standard list page token.
-   *   Typically obtained by {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token} of
-   *   the previous {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools} call. Return
-   *   first page if empty.
+   *   Typically obtained by
+   *   {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
+   *   call. Return first page if empty.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read. FieldMask represents a set of
    * @param {object} [options]

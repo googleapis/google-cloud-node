@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -561,6 +561,9 @@ export class MetadataServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
             },
             {
@@ -571,6 +574,9 @@ export class MetadataServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
@@ -789,6 +795,10 @@ export class MetadataServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -802,6 +812,10 @@ export class MetadataServiceClient {
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               delete:
@@ -971,6 +985,9 @@ export class MetadataServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -981,6 +998,9 @@ export class MetadataServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
@@ -1136,6 +1156,9 @@ export class MetadataServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
             },
             {
@@ -1146,6 +1169,9 @@ export class MetadataServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
@@ -1317,6 +1343,9 @@ export class MetadataServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
             },
             {
@@ -1327,6 +1356,9 @@ export class MetadataServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
@@ -1913,16 +1945,17 @@ export class MetadataServiceClient {
    *   The request object that will be sent.
    * @param {google.cloud.aiplatform.v1beta1.Artifact} request.artifact
    *   Required. The Artifact containing updates.
-   *   The Artifact's {@link google.cloud.aiplatform.v1beta1.Artifact.name|Artifact.name} field is used to identify the Artifact to
-   *   be updated.
-   *   Format:
+   *   The Artifact's
+   *   {@link google.cloud.aiplatform.v1beta1.Artifact.name|Artifact.name} field is
+   *   used to identify the Artifact to be updated. Format:
    *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. A FieldMask indicating which fields should be updated.
    *   Functionality of this field is not yet supported.
    * @param {boolean} request.allowMissing
-   *   If set to true, and the {@link google.cloud.aiplatform.v1beta1.Artifact|Artifact} is not found, a new {@link google.cloud.aiplatform.v1beta1.Artifact|Artifact} is
-   *   created.
+   *   If set to true, and the
+   *   {@link google.cloud.aiplatform.v1beta1.Artifact|Artifact} is not found, a new
+   *   {@link google.cloud.aiplatform.v1beta1.Artifact|Artifact} is created.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2013,9 +2046,8 @@ export class MetadataServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the MetadataStore where the Context should be
-   *   created.
-   *   Format:
+   *   Required. The resource name of the MetadataStore where the Context should
+   *   be created. Format:
    *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
    * @param {google.cloud.aiplatform.v1beta1.Context} request.context
    *   Required. The Context to create.
@@ -2211,15 +2243,15 @@ export class MetadataServiceClient {
    *   The request object that will be sent.
    * @param {google.cloud.aiplatform.v1beta1.Context} request.context
    *   Required. The Context containing updates.
-   *   The Context's {@link google.cloud.aiplatform.v1beta1.Context.name|Context.name} field is used to identify the Context to be
-   *   updated.
-   *   Format:
+   *   The Context's {@link google.cloud.aiplatform.v1beta1.Context.name|Context.name}
+   *   field is used to identify the Context to be updated. Format:
    *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. A FieldMask indicating which fields should be updated.
    *   Functionality of this field is not yet supported.
    * @param {boolean} request.allowMissing
-   *   If set to true, and the {@link google.cloud.aiplatform.v1beta1.Context|Context} is not found, a new {@link google.cloud.aiplatform.v1beta1.Context|Context} is
+   *   If set to true, and the {@link google.cloud.aiplatform.v1beta1.Context|Context}
+   *   is not found, a new {@link google.cloud.aiplatform.v1beta1.Context|Context} is
    *   created.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2313,9 +2345,8 @@ export class MetadataServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.context
-   *   Required. The resource name of the Context that the Artifacts and Executions
-   *   belong to.
-   *   Format:
+   *   Required. The resource name of the Context that the Artifacts and
+   *   Executions belong to. Format:
    *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
    * @param {string[]} request.artifacts
    *   The resource names of the Artifacts to attribute to the Context.
@@ -2952,16 +2983,17 @@ export class MetadataServiceClient {
    *   The request object that will be sent.
    * @param {google.cloud.aiplatform.v1beta1.Execution} request.execution
    *   Required. The Execution containing updates.
-   *   The Execution's {@link google.cloud.aiplatform.v1beta1.Execution.name|Execution.name} field is used to identify the Execution
-   *   to be updated.
-   *   Format:
+   *   The Execution's
+   *   {@link google.cloud.aiplatform.v1beta1.Execution.name|Execution.name} field is
+   *   used to identify the Execution to be updated. Format:
    *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. A FieldMask indicating which fields should be updated.
    *   Functionality of this field is not yet supported.
    * @param {boolean} request.allowMissing
-   *   If set to true, and the {@link google.cloud.aiplatform.v1beta1.Execution|Execution} is not found, a new {@link google.cloud.aiplatform.v1beta1.Execution|Execution}
-   *   is created.
+   *   If set to true, and the
+   *   {@link google.cloud.aiplatform.v1beta1.Execution|Execution} is not found, a new
+   *   {@link google.cloud.aiplatform.v1beta1.Execution|Execution} is created.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3165,9 +3197,8 @@ export class MetadataServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.execution
-   *   Required. The resource name of the Execution whose input and output Artifacts should
-   *   be retrieved as a LineageSubgraph.
-   *   Format:
+   *   Required. The resource name of the Execution whose input and output
+   *   Artifacts should be retrieved as a LineageSubgraph. Format:
    *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -3269,9 +3300,8 @@ export class MetadataServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the MetadataStore where the MetadataSchema should
-   *   be created.
-   *   Format:
+   *   Required. The resource name of the MetadataStore where the MetadataSchema
+   *   should be created. Format:
    *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
    * @param {google.cloud.aiplatform.v1beta1.MetadataSchema} request.metadataSchema
    *   Required. The MetadataSchema to create.
@@ -3480,9 +3510,8 @@ export class MetadataServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.artifact
-   *   Required. The resource name of the Artifact whose Lineage needs to be retrieved as a
-   *   LineageSubgraph.
-   *   Format:
+   *   Required. The resource name of the Artifact whose Lineage needs to be
+   *   retrieved as a LineageSubgraph. Format:
    *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
    *
    *   The request may error with FAILED_PRECONDITION if the number of Artifacts,
@@ -3513,7 +3542,8 @@ export class MetadataServiceClient {
    *      For example: `metadata.field_1.number_value = 10.0`
    *
    *   Each of the above supported filter types can be combined together using
-   *   logical operators (`AND` & `OR`).
+   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+   *   is 5.
    *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
    * @param {object} [options]
@@ -4796,8 +4826,8 @@ export class MetadataServiceClient {
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores} call. Provide this to retrieve the
-   *   subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters must match the call that
    *   provided the page token. (Otherwise the request will fail with
@@ -4904,8 +4934,8 @@ export class MetadataServiceClient {
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores} call. Provide this to retrieve the
-   *   subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters must match the call that
    *   provided the page token. (Otherwise the request will fail with
@@ -4960,8 +4990,8 @@ export class MetadataServiceClient {
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores} call. Provide this to retrieve the
-   *   subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters must match the call that
    *   provided the page token. (Otherwise the request will fail with
@@ -5013,7 +5043,8 @@ export class MetadataServiceClient {
    *   The maximum number of Artifacts to return. The service may return fewer.
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
-   *   A page token, received from a previous {@link google.cloud.aiplatform.v1beta1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
+   *   A page token, received from a previous
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters must match the call that
@@ -5044,7 +5075,8 @@ export class MetadataServiceClient {
    *       `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
    *
    *   Each of the above supported filter types can be combined together using
-   *   logical operators (`AND` & `OR`).
+   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+   *   is 5.
    *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
    * @param {string} request.orderBy
@@ -5154,7 +5186,8 @@ export class MetadataServiceClient {
    *   The maximum number of Artifacts to return. The service may return fewer.
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
-   *   A page token, received from a previous {@link google.cloud.aiplatform.v1beta1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
+   *   A page token, received from a previous
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters must match the call that
@@ -5185,7 +5218,8 @@ export class MetadataServiceClient {
    *       `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
    *
    *   Each of the above supported filter types can be combined together using
-   *   logical operators (`AND` & `OR`).
+   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+   *   is 5.
    *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
    * @param {string} request.orderBy
@@ -5243,7 +5277,8 @@ export class MetadataServiceClient {
    *   The maximum number of Artifacts to return. The service may return fewer.
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
-   *   A page token, received from a previous {@link google.cloud.aiplatform.v1beta1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
+   *   A page token, received from a previous
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters must match the call that
@@ -5274,7 +5309,8 @@ export class MetadataServiceClient {
    *       `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
    *
    *   Each of the above supported filter types can be combined together using
-   *   logical operators (`AND` & `OR`).
+   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+   *   is 5.
    *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
    * @param {string} request.orderBy
@@ -5331,7 +5367,8 @@ export class MetadataServiceClient {
    *   The maximum number of Contexts to return. The service may return fewer.
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
-   *   A page token, received from a previous {@link google.cloud.aiplatform.v1beta1.MetadataService.ListContexts|MetadataService.ListContexts}
+   *   A page token, received from a previous
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListContexts|MetadataService.ListContexts}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters must match the call that
@@ -5366,7 +5403,8 @@ export class MetadataServiceClient {
    *      ```
    *
    *   Each of the above supported filters can be combined together using
-   *   logical operators (`AND` & `OR`).
+   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+   *   is 5.
    *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
    * @param {string} request.orderBy
@@ -5476,7 +5514,8 @@ export class MetadataServiceClient {
    *   The maximum number of Contexts to return. The service may return fewer.
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
-   *   A page token, received from a previous {@link google.cloud.aiplatform.v1beta1.MetadataService.ListContexts|MetadataService.ListContexts}
+   *   A page token, received from a previous
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListContexts|MetadataService.ListContexts}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters must match the call that
@@ -5511,7 +5550,8 @@ export class MetadataServiceClient {
    *      ```
    *
    *   Each of the above supported filters can be combined together using
-   *   logical operators (`AND` & `OR`).
+   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+   *   is 5.
    *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
    * @param {string} request.orderBy
@@ -5569,7 +5609,8 @@ export class MetadataServiceClient {
    *   The maximum number of Contexts to return. The service may return fewer.
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
-   *   A page token, received from a previous {@link google.cloud.aiplatform.v1beta1.MetadataService.ListContexts|MetadataService.ListContexts}
+   *   A page token, received from a previous
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListContexts|MetadataService.ListContexts}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters must match the call that
@@ -5604,7 +5645,8 @@ export class MetadataServiceClient {
    *      ```
    *
    *   Each of the above supported filters can be combined together using
-   *   logical operators (`AND` & `OR`).
+   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+   *   is 5.
    *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
    * @param {string} request.orderBy
@@ -5661,7 +5703,8 @@ export class MetadataServiceClient {
    *   The maximum number of Executions to return. The service may return fewer.
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
-   *   A page token, received from a previous {@link google.cloud.aiplatform.v1beta1.MetadataService.ListExecutions|MetadataService.ListExecutions}
+   *   A page token, received from a previous
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListExecutions|MetadataService.ListExecutions}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters must match the call that
@@ -5692,7 +5735,9 @@ export class MetadataServiceClient {
    *      `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
    *
    *   Each of the above supported filters can be combined together using
-   *   logical operators (`AND` & `OR`).
+   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+   *   is 5.
+   *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
    * @param {string} request.orderBy
    *   How the list of messages is ordered. Specify the values to order by and an
@@ -5801,7 +5846,8 @@ export class MetadataServiceClient {
    *   The maximum number of Executions to return. The service may return fewer.
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
-   *   A page token, received from a previous {@link google.cloud.aiplatform.v1beta1.MetadataService.ListExecutions|MetadataService.ListExecutions}
+   *   A page token, received from a previous
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListExecutions|MetadataService.ListExecutions}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters must match the call that
@@ -5832,7 +5878,9 @@ export class MetadataServiceClient {
    *      `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
    *
    *   Each of the above supported filters can be combined together using
-   *   logical operators (`AND` & `OR`).
+   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+   *   is 5.
+   *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
    * @param {string} request.orderBy
    *   How the list of messages is ordered. Specify the values to order by and an
@@ -5889,7 +5937,8 @@ export class MetadataServiceClient {
    *   The maximum number of Executions to return. The service may return fewer.
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
-   *   A page token, received from a previous {@link google.cloud.aiplatform.v1beta1.MetadataService.ListExecutions|MetadataService.ListExecutions}
+   *   A page token, received from a previous
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListExecutions|MetadataService.ListExecutions}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters must match the call that
@@ -5920,7 +5969,9 @@ export class MetadataServiceClient {
    *      `in_context("projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context-id>")`
    *
    *   Each of the above supported filters can be combined together using
-   *   logical operators (`AND` & `OR`).
+   *   logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+   *   is 5.
+   *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
    * @param {string} request.orderBy
    *   How the list of messages is ordered. Specify the values to order by and an
@@ -5978,8 +6029,8 @@ export class MetadataServiceClient {
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas} call. Provide this to retrieve the
-   *   next page.
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas}
+   *   call. Provide this to retrieve the next page.
    *
    *   When paginating, all other provided parameters must match the call that
    *   provided the page token. (Otherwise the request will fail with
@@ -6088,8 +6139,8 @@ export class MetadataServiceClient {
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas} call. Provide this to retrieve the
-   *   next page.
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas}
+   *   call. Provide this to retrieve the next page.
    *
    *   When paginating, all other provided parameters must match the call that
    *   provided the page token. (Otherwise the request will fail with
@@ -6146,8 +6197,8 @@ export class MetadataServiceClient {
    *   Must be in range 1-1000, inclusive. Defaults to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas} call. Provide this to retrieve the
-   *   next page.
+   *   {@link google.cloud.aiplatform.v1beta1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas}
+   *   call. Provide this to retrieve the next page.
    *
    *   When paginating, all other provided parameters must match the call that
    *   provided the page token. (Otherwise the request will fail with

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -329,8 +329,14 @@ export class EndpointServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
@@ -338,9 +344,17 @@ export class EndpointServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
           body: '*',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+              body: '*',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
               body: '*',
@@ -349,8 +363,14 @@ export class EndpointServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
             },
@@ -1545,7 +1565,8 @@ export class EndpointServiceClient {
    * @param {google.cloud.aiplatform.v1.Endpoint} request.endpoint
    *   Required. The Endpoint which replaces the resource on the server.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. See {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
+   *   Required. The update mask applies to the resource. See
+   *   {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1932,21 +1953,24 @@ export class EndpointServiceClient {
    *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
    * @param {google.cloud.aiplatform.v1.DeployedModel} request.deployedModel
    *   Required. The DeployedModel to be created within the Endpoint. Note that
-   *   {@link google.cloud.aiplatform.v1.Endpoint.traffic_split|Endpoint.traffic_split} must be updated for the DeployedModel to start
-   *   receiving traffic, either as part of this call, or via
+   *   {@link google.cloud.aiplatform.v1.Endpoint.traffic_split|Endpoint.traffic_split}
+   *   must be updated for the DeployedModel to start receiving traffic, either as
+   *   part of this call, or via
    *   {@link google.cloud.aiplatform.v1.EndpointService.UpdateEndpoint|EndpointService.UpdateEndpoint}.
    * @param {number[]} request.trafficSplit
    *   A map from a DeployedModel's ID to the percentage of this Endpoint's
    *   traffic that should be forwarded to that DeployedModel.
    *
    *   If this field is non-empty, then the Endpoint's
-   *   {@link google.cloud.aiplatform.v1.Endpoint.traffic_split|traffic_split} will be overwritten with it.
-   *   To refer to the ID of the just being deployed Model, a "0" should be used,
-   *   and the actual ID of the new DeployedModel will be filled in its place by
-   *   this method. The traffic percentage values must add up to 100.
+   *   {@link google.cloud.aiplatform.v1.Endpoint.traffic_split|traffic_split} will be
+   *   overwritten with it. To refer to the ID of the just being deployed Model, a
+   *   "0" should be used, and the actual ID of the new DeployedModel will be
+   *   filled in its place by this method. The traffic percentage values must add
+   *   up to 100.
    *
    *   If this field is empty, then the Endpoint's
-   *   {@link google.cloud.aiplatform.v1.Endpoint.traffic_split|traffic_split} is not updated.
+   *   {@link google.cloud.aiplatform.v1.Endpoint.traffic_split|traffic_split} is not
+   *   updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2092,12 +2116,12 @@ export class EndpointServiceClient {
    *   Required. The ID of the DeployedModel to be undeployed from the Endpoint.
    * @param {number[]} request.trafficSplit
    *   If this field is provided, then the Endpoint's
-   *   {@link google.cloud.aiplatform.v1.Endpoint.traffic_split|traffic_split} will be overwritten with it. If
-   *   last DeployedModel is being undeployed from the Endpoint, the
-   *   [Endpoint.traffic_split] will always end up empty when this call returns.
-   *   A DeployedModel will be successfully undeployed only if it doesn't have
-   *   any traffic assigned to it when this method executes, or if this field
-   *   unassigns any traffic to it.
+   *   {@link google.cloud.aiplatform.v1.Endpoint.traffic_split|traffic_split} will be
+   *   overwritten with it. If last DeployedModel is being undeployed from the
+   *   Endpoint, the [Endpoint.traffic_split] will always end up empty when this
+   *   call returns. A DeployedModel will be successfully undeployed only if it
+   *   doesn't have any traffic assigned to it when this method executes, or if
+   *   this field unassigns any traffic to it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2235,14 +2259,15 @@ export class EndpointServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location from which to list the Endpoints.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location from which to list the
+   *   Endpoints. Format: `projects/{project}/locations/{location}`
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. For field names
-   *   both snake_case and camelCase are supported.
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
    *
    *     * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
-   *       i.e. the last segment of the Endpoint's {@link google.cloud.aiplatform.v1.Endpoint.name|resource name}.
+   *       i.e. the last segment of the Endpoint's [resource
+   *       name][google.cloud.aiplatform.v1.Endpoint.name].
    *     * `display_name` supports = and, !=
    *     * `labels` supports general map functions that is:
    *       * `labels.key=value` - key:value equality
@@ -2258,8 +2283,10 @@ export class EndpointServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListEndpointsResponse.next_page_token|ListEndpointsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.EndpointService.ListEndpoints|EndpointService.ListEndpoints} call.
+   *   {@link google.cloud.aiplatform.v1.ListEndpointsResponse.next_page_token|ListEndpointsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.EndpointService.ListEndpoints|EndpointService.ListEndpoints}
+   *   call.
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. Mask specifying which fields to read.
    * @param {string} request.orderBy
@@ -2364,14 +2391,15 @@ export class EndpointServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location from which to list the Endpoints.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location from which to list the
+   *   Endpoints. Format: `projects/{project}/locations/{location}`
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. For field names
-   *   both snake_case and camelCase are supported.
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
    *
    *     * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
-   *       i.e. the last segment of the Endpoint's {@link google.cloud.aiplatform.v1.Endpoint.name|resource name}.
+   *       i.e. the last segment of the Endpoint's [resource
+   *       name][google.cloud.aiplatform.v1.Endpoint.name].
    *     * `display_name` supports = and, !=
    *     * `labels` supports general map functions that is:
    *       * `labels.key=value` - key:value equality
@@ -2387,8 +2415,10 @@ export class EndpointServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListEndpointsResponse.next_page_token|ListEndpointsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.EndpointService.ListEndpoints|EndpointService.ListEndpoints} call.
+   *   {@link google.cloud.aiplatform.v1.ListEndpointsResponse.next_page_token|ListEndpointsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.EndpointService.ListEndpoints|EndpointService.ListEndpoints}
+   *   call.
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. Mask specifying which fields to read.
    * @param {string} request.orderBy
@@ -2441,14 +2471,15 @@ export class EndpointServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location from which to list the Endpoints.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location from which to list the
+   *   Endpoints. Format: `projects/{project}/locations/{location}`
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. For field names
-   *   both snake_case and camelCase are supported.
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
    *
    *     * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
-   *       i.e. the last segment of the Endpoint's {@link google.cloud.aiplatform.v1.Endpoint.name|resource name}.
+   *       i.e. the last segment of the Endpoint's [resource
+   *       name][google.cloud.aiplatform.v1.Endpoint.name].
    *     * `display_name` supports = and, !=
    *     * `labels` supports general map functions that is:
    *       * `labels.key=value` - key:value equality
@@ -2464,8 +2495,10 @@ export class EndpointServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListEndpointsResponse.next_page_token|ListEndpointsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.EndpointService.ListEndpoints|EndpointService.ListEndpoints} call.
+   *   {@link google.cloud.aiplatform.v1.ListEndpointsResponse.next_page_token|ListEndpointsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.EndpointService.ListEndpoints|EndpointService.ListEndpoints}
+   *   call.
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. Mask specifying which fields to read.
    * @param {string} request.orderBy

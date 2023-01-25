@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -556,6 +556,9 @@ export class FeaturestoreServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
             },
             {
@@ -566,6 +569,9 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
@@ -784,6 +790,10 @@ export class FeaturestoreServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -797,6 +807,10 @@ export class FeaturestoreServiceClient {
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               delete:
@@ -966,6 +980,9 @@ export class FeaturestoreServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -976,6 +993,9 @@ export class FeaturestoreServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
@@ -1131,6 +1151,9 @@ export class FeaturestoreServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
             },
             {
@@ -1141,6 +1164,9 @@ export class FeaturestoreServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
@@ -1312,6 +1338,9 @@ export class FeaturestoreServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
             },
             {
@@ -1322,6 +1351,9 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
@@ -1839,9 +1871,8 @@ export class FeaturestoreServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.aiplatform.v1beta1.EntityType} request.entityType
-   *   Required. The EntityType's `name` field is used to identify the EntityType to be
-   *   updated.
-   *   Format:
+   *   Required. The EntityType's `name` field is used to identify the EntityType
+   *   to be updated. Format:
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Field mask is used to specify the fields to be overwritten in the
@@ -1863,6 +1894,7 @@ export class FeaturestoreServiceClient {
    *     * `monitoring_config.import_features_analysis.anomaly_detection_baseline`
    *     * `monitoring_config.numerical_threshold_config.value`
    *     * `monitoring_config.categorical_threshold_config.value`
+   *     * `offline_storage_ttl_days` (available in Preview)
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2167,8 +2199,8 @@ export class FeaturestoreServiceClient {
    * @param {google.cloud.aiplatform.v1beta1.Featurestore} request.featurestore
    *   Required. The Featurestore to create.
    * @param {string} request.featurestoreId
-   *   Required. The ID to use for this Featurestore, which will become the final component
-   *   of the Featurestore's resource name.
+   *   Required. The ID to use for this Featurestore, which will become the final
+   *   component of the Featurestore's resource name.
    *
    *   This value may be up to 60 characters, and valid characters are
    *   `[a-z0-9_]`. The first character cannot be a number.
@@ -2311,9 +2343,8 @@ export class FeaturestoreServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.aiplatform.v1beta1.Featurestore} request.featurestore
-   *   Required. The Featurestore's `name` field is used to identify the Featurestore to be
-   *   updated.
-   *   Format:
+   *   Required. The Featurestore's `name` field is used to identify the
+   *   Featurestore to be updated. Format:
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}`
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Field mask is used to specify the fields to be overwritten in the
@@ -2329,6 +2360,7 @@ export class FeaturestoreServiceClient {
    *     * `labels`
    *     * `online_serving_config.fixed_node_count`
    *     * `online_serving_config.scaling`
+   *     * `online_storage_ttl_days` (available in Preview)
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2617,8 +2649,8 @@ export class FeaturestoreServiceClient {
    * @param {google.cloud.aiplatform.v1beta1.EntityType} request.entityType
    *   The EntityType to create.
    * @param {string} request.entityTypeId
-   *   Required. The ID to use for the EntityType, which will become the final component of
-   *   the EntityType's resource name.
+   *   Required. The ID to use for the EntityType, which will become the final
+   *   component of the EntityType's resource name.
    *
    *   This value may be up to 60 characters, and valid characters are
    *   `[a-z0-9_]`. The first character cannot be a number.
@@ -2911,10 +2943,10 @@ export class FeaturestoreServiceClient {
    * @param {google.cloud.aiplatform.v1beta1.Feature} request.feature
    *   Required. The Feature to create.
    * @param {string} request.featureId
-   *   Required. The ID to use for the Feature, which will become the final component of
-   *   the Feature's resource name.
+   *   Required. The ID to use for the Feature, which will become the final
+   *   component of the Feature's resource name.
    *
-   *   This value may be up to 60 characters, and valid characters are
+   *   This value may be up to 128 characters, and valid characters are
    *   `[a-z0-9_]`. The first character cannot be a number.
    *
    *   The value must be unique within an EntityType.
@@ -3055,14 +3087,15 @@ export class FeaturestoreServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the EntityType to create the batch of Features under.
-   *   Format:
+   *   Required. The resource name of the EntityType to create the batch of
+   *   Features under. Format:
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
    * @param {number[]} request.requests
-   *   Required. The request message specifying the Features to create. All Features must be
-   *   created under the same parent EntityType. The `parent` field in each child
-   *   request message can be omitted. If `parent` is set in a child request, then
-   *   the value must match the `parent` value in this request message.
+   *   Required. The request message specifying the Features to create. All
+   *   Features must be created under the same parent EntityType. The `parent`
+   *   field in each child request message can be omitted. If `parent` is set in a
+   *   child request, then the value must match the `parent` value in this request
+   *   message.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3368,16 +3401,16 @@ export class FeaturestoreServiceClient {
    *   Single Feature timestamp for all entities being imported. The
    *   timestamp must not have higher than millisecond precision.
    * @param {string} request.entityType
-   *   Required. The resource name of the EntityType grouping the Features for which values
-   *   are being imported. Format:
+   *   Required. The resource name of the EntityType grouping the Features for
+   *   which values are being imported. Format:
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
    * @param {string} request.entityIdField
    *   Source column that holds entity IDs. If not provided, entity IDs are
    *   extracted from the column named `entity_id`.
    * @param {number[]} request.featureSpecs
-   *   Required. Specifications defining which Feature values to import from the entity. The
-   *   request fails if no feature_specs are provided, and having multiple
-   *   feature_specs for one Feature is not allowed.
+   *   Required. Specifications defining which Feature values to import from the
+   *   entity. The request fails if no feature_specs are provided, and having
+   *   multiple feature_specs for one Feature is not allowed.
    * @param {boolean} request.disableOnlineServing
    *   If set, data will not be imported for online serving. This
    *   is typically used for backfilling, where Feature generation timestamps are
@@ -3560,8 +3593,8 @@ export class FeaturestoreServiceClient {
    * @param {google.cloud.aiplatform.v1beta1.BigQuerySource} request.bigqueryReadInstances
    *   Similar to csv_read_instances, but from BigQuery source.
    * @param {string} request.featurestore
-   *   Required. The resource name of the Featurestore from which to query Feature values.
-   *   Format:
+   *   Required. The resource name of the Featurestore from which to query Feature
+   *   values. Format:
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}`
    * @param {google.cloud.aiplatform.v1beta1.FeatureValueDestination} request.destination
    *   Required. Specifies output location and format.
@@ -3574,11 +3607,15 @@ export class FeaturestoreServiceClient {
    *   automatically inferred. For CSV source, the pass-through values will be
    *   passed as opaque bytes.
    * @param {number[]} request.entityTypeSpecs
-   *   Required. Specifies EntityType grouping Features to read values of and settings.
-   *   Each EntityType referenced in
+   *   Required. Specifies EntityType grouping Features to read values of and
+   *   settings. Each EntityType referenced in
    *   [BatchReadFeatureValuesRequest.entity_type_specs] must have a column
    *   specifying entity IDs in the EntityType in
    *   {@link |BatchReadFeatureValuesRequest.request} .
+   * @param {google.protobuf.Timestamp} [request.startTime]
+   *   Optional. Excludes Feature values with feature generation timestamp before
+   *   this timestamp. If not set, retrieve oldest values kept in Feature Store.
+   *   Timestamp, if present, must not have higher than millisecond precision.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3726,8 +3763,8 @@ export class FeaturestoreServiceClient {
    *   Exports all historical values of all entities of the EntityType within a
    *   time range
    * @param {string} request.entityType
-   *   Required. The resource name of the EntityType from which to export Feature values.
-   *   Format:
+   *   Required. The resource name of the EntityType from which to export Feature
+   *   values. Format:
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
    * @param {google.cloud.aiplatform.v1beta1.FeatureValueDestination} request.destination
    *   Required. Specifies destination location and format.
@@ -3886,8 +3923,8 @@ export class FeaturestoreServiceClient {
    *   Select feature values to be deleted by specifying time range and
    *   features.
    * @param {string} request.entityType
-   *   Required. The resource name of the EntityType grouping the Features for which values
-   *   are being deleted from. Format:
+   *   Required. The resource name of the EntityType grouping the Features for
+   *   which values are being deleted from. Format:
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -4056,12 +4093,12 @@ export class FeaturestoreServiceClient {
    *   coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores} must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.
@@ -4195,12 +4232,12 @@ export class FeaturestoreServiceClient {
    *   coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores} must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.
@@ -4282,12 +4319,12 @@ export class FeaturestoreServiceClient {
    *   coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores} must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores|FeaturestoreService.ListFeaturestores}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.
@@ -4367,12 +4404,12 @@ export class FeaturestoreServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes} must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.
@@ -4506,12 +4543,12 @@ export class FeaturestoreServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes} must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.
@@ -4593,12 +4630,12 @@ export class FeaturestoreServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes} must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListEntityTypes|FeaturestoreService.ListEntityTypes}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.
@@ -4681,12 +4718,12 @@ export class FeaturestoreServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures} must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.
@@ -4699,10 +4736,12 @@ export class FeaturestoreServiceClient {
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {number} request.latestStatsCount
-   *   If set, return the most recent {@link google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
+   *   If set, return the most recent
+   *   {@link google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
    *   of stats for each Feature in response. Valid value is [0, 10]. If number of
-   *   stats exists < {@link google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}, return all
-   *   existing stats.
+   *   stats exists <
+   *   {@link google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count},
+   *   return all existing stats.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4827,12 +4866,12 @@ export class FeaturestoreServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures} must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.
@@ -4845,10 +4884,12 @@ export class FeaturestoreServiceClient {
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {number} request.latestStatsCount
-   *   If set, return the most recent {@link google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
+   *   If set, return the most recent
+   *   {@link google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
    *   of stats for each Feature in response. Valid value is [0, 10]. If number of
-   *   stats exists < {@link google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}, return all
-   *   existing stats.
+   *   stats exists <
+   *   {@link google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count},
+   *   return all existing stats.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4921,12 +4962,12 @@ export class FeaturestoreServiceClient {
    *   1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures} must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures|FeaturestoreService.ListFeatures}
+   *   must match the call that provided the page token.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.
@@ -4939,10 +4980,12 @@ export class FeaturestoreServiceClient {
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {number} request.latestStatsCount
-   *   If set, return the most recent {@link google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
+   *   If set, return the most recent
+   *   {@link google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}
    *   of stats for each Feature in response. Valid value is [0, 10]. If number of
-   *   stats exists < {@link google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count}, return all
-   *   existing stats.
+   *   stats exists <
+   *   {@link google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count|ListFeaturesRequest.latest_stats_count},
+   *   return all existing stats.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5053,12 +5096,12 @@ export class FeaturestoreServiceClient {
    *   100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures}, except `page_size`, must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures},
+   *   except `page_size`, must match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5222,12 +5265,12 @@ export class FeaturestoreServiceClient {
    *   100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures}, except `page_size`, must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures},
+   *   except `page_size`, must match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5339,12 +5382,12 @@ export class FeaturestoreServiceClient {
    *   100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures} call.
-   *   Provide this to retrieve the subsequent page.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures}
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures}, except `page_size`, must
-   *   match the call that provided the page token.
+   *   {@link google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures|FeaturestoreService.SearchFeatures},
+   *   except `page_size`, must match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

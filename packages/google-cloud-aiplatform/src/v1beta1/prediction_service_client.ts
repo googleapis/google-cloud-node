@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -439,12 +439,14 @@ export class PredictionServiceClient {
    *   in case of AutoML Models, or, in case of customer created Models, the
    *   behaviour is as documented by that Model.
    *   The schema of any single instance may be specified via Endpoint's
-   *   DeployedModels' {@link google.cloud.aiplatform.v1beta1.DeployedModel.model|Model's}
+   *   DeployedModels'
+   *   {@link google.cloud.aiplatform.v1beta1.DeployedModel.model|Model's}
    *   {@link google.cloud.aiplatform.v1beta1.Model.predict_schemata|PredictSchemata's}
    *   {@link google.cloud.aiplatform.v1beta1.PredictSchemata.instance_schema_uri|instance_schema_uri}.
    * @param {google.protobuf.Value} request.parameters
    *   The parameters that govern the prediction. The schema of the parameters may
-   *   be specified via Endpoint's DeployedModels' {@link google.cloud.aiplatform.v1beta1.DeployedModel.model|Model's }
+   *   be specified via Endpoint's DeployedModels' [Model's
+   *   ][google.cloud.aiplatform.v1beta1.DeployedModel.model]
    *   {@link google.cloud.aiplatform.v1beta1.Model.predict_schemata|PredictSchemata's}
    *   {@link google.cloud.aiplatform.v1beta1.PredictSchemata.parameters_schema_uri|parameters_schema_uri}.
    * @param {object} [options]
@@ -530,11 +532,13 @@ export class PredictionServiceClient {
    *
    * The response includes the following HTTP headers:
    *
-   * * `X-Vertex-AI-Endpoint-Id`: ID of the {@link google.cloud.aiplatform.v1beta1.Endpoint|Endpoint} that served this
+   * * `X-Vertex-AI-Endpoint-Id`: ID of the
+   * {@link google.cloud.aiplatform.v1beta1.Endpoint|Endpoint} that served this
    * prediction.
    *
-   * * `X-Vertex-AI-Deployed-Model-Id`: ID of the Endpoint's {@link google.cloud.aiplatform.v1beta1.DeployedModel|DeployedModel}
-   * that served this prediction.
+   * * `X-Vertex-AI-Deployed-Model-Id`: ID of the Endpoint's
+   * {@link google.cloud.aiplatform.v1beta1.DeployedModel|DeployedModel} that served
+   * this prediction.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -545,17 +549,19 @@ export class PredictionServiceClient {
    * @param {google.api.HttpBody} request.httpBody
    *   The prediction input. Supports HTTP headers and arbitrary data payload.
    *
-   *   A {@link google.cloud.aiplatform.v1beta1.DeployedModel|DeployedModel} may have an upper limit on the number of instances it
-   *   supports per request. When this limit it is exceeded for an AutoML model,
-   *   the {@link google.cloud.aiplatform.v1beta1.PredictionService.RawPredict|RawPredict} method returns an error.
-   *   When this limit is exceeded for a custom-trained model, the behavior varies
-   *   depending on the model.
+   *   A {@link google.cloud.aiplatform.v1beta1.DeployedModel|DeployedModel} may have
+   *   an upper limit on the number of instances it supports per request. When
+   *   this limit it is exceeded for an AutoML model, the
+   *   {@link google.cloud.aiplatform.v1beta1.PredictionService.RawPredict|RawPredict}
+   *   method returns an error. When this limit is exceeded for a custom-trained
+   *   model, the behavior varies depending on the model.
    *
    *   You can specify the schema for each instance in the
    *   {@link google.cloud.aiplatform.v1beta1.PredictSchemata.instance_schema_uri|predict_schemata.instance_schema_uri}
-   *   field when you create a {@link google.cloud.aiplatform.v1beta1.Model|Model}. This schema applies when you deploy the
-   *   `Model` as a `DeployedModel` to an {@link google.cloud.aiplatform.v1beta1.Endpoint|Endpoint} and use the `RawPredict`
-   *   method.
+   *   field when you create a {@link google.cloud.aiplatform.v1beta1.Model|Model}.
+   *   This schema applies when you deploy the `Model` as a `DeployedModel` to an
+   *   {@link google.cloud.aiplatform.v1beta1.Endpoint|Endpoint} and use the
+   *   `RawPredict` method.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -643,10 +649,12 @@ export class PredictionServiceClient {
   /**
    * Perform an online explanation.
    *
-   * If {@link google.cloud.aiplatform.v1beta1.ExplainRequest.deployed_model_id|deployed_model_id} is specified,
-   * the corresponding DeployModel must have
+   * If
+   * {@link google.cloud.aiplatform.v1beta1.ExplainRequest.deployed_model_id|deployed_model_id}
+   * is specified, the corresponding DeployModel must have
    * {@link google.cloud.aiplatform.v1beta1.DeployedModel.explanation_spec|explanation_spec}
-   * populated. If {@link google.cloud.aiplatform.v1beta1.ExplainRequest.deployed_model_id|deployed_model_id}
+   * populated. If
+   * {@link google.cloud.aiplatform.v1beta1.ExplainRequest.deployed_model_id|deployed_model_id}
    * is not specified, all DeployedModels must have
    * {@link google.cloud.aiplatform.v1beta1.DeployedModel.explanation_spec|explanation_spec}
    * populated. Only deployed AutoML tabular Models have
@@ -665,26 +673,29 @@ export class PredictionServiceClient {
    *   in case of AutoML Models, or, in case of customer created Models, the
    *   behaviour is as documented by that Model.
    *   The schema of any single instance may be specified via Endpoint's
-   *   DeployedModels' {@link google.cloud.aiplatform.v1beta1.DeployedModel.model|Model's}
+   *   DeployedModels'
+   *   {@link google.cloud.aiplatform.v1beta1.DeployedModel.model|Model's}
    *   {@link google.cloud.aiplatform.v1beta1.Model.predict_schemata|PredictSchemata's}
    *   {@link google.cloud.aiplatform.v1beta1.PredictSchemata.instance_schema_uri|instance_schema_uri}.
    * @param {google.protobuf.Value} request.parameters
    *   The parameters that govern the prediction. The schema of the parameters may
-   *   be specified via Endpoint's DeployedModels' {@link google.cloud.aiplatform.v1beta1.DeployedModel.model|Model's }
+   *   be specified via Endpoint's DeployedModels' [Model's
+   *   ][google.cloud.aiplatform.v1beta1.DeployedModel.model]
    *   {@link google.cloud.aiplatform.v1beta1.Model.predict_schemata|PredictSchemata's}
    *   {@link google.cloud.aiplatform.v1beta1.PredictSchemata.parameters_schema_uri|parameters_schema_uri}.
    * @param {google.cloud.aiplatform.v1beta1.ExplanationSpecOverride} request.explanationSpecOverride
    *   If specified, overrides the
-   *   {@link google.cloud.aiplatform.v1beta1.DeployedModel.explanation_spec|explanation_spec} of the DeployedModel.
-   *   Can be used for explaining prediction results with different
-   *   configurations, such as:
+   *   {@link google.cloud.aiplatform.v1beta1.DeployedModel.explanation_spec|explanation_spec}
+   *   of the DeployedModel. Can be used for explaining prediction results with
+   *   different configurations, such as:
    *    - Explaining top-5 predictions results as opposed to top-1;
    *    - Increasing path count or step count of the attribution methods to reduce
    *      approximate errors;
    *    - Using different baselines for explaining the prediction results.
    * @param {string} request.deployedModelId
    *   If specified, this ExplainRequest will be served by the chosen
-   *   DeployedModel, overriding {@link google.cloud.aiplatform.v1beta1.Endpoint.traffic_split|Endpoint.traffic_split}.
+   *   DeployedModel, overriding
+   *   {@link google.cloud.aiplatform.v1beta1.Endpoint.traffic_split|Endpoint.traffic_split}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

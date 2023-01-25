@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -538,6 +538,9 @@ export class IndexServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
             },
             {
@@ -548,6 +551,9 @@ export class IndexServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
@@ -766,6 +772,10 @@ export class IndexServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -779,6 +789,10 @@ export class IndexServiceClient {
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               delete:
@@ -948,6 +962,9 @@ export class IndexServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -958,6 +975,9 @@ export class IndexServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
@@ -1113,6 +1133,9 @@ export class IndexServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
             },
             {
@@ -1123,6 +1146,9 @@ export class IndexServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
@@ -1294,6 +1320,9 @@ export class IndexServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
             },
             {
@@ -1304,6 +1333,9 @@ export class IndexServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
@@ -1953,7 +1985,8 @@ export class IndexServiceClient {
    *   Required. The Index which updates the resource on the server.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   The update mask applies to the resource.
-   *   For the `FieldMask` definition, see {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
+   *   For the `FieldMask` definition, see
+   *   {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2088,7 +2121,8 @@ export class IndexServiceClient {
   /**
    * Deletes an Index.
    * An Index can only be deleted when all its
-   * {@link google.cloud.aiplatform.v1beta1.Index.deployed_indexes|DeployedIndexes} had been undeployed.
+   * {@link google.cloud.aiplatform.v1beta1.Index.deployed_indexes|DeployedIndexes}
+   * had been undeployed.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2242,8 +2276,10 @@ export class IndexServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.IndexService.ListIndexes|IndexService.ListIndexes} call.
+   *   {@link google.cloud.aiplatform.v1beta1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.IndexService.ListIndexes|IndexService.ListIndexes}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -2348,8 +2384,10 @@ export class IndexServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.IndexService.ListIndexes|IndexService.ListIndexes} call.
+   *   {@link google.cloud.aiplatform.v1beta1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.IndexService.ListIndexes|IndexService.ListIndexes}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -2402,8 +2440,10 @@ export class IndexServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.IndexService.ListIndexes|IndexService.ListIndexes} call.
+   *   {@link google.cloud.aiplatform.v1beta1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.IndexService.ListIndexes|IndexService.ListIndexes}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]

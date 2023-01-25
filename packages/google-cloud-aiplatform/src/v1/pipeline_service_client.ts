@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -336,8 +336,14 @@ export class PipelineServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
@@ -345,9 +351,17 @@ export class PipelineServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
           body: '*',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+              body: '*',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
               body: '*',
@@ -356,8 +370,14 @@ export class PipelineServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+            },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
             },
@@ -1449,8 +1469,8 @@ export class PipelineServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to create the TrainingPipeline in.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location to create the TrainingPipeline
+   *   in. Format: `projects/{project}/locations/{location}`
    * @param {google.cloud.aiplatform.v1.TrainingPipeline} request.trainingPipeline
    *   Required. The TrainingPipeline to create.
    * @param {object} [options]
@@ -1644,13 +1664,17 @@ export class PipelineServiceClient {
    * Cancels a TrainingPipeline.
    * Starts asynchronous cancellation on the TrainingPipeline. The server
    * makes a best effort to cancel the pipeline, but success is not
-   * guaranteed. Clients can use {@link google.cloud.aiplatform.v1.PipelineService.GetTrainingPipeline|PipelineService.GetTrainingPipeline} or
-   * other methods to check whether the cancellation succeeded or whether the
+   * guaranteed. Clients can use
+   * {@link google.cloud.aiplatform.v1.PipelineService.GetTrainingPipeline|PipelineService.GetTrainingPipeline}
+   * or other methods to check whether the cancellation succeeded or whether the
    * pipeline completed despite cancellation. On successful cancellation,
    * the TrainingPipeline is not deleted; instead it becomes a pipeline with
-   * a {@link google.cloud.aiplatform.v1.TrainingPipeline.error|TrainingPipeline.error} value with a {@link google.rpc.Status.code|google.rpc.Status.code} of 1,
-   * corresponding to `Code.CANCELLED`, and {@link google.cloud.aiplatform.v1.TrainingPipeline.state|TrainingPipeline.state} is set to
-   * `CANCELLED`.
+   * a
+   * {@link google.cloud.aiplatform.v1.TrainingPipeline.error|TrainingPipeline.error}
+   * value with a {@link google.rpc.Status.code|google.rpc.Status.code} of 1,
+   * corresponding to `Code.CANCELLED`, and
+   * {@link google.cloud.aiplatform.v1.TrainingPipeline.state|TrainingPipeline.state}
+   * is set to `CANCELLED`.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1950,12 +1974,15 @@ export class PipelineServiceClient {
    * Cancels a PipelineJob.
    * Starts asynchronous cancellation on the PipelineJob. The server
    * makes a best effort to cancel the pipeline, but success is not
-   * guaranteed. Clients can use {@link google.cloud.aiplatform.v1.PipelineService.GetPipelineJob|PipelineService.GetPipelineJob} or
-   * other methods to check whether the cancellation succeeded or whether the
+   * guaranteed. Clients can use
+   * {@link google.cloud.aiplatform.v1.PipelineService.GetPipelineJob|PipelineService.GetPipelineJob}
+   * or other methods to check whether the cancellation succeeded or whether the
    * pipeline completed despite cancellation. On successful cancellation,
    * the PipelineJob is not deleted; instead it becomes a pipeline with
-   * a {@link google.cloud.aiplatform.v1.PipelineJob.error|PipelineJob.error} value with a {@link google.rpc.Status.code|google.rpc.Status.code} of 1,
-   * corresponding to `Code.CANCELLED`, and {@link google.cloud.aiplatform.v1.PipelineJob.state|PipelineJob.state} is set to
+   * a {@link google.cloud.aiplatform.v1.PipelineJob.error|PipelineJob.error} value
+   * with a {@link google.rpc.Status.code|google.rpc.Status.code} of 1, corresponding
+   * to `Code.CANCELLED`, and
+   * {@link google.cloud.aiplatform.v1.PipelineJob.state|PipelineJob.state} is set to
    * `CANCELLED`.
    *
    * @param {Object} request
@@ -2339,8 +2366,8 @@ export class PipelineServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the TrainingPipelines from.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location to list the TrainingPipelines
+   *   from. Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
    *
@@ -2367,8 +2394,10 @@ export class PipelineServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines} call.
+   *   {@link google.cloud.aiplatform.v1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -2464,8 +2493,8 @@ export class PipelineServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the TrainingPipelines from.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location to list the TrainingPipelines
+   *   from. Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
    *
@@ -2492,8 +2521,10 @@ export class PipelineServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines} call.
+   *   {@link google.cloud.aiplatform.v1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -2537,8 +2568,8 @@ export class PipelineServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the TrainingPipelines from.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location to list the TrainingPipelines
+   *   from. Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
    *
@@ -2565,8 +2596,10 @@ export class PipelineServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines} call.
+   *   {@link google.cloud.aiplatform.v1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines}
+   *   call.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
    * @param {object} [options]
@@ -2651,8 +2684,10 @@ export class PipelineServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs} call.
+   *   {@link google.cloud.aiplatform.v1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs}
+   *   call.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by. The default sort order is in
    *   ascending order. Use "desc" after a field name for descending. You can have
@@ -2804,8 +2839,10 @@ export class PipelineServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs} call.
+   *   {@link google.cloud.aiplatform.v1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs}
+   *   call.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by. The default sort order is in
    *   ascending order. Use "desc" after a field name for descending. You can have
@@ -2905,8 +2942,10 @@ export class PipelineServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs} call.
+   *   {@link google.cloud.aiplatform.v1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs}
+   *   call.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by. The default sort order is in
    *   ascending order. Use "desc" after a field name for descending. You can have

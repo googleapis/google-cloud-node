@@ -28,6 +28,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ReadTensorboardUsage": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "UpdateTensorboard": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

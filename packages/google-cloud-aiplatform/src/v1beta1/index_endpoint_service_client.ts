@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -538,6 +538,9 @@ export class IndexEndpointServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
             },
             {
@@ -548,6 +551,9 @@ export class IndexEndpointServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
@@ -766,6 +772,10 @@ export class IndexEndpointServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -779,6 +789,10 @@ export class IndexEndpointServiceClient {
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               delete:
@@ -948,6 +962,9 @@ export class IndexEndpointServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -958,6 +975,9 @@ export class IndexEndpointServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
@@ -1113,6 +1133,9 @@ export class IndexEndpointServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
             },
             {
@@ -1123,6 +1146,9 @@ export class IndexEndpointServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
@@ -1294,6 +1320,9 @@ export class IndexEndpointServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
             },
             {
@@ -1304,6 +1333,9 @@ export class IndexEndpointServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
@@ -1638,7 +1670,8 @@ export class IndexEndpointServiceClient {
    * @param {google.cloud.aiplatform.v1beta1.IndexEndpoint} request.indexEndpoint
    *   Required. The IndexEndpoint which replaces the resource on the server.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. See {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
+   *   Required. The update mask applies to the resource. See
+   *   {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2019,8 +2052,8 @@ export class IndexEndpointServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.indexEndpoint
-   *   Required. The name of the IndexEndpoint resource into which to deploy an Index.
-   *   Format:
+   *   Required. The name of the IndexEndpoint resource into which to deploy an
+   *   Index. Format:
    *   `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
    * @param {google.cloud.aiplatform.v1beta1.DeployedIndex} request.deployedIndex
    *   Required. The DeployedIndex to be created within the IndexEndpoint.
@@ -2162,11 +2195,12 @@ export class IndexEndpointServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.indexEndpoint
-   *   Required. The name of the IndexEndpoint resource from which to undeploy an Index.
-   *   Format:
+   *   Required. The name of the IndexEndpoint resource from which to undeploy an
+   *   Index. Format:
    *   `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
    * @param {string} request.deployedIndexId
-   *   Required. The ID of the DeployedIndex to be undeployed from the IndexEndpoint.
+   *   Required. The ID of the DeployedIndex to be undeployed from the
+   *   IndexEndpoint.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2304,8 +2338,8 @@ export class IndexEndpointServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.indexEndpoint
-   *   Required. The name of the IndexEndpoint resource into which to deploy an Index.
-   *   Format:
+   *   Required. The name of the IndexEndpoint resource into which to deploy an
+   *   Index. Format:
    *   `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
    * @param {google.cloud.aiplatform.v1beta1.DeployedIndex} request.deployedIndex
    *   Required. The DeployedIndex to be updated within the IndexEndpoint.
@@ -2448,11 +2482,11 @@ export class IndexEndpointServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location from which to list the IndexEndpoints.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location from which to list the
+   *   IndexEndpoints. Format: `projects/{project}/locations/{location}`
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. For field names
-   *   both snake_case and camelCase are supported.
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
    *
    *     * `index_endpoint` supports = and !=. `index_endpoint` represents the
    *        IndexEndpoint ID, ie. the last segment of the IndexEndpoint's
@@ -2474,8 +2508,10 @@ export class IndexEndpointServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints} call.
+   *   {@link google.cloud.aiplatform.v1beta1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints}
+   *   call.
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. Mask specifying which fields to read.
    * @param {object} [options]
@@ -2571,11 +2607,11 @@ export class IndexEndpointServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location from which to list the IndexEndpoints.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location from which to list the
+   *   IndexEndpoints. Format: `projects/{project}/locations/{location}`
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. For field names
-   *   both snake_case and camelCase are supported.
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
    *
    *     * `index_endpoint` supports = and !=. `index_endpoint` represents the
    *        IndexEndpoint ID, ie. the last segment of the IndexEndpoint's
@@ -2597,8 +2633,10 @@ export class IndexEndpointServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints} call.
+   *   {@link google.cloud.aiplatform.v1beta1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints}
+   *   call.
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. Mask specifying which fields to read.
    * @param {object} [options]
@@ -2642,11 +2680,11 @@ export class IndexEndpointServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location from which to list the IndexEndpoints.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The resource name of the Location from which to list the
+   *   IndexEndpoints. Format: `projects/{project}/locations/{location}`
    * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. For field names
-   *   both snake_case and camelCase are supported.
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
    *
    *     * `index_endpoint` supports = and !=. `index_endpoint` represents the
    *        IndexEndpoint ID, ie. the last segment of the IndexEndpoint's
@@ -2668,8 +2706,10 @@ export class IndexEndpointServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints} call.
+   *   {@link google.cloud.aiplatform.v1beta1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints}
+   *   call.
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. Mask specifying which fields to read.
    * @param {object} [options]

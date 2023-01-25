@@ -284,6 +284,10 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "instanceConfig": {
+                          "type": "InstanceConfig",
+                          "id": 27
+                        },
                         "modelParameters": {
                           "type": "google.protobuf.Value",
                           "id": 5
@@ -298,6 +302,10 @@
                         "dedicatedResources": {
                           "type": "BatchDedicatedResources",
                           "id": 7
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 29
                         },
                         "manualBatchTuningParameters": {
                           "type": "ManualBatchTuningParameters",
@@ -420,6 +428,28 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            }
+                          }
+                        },
+                        "InstanceConfig": {
+                          "fields": {
+                            "instanceType": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "keyField": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "includedFields": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "excludedFields": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
                             }
                           }
                         },
@@ -1559,6 +1589,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "metadataArtifact": {
+                          "type": "string",
+                          "id": 44,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1949,6 +1986,13 @@
                         "enableWebAccess": {
                           "type": "bool",
                           "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableDashboardAccess": {
+                          "type": "bool",
+                          "id": 16,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2344,10 +2388,7 @@
                         },
                         "description": {
                           "type": "string",
-                          "id": 16,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 16
                         },
                         "metadataSchemaUri": {
                           "type": "string",
@@ -2386,9 +2427,21 @@
                           "type": "string",
                           "id": 7
                         },
+                        "savedQueries": {
+                          "rule": "repeated",
+                          "type": "SavedQuery",
+                          "id": 9
+                        },
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 11
+                        },
+                        "metadataArtifact": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2409,6 +2462,11 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 2
+                        },
+                        "annotationLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
                         },
                         "importSchemaUri": {
                           "type": "string",
@@ -2435,6 +2493,78 @@
                         "annotationsFilter": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "SavedQuery": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/SavedQuery",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 12
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotationFilter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "problemType": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "annotationSpecCount": {
+                          "type": "int32",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "supportAutomlTraining": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2625,6 +2755,20 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "SearchDataItems": {
+                          "requestType": "SearchDataItemsRequest",
+                          "responseType": "SearchDataItemsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{dataset=projects/*/locations/*/datasets/*}:searchDataItems"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{dataset=projects/*/locations/*/datasets/*}:searchDataItems"
+                              }
                             }
                           ]
                         },
@@ -2918,6 +3062,132 @@
                         }
                       }
                     },
+                    "SearchDataItemsRequest": {
+                      "oneofs": {
+                        "order": {
+                          "oneof": [
+                            "orderByDataItem",
+                            "orderByAnnotation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "orderByDataItem": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "orderByAnnotation": {
+                          "type": "OrderByAnnotation",
+                          "id": 13
+                        },
+                        "dataset": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
+                          }
+                        },
+                        "savedQuery": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/SavedQuery"
+                          }
+                        },
+                        "dataLabelingJob": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "dataItemFilter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "annotationsFilter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "annotationFilters": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
+                        },
+                        "fieldMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 6
+                        },
+                        "annotationsLimit": {
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 8
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "OrderByAnnotation": {
+                          "fields": {
+                            "savedQuery": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SearchDataItemsResponse": {
+                      "fields": {
+                        "dataItemViews": {
+                          "rule": "repeated",
+                          "type": "DataItemView",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DataItemView": {
+                      "fields": {
+                        "dataItem": {
+                          "type": "DataItem",
+                          "id": 1
+                        },
+                        "annotations": {
+                          "rule": "repeated",
+                          "type": "Annotation",
+                          "id": 2
+                        },
+                        "hasTruncatedAnnotations": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
                     "ListSavedQueriesRequest": {
                       "fields": {
                         "parent": {
@@ -3055,78 +3325,6 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
-                        }
-                      }
-                    },
-                    "SavedQuery": {
-                      "options": {
-                        "(google.api.resource).type": "aiplatform.googleapis.com/SavedQuery",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "metadata": {
-                          "type": "google.protobuf.Value",
-                          "id": 12
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "annotationFilter": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "problemType": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "annotationSpecCount": {
-                          "type": "int32",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "etag": {
-                          "type": "string",
-                          "id": 8
-                        },
-                        "supportAutomlTraining": {
-                          "type": "bool",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
                         }
                       }
                     },
@@ -4328,8 +4526,70 @@
                               "(google.api.method_signature)": "entity_type"
                             }
                           ]
+                        },
+                        "WriteFeatureValues": {
+                          "requestType": "WriteFeatureValuesRequest",
+                          "responseType": "WriteFeatureValuesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{entity_type=projects/*/locations/*/featurestores/*/entityTypes/*}:writeFeatureValues",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "entity_type,payloads"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{entity_type=projects/*/locations/*/featurestores/*/entityTypes/*}:writeFeatureValues",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "entity_type,payloads"
+                            }
+                          ]
                         }
                       }
+                    },
+                    "WriteFeatureValuesRequest": {
+                      "fields": {
+                        "entityType": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/EntityType"
+                          }
+                        },
+                        "payloads": {
+                          "rule": "repeated",
+                          "type": "WriteFeatureValuesPayload",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "WriteFeatureValuesPayload": {
+                      "fields": {
+                        "entityId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "featureValues": {
+                          "keyType": "string",
+                          "type": "FeatureValue",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "WriteFeatureValuesResponse": {
+                      "fields": {}
                     },
                     "ReadFeatureValuesRequest": {
                       "fields": {
@@ -5332,6 +5592,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -5810,6 +6077,11 @@
                         "importedFeatureValueCount": {
                           "type": "int64",
                           "id": 3
+                        },
+                        "sourceUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
                         },
                         "invalidRowCount": {
                           "type": "int64",
@@ -6499,6 +6771,13 @@
                           }
                         },
                         "ConvexAutomatedStoppingSpec": {
+                          "oneofs": {
+                            "_updateAllStoppedTrials": {
+                              "oneof": [
+                                "updateAllStoppedTrials"
+                              ]
+                            }
+                          },
                           "fields": {
                             "maxStepCount": {
                               "type": "int64",
@@ -6519,6 +6798,13 @@
                             "useElapsedDuration": {
                               "type": "bool",
                               "id": 5
+                            },
+                            "updateAllStoppedTrials": {
+                              "type": "bool",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
                             }
                           }
                         },
@@ -12051,6 +12337,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -12162,6 +12455,10 @@
                         "readMask": {
                           "type": "google.protobuf.FieldMask",
                           "id": 5
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -12867,6 +13164,22 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "(google.api.resource_reference).type": "aiplatform.googleapis.com/CustomJob"
                               }
+                            },
+                            "failedMainJobs": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "failedPreCachingCheckJobs": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -13518,6 +13831,10 @@
                         "savedQueryId": {
                           "type": "string",
                           "id": 7
+                        },
+                        "persistMlUseAssignment": {
+                          "type": "bool",
+                          "id": 11
                         }
                       }
                     },
@@ -15598,6 +15915,24 @@
                             }
                           ]
                         },
+                        "ReadTensorboardUsage": {
+                          "requestType": "ReadTensorboardUsageRequest",
+                          "responseType": "ReadTensorboardUsageResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{tensorboard=projects/*/locations/*/tensorboards/*}:readUsage",
+                            "(google.api.method_signature)": "tensorboard"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{tensorboard=projects/*/locations/*/tensorboards/*}:readUsage"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tensorboard"
+                            }
+                          ]
+                        },
                         "UpdateTensorboard": {
                           "requestType": "UpdateTensorboardRequest",
                           "responseType": "google.longrunning.Operation",
@@ -16160,6 +16495,50 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        }
+                      }
+                    },
+                    "ReadTensorboardUsageRequest": {
+                      "fields": {
+                        "tensorboard": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        }
+                      }
+                    },
+                    "ReadTensorboardUsageResponse": {
+                      "fields": {
+                        "monthlyUsageData": {
+                          "keyType": "string",
+                          "type": "PerMonthUsageData",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "PerUserUsageData": {
+                          "fields": {
+                            "username": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "viewCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "PerMonthUsageData": {
+                          "fields": {
+                            "userUsageData": {
+                              "rule": "repeated",
+                              "type": "PerUserUsageData",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -17499,6 +17878,7 @@
                         "NVIDIA_TESLA_P4": 4,
                         "NVIDIA_TESLA_T4": 5,
                         "NVIDIA_TESLA_A100": 8,
+                        "NVIDIA_A100_80GB": 9,
                         "TPU_V2": 6,
                         "TPU_V3": 7
                       }
@@ -17755,6 +18135,10 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "instanceConfig": {
+                          "type": "InstanceConfig",
+                          "id": 27
+                        },
                         "modelParameters": {
                           "type": "google.protobuf.Value",
                           "id": 5
@@ -17911,6 +18295,28 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            }
+                          }
+                        },
+                        "InstanceConfig": {
+                          "fields": {
+                            "instanceType": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "keyField": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "includedFields": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "excludedFields": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
                             }
                           }
                         },
@@ -19662,6 +20068,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "metadataArtifact": {
+                          "type": "string",
+                          "id": 44,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -20052,6 +20465,13 @@
                         "enableWebAccess": {
                           "type": "bool",
                           "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableDashboardAccess": {
+                          "type": "bool",
+                          "id": 16,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -20447,10 +20867,7 @@
                         },
                         "description": {
                           "type": "string",
-                          "id": 16,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 16
                         },
                         "metadataSchemaUri": {
                           "type": "string",
@@ -20489,9 +20906,21 @@
                           "type": "string",
                           "id": 7
                         },
+                        "savedQueries": {
+                          "rule": "repeated",
+                          "type": "SavedQuery",
+                          "id": 9
+                        },
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 11
+                        },
+                        "metadataArtifact": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -20512,6 +20941,11 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 2
+                        },
+                        "annotationLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
                         },
                         "importSchemaUri": {
                           "type": "string",
@@ -20538,6 +20972,78 @@
                         "annotationsFilter": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "SavedQuery": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/SavedQuery",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 12
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotationFilter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "problemType": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "annotationSpecCount": {
+                          "type": "int32",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "supportAutomlTraining": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -20728,6 +21234,20 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "SearchDataItems": {
+                          "requestType": "SearchDataItemsRequest",
+                          "responseType": "SearchDataItemsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{dataset=projects/*/locations/*/datasets/*}:searchDataItems"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{dataset=projects/*/locations/*/datasets/*}:searchDataItems"
+                              }
                             }
                           ]
                         },
@@ -21021,6 +21541,132 @@
                         }
                       }
                     },
+                    "SearchDataItemsRequest": {
+                      "oneofs": {
+                        "order": {
+                          "oneof": [
+                            "orderByDataItem",
+                            "orderByAnnotation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "orderByDataItem": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "orderByAnnotation": {
+                          "type": "OrderByAnnotation",
+                          "id": 13
+                        },
+                        "dataset": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
+                          }
+                        },
+                        "savedQuery": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/SavedQuery"
+                          }
+                        },
+                        "dataLabelingJob": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "dataItemFilter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "annotationsFilter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "annotationFilters": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
+                        },
+                        "fieldMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 6
+                        },
+                        "annotationsLimit": {
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 8
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "OrderByAnnotation": {
+                          "fields": {
+                            "savedQuery": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SearchDataItemsResponse": {
+                      "fields": {
+                        "dataItemViews": {
+                          "rule": "repeated",
+                          "type": "DataItemView",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DataItemView": {
+                      "fields": {
+                        "dataItem": {
+                          "type": "DataItem",
+                          "id": 1
+                        },
+                        "annotations": {
+                          "rule": "repeated",
+                          "type": "Annotation",
+                          "id": 2
+                        },
+                        "hasTruncatedAnnotations": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
                     "ListSavedQueriesRequest": {
                       "fields": {
                         "parent": {
@@ -21158,78 +21804,6 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
-                        }
-                      }
-                    },
-                    "SavedQuery": {
-                      "options": {
-                        "(google.api.resource).type": "aiplatform.googleapis.com/SavedQuery",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "metadata": {
-                          "type": "google.protobuf.Value",
-                          "id": 12
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "annotationFilter": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "problemType": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "annotationSpecCount": {
-                          "type": "int32",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "etag": {
-                          "type": "string",
-                          "id": 8
-                        },
-                        "supportAutomlTraining": {
-                          "type": "bool",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
                         }
                       }
                     },
@@ -21533,6 +22107,14 @@
                           "rule": "repeated",
                           "type": "DeployedModelRef",
                           "id": 3
+                        },
+                        "totalDeployedModelCount": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "totalEndpointCount": {
+                          "type": "int32",
+                          "id": 5
                         }
                       }
                     },
@@ -22196,6 +22778,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "offlineStorageTtlDays": {
+                          "type": "int32",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -22615,6 +23204,13 @@
                           "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "onlineStorageTtlDays": {
+                          "type": "int32",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "encryptionSpec": {
@@ -23804,6 +24400,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -24282,6 +24885,11 @@
                         "importedFeatureValueCount": {
                           "type": "int64",
                           "id": 3
+                        },
+                        "sourceUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
                         },
                         "invalidRowCount": {
                           "type": "int64",
@@ -25076,6 +25684,13 @@
                           }
                         },
                         "ConvexAutomatedStoppingSpec": {
+                          "oneofs": {
+                            "_updateAllStoppedTrials": {
+                              "oneof": [
+                                "updateAllStoppedTrials"
+                              ]
+                            }
+                          },
                           "fields": {
                             "maxStepCount": {
                               "type": "int64",
@@ -25096,6 +25711,13 @@
                             "useElapsedDuration": {
                               "type": "bool",
                               "id": 5
+                            },
+                            "updateAllStoppedTrials": {
+                              "type": "bool",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
                             }
                           }
                         },
@@ -30203,6 +30825,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -30310,6 +30939,10 @@
                         "readMask": {
                           "type": "google.protobuf.FieldMask",
                           "id": 5
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -31042,6 +31675,22 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "(google.api.resource_reference).type": "aiplatform.googleapis.com/CustomJob"
                               }
+                            },
+                            "failedMainJobs": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "failedPreCachingCheckJobs": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -31693,6 +32342,10 @@
                         "savedQueryId": {
                           "type": "string",
                           "id": 7
+                        },
+                        "persistMlUseAssignment": {
+                          "type": "bool",
+                          "id": 11
                         }
                       }
                     },
@@ -34454,6 +35107,24 @@
                             }
                           ]
                         },
+                        "ReadTensorboardUsage": {
+                          "requestType": "ReadTensorboardUsageRequest",
+                          "responseType": "ReadTensorboardUsageResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{tensorboard=projects/*/locations/*/tensorboards/*}:readUsage",
+                            "(google.api.method_signature)": "tensorboard"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{tensorboard=projects/*/locations/*/tensorboards/*}:readUsage"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tensorboard"
+                            }
+                          ]
+                        },
                         "UpdateTensorboard": {
                           "requestType": "UpdateTensorboardRequest",
                           "responseType": "google.longrunning.Operation",
@@ -35016,6 +35687,50 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        }
+                      }
+                    },
+                    "ReadTensorboardUsageRequest": {
+                      "fields": {
+                        "tensorboard": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        }
+                      }
+                    },
+                    "ReadTensorboardUsageResponse": {
+                      "fields": {
+                        "monthlyUsageData": {
+                          "keyType": "string",
+                          "type": "PerMonthUsageData",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "PerUserUsageData": {
+                          "fields": {
+                            "username": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "viewCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "PerMonthUsageData": {
+                          "fields": {
+                            "userUsageData": {
+                              "rule": "repeated",
+                              "type": "PerUserUsageData",
+                              "id": 1
+                            }
                           }
                         }
                       }
