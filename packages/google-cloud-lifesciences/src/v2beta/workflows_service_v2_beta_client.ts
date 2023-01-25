@@ -372,11 +372,11 @@ export class WorkflowsServiceV2BetaClient {
   /**
    * Runs a pipeline.  The returned Operation's [metadata]
    * [google.longrunning.Operation.metadata] field will contain a
-   * {@link google.cloud.lifesciences.v2beta.Metadata|google.cloud.lifesciences.v2beta.Metadata} object describing the status
-   * of the pipeline execution. The
+   * {@link google.cloud.lifesciences.v2beta.Metadata|google.cloud.lifesciences.v2beta.Metadata}
+   * object describing the status of the pipeline execution. The
    * {@link google.longrunning.Operation.response|response} field will contain a
-   * {@link google.cloud.lifesciences.v2beta.RunPipelineResponse|google.cloud.lifesciences.v2beta.RunPipelineResponse} object if the
-   * pipeline completes successfully.
+   * {@link google.cloud.lifesciences.v2beta.RunPipelineResponse|google.cloud.lifesciences.v2beta.RunPipelineResponse}
+   * object if the pipeline completes successfully.
    *
    * **Note:** Before you can use this method, the *Life Sciences Service Agent*
    * must have access to your project. This is done automatically when the
