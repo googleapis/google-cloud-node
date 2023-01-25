@@ -11,15 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-docker:
-  image: gcr.io/cloud-devrel-public-resources/owlbot-nodejs:latest
 
 deep-remove-regex:
   - /owl-bot-staging
 
 deep-copy-regex:
-  - source: /google/cloud/speech/(v.*)/.*-nodejs/(.*)
-    dest: /owl-bot-staging/$1/$2
+  - source: /google/cloud/speech/(v.*)/.*-nodejs
+    dest: /owl-bot-staging/google-cloud-speech/$1
 
 begin-after-commit-hash: f43939eac6a0bb5998c1fa0f79063194e699230e
 

@@ -16,7 +16,7 @@
 import os
 import synthtool as s
 import synthtool.gcp as gcp
-import synthtool.languages.node as node
+import synthtool.languages.node_mono_repo as node
 import json
 import logging
 from pathlib import Path
@@ -35,4 +35,4 @@ def patch(library: Path):
         '// eslint-disable-next-line @typescript-eslint/no-empty-interface\n' +
         'export interface SpeechClient extends ImprovedStreamingClient {}\n'
     )
-node.owlbot_main(templates_excludes=["src/index.ts"], patch_staging=patch)
+node.owlbot_main(relative_dir="packages/google-cloud-speech",templates_excludes=["src/index.ts"], patch_staging=patch)

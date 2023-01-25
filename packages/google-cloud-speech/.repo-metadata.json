@@ -6,7 +6,7 @@
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559758",
   "release_level": "stable",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-speech",
+  "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/speech",
   "api_id": "speech.googleapis.com",
   "requires_billing": false,
