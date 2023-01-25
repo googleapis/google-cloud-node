@@ -96,6 +96,7 @@
     "packages/google-cloud-securitycenter": {},
     "packages/google-cloud-servicedirectory": {},
     "packages/google-cloud-shell": {},
+    "packages/google-cloud-speech": {},
     "packages/google-cloud-talent": {},
     "packages/google-cloud-tasks": {},
     "packages/google-cloud-texttospeech": {},
