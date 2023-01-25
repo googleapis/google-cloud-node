@@ -63,6 +63,13 @@ function main(origins, destinations) {
    *  has already occurred, the request fails.
    */
   // const departureTime = {}
+  /**
+   *  Optional. A list of extra computations which may be used to complete the
+   *  request. Note: These extra computations may return extra fields on the
+   *  response. These extra fields must also be specified in the field mask to be
+   *  returned in the response.
+   */
+  // const extraComputations = 1234
 
   // Imports the Routing library
   const {RoutesClient} = require('@googlemaps/routing').v2;

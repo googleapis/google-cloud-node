@@ -245,6 +245,11 @@ export class ServicesClient {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v2/{name=projects/*/locations/*}/operations',
         },
+        {
+          selector: 'google.longrunning.Operations.WaitOperation',
+          post: '/v2/{name=projects/*/locations/*/operations/*}:wait',
+          body: '*',
+        },
       ];
     }
     this.operationsClient = this._gaxModule
@@ -1285,9 +1290,9 @@ export class ServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location and project to list resources on.
-   *   Location must be a valid GCP region, and cannot be the "-" wildcard.
-   *   Format: projects/{project}/locations/{location}, where {project} can be
-   *   project id or number.
+   *   Location must be a valid Google Cloud region, and cannot be the "-"
+   *   wildcard. Format: projects/{project}/locations/{location}, where {project}
+   *   can be project id or number.
    * @param {number} request.pageSize
    *   Maximum number of Services to return in this call.
    * @param {string} request.pageToken
@@ -1392,9 +1397,9 @@ export class ServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location and project to list resources on.
-   *   Location must be a valid GCP region, and cannot be the "-" wildcard.
-   *   Format: projects/{project}/locations/{location}, where {project} can be
-   *   project id or number.
+   *   Location must be a valid Google Cloud region, and cannot be the "-"
+   *   wildcard. Format: projects/{project}/locations/{location}, where {project}
+   *   can be project id or number.
    * @param {number} request.pageSize
    *   Maximum number of Services to return in this call.
    * @param {string} request.pageToken
@@ -1455,9 +1460,9 @@ export class ServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location and project to list resources on.
-   *   Location must be a valid GCP region, and cannot be the "-" wildcard.
-   *   Format: projects/{project}/locations/{location}, where {project} can be
-   *   project id or number.
+   *   Location must be a valid Google Cloud region, and cannot be the "-"
+   *   wildcard. Format: projects/{project}/locations/{location}, where {project}
+   *   can be project id or number.
    * @param {number} request.pageSize
    *   Maximum number of Services to return in this call.
    * @param {string} request.pageToken

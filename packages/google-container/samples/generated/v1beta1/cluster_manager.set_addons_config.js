@@ -29,8 +29,8 @@ function main(projectId, zone, clusterId, addonsConfig) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The desired configurations for the various addons available to run in the
-   *  cluster.
+   *  Required. The desired configurations for the various addons available to
+   *  run in the cluster.
    */
   // const addonsConfig = {}
   /**

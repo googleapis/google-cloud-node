@@ -35,8 +35,8 @@ function main(parent, clientEvent) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. Events issued when end user interacts with customer's application that
-   *  uses Cloud Talent Solution.
+   *  Required. Events issued when end user interacts with customer's application
+   *  that uses Cloud Talent Solution.
    */
   // const clientEvent = {}
 

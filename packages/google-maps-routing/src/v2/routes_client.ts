@@ -412,6 +412,11 @@ export class RoutesClient {
    *   a different route calculation objective than the default route. For example
    *   an FUEL_EFFICIENT reference route calculation takes into account various
    *   parameters that would generate an optimal fuel efficient route.
+   * @param {number[]} [request.extraComputations]
+   *   Optional. A list of extra computations which may be used to complete the
+   *   request. Note: These extra computations may return extra fields on the
+   *   response. These extra fields must also be specified in the field mask to be
+   *   returned in the response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -552,6 +557,11 @@ export class RoutesClient {
    *   Optional. The departure time. If you don't set this value, this defaults to
    *   the time that you made the request. If you set this value to a time that
    *   has already occurred, the request fails.
+   * @param {number[]} [request.extraComputations]
+   *   Optional. A list of extra computations which may be used to complete the
+   *   request. Note: These extra computations may return extra fields on the
+   *   response. These extra fields must also be specified in the field mask to be
+   *   returned in the response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
