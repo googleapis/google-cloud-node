@@ -126,64 +126,6 @@
           }
         }
       }
-    },
-    "PolicyBasedRoutingService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "PolicyBasedRoutingServiceClient",
-          "rpcs": {
-            "GetPolicyBasedRoute": {
-              "methods": [
-                "getPolicyBasedRoute"
-              ]
-            },
-            "CreatePolicyBasedRoute": {
-              "methods": [
-                "createPolicyBasedRoute"
-              ]
-            },
-            "DeletePolicyBasedRoute": {
-              "methods": [
-                "deletePolicyBasedRoute"
-              ]
-            },
-            "ListPolicyBasedRoutes": {
-              "methods": [
-                "listPolicyBasedRoutes",
-                "listPolicyBasedRoutesStream",
-                "listPolicyBasedRoutesAsync"
-              ]
-            }
-          }
-        },
-        "grpc-fallback": {
-          "libraryClient": "PolicyBasedRoutingServiceClient",
-          "rpcs": {
-            "GetPolicyBasedRoute": {
-              "methods": [
-                "getPolicyBasedRoute"
-              ]
-            },
-            "CreatePolicyBasedRoute": {
-              "methods": [
-                "createPolicyBasedRoute"
-              ]
-            },
-            "DeletePolicyBasedRoute": {
-              "methods": [
-                "deletePolicyBasedRoute"
-              ]
-            },
-            "ListPolicyBasedRoutes": {
-              "methods": [
-                "listPolicyBasedRoutes",
-                "listPolicyBasedRoutesStream",
-                "listPolicyBasedRoutesAsync"
-              ]
-            }
-          }
-        }
-      }
     }
   }
 }

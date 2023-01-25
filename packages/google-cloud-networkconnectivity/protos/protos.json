@@ -15,8 +15,8 @@
                     "java_package": "com.google.cloud.networkconnectivity.v1",
                     "php_namespace": "Google\\Cloud\\NetworkConnectivity\\V1",
                     "ruby_package": "Google::Cloud::NetworkConnectivity::V1",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Instance",
-                    "(google.api.resource_definition).pattern": "projects/{project}/zones/{zone}/instances/{instance}"
+                    "(google.api.resource_definition).type": "compute.googleapis.com/Network",
+                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{resource_id}"
                   },
                   "nested": {
                     "OperationMetadata": {
@@ -316,20 +316,19 @@
                         }
                       }
                     },
-                    "LocationFeature": {
-                      "values": {
-                        "LOCATION_FEATURE_UNSPECIFIED": 0,
-                        "SITE_TO_CLOUD_SPOKES": 1,
-                        "SITE_TO_SITE_SPOKES": 2
-                      }
-                    },
                     "State": {
                       "values": {
                         "STATE_UNSPECIFIED": 0,
                         "CREATING": 1,
                         "ACTIVE": 2,
-                        "DELETING": 3,
-                        "UPDATING": 6
+                        "DELETING": 3
+                      }
+                    },
+                    "LocationFeature": {
+                      "values": {
+                        "LOCATION_FEATURE_UNSPECIFIED": 0,
+                        "SITE_TO_CLOUD_SPOKES": 1,
+                        "SITE_TO_SITE_SPOKES": 2
                       }
                     },
                     "Hub": {
@@ -762,14 +761,6 @@
                         "siteToSiteDataTransfer": {
                           "type": "bool",
                           "id": 2
-                        },
-                        "vpcNetwork": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
-                          }
                         }
                       }
                     },
@@ -786,14 +777,6 @@
                         "siteToSiteDataTransfer": {
                           "type": "bool",
                           "id": 2
-                        },
-                        "vpcNetwork": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
-                          }
                         }
                       }
                     },
@@ -807,14 +790,6 @@
                         "siteToSiteDataTransfer": {
                           "type": "bool",
                           "id": 2
-                        },
-                        "vpcNetwork": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
-                          }
                         }
                       }
                     },
@@ -2020,7 +1995,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -2042,83 +2017,6 @@
                 "IMMUTABLE": 5,
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
               }
             },
             "http": {
@@ -2223,6 +2121,83 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
             }
           }
         },
