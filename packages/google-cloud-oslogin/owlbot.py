@@ -12,6 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import synthtool.languages.node as node
+import synthtool.languages.node_mono_repo as node
 
 node.owlbot_main(templates_excludes=['README.md'])
