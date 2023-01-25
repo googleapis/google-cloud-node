@@ -30,9 +30,9 @@ function main(parent) {
    */
   /**
    *  Required. The location and project to list resources on.
-   *  Location must be a valid GCP region, and cannot be the "-" wildcard.
-   *  Format: projects/{project}/locations/{location}, where {project} can be
-   *  project id or number.
+   *  Location must be a valid Google Cloud region, and cannot be the "-"
+   *  wildcard. Format: projects/{project}/locations/{location}, where {project}
+   *  can be project id or number.
    */
   // const parent = 'abc123'
   /**

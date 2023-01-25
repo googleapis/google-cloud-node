@@ -4069,7 +4069,8 @@ export namespace google {
                         MIN_INSTANCES_NOT_PROVISIONED = 8,
                         ACTIVE_REVISION_LIMIT_REACHED = 9,
                         NO_DEPLOYMENT = 10,
-                        HEALTH_CHECK_SKIPPED = 11
+                        HEALTH_CHECK_SKIPPED = 11,
+                        MIN_INSTANCES_WARMING = 12
                     }
 
                     /** ExecutionReason enum. */
@@ -4661,6 +4662,15 @@ export namespace google {
                     /** Execution failedCount */
                     failedCount?: (number|null);
 
+                    /** Execution cancelledCount */
+                    cancelledCount?: (number|null);
+
+                    /** Execution retriedCount */
+                    retriedCount?: (number|null);
+
+                    /** Execution logUri */
+                    logUri?: (string|null);
+
                     /** Execution etag */
                     etag?: (string|null);
                 }
@@ -4739,6 +4749,15 @@ export namespace google {
 
                     /** Execution failedCount. */
                     public failedCount: number;
+
+                    /** Execution cancelledCount. */
+                    public cancelledCount: number;
+
+                    /** Execution retriedCount. */
+                    public retriedCount: number;
+
+                    /** Execution logUri. */
+                    public logUri: string;
 
                     /** Execution etag. */
                     public etag: string;
@@ -7047,6 +7066,13 @@ export namespace google {
                     EXECUTION_ENVIRONMENT_GEN2 = 2
                 }
 
+                /** EncryptionKeyRevocationAction enum. */
+                enum EncryptionKeyRevocationAction {
+                    ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED = 0,
+                    PREVENT_NEW = 1,
+                    SHUTDOWN = 2
+                }
+
                 /** Properties of an ExecutionTemplate. */
                 interface IExecutionTemplate {
 
@@ -9050,6 +9076,12 @@ export namespace google {
                     /** Revision encryptionKey */
                     encryptionKey?: (string|null);
 
+                    /** Revision encryptionKeyRevocationAction */
+                    encryptionKeyRevocationAction?: (google.cloud.run.v2.EncryptionKeyRevocationAction|keyof typeof google.cloud.run.v2.EncryptionKeyRevocationAction|null);
+
+                    /** Revision encryptionKeyShutdownDuration */
+                    encryptionKeyShutdownDuration?: (google.protobuf.IDuration|null);
+
                     /** Revision reconciling */
                     reconciling?: (boolean|null);
 
@@ -9134,6 +9166,12 @@ export namespace google {
 
                     /** Revision encryptionKey. */
                     public encryptionKey: string;
+
+                    /** Revision encryptionKeyRevocationAction. */
+                    public encryptionKeyRevocationAction: (google.cloud.run.v2.EncryptionKeyRevocationAction|keyof typeof google.cloud.run.v2.EncryptionKeyRevocationAction);
+
+                    /** Revision encryptionKeyShutdownDuration. */
+                    public encryptionKeyShutdownDuration?: (google.protobuf.IDuration|null);
 
                     /** Revision reconciling. */
                     public reconciling: boolean;
@@ -11198,6 +11236,9 @@ export namespace google {
                     /** Task vpcAccess */
                     vpcAccess?: (google.cloud.run.v2.IVpcAccess|null);
 
+                    /** Task logUri */
+                    logUri?: (string|null);
+
                     /** Task etag */
                     etag?: (string|null);
                 }
@@ -11291,6 +11332,9 @@ export namespace google {
 
                     /** Task vpcAccess. */
                     public vpcAccess?: (google.cloud.run.v2.IVpcAccess|null);
+
+                    /** Task logUri. */
+                    public logUri: string;
 
                     /** Task etag. */
                     public etag: string;

@@ -1091,7 +1091,8 @@
                             "MIN_INSTANCES_NOT_PROVISIONED": 8,
                             "ACTIVE_REVISION_LIMIT_REACHED": 9,
                             "NO_DEPLOYMENT": 10,
-                            "HEALTH_CHECK_SKIPPED": 11
+                            "HEALTH_CHECK_SKIPPED": 11,
+                            "MIN_INSTANCES_WARMING": 12
                           }
                         },
                         "ExecutionReason": {
@@ -1395,6 +1396,27 @@
                         "failedCount": {
                           "type": "int32",
                           "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cancelledCount": {
+                          "type": "int32",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "retriedCount": {
+                          "type": "int32",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "logUri": {
+                          "type": "string",
+                          "id": 26,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1841,6 +1863,13 @@
                         "EXECUTION_ENVIRONMENT_UNSPECIFIED": 0,
                         "EXECUTION_ENVIRONMENT_GEN1": 1,
                         "EXECUTION_ENVIRONMENT_GEN2": 2
+                      }
+                    },
+                    "EncryptionKeyRevocationAction": {
+                      "values": {
+                        "ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED": 0,
+                        "PREVENT_NEW": 1,
+                        "SHUTDOWN": 2
                       }
                     },
                     "ExecutionTemplate": {
@@ -2668,6 +2697,14 @@
                           "options": {
                             "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                           }
+                        },
+                        "encryptionKeyRevocationAction": {
+                          "type": "EncryptionKeyRevocationAction",
+                          "id": 23
+                        },
+                        "encryptionKeyShutdownDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 24
                         },
                         "reconciling": {
                           "type": "bool",
@@ -3617,6 +3654,13 @@
                         "vpcAccess": {
                           "type": "VpcAccess",
                           "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "logUri": {
+                          "type": "string",
+                          "id": 32,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }

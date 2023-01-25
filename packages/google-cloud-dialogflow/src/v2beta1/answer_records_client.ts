@@ -40,7 +40,8 @@ import * as gapicConfig from './answer_records_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.v2beta1.AnswerRecord|AnswerRecords}.
+ *  Service for managing
+ *  {@link google.cloud.dialogflow.v2beta1.AnswerRecord|AnswerRecords}.
  * @class
  * @memberof v2beta1
  */
