@@ -26527,6 +26527,9 @@ export namespace google {
 
                     /** OcrConfig enableNativePdfParsing */
                     enableNativePdfParsing?: (boolean|null);
+
+                    /** OcrConfig advancedOcrOptions */
+                    advancedOcrOptions?: (string[]|null);
                 }
 
                 /** Represents an OcrConfig. */
@@ -26540,6 +26543,9 @@ export namespace google {
 
                     /** OcrConfig enableNativePdfParsing. */
                     public enableNativePdfParsing: boolean;
+
+                    /** OcrConfig advancedOcrOptions. */
+                    public advancedOcrOptions: string[];
 
                     /**
                      * Creates a new OcrConfig instance using the specified properties.
