@@ -47,7 +47,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Service_manager.create_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.create_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.create_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.create_service.js,samples/README.md)
 
@@ -64,7 +64,7 @@ __Usage:__
 
 ### Service_manager.create_service_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.create_service_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.create_service_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.create_service_config.js,samples/README.md)
 
@@ -81,7 +81,7 @@ __Usage:__
 
 ### Service_manager.create_service_rollout
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.create_service_rollout.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.create_service_rollout.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.create_service_rollout.js,samples/README.md)
 
@@ -98,7 +98,7 @@ __Usage:__
 
 ### Service_manager.delete_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.delete_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.delete_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.delete_service.js,samples/README.md)
 
@@ -115,7 +115,7 @@ __Usage:__
 
 ### Service_manager.disable_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.disable_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.disable_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.disable_service.js,samples/README.md)
 
@@ -132,7 +132,7 @@ __Usage:__
 
 ### Service_manager.enable_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.enable_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.enable_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.enable_service.js,samples/README.md)
 
@@ -149,7 +149,7 @@ __Usage:__
 
 ### Service_manager.generate_config_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.generate_config_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.generate_config_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.generate_config_report.js,samples/README.md)
 
@@ -166,7 +166,7 @@ __Usage:__
 
 ### Service_manager.get_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.get_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.get_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.get_service.js,samples/README.md)
 
@@ -183,7 +183,7 @@ __Usage:__
 
 ### Service_manager.get_service_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.get_service_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.get_service_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.get_service_config.js,samples/README.md)
 
@@ -200,7 +200,7 @@ __Usage:__
 
 ### Service_manager.get_service_rollout
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.get_service_rollout.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.get_service_rollout.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.get_service_rollout.js,samples/README.md)
 
@@ -217,7 +217,7 @@ __Usage:__
 
 ### Service_manager.list_service_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.list_service_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.list_service_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.list_service_configs.js,samples/README.md)
 
@@ -234,7 +234,7 @@ __Usage:__
 
 ### Service_manager.list_service_rollouts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.list_service_rollouts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.list_service_rollouts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.list_service_rollouts.js,samples/README.md)
 
@@ -251,7 +251,7 @@ __Usage:__
 
 ### Service_manager.list_services
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.list_services.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.list_services.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.list_services.js,samples/README.md)
 
@@ -268,7 +268,7 @@ __Usage:__
 
 ### Service_manager.submit_config_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.submit_config_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.submit_config_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.submit_config_source.js,samples/README.md)
 
@@ -285,7 +285,7 @@ __Usage:__
 
 ### Service_manager.undelete_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/generated/v1/service_manager.undelete_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.undelete_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/generated/v1/service_manager.undelete_service.js,samples/README.md)
 
@@ -302,7 +302,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/quickstart.js,samples/README.md)
 
@@ -319,7 +319,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicemanagement/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicemanagement/samples/test/quickstart.js,samples/README.md)
 

@@ -40,7 +40,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Alpha_analytics_data.run_funnel_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.run_funnel_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.run_funnel_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.run_funnel_report.js,samples/README.md)
 
@@ -57,7 +57,7 @@ __Usage:__
 
 ### Beta_analytics_data.batch_run_pivot_reports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.batch_run_pivot_reports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.batch_run_pivot_reports.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.batch_run_pivot_reports.js,samples/README.md)
 
@@ -74,7 +74,7 @@ __Usage:__
 
 ### Beta_analytics_data.batch_run_reports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.batch_run_reports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.batch_run_reports.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.batch_run_reports.js,samples/README.md)
 
@@ -91,7 +91,7 @@ __Usage:__
 
 ### Beta_analytics_data.check_compatibility
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.check_compatibility.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.check_compatibility.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.check_compatibility.js,samples/README.md)
 
@@ -108,7 +108,7 @@ __Usage:__
 
 ### Beta_analytics_data.get_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.get_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.get_metadata.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.get_metadata.js,samples/README.md)
 
@@ -125,7 +125,7 @@ __Usage:__
 
 ### Beta_analytics_data.run_pivot_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_pivot_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_pivot_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_pivot_report.js,samples/README.md)
 
@@ -142,7 +142,7 @@ __Usage:__
 
 ### Beta_analytics_data.run_realtime_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_realtime_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_realtime_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_realtime_report.js,samples/README.md)
 
@@ -159,7 +159,7 @@ __Usage:__
 
 ### Beta_analytics_data.run_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_report.js,samples/README.md)
 
@@ -176,7 +176,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/quickstart.js,samples/README.md)
 
@@ -193,7 +193,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/test/quickstart.test.js,samples/README.md)
 
