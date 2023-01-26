@@ -80,7 +80,8 @@ npm install @google-cloud/mapsplatformdatasets
 // const pageToken = 'abc123'
 
 // Imports the Mapsplatformdatasets library
-const {MapsPlatformDatasetsV1AlphaClient} = require('@google-cloud/mapsplatformdatasets').v1alpha;
+const {MapsPlatformDatasetsV1AlphaClient} =
+  require('@google-cloud/mapsplatformdatasets').v1alpha;
 
 // Instantiates a client
 const mapsplatformdatasetsClient = new MapsPlatformDatasetsV1AlphaClient();
@@ -92,9 +93,11 @@ async function callListDatasetVersions() {
   };
 
   // Run request
-  const iterable = await mapsplatformdatasetsClient.listDatasetVersionsAsync(request);
+  const iterable = await mapsplatformdatasetsClient.listDatasetVersionsAsync(
+    request
+  );
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
