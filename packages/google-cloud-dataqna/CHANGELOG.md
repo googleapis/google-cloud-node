@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/data-qna-v2.0.2...data-qna-v2.1.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3852](https://github.com/googleapis/google-cloud-node/issues/3852)) ([d83d70a](https://github.com/googleapis/google-cloud-node/commit/d83d70a25f78812a44c4476b2149fbdef0a2baa1))
+
 ## [2.0.2](https://github.com/googleapis/nodejs-data-qna/compare/v2.0.1...v2.0.2) (2022-11-10)
 
 

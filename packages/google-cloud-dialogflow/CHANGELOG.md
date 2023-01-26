@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.4.0...dialogflow-v5.5.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3852](https://github.com/googleapis/google-cloud-node/issues/3852)) ([d83d70a](https://github.com/googleapis/google-cloud-node/commit/d83d70a25f78812a44c4476b2149fbdef0a2baa1))
+
 ## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.3.0...dialogflow-v5.4.0) (2022-12-16)
 
 

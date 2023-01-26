@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/managed-identities-v2.1.3...managed-identities-v2.2.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3853](https://github.com/googleapis/google-cloud-node/issues/3853)) ([cc352db](https://github.com/googleapis/google-cloud-node/commit/cc352db97f3bd8925bf1a7631a0ae64ff976fa4e))
+
 ## [2.1.3](https://github.com/googleapis/nodejs-managed-identities/compare/v2.1.2...v2.1.3) (2022-11-10)
 
 

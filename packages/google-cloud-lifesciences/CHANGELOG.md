@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/life-sciences-v2.2.0...life-sciences-v2.3.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3852](https://github.com/googleapis/google-cloud-node/issues/3852)) ([d83d70a](https://github.com/googleapis/google-cloud-node/commit/d83d70a25f78812a44c4476b2149fbdef0a2baa1))
+
 ## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/life-sciences-v2.1.2...life-sciences-v2.2.0) (2022-12-16)
 
 

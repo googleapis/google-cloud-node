@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v4.2.0...dataproc-v4.3.0) (2023-01-26)
+
+
+### Features
+
+* Add SPOT to Preemptibility enum ([#3867](https://github.com/googleapis/google-cloud-node/issues/3867)) ([9ef74ad](https://github.com/googleapis/google-cloud-node/commit/9ef74ada3aea637aacc7554218c4e5be416264b1))
+* Added SuggestConversationSummary RPC ([#3852](https://github.com/googleapis/google-cloud-node/issues/3852)) ([d83d70a](https://github.com/googleapis/google-cloud-node/commit/d83d70a25f78812a44c4476b2149fbdef0a2baa1))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v4.1.1...dataproc-v4.2.0) (2022-12-16)
 
 

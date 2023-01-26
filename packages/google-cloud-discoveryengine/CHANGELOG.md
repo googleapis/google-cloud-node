@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.2.0...discoveryengine-v0.3.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3852](https://github.com/googleapis/google-cloud-node/issues/3852)) ([d83d70a](https://github.com/googleapis/google-cloud-node/commit/d83d70a25f78812a44c4476b2149fbdef0a2baa1))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.1.1...discoveryengine-v0.2.0) (2022-11-10)
 
 

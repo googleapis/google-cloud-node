@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/contentwarehouse",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Document AI Warehouse client for Node.js",
   "repository": {
     "type": "git",

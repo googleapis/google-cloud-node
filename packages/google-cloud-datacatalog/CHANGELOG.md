@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v3.1.1...datacatalog-v3.2.0) (2023-01-26)
+
+
+### Features
+
+* Added Snooze API support ([#3832](https://github.com/googleapis/google-cloud-node/issues/3832)) ([f715797](https://github.com/googleapis/google-cloud-node/commit/f715797a46cdd2bf4dffc1a82378986941fd6d79))
+
 ## [3.1.1](https://github.com/googleapis/nodejs-datacatalog/compare/v3.1.0...v3.1.1) (2022-11-30)
 
 

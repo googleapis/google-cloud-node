@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/language-v5.1.2...language-v5.2.0) (2023-01-26)
+
+
+### Features
+
+* Added Snooze API support ([#3832](https://github.com/googleapis/google-cloud-node/issues/3832)) ([f715797](https://github.com/googleapis/google-cloud-node/commit/f715797a46cdd2bf4dffc1a82378986941fd6d79))
+
 ## [5.1.2](https://github.com/googleapis/google-cloud-node/compare/language-v5.1.1...language-v5.1.2) (2022-11-10)
 
 
