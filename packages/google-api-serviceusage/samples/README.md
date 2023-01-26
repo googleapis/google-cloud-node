@@ -57,7 +57,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Service_usage.batch_enable_services
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1/service_usage.batch_enable_services.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1/service_usage.batch_enable_services.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1/service_usage.batch_enable_services.js,samples/README.md)
 
@@ -74,7 +74,7 @@ __Usage:__
 
 ### Service_usage.batch_get_services
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1/service_usage.batch_get_services.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1/service_usage.batch_get_services.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1/service_usage.batch_get_services.js,samples/README.md)
 
@@ -91,7 +91,7 @@ __Usage:__
 
 ### Service_usage.disable_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1/service_usage.disable_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1/service_usage.disable_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1/service_usage.disable_service.js,samples/README.md)
 
@@ -108,7 +108,7 @@ __Usage:__
 
 ### Service_usage.enable_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1/service_usage.enable_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1/service_usage.enable_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1/service_usage.enable_service.js,samples/README.md)
 
@@ -125,7 +125,7 @@ __Usage:__
 
 ### Service_usage.get_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1/service_usage.get_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1/service_usage.get_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1/service_usage.get_service.js,samples/README.md)
 
@@ -142,7 +142,7 @@ __Usage:__
 
 ### Service_usage.list_services
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1/service_usage.list_services.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1/service_usage.list_services.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1/service_usage.list_services.js,samples/README.md)
 
@@ -159,7 +159,7 @@ __Usage:__
 
 ### Service_usage.batch_enable_services
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.batch_enable_services.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.batch_enable_services.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.batch_enable_services.js,samples/README.md)
 
@@ -176,7 +176,7 @@ __Usage:__
 
 ### Service_usage.create_admin_override
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.create_admin_override.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.create_admin_override.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.create_admin_override.js,samples/README.md)
 
@@ -193,7 +193,7 @@ __Usage:__
 
 ### Service_usage.create_consumer_override
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.create_consumer_override.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.create_consumer_override.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.create_consumer_override.js,samples/README.md)
 
@@ -210,7 +210,7 @@ __Usage:__
 
 ### Service_usage.delete_admin_override
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.delete_admin_override.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.delete_admin_override.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.delete_admin_override.js,samples/README.md)
 
@@ -227,7 +227,7 @@ __Usage:__
 
 ### Service_usage.delete_consumer_override
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.delete_consumer_override.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.delete_consumer_override.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.delete_consumer_override.js,samples/README.md)
 
@@ -244,7 +244,7 @@ __Usage:__
 
 ### Service_usage.disable_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.disable_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.disable_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.disable_service.js,samples/README.md)
 
@@ -261,7 +261,7 @@ __Usage:__
 
 ### Service_usage.enable_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.enable_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.enable_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.enable_service.js,samples/README.md)
 
@@ -278,7 +278,7 @@ __Usage:__
 
 ### Service_usage.generate_service_identity
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.generate_service_identity.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.generate_service_identity.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.generate_service_identity.js,samples/README.md)
 
@@ -295,7 +295,7 @@ __Usage:__
 
 ### Service_usage.get_consumer_quota_limit
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.get_consumer_quota_limit.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.get_consumer_quota_limit.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.get_consumer_quota_limit.js,samples/README.md)
 
@@ -312,7 +312,7 @@ __Usage:__
 
 ### Service_usage.get_consumer_quota_metric
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.get_consumer_quota_metric.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.get_consumer_quota_metric.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.get_consumer_quota_metric.js,samples/README.md)
 
@@ -329,7 +329,7 @@ __Usage:__
 
 ### Service_usage.get_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.get_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.get_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.get_service.js,samples/README.md)
 
@@ -346,7 +346,7 @@ __Usage:__
 
 ### Service_usage.import_admin_overrides
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.import_admin_overrides.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.import_admin_overrides.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.import_admin_overrides.js,samples/README.md)
 
@@ -363,7 +363,7 @@ __Usage:__
 
 ### Service_usage.import_consumer_overrides
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.import_consumer_overrides.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.import_consumer_overrides.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.import_consumer_overrides.js,samples/README.md)
 
@@ -380,7 +380,7 @@ __Usage:__
 
 ### Service_usage.list_admin_overrides
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.list_admin_overrides.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.list_admin_overrides.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.list_admin_overrides.js,samples/README.md)
 
@@ -397,7 +397,7 @@ __Usage:__
 
 ### Service_usage.list_consumer_overrides
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.list_consumer_overrides.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.list_consumer_overrides.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.list_consumer_overrides.js,samples/README.md)
 
@@ -414,7 +414,7 @@ __Usage:__
 
 ### Service_usage.list_consumer_quota_metrics
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.list_consumer_quota_metrics.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.list_consumer_quota_metrics.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.list_consumer_quota_metrics.js,samples/README.md)
 
@@ -431,7 +431,7 @@ __Usage:__
 
 ### Service_usage.list_services
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.list_services.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.list_services.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.list_services.js,samples/README.md)
 
@@ -448,7 +448,7 @@ __Usage:__
 
 ### Service_usage.update_admin_override
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.update_admin_override.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.update_admin_override.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.update_admin_override.js,samples/README.md)
 
@@ -465,7 +465,7 @@ __Usage:__
 
 ### Service_usage.update_consumer_override
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.update_consumer_override.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.update_consumer_override.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.update_consumer_override.js,samples/README.md)
 
@@ -482,7 +482,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/quickstart.js,samples/README.md)
 
@@ -499,7 +499,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-serviceusage/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/test/quickstart.js,samples/README.md)
 

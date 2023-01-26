@@ -81,17 +81,17 @@ reportOperationResults();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quota_controller.allocate_quota | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicecontrol/samples/generated/v1/quota_controller.allocate_quota.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicecontrol/samples/generated/v1/quota_controller.allocate_quota.js,samples/README.md) |
-| Service_controller.check | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicecontrol/samples/generated/v1/service_controller.check.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicecontrol/samples/generated/v1/service_controller.check.js,samples/README.md) |
-| Service_controller.report | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicecontrol/samples/generated/v1/service_controller.report.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicecontrol/samples/generated/v1/service_controller.report.js,samples/README.md) |
-| Service_controller.check | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicecontrol/samples/generated/v2/service_controller.check.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicecontrol/samples/generated/v2/service_controller.check.js,samples/README.md) |
-| Service_controller.report | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicecontrol/samples/generated/v2/service_controller.report.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicecontrol/samples/generated/v2/service_controller.report.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicecontrol/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicecontrol/samples/quickstart.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicecontrol/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicecontrol/samples/test/quickstart.js,samples/README.md) |
+| Quota_controller.allocate_quota | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicecontrol/samples/generated/v1/quota_controller.allocate_quota.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicecontrol/samples/generated/v1/quota_controller.allocate_quota.js,samples/README.md) |
+| Service_controller.check | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicecontrol/samples/generated/v1/service_controller.check.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicecontrol/samples/generated/v1/service_controller.check.js,samples/README.md) |
+| Service_controller.report | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicecontrol/samples/generated/v1/service_controller.report.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicecontrol/samples/generated/v1/service_controller.report.js,samples/README.md) |
+| Service_controller.check | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicecontrol/samples/generated/v2/service_controller.check.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicecontrol/samples/generated/v2/service_controller.check.js,samples/README.md) |
+| Service_controller.report | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicecontrol/samples/generated/v2/service_controller.report.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicecontrol/samples/generated/v2/service_controller.report.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicecontrol/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicecontrol/samples/quickstart.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-api-servicecontrol/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-servicecontrol/samples/test/quickstart.js,samples/README.md) |
 
 
 
@@ -141,7 +141,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/master/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -153,7 +153,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/service-control/latest
 [product-docs]: https://cloud.google.com/service-infrastructure/docs/overview/
