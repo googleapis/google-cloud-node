@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/network-security-v1.0.2...network-security-v1.1.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3853](https://github.com/googleapis/google-cloud-node/issues/3853)) ([cc352db](https://github.com/googleapis/google-cloud-node/commit/cc352db97f3bd8925bf1a7631a0ae64ff976fa4e))
+
 ## [1.0.2](https://github.com/googleapis/nodejs-network-security/compare/v1.0.1...v1.0.2) (2022-11-10)
 
 

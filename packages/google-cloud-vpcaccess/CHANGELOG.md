@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/vpc-access-v2.1.3...vpc-access-v2.2.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3854](https://github.com/googleapis/google-cloud-node/issues/3854)) ([9e4b7f8](https://github.com/googleapis/google-cloud-node/commit/9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b))
+
 ## [2.1.3](https://github.com/googleapis/nodejs-vpc-access/compare/v2.1.2...v2.1.3) (2022-11-11)
 
 

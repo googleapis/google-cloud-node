@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/vmmigration-v2.2.1...vmmigration-v2.3.0) (2023-01-26)
+
+
+### Features
+
+* AWS as a source ([#3835](https://github.com/googleapis/google-cloud-node/issues/3835)) ([b1c4b9c](https://github.com/googleapis/google-cloud-node/commit/b1c4b9c89d40c30e8dd9d5a4d460b0f74069195e))
+
 ## [2.2.1](https://github.com/googleapis/nodejs-vmmigration/compare/v2.2.0...v2.2.1) (2022-11-11)
 
 

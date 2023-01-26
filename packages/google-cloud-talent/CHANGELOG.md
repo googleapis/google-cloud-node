@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/talent-v5.0.1...talent-v5.1.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3845](https://github.com/googleapis/google-cloud-node/issues/3845)) ([754a530](https://github.com/googleapis/google-cloud-node/commit/754a530904e860a0548b2ffc906930c441c8427d))
+
 ## [5.0.1](https://github.com/googleapis/nodejs-talent/compare/v5.0.0...v5.0.1) (2022-11-11)
 
 

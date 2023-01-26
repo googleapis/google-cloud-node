@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/private-catalog-v2.0.4...private-catalog-v2.1.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3853](https://github.com/googleapis/google-cloud-node/issues/3853)) ([cc352db](https://github.com/googleapis/google-cloud-node/commit/cc352db97f3bd8925bf1a7631a0ae64ff976fa4e))
+
 ## [2.0.4](https://github.com/googleapis/nodejs-private-catalog/compare/v2.0.3...v2.0.4) (2022-11-11)
 
 

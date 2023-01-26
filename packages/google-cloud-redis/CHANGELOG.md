@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/redis-v3.1.5...redis-v3.2.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3853](https://github.com/googleapis/google-cloud-node/issues/3853)) ([cc352db](https://github.com/googleapis/google-cloud-node/commit/cc352db97f3bd8925bf1a7631a0ae64ff976fa4e))
+
 ## [3.1.5](https://github.com/googleapis/google-cloud-node/compare/redis-v3.1.4...redis-v3.1.5) (2022-11-10)
 
 

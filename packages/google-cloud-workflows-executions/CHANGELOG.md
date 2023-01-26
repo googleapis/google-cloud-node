@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/workflows-v2.2.0...workflows-v2.3.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3854](https://github.com/googleapis/google-cloud-node/issues/3854)) ([9e4b7f8](https://github.com/googleapis/google-cloud-node/commit/9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-workflows/compare/v2.1.1...v2.2.0) (2022-11-11)
 
 

@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.6.0...container-v4.7.0) (2023-01-26)
+
+
+### Features
+
+* Add field for enabled Beta K8s APIs in proto ([#3823](https://github.com/googleapis/google-cloud-node/issues/3823)) ([1a3497a](https://github.com/googleapis/google-cloud-node/commit/1a3497a49a09794a1636b3163335b307c1c18d87))
+* Release GKE CloudDNS Cluster Scope ([#3820](https://github.com/googleapis/google-cloud-node/issues/3820)) ([076de4c](https://github.com/googleapis/google-cloud-node/commit/076de4c5fce49989efe5ca4465a411df030715f8))
+
 ## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.5.0...container-v4.6.0) (2022-12-21)
 
 

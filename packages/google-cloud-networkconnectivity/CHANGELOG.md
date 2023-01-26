@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v2.2.0...network-connectivity-v3.0.0) (2023-01-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* **network-connectivity:** remove policy-based routing ([#3885](https://github.com/googleapis/google-cloud-node/issues/3885))
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3853](https://github.com/googleapis/google-cloud-node/issues/3853)) ([cc352db](https://github.com/googleapis/google-cloud-node/commit/cc352db97f3bd8925bf1a7631a0ae64ff976fa4e))
+
+
+### Bug Fixes
+
+* **network-connectivity:** Remove policy-based routing ([#3885](https://github.com/googleapis/google-cloud-node/issues/3885)) ([a71d871](https://github.com/googleapis/google-cloud-node/commit/a71d871e056dff4eb5ea18ca8977636f6ff4a9d4))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-network-connectivity/compare/v2.1.2...v2.2.0) (2022-11-15)
 
 

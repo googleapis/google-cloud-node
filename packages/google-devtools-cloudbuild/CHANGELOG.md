@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.2.0...cloudbuild-v3.3.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3854](https://github.com/googleapis/google-cloud-node/issues/3854)) ([9e4b7f8](https://github.com/googleapis/google-cloud-node/commit/9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b))
+
 ## [3.2.0](https://github.com/googleapis/nodejs-cloudbuild/compare/v3.1.2...v3.2.0) (2022-11-11)
 
 

@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v4.1.0...text-to-speech-v4.2.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3853](https://github.com/googleapis/google-cloud-node/issues/3853)) ([cc352db](https://github.com/googleapis/google-cloud-node/commit/cc352db97f3bd8925bf1a7631a0ae64ff976fa4e))
+* Support REST transport ([#3855](https://github.com/googleapis/google-cloud-node/issues/3855)) ([b30b329](https://github.com/googleapis/google-cloud-node/commit/b30b329f30615c0855c3fb3ae88afd1453bca18f))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v4.0.4...text-to-speech-v4.1.0) (2022-12-16)
 
 
