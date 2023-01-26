@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.2.0...typeless-sample-bot-v1.3.0) (2023-01-26)
+
+
+### Features
+
+* Add support for converting optional chaining to regular chaining ([#3891](https://github.com/googleapis/google-cloud-node/issues/3891)) ([f8414ac](https://github.com/googleapis/google-cloud-node/commit/f8414ac2f7ea1b8cd11ab49939dc2abec9fd0bb9))
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.1.0...typeless-sample-bot-v1.2.0) (2022-12-16)
 
 

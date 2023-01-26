@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/routing-v0.2.1...routing-v0.3.0) (2023-01-26)
+
+
+### Features
+
+* Add ExtraComputations feature to ComputeRoutes and ComputeRouteMatrix ([#3868](https://github.com/googleapis/google-cloud-node/issues/3868)) ([3b646fa](https://github.com/googleapis/google-cloud-node/commit/3b646fabd5aa4f29a176817d5ed6a23de9583ccb))
+* Added SuggestConversationSummary RPC ([#3854](https://github.com/googleapis/google-cloud-node/issues/3854)) ([9e4b7f8](https://github.com/googleapis/google-cloud-node/commit/9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b))
+
 ## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/routing-v0.2.0...routing-v0.2.1) (2022-11-10)
 
 
