@@ -16,17 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {MapsPlatformDatasetsV1AlphaClient} from '@google-cloud/mapsplatformdatasets';
-
-// check that the client class type name can be used
-function doStuffWithMapsPlatformDatasetsV1AlphaClient(client: MapsPlatformDatasetsV1AlphaClient) {
-  client.close();
-}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const mapsplatformdatasets = require('@google-cloud/mapsplatformdatasets');
 
 function main() {
-  // check that the client instance can be created
-  const mapsPlatformDatasetsV1AlphaClient = new MapsPlatformDatasetsV1AlphaClient();
-  doStuffWithMapsPlatformDatasetsV1AlphaClient(mapsPlatformDatasetsV1AlphaClient);
+  const mapsPlatformDatasetsV1AlphaClient =
+    new mapsplatformdatasets.MapsPlatformDatasetsV1AlphaClient();
 }
 
 main();
