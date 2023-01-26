@@ -122,7 +122,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Data_catalog.create_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_entry.js,samples/README.md)
 
@@ -139,7 +139,7 @@ __Usage:__
 
 ### Data_catalog.create_entry_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_entry_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_entry_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_entry_group.js,samples/README.md)
 
@@ -156,7 +156,7 @@ __Usage:__
 
 ### Data_catalog.create_tag
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_tag.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_tag.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_tag.js,samples/README.md)
 
@@ -173,7 +173,7 @@ __Usage:__
 
 ### Data_catalog.create_tag_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_tag_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_tag_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_tag_template.js,samples/README.md)
 
@@ -190,7 +190,7 @@ __Usage:__
 
 ### Data_catalog.create_tag_template_field
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_tag_template_field.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_tag_template_field.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.create_tag_template_field.js,samples/README.md)
 
@@ -207,7 +207,7 @@ __Usage:__
 
 ### Data_catalog.delete_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_entry.js,samples/README.md)
 
@@ -224,7 +224,7 @@ __Usage:__
 
 ### Data_catalog.delete_entry_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_entry_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_entry_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_entry_group.js,samples/README.md)
 
@@ -241,7 +241,7 @@ __Usage:__
 
 ### Data_catalog.delete_tag
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_tag.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_tag.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_tag.js,samples/README.md)
 
@@ -258,7 +258,7 @@ __Usage:__
 
 ### Data_catalog.delete_tag_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_tag_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_tag_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_tag_template.js,samples/README.md)
 
@@ -275,7 +275,7 @@ __Usage:__
 
 ### Data_catalog.delete_tag_template_field
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_tag_template_field.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_tag_template_field.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.delete_tag_template_field.js,samples/README.md)
 
@@ -292,7 +292,7 @@ __Usage:__
 
 ### Data_catalog.get_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.get_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.get_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.get_entry.js,samples/README.md)
 
@@ -309,7 +309,7 @@ __Usage:__
 
 ### Data_catalog.get_entry_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.get_entry_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.get_entry_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.get_entry_group.js,samples/README.md)
 
@@ -326,7 +326,7 @@ __Usage:__
 
 ### Data_catalog.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.get_iam_policy.js,samples/README.md)
 
@@ -343,7 +343,7 @@ __Usage:__
 
 ### Data_catalog.get_tag_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.get_tag_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.get_tag_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.get_tag_template.js,samples/README.md)
 
@@ -360,7 +360,7 @@ __Usage:__
 
 ### Data_catalog.list_entries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.list_entries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.list_entries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.list_entries.js,samples/README.md)
 
@@ -377,7 +377,7 @@ __Usage:__
 
 ### Data_catalog.list_entry_groups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.list_entry_groups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.list_entry_groups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.list_entry_groups.js,samples/README.md)
 
@@ -394,7 +394,7 @@ __Usage:__
 
 ### Data_catalog.list_tags
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.list_tags.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.list_tags.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.list_tags.js,samples/README.md)
 
@@ -411,7 +411,7 @@ __Usage:__
 
 ### Data_catalog.lookup_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.lookup_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.lookup_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.lookup_entry.js,samples/README.md)
 
@@ -428,7 +428,7 @@ __Usage:__
 
 ### Data_catalog.modify_entry_contacts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.modify_entry_contacts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.modify_entry_contacts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.modify_entry_contacts.js,samples/README.md)
 
@@ -445,7 +445,7 @@ __Usage:__
 
 ### Data_catalog.modify_entry_overview
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.modify_entry_overview.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.modify_entry_overview.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.modify_entry_overview.js,samples/README.md)
 
@@ -462,7 +462,7 @@ __Usage:__
 
 ### Data_catalog.rename_tag_template_field
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.rename_tag_template_field.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.rename_tag_template_field.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.rename_tag_template_field.js,samples/README.md)
 
@@ -479,7 +479,7 @@ __Usage:__
 
 ### Data_catalog.rename_tag_template_field_enum_value
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.rename_tag_template_field_enum_value.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.rename_tag_template_field_enum_value.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.rename_tag_template_field_enum_value.js,samples/README.md)
 
@@ -496,7 +496,7 @@ __Usage:__
 
 ### Data_catalog.search_catalog
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.search_catalog.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.search_catalog.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.search_catalog.js,samples/README.md)
 
@@ -513,7 +513,7 @@ __Usage:__
 
 ### Data_catalog.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.set_iam_policy.js,samples/README.md)
 
@@ -530,7 +530,7 @@ __Usage:__
 
 ### Data_catalog.star_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.star_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.star_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.star_entry.js,samples/README.md)
 
@@ -547,7 +547,7 @@ __Usage:__
 
 ### Data_catalog.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.test_iam_permissions.js,samples/README.md)
 
@@ -564,7 +564,7 @@ __Usage:__
 
 ### Data_catalog.unstar_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.unstar_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.unstar_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.unstar_entry.js,samples/README.md)
 
@@ -581,7 +581,7 @@ __Usage:__
 
 ### Data_catalog.update_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_entry.js,samples/README.md)
 
@@ -598,7 +598,7 @@ __Usage:__
 
 ### Data_catalog.update_entry_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_entry_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_entry_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_entry_group.js,samples/README.md)
 
@@ -615,7 +615,7 @@ __Usage:__
 
 ### Data_catalog.update_tag
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_tag.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_tag.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_tag.js,samples/README.md)
 
@@ -632,7 +632,7 @@ __Usage:__
 
 ### Data_catalog.update_tag_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_tag_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_tag_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_tag_template.js,samples/README.md)
 
@@ -649,7 +649,7 @@ __Usage:__
 
 ### Data_catalog.update_tag_template_field
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_tag_template_field.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_tag_template_field.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.update_tag_template_field.js,samples/README.md)
 
@@ -666,7 +666,7 @@ __Usage:__
 
 ### Policy_tag_manager.create_policy_tag
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.create_policy_tag.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.create_policy_tag.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.create_policy_tag.js,samples/README.md)
 
@@ -683,7 +683,7 @@ __Usage:__
 
 ### Policy_tag_manager.create_taxonomy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.create_taxonomy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.create_taxonomy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.create_taxonomy.js,samples/README.md)
 
@@ -700,7 +700,7 @@ __Usage:__
 
 ### Policy_tag_manager.delete_policy_tag
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.delete_policy_tag.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.delete_policy_tag.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.delete_policy_tag.js,samples/README.md)
 
@@ -717,7 +717,7 @@ __Usage:__
 
 ### Policy_tag_manager.delete_taxonomy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.delete_taxonomy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.delete_taxonomy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.delete_taxonomy.js,samples/README.md)
 
@@ -734,7 +734,7 @@ __Usage:__
 
 ### Policy_tag_manager.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.get_iam_policy.js,samples/README.md)
 
@@ -751,7 +751,7 @@ __Usage:__
 
 ### Policy_tag_manager.get_policy_tag
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.get_policy_tag.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.get_policy_tag.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.get_policy_tag.js,samples/README.md)
 
@@ -768,7 +768,7 @@ __Usage:__
 
 ### Policy_tag_manager.get_taxonomy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.get_taxonomy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.get_taxonomy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.get_taxonomy.js,samples/README.md)
 
@@ -785,7 +785,7 @@ __Usage:__
 
 ### Policy_tag_manager.list_policy_tags
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.list_policy_tags.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.list_policy_tags.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.list_policy_tags.js,samples/README.md)
 
@@ -802,7 +802,7 @@ __Usage:__
 
 ### Policy_tag_manager.list_taxonomies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.list_taxonomies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.list_taxonomies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.list_taxonomies.js,samples/README.md)
 
@@ -819,7 +819,7 @@ __Usage:__
 
 ### Policy_tag_manager.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.set_iam_policy.js,samples/README.md)
 
@@ -836,7 +836,7 @@ __Usage:__
 
 ### Policy_tag_manager.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.test_iam_permissions.js,samples/README.md)
 
@@ -853,7 +853,7 @@ __Usage:__
 
 ### Policy_tag_manager.update_policy_tag
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.update_policy_tag.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.update_policy_tag.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.update_policy_tag.js,samples/README.md)
 
@@ -870,7 +870,7 @@ __Usage:__
 
 ### Policy_tag_manager.update_taxonomy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.update_taxonomy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.update_taxonomy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager.update_taxonomy.js,samples/README.md)
 
@@ -887,7 +887,7 @@ __Usage:__
 
 ### Policy_tag_manager_serialization.export_taxonomies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager_serialization.export_taxonomies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager_serialization.export_taxonomies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager_serialization.export_taxonomies.js,samples/README.md)
 
@@ -904,7 +904,7 @@ __Usage:__
 
 ### Policy_tag_manager_serialization.import_taxonomies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager_serialization.import_taxonomies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager_serialization.import_taxonomies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager_serialization.import_taxonomies.js,samples/README.md)
 
@@ -921,7 +921,7 @@ __Usage:__
 
 ### Policy_tag_manager_serialization.replace_taxonomy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager_serialization.replace_taxonomy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager_serialization.replace_taxonomy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/policy_tag_manager_serialization.replace_taxonomy.js,samples/README.md)
 
@@ -938,7 +938,7 @@ __Usage:__
 
 ### Data_catalog.create_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_entry.js,samples/README.md)
 
@@ -955,7 +955,7 @@ __Usage:__
 
 ### Data_catalog.create_entry_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_entry_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_entry_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_entry_group.js,samples/README.md)
 
@@ -972,7 +972,7 @@ __Usage:__
 
 ### Data_catalog.create_tag
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_tag.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_tag.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_tag.js,samples/README.md)
 
@@ -989,7 +989,7 @@ __Usage:__
 
 ### Data_catalog.create_tag_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_tag_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_tag_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_tag_template.js,samples/README.md)
 
@@ -1006,7 +1006,7 @@ __Usage:__
 
 ### Data_catalog.create_tag_template_field
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_tag_template_field.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_tag_template_field.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.create_tag_template_field.js,samples/README.md)
 
@@ -1023,7 +1023,7 @@ __Usage:__
 
 ### Data_catalog.delete_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_entry.js,samples/README.md)
 
@@ -1040,7 +1040,7 @@ __Usage:__
 
 ### Data_catalog.delete_entry_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_entry_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_entry_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_entry_group.js,samples/README.md)
 
@@ -1057,7 +1057,7 @@ __Usage:__
 
 ### Data_catalog.delete_tag
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_tag.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_tag.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_tag.js,samples/README.md)
 
@@ -1074,7 +1074,7 @@ __Usage:__
 
 ### Data_catalog.delete_tag_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_tag_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_tag_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_tag_template.js,samples/README.md)
 
@@ -1091,7 +1091,7 @@ __Usage:__
 
 ### Data_catalog.delete_tag_template_field
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_tag_template_field.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_tag_template_field.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.delete_tag_template_field.js,samples/README.md)
 
@@ -1108,7 +1108,7 @@ __Usage:__
 
 ### Data_catalog.get_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.get_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.get_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.get_entry.js,samples/README.md)
 
@@ -1125,7 +1125,7 @@ __Usage:__
 
 ### Data_catalog.get_entry_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.get_entry_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.get_entry_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.get_entry_group.js,samples/README.md)
 
@@ -1142,7 +1142,7 @@ __Usage:__
 
 ### Data_catalog.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.get_iam_policy.js,samples/README.md)
 
@@ -1159,7 +1159,7 @@ __Usage:__
 
 ### Data_catalog.get_tag_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.get_tag_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.get_tag_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.get_tag_template.js,samples/README.md)
 
@@ -1176,7 +1176,7 @@ __Usage:__
 
 ### Data_catalog.list_entries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.list_entries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.list_entries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.list_entries.js,samples/README.md)
 
@@ -1193,7 +1193,7 @@ __Usage:__
 
 ### Data_catalog.list_entry_groups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.list_entry_groups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.list_entry_groups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.list_entry_groups.js,samples/README.md)
 
@@ -1210,7 +1210,7 @@ __Usage:__
 
 ### Data_catalog.list_tags
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.list_tags.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.list_tags.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.list_tags.js,samples/README.md)
 
@@ -1227,7 +1227,7 @@ __Usage:__
 
 ### Data_catalog.lookup_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.lookup_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.lookup_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.lookup_entry.js,samples/README.md)
 
@@ -1244,7 +1244,7 @@ __Usage:__
 
 ### Data_catalog.rename_tag_template_field
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.rename_tag_template_field.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.rename_tag_template_field.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.rename_tag_template_field.js,samples/README.md)
 
@@ -1261,7 +1261,7 @@ __Usage:__
 
 ### Data_catalog.search_catalog
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.search_catalog.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.search_catalog.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.search_catalog.js,samples/README.md)
 
@@ -1278,7 +1278,7 @@ __Usage:__
 
 ### Data_catalog.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.set_iam_policy.js,samples/README.md)
 
@@ -1295,7 +1295,7 @@ __Usage:__
 
 ### Data_catalog.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.test_iam_permissions.js,samples/README.md)
 
@@ -1312,7 +1312,7 @@ __Usage:__
 
 ### Data_catalog.update_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_entry.js,samples/README.md)
 
@@ -1329,7 +1329,7 @@ __Usage:__
 
 ### Data_catalog.update_entry_group
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_entry_group.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_entry_group.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_entry_group.js,samples/README.md)
 
@@ -1346,7 +1346,7 @@ __Usage:__
 
 ### Data_catalog.update_tag
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_tag.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_tag.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_tag.js,samples/README.md)
 
@@ -1363,7 +1363,7 @@ __Usage:__
 
 ### Data_catalog.update_tag_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_tag_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_tag_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_tag_template.js,samples/README.md)
 
@@ -1380,7 +1380,7 @@ __Usage:__
 
 ### Data_catalog.update_tag_template_field
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_tag_template_field.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_tag_template_field.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/data_catalog.update_tag_template_field.js,samples/README.md)
 
@@ -1397,7 +1397,7 @@ __Usage:__
 
 ### Policy_tag_manager.create_policy_tag
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.create_policy_tag.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.create_policy_tag.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.create_policy_tag.js,samples/README.md)
 
@@ -1414,7 +1414,7 @@ __Usage:__
 
 ### Policy_tag_manager.create_taxonomy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.create_taxonomy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.create_taxonomy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.create_taxonomy.js,samples/README.md)
 
@@ -1431,7 +1431,7 @@ __Usage:__
 
 ### Policy_tag_manager.delete_policy_tag
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.delete_policy_tag.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.delete_policy_tag.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.delete_policy_tag.js,samples/README.md)
 
@@ -1448,7 +1448,7 @@ __Usage:__
 
 ### Policy_tag_manager.delete_taxonomy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.delete_taxonomy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.delete_taxonomy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.delete_taxonomy.js,samples/README.md)
 
@@ -1465,7 +1465,7 @@ __Usage:__
 
 ### Policy_tag_manager.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.get_iam_policy.js,samples/README.md)
 
@@ -1482,7 +1482,7 @@ __Usage:__
 
 ### Policy_tag_manager.get_policy_tag
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.get_policy_tag.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.get_policy_tag.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.get_policy_tag.js,samples/README.md)
 
@@ -1499,7 +1499,7 @@ __Usage:__
 
 ### Policy_tag_manager.get_taxonomy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.get_taxonomy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.get_taxonomy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.get_taxonomy.js,samples/README.md)
 
@@ -1516,7 +1516,7 @@ __Usage:__
 
 ### Policy_tag_manager.list_policy_tags
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.list_policy_tags.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.list_policy_tags.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.list_policy_tags.js,samples/README.md)
 
@@ -1533,7 +1533,7 @@ __Usage:__
 
 ### Policy_tag_manager.list_taxonomies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.list_taxonomies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.list_taxonomies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.list_taxonomies.js,samples/README.md)
 
@@ -1550,7 +1550,7 @@ __Usage:__
 
 ### Policy_tag_manager.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.set_iam_policy.js,samples/README.md)
 
@@ -1567,7 +1567,7 @@ __Usage:__
 
 ### Policy_tag_manager.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.test_iam_permissions.js,samples/README.md)
 
@@ -1584,7 +1584,7 @@ __Usage:__
 
 ### Policy_tag_manager.update_policy_tag
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.update_policy_tag.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.update_policy_tag.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.update_policy_tag.js,samples/README.md)
 
@@ -1601,7 +1601,7 @@ __Usage:__
 
 ### Policy_tag_manager.update_taxonomy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.update_taxonomy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.update_taxonomy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager.update_taxonomy.js,samples/README.md)
 
@@ -1618,7 +1618,7 @@ __Usage:__
 
 ### Policy_tag_manager_serialization.export_taxonomies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager_serialization.export_taxonomies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager_serialization.export_taxonomies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager_serialization.export_taxonomies.js,samples/README.md)
 
@@ -1635,7 +1635,7 @@ __Usage:__
 
 ### Policy_tag_manager_serialization.import_taxonomies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager_serialization.import_taxonomies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager_serialization.import_taxonomies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1beta1/policy_tag_manager_serialization.import_taxonomies.js,samples/README.md)
 
@@ -1652,7 +1652,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/quickstart.js,samples/README.md)
 
@@ -1669,7 +1669,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-datacatalog/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/test/quickstart.test.js,samples/README.md)
 

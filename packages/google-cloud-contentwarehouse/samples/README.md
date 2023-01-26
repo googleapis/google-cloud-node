@@ -58,7 +58,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Document_link_service.create_document_link
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_link_service.create_document_link.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_link_service.create_document_link.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_link_service.create_document_link.js,samples/README.md)
 
@@ -75,7 +75,7 @@ __Usage:__
 
 ### Document_link_service.delete_document_link
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_link_service.delete_document_link.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_link_service.delete_document_link.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_link_service.delete_document_link.js,samples/README.md)
 
@@ -92,7 +92,7 @@ __Usage:__
 
 ### Document_link_service.list_linked_sources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_link_service.list_linked_sources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_link_service.list_linked_sources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_link_service.list_linked_sources.js,samples/README.md)
 
@@ -109,7 +109,7 @@ __Usage:__
 
 ### Document_link_service.list_linked_targets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_link_service.list_linked_targets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_link_service.list_linked_targets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_link_service.list_linked_targets.js,samples/README.md)
 
@@ -126,7 +126,7 @@ __Usage:__
 
 ### Document_schema_service.create_document_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.create_document_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.create_document_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.create_document_schema.js,samples/README.md)
 
@@ -143,7 +143,7 @@ __Usage:__
 
 ### Document_schema_service.delete_document_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.delete_document_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.delete_document_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.delete_document_schema.js,samples/README.md)
 
@@ -160,7 +160,7 @@ __Usage:__
 
 ### Document_schema_service.get_document_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.get_document_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.get_document_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.get_document_schema.js,samples/README.md)
 
@@ -177,7 +177,7 @@ __Usage:__
 
 ### Document_schema_service.list_document_schemas
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.list_document_schemas.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.list_document_schemas.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.list_document_schemas.js,samples/README.md)
 
@@ -194,7 +194,7 @@ __Usage:__
 
 ### Document_schema_service.update_document_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.update_document_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.update_document_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_schema_service.update_document_schema.js,samples/README.md)
 
@@ -211,7 +211,7 @@ __Usage:__
 
 ### Document_service.create_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.create_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.create_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.create_document.js,samples/README.md)
 
@@ -228,7 +228,7 @@ __Usage:__
 
 ### Document_service.delete_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.delete_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.delete_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.delete_document.js,samples/README.md)
 
@@ -245,7 +245,7 @@ __Usage:__
 
 ### Document_service.fetch_acl
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.fetch_acl.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.fetch_acl.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.fetch_acl.js,samples/README.md)
 
@@ -262,7 +262,7 @@ __Usage:__
 
 ### Document_service.get_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.get_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.get_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.get_document.js,samples/README.md)
 
@@ -279,7 +279,7 @@ __Usage:__
 
 ### Document_service.search_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.search_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.search_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.search_documents.js,samples/README.md)
 
@@ -296,7 +296,7 @@ __Usage:__
 
 ### Document_service.set_acl
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.set_acl.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.set_acl.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.set_acl.js,samples/README.md)
 
@@ -313,7 +313,7 @@ __Usage:__
 
 ### Document_service.update_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.update_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.update_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.update_document.js,samples/README.md)
 
@@ -330,7 +330,7 @@ __Usage:__
 
 ### Rule_set_service.create_rule_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.create_rule_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.create_rule_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.create_rule_set.js,samples/README.md)
 
@@ -347,7 +347,7 @@ __Usage:__
 
 ### Rule_set_service.delete_rule_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.delete_rule_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.delete_rule_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.delete_rule_set.js,samples/README.md)
 
@@ -364,7 +364,7 @@ __Usage:__
 
 ### Rule_set_service.get_rule_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.get_rule_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.get_rule_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.get_rule_set.js,samples/README.md)
 
@@ -381,7 +381,7 @@ __Usage:__
 
 ### Rule_set_service.list_rule_sets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.list_rule_sets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.list_rule_sets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.list_rule_sets.js,samples/README.md)
 
@@ -398,7 +398,7 @@ __Usage:__
 
 ### Rule_set_service.update_rule_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.update_rule_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.update_rule_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.update_rule_set.js,samples/README.md)
 
@@ -415,7 +415,7 @@ __Usage:__
 
 ### Synonym_set_service.create_synonym_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.create_synonym_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.create_synonym_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.create_synonym_set.js,samples/README.md)
 
@@ -432,7 +432,7 @@ __Usage:__
 
 ### Synonym_set_service.delete_synonym_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.delete_synonym_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.delete_synonym_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.delete_synonym_set.js,samples/README.md)
 
@@ -449,7 +449,7 @@ __Usage:__
 
 ### Synonym_set_service.get_synonym_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.get_synonym_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.get_synonym_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.get_synonym_set.js,samples/README.md)
 
@@ -466,7 +466,7 @@ __Usage:__
 
 ### Synonym_set_service.list_synonym_sets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.list_synonym_sets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.list_synonym_sets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.list_synonym_sets.js,samples/README.md)
 
@@ -483,7 +483,7 @@ __Usage:__
 
 ### Synonym_set_service.update_synonym_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.update_synonym_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.update_synonym_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.update_synonym_set.js,samples/README.md)
 
@@ -500,7 +500,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/quickstart.js,samples/README.md)
 
@@ -517,7 +517,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-contentwarehouse/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/test/quickstart.js,samples/README.md)
 
