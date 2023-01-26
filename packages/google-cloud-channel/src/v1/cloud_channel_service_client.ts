@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50,15 +50,16 @@ const version = require('../../../package.json').version;
  *  3. Resellers and distributors can manage customer entitlements.
  *
  *  CloudChannelService exposes the following resources:
- *  - {@link google.cloud.channel.v1.Customer|Customer}s: An entity—usually an enterprise—managed by a reseller or
- *  distributor.
+ *  - {@link google.cloud.channel.v1.Customer|Customer}s: An entity-usually an
+ *  enterprise-managed by a reseller or distributor.
  *
- *  - {@link google.cloud.channel.v1.Entitlement|Entitlement}s: An entity that provides a customer with the means to use
- *  a service. Entitlements are created or updated as a result of a successful
- *  fulfillment.
+ *  - {@link google.cloud.channel.v1.Entitlement|Entitlement}s: An entity that
+ *  provides a customer with the means to use a service. Entitlements are created
+ *  or updated as a result of a successful fulfillment.
  *
- *  - {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}s: An entity that identifies links between
- *  distributors and their indirect resellers in a channel.
+ *  - {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}s: An
+ *  entity that identifies links between distributors and their indirect
+ *  resellers in a channel.
  * @class
  * @memberof v1
  */
@@ -140,6 +141,9 @@ export class CloudChannelServiceClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -650,7 +654,8 @@ export class CloudChannelServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Returns the requested {@link google.cloud.channel.v1.Customer|Customer} resource.
+   * Returns the requested {@link google.cloud.channel.v1.Customer|Customer}
+   * resource.
    *
    * Possible error codes:
    *
@@ -756,11 +761,14 @@ export class CloudChannelServiceClient {
    * * INVALID_VALUE: Invalid domain value in the request.
    *
    * Return value:
-   * A list of {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount} resources for the domain (may be
-   * empty)
+   * A list of
+   * {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount}
+   * resources for the domain (may be empty)
    *
    * Note: in the v1alpha1 version of the API, a NOT_FOUND error returns if
-   * no {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount} resources match the domain.
+   * no
+   * {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount}
+   * resources match the domain.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -864,8 +872,8 @@ export class CloudChannelServiceClient {
     );
   }
   /**
-   * Creates a new {@link google.cloud.channel.v1.Customer|Customer} resource under the reseller or distributor
-   * account.
+   * Creates a new {@link google.cloud.channel.v1.Customer|Customer} resource under
+   * the reseller or distributor account.
    *
    * Possible error codes:
    *
@@ -881,8 +889,8 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of reseller account in which to create the customer.
-   *   Parent uses the format: accounts/{account_id}
+   *   Required. The resource name of reseller account in which to create the
+   *   customer. Parent uses the format: accounts/{account_id}
    * @param {google.cloud.channel.v1.Customer} request.customer
    *   Required. The customer to create.
    * @param {object} [options]
@@ -964,15 +972,16 @@ export class CloudChannelServiceClient {
     return this.innerApiCalls.createCustomer(request, options, callback);
   }
   /**
-   * Updates an existing {@link google.cloud.channel.v1.Customer|Customer} resource for the reseller or
-   * distributor.
+   * Updates an existing {@link google.cloud.channel.v1.Customer|Customer} resource
+   * for the reseller or distributor.
    *
    * Possible error codes:
    *
    * * PERMISSION_DENIED: The reseller account making the request is different
    * from the reseller account in the API request.
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
-   * * NOT_FOUND: No {@link google.cloud.channel.v1.Customer|Customer} resource found for the name in the request.
+   * * NOT_FOUND: No {@link google.cloud.channel.v1.Customer|Customer} resource found
+   * for the name in the request.
    *
    * Return value:
    * The updated {@link google.cloud.channel.v1.Customer|Customer} resource.
@@ -1071,7 +1080,8 @@ export class CloudChannelServiceClient {
    * this customer.
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    * * FAILED_PRECONDITION: The customer has existing entitlements.
-   * * NOT_FOUND: No {@link google.cloud.channel.v1.Customer|Customer} resource found for the name in the request.
+   * * NOT_FOUND: No {@link google.cloud.channel.v1.Customer|Customer} resource found
+   * for the name in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1156,10 +1166,10 @@ export class CloudChannelServiceClient {
     return this.innerApiCalls.deleteCustomer(request, options, callback);
   }
   /**
-   * Imports a {@link google.cloud.channel.v1.Customer|Customer} from the Cloud Identity associated with the provided
-   * Cloud Identity ID or domain before a TransferEntitlements call. If a
-   * linked Customer already exists and overwrite_if_exists is true, it will
-   * update that Customer's data.
+   * Imports a {@link google.cloud.channel.v1.Customer|Customer} from the Cloud
+   * Identity associated with the provided Cloud Identity ID or domain before a
+   * TransferEntitlements call. If a linked Customer already exists and
+   * overwrite_if_exists is true, it will update that Customer's data.
    *
    * Possible error codes:
    *
@@ -1194,9 +1204,10 @@ export class CloudChannelServiceClient {
    *   This must be set to true if there is an existing customer with a
    *   conflicting region code or domain.
    * @param {string} [request.channelPartnerId]
-   *   Optional. Cloud Identity ID of a channel partner who will be the direct reseller for
-   *   the customer's order. This field is required for 2-tier transfer scenarios
-   *   and can be provided via the request Parent binding as well.
+   *   Optional. Cloud Identity ID of a channel partner who will be the direct
+   *   reseller for the customer's order. This field is required for 2-tier
+   *   transfer scenarios and can be provided via the request Parent binding as
+   *   well.
    * @param {string} [request.customer]
    *   Optional. Specifies the customer that will receive imported Cloud Identity
    *   information.
@@ -1280,7 +1291,8 @@ export class CloudChannelServiceClient {
     return this.innerApiCalls.importCustomer(request, options, callback);
   }
   /**
-   * Returns the requested {@link google.cloud.channel.v1.Entitlement|Entitlement} resource.
+   * Returns the requested {@link google.cloud.channel.v1.Entitlement|Entitlement}
+   * resource.
    *
    * Possible error codes:
    *
@@ -1376,7 +1388,8 @@ export class CloudChannelServiceClient {
     return this.innerApiCalls.getEntitlement(request, options, callback);
   }
   /**
-   * Returns the requested {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
+   * Returns the requested
+   * {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
    * You must be a distributor to call this method.
    *
    * Possible error codes:
@@ -1388,7 +1401,8 @@ export class CloudChannelServiceClient {
    * invalid channel partner link name.
    *
    * Return value:
-   * The {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
+   * The {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}
+   * resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1504,7 +1518,8 @@ export class CloudChannelServiceClient {
    * Contact Cloud Channel support.
    *
    * Return value:
-   * The new {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
+   * The new {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}
+   * resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1631,7 +1646,8 @@ export class CloudChannelServiceClient {
    * Contact Cloud Channel support.
    *
    * Return value:
-   * The updated {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
+   * The updated
+   * {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1640,8 +1656,8 @@ export class CloudChannelServiceClient {
    *   Name uses the format: accounts/{account_id}/channelPartnerLinks/{id}
    *   where {id} is the Cloud Identity ID of the partner.
    * @param {google.cloud.channel.v1.ChannelPartnerLink} request.channelPartnerLink
-   *   Required. The channel partner link to update. Only channel_partner_link.link_state
-   *   is allowed for updates.
+   *   Required. The channel partner link to update. Only
+   *   channel_partner_link.link_state is allowed for updates.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The update mask that applies to the resource.
    *   The only allowable value for an update mask is
@@ -1748,13 +1764,16 @@ export class CloudChannelServiceClient {
    *
    * * PERMISSION_DENIED: If the account making the request and the account
    * being queried are different.
-   * * NOT_FOUND: The {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} was not found.
+   * * NOT_FOUND: The
+   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * was not found.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
-   * If successful, the {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} resource, otherwise returns
-   * an error.
+   * If successful, the
+   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * resource, otherwise returns an error.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1859,9 +1878,9 @@ export class CloudChannelServiceClient {
   /**
    * Creates a CustomerRepricingConfig. Call this method to set modifications
    * for a specific customer's bill. You can only create configs if the
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month} is a
-   * future month. If needed, you can create a config for the current month,
-   * with some restrictions.
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * is a future month. If needed, you can create a config for the current
+   * month, with some restrictions.
    *
    * When creating a config for a future month, make sure there are no existing
    * configs for that
@@ -1875,9 +1894,11 @@ export class CloudChannelServiceClient {
    * Changes to the config may be immediate, but may take up to 24 hours.
    * * There is a limit of ten configs for any
    * {@link google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}
-   * or {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
-   * * The contained {@link google.cloud.channel.v1.CustomerRepricingConfig.repricing_config|CustomerRepricingConfig.repricing_config} vaule must be
-   * different from the value used in the current config for a
+   * or
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   * * The contained
+   * {@link google.cloud.channel.v1.CustomerRepricingConfig.repricing_config|CustomerRepricingConfig.repricing_config}
+   * vaule must be different from the value used in the current config for a
    * {@link google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}.
    *
    * Possible Error Codes:
@@ -1887,20 +1908,23 @@ export class CloudChannelServiceClient {
    * * INVALID_ARGUMENT: Missing or invalid required parameters in the
    * request. Also displays if the updated config is for the current month or
    * past months.
-   * * NOT_FOUND: The {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} specified does not exist or is
-   * not associated with the given account.
+   * * NOT_FOUND: The
+   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * specified does not exist or is not associated with the given account.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
-   * If successful, the updated {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} resource, otherwise
-   * returns an error.
+   * If successful, the updated
+   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * resource, otherwise returns an error.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the customer that will receive this repricing config.
-   *   Parent uses the format: accounts/{account_id}/customers/{customer_id}
+   *   Required. The resource name of the customer that will receive this
+   *   repricing config. Parent uses the format:
+   *   accounts/{account_id}/customers/{customer_id}
    * @param {google.cloud.channel.v1.CustomerRepricingConfig} request.customerRepricingConfig
    *   Required. The CustomerRepricingConfig object to update.
    * @param {object} [options]
@@ -2003,10 +2027,11 @@ export class CloudChannelServiceClient {
    * CustomerRepricingConfig.
    *
    * You can only update configs if the
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month} is a
-   * future month. To make changes to configs for the current month, use
-   * {@link google.cloud.channel.v1.CloudChannelService.CreateCustomerRepricingConfig|CreateCustomerRepricingConfig}, taking note of its restrictions. You
-   * cannot update the {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * is a future month. To make changes to configs for the current month, use
+   * {@link google.cloud.channel.v1.CloudChannelService.CreateCustomerRepricingConfig|CreateCustomerRepricingConfig},
+   * taking note of its restrictions. You cannot update the
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
    *
    * When updating a config in the future:
    *
@@ -2019,14 +2044,16 @@ export class CloudChannelServiceClient {
    * * INVALID_ARGUMENT: Missing or invalid required parameters in the
    * request. Also displays if the updated config is for the current month or
    * past months.
-   * * NOT_FOUND: The {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} specified does not exist or is
-   * not associated with the given account.
+   * * NOT_FOUND: The
+   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * specified does not exist or is not associated with the given account.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
-   * If successful, the updated {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} resource, otherwise
-   * returns an error.
+   * If successful, the updated
+   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * resource, otherwise returns an error.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2128,25 +2155,29 @@ export class CloudChannelServiceClient {
     );
   }
   /**
-   * Deletes the given {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} permanently. You can only
-   * delete configs if their {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month} is set
-   * to a date after the current month.
+   * Deletes the given
+   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * permanently. You can only delete configs if their
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * is set to a date after the current month.
    *
    * Possible error codes:
    *
    * * PERMISSION_DENIED: The account making the request does not own
    * this customer.
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
-   * * FAILED_PRECONDITION: The {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} is active or in the
-   * past.
-   * * NOT_FOUND: No {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} found for the name in the
-   * request.
+   * * FAILED_PRECONDITION: The
+   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * is active or in the past.
+   * * NOT_FOUND: No
+   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * found for the name in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the customer repricing config rule to delete.
-   *   Format:
+   *   Required. The resource name of the customer repricing config rule to
+   *   delete. Format:
    *   accounts/{account_id}/customers/{customer_id}/customerRepricingConfigs/{id}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2250,13 +2281,16 @@ export class CloudChannelServiceClient {
    *
    * * PERMISSION_DENIED: If the account making the request and the account
    * being queried are different.
-   * * NOT_FOUND: The {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} was not found.
+   * * NOT_FOUND: The
+   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * was not found.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
-   * If successful, the {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} resource, otherwise
-   * returns an error.
+   * If successful, the
+   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * resource, otherwise returns an error.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2361,9 +2395,10 @@ export class CloudChannelServiceClient {
   /**
    * Creates a ChannelPartnerRepricingConfig. Call this method to set
    * modifications for a specific ChannelPartner's bill. You can only create
-   * configs if the {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month} is a future
-   * month. If needed, you can create a config for the current month, with some
-   * restrictions.
+   * configs if the
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * is a future month. If needed, you can create a config for the current
+   * month, with some restrictions.
    *
    * When creating a config for a future month, make sure there are no existing
    * configs for that
@@ -2377,8 +2412,9 @@ export class CloudChannelServiceClient {
    * Changes to the config may be immediate, but may take up to 24 hours.
    * * There is a limit of ten configs for any ChannelPartner or
    * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
-   * * The contained {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig.repricing_config|ChannelPartnerRepricingConfig.repricing_config} vaule
-   * must be different from the value used in the current config for a
+   * * The contained
+   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig.repricing_config|ChannelPartnerRepricingConfig.repricing_config}
+   * vaule must be different from the value used in the current config for a
    * ChannelPartner.
    *
    * Possible Error Codes:
@@ -2388,20 +2424,22 @@ export class CloudChannelServiceClient {
    * * INVALID_ARGUMENT: Missing or invalid required parameters in the
    * request. Also displays if the updated config is for the current month or
    * past months.
-   * * NOT_FOUND: The {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} specified does not exist
-   * or is not associated with the given account.
+   * * NOT_FOUND: The
+   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * specified does not exist or is not associated with the given account.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
-   * If successful, the updated {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} resource,
-   * otherwise returns an error.
+   * If successful, the updated
+   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * resource, otherwise returns an error.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the ChannelPartner that will receive the repricing
-   *   config. Parent uses the format:
+   *   Required. The resource name of the ChannelPartner that will receive the
+   *   repricing config. Parent uses the format:
    *   accounts/{account_id}/channelPartnerLinks/{channel_partner_id}
    * @param {google.cloud.channel.v1.ChannelPartnerRepricingConfig} request.channelPartnerRepricingConfig
    *   Required. The ChannelPartnerRepricingConfig object to update.
@@ -2505,10 +2543,11 @@ export class CloudChannelServiceClient {
    * the existing CustomerRepricingConfig.
    *
    * You can only update configs if the
-   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month} is a
-   * future month. To make changes to configs for the current month, use
-   * {@link google.cloud.channel.v1.CloudChannelService.CreateChannelPartnerRepricingConfig|CreateChannelPartnerRepricingConfig}, taking note of its restrictions.
-   * You cannot update the {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * is a future month. To make changes to configs for the current month, use
+   * {@link google.cloud.channel.v1.CloudChannelService.CreateChannelPartnerRepricingConfig|CreateChannelPartnerRepricingConfig},
+   * taking note of its restrictions. You cannot update the
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
    *
    * When updating a config in the future:
    *
@@ -2521,14 +2560,16 @@ export class CloudChannelServiceClient {
    * * INVALID_ARGUMENT: Missing or invalid required parameters in the
    * request. Also displays if the updated config is for the current month or
    * past months.
-   * * NOT_FOUND: The {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} specified does not exist
-   * or is not associated with the given account.
+   * * NOT_FOUND: The
+   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * specified does not exist or is not associated with the given account.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
-   * If successful, the updated {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} resource,
-   * otherwise returns an error.
+   * If successful, the updated
+   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * resource, otherwise returns an error.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2630,24 +2671,29 @@ export class CloudChannelServiceClient {
     );
   }
   /**
-   * Deletes the given {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} permanently. You can
-   * only delete configs if their {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month} is
-   * set to a date after the current month.
+   * Deletes the given
+   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * permanently. You can only delete configs if their
+   * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
+   * is set to a date after the current month.
    *
    * Possible error codes:
    *
    * * PERMISSION_DENIED: The account making the request does not own
    * this customer.
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
-   * * FAILED_PRECONDITION: The {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} is active or
-   * in the past.
-   * * NOT_FOUND: No {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} found for the name in the
-   * request.
+   * * FAILED_PRECONDITION: The
+   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * is active or in the past.
+   * * NOT_FOUND: No
+   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * found for the name in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the channel partner repricing config rule to delete.
+   *   Required. The resource name of the channel partner repricing config rule to
+   *   delete.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2839,7 +2885,8 @@ export class CloudChannelServiceClient {
   /**
    * Registers a service account with subscriber privileges on the Cloud Pub/Sub
    * topic for this Channel Services account. After you create a
-   * subscriber, you get the events through {@link google.cloud.channel.v1.SubscriberEvent|SubscriberEvent}
+   * subscriber, you get the events through
+   * {@link google.cloud.channel.v1.SubscriberEvent|SubscriberEvent}
    *
    * Possible error codes:
    *
@@ -2860,7 +2907,8 @@ export class CloudChannelServiceClient {
    * @param {string} request.account
    *   Required. Resource name of the account.
    * @param {string} request.serviceAccount
-   *   Required. Service account that provides subscriber access to the registered topic.
+   *   Required. Service account that provides subscriber access to the registered
+   *   topic.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2973,7 +3021,8 @@ export class CloudChannelServiceClient {
    * @param {string} request.account
    *   Required. Resource name of the account.
    * @param {string} request.serviceAccount
-   *   Required. Service account to unregister from subscriber access to the topic.
+   *   Required. Service account to unregister from subscriber access to the
+   *   topic.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3269,14 +3318,15 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller's customer account in which to create the
-   *   entitlement.
-   *   Parent uses the format: accounts/{account_id}/customers/{customer_id}
+   *   Required. The resource name of the reseller's customer account in which to
+   *   create the entitlement. Parent uses the format:
+   *   accounts/{account_id}/customers/{customer_id}
    * @param {google.cloud.channel.v1.Entitlement} request.entitlement
    *   Required. The entitlement to create.
    * @param {string} [request.requestId]
-   *   Optional. You can specify an optional unique request ID, and if you need to retry
-   *   your request, the server will know to ignore the request if it's complete.
+   *   Optional. You can specify an optional unique request ID, and if you need to
+   *   retry your request, the server will know to ignore the request if it's
+   *   complete.
    *
    *   For example, you make an initial request and the request times out. If you
    *   make the request again with the same request ID, the server can check if
@@ -3449,13 +3499,16 @@ export class CloudChannelServiceClient {
    *   Name uses the format:
    *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
    * @param {number[]} request.parameters
-   *   Required. Entitlement parameters to update. You can only change editable parameters.
+   *   Required. Entitlement parameters to update. You can only change editable
+   *   parameters.
    *
    *   To view the available Parameters for a request, refer to the
-   *   {@link google.cloud.channel.v1.Offer.parameter_definitions|Offer.parameter_definitions} from the desired offer.
+   *   {@link google.cloud.channel.v1.Offer.parameter_definitions|Offer.parameter_definitions}
+   *   from the desired offer.
    * @param {string} [request.requestId]
-   *   Optional. You can specify an optional unique request ID, and if you need to retry
-   *   your request, the server will know to ignore the request if it's complete.
+   *   Optional. You can specify an optional unique request ID, and if you need to
+   *   retry your request, the server will know to ignore the request if it's
+   *   complete.
    *
    *   For example, you make an initial request and the request times out. If you
    *   make the request again with the same request ID, the server can check if
@@ -3632,8 +3685,9 @@ export class CloudChannelServiceClient {
    * @param {google.cloud.channel.v1.RenewalSettings} request.renewalSettings
    *   Required. New renewal settings.
    * @param {string} [request.requestId]
-   *   Optional. You can specify an optional unique request ID, and if you need to retry
-   *   your request, the server will know to ignore the request if it's complete.
+   *   Optional. You can specify an optional unique request ID, and if you need to
+   *   retry your request, the server will know to ignore the request if it's
+   *   complete.
    *
    *   For example, you make an initial request and the request times out. If you
    *   make the request again with the same request ID, the server can check if
@@ -3807,13 +3861,16 @@ export class CloudChannelServiceClient {
    *   Required. New Offer.
    *   Format: accounts/{account_id}/offers/{offer_id}.
    * @param {number[]} [request.parameters]
-   *   Optional. Parameters needed to purchase the Offer. To view the available Parameters
-   *   refer to the {@link google.cloud.channel.v1.Offer.parameter_definitions|Offer.parameter_definitions} from the desired offer.
+   *   Optional. Parameters needed to purchase the Offer. To view the available
+   *   Parameters refer to the
+   *   {@link google.cloud.channel.v1.Offer.parameter_definitions|Offer.parameter_definitions}
+   *   from the desired offer.
    * @param {string} [request.purchaseOrderId]
    *   Optional. Purchase order id provided by the reseller.
    * @param {string} [request.requestId]
-   *   Optional. You can specify an optional unique request ID, and if you need to retry
-   *   your request, the server will know to ignore the request if it's complete.
+   *   Optional. You can specify an optional unique request ID, and if you need to
+   *   retry your request, the server will know to ignore the request if it's
+   *   complete.
    *
    *   For example, you make an initial request and the request times out. If you
    *   make the request again with the same request ID, the server can check if
@@ -3987,8 +4044,9 @@ export class CloudChannelServiceClient {
    *   Name uses the format:
    *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
    * @param {string} [request.requestId]
-   *   Optional. You can specify an optional unique request ID, and if you need to retry
-   *   your request, the server will know to ignore the request if it's complete.
+   *   Optional. You can specify an optional unique request ID, and if you need to
+   *   retry your request, the server will know to ignore the request if it's
+   *   complete.
    *
    *   For example, you make an initial request and the request times out. If you
    *   make the request again with the same request ID, the server can check if
@@ -4159,8 +4217,9 @@ export class CloudChannelServiceClient {
    *   Name uses the format:
    *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
    * @param {string} [request.requestId]
-   *   Optional. You can specify an optional unique request ID, and if you need to retry
-   *   your request, the server will know to ignore the request if it's complete.
+   *   Optional. You can specify an optional unique request ID, and if you need to
+   *   retry your request, the server will know to ignore the request if it's
+   *   complete.
    *
    *   For example, you make an initial request and the request times out. If you
    *   make the request again with the same request ID, the server can check if
@@ -4336,8 +4395,9 @@ export class CloudChannelServiceClient {
    *   Name uses the format:
    *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
    * @param {string} [request.requestId]
-   *   Optional. You can specify an optional unique request ID, and if you need to retry
-   *   your request, the server will know to ignore the request if it's complete.
+   *   Optional. You can specify an optional unique request ID, and if you need to
+   *   retry your request, the server will know to ignore the request if it's
+   *   complete.
    *
    *   For example, you make an initial request and the request times out. If you
    *   make the request again with the same request ID, the server can check if
@@ -4514,8 +4574,9 @@ export class CloudChannelServiceClient {
    *   Name uses the format:
    *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
    * @param {string} [request.requestId]
-   *   Optional. You can specify an optional unique request ID, and if you need to retry
-   *   your request, the server will know to ignore the request if it's complete.
+   *   Optional. You can specify an optional unique request ID, and if you need to
+   *   retry your request, the server will know to ignore the request if it's
+   *   complete.
    *
    *   For example, you make an initial request and the request times out. If you
    *   make the request again with the same request ID, the server can check if
@@ -4690,9 +4751,9 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller's customer account that will receive
-   *   transferred entitlements.
-   *   Parent uses the format: accounts/{account_id}/customers/{customer_id}
+   *   Required. The resource name of the reseller's customer account that will
+   *   receive transferred entitlements. Parent uses the format:
+   *   accounts/{account_id}/customers/{customer_id}
    * @param {number[]} request.entitlements
    *   Required. The new entitlements to create or transfer.
    * @param {string} request.authToken
@@ -4701,8 +4762,9 @@ export class CloudChannelServiceClient {
    *   entitlements on their behalf. You can omit this token after authorization.
    *   See https://support.google.com/a/answer/7643790 for more details.
    * @param {string} [request.requestId]
-   *   Optional. You can specify an optional unique request ID, and if you need to retry
-   *   your request, the server will know to ignore the request if it's complete.
+   *   Optional. You can specify an optional unique request ID, and if you need to
+   *   retry your request, the server will know to ignore the request if it's
+   *   complete.
    *
    *   For example, you make an initial request and the request times out. If you
    *   make the request again with the same request ID, the server can check if
@@ -4877,14 +4939,15 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller's customer account where the entitlements
-   *   transfer from.
-   *   Parent uses the format: accounts/{account_id}/customers/{customer_id}
+   *   Required. The resource name of the reseller's customer account where the
+   *   entitlements transfer from. Parent uses the format:
+   *   accounts/{account_id}/customers/{customer_id}
    * @param {number[]} request.entitlements
    *   Required. The entitlements to transfer to Google.
    * @param {string} [request.requestId]
-   *   Optional. You can specify an optional unique request ID, and if you need to retry
-   *   your request, the server will know to ignore the request if it's complete.
+   *   Optional. You can specify an optional unique request ID, and if you need to
+   *   retry your request, the server will know to ignore the request if it's
+   *   complete.
    *
    *   For example, you make an initial request and the request times out. If you
    *   make the request again with the same request ID, the server can check if
@@ -5039,7 +5102,8 @@ export class CloudChannelServiceClient {
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
    * Return value:
-   * List of {@link google.cloud.channel.v1.Customer|Customer}s, or an empty list if there are no customers.
+   * List of {@link google.cloud.channel.v1.Customer|Customer}s, or an empty list if
+   * there are no customers.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -5047,16 +5111,19 @@ export class CloudChannelServiceClient {
    *   Required. The resource name of the reseller account to list customers from.
    *   Parent uses the format: accounts/{account_id}.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of customers to return. The service may return fewer
-   *   than this value. If unspecified, returns at most 10 customers. The
+   *   Optional. The maximum number of customers to return. The service may return
+   *   fewer than this value. If unspecified, returns at most 10 customers. The
    *   maximum value is 50.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results other than the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers} call.
+   *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers}
+   *   call.
    * @param {string} [request.filter]
-   *   Optional. Filters applied to the [CloudChannelService.ListCustomers] results. See
+   *   Optional. Filters applied to the [CloudChannelService.ListCustomers]
+   *   results. See
    *   https://cloud.google.com/channel/docs/concepts/google-cloud/filter-customers
    *   for more information.
    * @param {object} [options]
@@ -5149,16 +5216,19 @@ export class CloudChannelServiceClient {
    *   Required. The resource name of the reseller account to list customers from.
    *   Parent uses the format: accounts/{account_id}.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of customers to return. The service may return fewer
-   *   than this value. If unspecified, returns at most 10 customers. The
+   *   Optional. The maximum number of customers to return. The service may return
+   *   fewer than this value. If unspecified, returns at most 10 customers. The
    *   maximum value is 50.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results other than the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers} call.
+   *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers}
+   *   call.
    * @param {string} [request.filter]
-   *   Optional. Filters applied to the [CloudChannelService.ListCustomers] results. See
+   *   Optional. Filters applied to the [CloudChannelService.ListCustomers]
+   *   results. See
    *   https://cloud.google.com/channel/docs/concepts/google-cloud/filter-customers
    *   for more information.
    * @param {object} [options]
@@ -5205,16 +5275,19 @@ export class CloudChannelServiceClient {
    *   Required. The resource name of the reseller account to list customers from.
    *   Parent uses the format: accounts/{account_id}.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of customers to return. The service may return fewer
-   *   than this value. If unspecified, returns at most 10 customers. The
+   *   Optional. The maximum number of customers to return. The service may return
+   *   fewer than this value. If unspecified, returns at most 10 customers. The
    *   maximum value is 50.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results other than the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers} call.
+   *   {@link google.cloud.channel.v1.ListCustomersResponse.next_page_token|ListCustomersResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomers|CloudChannelService.ListCustomers}
+   *   call.
    * @param {string} [request.filter]
-   *   Optional. Filters applied to the [CloudChannelService.ListCustomers] results. See
+   *   Optional. Filters applied to the [CloudChannelService.ListCustomers]
+   *   results. See
    *   https://cloud.google.com/channel/docs/concepts/google-cloud/filter-customers
    *   for more information.
    * @param {object} [options]
@@ -5252,7 +5325,8 @@ export class CloudChannelServiceClient {
     ) as AsyncIterable<protos.google.cloud.channel.v1.ICustomer>;
   }
   /**
-   * Lists {@link google.cloud.channel.v1.Entitlement|Entitlement}s belonging to a customer.
+   * Lists {@link google.cloud.channel.v1.Entitlement|Entitlement}s belonging to a
+   * customer.
    *
    * Possible error codes:
    *
@@ -5260,7 +5334,8 @@ export class CloudChannelServiceClient {
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
    * Return value:
-   * A list of the customer's {@link google.cloud.channel.v1.Entitlement|Entitlement}s.
+   * A list of the customer's
+   * {@link google.cloud.channel.v1.Entitlement|Entitlement}s.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -5269,14 +5344,16 @@ export class CloudChannelServiceClient {
    *   entitlements for.
    *   Parent uses the format: accounts/{account_id}/customers/{customer_id}
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, return at most 50 entitlements.
-   *   The maximum value is 100; the server will coerce values above 100.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, return at most 50 entitlements. The maximum
+   *   value is 100; the server will coerce values above 100.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements} call.
+   *   {@link google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements}
+   *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5374,14 +5451,16 @@ export class CloudChannelServiceClient {
    *   entitlements for.
    *   Parent uses the format: accounts/{account_id}/customers/{customer_id}
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, return at most 50 entitlements.
-   *   The maximum value is 100; the server will coerce values above 100.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, return at most 50 entitlements. The maximum
+   *   value is 100; the server will coerce values above 100.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements} call.
+   *   {@link google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements}
+   *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5427,14 +5506,16 @@ export class CloudChannelServiceClient {
    *   entitlements for.
    *   Parent uses the format: accounts/{account_id}/customers/{customer_id}
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, return at most 50 entitlements.
-   *   The maximum value is 100; the server will coerce values above 100.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, return at most 50 entitlements. The maximum
+   *   value is 100; the server will coerce values above 100.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements} call.
+   *   {@link google.cloud.channel.v1.ListEntitlementsResponse.next_page_token|ListEntitlementsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlements|CloudChannelService.ListEntitlements}
+   *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5470,8 +5551,8 @@ export class CloudChannelServiceClient {
     ) as AsyncIterable<protos.google.cloud.channel.v1.IEntitlement>;
   }
   /**
-   * List {@link google.cloud.channel.v1.TransferableSku|TransferableSku}s of a customer based on the Cloud Identity ID or
-   * Customer Name in the request.
+   * List {@link google.cloud.channel.v1.TransferableSku|TransferableSku}s of a
+   * customer based on the Cloud Identity ID or Customer Name in the request.
    *
    * Use this method to list the entitlements information of an
    * unowned customer. You should provide the customer's
@@ -5487,7 +5568,8 @@ export class CloudChannelServiceClient {
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
    * Return value:
-   * A list of the customer's {@link google.cloud.channel.v1.TransferableSku|TransferableSku}.
+   * A list of the customer's
+   * {@link google.cloud.channel.v1.TransferableSku|TransferableSku}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -5509,9 +5591,10 @@ export class CloudChannelServiceClient {
    * @param {string} request.pageToken
    *   A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus} call.
-   *   Optional.
+   *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus}
+   *   call. Optional.
    * @param {string} [request.authToken]
    *   Optional. The super admin of the resold customer generates this token to
    *   authorize a reseller to access their Cloud Identity and purchase
@@ -5632,9 +5715,10 @@ export class CloudChannelServiceClient {
    * @param {string} request.pageToken
    *   A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus} call.
-   *   Optional.
+   *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus}
+   *   call. Optional.
    * @param {string} [request.authToken]
    *   Optional. The super admin of the resold customer generates this token to
    *   authorize a reseller to access their Cloud Identity and purchase
@@ -5703,9 +5787,10 @@ export class CloudChannelServiceClient {
    * @param {string} request.pageToken
    *   A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus} call.
-   *   Optional.
+   *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus}
+   *   call. Optional.
    * @param {string} [request.authToken]
    *   Optional. The super admin of the resold customer generates this token to
    *   authorize a reseller to access their Cloud Identity and purchase
@@ -5751,8 +5836,8 @@ export class CloudChannelServiceClient {
     ) as AsyncIterable<protos.google.cloud.channel.v1.ITransferableSku>;
   }
   /**
-   * List {@link google.cloud.channel.v1.TransferableOffer|TransferableOffer}s of a customer based on Cloud Identity ID or
-   * Customer Name in the request.
+   * List {@link google.cloud.channel.v1.TransferableOffer|TransferableOffer}s of a
+   * customer based on Cloud Identity ID or Customer Name in the request.
    *
    * Use this method when a reseller gets the entitlement information of an
    * unowned customer. The reseller should provide the customer's
@@ -5769,7 +5854,8 @@ export class CloudChannelServiceClient {
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
    * Return value:
-   * List of {@link google.cloud.channel.v1.TransferableOffer|TransferableOffer} for the given customer and SKU.
+   * List of {@link google.cloud.channel.v1.TransferableOffer|TransferableOffer} for
+   * the given customer and SKU.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -5787,8 +5873,10 @@ export class CloudChannelServiceClient {
    * @param {string} request.pageToken
    *   A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers} call.
+   *   {@link google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers}
+   *   call.
    * @param {string} request.sku
    *   Required. The SKU to look up Offers for.
    * @param {string} [request.languageCode]
@@ -5905,8 +5993,10 @@ export class CloudChannelServiceClient {
    * @param {string} request.pageToken
    *   A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers} call.
+   *   {@link google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers}
+   *   call.
    * @param {string} request.sku
    *   Required. The SKU to look up Offers for.
    * @param {string} [request.languageCode]
@@ -5967,8 +6057,10 @@ export class CloudChannelServiceClient {
    * @param {string} request.pageToken
    *   A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers} call.
+   *   {@link google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token|ListTransferableOffersResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers}
+   *   call.
    * @param {string} request.sku
    *   Required. The SKU to look up Offers for.
    * @param {string} [request.languageCode]
@@ -6010,8 +6102,8 @@ export class CloudChannelServiceClient {
     ) as AsyncIterable<protos.google.cloud.channel.v1.ITransferableOffer>;
   }
   /**
-   * List {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}s belonging to a distributor.
-   * You must be a distributor to call this method.
+   * List {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}s
+   * belonging to a distributor. You must be a distributor to call this method.
    *
    * Possible error codes:
    *
@@ -6020,23 +6112,25 @@ export class CloudChannelServiceClient {
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
    * Return value:
-   * The list of the distributor account's {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resources.
+   * The list of the distributor account's
+   * {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resources.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller account for listing channel partner
-   *   links.
-   *   Parent uses the format: accounts/{account_id}
+   *   Required. The resource name of the reseller account for listing channel
+   *   partner links. Parent uses the format: accounts/{account_id}
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, server will pick a default size (25).
-   *   The maximum value is 200; the server will coerce values above 200.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, server will pick a default size (25). The
+   *   maximum value is 200; the server will coerce values above 200.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks} call.
+   *   {@link google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks}
+   *   call.
    * @param {google.cloud.channel.v1.ChannelPartnerLinkView} [request.view]
    *   Optional. The level of granularity the ChannelPartnerLink will display.
    * @param {object} [options]
@@ -6136,18 +6230,19 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller account for listing channel partner
-   *   links.
-   *   Parent uses the format: accounts/{account_id}
+   *   Required. The resource name of the reseller account for listing channel
+   *   partner links. Parent uses the format: accounts/{account_id}
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, server will pick a default size (25).
-   *   The maximum value is 200; the server will coerce values above 200.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, server will pick a default size (25). The
+   *   maximum value is 200; the server will coerce values above 200.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks} call.
+   *   {@link google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks}
+   *   call.
    * @param {google.cloud.channel.v1.ChannelPartnerLinkView} [request.view]
    *   Optional. The level of granularity the ChannelPartnerLink will display.
    * @param {object} [options]
@@ -6191,18 +6286,19 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller account for listing channel partner
-   *   links.
-   *   Parent uses the format: accounts/{account_id}
+   *   Required. The resource name of the reseller account for listing channel
+   *   partner links. Parent uses the format: accounts/{account_id}
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, server will pick a default size (25).
-   *   The maximum value is 200; the server will coerce values above 200.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, server will pick a default size (25). The
+   *   maximum value is 200; the server will coerce values above 200.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Obtained using
-   *   {@link google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks} call.
+   *   {@link google.cloud.channel.v1.ListChannelPartnerLinksResponse.next_page_token|ListChannelPartnerLinksResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks|CloudChannelService.ListChannelPartnerLinks}
+   *   call.
    * @param {google.cloud.channel.v1.ChannelPartnerLinkView} [request.view]
    *   Optional. The level of granularity the ChannelPartnerLink will display.
    * @param {object} [options]
@@ -6247,14 +6343,17 @@ export class CloudChannelServiceClient {
    *
    * * PERMISSION_DENIED: If the account making the request and the account
    * being queried are different.
-   * * NOT_FOUND: The {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} specified does not exist or is
-   * not associated with the given account.
+   * * NOT_FOUND: The
+   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * specified does not exist or is not associated with the given account.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
-   * If successful, the {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig} resources. The
-   * data for each resource is displayed in the ascending order of:
+   * If successful, the
+   * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
+   * resources. The data for each resource is displayed in the ascending order
+   * of:
    * * customer ID
    * * {@link google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}
    * * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
@@ -6270,14 +6369,16 @@ export class CloudChannelServiceClient {
    *   Supports accounts/{account_id}/customers/- to retrieve configs for all
    *   customers.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of repricing configs to return. The service may return
-   *   fewer than this value. If unspecified, returns a maximum of 50 rules. The
-   *   maximum value is 100; values above 100 will be coerced to 100.
+   *   Optional. The maximum number of repricing configs to return. The service
+   *   may return fewer than this value. If unspecified, returns a maximum of 50
+   *   rules. The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs} call.
+   *   {@link google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs}
+   *   call.
    * @param {string} [request.filter]
    *   Optional. A filter for [CloudChannelService.ListCustomerRepricingConfigs]
    *   results (customer only). You can use this filter when you support
@@ -6388,14 +6489,16 @@ export class CloudChannelServiceClient {
    *   Supports accounts/{account_id}/customers/- to retrieve configs for all
    *   customers.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of repricing configs to return. The service may return
-   *   fewer than this value. If unspecified, returns a maximum of 50 rules. The
-   *   maximum value is 100; values above 100 will be coerced to 100.
+   *   Optional. The maximum number of repricing configs to return. The service
+   *   may return fewer than this value. If unspecified, returns a maximum of 50
+   *   rules. The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs} call.
+   *   {@link google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs}
+   *   call.
    * @param {string} [request.filter]
    *   Optional. A filter for [CloudChannelService.ListCustomerRepricingConfigs]
    *   results (customer only). You can use this filter when you support
@@ -6450,14 +6553,16 @@ export class CloudChannelServiceClient {
    *   Supports accounts/{account_id}/customers/- to retrieve configs for all
    *   customers.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of repricing configs to return. The service may return
-   *   fewer than this value. If unspecified, returns a maximum of 50 rules. The
-   *   maximum value is 100; values above 100 will be coerced to 100.
+   *   Optional. The maximum number of repricing configs to return. The service
+   *   may return fewer than this value. If unspecified, returns a maximum of 50
+   *   rules. The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token} of the previous
-   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs} call.
+   *   {@link google.cloud.channel.v1.ListCustomerRepricingConfigsResponse.next_page_token|ListCustomerRepricingConfigsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs|CloudChannelService.ListCustomerRepricingConfigs}
+   *   call.
    * @param {string} [request.filter]
    *   Optional. A filter for [CloudChannelService.ListCustomerRepricingConfigs]
    *   results (customer only). You can use this filter when you support
@@ -6508,14 +6613,17 @@ export class CloudChannelServiceClient {
    *
    * * PERMISSION_DENIED: If the account making the request and the account
    * being queried are different.
-   * * NOT_FOUND: The {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} specified does not exist
-   * or is not associated with the given account.
+   * * NOT_FOUND: The
+   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * specified does not exist or is not associated with the given account.
    * * INTERNAL: Any non-user error related to technical issues in the
    * backend. In this case, contact Cloud Channel support.
    *
    * Return Value:
-   * If successful, the {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig} resources.
-   * The data for each resource is displayed in the ascending order of:
+   * If successful, the
+   * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
+   * resources. The data for each resource is displayed in the ascending order
+   * of:
    * * channel partner ID
    * * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
    * * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig.update_time|ChannelPartnerRepricingConfig.update_time}
@@ -6525,25 +6633,28 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the account's {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}.
-   *   Parent uses the format:
+   *   Required. The resource name of the account's
+   *   {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}. Parent
+   *   uses the format:
    *   accounts/{account_id}/channelPartnerLinks/{channel_partner_id}.
    *   Supports accounts/{account_id}/channelPartnerLinks/- to retrieve configs
    *   for all channel partners.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of repricing configs to return. The service may return
-   *   fewer than this value. If unspecified, returns a maximum of 50 rules. The
-   *   maximum value is 100; values above 100 will be coerced to 100.
+   *   Optional. The maximum number of repricing configs to return. The service
+   *   may return fewer than this value. If unspecified, returns a maximum of 50
+   *   rules. The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token} of the
-   *   previous {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs} call.
+   *   {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs}
+   *   call.
    * @param {string} [request.filter]
-   *   Optional. A filter for [CloudChannelService.ListChannelPartnerRepricingConfigs]
-   *   results (channel_partner_link only). You can use this filter when you
-   *   support a BatchGet-like query.
-   *   To use the filter, you must set
+   *   Optional. A filter for
+   *   [CloudChannelService.ListChannelPartnerRepricingConfigs] results
+   *   (channel_partner_link only). You can use this filter when you support a
+   *   BatchGet-like query. To use the filter, you must set
    *   `parent=accounts/{account_id}/channelPartnerLinks/-`.
    *
    *   Example: `channel_partner_link =
@@ -6646,25 +6757,28 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the account's {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}.
-   *   Parent uses the format:
+   *   Required. The resource name of the account's
+   *   {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}. Parent
+   *   uses the format:
    *   accounts/{account_id}/channelPartnerLinks/{channel_partner_id}.
    *   Supports accounts/{account_id}/channelPartnerLinks/- to retrieve configs
    *   for all channel partners.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of repricing configs to return. The service may return
-   *   fewer than this value. If unspecified, returns a maximum of 50 rules. The
-   *   maximum value is 100; values above 100 will be coerced to 100.
+   *   Optional. The maximum number of repricing configs to return. The service
+   *   may return fewer than this value. If unspecified, returns a maximum of 50
+   *   rules. The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token} of the
-   *   previous {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs} call.
+   *   {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs}
+   *   call.
    * @param {string} [request.filter]
-   *   Optional. A filter for [CloudChannelService.ListChannelPartnerRepricingConfigs]
-   *   results (channel_partner_link only). You can use this filter when you
-   *   support a BatchGet-like query.
-   *   To use the filter, you must set
+   *   Optional. A filter for
+   *   [CloudChannelService.ListChannelPartnerRepricingConfigs] results
+   *   (channel_partner_link only). You can use this filter when you support a
+   *   BatchGet-like query. To use the filter, you must set
    *   `parent=accounts/{account_id}/channelPartnerLinks/-`.
    *
    *   Example: `channel_partner_link =
@@ -6712,25 +6826,28 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the account's {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}.
-   *   Parent uses the format:
+   *   Required. The resource name of the account's
+   *   {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}. Parent
+   *   uses the format:
    *   accounts/{account_id}/channelPartnerLinks/{channel_partner_id}.
    *   Supports accounts/{account_id}/channelPartnerLinks/- to retrieve configs
    *   for all channel partners.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of repricing configs to return. The service may return
-   *   fewer than this value. If unspecified, returns a maximum of 50 rules. The
-   *   maximum value is 100; values above 100 will be coerced to 100.
+   *   Optional. The maximum number of repricing configs to return. The service
+   *   may return fewer than this value. If unspecified, returns a maximum of 50
+   *   rules. The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results beyond the first page.
    *   Obtained through
-   *   {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token} of the
-   *   previous {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs} call.
+   *   {@link google.cloud.channel.v1.ListChannelPartnerRepricingConfigsResponse.next_page_token|ListChannelPartnerRepricingConfigsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs|CloudChannelService.ListChannelPartnerRepricingConfigs}
+   *   call.
    * @param {string} [request.filter]
-   *   Optional. A filter for [CloudChannelService.ListChannelPartnerRepricingConfigs]
-   *   results (channel_partner_link only). You can use this filter when you
-   *   support a BatchGet-like query.
-   *   To use the filter, you must set
+   *   Optional. A filter for
+   *   [CloudChannelService.ListChannelPartnerRepricingConfigs] results
+   *   (channel_partner_link only). You can use this filter when you support a
+   *   BatchGet-like query. To use the filter, you must set
    *   `parent=accounts/{account_id}/channelPartnerLinks/-`.
    *
    *   Example: `channel_partner_link =
@@ -6784,9 +6901,9 @@ export class CloudChannelServiceClient {
    *   Required. The resource name of the reseller account.
    *   Format: accounts/{account_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 100 Products.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 100 Products. The maximum value
+   *   is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
@@ -6879,9 +6996,9 @@ export class CloudChannelServiceClient {
    *   Required. The resource name of the reseller account.
    *   Format: accounts/{account_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 100 Products.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 100 Products. The maximum value
+   *   is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
@@ -6928,9 +7045,9 @@ export class CloudChannelServiceClient {
    *   Required. The resource name of the reseller account.
    *   Format: accounts/{account_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 100 Products.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 100 Products. The maximum value
+   *   is 1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
@@ -6984,9 +7101,9 @@ export class CloudChannelServiceClient {
    *   Required. Resource name of the reseller.
    *   Format: accounts/{account_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 100 SKUs.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 100 SKUs. The maximum value is
+   *   1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Optional.
@@ -7086,9 +7203,9 @@ export class CloudChannelServiceClient {
    *   Required. Resource name of the reseller.
    *   Format: accounts/{account_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 100 SKUs.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 100 SKUs. The maximum value is
+   *   1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Optional.
@@ -7144,9 +7261,9 @@ export class CloudChannelServiceClient {
    *   Required. Resource name of the reseller.
    *   Format: accounts/{account_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 100 SKUs.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 100 SKUs. The maximum value is
+   *   1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    *   Optional.
@@ -7198,12 +7315,12 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller account from which to list Offers.
-   *   Parent uses the format: accounts/{account_id}.
+   *   Required. The resource name of the reseller account from which to list
+   *   Offers. Parent uses the format: accounts/{account_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 500 Offers.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 500 Offers. The maximum value is
+   *   1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.filter]
@@ -7301,12 +7418,12 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller account from which to list Offers.
-   *   Parent uses the format: accounts/{account_id}.
+   *   Required. The resource name of the reseller account from which to list
+   *   Offers. Parent uses the format: accounts/{account_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 500 Offers.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 500 Offers. The maximum value is
+   *   1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.filter]
@@ -7360,12 +7477,12 @@ export class CloudChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the reseller account from which to list Offers.
-   *   Parent uses the format: accounts/{account_id}.
+   *   Required. The resource name of the reseller account from which to list
+   *   Offers. Parent uses the format: accounts/{account_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 500 Offers.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 500 Offers. The maximum value is
+   *   1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.filter]
@@ -7433,9 +7550,9 @@ export class CloudChannelServiceClient {
    *   Required. The resource name of the customer to list SKUs for.
    *   Format: accounts/{account_id}/customers/{customer_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 100 SKUs.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 100 SKUs. The maximum value is
+   *   1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
@@ -7542,9 +7659,9 @@ export class CloudChannelServiceClient {
    *   Required. The resource name of the customer to list SKUs for.
    *   Format: accounts/{account_id}/customers/{customer_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 100 SKUs.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 100 SKUs. The maximum value is
+   *   1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
@@ -7599,9 +7716,9 @@ export class CloudChannelServiceClient {
    *   Required. The resource name of the customer to list SKUs for.
    *   Format: accounts/{account_id}/customers/{customer_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 100 SKUs.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 100 SKUs. The maximum value is
+   *   1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
@@ -7663,9 +7780,9 @@ export class CloudChannelServiceClient {
    *   Required. The resource name of the customer to list Offers for.
    *   Format: accounts/{account_id}/customers/{customer_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 100 Offers.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 100 Offers. The maximum value is
+   *   1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
@@ -7772,9 +7889,9 @@ export class CloudChannelServiceClient {
    *   Required. The resource name of the customer to list Offers for.
    *   Format: accounts/{account_id}/customers/{customer_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 100 Offers.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 100 Offers. The maximum value is
+   *   1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
@@ -7829,9 +7946,9 @@ export class CloudChannelServiceClient {
    *   Required. The resource name of the customer to list Offers for.
    *   Format: accounts/{account_id}/customers/{customer_id}.
    * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server might return fewer results than requested.
-   *   If unspecified, returns at most 100 Offers.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. Requested page size. Server might return fewer results than
+   *   requested. If unspecified, returns at most 100 Offers. The maximum value is
+   *   1000; the server will coerce values above 1000.
    * @param {string} [request.pageToken]
    *   Optional. A token for a page of results other than the first page.
    * @param {string} [request.languageCode]
@@ -7896,10 +8013,10 @@ export class CloudChannelServiceClient {
    * @param {string} request.account
    *   Required. Resource name of the account.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of service accounts to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, returns at most 100 service accounts.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. The maximum number of service accounts to return. The service may
+   *   return fewer than this value. If unspecified, returns at most 100 service
+   *   accounts. The maximum value is 1000; the server will coerce values above
+   *   1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListSubscribers` call.
    *   Provide this to retrieve the subsequent page.
@@ -8001,10 +8118,10 @@ export class CloudChannelServiceClient {
    * @param {string} request.account
    *   Required. Resource name of the account.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of service accounts to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, returns at most 100 service accounts.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. The maximum number of service accounts to return. The service may
+   *   return fewer than this value. If unspecified, returns at most 100 service
+   *   accounts. The maximum value is 1000; the server will coerce values above
+   *   1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListSubscribers` call.
    *   Provide this to retrieve the subsequent page.
@@ -8054,10 +8171,10 @@ export class CloudChannelServiceClient {
    * @param {string} request.account
    *   Required. Resource name of the account.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of service accounts to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, returns at most 100 service accounts.
-   *   The maximum value is 1000; the server will coerce values above 1000.
+   *   Optional. The maximum number of service accounts to return. The service may
+   *   return fewer than this value. If unspecified, returns at most 100 service
+   *   accounts. The maximum value is 1000; the server will coerce values above
+   *   1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListSubscribers` call.
    *   Provide this to retrieve the subsequent page.

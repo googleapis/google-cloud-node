@@ -10,6 +10,11 @@
         "grpc": {
           "libraryClient": "OsLoginServiceClient",
           "rpcs": {
+            "CreateSshPublicKey": {
+              "methods": [
+                "createSshPublicKey"
+              ]
+            },
             "DeletePosixAccount": {
               "methods": [
                 "deletePosixAccount"
@@ -45,6 +50,11 @@
         "grpc-fallback": {
           "libraryClient": "OsLoginServiceClient",
           "rpcs": {
+            "CreateSshPublicKey": {
+              "methods": [
+                "createSshPublicKey"
+              ]
+            },
             "DeletePosixAccount": {
               "methods": [
                 "deletePosixAccount"

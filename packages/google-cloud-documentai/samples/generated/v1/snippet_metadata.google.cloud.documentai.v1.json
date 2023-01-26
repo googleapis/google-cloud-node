@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-documentai",
-        "version": "6.1.0",
+        "version": "6.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 77,
+                    "end": 81,
                     "type": "FULL"
                 }
             ],
@@ -78,7 +78,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -200,6 +200,46 @@
                 "method": {
                     "shortName": "ListProcessorTypes",
                     "fullName": "google.cloud.documentai.v1.DocumentProcessorService.ListProcessorTypes",
+                    "service": {
+                        "shortName": "DocumentProcessorService",
+                        "fullName": "google.cloud.documentai.v1.DocumentProcessorService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "documentai_v1_generated_DocumentProcessorService_GetProcessorType_async",
+            "title": "DocumentProcessorService getProcessorType Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a processor type detail.",
+            "canonical": true,
+            "file": "document_processor_service.get_processor_type.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetProcessorType",
+                "fullName": "google.cloud.documentai.v1.DocumentProcessorService.GetProcessorType",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.documentai.v1.ProcessorType",
+                "client": {
+                    "shortName": "DocumentProcessorServiceClient",
+                    "fullName": "google.cloud.documentai.v1.DocumentProcessorServiceClient"
+                },
+                "method": {
+                    "shortName": "GetProcessorType",
+                    "fullName": "google.cloud.documentai.v1.DocumentProcessorService.GetProcessorType",
                     "service": {
                         "shortName": "DocumentProcessorService",
                         "fullName": "google.cloud.documentai.v1.DocumentProcessorService"
@@ -346,7 +386,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -514,7 +554,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 61,
                     "type": "FULL"
                 }
             ],
@@ -678,7 +718,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],

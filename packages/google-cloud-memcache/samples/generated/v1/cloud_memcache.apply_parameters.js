@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,13 +34,13 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Nodes to which we should apply the instance-level parameter group.
+   *  Nodes to which the instance-level parameter group is applied.
    */
   // const nodeIds = 'abc123'
   /**
    *  Whether to apply instance-level parameter group to all nodes. If set to
-   *  true, will explicitly restrict users from specifying any nodes, and apply
-   *  parameter group updates to all nodes within the instance.
+   *  true, users are restricted from specifying individual nodes, and
+   *  `ApplyParameters` updates all nodes within the instance.
    */
   // const applyAll = true
 

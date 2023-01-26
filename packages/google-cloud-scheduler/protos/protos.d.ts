@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2327,11 +2327,17 @@ export namespace google {
                     /** ListJobsRequest parent */
                     parent?: (string|null);
 
+                    /** ListJobsRequest filter */
+                    filter?: (string|null);
+
                     /** ListJobsRequest pageSize */
                     pageSize?: (number|null);
 
                     /** ListJobsRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListJobsRequest legacyAppEngineCron */
+                    legacyAppEngineCron?: (boolean|null);
                 }
 
                 /** Represents a ListJobsRequest. */
@@ -2346,11 +2352,17 @@ export namespace google {
                     /** ListJobsRequest parent. */
                     public parent: string;
 
+                    /** ListJobsRequest filter. */
+                    public filter: string;
+
                     /** ListJobsRequest pageSize. */
                     public pageSize: number;
 
                     /** ListJobsRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListJobsRequest legacyAppEngineCron. */
+                    public legacyAppEngineCron: boolean;
 
                     /**
                      * Creates a new ListJobsRequest instance using the specified properties.
@@ -2841,6 +2853,9 @@ export namespace google {
 
                     /** DeleteJobRequest name */
                     name?: (string|null);
+
+                    /** DeleteJobRequest legacyAppEngineCron */
+                    legacyAppEngineCron?: (boolean|null);
                 }
 
                 /** Represents a DeleteJobRequest. */
@@ -2854,6 +2869,9 @@ export namespace google {
 
                     /** DeleteJobRequest name. */
                     public name: string;
+
+                    /** DeleteJobRequest legacyAppEngineCron. */
+                    public legacyAppEngineCron: boolean;
 
                     /**
                      * Creates a new DeleteJobRequest instance using the specified properties.
@@ -3132,6 +3150,9 @@ export namespace google {
 
                     /** RunJobRequest name */
                     name?: (string|null);
+
+                    /** RunJobRequest legacyAppEngineCron */
+                    legacyAppEngineCron?: (boolean|null);
                 }
 
                 /** Represents a RunJobRequest. */
@@ -3145,6 +3166,9 @@ export namespace google {
 
                     /** RunJobRequest name. */
                     public name: string;
+
+                    /** RunJobRequest legacyAppEngineCron. */
+                    public legacyAppEngineCron: boolean;
 
                     /**
                      * Creates a new RunJobRequest instance using the specified properties.
@@ -3268,6 +3292,9 @@ export namespace google {
 
                     /** Job attemptDeadline */
                     attemptDeadline?: (google.protobuf.IDuration|null);
+
+                    /** Job legacyAppEngineCron */
+                    legacyAppEngineCron?: (boolean|null);
                 }
 
                 /** Represents a Job. */
@@ -3320,6 +3347,9 @@ export namespace google {
 
                     /** Job attemptDeadline. */
                     public attemptDeadline?: (google.protobuf.IDuration|null);
+
+                    /** Job legacyAppEngineCron. */
+                    public legacyAppEngineCron: boolean;
 
                     /** Job target. */
                     public target?: ("pubsubTarget"|"appEngineHttpTarget"|"httpTarget");

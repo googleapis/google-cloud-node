@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ const version = require('../../../package.json').version;
  *  Auto-completion service for retail.
  *
  *  This feature is only available for users who have Retail Search enabled.
- *  Please enable Retail Search on Cloud Console before using this feature.
+ *  Enable Retail Search on Cloud Console before using this feature.
  * @class
  * @memberof v2alpha
  */
@@ -126,6 +126,9 @@ export class CompletionServiceClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -224,6 +227,9 @@ export class CompletionServiceClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
           additional_bindings: [
+            {
+              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',
+            },
             {
               get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
             },
@@ -398,7 +404,7 @@ export class CompletionServiceClient {
    * Completes the specified prefix with keyword suggestions.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -430,8 +436,10 @@ export class CompletionServiceClient {
    *   Identifying Languages](https://tools.ietf.org/html/bcp47). The maximum
    *   number of language codes is 3.
    * @param {string} request.deviceType
-   *   The device type context for completion suggestions.
-   *   It is useful to apply different suggestions on different device types, e.g.
+   *   The device type context for completion suggestions. We recommend that you
+   *   leave this field empty.
+   *
+   *   It can apply different suggestions on different device types, e.g.
    *   `DESKTOP`, `MOBILE`. If it is empty, the suggestions are across all device
    *   types.
    *
@@ -465,6 +473,10 @@ export class CompletionServiceClient {
    *
    *   The maximum allowed max suggestions is 20. If it is set higher, it will be
    *   capped by 20.
+   * @param {boolean} request.enableAttributeSuggestions
+   *   If true, attribute suggestions are enabled and provided in response.
+   *
+   *   This field is only available for "cloud-retail" dataset.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -559,7 +571,7 @@ export class CompletionServiceClient {
    * are indexed successfully and ready for serving. The process takes hours.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -571,8 +583,8 @@ export class CompletionServiceClient {
    *   Required. The desired input location of the data.
    * @param {string} request.notificationPubsubTopic
    *   Pub/Sub topic for receiving notification. If this field is set,
-   *   when the import is finished, a notification will be sent to
-   *   specified Pub/Sub topic. The message data will be JSON string of a
+   *   when the import is finished, a notification is sent to
+   *   specified Pub/Sub topic. The message data is JSON string of a
    *   {@link google.longrunning.Operation|Operation}.
    *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
    * @param {object} [options]

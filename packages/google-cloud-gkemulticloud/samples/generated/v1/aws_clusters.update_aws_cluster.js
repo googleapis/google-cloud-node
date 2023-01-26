@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +29,8 @@ function main(awsCluster, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The AwsCluster google.cloud.gkemulticloud.v1.AwsCluster  resource to update.
+   *  Required. The AwsCluster google.cloud.gkemulticloud.v1.AwsCluster 
+   *  resource to update.
    */
   // const awsCluster = {}
   /**
@@ -52,14 +53,17 @@ function main(awsCluster, updateMask) {
    *   *   `control_plane.proxy_config`.
    *   *   `control_plane.proxy_config.secret_arn`.
    *   *   `control_plane.proxy_config.secret_version`.
+   *   *   `control_plane.root_volume.size_gib`.
+   *   *   `control_plane.root_volume.volume_type`.
    *   *   `control_plane.root_volume.iops`.
    *   *   `control_plane.root_volume.kms_key_arn`.
-   *   *   `control_plane.root_volume.volume_type`.
-   *   *   `control_plane.root_volume.size_gib`.
    *   *   `control_plane.ssh_config`.
    *   *   `control_plane.ssh_config.ec2_key_pair`.
    *   *   `control_plane.instance_placement.tenancy`.
-   *   *   `logging_config`.
+   *   *   `control_plane.iam_instance_profile`.
+   *   *   `logging_config.component_config.enable_components`.
+   *   *   `control_plane.tags`.
+   *   *   `monitoring_config.managed_prometheus_config.enabled`.
    */
   // const updateMask = {}
 

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,19 +29,19 @@ function main(parent, testCases) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Agent name. Format: `projects/<Project ID>/locations/<Location ID>/agents/
-   *  <AgentID>`.
+   *  Required. Agent name. Format: `projects/<Project ID>/locations/<Location
+   *  ID>/agents/ <AgentID>`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. If not set, draft environment is assumed. Format: `projects/<Project
-   *  ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
-   *  ID>`.
+   *  Optional. If not set, draft environment is assumed. Format:
+   *  `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *  ID>/environments/<Environment ID>`.
    */
   // const environment = 'abc123'
   /**
-   *  Required. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/testCases/<TestCase ID>`.
+   *  Required. Format: `projects/<Project ID>/locations/<Location
+   *  ID>/agents/<Agent ID>/testCases/<TestCase ID>`.
    */
   // const testCases = 'abc123'
 

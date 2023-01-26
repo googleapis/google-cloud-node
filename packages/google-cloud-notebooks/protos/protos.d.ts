@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,6 +25,127 @@ export namespace google {
 
             /** Namespace v1. */
             namespace v1 {
+
+                /** Properties of a DiagnosticConfig. */
+                interface IDiagnosticConfig {
+
+                    /** DiagnosticConfig gcsBucket */
+                    gcsBucket?: (string|null);
+
+                    /** DiagnosticConfig relativePath */
+                    relativePath?: (string|null);
+
+                    /** DiagnosticConfig repairFlagEnabled */
+                    repairFlagEnabled?: (boolean|null);
+
+                    /** DiagnosticConfig packetCaptureFlagEnabled */
+                    packetCaptureFlagEnabled?: (boolean|null);
+
+                    /** DiagnosticConfig copyHomeFilesFlagEnabled */
+                    copyHomeFilesFlagEnabled?: (boolean|null);
+                }
+
+                /** Represents a DiagnosticConfig. */
+                class DiagnosticConfig implements IDiagnosticConfig {
+
+                    /**
+                     * Constructs a new DiagnosticConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v1.IDiagnosticConfig);
+
+                    /** DiagnosticConfig gcsBucket. */
+                    public gcsBucket: string;
+
+                    /** DiagnosticConfig relativePath. */
+                    public relativePath: string;
+
+                    /** DiagnosticConfig repairFlagEnabled. */
+                    public repairFlagEnabled: boolean;
+
+                    /** DiagnosticConfig packetCaptureFlagEnabled. */
+                    public packetCaptureFlagEnabled: boolean;
+
+                    /** DiagnosticConfig copyHomeFilesFlagEnabled. */
+                    public copyHomeFilesFlagEnabled: boolean;
+
+                    /**
+                     * Creates a new DiagnosticConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiagnosticConfig instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v1.IDiagnosticConfig): google.cloud.notebooks.v1.DiagnosticConfig;
+
+                    /**
+                     * Encodes the specified DiagnosticConfig message. Does not implicitly {@link google.cloud.notebooks.v1.DiagnosticConfig.verify|verify} messages.
+                     * @param message DiagnosticConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v1.IDiagnosticConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiagnosticConfig message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.DiagnosticConfig.verify|verify} messages.
+                     * @param message DiagnosticConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v1.IDiagnosticConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiagnosticConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiagnosticConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v1.DiagnosticConfig;
+
+                    /**
+                     * Decodes a DiagnosticConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiagnosticConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v1.DiagnosticConfig;
+
+                    /**
+                     * Verifies a DiagnosticConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiagnosticConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiagnosticConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v1.DiagnosticConfig;
+
+                    /**
+                     * Creates a plain object from a DiagnosticConfig message. Also converts values to other types if specified.
+                     * @param message DiagnosticConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v1.DiagnosticConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiagnosticConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiagnosticConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
 
                 /** Properties of an Environment. */
                 interface IEnvironment {
@@ -2479,6 +2600,20 @@ export namespace google {
                     public createRuntime(request: google.cloud.notebooks.v1.ICreateRuntimeRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpdateRuntime.
+                     * @param request UpdateRuntimeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateRuntime(request: google.cloud.notebooks.v1.IUpdateRuntimeRequest, callback: google.cloud.notebooks.v1.ManagedNotebookService.UpdateRuntimeCallback): void;
+
+                    /**
+                     * Calls UpdateRuntime.
+                     * @param request UpdateRuntimeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateRuntime(request: google.cloud.notebooks.v1.IUpdateRuntimeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteRuntime.
                      * @param request DeleteRuntimeRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -2549,6 +2684,20 @@ export namespace google {
                     public resetRuntime(request: google.cloud.notebooks.v1.IResetRuntimeRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpgradeRuntime.
+                     * @param request UpgradeRuntimeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public upgradeRuntime(request: google.cloud.notebooks.v1.IUpgradeRuntimeRequest, callback: google.cloud.notebooks.v1.ManagedNotebookService.UpgradeRuntimeCallback): void;
+
+                    /**
+                     * Calls UpgradeRuntime.
+                     * @param request UpgradeRuntimeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public upgradeRuntime(request: google.cloud.notebooks.v1.IUpgradeRuntimeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ReportRuntimeEvent.
                      * @param request ReportRuntimeEventRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -2575,6 +2724,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public refreshRuntimeTokenInternal(request: google.cloud.notebooks.v1.IRefreshRuntimeTokenInternalRequest): Promise<google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse>;
+
+                    /**
+                     * Calls DiagnoseRuntime.
+                     * @param request DiagnoseRuntimeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public diagnoseRuntime(request: google.cloud.notebooks.v1.IDiagnoseRuntimeRequest, callback: google.cloud.notebooks.v1.ManagedNotebookService.DiagnoseRuntimeCallback): void;
+
+                    /**
+                     * Calls DiagnoseRuntime.
+                     * @param request DiagnoseRuntimeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public diagnoseRuntime(request: google.cloud.notebooks.v1.IDiagnoseRuntimeRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace ManagedNotebookService {
@@ -2599,6 +2762,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type CreateRuntimeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|updateRuntime}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateRuntimeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|deleteRuntime}.
@@ -2636,6 +2806,13 @@ export namespace google {
                     type ResetRuntimeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|upgradeRuntime}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpgradeRuntimeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|reportRuntimeEvent}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -2648,6 +2825,13 @@ export namespace google {
                      * @param [response] RefreshRuntimeTokenInternalResponse
                      */
                     type RefreshRuntimeTokenInternalCallback = (error: (Error|null), response?: google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v1.ManagedNotebookService|diagnoseRuntime}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DiagnoseRuntimeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a ListRuntimesRequest. */
@@ -3607,6 +3791,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UpgradeRuntimeRequest. */
+                interface IUpgradeRuntimeRequest {
+
+                    /** UpgradeRuntimeRequest name */
+                    name?: (string|null);
+
+                    /** UpgradeRuntimeRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpgradeRuntimeRequest. */
+                class UpgradeRuntimeRequest implements IUpgradeRuntimeRequest {
+
+                    /**
+                     * Constructs a new UpgradeRuntimeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v1.IUpgradeRuntimeRequest);
+
+                    /** UpgradeRuntimeRequest name. */
+                    public name: string;
+
+                    /** UpgradeRuntimeRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpgradeRuntimeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpgradeRuntimeRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v1.IUpgradeRuntimeRequest): google.cloud.notebooks.v1.UpgradeRuntimeRequest;
+
+                    /**
+                     * Encodes the specified UpgradeRuntimeRequest message. Does not implicitly {@link google.cloud.notebooks.v1.UpgradeRuntimeRequest.verify|verify} messages.
+                     * @param message UpgradeRuntimeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v1.IUpgradeRuntimeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpgradeRuntimeRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.UpgradeRuntimeRequest.verify|verify} messages.
+                     * @param message UpgradeRuntimeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v1.IUpgradeRuntimeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpgradeRuntimeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpgradeRuntimeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v1.UpgradeRuntimeRequest;
+
+                    /**
+                     * Decodes an UpgradeRuntimeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpgradeRuntimeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v1.UpgradeRuntimeRequest;
+
+                    /**
+                     * Verifies an UpgradeRuntimeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpgradeRuntimeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpgradeRuntimeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v1.UpgradeRuntimeRequest;
+
+                    /**
+                     * Creates a plain object from an UpgradeRuntimeRequest message. Also converts values to other types if specified.
+                     * @param message UpgradeRuntimeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v1.UpgradeRuntimeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpgradeRuntimeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpgradeRuntimeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ReportRuntimeEventRequest. */
                 interface IReportRuntimeEventRequest {
 
@@ -3710,6 +3997,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ReportRuntimeEventRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateRuntimeRequest. */
+                interface IUpdateRuntimeRequest {
+
+                    /** UpdateRuntimeRequest runtime */
+                    runtime?: (google.cloud.notebooks.v1.IRuntime|null);
+
+                    /** UpdateRuntimeRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateRuntimeRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateRuntimeRequest. */
+                class UpdateRuntimeRequest implements IUpdateRuntimeRequest {
+
+                    /**
+                     * Constructs a new UpdateRuntimeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v1.IUpdateRuntimeRequest);
+
+                    /** UpdateRuntimeRequest runtime. */
+                    public runtime?: (google.cloud.notebooks.v1.IRuntime|null);
+
+                    /** UpdateRuntimeRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateRuntimeRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateRuntimeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateRuntimeRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v1.IUpdateRuntimeRequest): google.cloud.notebooks.v1.UpdateRuntimeRequest;
+
+                    /**
+                     * Encodes the specified UpdateRuntimeRequest message. Does not implicitly {@link google.cloud.notebooks.v1.UpdateRuntimeRequest.verify|verify} messages.
+                     * @param message UpdateRuntimeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v1.IUpdateRuntimeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateRuntimeRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.UpdateRuntimeRequest.verify|verify} messages.
+                     * @param message UpdateRuntimeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v1.IUpdateRuntimeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateRuntimeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateRuntimeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v1.UpdateRuntimeRequest;
+
+                    /**
+                     * Decodes an UpdateRuntimeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateRuntimeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v1.UpdateRuntimeRequest;
+
+                    /**
+                     * Verifies an UpdateRuntimeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateRuntimeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateRuntimeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v1.UpdateRuntimeRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateRuntimeRequest message. Also converts values to other types if specified.
+                     * @param message UpdateRuntimeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v1.UpdateRuntimeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateRuntimeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateRuntimeRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -3916,6 +4312,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RefreshRuntimeTokenInternalResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiagnoseRuntimeRequest. */
+                interface IDiagnoseRuntimeRequest {
+
+                    /** DiagnoseRuntimeRequest name */
+                    name?: (string|null);
+
+                    /** DiagnoseRuntimeRequest diagnosticConfig */
+                    diagnosticConfig?: (google.cloud.notebooks.v1.IDiagnosticConfig|null);
+                }
+
+                /** Represents a DiagnoseRuntimeRequest. */
+                class DiagnoseRuntimeRequest implements IDiagnoseRuntimeRequest {
+
+                    /**
+                     * Constructs a new DiagnoseRuntimeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v1.IDiagnoseRuntimeRequest);
+
+                    /** DiagnoseRuntimeRequest name. */
+                    public name: string;
+
+                    /** DiagnoseRuntimeRequest diagnosticConfig. */
+                    public diagnosticConfig?: (google.cloud.notebooks.v1.IDiagnosticConfig|null);
+
+                    /**
+                     * Creates a new DiagnoseRuntimeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiagnoseRuntimeRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v1.IDiagnoseRuntimeRequest): google.cloud.notebooks.v1.DiagnoseRuntimeRequest;
+
+                    /**
+                     * Encodes the specified DiagnoseRuntimeRequest message. Does not implicitly {@link google.cloud.notebooks.v1.DiagnoseRuntimeRequest.verify|verify} messages.
+                     * @param message DiagnoseRuntimeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v1.IDiagnoseRuntimeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiagnoseRuntimeRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.DiagnoseRuntimeRequest.verify|verify} messages.
+                     * @param message DiagnoseRuntimeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v1.IDiagnoseRuntimeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiagnoseRuntimeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiagnoseRuntimeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v1.DiagnoseRuntimeRequest;
+
+                    /**
+                     * Decodes a DiagnoseRuntimeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiagnoseRuntimeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v1.DiagnoseRuntimeRequest;
+
+                    /**
+                     * Verifies a DiagnoseRuntimeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiagnoseRuntimeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiagnoseRuntimeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v1.DiagnoseRuntimeRequest;
+
+                    /**
+                     * Creates a plain object from a DiagnoseRuntimeRequest message. Also converts values to other types if specified.
+                     * @param message DiagnoseRuntimeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v1.DiagnoseRuntimeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiagnoseRuntimeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiagnoseRuntimeRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4858,6 +5357,15 @@ export namespace google {
 
                     /** RuntimeSoftwareConfig upgradeable */
                     upgradeable?: (boolean|null);
+
+                    /** RuntimeSoftwareConfig postStartupScriptBehavior */
+                    postStartupScriptBehavior?: (google.cloud.notebooks.v1.RuntimeSoftwareConfig.PostStartupScriptBehavior|keyof typeof google.cloud.notebooks.v1.RuntimeSoftwareConfig.PostStartupScriptBehavior|null);
+
+                    /** RuntimeSoftwareConfig disableTerminal */
+                    disableTerminal?: (boolean|null);
+
+                    /** RuntimeSoftwareConfig version */
+                    version?: (string|null);
                 }
 
                 /** Represents a RuntimeSoftwareConfig. */
@@ -4896,6 +5404,15 @@ export namespace google {
                     /** RuntimeSoftwareConfig upgradeable. */
                     public upgradeable?: (boolean|null);
 
+                    /** RuntimeSoftwareConfig postStartupScriptBehavior. */
+                    public postStartupScriptBehavior: (google.cloud.notebooks.v1.RuntimeSoftwareConfig.PostStartupScriptBehavior|keyof typeof google.cloud.notebooks.v1.RuntimeSoftwareConfig.PostStartupScriptBehavior);
+
+                    /** RuntimeSoftwareConfig disableTerminal. */
+                    public disableTerminal?: (boolean|null);
+
+                    /** RuntimeSoftwareConfig version. */
+                    public version?: (string|null);
+
                     /** RuntimeSoftwareConfig _enableHealthMonitoring. */
                     public _enableHealthMonitoring?: "enableHealthMonitoring";
 
@@ -4904,6 +5421,12 @@ export namespace google {
 
                     /** RuntimeSoftwareConfig _upgradeable. */
                     public _upgradeable?: "upgradeable";
+
+                    /** RuntimeSoftwareConfig _disableTerminal. */
+                    public _disableTerminal?: "disableTerminal";
+
+                    /** RuntimeSoftwareConfig _version. */
+                    public _version?: "version";
 
                     /**
                      * Creates a new RuntimeSoftwareConfig instance using the specified properties.
@@ -4981,6 +5504,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RuntimeSoftwareConfig {
+
+                    /** PostStartupScriptBehavior enum. */
+                    enum PostStartupScriptBehavior {
+                        POST_STARTUP_SCRIPT_BEHAVIOR_UNSPECIFIED = 0,
+                        RUN_EVERY_START = 1,
+                        DOWNLOAD_AND_RUN_EVERY_START = 2
+                    }
                 }
 
                 /** Properties of a RuntimeMetrics. */
@@ -6044,6 +6577,20 @@ export namespace google {
                     public rollbackInstance(request: google.cloud.notebooks.v1.IRollbackInstanceRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls DiagnoseInstance.
+                     * @param request DiagnoseInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public diagnoseInstance(request: google.cloud.notebooks.v1.IDiagnoseInstanceRequest, callback: google.cloud.notebooks.v1.NotebookService.DiagnoseInstanceCallback): void;
+
+                    /**
+                     * Calls DiagnoseInstance.
+                     * @param request DiagnoseInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public diagnoseInstance(request: google.cloud.notebooks.v1.IDiagnoseInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls UpgradeInstanceInternal.
                      * @param request UpgradeInstanceInternalRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -6374,6 +6921,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type RollbackInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|diagnoseInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DiagnoseInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.notebooks.v1.NotebookService|upgradeInstanceInternal}.
@@ -9212,6 +9766,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a DiagnoseInstanceRequest. */
+                interface IDiagnoseInstanceRequest {
+
+                    /** DiagnoseInstanceRequest name */
+                    name?: (string|null);
+
+                    /** DiagnoseInstanceRequest diagnosticConfig */
+                    diagnosticConfig?: (google.cloud.notebooks.v1.IDiagnosticConfig|null);
+                }
+
+                /** Represents a DiagnoseInstanceRequest. */
+                class DiagnoseInstanceRequest implements IDiagnoseInstanceRequest {
+
+                    /**
+                     * Constructs a new DiagnoseInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v1.IDiagnoseInstanceRequest);
+
+                    /** DiagnoseInstanceRequest name. */
+                    public name: string;
+
+                    /** DiagnoseInstanceRequest diagnosticConfig. */
+                    public diagnosticConfig?: (google.cloud.notebooks.v1.IDiagnosticConfig|null);
+
+                    /**
+                     * Creates a new DiagnoseInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiagnoseInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v1.IDiagnoseInstanceRequest): google.cloud.notebooks.v1.DiagnoseInstanceRequest;
+
+                    /**
+                     * Encodes the specified DiagnoseInstanceRequest message. Does not implicitly {@link google.cloud.notebooks.v1.DiagnoseInstanceRequest.verify|verify} messages.
+                     * @param message DiagnoseInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v1.IDiagnoseInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiagnoseInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1.DiagnoseInstanceRequest.verify|verify} messages.
+                     * @param message DiagnoseInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v1.IDiagnoseInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiagnoseInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiagnoseInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v1.DiagnoseInstanceRequest;
+
+                    /**
+                     * Decodes a DiagnoseInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiagnoseInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v1.DiagnoseInstanceRequest;
+
+                    /**
+                     * Verifies a DiagnoseInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiagnoseInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiagnoseInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v1.DiagnoseInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a DiagnoseInstanceRequest message. Also converts values to other types if specified.
+                     * @param message DiagnoseInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v1.DiagnoseInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiagnoseInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiagnoseInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ListEnvironmentsResponse. */
                 interface IListEnvironmentsResponse {
 
@@ -11151,6 +11808,126 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ReservationAffinity. */
+                interface IReservationAffinity {
+
+                    /** ReservationAffinity consumeReservationType */
+                    consumeReservationType?: (google.cloud.notebooks.v1beta1.ReservationAffinity.Type|keyof typeof google.cloud.notebooks.v1beta1.ReservationAffinity.Type|null);
+
+                    /** ReservationAffinity key */
+                    key?: (string|null);
+
+                    /** ReservationAffinity values */
+                    values?: (string[]|null);
+                }
+
+                /** Represents a ReservationAffinity. */
+                class ReservationAffinity implements IReservationAffinity {
+
+                    /**
+                     * Constructs a new ReservationAffinity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v1beta1.IReservationAffinity);
+
+                    /** ReservationAffinity consumeReservationType. */
+                    public consumeReservationType: (google.cloud.notebooks.v1beta1.ReservationAffinity.Type|keyof typeof google.cloud.notebooks.v1beta1.ReservationAffinity.Type);
+
+                    /** ReservationAffinity key. */
+                    public key: string;
+
+                    /** ReservationAffinity values. */
+                    public values: string[];
+
+                    /**
+                     * Creates a new ReservationAffinity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReservationAffinity instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v1beta1.IReservationAffinity): google.cloud.notebooks.v1beta1.ReservationAffinity;
+
+                    /**
+                     * Encodes the specified ReservationAffinity message. Does not implicitly {@link google.cloud.notebooks.v1beta1.ReservationAffinity.verify|verify} messages.
+                     * @param message ReservationAffinity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v1beta1.IReservationAffinity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReservationAffinity message, length delimited. Does not implicitly {@link google.cloud.notebooks.v1beta1.ReservationAffinity.verify|verify} messages.
+                     * @param message ReservationAffinity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v1beta1.IReservationAffinity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReservationAffinity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReservationAffinity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v1beta1.ReservationAffinity;
+
+                    /**
+                     * Decodes a ReservationAffinity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReservationAffinity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v1beta1.ReservationAffinity;
+
+                    /**
+                     * Verifies a ReservationAffinity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReservationAffinity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReservationAffinity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v1beta1.ReservationAffinity;
+
+                    /**
+                     * Creates a plain object from a ReservationAffinity message. Also converts values to other types if specified.
+                     * @param message ReservationAffinity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v1beta1.ReservationAffinity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReservationAffinity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReservationAffinity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReservationAffinity {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        NO_RESERVATION = 1,
+                        ANY_RESERVATION = 2,
+                        SPECIFIC_RESERVATION = 3
+                    }
+                }
+
                 /** Properties of an Instance. */
                 interface IInstance {
 
@@ -11228,6 +12005,15 @@ export namespace google {
 
                     /** Instance metadata */
                     metadata?: ({ [k: string]: string }|null);
+
+                    /** Instance nicType */
+                    nicType?: (google.cloud.notebooks.v1beta1.Instance.NicType|keyof typeof google.cloud.notebooks.v1beta1.Instance.NicType|null);
+
+                    /** Instance reservationAffinity */
+                    reservationAffinity?: (google.cloud.notebooks.v1beta1.IReservationAffinity|null);
+
+                    /** Instance canIpForward */
+                    canIpForward?: (boolean|null);
 
                     /** Instance createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
@@ -11320,6 +12106,15 @@ export namespace google {
                     /** Instance metadata. */
                     public metadata: { [k: string]: string };
 
+                    /** Instance nicType. */
+                    public nicType: (google.cloud.notebooks.v1beta1.Instance.NicType|keyof typeof google.cloud.notebooks.v1beta1.Instance.NicType);
+
+                    /** Instance reservationAffinity. */
+                    public reservationAffinity?: (google.cloud.notebooks.v1beta1.IReservationAffinity|null);
+
+                    /** Instance canIpForward. */
+                    public canIpForward: boolean;
+
                     /** Instance createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
 
@@ -11408,6 +12203,21 @@ export namespace google {
                 }
 
                 namespace Instance {
+
+                    /** AcceleratorType enum. */
+                    enum AcceleratorType {
+                        ACCELERATOR_TYPE_UNSPECIFIED = 0,
+                        NVIDIA_TESLA_K80 = 1,
+                        NVIDIA_TESLA_P100 = 2,
+                        NVIDIA_TESLA_V100 = 3,
+                        NVIDIA_TESLA_P4 = 4,
+                        NVIDIA_TESLA_T4 = 5,
+                        NVIDIA_TESLA_T4_VWS = 8,
+                        NVIDIA_TESLA_P100_VWS = 9,
+                        NVIDIA_TESLA_P4_VWS = 10,
+                        TPU_V2 = 6,
+                        TPU_V3 = 7
+                    }
 
                     /** Properties of an AcceleratorConfig. */
                     interface IAcceleratorConfig {
@@ -11512,21 +12322,6 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
-                    /** AcceleratorType enum. */
-                    enum AcceleratorType {
-                        ACCELERATOR_TYPE_UNSPECIFIED = 0,
-                        NVIDIA_TESLA_K80 = 1,
-                        NVIDIA_TESLA_P100 = 2,
-                        NVIDIA_TESLA_V100 = 3,
-                        NVIDIA_TESLA_P4 = 4,
-                        NVIDIA_TESLA_T4 = 5,
-                        NVIDIA_TESLA_T4_VWS = 8,
-                        NVIDIA_TESLA_P100_VWS = 9,
-                        NVIDIA_TESLA_P4_VWS = 10,
-                        TPU_V2 = 6,
-                        TPU_V3 = 7
-                    }
-
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
@@ -11538,7 +12333,9 @@ export namespace google {
                         DELETED = 6,
                         UPGRADING = 7,
                         INITIALIZING = 8,
-                        REGISTERING = 9
+                        REGISTERING = 9,
+                        SUSPENDING = 10,
+                        SUSPENDED = 11
                     }
 
                     /** DiskType enum. */
@@ -11554,6 +12351,13 @@ export namespace google {
                         DISK_ENCRYPTION_UNSPECIFIED = 0,
                         GMEK = 1,
                         CMEK = 2
+                    }
+
+                    /** NicType enum. */
+                    enum NicType {
+                        UNSPECIFIED_NIC_TYPE = 0,
+                        VIRTIO_NET = 1,
+                        GVNIC = 2
                     }
                 }
 
@@ -13566,6 +14370,9 @@ export namespace google {
 
                     /** IsInstanceUpgradeableResponse upgradeInfo */
                     upgradeInfo?: (string|null);
+
+                    /** IsInstanceUpgradeableResponse upgradeImage */
+                    upgradeImage?: (string|null);
                 }
 
                 /** Represents an IsInstanceUpgradeableResponse. */
@@ -13585,6 +14392,9 @@ export namespace google {
 
                     /** IsInstanceUpgradeableResponse upgradeInfo. */
                     public upgradeInfo: string;
+
+                    /** IsInstanceUpgradeableResponse upgradeImage. */
+                    public upgradeImage: string;
 
                     /**
                      * Creates a new IsInstanceUpgradeableResponse instance using the specified properties.
@@ -18759,6 +19569,103 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -128,6 +128,9 @@ export class ConversationDatasetsClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -693,8 +696,10 @@ export class ConversationDatasetsClient {
    * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata|CreateConversationDatasetOperationMetadata}
-   * - `response`: {@link google.cloud.dialogflow.v2.ConversationDataset|ConversationDataset}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata|CreateConversationDatasetOperationMetadata}
+   * - `response`:
+   * {@link google.cloud.dialogflow.v2.ConversationDataset|ConversationDataset}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -845,7 +850,8 @@ export class ConversationDatasetsClient {
    * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata|DeleteConversationDatasetOperationMetadata}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata|DeleteConversationDatasetOperationMetadata}
    * - `response`: An [Empty
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
    *
@@ -999,8 +1005,10 @@ export class ConversationDatasetsClient {
    * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.v2.ImportConversationDataOperationMetadata|ImportConversationDataOperationMetadata}
-   * - `response`: {@link google.cloud.dialogflow.v2.ImportConversationDataOperationResponse|ImportConversationDataOperationResponse}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.v2.ImportConversationDataOperationMetadata|ImportConversationDataOperationMetadata}
+   * - `response`:
+   * {@link google.cloud.dialogflow.v2.ImportConversationDataOperationResponse|ImportConversationDataOperationResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1152,8 +1160,8 @@ export class ConversationDatasetsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location name to list all conversation datasets for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`
+   *   Required. The project and location name to list all conversation datasets
+   *   for. Format: `projects/<Project ID>/locations/<Location ID>`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of conversation datasets to return in a single
    *   page. By default 100 and at most 1000.
@@ -1256,8 +1264,8 @@ export class ConversationDatasetsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location name to list all conversation datasets for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`
+   *   Required. The project and location name to list all conversation datasets
+   *   for. Format: `projects/<Project ID>/locations/<Location ID>`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of conversation datasets to return in a single
    *   page. By default 100 and at most 1000.
@@ -1304,8 +1312,8 @@ export class ConversationDatasetsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location name to list all conversation datasets for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`
+   *   Required. The project and location name to list all conversation datasets
+   *   for. Format: `projects/<Project ID>/locations/<Location ID>`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of conversation datasets to return in a single
    *   page. By default 100 and at most 1000.

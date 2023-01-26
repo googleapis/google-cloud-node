@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v4.1.4...secret-manager-v4.2.0) (2022-12-21)
+
+
+### Features
+
+* Update public API to include annotation support ([#3790](https://github.com/googleapis/google-cloud-node/issues/3790)) ([8bb4f9b](https://github.com/googleapis/google-cloud-node/commit/8bb4f9b0f4ef404f2998ccf377a01278dd977aa8))
+
 ## [4.1.4](https://github.com/googleapis/nodejs-secret-manager/compare/v4.1.3...v4.1.4) (2022-11-11)
 
 

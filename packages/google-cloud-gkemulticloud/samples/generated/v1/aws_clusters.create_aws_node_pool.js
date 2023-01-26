@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +29,8 @@ function main(parent, awsNodePool, awsNodePoolId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The AwsCluster google.cloud.gkemulticloud.v1.AwsCluster  resource where this node pool will be created.
+   *  Required. The AwsCluster google.cloud.gkemulticloud.v1.AwsCluster 
+   *  resource where this node pool will be created.
    *  `AwsCluster` names are formatted as
    *  `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
@@ -37,16 +38,18 @@ function main(parent, awsNodePool, awsNodePoolId) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. The specification of the AwsNodePool google.cloud.gkemulticloud.v1.AwsNodePool  to create.
+   *  Required. The specification of the
+   *  AwsNodePool google.cloud.gkemulticloud.v1.AwsNodePool  to create.
    */
   // const awsNodePool = {}
   /**
-   *  Required. A client provided ID the resource. Must be unique within the parent
-   *  resource.
-   *  The provided ID will be part of the AwsNodePool google.cloud.gkemulticloud.v1.AwsNodePool 
-   *  resource name formatted as
+   *  Required. A client provided ID the resource. Must be unique within the
+   *  parent resource.
+   *  The provided ID will be part of the
+   *  AwsNodePool google.cloud.gkemulticloud.v1.AwsNodePool  resource name
+   *  formatted as
    *  `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
-   *  Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 40 characters.
+   *  Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 63 characters.
    */
   // const awsNodePoolId = 'abc123'
   /**

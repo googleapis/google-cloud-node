@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-oslogin",
-        "version": "4.0.4",
+        "version": "4.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -11,6 +11,50 @@
         ]
     },
     "snippets": [
+        {
+            "regionTag": "oslogin_v1beta_generated_OsLoginService_CreateSshPublicKey_async",
+            "title": "OsLoginService createSshPublicKey Sample",
+            "origin": "API_DEFINITION",
+            "description": " Create an SSH public key",
+            "canonical": true,
+            "file": "os_login_service.create_ssh_public_key.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateSshPublicKey",
+                "fullName": "google.cloud.oslogin.v1beta.OsLoginService.CreateSshPublicKey",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ssh_public_key",
+                        "type": ".google.cloud.oslogin.common.SshPublicKey"
+                    }
+                ],
+                "resultType": ".google.cloud.oslogin.common.SshPublicKey",
+                "client": {
+                    "shortName": "OsLoginServiceClient",
+                    "fullName": "google.cloud.oslogin.v1beta.OsLoginServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateSshPublicKey",
+                    "fullName": "google.cloud.oslogin.v1beta.OsLoginService.CreateSshPublicKey",
+                    "service": {
+                        "shortName": "OsLoginService",
+                        "fullName": "google.cloud.oslogin.v1beta.OsLoginService"
+                    }
+                }
+            }
+        },
         {
             "regionTag": "oslogin_v1beta_generated_OsLoginService_DeletePosixAccount_async",
             "title": "OsLoginService deletePosixAccount Sample",
@@ -102,7 +146,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -122,6 +166,10 @@
                     {
                         "name": "system_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.oslogin.v1beta.LoginProfileView"
                     }
                 ],
                 "resultType": ".google.cloud.oslogin.v1beta.LoginProfile",
@@ -190,7 +238,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -210,6 +258,10 @@
                     {
                         "name": "project_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.oslogin.v1beta.LoginProfileView"
                     }
                 ],
                 "resultType": ".google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse",

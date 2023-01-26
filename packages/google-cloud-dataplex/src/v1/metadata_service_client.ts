@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -126,6 +126,9 @@ export class MetadataServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -190,6 +193,12 @@ export class MetadataServiceClient {
       ),
       contentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/content/{content}'
+      ),
+      dataScanPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataScans/{dataScan}'
+      ),
+      dataScanJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataScans/{dataScan}/jobs/{job}'
       ),
       entityPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}'
@@ -279,6 +288,18 @@ export class MetadataServiceClient {
             {
               get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',
             },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -302,6 +323,22 @@ export class MetadataServiceClient {
               post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -323,6 +360,22 @@ export class MetadataServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -682,8 +735,8 @@ export class MetadataServiceClient {
    *   Required. The resource name of the entity:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
    * @param {string} request.etag
-   *   Required. The etag associated with the entity, which can be retrieved with a
-   *   {@link |GetEntity} request.
+   *   Required. The etag associated with the entity, which can be retrieved with
+   *   a {@link |GetEntity} request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1143,17 +1196,18 @@ export class MetadataServiceClient {
    * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
    *   Required. Specify the entity view to make a partial list request.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of entities to return. The service may return fewer than
-   *   this value. If unspecified, 100 entities will be returned by default. The
-   *   maximum value is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of entities to return. The service may return
+   *   fewer than this value. If unspecified, 100 entities will be returned by
+   *   default. The maximum value is 500; larger values will will be truncated to
+   *   500.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListEntities` call. Provide
    *   this to retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListEntities` must match the call that provided the
    *   page token.
    * @param {string} [request.filter]
-   *   Optional. The following filter parameters can be added to the URL to limit the
-   *   entities returned by the API:
+   *   Optional. The following filter parameters can be added to the URL to limit
+   *   the entities returned by the API:
    *
    *   - Entity ID: ?filter="id=entityID"
    *   - Asset ID: ?filter="asset=assetID"
@@ -1252,17 +1306,18 @@ export class MetadataServiceClient {
    * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
    *   Required. Specify the entity view to make a partial list request.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of entities to return. The service may return fewer than
-   *   this value. If unspecified, 100 entities will be returned by default. The
-   *   maximum value is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of entities to return. The service may return
+   *   fewer than this value. If unspecified, 100 entities will be returned by
+   *   default. The maximum value is 500; larger values will will be truncated to
+   *   500.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListEntities` call. Provide
    *   this to retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListEntities` must match the call that provided the
    *   page token.
    * @param {string} [request.filter]
-   *   Optional. The following filter parameters can be added to the URL to limit the
-   *   entities returned by the API:
+   *   Optional. The following filter parameters can be added to the URL to limit
+   *   the entities returned by the API:
    *
    *   - Entity ID: ?filter="id=entityID"
    *   - Asset ID: ?filter="asset=assetID"
@@ -1315,17 +1370,18 @@ export class MetadataServiceClient {
    * @param {google.cloud.dataplex.v1.ListEntitiesRequest.EntityView} request.view
    *   Required. Specify the entity view to make a partial list request.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of entities to return. The service may return fewer than
-   *   this value. If unspecified, 100 entities will be returned by default. The
-   *   maximum value is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of entities to return. The service may return
+   *   fewer than this value. If unspecified, 100 entities will be returned by
+   *   default. The maximum value is 500; larger values will will be truncated to
+   *   500.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `ListEntities` call. Provide
    *   this to retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListEntities` must match the call that provided the
    *   page token.
    * @param {string} [request.filter]
-   *   Optional. The following filter parameters can be added to the URL to limit the
-   *   entities returned by the API:
+   *   Optional. The following filter parameters can be added to the URL to limit
+   *   the entities returned by the API:
    *
    *   - Entity ID: ?filter="id=entityID"
    *   - Asset ID: ?filter="asset=assetID"
@@ -1375,17 +1431,18 @@ export class MetadataServiceClient {
    *   Required. The resource name of the parent entity:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of partitions to return. The service may return fewer than
-   *   this value. If unspecified, 100 partitions will be returned by default. The
-   *   maximum page size is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of partitions to return. The service may return
+   *   fewer than this value. If unspecified, 100 partitions will be returned by
+   *   default. The maximum page size is 500; larger values will will be truncated
+   *   to 500.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListPartitions` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListPartitions` must match the call that provided the
-   *   page token.
+   *   Optional. Page token received from a previous `ListPartitions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListPartitions` must match the call that provided
+   *   the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key value pair
-   *   expression. Supported operators and syntax:
+   *   Optional. Filter the partitions returned to the caller using a key value
+   *   pair expression. Supported operators and syntax:
    *
    *   - logic operators: AND, OR
    *   - comparison operators: <, >, >=, <= ,=, !=
@@ -1499,17 +1556,18 @@ export class MetadataServiceClient {
    *   Required. The resource name of the parent entity:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of partitions to return. The service may return fewer than
-   *   this value. If unspecified, 100 partitions will be returned by default. The
-   *   maximum page size is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of partitions to return. The service may return
+   *   fewer than this value. If unspecified, 100 partitions will be returned by
+   *   default. The maximum page size is 500; larger values will will be truncated
+   *   to 500.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListPartitions` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListPartitions` must match the call that provided the
-   *   page token.
+   *   Optional. Page token received from a previous `ListPartitions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListPartitions` must match the call that provided
+   *   the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key value pair
-   *   expression. Supported operators and syntax:
+   *   Optional. Filter the partitions returned to the caller using a key value
+   *   pair expression. Supported operators and syntax:
    *
    *   - logic operators: AND, OR
    *   - comparison operators: <, >, >=, <= ,=, !=
@@ -1571,17 +1629,18 @@ export class MetadataServiceClient {
    *   Required. The resource name of the parent entity:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of partitions to return. The service may return fewer than
-   *   this value. If unspecified, 100 partitions will be returned by default. The
-   *   maximum page size is 500; larger values will will be truncated to 500.
+   *   Optional. Maximum number of partitions to return. The service may return
+   *   fewer than this value. If unspecified, 100 partitions will be returned by
+   *   default. The maximum page size is 500; larger values will will be truncated
+   *   to 500.
    * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListPartitions` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListPartitions` must match the call that provided the
-   *   page token.
+   *   Optional. Page token received from a previous `ListPartitions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListPartitions` must match the call that provided
+   *   the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key value pair
-   *   expression. Supported operators and syntax:
+   *   Optional. Filter the partitions returned to the caller using a key value
+   *   pair expression. Supported operators and syntax:
    *
    *   - logic operators: AND, OR
    *   - comparison operators: <, >, >=, <= ,=, !=
@@ -2040,6 +2099,126 @@ export class MetadataServiceClient {
    */
   matchContentFromContentName(contentName: string) {
     return this.pathTemplates.contentPathTemplate.match(contentName).content;
+  }
+
+  /**
+   * Return a fully-qualified dataScan resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataScan
+   * @returns {string} Resource name string.
+   */
+  dataScanPath(project: string, location: string, dataScan: string) {
+    return this.pathTemplates.dataScanPathTemplate.render({
+      project: project,
+      location: location,
+      dataScan: dataScan,
+    });
+  }
+
+  /**
+   * Parse the project from DataScan resource.
+   *
+   * @param {string} dataScanName
+   *   A fully-qualified path representing DataScan resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataScanName(dataScanName: string) {
+    return this.pathTemplates.dataScanPathTemplate.match(dataScanName).project;
+  }
+
+  /**
+   * Parse the location from DataScan resource.
+   *
+   * @param {string} dataScanName
+   *   A fully-qualified path representing DataScan resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataScanName(dataScanName: string) {
+    return this.pathTemplates.dataScanPathTemplate.match(dataScanName).location;
+  }
+
+  /**
+   * Parse the dataScan from DataScan resource.
+   *
+   * @param {string} dataScanName
+   *   A fully-qualified path representing DataScan resource.
+   * @returns {string} A string representing the dataScan.
+   */
+  matchDataScanFromDataScanName(dataScanName: string) {
+    return this.pathTemplates.dataScanPathTemplate.match(dataScanName).dataScan;
+  }
+
+  /**
+   * Return a fully-qualified dataScanJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataScan
+   * @param {string} job
+   * @returns {string} Resource name string.
+   */
+  dataScanJobPath(
+    project: string,
+    location: string,
+    dataScan: string,
+    job: string
+  ) {
+    return this.pathTemplates.dataScanJobPathTemplate.render({
+      project: project,
+      location: location,
+      dataScan: dataScan,
+      job: job,
+    });
+  }
+
+  /**
+   * Parse the project from DataScanJob resource.
+   *
+   * @param {string} dataScanJobName
+   *   A fully-qualified path representing DataScanJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataScanJobName(dataScanJobName: string) {
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .project;
+  }
+
+  /**
+   * Parse the location from DataScanJob resource.
+   *
+   * @param {string} dataScanJobName
+   *   A fully-qualified path representing DataScanJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataScanJobName(dataScanJobName: string) {
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .location;
+  }
+
+  /**
+   * Parse the dataScan from DataScanJob resource.
+   *
+   * @param {string} dataScanJobName
+   *   A fully-qualified path representing DataScanJob resource.
+   * @returns {string} A string representing the dataScan.
+   */
+  matchDataScanFromDataScanJobName(dataScanJobName: string) {
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .dataScan;
+  }
+
+  /**
+   * Parse the job from DataScanJob resource.
+   *
+   * @param {string} dataScanJobName
+   *   A fully-qualified path representing DataScanJob resource.
+   * @returns {string} A string representing the job.
+   */
+  matchJobFromDataScanJobName(dataScanJobName: string) {
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .job;
   }
 
   /**

@@ -21,7 +21,7 @@ substitutions:
   _NODE_VERSION: "14"
 
 logsBucket: 'gs://${_LOGS_BUCKET}/logs/google-cloud-node/${_BUILD_TYPE}/${COMMIT_SHA}/${TRIGGER_NAME}'
-timeout: 7200s
+timeout: 32400s
 
 steps:
   - name: 'gcr.io/kaniko-project/executor:v1.9.1'
@@ -37,7 +37,7 @@ steps:
     ]
   - name: gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}
     id: "run-tests"
-    timeout: 7200s
+    timeout: 32400s
     entrypoint: "ci/run_conditional_tests.sh"
     env:
     - 'BUILD_TYPE=${_BUILD_TYPE}'

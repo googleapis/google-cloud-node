@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@
 import {
   ContentServiceClient,
   DataplexServiceClient,
+  DataScanServiceClient,
   MetadataServiceClient,
 } from '@google-cloud/dataplex';
 
@@ -27,6 +28,9 @@ function doStuffWithContentServiceClient(client: ContentServiceClient) {
   client.close();
 }
 function doStuffWithDataplexServiceClient(client: DataplexServiceClient) {
+  client.close();
+}
+function doStuffWithDataScanServiceClient(client: DataScanServiceClient) {
   client.close();
 }
 function doStuffWithMetadataServiceClient(client: MetadataServiceClient) {
@@ -40,6 +44,9 @@ function main() {
   // check that the client instance can be created
   const dataplexServiceClient = new DataplexServiceClient();
   doStuffWithDataplexServiceClient(dataplexServiceClient);
+  // check that the client instance can be created
+  const dataScanServiceClient = new DataScanServiceClient();
+  doStuffWithDataScanServiceClient(dataScanServiceClient);
   // check that the client instance can be created
   const metadataServiceClient = new MetadataServiceClient();
   doStuffWithMetadataServiceClient(metadataServiceClient);

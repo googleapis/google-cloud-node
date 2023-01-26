@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/video-transcoder",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "Transcoder client for Node.js",
   "repository": {
     "type": "git",
@@ -59,7 +59,7 @@
     "mocha": "^9.2.2",
     "null-loader": "^4.0.0",
     "pack-n-play": "^1.0.0-2",
-    "sinon": "^14.0.0",
+    "sinon": "^15.0.0",
     "ts-loader": "^9.0.0",
     "typescript": "^4.6.4"
   },

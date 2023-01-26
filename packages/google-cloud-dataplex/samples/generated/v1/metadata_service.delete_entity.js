@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,8 +34,8 @@ function main(name, etag) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The etag associated with the entity, which can be retrieved with a
-   *  GetEntity   request.
+   *  Required. The etag associated with the entity, which can be retrieved with
+   *  a GetEntity   request.
    */
   // const etag = 'abc123'
 

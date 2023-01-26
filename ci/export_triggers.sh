@@ -44,4 +44,12 @@ for NODE_VERSION in ${NODE_VERSIONS[@]}; do
     gcloud beta builds triggers export "samples-continuous-node${NODE_VERSION}" --destination "ci/export/samples-continuous-node${NODE_VERSION}.yaml"
     echo "exporting nightly build for node${NODE_VERSION}"
     gcloud beta builds triggers export "samples-nightly-node${NODE_VERSION}" --destination "ci/export/samples-nightly-node${NODE_VERSION}.yaml"
+    echo "exporting presubmit build for node${NODE_VERSION} with credentials"
+    gcloud beta builds triggers export "samples-presubmit-node${NODE_VERSION}-with-credentials" --destination "ci/export/samples-presubmit-node${NODE_VERSION}-with-credentials.yaml"
 done
+
+# Since we don't want to run nightly, presubmit, and continuous for node 16 and node 18, adding these outside of the loop
+echo "exporting presubmit unit build for node16 unit tests"
+gcloud beta builds triggers export "unit-presubmit-node16" --destination "ci/export/unit-presubmit-node16.yaml"
+echo "exporting presubmit unit build for node18 unit tests"
+gcloud beta builds triggers export "unit-presubmit-node18" --destination "ci/export/unit-presubmit-node18.yaml"

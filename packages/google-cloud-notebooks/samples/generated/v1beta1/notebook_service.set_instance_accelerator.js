@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,10 +38,10 @@ function main(name, type, coreCount) {
    */
   // const type = {}
   /**
-   *  Required. Count of cores of this accelerator. Note that not all
-   *  combinations of `type` and `core_count` are valid. Check GPUs on Compute
-   *  Engine (https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a
-   *  valid combination. TPUs are not supported.
+   *  Required. Count of cores of this accelerator. Note that not all combinations
+   *  of `type` and `core_count` are valid. Check GPUs on
+   *  Compute Engine (https://cloud.google.com/compute/docs/gpus/#gpus-list) to
+   *  find a valid combination. TPUs are not supported.
    */
   // const coreCount = 1234
 

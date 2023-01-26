@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -143,6 +143,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public applyParameters(request: google.cloud.memcache.v1.IApplyParametersRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RescheduleMaintenance.
+                     * @param request RescheduleMaintenanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public rescheduleMaintenance(request: google.cloud.memcache.v1.IRescheduleMaintenanceRequest, callback: google.cloud.memcache.v1.CloudMemcache.RescheduleMaintenanceCallback): void;
+
+                    /**
+                     * Calls RescheduleMaintenance.
+                     * @param request RescheduleMaintenanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public rescheduleMaintenance(request: google.cloud.memcache.v1.IRescheduleMaintenanceRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace CloudMemcache {
@@ -195,6 +209,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ApplyParametersCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memcache.v1.CloudMemcache|rescheduleMaintenance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RescheduleMaintenanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of an Instance. */
@@ -247,6 +268,12 @@ export namespace google {
 
                     /** Instance discoveryEndpoint */
                     discoveryEndpoint?: (string|null);
+
+                    /** Instance maintenancePolicy */
+                    maintenancePolicy?: (google.cloud.memcache.v1.IMaintenancePolicy|null);
+
+                    /** Instance maintenanceSchedule */
+                    maintenanceSchedule?: (google.cloud.memcache.v1.IMaintenanceSchedule|null);
                 }
 
                 /** Represents an Instance. */
@@ -305,6 +332,12 @@ export namespace google {
 
                     /** Instance discoveryEndpoint. */
                     public discoveryEndpoint: string;
+
+                    /** Instance maintenancePolicy. */
+                    public maintenancePolicy?: (google.cloud.memcache.v1.IMaintenancePolicy|null);
+
+                    /** Instance maintenanceSchedule. */
+                    public maintenanceSchedule?: (google.cloud.memcache.v1.IMaintenanceSchedule|null);
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -385,6 +418,16 @@ export namespace google {
                 }
 
                 namespace Instance {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        READY = 2,
+                        UPDATING = 3,
+                        DELETING = 4,
+                        PERFORMING_MAINTENANCE = 5
+                    }
 
                     /** Properties of a NodeConfig. */
                     interface INodeConfig {
@@ -739,14 +782,458 @@ export namespace google {
                             ZONE_DISTRIBUTION_UNBALANCED = 1
                         }
                     }
+                }
 
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        CREATING = 1,
-                        READY = 2,
-                        DELETING = 4,
-                        PERFORMING_MAINTENANCE = 5
+                /** Properties of a MaintenancePolicy. */
+                interface IMaintenancePolicy {
+
+                    /** MaintenancePolicy createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenancePolicy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenancePolicy description */
+                    description?: (string|null);
+
+                    /** MaintenancePolicy weeklyMaintenanceWindow */
+                    weeklyMaintenanceWindow?: (google.cloud.memcache.v1.IWeeklyMaintenanceWindow[]|null);
+                }
+
+                /** Represents a MaintenancePolicy. */
+                class MaintenancePolicy implements IMaintenancePolicy {
+
+                    /**
+                     * Constructs a new MaintenancePolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IMaintenancePolicy);
+
+                    /** MaintenancePolicy createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenancePolicy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenancePolicy description. */
+                    public description: string;
+
+                    /** MaintenancePolicy weeklyMaintenanceWindow. */
+                    public weeklyMaintenanceWindow: google.cloud.memcache.v1.IWeeklyMaintenanceWindow[];
+
+                    /**
+                     * Creates a new MaintenancePolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaintenancePolicy instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IMaintenancePolicy): google.cloud.memcache.v1.MaintenancePolicy;
+
+                    /**
+                     * Encodes the specified MaintenancePolicy message. Does not implicitly {@link google.cloud.memcache.v1.MaintenancePolicy.verify|verify} messages.
+                     * @param message MaintenancePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaintenancePolicy message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.MaintenancePolicy.verify|verify} messages.
+                     * @param message MaintenancePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaintenancePolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaintenancePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.MaintenancePolicy;
+
+                    /**
+                     * Decodes a MaintenancePolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaintenancePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.MaintenancePolicy;
+
+                    /**
+                     * Verifies a MaintenancePolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaintenancePolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaintenancePolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.MaintenancePolicy;
+
+                    /**
+                     * Creates a plain object from a MaintenancePolicy message. Also converts values to other types if specified.
+                     * @param message MaintenancePolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.MaintenancePolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaintenancePolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MaintenancePolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a WeeklyMaintenanceWindow. */
+                interface IWeeklyMaintenanceWindow {
+
+                    /** WeeklyMaintenanceWindow day */
+                    day?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
+
+                    /** WeeklyMaintenanceWindow startTime */
+                    startTime?: (google.type.ITimeOfDay|null);
+
+                    /** WeeklyMaintenanceWindow duration */
+                    duration?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a WeeklyMaintenanceWindow. */
+                class WeeklyMaintenanceWindow implements IWeeklyMaintenanceWindow {
+
+                    /**
+                     * Constructs a new WeeklyMaintenanceWindow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IWeeklyMaintenanceWindow);
+
+                    /** WeeklyMaintenanceWindow day. */
+                    public day: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
+
+                    /** WeeklyMaintenanceWindow startTime. */
+                    public startTime?: (google.type.ITimeOfDay|null);
+
+                    /** WeeklyMaintenanceWindow duration. */
+                    public duration?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new WeeklyMaintenanceWindow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WeeklyMaintenanceWindow instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IWeeklyMaintenanceWindow): google.cloud.memcache.v1.WeeklyMaintenanceWindow;
+
+                    /**
+                     * Encodes the specified WeeklyMaintenanceWindow message. Does not implicitly {@link google.cloud.memcache.v1.WeeklyMaintenanceWindow.verify|verify} messages.
+                     * @param message WeeklyMaintenanceWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IWeeklyMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WeeklyMaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.WeeklyMaintenanceWindow.verify|verify} messages.
+                     * @param message WeeklyMaintenanceWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IWeeklyMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WeeklyMaintenanceWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.WeeklyMaintenanceWindow;
+
+                    /**
+                     * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WeeklyMaintenanceWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.WeeklyMaintenanceWindow;
+
+                    /**
+                     * Verifies a WeeklyMaintenanceWindow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WeeklyMaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WeeklyMaintenanceWindow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.WeeklyMaintenanceWindow;
+
+                    /**
+                     * Creates a plain object from a WeeklyMaintenanceWindow message. Also converts values to other types if specified.
+                     * @param message WeeklyMaintenanceWindow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.WeeklyMaintenanceWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WeeklyMaintenanceWindow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WeeklyMaintenanceWindow
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MaintenanceSchedule. */
+                interface IMaintenanceSchedule {
+
+                    /** MaintenanceSchedule startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenanceSchedule endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenanceSchedule scheduleDeadlineTime */
+                    scheduleDeadlineTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a MaintenanceSchedule. */
+                class MaintenanceSchedule implements IMaintenanceSchedule {
+
+                    /**
+                     * Constructs a new MaintenanceSchedule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IMaintenanceSchedule);
+
+                    /** MaintenanceSchedule startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenanceSchedule endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenanceSchedule scheduleDeadlineTime. */
+                    public scheduleDeadlineTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new MaintenanceSchedule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaintenanceSchedule instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IMaintenanceSchedule): google.cloud.memcache.v1.MaintenanceSchedule;
+
+                    /**
+                     * Encodes the specified MaintenanceSchedule message. Does not implicitly {@link google.cloud.memcache.v1.MaintenanceSchedule.verify|verify} messages.
+                     * @param message MaintenanceSchedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IMaintenanceSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaintenanceSchedule message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.MaintenanceSchedule.verify|verify} messages.
+                     * @param message MaintenanceSchedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IMaintenanceSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaintenanceSchedule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaintenanceSchedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.MaintenanceSchedule;
+
+                    /**
+                     * Decodes a MaintenanceSchedule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaintenanceSchedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.MaintenanceSchedule;
+
+                    /**
+                     * Verifies a MaintenanceSchedule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaintenanceSchedule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaintenanceSchedule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.MaintenanceSchedule;
+
+                    /**
+                     * Creates a plain object from a MaintenanceSchedule message. Also converts values to other types if specified.
+                     * @param message MaintenanceSchedule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.MaintenanceSchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaintenanceSchedule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MaintenanceSchedule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RescheduleMaintenanceRequest. */
+                interface IRescheduleMaintenanceRequest {
+
+                    /** RescheduleMaintenanceRequest instance */
+                    instance?: (string|null);
+
+                    /** RescheduleMaintenanceRequest rescheduleType */
+                    rescheduleType?: (google.cloud.memcache.v1.RescheduleMaintenanceRequest.RescheduleType|keyof typeof google.cloud.memcache.v1.RescheduleMaintenanceRequest.RescheduleType|null);
+
+                    /** RescheduleMaintenanceRequest scheduleTime */
+                    scheduleTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a RescheduleMaintenanceRequest. */
+                class RescheduleMaintenanceRequest implements IRescheduleMaintenanceRequest {
+
+                    /**
+                     * Constructs a new RescheduleMaintenanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IRescheduleMaintenanceRequest);
+
+                    /** RescheduleMaintenanceRequest instance. */
+                    public instance: string;
+
+                    /** RescheduleMaintenanceRequest rescheduleType. */
+                    public rescheduleType: (google.cloud.memcache.v1.RescheduleMaintenanceRequest.RescheduleType|keyof typeof google.cloud.memcache.v1.RescheduleMaintenanceRequest.RescheduleType);
+
+                    /** RescheduleMaintenanceRequest scheduleTime. */
+                    public scheduleTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new RescheduleMaintenanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RescheduleMaintenanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IRescheduleMaintenanceRequest): google.cloud.memcache.v1.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Encodes the specified RescheduleMaintenanceRequest message. Does not implicitly {@link google.cloud.memcache.v1.RescheduleMaintenanceRequest.verify|verify} messages.
+                     * @param message RescheduleMaintenanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IRescheduleMaintenanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RescheduleMaintenanceRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.RescheduleMaintenanceRequest.verify|verify} messages.
+                     * @param message RescheduleMaintenanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IRescheduleMaintenanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RescheduleMaintenanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RescheduleMaintenanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Verifies a RescheduleMaintenanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RescheduleMaintenanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RescheduleMaintenanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Creates a plain object from a RescheduleMaintenanceRequest message. Also converts values to other types if specified.
+                     * @param message RescheduleMaintenanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.RescheduleMaintenanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RescheduleMaintenanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RescheduleMaintenanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RescheduleMaintenanceRequest {
+
+                    /** RescheduleType enum. */
+                    enum RescheduleType {
+                        RESCHEDULE_TYPE_UNSPECIFIED = 0,
+                        IMMEDIATE = 1,
+                        NEXT_AVAILABLE_WINDOW = 2,
+                        SPECIFIC_TIME = 3
                     }
                 }
 
@@ -1604,6 +2091,12 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** MemcacheVersion enum. */
+                enum MemcacheVersion {
+                    MEMCACHE_VERSION_UNSPECIFIED = 0,
+                    MEMCACHE_1_5 = 1
+                }
+
                 /** Properties of a MemcacheParameters. */
                 interface IMemcacheParameters {
 
@@ -1840,10 +2333,192 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** MemcacheVersion enum. */
-                enum MemcacheVersion {
-                    MEMCACHE_VERSION_UNSPECIFIED = 0,
-                    MEMCACHE_1_5 = 1
+                /** Properties of a LocationMetadata. */
+                interface ILocationMetadata {
+
+                    /** LocationMetadata availableZones */
+                    availableZones?: ({ [k: string]: google.cloud.memcache.v1.IZoneMetadata }|null);
+                }
+
+                /** Represents a LocationMetadata. */
+                class LocationMetadata implements ILocationMetadata {
+
+                    /**
+                     * Constructs a new LocationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.ILocationMetadata);
+
+                    /** LocationMetadata availableZones. */
+                    public availableZones: { [k: string]: google.cloud.memcache.v1.IZoneMetadata };
+
+                    /**
+                     * Creates a new LocationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LocationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.ILocationMetadata): google.cloud.memcache.v1.LocationMetadata;
+
+                    /**
+                     * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.memcache.v1.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.LocationMetadata;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.LocationMetadata;
+
+                    /**
+                     * Verifies a LocationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LocationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.LocationMetadata;
+
+                    /**
+                     * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                     * @param message LocationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.LocationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LocationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LocationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ZoneMetadata. */
+                interface IZoneMetadata {
+                }
+
+                /** Represents a ZoneMetadata. */
+                class ZoneMetadata implements IZoneMetadata {
+
+                    /**
+                     * Constructs a new ZoneMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1.IZoneMetadata);
+
+                    /**
+                     * Creates a new ZoneMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ZoneMetadata instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1.IZoneMetadata): google.cloud.memcache.v1.ZoneMetadata;
+
+                    /**
+                     * Encodes the specified ZoneMetadata message. Does not implicitly {@link google.cloud.memcache.v1.ZoneMetadata.verify|verify} messages.
+                     * @param message ZoneMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1.IZoneMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ZoneMetadata message, length delimited. Does not implicitly {@link google.cloud.memcache.v1.ZoneMetadata.verify|verify} messages.
+                     * @param message ZoneMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1.IZoneMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ZoneMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ZoneMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1.ZoneMetadata;
+
+                    /**
+                     * Decodes a ZoneMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ZoneMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1.ZoneMetadata;
+
+                    /**
+                     * Verifies a ZoneMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ZoneMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ZoneMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1.ZoneMetadata;
+
+                    /**
+                     * Creates a plain object from a ZoneMetadata message. Also converts values to other types if specified.
+                     * @param message ZoneMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1.ZoneMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ZoneMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ZoneMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 
@@ -1981,6 +2656,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public applySoftwareUpdate(request: google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RescheduleMaintenance.
+                     * @param request RescheduleMaintenanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public rescheduleMaintenance(request: google.cloud.memcache.v1beta2.IRescheduleMaintenanceRequest, callback: google.cloud.memcache.v1beta2.CloudMemcache.RescheduleMaintenanceCallback): void;
+
+                    /**
+                     * Calls RescheduleMaintenance.
+                     * @param request RescheduleMaintenanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public rescheduleMaintenance(request: google.cloud.memcache.v1beta2.IRescheduleMaintenanceRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace CloudMemcache {
@@ -2040,6 +2729,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ApplySoftwareUpdateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memcache.v1beta2.CloudMemcache|rescheduleMaintenance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RescheduleMaintenanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of an Instance. */
@@ -2095,6 +2791,12 @@ export namespace google {
 
                     /** Instance updateAvailable */
                     updateAvailable?: (boolean|null);
+
+                    /** Instance maintenancePolicy */
+                    maintenancePolicy?: (google.cloud.memcache.v1beta2.IMaintenancePolicy|null);
+
+                    /** Instance maintenanceSchedule */
+                    maintenanceSchedule?: (google.cloud.memcache.v1beta2.IMaintenanceSchedule|null);
                 }
 
                 /** Represents an Instance. */
@@ -2156,6 +2858,12 @@ export namespace google {
 
                     /** Instance updateAvailable. */
                     public updateAvailable: boolean;
+
+                    /** Instance maintenancePolicy. */
+                    public maintenancePolicy?: (google.cloud.memcache.v1beta2.IMaintenancePolicy|null);
+
+                    /** Instance maintenanceSchedule. */
+                    public maintenanceSchedule?: (google.cloud.memcache.v1beta2.IMaintenanceSchedule|null);
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -2236,6 +2944,16 @@ export namespace google {
                 }
 
                 namespace Instance {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        READY = 2,
+                        UPDATING = 3,
+                        DELETING = 4,
+                        PERFORMING_MAINTENANCE = 5
+                    }
 
                     /** Properties of a NodeConfig. */
                     interface INodeConfig {
@@ -2596,15 +3314,339 @@ export namespace google {
                             ZONE_DISTRIBUTION_UNBALANCED = 1
                         }
                     }
+                }
 
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        CREATING = 1,
-                        READY = 2,
-                        DELETING = 4,
-                        PERFORMING_MAINTENANCE = 5
-                    }
+                /** Properties of a MaintenancePolicy. */
+                interface IMaintenancePolicy {
+
+                    /** MaintenancePolicy createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenancePolicy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenancePolicy description */
+                    description?: (string|null);
+
+                    /** MaintenancePolicy weeklyMaintenanceWindow */
+                    weeklyMaintenanceWindow?: (google.cloud.memcache.v1beta2.IWeeklyMaintenanceWindow[]|null);
+                }
+
+                /** Represents a MaintenancePolicy. */
+                class MaintenancePolicy implements IMaintenancePolicy {
+
+                    /**
+                     * Constructs a new MaintenancePolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1beta2.IMaintenancePolicy);
+
+                    /** MaintenancePolicy createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenancePolicy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenancePolicy description. */
+                    public description: string;
+
+                    /** MaintenancePolicy weeklyMaintenanceWindow. */
+                    public weeklyMaintenanceWindow: google.cloud.memcache.v1beta2.IWeeklyMaintenanceWindow[];
+
+                    /**
+                     * Creates a new MaintenancePolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaintenancePolicy instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1beta2.IMaintenancePolicy): google.cloud.memcache.v1beta2.MaintenancePolicy;
+
+                    /**
+                     * Encodes the specified MaintenancePolicy message. Does not implicitly {@link google.cloud.memcache.v1beta2.MaintenancePolicy.verify|verify} messages.
+                     * @param message MaintenancePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1beta2.IMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaintenancePolicy message, length delimited. Does not implicitly {@link google.cloud.memcache.v1beta2.MaintenancePolicy.verify|verify} messages.
+                     * @param message MaintenancePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1beta2.IMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaintenancePolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaintenancePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1beta2.MaintenancePolicy;
+
+                    /**
+                     * Decodes a MaintenancePolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaintenancePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1beta2.MaintenancePolicy;
+
+                    /**
+                     * Verifies a MaintenancePolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaintenancePolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaintenancePolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1beta2.MaintenancePolicy;
+
+                    /**
+                     * Creates a plain object from a MaintenancePolicy message. Also converts values to other types if specified.
+                     * @param message MaintenancePolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1beta2.MaintenancePolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaintenancePolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MaintenancePolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a WeeklyMaintenanceWindow. */
+                interface IWeeklyMaintenanceWindow {
+
+                    /** WeeklyMaintenanceWindow day */
+                    day?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
+
+                    /** WeeklyMaintenanceWindow startTime */
+                    startTime?: (google.type.ITimeOfDay|null);
+
+                    /** WeeklyMaintenanceWindow duration */
+                    duration?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a WeeklyMaintenanceWindow. */
+                class WeeklyMaintenanceWindow implements IWeeklyMaintenanceWindow {
+
+                    /**
+                     * Constructs a new WeeklyMaintenanceWindow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1beta2.IWeeklyMaintenanceWindow);
+
+                    /** WeeklyMaintenanceWindow day. */
+                    public day: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
+
+                    /** WeeklyMaintenanceWindow startTime. */
+                    public startTime?: (google.type.ITimeOfDay|null);
+
+                    /** WeeklyMaintenanceWindow duration. */
+                    public duration?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new WeeklyMaintenanceWindow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WeeklyMaintenanceWindow instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1beta2.IWeeklyMaintenanceWindow): google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow;
+
+                    /**
+                     * Encodes the specified WeeklyMaintenanceWindow message. Does not implicitly {@link google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow.verify|verify} messages.
+                     * @param message WeeklyMaintenanceWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1beta2.IWeeklyMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WeeklyMaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow.verify|verify} messages.
+                     * @param message WeeklyMaintenanceWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1beta2.IWeeklyMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WeeklyMaintenanceWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow;
+
+                    /**
+                     * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WeeklyMaintenanceWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow;
+
+                    /**
+                     * Verifies a WeeklyMaintenanceWindow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WeeklyMaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WeeklyMaintenanceWindow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow;
+
+                    /**
+                     * Creates a plain object from a WeeklyMaintenanceWindow message. Also converts values to other types if specified.
+                     * @param message WeeklyMaintenanceWindow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1beta2.WeeklyMaintenanceWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WeeklyMaintenanceWindow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WeeklyMaintenanceWindow
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MaintenanceSchedule. */
+                interface IMaintenanceSchedule {
+
+                    /** MaintenanceSchedule startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenanceSchedule endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenanceSchedule scheduleDeadlineTime */
+                    scheduleDeadlineTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a MaintenanceSchedule. */
+                class MaintenanceSchedule implements IMaintenanceSchedule {
+
+                    /**
+                     * Constructs a new MaintenanceSchedule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1beta2.IMaintenanceSchedule);
+
+                    /** MaintenanceSchedule startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenanceSchedule endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenanceSchedule scheduleDeadlineTime. */
+                    public scheduleDeadlineTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new MaintenanceSchedule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaintenanceSchedule instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1beta2.IMaintenanceSchedule): google.cloud.memcache.v1beta2.MaintenanceSchedule;
+
+                    /**
+                     * Encodes the specified MaintenanceSchedule message. Does not implicitly {@link google.cloud.memcache.v1beta2.MaintenanceSchedule.verify|verify} messages.
+                     * @param message MaintenanceSchedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1beta2.IMaintenanceSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaintenanceSchedule message, length delimited. Does not implicitly {@link google.cloud.memcache.v1beta2.MaintenanceSchedule.verify|verify} messages.
+                     * @param message MaintenanceSchedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1beta2.IMaintenanceSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaintenanceSchedule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaintenanceSchedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1beta2.MaintenanceSchedule;
+
+                    /**
+                     * Decodes a MaintenanceSchedule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaintenanceSchedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1beta2.MaintenanceSchedule;
+
+                    /**
+                     * Verifies a MaintenanceSchedule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaintenanceSchedule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaintenanceSchedule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1beta2.MaintenanceSchedule;
+
+                    /**
+                     * Creates a plain object from a MaintenanceSchedule message. Also converts values to other types if specified.
+                     * @param message MaintenanceSchedule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1beta2.MaintenanceSchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaintenanceSchedule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MaintenanceSchedule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListInstancesRequest. */
@@ -3243,6 +4285,126 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RescheduleMaintenanceRequest. */
+                interface IRescheduleMaintenanceRequest {
+
+                    /** RescheduleMaintenanceRequest instance */
+                    instance?: (string|null);
+
+                    /** RescheduleMaintenanceRequest rescheduleType */
+                    rescheduleType?: (google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.RescheduleType|keyof typeof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.RescheduleType|null);
+
+                    /** RescheduleMaintenanceRequest scheduleTime */
+                    scheduleTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a RescheduleMaintenanceRequest. */
+                class RescheduleMaintenanceRequest implements IRescheduleMaintenanceRequest {
+
+                    /**
+                     * Constructs a new RescheduleMaintenanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memcache.v1beta2.IRescheduleMaintenanceRequest);
+
+                    /** RescheduleMaintenanceRequest instance. */
+                    public instance: string;
+
+                    /** RescheduleMaintenanceRequest rescheduleType. */
+                    public rescheduleType: (google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.RescheduleType|keyof typeof google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.RescheduleType);
+
+                    /** RescheduleMaintenanceRequest scheduleTime. */
+                    public scheduleTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new RescheduleMaintenanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RescheduleMaintenanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.memcache.v1beta2.IRescheduleMaintenanceRequest): google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Encodes the specified RescheduleMaintenanceRequest message. Does not implicitly {@link google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.verify|verify} messages.
+                     * @param message RescheduleMaintenanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memcache.v1beta2.IRescheduleMaintenanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RescheduleMaintenanceRequest message, length delimited. Does not implicitly {@link google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest.verify|verify} messages.
+                     * @param message RescheduleMaintenanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memcache.v1beta2.IRescheduleMaintenanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RescheduleMaintenanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RescheduleMaintenanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Verifies a RescheduleMaintenanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RescheduleMaintenanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RescheduleMaintenanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Creates a plain object from a RescheduleMaintenanceRequest message. Also converts values to other types if specified.
+                     * @param message RescheduleMaintenanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memcache.v1beta2.RescheduleMaintenanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RescheduleMaintenanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RescheduleMaintenanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RescheduleMaintenanceRequest {
+
+                    /** RescheduleType enum. */
+                    enum RescheduleType {
+                        RESCHEDULE_TYPE_UNSPECIFIED = 0,
+                        IMMEDIATE = 1,
+                        NEXT_AVAILABLE_WINDOW = 2,
+                        SPECIFIC_TIME = 3
+                    }
+                }
+
                 /** Properties of an ApplyParametersRequest. */
                 interface IApplyParametersRequest {
 
@@ -3570,6 +4732,12 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** MemcacheVersion enum. */
+                enum MemcacheVersion {
+                    MEMCACHE_VERSION_UNSPECIFIED = 0,
+                    MEMCACHE_1_5 = 1
+                }
+
                 /** Properties of a MemcacheParameters. */
                 interface IMemcacheParameters {
 
@@ -3804,12 +4972,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** MemcacheVersion enum. */
-                enum MemcacheVersion {
-                    MEMCACHE_VERSION_UNSPECIFIED = 0,
-                    MEMCACHE_1_5 = 1
                 }
 
                 /** Properties of a LocationMetadata. */
@@ -9556,6 +10718,137 @@ export namespace google {
 
             /**
              * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** DayOfWeek enum. */
+        enum DayOfWeek {
+            DAY_OF_WEEK_UNSPECIFIED = 0,
+            MONDAY = 1,
+            TUESDAY = 2,
+            WEDNESDAY = 3,
+            THURSDAY = 4,
+            FRIDAY = 5,
+            SATURDAY = 6,
+            SUNDAY = 7
+        }
+
+        /** Properties of a TimeOfDay. */
+        interface ITimeOfDay {
+
+            /** TimeOfDay hours */
+            hours?: (number|null);
+
+            /** TimeOfDay minutes */
+            minutes?: (number|null);
+
+            /** TimeOfDay seconds */
+            seconds?: (number|null);
+
+            /** TimeOfDay nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a TimeOfDay. */
+        class TimeOfDay implements ITimeOfDay {
+
+            /**
+             * Constructs a new TimeOfDay.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.ITimeOfDay);
+
+            /** TimeOfDay hours. */
+            public hours: number;
+
+            /** TimeOfDay minutes. */
+            public minutes: number;
+
+            /** TimeOfDay seconds. */
+            public seconds: number;
+
+            /** TimeOfDay nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new TimeOfDay instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TimeOfDay instance
+             */
+            public static create(properties?: google.type.ITimeOfDay): google.type.TimeOfDay;
+
+            /**
+             * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.TimeOfDay;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.TimeOfDay;
+
+            /**
+             * Verifies a TimeOfDay message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TimeOfDay
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.TimeOfDay;
+
+            /**
+             * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
+             * @param message TimeOfDay
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.TimeOfDay, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TimeOfDay to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TimeOfDay
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-securitycenter",
-        "version": "7.0.0",
+        "version": "7.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -298,7 +298,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -331,7 +331,7 @@
             "regionTag": "securitycenter_v1_generated_SecurityCenter_GetBigQueryExport_async",
             "title": "SecurityCenter getBigQueryExport Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets a BigQuery export.",
+            "description": " Gets a big query export.",
             "canonical": true,
             "file": "security_center.get_big_query_export.js",
             "language": "JAVASCRIPT",
@@ -462,7 +462,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -710,7 +710,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 177,
+                    "end": 179,
                     "type": "FULL"
                 }
             ],
@@ -1030,7 +1030,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -1519,7 +1519,7 @@
             "regionTag": "securitycenter_v1_generated_SecurityCenter_CreateBigQueryExport_async",
             "title": "SecurityCenter createBigQueryExport Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a BigQuery export.",
+            "description": " Creates a big query export.",
             "canonical": true,
             "file": "security_center.create_big_query_export.js",
             "language": "JAVASCRIPT",
@@ -1567,7 +1567,7 @@
             "regionTag": "securitycenter_v1_generated_SecurityCenter_DeleteBigQueryExport_async",
             "title": "SecurityCenter deleteBigQueryExport Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes an existing BigQuery export.",
+            "description": " Deletes an existing big query export.",
             "canonical": true,
             "file": "security_center.delete_big_query_export.js",
             "language": "JAVASCRIPT",

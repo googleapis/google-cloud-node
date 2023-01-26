@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.1](https://github.com/googleapis/google-cloud-node/compare/admin-v4.3.0...admin-v4.3.1) (2022-12-16)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency google-gax to v3 ([#3626](https://github.com/googleapis/google-cloud-node/issues/3626)) ([bab338f](https://github.com/googleapis/google-cloud-node/commit/bab338f0dd566df02fb3c41ce4af17439126892e))
+
 ## [4.3.0](https://github.com/googleapis/nodejs-analytics-admin/compare/v4.2.0...v4.3.0) (2022-11-11)
 
 

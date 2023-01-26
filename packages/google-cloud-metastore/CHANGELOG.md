@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-metastore-v3.2.0...dataproc-metastore-v3.3.0) (2022-12-21)
+
+
+### Features
+
+* Added RemoveIamPolicy API ([#3791](https://github.com/googleapis/google-cloud-node/issues/3791)) ([e16a9d2](https://github.com/googleapis/google-cloud-node/commit/e16a9d23cccf29180469d2047fe2643bb99493f4))
+
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-metastore-v3.1.2...dataproc-metastore-v3.2.0) (2022-12-16)
+
+
+### Features
+
+* Added federation API ([#3681](https://github.com/googleapis/google-cloud-node/issues/3681)) ([6b2c4d1](https://github.com/googleapis/google-cloud-node/commit/6b2c4d101d966abc017c02fa7777227faa4698ef))
+
 ## [3.1.2](https://github.com/googleapis/nodejs-dataproc-metastore/compare/v3.1.1...v3.1.2) (2022-11-11)
 
 

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.3.0...dialogflow-v5.4.0) (2022-12-16)
+
+
+### Features
+
+* Added cx_current_page field to AutomatedAgentReply ([#3671](https://github.com/googleapis/google-cloud-node/issues/3671)) ([47e23e4](https://github.com/googleapis/google-cloud-node/commit/47e23e44af8a2e190dfe259ef50442dd1775cd81))
+
 ## [5.3.0](https://github.com/googleapis/nodejs-dialogflow/compare/v5.2.1...v5.3.0) (2022-11-11)
 
 

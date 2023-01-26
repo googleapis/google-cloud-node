@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,11 +37,15 @@ function main(name) {
    */
   // const rawDocument = {}
   /**
-   *  Required. The resource name of the Processor google.cloud.documentai.v1.Processor  or
+   *  Required. The resource name of the
+   *  Processor google.cloud.documentai.v1.Processor  or
    *  ProcessorVersion google.cloud.documentai.v1.ProcessorVersion 
-   *  to use for processing. If a Processor google.cloud.documentai.v1.Processor  is specified, the server will use
-   *  its default version google.cloud.documentai.v1.Processor.default_processor_version. Format:
-   *  `projects/{project}/locations/{location}/processors/{processor}`, or
+   *  to use for processing. If a
+   *  Processor google.cloud.documentai.v1.Processor  is specified, the server
+   *  will use its default
+   *  version google.cloud.documentai.v1.Processor.default_processor_version.
+   *  Format: `projects/{project}/locations/{location}/processors/{processor}`,
+   *  or
    *  `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    */
   // const name = 'abc123'

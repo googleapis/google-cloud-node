@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -4587,6 +4587,9 @@ export namespace google {
 
                     /** ClusterConfig dataprocMetricConfig */
                     dataprocMetricConfig?: (google.cloud.dataproc.v1.IDataprocMetricConfig|null);
+
+                    /** ClusterConfig auxiliaryNodeGroups */
+                    auxiliaryNodeGroups?: (google.cloud.dataproc.v1.IAuxiliaryNodeGroup[]|null);
                 }
 
                 /** Represents a ClusterConfig. */
@@ -4642,6 +4645,9 @@ export namespace google {
 
                     /** ClusterConfig dataprocMetricConfig. */
                     public dataprocMetricConfig?: (google.cloud.dataproc.v1.IDataprocMetricConfig|null);
+
+                    /** ClusterConfig auxiliaryNodeGroups. */
+                    public auxiliaryNodeGroups: google.cloud.dataproc.v1.IAuxiliaryNodeGroup[];
 
                     /**
                      * Creates a new ClusterConfig instance using the specified properties.
@@ -5873,7 +5879,8 @@ export namespace google {
                     enum Preemptibility {
                         PREEMPTIBILITY_UNSPECIFIED = 0,
                         NON_PREEMPTIBLE = 1,
-                        PREEMPTIBLE = 2
+                        PREEMPTIBLE = 2,
+                        SPOT = 3
                     }
                 }
 
@@ -6196,6 +6203,233 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AuxiliaryNodeGroup. */
+                interface IAuxiliaryNodeGroup {
+
+                    /** AuxiliaryNodeGroup nodeGroup */
+                    nodeGroup?: (google.cloud.dataproc.v1.INodeGroup|null);
+
+                    /** AuxiliaryNodeGroup nodeGroupId */
+                    nodeGroupId?: (string|null);
+                }
+
+                /** Represents an AuxiliaryNodeGroup. */
+                class AuxiliaryNodeGroup implements IAuxiliaryNodeGroup {
+
+                    /**
+                     * Constructs a new AuxiliaryNodeGroup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IAuxiliaryNodeGroup);
+
+                    /** AuxiliaryNodeGroup nodeGroup. */
+                    public nodeGroup?: (google.cloud.dataproc.v1.INodeGroup|null);
+
+                    /** AuxiliaryNodeGroup nodeGroupId. */
+                    public nodeGroupId: string;
+
+                    /**
+                     * Creates a new AuxiliaryNodeGroup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AuxiliaryNodeGroup instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IAuxiliaryNodeGroup): google.cloud.dataproc.v1.AuxiliaryNodeGroup;
+
+                    /**
+                     * Encodes the specified AuxiliaryNodeGroup message. Does not implicitly {@link google.cloud.dataproc.v1.AuxiliaryNodeGroup.verify|verify} messages.
+                     * @param message AuxiliaryNodeGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IAuxiliaryNodeGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AuxiliaryNodeGroup message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.AuxiliaryNodeGroup.verify|verify} messages.
+                     * @param message AuxiliaryNodeGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IAuxiliaryNodeGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AuxiliaryNodeGroup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AuxiliaryNodeGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.AuxiliaryNodeGroup;
+
+                    /**
+                     * Decodes an AuxiliaryNodeGroup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AuxiliaryNodeGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.AuxiliaryNodeGroup;
+
+                    /**
+                     * Verifies an AuxiliaryNodeGroup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AuxiliaryNodeGroup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AuxiliaryNodeGroup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.AuxiliaryNodeGroup;
+
+                    /**
+                     * Creates a plain object from an AuxiliaryNodeGroup message. Also converts values to other types if specified.
+                     * @param message AuxiliaryNodeGroup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.AuxiliaryNodeGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AuxiliaryNodeGroup to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AuxiliaryNodeGroup
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NodeGroup. */
+                interface INodeGroup {
+
+                    /** NodeGroup name */
+                    name?: (string|null);
+
+                    /** NodeGroup roles */
+                    roles?: (google.cloud.dataproc.v1.NodeGroup.Role[]|null);
+
+                    /** NodeGroup nodeGroupConfig */
+                    nodeGroupConfig?: (google.cloud.dataproc.v1.IInstanceGroupConfig|null);
+
+                    /** NodeGroup labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a NodeGroup. */
+                class NodeGroup implements INodeGroup {
+
+                    /**
+                     * Constructs a new NodeGroup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.INodeGroup);
+
+                    /** NodeGroup name. */
+                    public name: string;
+
+                    /** NodeGroup roles. */
+                    public roles: google.cloud.dataproc.v1.NodeGroup.Role[];
+
+                    /** NodeGroup nodeGroupConfig. */
+                    public nodeGroupConfig?: (google.cloud.dataproc.v1.IInstanceGroupConfig|null);
+
+                    /** NodeGroup labels. */
+                    public labels: { [k: string]: string };
+
+                    /**
+                     * Creates a new NodeGroup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NodeGroup instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.INodeGroup): google.cloud.dataproc.v1.NodeGroup;
+
+                    /**
+                     * Encodes the specified NodeGroup message. Does not implicitly {@link google.cloud.dataproc.v1.NodeGroup.verify|verify} messages.
+                     * @param message NodeGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.INodeGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NodeGroup message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.NodeGroup.verify|verify} messages.
+                     * @param message NodeGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.INodeGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NodeGroup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NodeGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.NodeGroup;
+
+                    /**
+                     * Decodes a NodeGroup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NodeGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.NodeGroup;
+
+                    /**
+                     * Verifies a NodeGroup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NodeGroup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NodeGroup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.NodeGroup;
+
+                    /**
+                     * Creates a plain object from a NodeGroup message. Also converts values to other types if specified.
+                     * @param message NodeGroup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.NodeGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NodeGroup to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NodeGroup
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NodeGroup {
+
+                    /** Role enum. */
+                    enum Role {
+                        ROLE_UNSPECIFIED = 0,
+                        DRIVER = 1
+                    }
                 }
 
                 /** Properties of a NodeInitializationAction. */
@@ -10743,6 +10977,9 @@ export namespace google {
 
                     /** Job done */
                     done?: (boolean|null);
+
+                    /** Job driverSchedulingConfig */
+                    driverSchedulingConfig?: (google.cloud.dataproc.v1.IDriverSchedulingConfig|null);
                 }
 
                 /** Represents a Job. */
@@ -10810,6 +11047,9 @@ export namespace google {
 
                     /** Job done. */
                     public done: boolean;
+
+                    /** Job driverSchedulingConfig. */
+                    public driverSchedulingConfig?: (google.cloud.dataproc.v1.IDriverSchedulingConfig|null);
 
                     /** Job typeJob. */
                     public typeJob?: ("hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob");
@@ -10886,6 +11126,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Job
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DriverSchedulingConfig. */
+                interface IDriverSchedulingConfig {
+
+                    /** DriverSchedulingConfig memoryMb */
+                    memoryMb?: (number|null);
+
+                    /** DriverSchedulingConfig vcores */
+                    vcores?: (number|null);
+                }
+
+                /** Represents a DriverSchedulingConfig. */
+                class DriverSchedulingConfig implements IDriverSchedulingConfig {
+
+                    /**
+                     * Constructs a new DriverSchedulingConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IDriverSchedulingConfig);
+
+                    /** DriverSchedulingConfig memoryMb. */
+                    public memoryMb: number;
+
+                    /** DriverSchedulingConfig vcores. */
+                    public vcores: number;
+
+                    /**
+                     * Creates a new DriverSchedulingConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DriverSchedulingConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IDriverSchedulingConfig): google.cloud.dataproc.v1.DriverSchedulingConfig;
+
+                    /**
+                     * Encodes the specified DriverSchedulingConfig message. Does not implicitly {@link google.cloud.dataproc.v1.DriverSchedulingConfig.verify|verify} messages.
+                     * @param message DriverSchedulingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IDriverSchedulingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DriverSchedulingConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.DriverSchedulingConfig.verify|verify} messages.
+                     * @param message DriverSchedulingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IDriverSchedulingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DriverSchedulingConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DriverSchedulingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.DriverSchedulingConfig;
+
+                    /**
+                     * Decodes a DriverSchedulingConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DriverSchedulingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.DriverSchedulingConfig;
+
+                    /**
+                     * Verifies a DriverSchedulingConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DriverSchedulingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DriverSchedulingConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.DriverSchedulingConfig;
+
+                    /**
+                     * Creates a plain object from a DriverSchedulingConfig message. Also converts values to other types if specified.
+                     * @param message DriverSchedulingConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.DriverSchedulingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DriverSchedulingConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DriverSchedulingConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11919,6 +12262,420 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Represents a NodeGroupController */
+                class NodeGroupController extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new NodeGroupController service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new NodeGroupController service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): NodeGroupController;
+
+                    /**
+                     * Calls CreateNodeGroup.
+                     * @param request CreateNodeGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createNodeGroup(request: google.cloud.dataproc.v1.ICreateNodeGroupRequest, callback: google.cloud.dataproc.v1.NodeGroupController.CreateNodeGroupCallback): void;
+
+                    /**
+                     * Calls CreateNodeGroup.
+                     * @param request CreateNodeGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createNodeGroup(request: google.cloud.dataproc.v1.ICreateNodeGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ResizeNodeGroup.
+                     * @param request ResizeNodeGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public resizeNodeGroup(request: google.cloud.dataproc.v1.IResizeNodeGroupRequest, callback: google.cloud.dataproc.v1.NodeGroupController.ResizeNodeGroupCallback): void;
+
+                    /**
+                     * Calls ResizeNodeGroup.
+                     * @param request ResizeNodeGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resizeNodeGroup(request: google.cloud.dataproc.v1.IResizeNodeGroupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetNodeGroup.
+                     * @param request GetNodeGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and NodeGroup
+                     */
+                    public getNodeGroup(request: google.cloud.dataproc.v1.IGetNodeGroupRequest, callback: google.cloud.dataproc.v1.NodeGroupController.GetNodeGroupCallback): void;
+
+                    /**
+                     * Calls GetNodeGroup.
+                     * @param request GetNodeGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getNodeGroup(request: google.cloud.dataproc.v1.IGetNodeGroupRequest): Promise<google.cloud.dataproc.v1.NodeGroup>;
+                }
+
+                namespace NodeGroupController {
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.NodeGroupController|createNodeGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateNodeGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.NodeGroupController|resizeNodeGroup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ResizeNodeGroupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.NodeGroupController|getNodeGroup}.
+                     * @param error Error, if any
+                     * @param [response] NodeGroup
+                     */
+                    type GetNodeGroupCallback = (error: (Error|null), response?: google.cloud.dataproc.v1.NodeGroup) => void;
+                }
+
+                /** Properties of a CreateNodeGroupRequest. */
+                interface ICreateNodeGroupRequest {
+
+                    /** CreateNodeGroupRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateNodeGroupRequest nodeGroup */
+                    nodeGroup?: (google.cloud.dataproc.v1.INodeGroup|null);
+
+                    /** CreateNodeGroupRequest nodeGroupId */
+                    nodeGroupId?: (string|null);
+
+                    /** CreateNodeGroupRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateNodeGroupRequest. */
+                class CreateNodeGroupRequest implements ICreateNodeGroupRequest {
+
+                    /**
+                     * Constructs a new CreateNodeGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.ICreateNodeGroupRequest);
+
+                    /** CreateNodeGroupRequest parent. */
+                    public parent: string;
+
+                    /** CreateNodeGroupRequest nodeGroup. */
+                    public nodeGroup?: (google.cloud.dataproc.v1.INodeGroup|null);
+
+                    /** CreateNodeGroupRequest nodeGroupId. */
+                    public nodeGroupId: string;
+
+                    /** CreateNodeGroupRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateNodeGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateNodeGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.ICreateNodeGroupRequest): google.cloud.dataproc.v1.CreateNodeGroupRequest;
+
+                    /**
+                     * Encodes the specified CreateNodeGroupRequest message. Does not implicitly {@link google.cloud.dataproc.v1.CreateNodeGroupRequest.verify|verify} messages.
+                     * @param message CreateNodeGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.ICreateNodeGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateNodeGroupRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.CreateNodeGroupRequest.verify|verify} messages.
+                     * @param message CreateNodeGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.ICreateNodeGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateNodeGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateNodeGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.CreateNodeGroupRequest;
+
+                    /**
+                     * Decodes a CreateNodeGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateNodeGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.CreateNodeGroupRequest;
+
+                    /**
+                     * Verifies a CreateNodeGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateNodeGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateNodeGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.CreateNodeGroupRequest;
+
+                    /**
+                     * Creates a plain object from a CreateNodeGroupRequest message. Also converts values to other types if specified.
+                     * @param message CreateNodeGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.CreateNodeGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateNodeGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateNodeGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResizeNodeGroupRequest. */
+                interface IResizeNodeGroupRequest {
+
+                    /** ResizeNodeGroupRequest name */
+                    name?: (string|null);
+
+                    /** ResizeNodeGroupRequest size */
+                    size?: (number|null);
+
+                    /** ResizeNodeGroupRequest requestId */
+                    requestId?: (string|null);
+
+                    /** ResizeNodeGroupRequest gracefulDecommissionTimeout */
+                    gracefulDecommissionTimeout?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a ResizeNodeGroupRequest. */
+                class ResizeNodeGroupRequest implements IResizeNodeGroupRequest {
+
+                    /**
+                     * Constructs a new ResizeNodeGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IResizeNodeGroupRequest);
+
+                    /** ResizeNodeGroupRequest name. */
+                    public name: string;
+
+                    /** ResizeNodeGroupRequest size. */
+                    public size: number;
+
+                    /** ResizeNodeGroupRequest requestId. */
+                    public requestId: string;
+
+                    /** ResizeNodeGroupRequest gracefulDecommissionTimeout. */
+                    public gracefulDecommissionTimeout?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new ResizeNodeGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResizeNodeGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IResizeNodeGroupRequest): google.cloud.dataproc.v1.ResizeNodeGroupRequest;
+
+                    /**
+                     * Encodes the specified ResizeNodeGroupRequest message. Does not implicitly {@link google.cloud.dataproc.v1.ResizeNodeGroupRequest.verify|verify} messages.
+                     * @param message ResizeNodeGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IResizeNodeGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResizeNodeGroupRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.ResizeNodeGroupRequest.verify|verify} messages.
+                     * @param message ResizeNodeGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IResizeNodeGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResizeNodeGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResizeNodeGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.ResizeNodeGroupRequest;
+
+                    /**
+                     * Decodes a ResizeNodeGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResizeNodeGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.ResizeNodeGroupRequest;
+
+                    /**
+                     * Verifies a ResizeNodeGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResizeNodeGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResizeNodeGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.ResizeNodeGroupRequest;
+
+                    /**
+                     * Creates a plain object from a ResizeNodeGroupRequest message. Also converts values to other types if specified.
+                     * @param message ResizeNodeGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.ResizeNodeGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResizeNodeGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResizeNodeGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetNodeGroupRequest. */
+                interface IGetNodeGroupRequest {
+
+                    /** GetNodeGroupRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetNodeGroupRequest. */
+                class GetNodeGroupRequest implements IGetNodeGroupRequest {
+
+                    /**
+                     * Constructs a new GetNodeGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IGetNodeGroupRequest);
+
+                    /** GetNodeGroupRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetNodeGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetNodeGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IGetNodeGroupRequest): google.cloud.dataproc.v1.GetNodeGroupRequest;
+
+                    /**
+                     * Encodes the specified GetNodeGroupRequest message. Does not implicitly {@link google.cloud.dataproc.v1.GetNodeGroupRequest.verify|verify} messages.
+                     * @param message GetNodeGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IGetNodeGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetNodeGroupRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GetNodeGroupRequest.verify|verify} messages.
+                     * @param message GetNodeGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IGetNodeGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetNodeGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetNodeGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.GetNodeGroupRequest;
+
+                    /**
+                     * Decodes a GetNodeGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetNodeGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.GetNodeGroupRequest;
+
+                    /**
+                     * Verifies a GetNodeGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetNodeGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetNodeGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.GetNodeGroupRequest;
+
+                    /**
+                     * Creates a plain object from a GetNodeGroupRequest message. Also converts values to other types if specified.
+                     * @param message GetNodeGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.GetNodeGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetNodeGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetNodeGroupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a BatchOperationMetadata. */
                 interface IBatchOperationMetadata {
 
@@ -12330,6 +13087,157 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NodeGroupOperationMetadata. */
+                interface INodeGroupOperationMetadata {
+
+                    /** NodeGroupOperationMetadata nodeGroupId */
+                    nodeGroupId?: (string|null);
+
+                    /** NodeGroupOperationMetadata clusterUuid */
+                    clusterUuid?: (string|null);
+
+                    /** NodeGroupOperationMetadata status */
+                    status?: (google.cloud.dataproc.v1.IClusterOperationStatus|null);
+
+                    /** NodeGroupOperationMetadata statusHistory */
+                    statusHistory?: (google.cloud.dataproc.v1.IClusterOperationStatus[]|null);
+
+                    /** NodeGroupOperationMetadata operationType */
+                    operationType?: (google.cloud.dataproc.v1.NodeGroupOperationMetadata.NodeGroupOperationType|keyof typeof google.cloud.dataproc.v1.NodeGroupOperationMetadata.NodeGroupOperationType|null);
+
+                    /** NodeGroupOperationMetadata description */
+                    description?: (string|null);
+
+                    /** NodeGroupOperationMetadata labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** NodeGroupOperationMetadata warnings */
+                    warnings?: (string[]|null);
+                }
+
+                /** Represents a NodeGroupOperationMetadata. */
+                class NodeGroupOperationMetadata implements INodeGroupOperationMetadata {
+
+                    /**
+                     * Constructs a new NodeGroupOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.INodeGroupOperationMetadata);
+
+                    /** NodeGroupOperationMetadata nodeGroupId. */
+                    public nodeGroupId: string;
+
+                    /** NodeGroupOperationMetadata clusterUuid. */
+                    public clusterUuid: string;
+
+                    /** NodeGroupOperationMetadata status. */
+                    public status?: (google.cloud.dataproc.v1.IClusterOperationStatus|null);
+
+                    /** NodeGroupOperationMetadata statusHistory. */
+                    public statusHistory: google.cloud.dataproc.v1.IClusterOperationStatus[];
+
+                    /** NodeGroupOperationMetadata operationType. */
+                    public operationType: (google.cloud.dataproc.v1.NodeGroupOperationMetadata.NodeGroupOperationType|keyof typeof google.cloud.dataproc.v1.NodeGroupOperationMetadata.NodeGroupOperationType);
+
+                    /** NodeGroupOperationMetadata description. */
+                    public description: string;
+
+                    /** NodeGroupOperationMetadata labels. */
+                    public labels: { [k: string]: string };
+
+                    /** NodeGroupOperationMetadata warnings. */
+                    public warnings: string[];
+
+                    /**
+                     * Creates a new NodeGroupOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NodeGroupOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.INodeGroupOperationMetadata): google.cloud.dataproc.v1.NodeGroupOperationMetadata;
+
+                    /**
+                     * Encodes the specified NodeGroupOperationMetadata message. Does not implicitly {@link google.cloud.dataproc.v1.NodeGroupOperationMetadata.verify|verify} messages.
+                     * @param message NodeGroupOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.INodeGroupOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NodeGroupOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.NodeGroupOperationMetadata.verify|verify} messages.
+                     * @param message NodeGroupOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.INodeGroupOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NodeGroupOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NodeGroupOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.NodeGroupOperationMetadata;
+
+                    /**
+                     * Decodes a NodeGroupOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NodeGroupOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.NodeGroupOperationMetadata;
+
+                    /**
+                     * Verifies a NodeGroupOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NodeGroupOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NodeGroupOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.NodeGroupOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a NodeGroupOperationMetadata message. Also converts values to other types if specified.
+                     * @param message NodeGroupOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.NodeGroupOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NodeGroupOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NodeGroupOperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NodeGroupOperationMetadata {
+
+                    /** NodeGroupOperationType enum. */
+                    enum NodeGroupOperationType {
+                        NODE_GROUP_OPERATION_TYPE_UNSPECIFIED = 0,
+                        CREATE = 1,
+                        UPDATE = 2,
+                        DELETE = 3,
+                        RESIZE = 4
+                    }
                 }
 
                 /** Represents a WorkflowTemplateService */

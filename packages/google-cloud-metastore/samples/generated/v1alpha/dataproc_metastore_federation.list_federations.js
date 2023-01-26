@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,15 +29,16 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The relative resource name of the location of metastore federations
-   *  to list, in the following form:
+   *  Required. The relative resource name of the location of metastore
+   *  federations to list, in the following form:
    *  `projects/{project_number}/locations/{location_id}`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of federations to return. The response may contain less
-   *  than the maximum number. If unspecified, no more than 500 services are
-   *  returned. The maximum value is 1000; values above 1000 are changed to 1000.
+   *  Optional. The maximum number of federations to return. The response may
+   *  contain less than the maximum number. If unspecified, no more than 500
+   *  services are returned. The maximum value is 1000; values above 1000 are
+   *  changed to 1000.
    */
   // const pageSize = 1234
   /**

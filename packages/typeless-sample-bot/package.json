@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/typeless-sample-bot",
   "description": "Google Cloud GitHub bot that converts TypeScript snippets into JavaScript",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -33,7 +33,7 @@
     "@babel/traverse": "^7.18.10",
     "chalk": "^5.0.1",
     "debug": "^4.3.4",
-    "recast": "^0.21.1",
+    "recast": "^0.22.0",
     "yargs": "^17.4.1"
   },
   "devDependencies": {
@@ -42,13 +42,13 @@
     "@types/babel__core": "^7.1.19",
     "@types/babel__traverse": "^7.14.2",
     "@types/mocha": "^9.1.1",
-    "@types/node": "^17.0.23",
+    "@types/node": "^18.0.0",
     "@types/sinon": "^10.0.13",
     "@types/yargs": "^17.0.10",
     "c8": "^7.11.3",
     "gts": "^3.1.0",
     "mocha": "^10.0.0",
-    "sinon": "^14.0.0",
+    "sinon": "^15.0.0",
     "snap-shot-it": "^7.9.6",
     "typescript": "^4.6.3"
   }

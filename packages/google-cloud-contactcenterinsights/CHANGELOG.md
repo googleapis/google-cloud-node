@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.1.2...contact-center-insights-v2.2.0) (2022-12-16)
+
+
+### Features
+
+* Add Configurable Analysis, Bulk Upload, Bulk Analyze, Delete Issue Apis ([#3736](https://github.com/googleapis/google-cloud-node/issues/3736)) ([c7a240f](https://github.com/googleapis/google-cloud-node/commit/c7a240f1b0c8279d1ba255a0a84a568bb08f9a38))
+
 ## [2.1.2](https://github.com/googleapis/nodejs-contact-center-insights/compare/v2.1.1...v2.1.2) (2022-11-11)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,8 +33,8 @@ function main(version, updateMask) {
    */
   // const version = {}
   /**
-   *  Required. The mask to control which fields get updated. Currently only `description`
-   *  and `display_name` can be updated.
+   *  Required. The mask to control which fields get updated. Currently only
+   *  `description` and `display_name` can be updated.
    */
   // const updateMask = {}
 

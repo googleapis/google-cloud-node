@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ function main(billingAccount) {
   /**
    *  Required. The billing account resource to create.
    *  Currently CreateBillingAccount only supports subaccount creation, so
-   *  any created billing accounts must be under a provided master billing
+   *  any created billing accounts must be under a provided parent billing
    *  account.
    */
   // const billingAccount = {}

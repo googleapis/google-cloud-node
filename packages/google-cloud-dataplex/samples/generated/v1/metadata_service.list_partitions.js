@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,21 +34,22 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Maximum number of partitions to return. The service may return fewer than
-   *  this value. If unspecified, 100 partitions will be returned by default. The
-   *  maximum page size is 500; larger values will will be truncated to 500.
+   *  Optional. Maximum number of partitions to return. The service may return
+   *  fewer than this value. If unspecified, 100 partitions will be returned by
+   *  default. The maximum page size is 500; larger values will will be truncated
+   *  to 500.
    */
   // const pageSize = 1234
   /**
-   *  Optional. Page token received from a previous `ListPartitions` call. Provide
-   *  this to retrieve the subsequent page. When paginating, all other parameters
-   *  provided to `ListPartitions` must match the call that provided the
-   *  page token.
+   *  Optional. Page token received from a previous `ListPartitions` call.
+   *  Provide this to retrieve the subsequent page. When paginating, all other
+   *  parameters provided to `ListPartitions` must match the call that provided
+   *  the page token.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Filter the partitions returned to the caller using a key value pair
-   *  expression. Supported operators and syntax:
+   *  Optional. Filter the partitions returned to the caller using a key value
+   *  pair expression. Supported operators and syntax:
    *  - logic operators: AND, OR
    *  - comparison operators: <, >, >=, <= ,=, !=
    *  - LIKE operators:

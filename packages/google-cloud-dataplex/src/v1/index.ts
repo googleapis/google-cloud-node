@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,4 +18,5 @@
 
 export {ContentServiceClient} from './content_service_client';
 export {DataplexServiceClient} from './dataplex_service_client';
+export {DataScanServiceClient} from './data_scan_service_client';
 export {MetadataServiceClient} from './metadata_service_client';

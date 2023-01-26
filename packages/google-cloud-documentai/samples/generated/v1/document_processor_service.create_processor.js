@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,13 +29,14 @@ function main(parent, processor) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent (project and location) under which to create the processor.
-   *  Format: `projects/{project}/locations/{location}`
+   *  Required. The parent (project and location) under which to create the
+   *  processor. Format: `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**
-   *  Required. The processor to be created, requires processor_type  and display_name 
-   *  to be set. Also, the processor is under CMEK if CMEK fields are set.
+   *  Required. The processor to be created, requires processor_type  and
+   *  display_name  to be set. Also, the processor is under CMEK if CMEK fields
+   *  are set.
    */
   // const processor = {}
 

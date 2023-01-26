@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,4 +20,5 @@ export {AutoscalingPolicyServiceClient} from './autoscaling_policy_service_clien
 export {BatchControllerClient} from './batch_controller_client';
 export {ClusterControllerClient} from './cluster_controller_client';
 export {JobControllerClient} from './job_controller_client';
+export {NodeGroupControllerClient} from './node_group_controller_client';
 export {WorkflowTemplateServiceClient} from './workflow_template_service_client';

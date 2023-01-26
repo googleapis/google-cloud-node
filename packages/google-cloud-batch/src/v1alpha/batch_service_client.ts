@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -131,6 +131,9 @@ export class BatchServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -247,44 +250,16 @@ export class BatchServiceClient {
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
           get: '/v1alpha/{resource=projects/*/locations/*/jobs/*}:getIamPolicy',
-          additional_bindings: [
-            {
-              get: '/v1alpha/{resource=projects/*/locations/*/tasks/*}:getIamPolicy',
-            },
-            {
-              get: '/v1alpha/{resource=projects/*/locations/*/nodes/*}:getIamPolicy',
-            },
-          ],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
           post: '/v1alpha/{resource=projects/*/locations/*/jobs/*}:setIamPolicy',
           body: '*',
-          additional_bindings: [
-            {
-              post: '/v1alpha/{resource=projects/*/locations/*/tasks/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1alpha/{resource=projects/*/locations/*/nodes/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
           post: '/v1alpha/{resource=projects/*/locations/*/jobs/*}:testIamPermissions',
           body: '*',
-          additional_bindings: [
-            {
-              post: '/v1alpha/{resource=projects/*/locations/*/tasks/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1alpha/{resource=projects/*/locations/*/nodes/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
         },
         {
           selector: 'google.longrunning.Operations.CancelOperation',
@@ -486,10 +461,10 @@ export class BatchServiceClient {
    * @param {google.cloud.batch.v1alpha.Job} request.job
    *   Required. The Job to create.
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and t
    *   he request times out. If you make the request again with the same request
@@ -754,10 +729,10 @@ export class BatchServiceClient {
    * @param {string} [request.reason]
    *   Optional. Reason for this deletion.
    * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
    *
    *   For example, consider a situation where you make an initial request and t
    *   he request times out. If you make the request again with the same request

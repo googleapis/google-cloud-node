@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,11 +17,15 @@
 // ** All changes to this file may be overwritten. **
 
 import {
+  AttachedClustersClient,
   AwsClustersClient,
   AzureClustersClient,
 } from '@google-cloud/gkemulticloud';
 
 // check that the client class type name can be used
+function doStuffWithAttachedClustersClient(client: AttachedClustersClient) {
+  client.close();
+}
 function doStuffWithAwsClustersClient(client: AwsClustersClient) {
   client.close();
 }
@@ -30,6 +34,9 @@ function doStuffWithAzureClustersClient(client: AzureClustersClient) {
 }
 
 function main() {
+  // check that the client instance can be created
+  const attachedClustersClient = new AttachedClustersClient();
+  doStuffWithAttachedClustersClient(attachedClustersClient);
   // check that the client instance can be created
   const awsClustersClient = new AwsClustersClient();
   doStuffWithAwsClustersClient(awsClustersClient);

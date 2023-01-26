@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,12 +29,10 @@ function main(name, state, startTime) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The relative resource
-   *  name (https://cloud.google.com/apis/design/resource_names#relative_resource_name)
-   *  of the finding. Example:
-   *  "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}",
-   *  "folders/{folder_id}/sources/{source_id}/findings/{finding_id}",
-   *  "projects/{project_id}/sources/{source_id}/findings/{finding_id}".
+   *  Required. The relative resource name of the finding. See:
+   *  https://cloud.google.com/apis/design/resource_names#relative_resource_name
+   *  Example:
+   *  "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}".
    */
   // const name = 'abc123'
   /**

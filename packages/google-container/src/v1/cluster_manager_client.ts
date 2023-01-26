@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -118,6 +118,9 @@ export class ClusterManagerClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -828,11 +831,19 @@ export class ClusterManagerClient {
    *   All the nodes in the node pool will be Confidential VM once enabled.
    * @param {google.container.v1.VirtualNIC} request.gvnic
    *   Enable or disable gvnic on the node pool.
+   * @param {string} request.etag
+   *   The current etag of the node pool.
+   *   If an etag is provided and does not match the current etag of the node
+   *   pool, update will be blocked and an ABORTED error will be returned.
+   * @param {google.container.v1.FastSocket} request.fastSocket
+   *   Enable or disable NCCL fast socket for the node pool.
    * @param {google.container.v1.NodePoolLoggingConfig} request.loggingConfig
    *   Logging configuration.
    * @param {google.container.v1.ResourceLabels} request.resourceLabels
    *   The resource labels for the node pool to use to annotate any related
    *   Google Compute Engine resources.
+   * @param {google.container.v1.WindowsNodeConfig} request.windowsNodeConfig
+   *   Parameters that can be configured on Windows nodes.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1281,8 +1292,8 @@ export class ClusterManagerClient {
    *   Deprecated. The name of the cluster to upgrade.
    *   This field has been deprecated and replaced by the name field.
    * @param {google.container.v1.AddonsConfig} request.addonsConfig
-   *   Required. The desired configurations for the various addons available to run in the
-   *   cluster.
+   *   Required. The desired configurations for the various addons available to
+   *   run in the cluster.
    * @param {string} request.name
    *   The name (project, location, cluster) of the cluster to set addons.
    *   Specified in the format `projects/* /locations/* /clusters/*`.

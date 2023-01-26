@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -124,6 +124,9 @@ export class ClusterControllerClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -181,6 +184,9 @@ export class ClusterControllerClient {
     this.pathTemplates = {
       batchPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batches/{batch}'
+      ),
+      nodeGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{node_group}'
       ),
       projectLocationAutoscalingPolicyPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -659,11 +665,12 @@ export class ClusterControllerClient {
    * @param {google.cloud.dataproc.v1.Cluster} request.cluster
    *   Required. The cluster to create.
    * @param {string} [request.requestId]
-   *   Optional. A unique ID used to identify the request. If the server receives two
+   *   Optional. A unique ID used to identify the request. If the server receives
+   *   two
    *   [CreateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateClusterRequest)s
    *   with the same id, then the second request will be ignored and the
-   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the backend
-   *   is returned.
+   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created
+   *   and stored in the backend is returned.
    *
    *   It is recommended to always set this value to a
    *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -808,7 +815,8 @@ export class ClusterControllerClient {
    * Updates a cluster in a project. The returned
    * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
    * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
-   * The cluster must be in a {@link google.cloud.dataproc.v1.ClusterStatus.State|`RUNNING`} state or an error
+   * The cluster must be in a
+   * {@link google.cloud.dataproc.v1.ClusterStatus.State|`RUNNING`} state or an error
    * is returned.
    *
    * @param {Object} request
@@ -889,8 +897,8 @@ export class ClusterControllerClient {
    *   receives two
    *   [UpdateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.UpdateClusterRequest)s
    *   with the same id, then the second request will be ignored and the
-   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the
-   *   backend is returned.
+   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created
+   *   and stored in the backend is returned.
    *
    *   It is recommended to always set this value to a
    *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -1050,8 +1058,8 @@ export class ClusterControllerClient {
    *   receives two
    *   [StopClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StopClusterRequest)s
    *   with the same id, then the second request will be ignored and the
-   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the
-   *   backend is returned.
+   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created
+   *   and stored in the backend is returned.
    *
    *   Recommendation: Set this value to a
    *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -1211,8 +1219,8 @@ export class ClusterControllerClient {
    *   receives two
    *   [StartClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StartClusterRequest)s
    *   with the same id, then the second request will be ignored and the
-   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the
-   *   backend is returned.
+   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created
+   *   and stored in the backend is returned.
    *
    *   Recommendation: Set this value to a
    *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -1374,8 +1382,8 @@ export class ClusterControllerClient {
    *   receives two
    *   [DeleteClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteClusterRequest)s
    *   with the same id, then the second request will be ignored and the
-   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created and stored in the
-   *   backend is returned.
+   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created
+   *   and stored in the backend is returned.
    *
    *   It is recommended to always set this value to a
    *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -1972,6 +1980,76 @@ export class ClusterControllerClient {
    */
   matchBatchFromBatchName(batchName: string) {
     return this.pathTemplates.batchPathTemplate.match(batchName).batch;
+  }
+
+  /**
+   * Return a fully-qualified nodeGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} region
+   * @param {string} cluster
+   * @param {string} node_group
+   * @returns {string} Resource name string.
+   */
+  nodeGroupPath(
+    project: string,
+    region: string,
+    cluster: string,
+    nodeGroup: string
+  ) {
+    return this.pathTemplates.nodeGroupPathTemplate.render({
+      project: project,
+      region: region,
+      cluster: cluster,
+      node_group: nodeGroup,
+    });
+  }
+
+  /**
+   * Parse the project from NodeGroup resource.
+   *
+   * @param {string} nodeGroupName
+   *   A fully-qualified path representing NodeGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNodeGroupName(nodeGroupName: string) {
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
+      .project;
+  }
+
+  /**
+   * Parse the region from NodeGroup resource.
+   *
+   * @param {string} nodeGroupName
+   *   A fully-qualified path representing NodeGroup resource.
+   * @returns {string} A string representing the region.
+   */
+  matchRegionFromNodeGroupName(nodeGroupName: string) {
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName).region;
+  }
+
+  /**
+   * Parse the cluster from NodeGroup resource.
+   *
+   * @param {string} nodeGroupName
+   *   A fully-qualified path representing NodeGroup resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromNodeGroupName(nodeGroupName: string) {
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
+      .cluster;
+  }
+
+  /**
+   * Parse the node_group from NodeGroup resource.
+   *
+   * @param {string} nodeGroupName
+   *   A fully-qualified path representing NodeGroup resource.
+   * @returns {string} A string representing the node_group.
+   */
+  matchNodeGroupFromNodeGroupName(nodeGroupName: string) {
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
+      .node_group;
   }
 
   /**

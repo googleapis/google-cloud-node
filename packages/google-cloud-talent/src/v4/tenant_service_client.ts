@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -119,6 +119,9 @@ export class TenantServiceClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -521,12 +524,15 @@ export class TenantServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.talent.v4.Tenant} request.tenant
-   *   Required. The tenant resource to replace the current resource in the system.
+   *   Required. The tenant resource to replace the current resource in the
+   *   system.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Strongly recommended for the best service experience.
    *
-   *   If {@link google.cloud.talent.v4.UpdateTenantRequest.update_mask|update_mask} is provided, only the specified fields in
-   *   {@link google.cloud.talent.v4.UpdateTenantRequest.tenant|tenant} are updated. Otherwise all the fields are updated.
+   *   If {@link google.cloud.talent.v4.UpdateTenantRequest.update_mask|update_mask} is
+   *   provided, only the specified fields in
+   *   {@link google.cloud.talent.v4.UpdateTenantRequest.tenant|tenant} are updated.
+   *   Otherwise all the fields are updated.
    *
    *   A field mask to specify the tenant fields to be updated. Only
    *   top level fields of {@link google.cloud.talent.v4.Tenant|Tenant} are supported.

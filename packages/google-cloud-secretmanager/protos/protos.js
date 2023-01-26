@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -82,6 +82,7 @@
                          * @property {string|null} [etag] Secret etag
                          * @property {google.cloud.secretmanager.v1.IRotation|null} [rotation] Secret rotation
                          * @property {Object.<string,number|Long>|null} [versionAliases] Secret versionAliases
+                         * @property {Object.<string,string>|null} [annotations] Secret annotations
                          */
     
                         /**
@@ -96,6 +97,7 @@
                             this.labels = {};
                             this.topics = [];
                             this.versionAliases = {};
+                            this.annotations = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -182,6 +184,14 @@
                          */
                         Secret.prototype.versionAliases = $util.emptyObject;
     
+                        /**
+                         * Secret annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.secretmanager.v1.Secret
+                         * @instance
+                         */
+                        Secret.prototype.annotations = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -243,6 +253,9 @@
                             if (message.versionAliases != null && Object.hasOwnProperty.call(message, "versionAliases"))
                                 for (var keys = Object.keys(message.versionAliases), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 11, wireType 2 =*/90).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 0 =*/16).int64(message.versionAliases[keys[i]]).ldelim();
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 13, wireType 2 =*/106).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -357,6 +370,29 @@
                                         message.versionAliases[key] = value;
                                         break;
                                     }
+                                case 13: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -457,6 +493,14 @@
                                     if (!$util.isInteger(message.versionAliases[key[i]]) && !(message.versionAliases[key[i]] && $util.isInteger(message.versionAliases[key[i]].low) && $util.isInteger(message.versionAliases[key[i]].high)))
                                         return "versionAliases: integer|Long{k:string} expected";
                             }
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -532,6 +576,13 @@
                                     else if (typeof object.versionAliases[keys[i]] === "object")
                                         message.versionAliases[keys[i]] = new $util.LongBits(object.versionAliases[keys[i]].low >>> 0, object.versionAliases[keys[i]].high >>> 0).toNumber();
                             }
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.Secret.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -553,6 +604,7 @@
                             if (options.objects || options.defaults) {
                                 object.labels = {};
                                 object.versionAliases = {};
+                                object.annotations = {};
                             }
                             if (options.defaults) {
                                 object.name = "";
@@ -599,6 +651,11 @@
                                         object.versionAliases[keys2[j]] = options.longs === String ? String(message.versionAliases[keys2[j]]) : message.versionAliases[keys2[j]];
                                     else
                                         object.versionAliases[keys2[j]] = options.longs === String ? $util.Long.prototype.toString.call(message.versionAliases[keys2[j]]) : options.longs === Number ? new $util.LongBits(message.versionAliases[keys2[j]].low >>> 0, message.versionAliases[keys2[j]].high >>> 0).toNumber() : message.versionAliases[keys2[j]];
+                            }
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
                             }
                             return object;
                         };

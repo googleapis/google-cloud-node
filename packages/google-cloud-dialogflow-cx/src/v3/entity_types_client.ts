@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -124,6 +124,9 @@ export class EntityTypesClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -800,9 +803,11 @@ export class EntityTypesClient {
    *      indicating the referencing resources.
    *   *  If `force` is set to true, Dialogflow will remove the entity type, as
    *      well as any references to the entity type (i.e. Page
-   *      {@link google.cloud.dialogflow.cx.v3.Form.Parameter|parameter} of the entity type will be changed to
-   *      '@sys.any' and intent {@link google.cloud.dialogflow.cx.v3.Intent.Parameter|parameter} of the entity type
-   *      will be removed).
+   *      {@link google.cloud.dialogflow.cx.v3.Form.Parameter|parameter} of the entity
+   *      type will be changed to
+   *      '@sys.any' and intent
+   *      {@link google.cloud.dialogflow.cx.v3.Intent.Parameter|parameter} of the
+   *      entity type will be removed).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

@@ -20,6 +20,7 @@ import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
+import "google/cloud/notebooks/v1/diagnostic_config.proto";
 import "google/cloud/notebooks/v1/environment.proto";
 import "google/cloud/notebooks/v1/execution.proto";
 import "google/cloud/notebooks/v1/instance.proto";
@@ -255,6 +256,19 @@ service NotebookService {
     };
   }
 
+  // Creates a Diagnostic File and runs Diagnostic Tool given an Instance.
+  rpc DiagnoseInstance(DiagnoseInstanceRequest) returns (google.longrunning.Operation) {
+    option (google.api.http) = {
+      post: "/v1/{name=projects/*/locations/*/instances/*}:diagnose"
+      body: "*"
+    };
+    option (google.api.method_signature) = "name,diagnostic_config";
+    option (google.longrunning.operation_info) = {
+      response_type: "Instance"
+      metadata_type: "OperationMetadata"
+    };
+  }
+
   // Allows notebook instances to
   // call this endpoint to upgrade themselves. Do not use this method directly.
   rpc UpgradeInstanceInternal(UpgradeInstanceInternalRequest) returns (google.longrunning.Operation) {
@@ -458,7 +472,7 @@ message ListInstancesResponse {
   string next_page_token = 2;
 
   // Locations that could not be reached. For example,
-  // ['us-west1-a', 'us-central1-b'].
+  // `['us-west1-a', 'us-central1-b']`.
   // A ListInstancesResponse will only contain either instances or unreachables,
   repeated string unreachable = 3;
 }
@@ -686,13 +700,13 @@ message GetInstanceHealthResponse {
 
   // Output only. Additional information about instance health.
   // Example:
-  //  healthInfo": {
-  //   "docker_proxy_agent_status": "1",
-  //   "docker_status": "1",
-  //   "jupyterlab_api_status": "-1",
-  //   "jupyterlab_status": "-1",
-  //   "updated": "2020-10-18 09:40:03.573409"
-  //  }
+  //     healthInfo": {
+  //       "docker_proxy_agent_status": "1",
+  //       "docker_status": "1",
+  //       "jupyterlab_api_status": "-1",
+  //       "jupyterlab_status": "-1",
+  //       "updated": "2020-10-18 09:40:03.573409"
+  //     }
   map<string, string> health_info = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
@@ -714,7 +728,7 @@ message RollbackInstanceRequest {
   string name = 1 [(google.api.field_behavior) = REQUIRED];
 
   // Required. The snapshot for rollback.
-  // Example: "projects/test-project/global/snapshots/krwlzipynril".
+  // Example: `projects/test-project/global/snapshots/krwlzipynril`.
   string target_snapshot = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
@@ -744,6 +758,21 @@ message ListEnvironmentsRequest {
   // A previous returned page token that can be used to continue listing from
   // the last result.
   string page_token = 3;
+}
+
+// Request for creating a notebook instance diagnostic file.
+message DiagnoseInstanceRequest {
+  // Required. Format:
+  // `projects/{project_id}/locations/{location}/instances/{instance_id}`
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "notebooks.googleapis.com/Instance"
+    }
+  ];
+
+  // Required. Defines flags that are used to run the diagnostic tool
+  DiagnosticConfig diagnostic_config = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Response for listing environments.
@@ -902,7 +931,7 @@ message ListExecutionsRequest {
   string page_token = 3;
 
   // Filter applied to resulting executions. Currently only supports filtering
-  // executions by a specified schedule_id.
+  // executions by a specified `schedule_id`.
   // Format: `schedule_id=<Schedule_ID>`
   string filter = 4;
 

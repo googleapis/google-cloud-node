@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/iap-v2.0.3...iap-v2.1.0) (2022-12-21)
+
+
+### Features
+
+* Add AllowedDomainSettings to the UpdateIapSettingsRequest ([#3806](https://github.com/googleapis/google-cloud-node/issues/3806)) ([070d9fa](https://github.com/googleapis/google-cloud-node/commit/070d9fac00eaac49b720bc28e16e36f788d1149d))
+
 ## [2.0.3](https://github.com/googleapis/nodejs-iap/compare/v2.0.2...v2.0.3) (2022-11-10)
 
 

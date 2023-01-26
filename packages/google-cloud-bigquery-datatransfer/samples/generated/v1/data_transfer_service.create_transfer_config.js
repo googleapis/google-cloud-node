@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,10 +29,11 @@ function main(parent, transferConfig) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The BigQuery project id where the transfer configuration should be created.
-   *  Must be in the format projects/{project_id}/locations/{location_id} or
-   *  projects/{project_id}. If specified location and location of the
-   *  destination bigquery dataset do not match - the request will fail.
+   *  Required. The BigQuery project id where the transfer configuration should
+   *  be created. Must be in the format
+   *  projects/{project_id}/locations/{location_id} or projects/{project_id}. If
+   *  specified location and location of the destination bigquery dataset do not
+   *  match - the request will fail.
    */
   // const parent = 'abc123'
   /**

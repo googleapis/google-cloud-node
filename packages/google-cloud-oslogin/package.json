@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/os-login",
   "description": "Google Cloud OS Login API client for Node.js",
-  "version": "4.0.4",
+  "version": "4.1.0",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
-    "@types/node": "^16.0.0",
+    "@types/node": "^18.0.0",
     "@types/sinon": "^10.0.0",
     "c8": "^7.0.0",
     "gts": "^3.1.0",
@@ -65,10 +65,10 @@
     "mocha": "^9.2.2",
     "null-loader": "^4.0.0",
     "pack-n-play": "^1.0.0-2",
-    "sinon": "^14.0.0",
+    "sinon": "^15.0.0",
     "ts-loader": "^8.0.0",
     "typescript": "^4.6.4",
     "webpack": "^5.0.0",
-    "webpack-cli": "^4.0.0"
+    "webpack-cli": "^5.0.0"
   }
 }

@@ -15,6 +15,9 @@
   * [Asset_service.analyze_iam_policy](#asset_service.analyze_iam_policy)
   * [Asset_service.analyze_iam_policy_longrunning](#asset_service.analyze_iam_policy_longrunning)
   * [Asset_service.analyze_move](#asset_service.analyze_move)
+  * [Asset_service.analyze_org_policies](#asset_service.analyze_org_policies)
+  * [Asset_service.analyze_org_policy_governed_assets](#asset_service.analyze_org_policy_governed_assets)
+  * [Asset_service.analyze_org_policy_governed_containers](#asset_service.analyze_org_policy_governed_containers)
   * [Asset_service.batch_get_assets_history](#asset_service.batch_get_assets_history)
   * [Asset_service.batch_get_effective_iam_policies](#asset_service.batch_get_effective_iam_policies)
   * [Asset_service.create_feed](#asset_service.create_feed)
@@ -105,6 +108,57 @@ __Usage:__
 
 
 `node packages/google-cloud-asset/samples/generated/v1/asset_service.analyze_move.js`
+
+
+-----
+
+
+
+
+### Asset_service.analyze_org_policies
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1/asset_service.analyze_org_policies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-asset/samples/generated/v1/asset_service.analyze_org_policies.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-asset/samples/generated/v1/asset_service.analyze_org_policies.js`
+
+
+-----
+
+
+
+
+### Asset_service.analyze_org_policy_governed_assets
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1/asset_service.analyze_org_policy_governed_assets.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-asset/samples/generated/v1/asset_service.analyze_org_policy_governed_assets.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-asset/samples/generated/v1/asset_service.analyze_org_policy_governed_assets.js`
+
+
+-----
+
+
+
+
+### Asset_service.analyze_org_policy_governed_containers
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1/asset_service.analyze_org_policy_governed_containers.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-asset/samples/generated/v1/asset_service.analyze_org_policy_governed_containers.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-asset/samples/generated/v1/asset_service.analyze_org_policy_governed_containers.js`
 
 
 -----

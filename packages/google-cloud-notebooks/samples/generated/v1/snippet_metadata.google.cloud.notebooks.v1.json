@@ -152,6 +152,54 @@
             }
         },
         {
+            "regionTag": "notebooks_v1_generated_ManagedNotebookService_UpdateRuntime_async",
+            "title": "ManagedNotebookService updateRuntime Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update Notebook Runtime configuration.",
+            "canonical": true,
+            "file": "managed_notebook_service.update_runtime.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 82,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateRuntime",
+                "fullName": "google.cloud.notebooks.v1.ManagedNotebookService.UpdateRuntime",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "runtime",
+                        "type": ".google.cloud.notebooks.v1.Runtime"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ManagedNotebookServiceClient",
+                    "fullName": "google.cloud.notebooks.v1.ManagedNotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateRuntime",
+                    "fullName": "google.cloud.notebooks.v1.ManagedNotebookService.UpdateRuntime",
+                    "service": {
+                        "shortName": "ManagedNotebookService",
+                        "fullName": "google.cloud.notebooks.v1.ManagedNotebookService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "notebooks_v1_generated_ManagedNotebookService_DeleteRuntime_async",
             "title": "ManagedNotebookService deleteRuntime Sample",
             "origin": "API_DEFINITION",
@@ -380,6 +428,50 @@
             }
         },
         {
+            "regionTag": "notebooks_v1_generated_ManagedNotebookService_UpgradeRuntime_async",
+            "title": "ManagedNotebookService upgradeRuntime Sample",
+            "origin": "API_DEFINITION",
+            "description": " Upgrades a Managed Notebook Runtime to the latest version.",
+            "canonical": true,
+            "file": "managed_notebook_service.upgrade_runtime.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpgradeRuntime",
+                "fullName": "google.cloud.notebooks.v1.ManagedNotebookService.UpgradeRuntime",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ManagedNotebookServiceClient",
+                    "fullName": "google.cloud.notebooks.v1.ManagedNotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "UpgradeRuntime",
+                    "fullName": "google.cloud.notebooks.v1.ManagedNotebookService.UpgradeRuntime",
+                    "service": {
+                        "shortName": "ManagedNotebookService",
+                        "fullName": "google.cloud.notebooks.v1.ManagedNotebookService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "notebooks_v1_generated_ManagedNotebookService_ReportRuntimeEvent_async",
             "title": "ManagedNotebookService reportRuntimeEvent Sample",
             "origin": "API_DEFINITION",
@@ -464,6 +556,50 @@
                 "method": {
                     "shortName": "RefreshRuntimeTokenInternal",
                     "fullName": "google.cloud.notebooks.v1.ManagedNotebookService.RefreshRuntimeTokenInternal",
+                    "service": {
+                        "shortName": "ManagedNotebookService",
+                        "fullName": "google.cloud.notebooks.v1.ManagedNotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "notebooks_v1_generated_ManagedNotebookService_DiagnoseRuntime_async",
+            "title": "ManagedNotebookService diagnoseRuntime Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a Diagnostic File and runs Diagnostic Tool given a Runtime.",
+            "canonical": true,
+            "file": "managed_notebook_service.diagnose_runtime.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DiagnoseRuntime",
+                "fullName": "google.cloud.notebooks.v1.ManagedNotebookService.DiagnoseRuntime",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "diagnostic_config",
+                        "type": ".google.cloud.notebooks.v1.DiagnosticConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ManagedNotebookServiceClient",
+                    "fullName": "google.cloud.notebooks.v1.ManagedNotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "DiagnoseRuntime",
+                    "fullName": "google.cloud.notebooks.v1.ManagedNotebookService.DiagnoseRuntime",
                     "service": {
                         "shortName": "ManagedNotebookService",
                         "fullName": "google.cloud.notebooks.v1.ManagedNotebookService"
@@ -1292,6 +1428,50 @@
                 "method": {
                     "shortName": "RollbackInstance",
                     "fullName": "google.cloud.notebooks.v1.NotebookService.RollbackInstance",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.notebooks.v1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "notebooks_v1_generated_NotebookService_DiagnoseInstance_async",
+            "title": "ManagedNotebookService diagnoseInstance Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a Diagnostic File and runs Diagnostic Tool given an Instance.",
+            "canonical": true,
+            "file": "notebook_service.diagnose_instance.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DiagnoseInstance",
+                "fullName": "google.cloud.notebooks.v1.NotebookService.DiagnoseInstance",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "diagnostic_config",
+                        "type": ".google.cloud.notebooks.v1.DiagnosticConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.notebooks.v1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "DiagnoseInstance",
+                    "fullName": "google.cloud.notebooks.v1.NotebookService.DiagnoseInstance",
                     "service": {
                         "shortName": "NotebookService",
                         "fullName": "google.cloud.notebooks.v1.NotebookService"

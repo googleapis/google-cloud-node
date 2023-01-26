@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,8 +41,8 @@ function main(parent, instanceId, instance) {
    *  * Must start with a letter.
    *  * Must be between 1-40 characters.
    *  * Must end with a number or a letter.
-   *  * Must be unique within the user project / location
-   *  If any of the above are not met, will raise an invalid argument error.
+   *  * Must be unique within the user project / location.
+   *  If any of the above are not met, the API raises an invalid argument error.
    */
   // const instanceId = 'abc123'
   /**

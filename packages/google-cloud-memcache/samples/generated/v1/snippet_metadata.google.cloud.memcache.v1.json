@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-memcache",
-        "version": "2.1.4",
+        "version": "2.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],
@@ -203,7 +203,7 @@
             "regionTag": "memcache_v1_generated_CloudMemcache_UpdateParameters_async",
             "title": "CloudMemcache updateParameters Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates the defined Memcached Parameters for an existing Instance. This method only stages the parameters, it must be followed by ApplyParameters to apply the parameters to nodes of the Memcached Instance.",
+            "description": " Updates the defined Memcached parameters for an existing instance. This method only stages the parameters, it must be followed by `ApplyParameters` to apply the parameters to nodes of the Memcached instance.",
             "canonical": true,
             "file": "cloud_memcache.update_parameters.js",
             "language": "JAVASCRIPT",
@@ -291,7 +291,7 @@
             "regionTag": "memcache_v1_generated_CloudMemcache_ApplyParameters_async",
             "title": "CloudMemcache applyParameters Sample",
             "origin": "API_DEFINITION",
-            "description": " ApplyParameters will restart the set of specified nodes in order to update them to the current set of parameters for the Memcached Instance.",
+            "description": " `ApplyParameters` restarts the set of specified nodes in order to update them to the current set of parameters for the Memcached Instance.",
             "canonical": true,
             "file": "cloud_memcache.apply_parameters.js",
             "language": "JAVASCRIPT",
@@ -328,6 +328,54 @@
                 "method": {
                     "shortName": "ApplyParameters",
                     "fullName": "google.cloud.memcache.v1.CloudMemcache.ApplyParameters",
+                    "service": {
+                        "shortName": "CloudMemcache",
+                        "fullName": "google.cloud.memcache.v1.CloudMemcache"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "memcache_v1_generated_CloudMemcache_RescheduleMaintenance_async",
+            "title": "CloudMemcache rescheduleMaintenance Sample",
+            "origin": "API_DEFINITION",
+            "description": " Reschedules upcoming maintenance event.",
+            "canonical": true,
+            "file": "cloud_memcache.reschedule_maintenance.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RescheduleMaintenance",
+                "fullName": "google.cloud.memcache.v1.CloudMemcache.RescheduleMaintenance",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instance",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "reschedule_type",
+                        "type": ".google.cloud.memcache.v1.RescheduleMaintenanceRequest.RescheduleType"
+                    },
+                    {
+                        "name": "schedule_time",
+                        "type": ".google.protobuf.Timestamp"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "CloudMemcacheClient",
+                    "fullName": "google.cloud.memcache.v1.CloudMemcacheClient"
+                },
+                "method": {
+                    "shortName": "RescheduleMaintenance",
+                    "fullName": "google.cloud.memcache.v1.CloudMemcache.RescheduleMaintenance",
                     "service": {
                         "shortName": "CloudMemcache",
                         "fullName": "google.cloud.memcache.v1.CloudMemcache"

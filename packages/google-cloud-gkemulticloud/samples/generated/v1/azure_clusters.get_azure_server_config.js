@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the AzureServerConfig google.cloud.gkemulticloud.v1.AzureServerConfig  resource to describe.
+   *  Required. The name of the
+   *  AzureServerConfig google.cloud.gkemulticloud.v1.AzureServerConfig 
+   *  resource to describe.
    *  `AzureServerConfig` names are formatted as
    *  `projects/<project-id>/locations/<region>/azureServerConfig`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)

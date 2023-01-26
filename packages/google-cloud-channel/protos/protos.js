@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14771,6 +14771,7 @@
                          * @property {google.type.IDate|null} [effectiveInvoiceMonth] RepricingConfig effectiveInvoiceMonth
                          * @property {google.cloud.channel.v1.IRepricingAdjustment|null} [adjustment] RepricingConfig adjustment
                          * @property {google.cloud.channel.v1.RebillingBasis|null} [rebillingBasis] RepricingConfig rebillingBasis
+                         * @property {Array.<google.cloud.channel.v1.IConditionalOverride>|null} [conditionalOverrides] RepricingConfig conditionalOverrides
                          */
     
                         /**
@@ -14782,6 +14783,7 @@
                          * @param {google.cloud.channel.v1.IRepricingConfig=} [properties] Properties to set
                          */
                         function RepricingConfig(properties) {
+                            this.conditionalOverrides = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -14827,6 +14829,14 @@
                          * @instance
                          */
                         RepricingConfig.prototype.rebillingBasis = 0;
+    
+                        /**
+                         * RepricingConfig conditionalOverrides.
+                         * @member {Array.<google.cloud.channel.v1.IConditionalOverride>} conditionalOverrides
+                         * @memberof google.cloud.channel.v1.RepricingConfig
+                         * @instance
+                         */
+                        RepricingConfig.prototype.conditionalOverrides = $util.emptyArray;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -14876,6 +14886,9 @@
                                 $root.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.encode(message.entitlementGranularity, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.channelPartnerGranularity != null && Object.hasOwnProperty.call(message, "channelPartnerGranularity"))
                                 $root.google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity.encode(message.channelPartnerGranularity, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.conditionalOverrides != null && message.conditionalOverrides.length)
+                                for (var i = 0; i < message.conditionalOverrides.length; ++i)
+                                    $root.google.cloud.channel.v1.ConditionalOverride.encode(message.conditionalOverrides[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -14928,6 +14941,12 @@
                                     }
                                 case 3: {
                                         message.rebillingBasis = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.conditionalOverrides && message.conditionalOverrides.length))
+                                            message.conditionalOverrides = [];
+                                        message.conditionalOverrides.push($root.google.cloud.channel.v1.ConditionalOverride.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -15003,6 +15022,15 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.conditionalOverrides != null && message.hasOwnProperty("conditionalOverrides")) {
+                                if (!Array.isArray(message.conditionalOverrides))
+                                    return "conditionalOverrides: array expected";
+                                for (var i = 0; i < message.conditionalOverrides.length; ++i) {
+                                    var error = $root.google.cloud.channel.v1.ConditionalOverride.verify(message.conditionalOverrides[i]);
+                                    if (error)
+                                        return "conditionalOverrides." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -15058,6 +15086,16 @@
                                 message.rebillingBasis = 2;
                                 break;
                             }
+                            if (object.conditionalOverrides) {
+                                if (!Array.isArray(object.conditionalOverrides))
+                                    throw TypeError(".google.cloud.channel.v1.RepricingConfig.conditionalOverrides: array expected");
+                                message.conditionalOverrides = [];
+                                for (var i = 0; i < object.conditionalOverrides.length; ++i) {
+                                    if (typeof object.conditionalOverrides[i] !== "object")
+                                        throw TypeError(".google.cloud.channel.v1.RepricingConfig.conditionalOverrides: object expected");
+                                    message.conditionalOverrides[i] = $root.google.cloud.channel.v1.ConditionalOverride.fromObject(object.conditionalOverrides[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -15074,6 +15112,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.conditionalOverrides = [];
                             if (options.defaults) {
                                 object.effectiveInvoiceMonth = null;
                                 object.adjustment = null;
@@ -15094,6 +15134,11 @@
                                 object.channelPartnerGranularity = $root.google.cloud.channel.v1.RepricingConfig.ChannelPartnerGranularity.toObject(message.channelPartnerGranularity, options);
                                 if (options.oneofs)
                                     object.granularity = "channelPartnerGranularity";
+                            }
+                            if (message.conditionalOverrides && message.conditionalOverrides.length) {
+                                object.conditionalOverrides = [];
+                                for (var j = 0; j < message.conditionalOverrides.length; ++j)
+                                    object.conditionalOverrides[j] = $root.google.cloud.channel.v1.ConditionalOverride.toObject(message.conditionalOverrides[j], options);
                             }
                             return object;
                         };
@@ -15938,6 +15983,720 @@
                         };
     
                         return PercentageAdjustment;
+                    })();
+    
+                    v1.ConditionalOverride = (function() {
+    
+                        /**
+                         * Properties of a ConditionalOverride.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IConditionalOverride
+                         * @property {google.cloud.channel.v1.IRepricingAdjustment|null} [adjustment] ConditionalOverride adjustment
+                         * @property {google.cloud.channel.v1.RebillingBasis|null} [rebillingBasis] ConditionalOverride rebillingBasis
+                         * @property {google.cloud.channel.v1.IRepricingCondition|null} [repricingCondition] ConditionalOverride repricingCondition
+                         */
+    
+                        /**
+                         * Constructs a new ConditionalOverride.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ConditionalOverride.
+                         * @implements IConditionalOverride
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IConditionalOverride=} [properties] Properties to set
+                         */
+                        function ConditionalOverride(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConditionalOverride adjustment.
+                         * @member {google.cloud.channel.v1.IRepricingAdjustment|null|undefined} adjustment
+                         * @memberof google.cloud.channel.v1.ConditionalOverride
+                         * @instance
+                         */
+                        ConditionalOverride.prototype.adjustment = null;
+    
+                        /**
+                         * ConditionalOverride rebillingBasis.
+                         * @member {google.cloud.channel.v1.RebillingBasis} rebillingBasis
+                         * @memberof google.cloud.channel.v1.ConditionalOverride
+                         * @instance
+                         */
+                        ConditionalOverride.prototype.rebillingBasis = 0;
+    
+                        /**
+                         * ConditionalOverride repricingCondition.
+                         * @member {google.cloud.channel.v1.IRepricingCondition|null|undefined} repricingCondition
+                         * @memberof google.cloud.channel.v1.ConditionalOverride
+                         * @instance
+                         */
+                        ConditionalOverride.prototype.repricingCondition = null;
+    
+                        /**
+                         * Creates a new ConditionalOverride instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ConditionalOverride
+                         * @static
+                         * @param {google.cloud.channel.v1.IConditionalOverride=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ConditionalOverride} ConditionalOverride instance
+                         */
+                        ConditionalOverride.create = function create(properties) {
+                            return new ConditionalOverride(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConditionalOverride message. Does not implicitly {@link google.cloud.channel.v1.ConditionalOverride.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ConditionalOverride
+                         * @static
+                         * @param {google.cloud.channel.v1.IConditionalOverride} message ConditionalOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConditionalOverride.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.adjustment != null && Object.hasOwnProperty.call(message, "adjustment"))
+                                $root.google.cloud.channel.v1.RepricingAdjustment.encode(message.adjustment, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.rebillingBasis != null && Object.hasOwnProperty.call(message, "rebillingBasis"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.rebillingBasis);
+                            if (message.repricingCondition != null && Object.hasOwnProperty.call(message, "repricingCondition"))
+                                $root.google.cloud.channel.v1.RepricingCondition.encode(message.repricingCondition, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConditionalOverride message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ConditionalOverride.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ConditionalOverride
+                         * @static
+                         * @param {google.cloud.channel.v1.IConditionalOverride} message ConditionalOverride message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConditionalOverride.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConditionalOverride message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ConditionalOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ConditionalOverride} ConditionalOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConditionalOverride.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ConditionalOverride();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.adjustment = $root.google.cloud.channel.v1.RepricingAdjustment.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rebillingBasis = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.repricingCondition = $root.google.cloud.channel.v1.RepricingCondition.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConditionalOverride message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ConditionalOverride
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ConditionalOverride} ConditionalOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConditionalOverride.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConditionalOverride message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ConditionalOverride
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConditionalOverride.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.adjustment != null && message.hasOwnProperty("adjustment")) {
+                                var error = $root.google.cloud.channel.v1.RepricingAdjustment.verify(message.adjustment);
+                                if (error)
+                                    return "adjustment." + error;
+                            }
+                            if (message.rebillingBasis != null && message.hasOwnProperty("rebillingBasis"))
+                                switch (message.rebillingBasis) {
+                                default:
+                                    return "rebillingBasis: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.repricingCondition != null && message.hasOwnProperty("repricingCondition")) {
+                                var error = $root.google.cloud.channel.v1.RepricingCondition.verify(message.repricingCondition);
+                                if (error)
+                                    return "repricingCondition." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConditionalOverride message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ConditionalOverride
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ConditionalOverride} ConditionalOverride
+                         */
+                        ConditionalOverride.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ConditionalOverride)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ConditionalOverride();
+                            if (object.adjustment != null) {
+                                if (typeof object.adjustment !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.ConditionalOverride.adjustment: object expected");
+                                message.adjustment = $root.google.cloud.channel.v1.RepricingAdjustment.fromObject(object.adjustment);
+                            }
+                            switch (object.rebillingBasis) {
+                            default:
+                                if (typeof object.rebillingBasis === "number") {
+                                    message.rebillingBasis = object.rebillingBasis;
+                                    break;
+                                }
+                                break;
+                            case "REBILLING_BASIS_UNSPECIFIED":
+                            case 0:
+                                message.rebillingBasis = 0;
+                                break;
+                            case "COST_AT_LIST":
+                            case 1:
+                                message.rebillingBasis = 1;
+                                break;
+                            case "DIRECT_CUSTOMER_COST":
+                            case 2:
+                                message.rebillingBasis = 2;
+                                break;
+                            }
+                            if (object.repricingCondition != null) {
+                                if (typeof object.repricingCondition !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.ConditionalOverride.repricingCondition: object expected");
+                                message.repricingCondition = $root.google.cloud.channel.v1.RepricingCondition.fromObject(object.repricingCondition);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConditionalOverride message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ConditionalOverride
+                         * @static
+                         * @param {google.cloud.channel.v1.ConditionalOverride} message ConditionalOverride
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConditionalOverride.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.adjustment = null;
+                                object.rebillingBasis = options.enums === String ? "REBILLING_BASIS_UNSPECIFIED" : 0;
+                                object.repricingCondition = null;
+                            }
+                            if (message.adjustment != null && message.hasOwnProperty("adjustment"))
+                                object.adjustment = $root.google.cloud.channel.v1.RepricingAdjustment.toObject(message.adjustment, options);
+                            if (message.rebillingBasis != null && message.hasOwnProperty("rebillingBasis"))
+                                object.rebillingBasis = options.enums === String ? $root.google.cloud.channel.v1.RebillingBasis[message.rebillingBasis] === undefined ? message.rebillingBasis : $root.google.cloud.channel.v1.RebillingBasis[message.rebillingBasis] : message.rebillingBasis;
+                            if (message.repricingCondition != null && message.hasOwnProperty("repricingCondition"))
+                                object.repricingCondition = $root.google.cloud.channel.v1.RepricingCondition.toObject(message.repricingCondition, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConditionalOverride to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ConditionalOverride
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConditionalOverride.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConditionalOverride
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.ConditionalOverride
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConditionalOverride.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.ConditionalOverride";
+                        };
+    
+                        return ConditionalOverride;
+                    })();
+    
+                    v1.RepricingCondition = (function() {
+    
+                        /**
+                         * Properties of a RepricingCondition.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IRepricingCondition
+                         * @property {google.cloud.channel.v1.ISkuGroupCondition|null} [skuGroupCondition] RepricingCondition skuGroupCondition
+                         */
+    
+                        /**
+                         * Constructs a new RepricingCondition.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a RepricingCondition.
+                         * @implements IRepricingCondition
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IRepricingCondition=} [properties] Properties to set
+                         */
+                        function RepricingCondition(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RepricingCondition skuGroupCondition.
+                         * @member {google.cloud.channel.v1.ISkuGroupCondition|null|undefined} skuGroupCondition
+                         * @memberof google.cloud.channel.v1.RepricingCondition
+                         * @instance
+                         */
+                        RepricingCondition.prototype.skuGroupCondition = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RepricingCondition condition.
+                         * @member {"skuGroupCondition"|undefined} condition
+                         * @memberof google.cloud.channel.v1.RepricingCondition
+                         * @instance
+                         */
+                        Object.defineProperty(RepricingCondition.prototype, "condition", {
+                            get: $util.oneOfGetter($oneOfFields = ["skuGroupCondition"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RepricingCondition instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.RepricingCondition
+                         * @static
+                         * @param {google.cloud.channel.v1.IRepricingCondition=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.RepricingCondition} RepricingCondition instance
+                         */
+                        RepricingCondition.create = function create(properties) {
+                            return new RepricingCondition(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RepricingCondition message. Does not implicitly {@link google.cloud.channel.v1.RepricingCondition.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.RepricingCondition
+                         * @static
+                         * @param {google.cloud.channel.v1.IRepricingCondition} message RepricingCondition message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepricingCondition.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.skuGroupCondition != null && Object.hasOwnProperty.call(message, "skuGroupCondition"))
+                                $root.google.cloud.channel.v1.SkuGroupCondition.encode(message.skuGroupCondition, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RepricingCondition message, length delimited. Does not implicitly {@link google.cloud.channel.v1.RepricingCondition.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.RepricingCondition
+                         * @static
+                         * @param {google.cloud.channel.v1.IRepricingCondition} message RepricingCondition message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RepricingCondition.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RepricingCondition message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.RepricingCondition
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.RepricingCondition} RepricingCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepricingCondition.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.RepricingCondition();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.skuGroupCondition = $root.google.cloud.channel.v1.SkuGroupCondition.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RepricingCondition message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.RepricingCondition
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.RepricingCondition} RepricingCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RepricingCondition.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RepricingCondition message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.RepricingCondition
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RepricingCondition.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.skuGroupCondition != null && message.hasOwnProperty("skuGroupCondition")) {
+                                properties.condition = 1;
+                                {
+                                    var error = $root.google.cloud.channel.v1.SkuGroupCondition.verify(message.skuGroupCondition);
+                                    if (error)
+                                        return "skuGroupCondition." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RepricingCondition message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.RepricingCondition
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.RepricingCondition} RepricingCondition
+                         */
+                        RepricingCondition.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.RepricingCondition)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.RepricingCondition();
+                            if (object.skuGroupCondition != null) {
+                                if (typeof object.skuGroupCondition !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.RepricingCondition.skuGroupCondition: object expected");
+                                message.skuGroupCondition = $root.google.cloud.channel.v1.SkuGroupCondition.fromObject(object.skuGroupCondition);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RepricingCondition message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.RepricingCondition
+                         * @static
+                         * @param {google.cloud.channel.v1.RepricingCondition} message RepricingCondition
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RepricingCondition.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.skuGroupCondition != null && message.hasOwnProperty("skuGroupCondition")) {
+                                object.skuGroupCondition = $root.google.cloud.channel.v1.SkuGroupCondition.toObject(message.skuGroupCondition, options);
+                                if (options.oneofs)
+                                    object.condition = "skuGroupCondition";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RepricingCondition to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.RepricingCondition
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RepricingCondition.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RepricingCondition
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.RepricingCondition
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RepricingCondition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.RepricingCondition";
+                        };
+    
+                        return RepricingCondition;
+                    })();
+    
+                    v1.SkuGroupCondition = (function() {
+    
+                        /**
+                         * Properties of a SkuGroupCondition.
+                         * @memberof google.cloud.channel.v1
+                         * @interface ISkuGroupCondition
+                         * @property {string|null} [skuGroup] SkuGroupCondition skuGroup
+                         */
+    
+                        /**
+                         * Constructs a new SkuGroupCondition.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a SkuGroupCondition.
+                         * @implements ISkuGroupCondition
+                         * @constructor
+                         * @param {google.cloud.channel.v1.ISkuGroupCondition=} [properties] Properties to set
+                         */
+                        function SkuGroupCondition(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SkuGroupCondition skuGroup.
+                         * @member {string} skuGroup
+                         * @memberof google.cloud.channel.v1.SkuGroupCondition
+                         * @instance
+                         */
+                        SkuGroupCondition.prototype.skuGroup = "";
+    
+                        /**
+                         * Creates a new SkuGroupCondition instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.SkuGroupCondition
+                         * @static
+                         * @param {google.cloud.channel.v1.ISkuGroupCondition=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.SkuGroupCondition} SkuGroupCondition instance
+                         */
+                        SkuGroupCondition.create = function create(properties) {
+                            return new SkuGroupCondition(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SkuGroupCondition message. Does not implicitly {@link google.cloud.channel.v1.SkuGroupCondition.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.SkuGroupCondition
+                         * @static
+                         * @param {google.cloud.channel.v1.ISkuGroupCondition} message SkuGroupCondition message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SkuGroupCondition.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.skuGroup != null && Object.hasOwnProperty.call(message, "skuGroup"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.skuGroup);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SkuGroupCondition message, length delimited. Does not implicitly {@link google.cloud.channel.v1.SkuGroupCondition.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.SkuGroupCondition
+                         * @static
+                         * @param {google.cloud.channel.v1.ISkuGroupCondition} message SkuGroupCondition message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SkuGroupCondition.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SkuGroupCondition message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.SkuGroupCondition
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.SkuGroupCondition} SkuGroupCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SkuGroupCondition.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.SkuGroupCondition();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.skuGroup = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SkuGroupCondition message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.SkuGroupCondition
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.SkuGroupCondition} SkuGroupCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SkuGroupCondition.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SkuGroupCondition message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.SkuGroupCondition
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SkuGroupCondition.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.skuGroup != null && message.hasOwnProperty("skuGroup"))
+                                if (!$util.isString(message.skuGroup))
+                                    return "skuGroup: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SkuGroupCondition message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.SkuGroupCondition
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.SkuGroupCondition} SkuGroupCondition
+                         */
+                        SkuGroupCondition.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.SkuGroupCondition)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.SkuGroupCondition();
+                            if (object.skuGroup != null)
+                                message.skuGroup = String(object.skuGroup);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SkuGroupCondition message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.SkuGroupCondition
+                         * @static
+                         * @param {google.cloud.channel.v1.SkuGroupCondition} message SkuGroupCondition
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SkuGroupCondition.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.skuGroup = "";
+                            if (message.skuGroup != null && message.hasOwnProperty("skuGroup"))
+                                object.skuGroup = message.skuGroup;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SkuGroupCondition to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.SkuGroupCondition
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SkuGroupCondition.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SkuGroupCondition
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.SkuGroupCondition
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SkuGroupCondition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.SkuGroupCondition";
+                        };
+    
+                        return SkuGroupCondition;
                     })();
     
                     v1.CloudChannelService = (function() {

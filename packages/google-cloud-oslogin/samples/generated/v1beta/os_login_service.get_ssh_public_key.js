@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,9 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The fingerprint of the public key to retrieve. Public keys are identified
-   *  by their SHA-256 fingerprint. The fingerprint of the public key is in
-   *  format `users/{user}/sshPublicKeys/{fingerprint}`.
+   *  Required. The fingerprint of the public key to retrieve. Public keys are
+   *  identified by their SHA-256 fingerprint. The fingerprint of the public key
+   *  is in format `users/{user}/sshPublicKeys/{fingerprint}`.
    */
   // const name = 'abc123'
 

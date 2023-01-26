@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -289,6 +289,9 @@ export namespace google {
                     /** Pipeline environment */
                     environment?: ({ [k: string]: string }|null);
 
+                    /** Pipeline encryptedEnvironment */
+                    encryptedEnvironment?: (google.cloud.lifesciences.v2beta.ISecret|null);
+
                     /** Pipeline timeout */
                     timeout?: (google.protobuf.IDuration|null);
                 }
@@ -310,6 +313,9 @@ export namespace google {
 
                     /** Pipeline environment. */
                     public environment: { [k: string]: string };
+
+                    /** Pipeline encryptedEnvironment. */
+                    public encryptedEnvironment?: (google.cloud.lifesciences.v2beta.ISecret|null);
 
                     /** Pipeline timeout. */
                     public timeout?: (google.protobuf.IDuration|null);
@@ -410,6 +416,9 @@ export namespace google {
                     /** Action environment */
                     environment?: ({ [k: string]: string }|null);
 
+                    /** Action encryptedEnvironment */
+                    encryptedEnvironment?: (google.cloud.lifesciences.v2beta.ISecret|null);
+
                     /** Action pidNamespace */
                     pidNamespace?: (string|null);
 
@@ -476,6 +485,9 @@ export namespace google {
 
                     /** Action environment. */
                     public environment: { [k: string]: string };
+
+                    /** Action encryptedEnvironment. */
+                    public encryptedEnvironment?: (google.cloud.lifesciences.v2beta.ISecret|null);
 
                     /** Action pidNamespace. */
                     public pidNamespace: string;
@@ -962,6 +974,9 @@ export namespace google {
 
                     /** VirtualMachine volumes */
                     volumes?: (google.cloud.lifesciences.v2beta.IVolume[]|null);
+
+                    /** VirtualMachine reservation */
+                    reservation?: (string|null);
                 }
 
                 /** Represents a VirtualMachine. */
@@ -1014,6 +1029,9 @@ export namespace google {
 
                     /** VirtualMachine volumes. */
                     public volumes: google.cloud.lifesciences.v2beta.IVolume[];
+
+                    /** VirtualMachine reservation. */
+                    public reservation: string;
 
                     /**
                      * Creates a new VirtualMachine instance using the specified properties.

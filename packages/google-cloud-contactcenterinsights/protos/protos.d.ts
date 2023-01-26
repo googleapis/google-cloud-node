@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -173,6 +173,34 @@ export namespace google {
                     public deleteAnalysis(request: google.cloud.contactcenterinsights.v1.IDeleteAnalysisRequest): Promise<google.protobuf.Empty>;
 
                     /**
+                     * Calls BulkAnalyzeConversations.
+                     * @param request BulkAnalyzeConversationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public bulkAnalyzeConversations(request: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.BulkAnalyzeConversationsCallback): void;
+
+                    /**
+                     * Calls BulkAnalyzeConversations.
+                     * @param request BulkAnalyzeConversationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public bulkAnalyzeConversations(request: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls IngestConversations.
+                     * @param request IngestConversationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public ingestConversations(request: google.cloud.contactcenterinsights.v1.IIngestConversationsRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.IngestConversationsCallback): void;
+
+                    /**
+                     * Calls IngestConversations.
+                     * @param request IngestConversationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public ingestConversations(request: google.cloud.contactcenterinsights.v1.IIngestConversationsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ExportInsightsData.
                      * @param request ExportInsightsDataRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -325,6 +353,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateIssue(request: google.cloud.contactcenterinsights.v1.IUpdateIssueRequest): Promise<google.cloud.contactcenterinsights.v1.Issue>;
+
+                    /**
+                     * Calls DeleteIssue.
+                     * @param request DeleteIssueRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteIssue(request: google.cloud.contactcenterinsights.v1.IDeleteIssueRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteIssueCallback): void;
+
+                    /**
+                     * Calls DeleteIssue.
+                     * @param request DeleteIssueRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteIssue(request: google.cloud.contactcenterinsights.v1.IDeleteIssueRequest): Promise<google.protobuf.Empty>;
 
                     /**
                      * Calls CalculateIssueModelStats.
@@ -589,6 +631,20 @@ export namespace google {
                     type DeleteAnalysisCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|bulkAnalyzeConversations}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type BulkAnalyzeConversationsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|ingestConversations}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type IngestConversationsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|exportInsightsData}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -664,6 +720,13 @@ export namespace google {
                      * @param [response] Issue
                      */
                     type UpdateIssueCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.Issue) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|deleteIssue}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteIssueCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|calculateIssueModelStats}.
@@ -1236,6 +1299,9 @@ export namespace google {
 
                     /** CreateAnalysisOperationMetadata conversation */
                     conversation?: (string|null);
+
+                    /** CreateAnalysisOperationMetadata annotatorSelector */
+                    annotatorSelector?: (google.cloud.contactcenterinsights.v1.IAnnotatorSelector|null);
                 }
 
                 /** Represents a CreateAnalysisOperationMetadata. */
@@ -1255,6 +1321,9 @@ export namespace google {
 
                     /** CreateAnalysisOperationMetadata conversation. */
                     public conversation: string;
+
+                    /** CreateAnalysisOperationMetadata annotatorSelector. */
+                    public annotatorSelector?: (google.cloud.contactcenterinsights.v1.IAnnotatorSelector|null);
 
                     /**
                      * Creates a new CreateAnalysisOperationMetadata instance using the specified properties.
@@ -1976,6 +2045,627 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an IngestConversationsRequest. */
+                interface IIngestConversationsRequest {
+
+                    /** IngestConversationsRequest gcsSource */
+                    gcsSource?: (google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IGcsSource|null);
+
+                    /** IngestConversationsRequest transcriptObjectConfig */
+                    transcriptObjectConfig?: (google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ITranscriptObjectConfig|null);
+
+                    /** IngestConversationsRequest parent */
+                    parent?: (string|null);
+
+                    /** IngestConversationsRequest conversationConfig */
+                    conversationConfig?: (google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IConversationConfig|null);
+                }
+
+                /** Represents an IngestConversationsRequest. */
+                class IngestConversationsRequest implements IIngestConversationsRequest {
+
+                    /**
+                     * Constructs a new IngestConversationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IIngestConversationsRequest);
+
+                    /** IngestConversationsRequest gcsSource. */
+                    public gcsSource?: (google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IGcsSource|null);
+
+                    /** IngestConversationsRequest transcriptObjectConfig. */
+                    public transcriptObjectConfig?: (google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ITranscriptObjectConfig|null);
+
+                    /** IngestConversationsRequest parent. */
+                    public parent: string;
+
+                    /** IngestConversationsRequest conversationConfig. */
+                    public conversationConfig?: (google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IConversationConfig|null);
+
+                    /** IngestConversationsRequest source. */
+                    public source?: "gcsSource";
+
+                    /** IngestConversationsRequest objectConfig. */
+                    public objectConfig?: "transcriptObjectConfig";
+
+                    /**
+                     * Creates a new IngestConversationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IngestConversationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IIngestConversationsRequest): google.cloud.contactcenterinsights.v1.IngestConversationsRequest;
+
+                    /**
+                     * Encodes the specified IngestConversationsRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsRequest.verify|verify} messages.
+                     * @param message IngestConversationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IIngestConversationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IngestConversationsRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsRequest.verify|verify} messages.
+                     * @param message IngestConversationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IIngestConversationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IngestConversationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IngestConversationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.IngestConversationsRequest;
+
+                    /**
+                     * Decodes an IngestConversationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IngestConversationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.IngestConversationsRequest;
+
+                    /**
+                     * Verifies an IngestConversationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IngestConversationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IngestConversationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.IngestConversationsRequest;
+
+                    /**
+                     * Creates a plain object from an IngestConversationsRequest message. Also converts values to other types if specified.
+                     * @param message IngestConversationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.IngestConversationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IngestConversationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IngestConversationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IngestConversationsRequest {
+
+                    /** Properties of a GcsSource. */
+                    interface IGcsSource {
+
+                        /** GcsSource bucketUri */
+                        bucketUri?: (string|null);
+                    }
+
+                    /** Represents a GcsSource. */
+                    class GcsSource implements IGcsSource {
+
+                        /**
+                         * Constructs a new GcsSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IGcsSource);
+
+                        /** GcsSource bucketUri. */
+                        public bucketUri: string;
+
+                        /**
+                         * Creates a new GcsSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsSource instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IGcsSource): google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource;
+
+                        /**
+                         * Encodes the specified GcsSource message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.verify|verify} messages.
+                         * @param message GcsSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IGcsSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsSource message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.verify|verify} messages.
+                         * @param message GcsSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IGcsSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource;
+
+                        /**
+                         * Decodes a GcsSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource;
+
+                        /**
+                         * Verifies a GcsSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource;
+
+                        /**
+                         * Creates a plain object from a GcsSource message. Also converts values to other types if specified.
+                         * @param message GcsSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TranscriptObjectConfig. */
+                    interface ITranscriptObjectConfig {
+
+                        /** TranscriptObjectConfig medium */
+                        medium?: (google.cloud.contactcenterinsights.v1.Conversation.Medium|keyof typeof google.cloud.contactcenterinsights.v1.Conversation.Medium|null);
+                    }
+
+                    /** Represents a TranscriptObjectConfig. */
+                    class TranscriptObjectConfig implements ITranscriptObjectConfig {
+
+                        /**
+                         * Constructs a new TranscriptObjectConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ITranscriptObjectConfig);
+
+                        /** TranscriptObjectConfig medium. */
+                        public medium: (google.cloud.contactcenterinsights.v1.Conversation.Medium|keyof typeof google.cloud.contactcenterinsights.v1.Conversation.Medium);
+
+                        /**
+                         * Creates a new TranscriptObjectConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TranscriptObjectConfig instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ITranscriptObjectConfig): google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig;
+
+                        /**
+                         * Encodes the specified TranscriptObjectConfig message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig.verify|verify} messages.
+                         * @param message TranscriptObjectConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ITranscriptObjectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TranscriptObjectConfig message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig.verify|verify} messages.
+                         * @param message TranscriptObjectConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ITranscriptObjectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TranscriptObjectConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TranscriptObjectConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig;
+
+                        /**
+                         * Decodes a TranscriptObjectConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TranscriptObjectConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig;
+
+                        /**
+                         * Verifies a TranscriptObjectConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TranscriptObjectConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TranscriptObjectConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig;
+
+                        /**
+                         * Creates a plain object from a TranscriptObjectConfig message. Also converts values to other types if specified.
+                         * @param message TranscriptObjectConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TranscriptObjectConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TranscriptObjectConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ConversationConfig. */
+                    interface IConversationConfig {
+
+                        /** ConversationConfig agentId */
+                        agentId?: (string|null);
+                    }
+
+                    /** Represents a ConversationConfig. */
+                    class ConversationConfig implements IConversationConfig {
+
+                        /**
+                         * Constructs a new ConversationConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IConversationConfig);
+
+                        /** ConversationConfig agentId. */
+                        public agentId: string;
+
+                        /**
+                         * Creates a new ConversationConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConversationConfig instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IConversationConfig): google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig;
+
+                        /**
+                         * Encodes the specified ConversationConfig message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig.verify|verify} messages.
+                         * @param message ConversationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IConversationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConversationConfig message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig.verify|verify} messages.
+                         * @param message ConversationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IConversationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConversationConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConversationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig;
+
+                        /**
+                         * Decodes a ConversationConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConversationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig;
+
+                        /**
+                         * Verifies a ConversationConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConversationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConversationConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig;
+
+                        /**
+                         * Creates a plain object from a ConversationConfig message. Also converts values to other types if specified.
+                         * @param message ConversationConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConversationConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConversationConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an IngestConversationsMetadata. */
+                interface IIngestConversationsMetadata {
+
+                    /** IngestConversationsMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** IngestConversationsMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** IngestConversationsMetadata request */
+                    request?: (google.cloud.contactcenterinsights.v1.IIngestConversationsRequest|null);
+
+                    /** IngestConversationsMetadata partialErrors */
+                    partialErrors?: (google.rpc.IStatus[]|null);
+                }
+
+                /** Represents an IngestConversationsMetadata. */
+                class IngestConversationsMetadata implements IIngestConversationsMetadata {
+
+                    /**
+                     * Constructs a new IngestConversationsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IIngestConversationsMetadata);
+
+                    /** IngestConversationsMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** IngestConversationsMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** IngestConversationsMetadata request. */
+                    public request?: (google.cloud.contactcenterinsights.v1.IIngestConversationsRequest|null);
+
+                    /** IngestConversationsMetadata partialErrors. */
+                    public partialErrors: google.rpc.IStatus[];
+
+                    /**
+                     * Creates a new IngestConversationsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IngestConversationsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IIngestConversationsMetadata): google.cloud.contactcenterinsights.v1.IngestConversationsMetadata;
+
+                    /**
+                     * Encodes the specified IngestConversationsMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.verify|verify} messages.
+                     * @param message IngestConversationsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IIngestConversationsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IngestConversationsMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.verify|verify} messages.
+                     * @param message IngestConversationsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IIngestConversationsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IngestConversationsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IngestConversationsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.IngestConversationsMetadata;
+
+                    /**
+                     * Decodes an IngestConversationsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IngestConversationsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.IngestConversationsMetadata;
+
+                    /**
+                     * Verifies an IngestConversationsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IngestConversationsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IngestConversationsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.IngestConversationsMetadata;
+
+                    /**
+                     * Creates a plain object from an IngestConversationsMetadata message. Also converts values to other types if specified.
+                     * @param message IngestConversationsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.IngestConversationsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IngestConversationsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IngestConversationsMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IngestConversationsResponse. */
+                interface IIngestConversationsResponse {
+                }
+
+                /** Represents an IngestConversationsResponse. */
+                class IngestConversationsResponse implements IIngestConversationsResponse {
+
+                    /**
+                     * Constructs a new IngestConversationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IIngestConversationsResponse);
+
+                    /**
+                     * Creates a new IngestConversationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IngestConversationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IIngestConversationsResponse): google.cloud.contactcenterinsights.v1.IngestConversationsResponse;
+
+                    /**
+                     * Encodes the specified IngestConversationsResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsResponse.verify|verify} messages.
+                     * @param message IngestConversationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IIngestConversationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IngestConversationsResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsResponse.verify|verify} messages.
+                     * @param message IngestConversationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IIngestConversationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IngestConversationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IngestConversationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.IngestConversationsResponse;
+
+                    /**
+                     * Decodes an IngestConversationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IngestConversationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.IngestConversationsResponse;
+
+                    /**
+                     * Verifies an IngestConversationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IngestConversationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IngestConversationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.IngestConversationsResponse;
+
+                    /**
+                     * Creates a plain object from an IngestConversationsResponse message. Also converts values to other types if specified.
+                     * @param message IngestConversationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.IngestConversationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IngestConversationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IngestConversationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CreateAnalysisRequest. */
                 interface ICreateAnalysisRequest {
 
@@ -2485,6 +3175,351 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteAnalysisRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkAnalyzeConversationsRequest. */
+                interface IBulkAnalyzeConversationsRequest {
+
+                    /** BulkAnalyzeConversationsRequest parent */
+                    parent?: (string|null);
+
+                    /** BulkAnalyzeConversationsRequest filter */
+                    filter?: (string|null);
+
+                    /** BulkAnalyzeConversationsRequest analysisPercentage */
+                    analysisPercentage?: (number|null);
+
+                    /** BulkAnalyzeConversationsRequest annotatorSelector */
+                    annotatorSelector?: (google.cloud.contactcenterinsights.v1.IAnnotatorSelector|null);
+                }
+
+                /** Represents a BulkAnalyzeConversationsRequest. */
+                class BulkAnalyzeConversationsRequest implements IBulkAnalyzeConversationsRequest {
+
+                    /**
+                     * Constructs a new BulkAnalyzeConversationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsRequest);
+
+                    /** BulkAnalyzeConversationsRequest parent. */
+                    public parent: string;
+
+                    /** BulkAnalyzeConversationsRequest filter. */
+                    public filter: string;
+
+                    /** BulkAnalyzeConversationsRequest analysisPercentage. */
+                    public analysisPercentage: number;
+
+                    /** BulkAnalyzeConversationsRequest annotatorSelector. */
+                    public annotatorSelector?: (google.cloud.contactcenterinsights.v1.IAnnotatorSelector|null);
+
+                    /**
+                     * Creates a new BulkAnalyzeConversationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkAnalyzeConversationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsRequest): google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest;
+
+                    /**
+                     * Encodes the specified BulkAnalyzeConversationsRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest.verify|verify} messages.
+                     * @param message BulkAnalyzeConversationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkAnalyzeConversationsRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest.verify|verify} messages.
+                     * @param message BulkAnalyzeConversationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkAnalyzeConversationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkAnalyzeConversationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest;
+
+                    /**
+                     * Decodes a BulkAnalyzeConversationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkAnalyzeConversationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest;
+
+                    /**
+                     * Verifies a BulkAnalyzeConversationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkAnalyzeConversationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkAnalyzeConversationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest;
+
+                    /**
+                     * Creates a plain object from a BulkAnalyzeConversationsRequest message. Also converts values to other types if specified.
+                     * @param message BulkAnalyzeConversationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkAnalyzeConversationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkAnalyzeConversationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkAnalyzeConversationsMetadata. */
+                interface IBulkAnalyzeConversationsMetadata {
+
+                    /** BulkAnalyzeConversationsMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkAnalyzeConversationsMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkAnalyzeConversationsMetadata request */
+                    request?: (google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsRequest|null);
+
+                    /** BulkAnalyzeConversationsMetadata completedAnalysesCount */
+                    completedAnalysesCount?: (number|null);
+
+                    /** BulkAnalyzeConversationsMetadata failedAnalysesCount */
+                    failedAnalysesCount?: (number|null);
+
+                    /** BulkAnalyzeConversationsMetadata totalRequestedAnalysesCount */
+                    totalRequestedAnalysesCount?: (number|null);
+                }
+
+                /** Represents a BulkAnalyzeConversationsMetadata. */
+                class BulkAnalyzeConversationsMetadata implements IBulkAnalyzeConversationsMetadata {
+
+                    /**
+                     * Constructs a new BulkAnalyzeConversationsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsMetadata);
+
+                    /** BulkAnalyzeConversationsMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkAnalyzeConversationsMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkAnalyzeConversationsMetadata request. */
+                    public request?: (google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsRequest|null);
+
+                    /** BulkAnalyzeConversationsMetadata completedAnalysesCount. */
+                    public completedAnalysesCount: number;
+
+                    /** BulkAnalyzeConversationsMetadata failedAnalysesCount. */
+                    public failedAnalysesCount: number;
+
+                    /** BulkAnalyzeConversationsMetadata totalRequestedAnalysesCount. */
+                    public totalRequestedAnalysesCount: number;
+
+                    /**
+                     * Creates a new BulkAnalyzeConversationsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkAnalyzeConversationsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsMetadata): google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata;
+
+                    /**
+                     * Encodes the specified BulkAnalyzeConversationsMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata.verify|verify} messages.
+                     * @param message BulkAnalyzeConversationsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkAnalyzeConversationsMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata.verify|verify} messages.
+                     * @param message BulkAnalyzeConversationsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkAnalyzeConversationsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkAnalyzeConversationsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata;
+
+                    /**
+                     * Decodes a BulkAnalyzeConversationsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkAnalyzeConversationsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata;
+
+                    /**
+                     * Verifies a BulkAnalyzeConversationsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkAnalyzeConversationsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkAnalyzeConversationsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata;
+
+                    /**
+                     * Creates a plain object from a BulkAnalyzeConversationsMetadata message. Also converts values to other types if specified.
+                     * @param message BulkAnalyzeConversationsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkAnalyzeConversationsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkAnalyzeConversationsMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkAnalyzeConversationsResponse. */
+                interface IBulkAnalyzeConversationsResponse {
+
+                    /** BulkAnalyzeConversationsResponse successfulAnalysisCount */
+                    successfulAnalysisCount?: (number|null);
+
+                    /** BulkAnalyzeConversationsResponse failedAnalysisCount */
+                    failedAnalysisCount?: (number|null);
+                }
+
+                /** Represents a BulkAnalyzeConversationsResponse. */
+                class BulkAnalyzeConversationsResponse implements IBulkAnalyzeConversationsResponse {
+
+                    /**
+                     * Constructs a new BulkAnalyzeConversationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsResponse);
+
+                    /** BulkAnalyzeConversationsResponse successfulAnalysisCount. */
+                    public successfulAnalysisCount: number;
+
+                    /** BulkAnalyzeConversationsResponse failedAnalysisCount. */
+                    public failedAnalysisCount: number;
+
+                    /**
+                     * Creates a new BulkAnalyzeConversationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkAnalyzeConversationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsResponse): google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsResponse;
+
+                    /**
+                     * Encodes the specified BulkAnalyzeConversationsResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsResponse.verify|verify} messages.
+                     * @param message BulkAnalyzeConversationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkAnalyzeConversationsResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsResponse.verify|verify} messages.
+                     * @param message BulkAnalyzeConversationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IBulkAnalyzeConversationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkAnalyzeConversationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkAnalyzeConversationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsResponse;
+
+                    /**
+                     * Decodes a BulkAnalyzeConversationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkAnalyzeConversationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsResponse;
+
+                    /**
+                     * Verifies a BulkAnalyzeConversationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkAnalyzeConversationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkAnalyzeConversationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsResponse;
+
+                    /**
+                     * Creates a plain object from a BulkAnalyzeConversationsResponse message. Also converts values to other types if specified.
+                     * @param message BulkAnalyzeConversationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkAnalyzeConversationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkAnalyzeConversationsResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4734,6 +5769,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateIssueRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteIssueRequest. */
+                interface IDeleteIssueRequest {
+
+                    /** DeleteIssueRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteIssueRequest. */
+                class DeleteIssueRequest implements IDeleteIssueRequest {
+
+                    /**
+                     * Constructs a new DeleteIssueRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IDeleteIssueRequest);
+
+                    /** DeleteIssueRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteIssueRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteIssueRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IDeleteIssueRequest): google.cloud.contactcenterinsights.v1.DeleteIssueRequest;
+
+                    /**
+                     * Encodes the specified DeleteIssueRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteIssueRequest.verify|verify} messages.
+                     * @param message DeleteIssueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IDeleteIssueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteIssueRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteIssueRequest.verify|verify} messages.
+                     * @param message DeleteIssueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IDeleteIssueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteIssueRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteIssueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.DeleteIssueRequest;
+
+                    /**
+                     * Decodes a DeleteIssueRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteIssueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.DeleteIssueRequest;
+
+                    /**
+                     * Verifies a DeleteIssueRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteIssueRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteIssueRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.DeleteIssueRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteIssueRequest message. Also converts values to other types if specified.
+                     * @param message DeleteIssueRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.DeleteIssueRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteIssueRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteIssueRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -7162,6 +8294,9 @@ export namespace google {
 
                     /** Analysis analysisResult */
                     analysisResult?: (google.cloud.contactcenterinsights.v1.IAnalysisResult|null);
+
+                    /** Analysis annotatorSelector */
+                    annotatorSelector?: (google.cloud.contactcenterinsights.v1.IAnnotatorSelector|null);
                 }
 
                 /** Represents an Analysis. */
@@ -7184,6 +8319,9 @@ export namespace google {
 
                     /** Analysis analysisResult. */
                     public analysisResult?: (google.cloud.contactcenterinsights.v1.IAnalysisResult|null);
+
+                    /** Analysis annotatorSelector. */
+                    public annotatorSelector?: (google.cloud.contactcenterinsights.v1.IAnnotatorSelector|null);
 
                     /**
                      * Creates a new Analysis instance using the specified properties.
@@ -8150,6 +9288,9 @@ export namespace google {
                     /** CallAnnotation phraseMatchData */
                     phraseMatchData?: (google.cloud.contactcenterinsights.v1.IPhraseMatchData|null);
 
+                    /** CallAnnotation issueMatchData */
+                    issueMatchData?: (google.cloud.contactcenterinsights.v1.IIssueMatchData|null);
+
                     /** CallAnnotation channelTag */
                     channelTag?: (number|null);
 
@@ -8190,6 +9331,9 @@ export namespace google {
                     /** CallAnnotation phraseMatchData. */
                     public phraseMatchData?: (google.cloud.contactcenterinsights.v1.IPhraseMatchData|null);
 
+                    /** CallAnnotation issueMatchData. */
+                    public issueMatchData?: (google.cloud.contactcenterinsights.v1.IIssueMatchData|null);
+
                     /** CallAnnotation channelTag. */
                     public channelTag: number;
 
@@ -8200,7 +9344,7 @@ export namespace google {
                     public annotationEndBoundary?: (google.cloud.contactcenterinsights.v1.IAnnotationBoundary|null);
 
                     /** CallAnnotation data. */
-                    public data?: ("interruptionData"|"sentimentData"|"silenceData"|"holdData"|"entityMentionData"|"intentMatchData"|"phraseMatchData");
+                    public data?: ("interruptionData"|"sentimentData"|"silenceData"|"holdData"|"entityMentionData"|"intentMatchData"|"phraseMatchData"|"issueMatchData");
 
                     /**
                      * Creates a new CallAnnotation instance using the specified properties.
@@ -9422,6 +10566,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an IssueMatchData. */
+                interface IIssueMatchData {
+
+                    /** IssueMatchData issueAssignment */
+                    issueAssignment?: (google.cloud.contactcenterinsights.v1.IIssueAssignment|null);
+                }
+
+                /** Represents an IssueMatchData. */
+                class IssueMatchData implements IIssueMatchData {
+
+                    /**
+                     * Constructs a new IssueMatchData.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IIssueMatchData);
+
+                    /** IssueMatchData issueAssignment. */
+                    public issueAssignment?: (google.cloud.contactcenterinsights.v1.IIssueAssignment|null);
+
+                    /**
+                     * Creates a new IssueMatchData instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IssueMatchData instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IIssueMatchData): google.cloud.contactcenterinsights.v1.IssueMatchData;
+
+                    /**
+                     * Encodes the specified IssueMatchData message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IssueMatchData.verify|verify} messages.
+                     * @param message IssueMatchData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IIssueMatchData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IssueMatchData message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IssueMatchData.verify|verify} messages.
+                     * @param message IssueMatchData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IIssueMatchData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IssueMatchData message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IssueMatchData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.IssueMatchData;
+
+                    /**
+                     * Decodes an IssueMatchData message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IssueMatchData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.IssueMatchData;
+
+                    /**
+                     * Verifies an IssueMatchData message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IssueMatchData message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IssueMatchData
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.IssueMatchData;
+
+                    /**
+                     * Creates a plain object from an IssueMatchData message. Also converts values to other types if specified.
+                     * @param message IssueMatchData
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.IssueMatchData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IssueMatchData to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IssueMatchData
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an IssueModel. */
                 interface IIssueModel {
 
@@ -9691,6 +10932,9 @@ export namespace google {
 
                     /** Issue updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Issue sampleUtterances */
+                    sampleUtterances?: (string[]|null);
                 }
 
                 /** Represents an Issue. */
@@ -9713,6 +10957,9 @@ export namespace google {
 
                     /** Issue updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Issue sampleUtterances. */
+                    public sampleUtterances: string[];
 
                     /**
                      * Creates a new Issue instance using the specified properties.
@@ -10739,6 +11986,9 @@ export namespace google {
 
                         /** AnalysisConfig runtimeIntegrationAnalysisPercentage */
                         runtimeIntegrationAnalysisPercentage?: (number|null);
+
+                        /** AnalysisConfig annotatorSelector */
+                        annotatorSelector?: (google.cloud.contactcenterinsights.v1.IAnnotatorSelector|null);
                     }
 
                     /** Represents an AnalysisConfig. */
@@ -10752,6 +12002,9 @@ export namespace google {
 
                         /** AnalysisConfig runtimeIntegrationAnalysisPercentage. */
                         public runtimeIntegrationAnalysisPercentage: number;
+
+                        /** AnalysisConfig annotatorSelector. */
+                        public annotatorSelector?: (google.cloud.contactcenterinsights.v1.IAnnotatorSelector|null);
 
                         /**
                          * Creates a new AnalysisConfig instance using the specified properties.
@@ -11944,6 +13197,151 @@ export namespace google {
 
                     /**
                      * Gets the default type url for View
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AnnotatorSelector. */
+                interface IAnnotatorSelector {
+
+                    /** AnnotatorSelector runInterruptionAnnotator */
+                    runInterruptionAnnotator?: (boolean|null);
+
+                    /** AnnotatorSelector runSilenceAnnotator */
+                    runSilenceAnnotator?: (boolean|null);
+
+                    /** AnnotatorSelector runPhraseMatcherAnnotator */
+                    runPhraseMatcherAnnotator?: (boolean|null);
+
+                    /** AnnotatorSelector phraseMatchers */
+                    phraseMatchers?: (string[]|null);
+
+                    /** AnnotatorSelector runSentimentAnnotator */
+                    runSentimentAnnotator?: (boolean|null);
+
+                    /** AnnotatorSelector runEntityAnnotator */
+                    runEntityAnnotator?: (boolean|null);
+
+                    /** AnnotatorSelector runIntentAnnotator */
+                    runIntentAnnotator?: (boolean|null);
+
+                    /** AnnotatorSelector runIssueModelAnnotator */
+                    runIssueModelAnnotator?: (boolean|null);
+
+                    /** AnnotatorSelector issueModels */
+                    issueModels?: (string[]|null);
+                }
+
+                /** Represents an AnnotatorSelector. */
+                class AnnotatorSelector implements IAnnotatorSelector {
+
+                    /**
+                     * Constructs a new AnnotatorSelector.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IAnnotatorSelector);
+
+                    /** AnnotatorSelector runInterruptionAnnotator. */
+                    public runInterruptionAnnotator: boolean;
+
+                    /** AnnotatorSelector runSilenceAnnotator. */
+                    public runSilenceAnnotator: boolean;
+
+                    /** AnnotatorSelector runPhraseMatcherAnnotator. */
+                    public runPhraseMatcherAnnotator: boolean;
+
+                    /** AnnotatorSelector phraseMatchers. */
+                    public phraseMatchers: string[];
+
+                    /** AnnotatorSelector runSentimentAnnotator. */
+                    public runSentimentAnnotator: boolean;
+
+                    /** AnnotatorSelector runEntityAnnotator. */
+                    public runEntityAnnotator: boolean;
+
+                    /** AnnotatorSelector runIntentAnnotator. */
+                    public runIntentAnnotator: boolean;
+
+                    /** AnnotatorSelector runIssueModelAnnotator. */
+                    public runIssueModelAnnotator: boolean;
+
+                    /** AnnotatorSelector issueModels. */
+                    public issueModels: string[];
+
+                    /**
+                     * Creates a new AnnotatorSelector instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnnotatorSelector instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IAnnotatorSelector): google.cloud.contactcenterinsights.v1.AnnotatorSelector;
+
+                    /**
+                     * Encodes the specified AnnotatorSelector message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.AnnotatorSelector.verify|verify} messages.
+                     * @param message AnnotatorSelector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IAnnotatorSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnnotatorSelector message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.AnnotatorSelector.verify|verify} messages.
+                     * @param message AnnotatorSelector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IAnnotatorSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnnotatorSelector message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnnotatorSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.AnnotatorSelector;
+
+                    /**
+                     * Decodes an AnnotatorSelector message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnnotatorSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.AnnotatorSelector;
+
+                    /**
+                     * Verifies an AnnotatorSelector message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnnotatorSelector message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnnotatorSelector
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.AnnotatorSelector;
+
+                    /**
+                     * Creates a plain object from an AnnotatorSelector message. Also converts values to other types if specified.
+                     * @param message AnnotatorSelector
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.AnnotatorSelector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnnotatorSelector to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnnotatorSelector
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

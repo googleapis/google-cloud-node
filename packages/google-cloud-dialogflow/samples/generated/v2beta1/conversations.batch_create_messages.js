@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,7 +37,8 @@ function main(parent, requests) {
   /**
    *  Required. A maximum of 1000 Messages can be created in a batch.
    *  CreateMessageRequest.message.send_time   is required. All created
-   *  messages will have identical Message.create_time google.cloud.dialogflow.v2beta1.Message.create_time.
+   *  messages will have identical
+   *  Message.create_time google.cloud.dialogflow.v2beta1.Message.create_time.
    */
   // const requests = 1234
 

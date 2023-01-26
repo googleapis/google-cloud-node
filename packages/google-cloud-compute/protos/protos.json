@@ -5387,6 +5387,42 @@
                         }
                       }
                     },
+                    "AllocationResourceStatus": {
+                      "oneofs": {
+                        "_specificSkuAllocation": {
+                          "oneof": [
+                            "specificSkuAllocation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "specificSkuAllocation": {
+                          "type": "AllocationResourceStatusSpecificSKUAllocation",
+                          "id": 196231151,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AllocationResourceStatusSpecificSKUAllocation": {
+                      "oneofs": {
+                        "_sourceInstanceTemplateId": {
+                          "oneof": [
+                            "sourceInstanceTemplateId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "sourceInstanceTemplateId": {
+                          "type": "string",
+                          "id": 111196154,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk": {
                       "oneofs": {
                         "_diskSizeGb": {
@@ -5499,6 +5535,11 @@
                           "oneof": [
                             "instanceProperties"
                           ]
+                        },
+                        "_sourceInstanceTemplate": {
+                          "oneof": [
+                            "sourceInstanceTemplate"
+                          ]
                         }
                       },
                       "fields": {
@@ -5526,6 +5567,13 @@
                         "instanceProperties": {
                           "type": "AllocationSpecificSKUAllocationReservedInstanceProperties",
                           "id": 215355165,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceInstanceTemplate": {
+                          "type": "string",
+                          "id": 332423616,
                           "options": {
                             "proto3_optional": true
                           }
@@ -21392,6 +21440,7 @@
                             "MULTI_IP_SUBNET": 151776719,
                             "SECURE_BOOT": 376811194,
                             "SEV_CAPABLE": 87083793,
+                            "SEV_SNP_CAPABLE": 426919,
                             "UEFI_COMPATIBLE": 195865408,
                             "VIRTIO_SCSI_MULTIQUEUE": 201597069,
                             "WINDOWS": 456863331
@@ -43456,6 +43505,11 @@
                             "network"
                           ]
                         },
+                        "_networkAttachment": {
+                          "oneof": [
+                            "networkAttachment"
+                          ]
+                        },
                         "_networkIP": {
                           "oneof": [
                             "networkIP"
@@ -43543,6 +43597,13 @@
                         "network": {
                           "type": "string",
                           "id": 232872494,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "networkAttachment": {
+                          "type": "string",
+                          "id": 224644052,
                           "options": {
                             "proto3_optional": true
                           }
@@ -52685,6 +52746,11 @@
                             "name"
                           ]
                         },
+                        "_resourceStatus": {
+                          "oneof": [
+                            "resourceStatus"
+                          ]
+                        },
                         "_satisfiesPzs": {
                           "oneof": [
                             "satisfiesPzs"
@@ -52768,6 +52834,13 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 22220385
+                        },
+                        "resourceStatus": {
+                          "type": "AllocationResourceStatus",
+                          "id": 249429315,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "satisfiesPzs": {
                           "type": "bool",

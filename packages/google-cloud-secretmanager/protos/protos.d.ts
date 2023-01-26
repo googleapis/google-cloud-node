@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -58,6 +58,9 @@ export namespace google {
 
                     /** Secret versionAliases */
                     versionAliases?: ({ [k: string]: (number|Long|string) }|null);
+
+                    /** Secret annotations */
+                    annotations?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Secret. */
@@ -98,6 +101,9 @@ export namespace google {
 
                     /** Secret versionAliases. */
                     public versionAliases: { [k: string]: (number|Long|string) };
+
+                    /** Secret annotations. */
+                    public annotations: { [k: string]: string };
 
                     /** Secret expiration. */
                     public expiration?: ("expireTime"|"ttl");
