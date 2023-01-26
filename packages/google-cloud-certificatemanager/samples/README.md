@@ -56,7 +56,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Certificate_manager.create_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_certificate.js,samples/README.md)
 
@@ -73,7 +73,7 @@ __Usage:__
 
 ### Certificate_manager.create_certificate_issuance_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_certificate_issuance_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_certificate_issuance_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_certificate_issuance_config.js,samples/README.md)
 
@@ -90,7 +90,7 @@ __Usage:__
 
 ### Certificate_manager.create_certificate_map
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_certificate_map.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_certificate_map.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_certificate_map.js,samples/README.md)
 
@@ -107,7 +107,7 @@ __Usage:__
 
 ### Certificate_manager.create_certificate_map_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_certificate_map_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_certificate_map_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_certificate_map_entry.js,samples/README.md)
 
@@ -124,7 +124,7 @@ __Usage:__
 
 ### Certificate_manager.create_dns_authorization
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_dns_authorization.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_dns_authorization.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.create_dns_authorization.js,samples/README.md)
 
@@ -141,7 +141,7 @@ __Usage:__
 
 ### Certificate_manager.delete_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_certificate.js,samples/README.md)
 
@@ -158,7 +158,7 @@ __Usage:__
 
 ### Certificate_manager.delete_certificate_issuance_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_certificate_issuance_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_certificate_issuance_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_certificate_issuance_config.js,samples/README.md)
 
@@ -175,7 +175,7 @@ __Usage:__
 
 ### Certificate_manager.delete_certificate_map
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_certificate_map.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_certificate_map.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_certificate_map.js,samples/README.md)
 
@@ -192,7 +192,7 @@ __Usage:__
 
 ### Certificate_manager.delete_certificate_map_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_certificate_map_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_certificate_map_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_certificate_map_entry.js,samples/README.md)
 
@@ -209,7 +209,7 @@ __Usage:__
 
 ### Certificate_manager.delete_dns_authorization
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_dns_authorization.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_dns_authorization.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.delete_dns_authorization.js,samples/README.md)
 
@@ -226,7 +226,7 @@ __Usage:__
 
 ### Certificate_manager.get_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_certificate.js,samples/README.md)
 
@@ -243,7 +243,7 @@ __Usage:__
 
 ### Certificate_manager.get_certificate_issuance_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_certificate_issuance_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_certificate_issuance_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_certificate_issuance_config.js,samples/README.md)
 
@@ -260,7 +260,7 @@ __Usage:__
 
 ### Certificate_manager.get_certificate_map
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_certificate_map.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_certificate_map.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_certificate_map.js,samples/README.md)
 
@@ -277,7 +277,7 @@ __Usage:__
 
 ### Certificate_manager.get_certificate_map_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_certificate_map_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_certificate_map_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_certificate_map_entry.js,samples/README.md)
 
@@ -294,7 +294,7 @@ __Usage:__
 
 ### Certificate_manager.get_dns_authorization
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_dns_authorization.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_dns_authorization.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.get_dns_authorization.js,samples/README.md)
 
@@ -311,7 +311,7 @@ __Usage:__
 
 ### Certificate_manager.list_certificate_issuance_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_certificate_issuance_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_certificate_issuance_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_certificate_issuance_configs.js,samples/README.md)
 
@@ -328,7 +328,7 @@ __Usage:__
 
 ### Certificate_manager.list_certificate_map_entries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_certificate_map_entries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_certificate_map_entries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_certificate_map_entries.js,samples/README.md)
 
@@ -345,7 +345,7 @@ __Usage:__
 
 ### Certificate_manager.list_certificate_maps
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_certificate_maps.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_certificate_maps.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_certificate_maps.js,samples/README.md)
 
@@ -362,7 +362,7 @@ __Usage:__
 
 ### Certificate_manager.list_certificates
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_certificates.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_certificates.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_certificates.js,samples/README.md)
 
@@ -379,7 +379,7 @@ __Usage:__
 
 ### Certificate_manager.list_dns_authorizations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_dns_authorizations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_dns_authorizations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.list_dns_authorizations.js,samples/README.md)
 
@@ -396,7 +396,7 @@ __Usage:__
 
 ### Certificate_manager.update_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_certificate.js,samples/README.md)
 
@@ -413,7 +413,7 @@ __Usage:__
 
 ### Certificate_manager.update_certificate_map
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_certificate_map.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_certificate_map.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_certificate_map.js,samples/README.md)
 
@@ -430,7 +430,7 @@ __Usage:__
 
 ### Certificate_manager.update_certificate_map_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_certificate_map_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_certificate_map_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_certificate_map_entry.js,samples/README.md)
 
@@ -447,7 +447,7 @@ __Usage:__
 
 ### Certificate_manager.update_dns_authorization
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_dns_authorization.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_dns_authorization.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_dns_authorization.js,samples/README.md)
 
@@ -464,7 +464,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/quickstart.js,samples/README.md)
 
@@ -481,7 +481,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-certificatemanager/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-certificatemanager/samples/test/quickstart.js,samples/README.md)
 
