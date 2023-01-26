@@ -37,7 +37,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Gateway_service.delete_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.delete_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.delete_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.delete_resource.js,samples/README.md)
 
@@ -54,7 +54,7 @@ __Usage:__
 
 ### Gateway_service.get_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.get_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.get_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.get_resource.js,samples/README.md)
 
@@ -71,7 +71,7 @@ __Usage:__
 
 ### Gateway_service.patch_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.patch_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.patch_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.patch_resource.js,samples/README.md)
 
@@ -88,7 +88,7 @@ __Usage:__
 
 ### Gateway_service.post_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.post_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.post_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.post_resource.js,samples/README.md)
 
@@ -105,7 +105,7 @@ __Usage:__
 
 ### Gateway_service.put_resource
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.put_resource.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.put_resource.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.put_resource.js,samples/README.md)
 
@@ -122,7 +122,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkeconnect-gateway/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkeconnect-gateway/samples/quickstart.js,samples/README.md)
 
@@ -139,7 +139,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkeconnect-gateway/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkeconnect-gateway/samples/test/quickstart.js,samples/README.md)
 

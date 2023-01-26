@@ -68,7 +68,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Gke_hub.create_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.create_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.create_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1/gke_hub.create_feature.js,samples/README.md)
 
@@ -85,7 +85,7 @@ __Usage:__
 
 ### Gke_hub.create_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.create_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.create_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1/gke_hub.create_membership.js,samples/README.md)
 
@@ -102,7 +102,7 @@ __Usage:__
 
 ### Gke_hub.delete_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.delete_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.delete_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1/gke_hub.delete_feature.js,samples/README.md)
 
@@ -119,7 +119,7 @@ __Usage:__
 
 ### Gke_hub.delete_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.delete_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.delete_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1/gke_hub.delete_membership.js,samples/README.md)
 
@@ -136,7 +136,7 @@ __Usage:__
 
 ### Gke_hub.generate_connect_manifest
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.generate_connect_manifest.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.generate_connect_manifest.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1/gke_hub.generate_connect_manifest.js,samples/README.md)
 
@@ -153,7 +153,7 @@ __Usage:__
 
 ### Gke_hub.get_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.get_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.get_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1/gke_hub.get_feature.js,samples/README.md)
 
@@ -170,7 +170,7 @@ __Usage:__
 
 ### Gke_hub.get_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.get_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.get_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1/gke_hub.get_membership.js,samples/README.md)
 
@@ -187,7 +187,7 @@ __Usage:__
 
 ### Gke_hub.list_features
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.list_features.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.list_features.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1/gke_hub.list_features.js,samples/README.md)
 
@@ -204,7 +204,7 @@ __Usage:__
 
 ### Gke_hub.list_memberships
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.list_memberships.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.list_memberships.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1/gke_hub.list_memberships.js,samples/README.md)
 
@@ -221,7 +221,7 @@ __Usage:__
 
 ### Gke_hub.update_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.update_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.update_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1/gke_hub.update_feature.js,samples/README.md)
 
@@ -238,7 +238,7 @@ __Usage:__
 
 ### Gke_hub.update_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.update_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1/gke_hub.update_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1/gke_hub.update_membership.js,samples/README.md)
 
@@ -255,7 +255,7 @@ __Usage:__
 
 ### Gke_hub.create_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.create_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.create_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.create_feature.js,samples/README.md)
 
@@ -272,7 +272,7 @@ __Usage:__
 
 ### Gke_hub.delete_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.delete_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.delete_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.delete_feature.js,samples/README.md)
 
@@ -289,7 +289,7 @@ __Usage:__
 
 ### Gke_hub.get_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.get_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.get_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.get_feature.js,samples/README.md)
 
@@ -306,7 +306,7 @@ __Usage:__
 
 ### Gke_hub.list_features
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.list_features.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.list_features.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.list_features.js,samples/README.md)
 
@@ -323,7 +323,7 @@ __Usage:__
 
 ### Gke_hub.update_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.update_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.update_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1alpha/gke_hub.update_feature.js,samples/README.md)
 
@@ -340,7 +340,7 @@ __Usage:__
 
 ### Gke_hub.create_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.create_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.create_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.create_membership.js,samples/README.md)
 
@@ -357,7 +357,7 @@ __Usage:__
 
 ### Gke_hub.delete_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.delete_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.delete_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.delete_membership.js,samples/README.md)
 
@@ -374,7 +374,7 @@ __Usage:__
 
 ### Gke_hub.generate_connect_manifest
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.generate_connect_manifest.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.generate_connect_manifest.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.generate_connect_manifest.js,samples/README.md)
 
@@ -391,7 +391,7 @@ __Usage:__
 
 ### Gke_hub.get_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.get_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.get_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.get_membership.js,samples/README.md)
 
@@ -408,7 +408,7 @@ __Usage:__
 
 ### Gke_hub.initialize_hub
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.initialize_hub.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.initialize_hub.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.initialize_hub.js,samples/README.md)
 
@@ -425,7 +425,7 @@ __Usage:__
 
 ### Gke_hub.list_memberships
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.list_memberships.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.list_memberships.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.list_memberships.js,samples/README.md)
 
@@ -442,7 +442,7 @@ __Usage:__
 
 ### Gke_hub.update_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.update_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.update_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1alpha2/gke_hub.update_membership.js,samples/README.md)
 
@@ -459,7 +459,7 @@ __Usage:__
 
 ### Gke_hub.create_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.create_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.create_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.create_feature.js,samples/README.md)
 
@@ -476,7 +476,7 @@ __Usage:__
 
 ### Gke_hub.delete_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.delete_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.delete_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.delete_feature.js,samples/README.md)
 
@@ -493,7 +493,7 @@ __Usage:__
 
 ### Gke_hub.get_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.get_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.get_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.get_feature.js,samples/README.md)
 
@@ -510,7 +510,7 @@ __Usage:__
 
 ### Gke_hub.list_features
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.list_features.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.list_features.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.list_features.js,samples/README.md)
 
@@ -527,7 +527,7 @@ __Usage:__
 
 ### Gke_hub.update_feature
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.update_feature.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.update_feature.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1beta/gke_hub.update_feature.js,samples/README.md)
 
@@ -544,7 +544,7 @@ __Usage:__
 
 ### Gke_hub_membership_service.create_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.create_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.create_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.create_membership.js,samples/README.md)
 
@@ -561,7 +561,7 @@ __Usage:__
 
 ### Gke_hub_membership_service.delete_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.delete_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.delete_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.delete_membership.js,samples/README.md)
 
@@ -578,7 +578,7 @@ __Usage:__
 
 ### Gke_hub_membership_service.generate_connect_manifest
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.generate_connect_manifest.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.generate_connect_manifest.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.generate_connect_manifest.js,samples/README.md)
 
@@ -595,7 +595,7 @@ __Usage:__
 
 ### Gke_hub_membership_service.generate_exclusivity_manifest
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.generate_exclusivity_manifest.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.generate_exclusivity_manifest.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.generate_exclusivity_manifest.js,samples/README.md)
 
@@ -612,7 +612,7 @@ __Usage:__
 
 ### Gke_hub_membership_service.get_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.get_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.get_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.get_membership.js,samples/README.md)
 
@@ -629,7 +629,7 @@ __Usage:__
 
 ### Gke_hub_membership_service.list_memberships
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.list_memberships.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.list_memberships.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.list_memberships.js,samples/README.md)
 
@@ -646,7 +646,7 @@ __Usage:__
 
 ### Gke_hub_membership_service.update_membership
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.update_membership.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.update_membership.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.update_membership.js,samples/README.md)
 
@@ -663,7 +663,7 @@ __Usage:__
 
 ### Gke_hub_membership_service.validate_exclusivity
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.validate_exclusivity.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.validate_exclusivity.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/generated/v1beta1/gke_hub_membership_service.validate_exclusivity.js,samples/README.md)
 
@@ -680,7 +680,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/quickstart.js,samples/README.md)
 
@@ -697,7 +697,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkehub/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkehub/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkehub/samples/test/quickstart.js,samples/README.md)
 
