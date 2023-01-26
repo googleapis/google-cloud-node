@@ -89,6 +89,8 @@ function listenForAvroRecords(subscriptionNameOrId: string, timeout: number) {
     subscription.removeListener('message', messageHandler);
     console.log(`${messageCount} message(s) received.`);
   }, timeout * 1000);
+
+  use?.optional?.chaining?.();
 }
 // [END pubsub_subscribe_avro_records]
 
