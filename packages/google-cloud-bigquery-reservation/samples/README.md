@@ -53,7 +53,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Reservation_service.create_assignment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.create_assignment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.create_assignment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.create_assignment.js,samples/README.md)
 
@@ -70,7 +70,7 @@ __Usage:__
 
 ### Reservation_service.create_capacity_commitment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.create_capacity_commitment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.create_capacity_commitment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.create_capacity_commitment.js,samples/README.md)
 
@@ -87,7 +87,7 @@ __Usage:__
 
 ### Reservation_service.create_reservation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.create_reservation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.create_reservation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.create_reservation.js,samples/README.md)
 
@@ -104,7 +104,7 @@ __Usage:__
 
 ### Reservation_service.delete_assignment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.delete_assignment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.delete_assignment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.delete_assignment.js,samples/README.md)
 
@@ -121,7 +121,7 @@ __Usage:__
 
 ### Reservation_service.delete_capacity_commitment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.delete_capacity_commitment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.delete_capacity_commitment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.delete_capacity_commitment.js,samples/README.md)
 
@@ -138,7 +138,7 @@ __Usage:__
 
 ### Reservation_service.delete_reservation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.delete_reservation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.delete_reservation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.delete_reservation.js,samples/README.md)
 
@@ -155,7 +155,7 @@ __Usage:__
 
 ### Reservation_service.get_bi_reservation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.get_bi_reservation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.get_bi_reservation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.get_bi_reservation.js,samples/README.md)
 
@@ -172,7 +172,7 @@ __Usage:__
 
 ### Reservation_service.get_capacity_commitment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.get_capacity_commitment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.get_capacity_commitment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.get_capacity_commitment.js,samples/README.md)
 
@@ -189,7 +189,7 @@ __Usage:__
 
 ### Reservation_service.get_reservation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.get_reservation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.get_reservation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.get_reservation.js,samples/README.md)
 
@@ -206,7 +206,7 @@ __Usage:__
 
 ### Reservation_service.list_assignments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.list_assignments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.list_assignments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.list_assignments.js,samples/README.md)
 
@@ -223,7 +223,7 @@ __Usage:__
 
 ### Reservation_service.list_capacity_commitments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.list_capacity_commitments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.list_capacity_commitments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.list_capacity_commitments.js,samples/README.md)
 
@@ -240,7 +240,7 @@ __Usage:__
 
 ### Reservation_service.list_reservations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.list_reservations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.list_reservations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.list_reservations.js,samples/README.md)
 
@@ -257,7 +257,7 @@ __Usage:__
 
 ### Reservation_service.merge_capacity_commitments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.merge_capacity_commitments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.merge_capacity_commitments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.merge_capacity_commitments.js,samples/README.md)
 
@@ -274,7 +274,7 @@ __Usage:__
 
 ### Reservation_service.move_assignment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.move_assignment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.move_assignment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.move_assignment.js,samples/README.md)
 
@@ -291,7 +291,7 @@ __Usage:__
 
 ### Reservation_service.search_all_assignments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.search_all_assignments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.search_all_assignments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.search_all_assignments.js,samples/README.md)
 
@@ -308,7 +308,7 @@ __Usage:__
 
 ### Reservation_service.search_assignments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.search_assignments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.search_assignments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.search_assignments.js,samples/README.md)
 
@@ -325,7 +325,7 @@ __Usage:__
 
 ### Reservation_service.split_capacity_commitment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.split_capacity_commitment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.split_capacity_commitment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.split_capacity_commitment.js,samples/README.md)
 
@@ -342,7 +342,7 @@ __Usage:__
 
 ### Reservation_service.update_assignment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.update_assignment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.update_assignment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.update_assignment.js,samples/README.md)
 
@@ -359,7 +359,7 @@ __Usage:__
 
 ### Reservation_service.update_bi_reservation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.update_bi_reservation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.update_bi_reservation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.update_bi_reservation.js,samples/README.md)
 
@@ -376,7 +376,7 @@ __Usage:__
 
 ### Reservation_service.update_capacity_commitment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.update_capacity_commitment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.update_capacity_commitment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.update_capacity_commitment.js,samples/README.md)
 
@@ -393,7 +393,7 @@ __Usage:__
 
 ### Reservation_service.update_reservation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.update_reservation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.update_reservation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/generated/v1/reservation_service.update_reservation.js,samples/README.md)
 
@@ -410,7 +410,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/quickstart.js,samples/README.md)
 
@@ -427,7 +427,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-reservation/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-reservation/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-reservation/samples/test/quickstart.js,samples/README.md)
 

@@ -44,7 +44,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Cloud_billing.create_billing_account
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_billing.create_billing_account.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-billing/samples/generated/v1/cloud_billing.create_billing_account.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing/samples/generated/v1/cloud_billing.create_billing_account.js,samples/README.md)
 
@@ -61,7 +61,7 @@ __Usage:__
 
 ### Cloud_billing.get_billing_account
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_billing.get_billing_account.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-billing/samples/generated/v1/cloud_billing.get_billing_account.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing/samples/generated/v1/cloud_billing.get_billing_account.js,samples/README.md)
 
@@ -78,7 +78,7 @@ __Usage:__
 
 ### Cloud_billing.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_billing.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-billing/samples/generated/v1/cloud_billing.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing/samples/generated/v1/cloud_billing.get_iam_policy.js,samples/README.md)
 
@@ -95,7 +95,7 @@ __Usage:__
 
 ### Cloud_billing.get_project_billing_info
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_billing.get_project_billing_info.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-billing/samples/generated/v1/cloud_billing.get_project_billing_info.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing/samples/generated/v1/cloud_billing.get_project_billing_info.js,samples/README.md)
 
@@ -112,7 +112,7 @@ __Usage:__
 
 ### Cloud_billing.list_billing_accounts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_billing.list_billing_accounts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-billing/samples/generated/v1/cloud_billing.list_billing_accounts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing/samples/generated/v1/cloud_billing.list_billing_accounts.js,samples/README.md)
 
@@ -129,7 +129,7 @@ __Usage:__
 
 ### Cloud_billing.list_project_billing_info
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_billing.list_project_billing_info.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-billing/samples/generated/v1/cloud_billing.list_project_billing_info.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing/samples/generated/v1/cloud_billing.list_project_billing_info.js,samples/README.md)
 
@@ -146,7 +146,7 @@ __Usage:__
 
 ### Cloud_billing.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_billing.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-billing/samples/generated/v1/cloud_billing.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing/samples/generated/v1/cloud_billing.set_iam_policy.js,samples/README.md)
 
@@ -163,7 +163,7 @@ __Usage:__
 
 ### Cloud_billing.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_billing.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-billing/samples/generated/v1/cloud_billing.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing/samples/generated/v1/cloud_billing.test_iam_permissions.js,samples/README.md)
 
@@ -180,7 +180,7 @@ __Usage:__
 
 ### Cloud_billing.update_billing_account
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_billing.update_billing_account.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-billing/samples/generated/v1/cloud_billing.update_billing_account.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing/samples/generated/v1/cloud_billing.update_billing_account.js,samples/README.md)
 
@@ -197,7 +197,7 @@ __Usage:__
 
 ### Cloud_billing.update_project_billing_info
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_billing.update_project_billing_info.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-billing/samples/generated/v1/cloud_billing.update_project_billing_info.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing/samples/generated/v1/cloud_billing.update_project_billing_info.js,samples/README.md)
 
@@ -214,7 +214,7 @@ __Usage:__
 
 ### Cloud_catalog.list_services
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_catalog.list_services.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-billing/samples/generated/v1/cloud_catalog.list_services.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing/samples/generated/v1/cloud_catalog.list_services.js,samples/README.md)
 
@@ -231,7 +231,7 @@ __Usage:__
 
 ### Cloud_catalog.list_skus
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_catalog.list_skus.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-billing/samples/generated/v1/cloud_catalog.list_skus.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing/samples/generated/v1/cloud_catalog.list_skus.js,samples/README.md)
 
@@ -248,7 +248,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-billing/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing/samples/quickstart.js,samples/README.md)
 
@@ -265,7 +265,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-billing/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing/samples/test/quickstart.js,samples/README.md)
 
