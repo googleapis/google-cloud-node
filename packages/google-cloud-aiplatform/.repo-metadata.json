@@ -1,6 +1,6 @@
 {
   "language": "nodejs",
-  "issue_tracker": "https://github.com/googleapis/nodejs-ai-platform/issues",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "requires_billing": true,
   "name_pretty": "Vertex AI",
   "product_documentation": "https://cloud.google.com/vertex-ai/docs",
@@ -9,7 +9,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/aiplatform/latest",
   "release_level": "stable",
   "api_id": "aiplatform.googleapis.com",
-  "repo": "googleapis/nodejs-ai-platform",
+  "repo": "googleapis/google-cloud-node",
   "codeowner_team": "@googleapis/ml-apis",
   "distribution_name": "@google-cloud/aiplatform",
   "api_shortname": "aiplatform",
