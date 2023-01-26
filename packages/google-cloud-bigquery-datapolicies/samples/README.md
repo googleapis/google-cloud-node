@@ -49,7 +49,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Data_policy_service.create_data_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.create_data_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.create_data_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.create_data_policy.js,samples/README.md)
 
@@ -66,7 +66,7 @@ __Usage:__
 
 ### Data_policy_service.delete_data_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.delete_data_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.delete_data_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.delete_data_policy.js,samples/README.md)
 
@@ -83,7 +83,7 @@ __Usage:__
 
 ### Data_policy_service.get_data_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.get_data_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.get_data_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.get_data_policy.js,samples/README.md)
 
@@ -100,7 +100,7 @@ __Usage:__
 
 ### Data_policy_service.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.get_iam_policy.js,samples/README.md)
 
@@ -117,7 +117,7 @@ __Usage:__
 
 ### Data_policy_service.list_data_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.list_data_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.list_data_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.list_data_policies.js,samples/README.md)
 
@@ -134,7 +134,7 @@ __Usage:__
 
 ### Data_policy_service.rename_data_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.rename_data_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.rename_data_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.rename_data_policy.js,samples/README.md)
 
@@ -151,7 +151,7 @@ __Usage:__
 
 ### Data_policy_service.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.set_iam_policy.js,samples/README.md)
 
@@ -168,7 +168,7 @@ __Usage:__
 
 ### Data_policy_service.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.test_iam_permissions.js,samples/README.md)
 
@@ -185,7 +185,7 @@ __Usage:__
 
 ### Data_policy_service.update_data_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.update_data_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.update_data_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.update_data_policy.js,samples/README.md)
 
@@ -202,7 +202,7 @@ __Usage:__
 
 ### Data_policy_service.create_data_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.create_data_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.create_data_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.create_data_policy.js,samples/README.md)
 
@@ -219,7 +219,7 @@ __Usage:__
 
 ### Data_policy_service.delete_data_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.delete_data_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.delete_data_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.delete_data_policy.js,samples/README.md)
 
@@ -236,7 +236,7 @@ __Usage:__
 
 ### Data_policy_service.get_data_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.get_data_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.get_data_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.get_data_policy.js,samples/README.md)
 
@@ -253,7 +253,7 @@ __Usage:__
 
 ### Data_policy_service.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.get_iam_policy.js,samples/README.md)
 
@@ -270,7 +270,7 @@ __Usage:__
 
 ### Data_policy_service.list_data_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.list_data_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.list_data_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.list_data_policies.js,samples/README.md)
 
@@ -287,7 +287,7 @@ __Usage:__
 
 ### Data_policy_service.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.set_iam_policy.js,samples/README.md)
 
@@ -304,7 +304,7 @@ __Usage:__
 
 ### Data_policy_service.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.test_iam_permissions.js,samples/README.md)
 
@@ -321,7 +321,7 @@ __Usage:__
 
 ### Data_policy_service.update_data_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.update_data_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.update_data_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.update_data_policy.js,samples/README.md)
 
@@ -338,7 +338,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/quickstart.js,samples/README.md)
 
@@ -355,7 +355,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datapolicies/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/test/quickstart.js,samples/README.md)
 

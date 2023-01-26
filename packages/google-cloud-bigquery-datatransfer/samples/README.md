@@ -47,7 +47,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Data_transfer_service.check_valid_creds
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.check_valid_creds.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.check_valid_creds.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.check_valid_creds.js,samples/README.md)
 
@@ -64,7 +64,7 @@ __Usage:__
 
 ### Data_transfer_service.create_transfer_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.create_transfer_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.create_transfer_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.create_transfer_config.js,samples/README.md)
 
@@ -81,7 +81,7 @@ __Usage:__
 
 ### Data_transfer_service.delete_transfer_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.delete_transfer_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.delete_transfer_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.delete_transfer_config.js,samples/README.md)
 
@@ -98,7 +98,7 @@ __Usage:__
 
 ### Data_transfer_service.delete_transfer_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.delete_transfer_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.delete_transfer_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.delete_transfer_run.js,samples/README.md)
 
@@ -115,7 +115,7 @@ __Usage:__
 
 ### Data_transfer_service.enroll_data_sources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.enroll_data_sources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.enroll_data_sources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.enroll_data_sources.js,samples/README.md)
 
@@ -132,7 +132,7 @@ __Usage:__
 
 ### Data_transfer_service.get_data_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.get_data_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.get_data_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.get_data_source.js,samples/README.md)
 
@@ -149,7 +149,7 @@ __Usage:__
 
 ### Data_transfer_service.get_transfer_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.get_transfer_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.get_transfer_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.get_transfer_config.js,samples/README.md)
 
@@ -166,7 +166,7 @@ __Usage:__
 
 ### Data_transfer_service.get_transfer_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.get_transfer_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.get_transfer_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.get_transfer_run.js,samples/README.md)
 
@@ -183,7 +183,7 @@ __Usage:__
 
 ### Data_transfer_service.list_data_sources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.list_data_sources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.list_data_sources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.list_data_sources.js,samples/README.md)
 
@@ -200,7 +200,7 @@ __Usage:__
 
 ### Data_transfer_service.list_transfer_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.list_transfer_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.list_transfer_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.list_transfer_configs.js,samples/README.md)
 
@@ -217,7 +217,7 @@ __Usage:__
 
 ### Data_transfer_service.list_transfer_logs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.list_transfer_logs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.list_transfer_logs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.list_transfer_logs.js,samples/README.md)
 
@@ -234,7 +234,7 @@ __Usage:__
 
 ### Data_transfer_service.list_transfer_runs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.list_transfer_runs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.list_transfer_runs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.list_transfer_runs.js,samples/README.md)
 
@@ -251,7 +251,7 @@ __Usage:__
 
 ### Data_transfer_service.schedule_transfer_runs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.schedule_transfer_runs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.schedule_transfer_runs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.schedule_transfer_runs.js,samples/README.md)
 
@@ -268,7 +268,7 @@ __Usage:__
 
 ### Data_transfer_service.start_manual_transfer_runs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.start_manual_transfer_runs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.start_manual_transfer_runs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.start_manual_transfer_runs.js,samples/README.md)
 
@@ -285,7 +285,7 @@ __Usage:__
 
 ### Data_transfer_service.update_transfer_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.update_transfer_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.update_transfer_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.update_transfer_config.js,samples/README.md)
 
@@ -302,7 +302,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/quickstart.js,samples/README.md)
 
@@ -319,7 +319,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-datatransfer/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/test/quickstart.test.js,samples/README.md)
 
