@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/service-management-v1.1.3...service-management-v1.2.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3851](https://github.com/googleapis/google-cloud-node/issues/3851)) ([79fbaa8](https://github.com/googleapis/google-cloud-node/commit/79fbaa833d08738fa37aa37158ddb5b1c91710e1))
+
 ## [1.1.3](https://github.com/googleapis/nodejs-service-management/compare/v1.1.2...v1.1.3) (2022-11-10)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v2.1.2...api-gateway-v2.2.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3851](https://github.com/googleapis/google-cloud-node/issues/3851)) ([79fbaa8](https://github.com/googleapis/google-cloud-node/commit/79fbaa833d08738fa37aa37158ddb5b1c91710e1))
+
 ## [2.1.2](https://github.com/googleapis/nodejs-api-gateway/compare/v2.1.1...v2.1.2) (2022-11-11)
 
 

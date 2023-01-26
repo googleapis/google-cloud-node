@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/bare-metal-solution-v0.2.2...bare-metal-solution-v0.3.0) (2023-01-26)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3851](https://github.com/googleapis/google-cloud-node/issues/3851)) ([79fbaa8](https://github.com/googleapis/google-cloud-node/commit/79fbaa833d08738fa37aa37158ddb5b1c91710e1))
+
 ## [0.2.2](https://github.com/googleapis/nodejs-bare-metal-solution/compare/v0.2.1...v0.2.2) (2022-11-12)
 
 
