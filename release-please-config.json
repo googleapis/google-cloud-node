@@ -10,6 +10,7 @@
     "packages/google-appengine": {},
     "packages/google-area120-tables": {},
     "packages/google-cloud-accessapproval": {},
+    "packages/google-cloud-aiplatform": {},
     "packages/google-cloud-apigateway": {},
     "packages/google-cloud-apigeeconnect": {},
     "packages/google-cloud-asset": {},

@@ -1791,7 +1791,7 @@
     "issue_tracker": "https://issuetracker.google.com/savedsearches/559758",
     "release_level": "stable",
     "language": "nodejs",
-    "repo": "googleapis/nodejs-speech",
+    "repo": "googleapis/google-cloud-node",
     "distribution_name": "@google-cloud/speech",
     "api_id": "speech.googleapis.com",
     "requires_billing": false,
@@ -1799,7 +1799,7 @@
     "default_version": "v1",
     "api_shortname": "speech",
     "library_type": "GAPIC_COMBO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-speech",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-speech",
     "support_documentation": "https://cloud.google.com/speech-to-text/docs/getting-support"
   },
   {
@@ -2004,6 +2004,25 @@
     "library_type": "GAPIC_AUTO",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-translate",
     "support_documentation": "https://cloud.google.com/translate/docs/getting-support"
+  },
+  {
+    "language": "nodejs",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "requires_billing": true,
+    "name_pretty": "Vertex AI",
+    "product_documentation": "https://cloud.google.com/vertex-ai/docs",
+    "name": "aiplatform",
+    "default_version": "v1",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/aiplatform/latest",
+    "release_level": "stable",
+    "api_id": "aiplatform.googleapis.com",
+    "repo": "googleapis/google-cloud-node",
+    "codeowner_team": "@googleapis/ml-apis",
+    "distribution_name": "@google-cloud/aiplatform",
+    "api_shortname": "aiplatform",
+    "library_type": "GAPIC_COMBO",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-aiplatform",
+    "support_documentation": "https://cloud.google.com/vertex-ai/docs/getting-support"
   },
   {
     "language": "nodejs",
