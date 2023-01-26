@@ -784,24 +784,6 @@
                     })();
     
                     /**
-                     * State enum.
-                     * @name google.cloud.networkconnectivity.v1.State
-                     * @enum {number}
-                     * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                     * @property {number} CREATING=1 CREATING value
-                     * @property {number} ACTIVE=2 ACTIVE value
-                     * @property {number} DELETING=3 DELETING value
-                     */
-                    v1.State = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "CREATING"] = 1;
-                        values[valuesById[2] = "ACTIVE"] = 2;
-                        values[valuesById[3] = "DELETING"] = 3;
-                        return values;
-                    })();
-    
-                    /**
                      * LocationFeature enum.
                      * @name google.cloud.networkconnectivity.v1.LocationFeature
                      * @enum {number}
@@ -814,6 +796,26 @@
                         values[valuesById[0] = "LOCATION_FEATURE_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "SITE_TO_CLOUD_SPOKES"] = 1;
                         values[valuesById[2] = "SITE_TO_SITE_SPOKES"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * State enum.
+                     * @name google.cloud.networkconnectivity.v1.State
+                     * @enum {number}
+                     * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                     * @property {number} CREATING=1 CREATING value
+                     * @property {number} ACTIVE=2 ACTIVE value
+                     * @property {number} DELETING=3 DELETING value
+                     * @property {number} UPDATING=6 UPDATING value
+                     */
+                    v1.State = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CREATING"] = 1;
+                        values[valuesById[2] = "ACTIVE"] = 2;
+                        values[valuesById[3] = "DELETING"] = 3;
+                        values[valuesById[6] = "UPDATING"] = 6;
                         return values;
                     })();
     
@@ -1113,6 +1115,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 6:
                                     break;
                                 }
                             if (message.routingVpcs != null && message.hasOwnProperty("routingVpcs")) {
@@ -1184,6 +1187,10 @@
                             case "DELETING":
                             case 3:
                                 message.state = 3;
+                                break;
+                            case "UPDATING":
+                            case 6:
+                                message.state = 6;
                                 break;
                             }
                             if (object.routingVpcs) {
@@ -1861,6 +1868,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 6:
                                     break;
                                 }
                             return null;
@@ -1940,6 +1948,10 @@
                             case "DELETING":
                             case 3:
                                 message.state = 3;
+                                break;
+                            case "UPDATING":
+                            case 6:
+                                message.state = 6;
                                 break;
                             }
                             return message;
@@ -5142,6 +5154,7 @@
                          * @interface ILinkedVpnTunnels
                          * @property {Array.<string>|null} [uris] LinkedVpnTunnels uris
                          * @property {boolean|null} [siteToSiteDataTransfer] LinkedVpnTunnels siteToSiteDataTransfer
+                         * @property {string|null} [vpcNetwork] LinkedVpnTunnels vpcNetwork
                          */
     
                         /**
@@ -5177,6 +5190,14 @@
                         LinkedVpnTunnels.prototype.siteToSiteDataTransfer = false;
     
                         /**
+                         * LinkedVpnTunnels vpcNetwork.
+                         * @member {string} vpcNetwork
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedVpnTunnels
+                         * @instance
+                         */
+                        LinkedVpnTunnels.prototype.vpcNetwork = "";
+    
+                        /**
                          * Creates a new LinkedVpnTunnels instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkconnectivity.v1.LinkedVpnTunnels
@@ -5205,6 +5226,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.uris[i]);
                             if (message.siteToSiteDataTransfer != null && Object.hasOwnProperty.call(message, "siteToSiteDataTransfer"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.siteToSiteDataTransfer);
+                            if (message.vpcNetwork != null && Object.hasOwnProperty.call(message, "vpcNetwork"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.vpcNetwork);
                             return writer;
                         };
     
@@ -5247,6 +5270,10 @@
                                     }
                                 case 2: {
                                         message.siteToSiteDataTransfer = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.vpcNetwork = reader.string();
                                         break;
                                     }
                                 default:
@@ -5294,6 +5321,9 @@
                             if (message.siteToSiteDataTransfer != null && message.hasOwnProperty("siteToSiteDataTransfer"))
                                 if (typeof message.siteToSiteDataTransfer !== "boolean")
                                     return "siteToSiteDataTransfer: boolean expected";
+                            if (message.vpcNetwork != null && message.hasOwnProperty("vpcNetwork"))
+                                if (!$util.isString(message.vpcNetwork))
+                                    return "vpcNetwork: string expected";
                             return null;
                         };
     
@@ -5318,6 +5348,8 @@
                             }
                             if (object.siteToSiteDataTransfer != null)
                                 message.siteToSiteDataTransfer = Boolean(object.siteToSiteDataTransfer);
+                            if (object.vpcNetwork != null)
+                                message.vpcNetwork = String(object.vpcNetwork);
                             return message;
                         };
     
@@ -5336,8 +5368,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.uris = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.siteToSiteDataTransfer = false;
+                                object.vpcNetwork = "";
+                            }
                             if (message.uris && message.uris.length) {
                                 object.uris = [];
                                 for (var j = 0; j < message.uris.length; ++j)
@@ -5345,6 +5379,8 @@
                             }
                             if (message.siteToSiteDataTransfer != null && message.hasOwnProperty("siteToSiteDataTransfer"))
                                 object.siteToSiteDataTransfer = message.siteToSiteDataTransfer;
+                            if (message.vpcNetwork != null && message.hasOwnProperty("vpcNetwork"))
+                                object.vpcNetwork = message.vpcNetwork;
                             return object;
                         };
     
@@ -5385,6 +5421,7 @@
                          * @interface ILinkedInterconnectAttachments
                          * @property {Array.<string>|null} [uris] LinkedInterconnectAttachments uris
                          * @property {boolean|null} [siteToSiteDataTransfer] LinkedInterconnectAttachments siteToSiteDataTransfer
+                         * @property {string|null} [vpcNetwork] LinkedInterconnectAttachments vpcNetwork
                          */
     
                         /**
@@ -5420,6 +5457,14 @@
                         LinkedInterconnectAttachments.prototype.siteToSiteDataTransfer = false;
     
                         /**
+                         * LinkedInterconnectAttachments vpcNetwork.
+                         * @member {string} vpcNetwork
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedInterconnectAttachments
+                         * @instance
+                         */
+                        LinkedInterconnectAttachments.prototype.vpcNetwork = "";
+    
+                        /**
                          * Creates a new LinkedInterconnectAttachments instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkconnectivity.v1.LinkedInterconnectAttachments
@@ -5448,6 +5493,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.uris[i]);
                             if (message.siteToSiteDataTransfer != null && Object.hasOwnProperty.call(message, "siteToSiteDataTransfer"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.siteToSiteDataTransfer);
+                            if (message.vpcNetwork != null && Object.hasOwnProperty.call(message, "vpcNetwork"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.vpcNetwork);
                             return writer;
                         };
     
@@ -5490,6 +5537,10 @@
                                     }
                                 case 2: {
                                         message.siteToSiteDataTransfer = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.vpcNetwork = reader.string();
                                         break;
                                     }
                                 default:
@@ -5537,6 +5588,9 @@
                             if (message.siteToSiteDataTransfer != null && message.hasOwnProperty("siteToSiteDataTransfer"))
                                 if (typeof message.siteToSiteDataTransfer !== "boolean")
                                     return "siteToSiteDataTransfer: boolean expected";
+                            if (message.vpcNetwork != null && message.hasOwnProperty("vpcNetwork"))
+                                if (!$util.isString(message.vpcNetwork))
+                                    return "vpcNetwork: string expected";
                             return null;
                         };
     
@@ -5561,6 +5615,8 @@
                             }
                             if (object.siteToSiteDataTransfer != null)
                                 message.siteToSiteDataTransfer = Boolean(object.siteToSiteDataTransfer);
+                            if (object.vpcNetwork != null)
+                                message.vpcNetwork = String(object.vpcNetwork);
                             return message;
                         };
     
@@ -5579,8 +5635,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.uris = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.siteToSiteDataTransfer = false;
+                                object.vpcNetwork = "";
+                            }
                             if (message.uris && message.uris.length) {
                                 object.uris = [];
                                 for (var j = 0; j < message.uris.length; ++j)
@@ -5588,6 +5646,8 @@
                             }
                             if (message.siteToSiteDataTransfer != null && message.hasOwnProperty("siteToSiteDataTransfer"))
                                 object.siteToSiteDataTransfer = message.siteToSiteDataTransfer;
+                            if (message.vpcNetwork != null && message.hasOwnProperty("vpcNetwork"))
+                                object.vpcNetwork = message.vpcNetwork;
                             return object;
                         };
     
@@ -5628,6 +5688,7 @@
                          * @interface ILinkedRouterApplianceInstances
                          * @property {Array.<google.cloud.networkconnectivity.v1.IRouterApplianceInstance>|null} [instances] LinkedRouterApplianceInstances instances
                          * @property {boolean|null} [siteToSiteDataTransfer] LinkedRouterApplianceInstances siteToSiteDataTransfer
+                         * @property {string|null} [vpcNetwork] LinkedRouterApplianceInstances vpcNetwork
                          */
     
                         /**
@@ -5663,6 +5724,14 @@
                         LinkedRouterApplianceInstances.prototype.siteToSiteDataTransfer = false;
     
                         /**
+                         * LinkedRouterApplianceInstances vpcNetwork.
+                         * @member {string} vpcNetwork
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances
+                         * @instance
+                         */
+                        LinkedRouterApplianceInstances.prototype.vpcNetwork = "";
+    
+                        /**
                          * Creates a new LinkedRouterApplianceInstances instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances
@@ -5691,6 +5760,8 @@
                                     $root.google.cloud.networkconnectivity.v1.RouterApplianceInstance.encode(message.instances[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.siteToSiteDataTransfer != null && Object.hasOwnProperty.call(message, "siteToSiteDataTransfer"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.siteToSiteDataTransfer);
+                            if (message.vpcNetwork != null && Object.hasOwnProperty.call(message, "vpcNetwork"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.vpcNetwork);
                             return writer;
                         };
     
@@ -5733,6 +5804,10 @@
                                     }
                                 case 2: {
                                         message.siteToSiteDataTransfer = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.vpcNetwork = reader.string();
                                         break;
                                     }
                                 default:
@@ -5782,6 +5857,9 @@
                             if (message.siteToSiteDataTransfer != null && message.hasOwnProperty("siteToSiteDataTransfer"))
                                 if (typeof message.siteToSiteDataTransfer !== "boolean")
                                     return "siteToSiteDataTransfer: boolean expected";
+                            if (message.vpcNetwork != null && message.hasOwnProperty("vpcNetwork"))
+                                if (!$util.isString(message.vpcNetwork))
+                                    return "vpcNetwork: string expected";
                             return null;
                         };
     
@@ -5809,6 +5887,8 @@
                             }
                             if (object.siteToSiteDataTransfer != null)
                                 message.siteToSiteDataTransfer = Boolean(object.siteToSiteDataTransfer);
+                            if (object.vpcNetwork != null)
+                                message.vpcNetwork = String(object.vpcNetwork);
                             return message;
                         };
     
@@ -5827,8 +5907,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.instances = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.siteToSiteDataTransfer = false;
+                                object.vpcNetwork = "";
+                            }
                             if (message.instances && message.instances.length) {
                                 object.instances = [];
                                 for (var j = 0; j < message.instances.length; ++j)
@@ -5836,6 +5918,8 @@
                             }
                             if (message.siteToSiteDataTransfer != null && message.hasOwnProperty("siteToSiteDataTransfer"))
                                 object.siteToSiteDataTransfer = message.siteToSiteDataTransfer;
+                            if (message.vpcNetwork != null && message.hasOwnProperty("vpcNetwork"))
+                                object.vpcNetwork = message.vpcNetwork;
                             return object;
                         };
     
@@ -6344,6 +6428,3147 @@
                         };
     
                         return LocationMetadata;
+                    })();
+    
+                    v1.PolicyBasedRoutingService = (function() {
+    
+                        /**
+                         * Constructs a new PolicyBasedRoutingService service.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a PolicyBasedRoutingService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function PolicyBasedRoutingService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (PolicyBasedRoutingService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = PolicyBasedRoutingService;
+    
+                        /**
+                         * Creates new PolicyBasedRoutingService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoutingService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {PolicyBasedRoutingService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        PolicyBasedRoutingService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.PolicyBasedRoutingService|listPolicyBasedRoutes}.
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoutingService
+                         * @typedef ListPolicyBasedRoutesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse} [response] ListPolicyBasedRoutesResponse
+                         */
+    
+                        /**
+                         * Calls ListPolicyBasedRoutes.
+                         * @function listPolicyBasedRoutes
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoutingService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListPolicyBasedRoutesRequest} request ListPolicyBasedRoutesRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoutingService.ListPolicyBasedRoutesCallback} callback Node-style callback called with the error, if any, and ListPolicyBasedRoutesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyBasedRoutingService.prototype.listPolicyBasedRoutes = function listPolicyBasedRoutes(request, callback) {
+                            return this.rpcCall(listPolicyBasedRoutes, $root.google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest, $root.google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse, request, callback);
+                        }, "name", { value: "ListPolicyBasedRoutes" });
+    
+                        /**
+                         * Calls ListPolicyBasedRoutes.
+                         * @function listPolicyBasedRoutes
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoutingService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListPolicyBasedRoutesRequest} request ListPolicyBasedRoutesRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.PolicyBasedRoutingService|getPolicyBasedRoute}.
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoutingService
+                         * @typedef GetPolicyBasedRouteCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute} [response] PolicyBasedRoute
+                         */
+    
+                        /**
+                         * Calls GetPolicyBasedRoute.
+                         * @function getPolicyBasedRoute
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoutingService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetPolicyBasedRouteRequest} request GetPolicyBasedRouteRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoutingService.GetPolicyBasedRouteCallback} callback Node-style callback called with the error, if any, and PolicyBasedRoute
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyBasedRoutingService.prototype.getPolicyBasedRoute = function getPolicyBasedRoute(request, callback) {
+                            return this.rpcCall(getPolicyBasedRoute, $root.google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest, $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute, request, callback);
+                        }, "name", { value: "GetPolicyBasedRoute" });
+    
+                        /**
+                         * Calls GetPolicyBasedRoute.
+                         * @function getPolicyBasedRoute
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoutingService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetPolicyBasedRouteRequest} request GetPolicyBasedRouteRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.PolicyBasedRoute>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.PolicyBasedRoutingService|createPolicyBasedRoute}.
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoutingService
+                         * @typedef CreatePolicyBasedRouteCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreatePolicyBasedRoute.
+                         * @function createPolicyBasedRoute
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoutingService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.ICreatePolicyBasedRouteRequest} request CreatePolicyBasedRouteRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoutingService.CreatePolicyBasedRouteCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyBasedRoutingService.prototype.createPolicyBasedRoute = function createPolicyBasedRoute(request, callback) {
+                            return this.rpcCall(createPolicyBasedRoute, $root.google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreatePolicyBasedRoute" });
+    
+                        /**
+                         * Calls CreatePolicyBasedRoute.
+                         * @function createPolicyBasedRoute
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoutingService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.ICreatePolicyBasedRouteRequest} request CreatePolicyBasedRouteRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.PolicyBasedRoutingService|deletePolicyBasedRoute}.
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoutingService
+                         * @typedef DeletePolicyBasedRouteCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeletePolicyBasedRoute.
+                         * @function deletePolicyBasedRoute
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoutingService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IDeletePolicyBasedRouteRequest} request DeletePolicyBasedRouteRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoutingService.DeletePolicyBasedRouteCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyBasedRoutingService.prototype.deletePolicyBasedRoute = function deletePolicyBasedRoute(request, callback) {
+                            return this.rpcCall(deletePolicyBasedRoute, $root.google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeletePolicyBasedRoute" });
+    
+                        /**
+                         * Calls DeletePolicyBasedRoute.
+                         * @function deletePolicyBasedRoute
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoutingService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IDeletePolicyBasedRouteRequest} request DeletePolicyBasedRouteRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return PolicyBasedRoutingService;
+                    })();
+    
+                    v1.PolicyBasedRoute = (function() {
+    
+                        /**
+                         * Properties of a PolicyBasedRoute.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IPolicyBasedRoute
+                         * @property {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IVirtualMachine|null} [virtualMachine] PolicyBasedRoute virtualMachine
+                         * @property {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IInterconnectAttachment|null} [interconnectAttachment] PolicyBasedRoute interconnectAttachment
+                         * @property {string|null} [nextHopIlbIp] PolicyBasedRoute nextHopIlbIp
+                         * @property {string|null} [name] PolicyBasedRoute name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] PolicyBasedRoute createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] PolicyBasedRoute updateTime
+                         * @property {Object.<string,string>|null} [labels] PolicyBasedRoute labels
+                         * @property {string|null} [description] PolicyBasedRoute description
+                         * @property {string|null} [network] PolicyBasedRoute network
+                         * @property {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IFilter|null} [filter] PolicyBasedRoute filter
+                         * @property {number|null} [priority] PolicyBasedRoute priority
+                         * @property {Array.<google.cloud.networkconnectivity.v1.PolicyBasedRoute.IWarnings>|null} [warnings] PolicyBasedRoute warnings
+                         * @property {string|null} [selfLink] PolicyBasedRoute selfLink
+                         * @property {string|null} [kind] PolicyBasedRoute kind
+                         */
+    
+                        /**
+                         * Constructs a new PolicyBasedRoute.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a PolicyBasedRoute.
+                         * @implements IPolicyBasedRoute
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IPolicyBasedRoute=} [properties] Properties to set
+                         */
+                        function PolicyBasedRoute(properties) {
+                            this.labels = {};
+                            this.warnings = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PolicyBasedRoute virtualMachine.
+                         * @member {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IVirtualMachine|null|undefined} virtualMachine
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        PolicyBasedRoute.prototype.virtualMachine = null;
+    
+                        /**
+                         * PolicyBasedRoute interconnectAttachment.
+                         * @member {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IInterconnectAttachment|null|undefined} interconnectAttachment
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        PolicyBasedRoute.prototype.interconnectAttachment = null;
+    
+                        /**
+                         * PolicyBasedRoute nextHopIlbIp.
+                         * @member {string|null|undefined} nextHopIlbIp
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        PolicyBasedRoute.prototype.nextHopIlbIp = null;
+    
+                        /**
+                         * PolicyBasedRoute name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        PolicyBasedRoute.prototype.name = "";
+    
+                        /**
+                         * PolicyBasedRoute createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        PolicyBasedRoute.prototype.createTime = null;
+    
+                        /**
+                         * PolicyBasedRoute updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        PolicyBasedRoute.prototype.updateTime = null;
+    
+                        /**
+                         * PolicyBasedRoute labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        PolicyBasedRoute.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * PolicyBasedRoute description.
+                         * @member {string} description
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        PolicyBasedRoute.prototype.description = "";
+    
+                        /**
+                         * PolicyBasedRoute network.
+                         * @member {string} network
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        PolicyBasedRoute.prototype.network = "";
+    
+                        /**
+                         * PolicyBasedRoute filter.
+                         * @member {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IFilter|null|undefined} filter
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        PolicyBasedRoute.prototype.filter = null;
+    
+                        /**
+                         * PolicyBasedRoute priority.
+                         * @member {number} priority
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        PolicyBasedRoute.prototype.priority = 0;
+    
+                        /**
+                         * PolicyBasedRoute warnings.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.PolicyBasedRoute.IWarnings>} warnings
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        PolicyBasedRoute.prototype.warnings = $util.emptyArray;
+    
+                        /**
+                         * PolicyBasedRoute selfLink.
+                         * @member {string} selfLink
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        PolicyBasedRoute.prototype.selfLink = "";
+    
+                        /**
+                         * PolicyBasedRoute kind.
+                         * @member {string} kind
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        PolicyBasedRoute.prototype.kind = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * PolicyBasedRoute target.
+                         * @member {"virtualMachine"|"interconnectAttachment"|undefined} target
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        Object.defineProperty(PolicyBasedRoute.prototype, "target", {
+                            get: $util.oneOfGetter($oneOfFields = ["virtualMachine", "interconnectAttachment"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * PolicyBasedRoute nextHop.
+                         * @member {"nextHopIlbIp"|undefined} nextHop
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         */
+                        Object.defineProperty(PolicyBasedRoute.prototype, "nextHop", {
+                            get: $util.oneOfGetter($oneOfFields = ["nextHopIlbIp"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new PolicyBasedRoute instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IPolicyBasedRoute=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute} PolicyBasedRoute instance
+                         */
+                        PolicyBasedRoute.create = function create(properties) {
+                            return new PolicyBasedRoute(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PolicyBasedRoute message. Does not implicitly {@link google.cloud.networkconnectivity.v1.PolicyBasedRoute.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IPolicyBasedRoute} message PolicyBasedRoute message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PolicyBasedRoute.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
+                            if (message.network != null && Object.hasOwnProperty.call(message, "network"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.network);
+                            if (message.interconnectAttachment != null && Object.hasOwnProperty.call(message, "interconnectAttachment"))
+                                $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment.encode(message.interconnectAttachment, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter.encode(message.filter, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.priority != null && Object.hasOwnProperty.call(message, "priority"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.priority);
+                            if (message.nextHopIlbIp != null && Object.hasOwnProperty.call(message, "nextHopIlbIp"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.nextHopIlbIp);
+                            if (message.warnings != null && message.warnings.length)
+                                for (var i = 0; i < message.warnings.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings.encode(message.warnings[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.selfLink != null && Object.hasOwnProperty.call(message, "selfLink"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.selfLink);
+                            if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.kind);
+                            if (message.virtualMachine != null && Object.hasOwnProperty.call(message, "virtualMachine"))
+                                $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine.encode(message.virtualMachine, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PolicyBasedRoute message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.PolicyBasedRoute.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IPolicyBasedRoute} message PolicyBasedRoute message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PolicyBasedRoute.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PolicyBasedRoute message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute} PolicyBasedRoute
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PolicyBasedRoute.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 18: {
+                                        message.virtualMachine = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.interconnectAttachment = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.nextHopIlbIp = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.filter = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.priority = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        if (!(message.warnings && message.warnings.length))
+                                            message.warnings = [];
+                                        message.warnings.push($root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 15: {
+                                        message.selfLink = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.kind = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PolicyBasedRoute message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute} PolicyBasedRoute
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PolicyBasedRoute.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PolicyBasedRoute message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PolicyBasedRoute.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.virtualMachine != null && message.hasOwnProperty("virtualMachine")) {
+                                properties.target = 1;
+                                {
+                                    var error = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine.verify(message.virtualMachine);
+                                    if (error)
+                                        return "virtualMachine." + error;
+                                }
+                            }
+                            if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
+                                if (properties.target === 1)
+                                    return "target: multiple values";
+                                properties.target = 1;
+                                {
+                                    var error = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment.verify(message.interconnectAttachment);
+                                    if (error)
+                                        return "interconnectAttachment." + error;
+                                }
+                            }
+                            if (message.nextHopIlbIp != null && message.hasOwnProperty("nextHopIlbIp")) {
+                                properties.nextHop = 1;
+                                if (!$util.isString(message.nextHopIlbIp))
+                                    return "nextHopIlbIp: string expected";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.network != null && message.hasOwnProperty("network"))
+                                if (!$util.isString(message.network))
+                                    return "network: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter.verify(message.filter);
+                                if (error)
+                                    return "filter." + error;
+                            }
+                            if (message.priority != null && message.hasOwnProperty("priority"))
+                                if (!$util.isInteger(message.priority))
+                                    return "priority: integer expected";
+                            if (message.warnings != null && message.hasOwnProperty("warnings")) {
+                                if (!Array.isArray(message.warnings))
+                                    return "warnings: array expected";
+                                for (var i = 0; i < message.warnings.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings.verify(message.warnings[i]);
+                                    if (error)
+                                        return "warnings." + error;
+                                }
+                            }
+                            if (message.selfLink != null && message.hasOwnProperty("selfLink"))
+                                if (!$util.isString(message.selfLink))
+                                    return "selfLink: string expected";
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                if (!$util.isString(message.kind))
+                                    return "kind: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PolicyBasedRoute message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute} PolicyBasedRoute
+                         */
+                        PolicyBasedRoute.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute();
+                            if (object.virtualMachine != null) {
+                                if (typeof object.virtualMachine !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.PolicyBasedRoute.virtualMachine: object expected");
+                                message.virtualMachine = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine.fromObject(object.virtualMachine);
+                            }
+                            if (object.interconnectAttachment != null) {
+                                if (typeof object.interconnectAttachment !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.PolicyBasedRoute.interconnectAttachment: object expected");
+                                message.interconnectAttachment = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment.fromObject(object.interconnectAttachment);
+                            }
+                            if (object.nextHopIlbIp != null)
+                                message.nextHopIlbIp = String(object.nextHopIlbIp);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.PolicyBasedRoute.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.PolicyBasedRoute.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.PolicyBasedRoute.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.network != null)
+                                message.network = String(object.network);
+                            if (object.filter != null) {
+                                if (typeof object.filter !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.PolicyBasedRoute.filter: object expected");
+                                message.filter = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter.fromObject(object.filter);
+                            }
+                            if (object.priority != null)
+                                message.priority = object.priority | 0;
+                            if (object.warnings) {
+                                if (!Array.isArray(object.warnings))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.PolicyBasedRoute.warnings: array expected");
+                                message.warnings = [];
+                                for (var i = 0; i < object.warnings.length; ++i) {
+                                    if (typeof object.warnings[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.PolicyBasedRoute.warnings: object expected");
+                                    message.warnings[i] = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings.fromObject(object.warnings[i]);
+                                }
+                            }
+                            if (object.selfLink != null)
+                                message.selfLink = String(object.selfLink);
+                            if (object.kind != null)
+                                message.kind = String(object.kind);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PolicyBasedRoute message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute} message PolicyBasedRoute
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PolicyBasedRoute.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.warnings = [];
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                                object.network = "";
+                                object.filter = null;
+                                object.priority = 0;
+                                object.selfLink = "";
+                                object.kind = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.network != null && message.hasOwnProperty("network"))
+                                object.network = message.network;
+                            if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
+                                object.interconnectAttachment = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment.toObject(message.interconnectAttachment, options);
+                                if (options.oneofs)
+                                    object.target = "interconnectAttachment";
+                            }
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter.toObject(message.filter, options);
+                            if (message.priority != null && message.hasOwnProperty("priority"))
+                                object.priority = message.priority;
+                            if (message.nextHopIlbIp != null && message.hasOwnProperty("nextHopIlbIp")) {
+                                object.nextHopIlbIp = message.nextHopIlbIp;
+                                if (options.oneofs)
+                                    object.nextHop = "nextHopIlbIp";
+                            }
+                            if (message.warnings && message.warnings.length) {
+                                object.warnings = [];
+                                for (var j = 0; j < message.warnings.length; ++j)
+                                    object.warnings[j] = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings.toObject(message.warnings[j], options);
+                            }
+                            if (message.selfLink != null && message.hasOwnProperty("selfLink"))
+                                object.selfLink = message.selfLink;
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                object.kind = message.kind;
+                            if (message.virtualMachine != null && message.hasOwnProperty("virtualMachine")) {
+                                object.virtualMachine = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine.toObject(message.virtualMachine, options);
+                                if (options.oneofs)
+                                    object.target = "virtualMachine";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PolicyBasedRoute to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PolicyBasedRoute.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PolicyBasedRoute
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PolicyBasedRoute.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.PolicyBasedRoute";
+                        };
+    
+                        PolicyBasedRoute.VirtualMachine = (function() {
+    
+                            /**
+                             * Properties of a VirtualMachine.
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                             * @interface IVirtualMachine
+                             * @property {Array.<string>|null} [tags] VirtualMachine tags
+                             */
+    
+                            /**
+                             * Constructs a new VirtualMachine.
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                             * @classdesc Represents a VirtualMachine.
+                             * @implements IVirtualMachine
+                             * @constructor
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IVirtualMachine=} [properties] Properties to set
+                             */
+                            function VirtualMachine(properties) {
+                                this.tags = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * VirtualMachine tags.
+                             * @member {Array.<string>} tags
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine
+                             * @instance
+                             */
+                            VirtualMachine.prototype.tags = $util.emptyArray;
+    
+                            /**
+                             * Creates a new VirtualMachine instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IVirtualMachine=} [properties] Properties to set
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine} VirtualMachine instance
+                             */
+                            VirtualMachine.create = function create(properties) {
+                                return new VirtualMachine(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified VirtualMachine message. Does not implicitly {@link google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IVirtualMachine} message VirtualMachine message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VirtualMachine.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.tags != null && message.tags.length)
+                                    for (var i = 0; i < message.tags.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.tags[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified VirtualMachine message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IVirtualMachine} message VirtualMachine message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VirtualMachine.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a VirtualMachine message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine} VirtualMachine
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VirtualMachine.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.tags && message.tags.length))
+                                                message.tags = [];
+                                            message.tags.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a VirtualMachine message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine} VirtualMachine
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VirtualMachine.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a VirtualMachine message.
+                             * @function verify
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            VirtualMachine.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.tags != null && message.hasOwnProperty("tags")) {
+                                    if (!Array.isArray(message.tags))
+                                        return "tags: array expected";
+                                    for (var i = 0; i < message.tags.length; ++i)
+                                        if (!$util.isString(message.tags[i]))
+                                            return "tags: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a VirtualMachine message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine} VirtualMachine
+                             */
+                            VirtualMachine.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine)
+                                    return object;
+                                var message = new $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine();
+                                if (object.tags) {
+                                    if (!Array.isArray(object.tags))
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine.tags: array expected");
+                                    message.tags = [];
+                                    for (var i = 0; i < object.tags.length; ++i)
+                                        message.tags[i] = String(object.tags[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a VirtualMachine message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine} message VirtualMachine
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            VirtualMachine.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.tags = [];
+                                if (message.tags && message.tags.length) {
+                                    object.tags = [];
+                                    for (var j = 0; j < message.tags.length; ++j)
+                                        object.tags[j] = message.tags[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this VirtualMachine to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            VirtualMachine.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for VirtualMachine
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            VirtualMachine.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine";
+                            };
+    
+                            return VirtualMachine;
+                        })();
+    
+                        PolicyBasedRoute.InterconnectAttachment = (function() {
+    
+                            /**
+                             * Properties of an InterconnectAttachment.
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                             * @interface IInterconnectAttachment
+                             * @property {string|null} [region] InterconnectAttachment region
+                             */
+    
+                            /**
+                             * Constructs a new InterconnectAttachment.
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                             * @classdesc Represents an InterconnectAttachment.
+                             * @implements IInterconnectAttachment
+                             * @constructor
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IInterconnectAttachment=} [properties] Properties to set
+                             */
+                            function InterconnectAttachment(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InterconnectAttachment region.
+                             * @member {string} region
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment
+                             * @instance
+                             */
+                            InterconnectAttachment.prototype.region = "";
+    
+                            /**
+                             * Creates a new InterconnectAttachment instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IInterconnectAttachment=} [properties] Properties to set
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment} InterconnectAttachment instance
+                             */
+                            InterconnectAttachment.create = function create(properties) {
+                                return new InterconnectAttachment(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InterconnectAttachment message. Does not implicitly {@link google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IInterconnectAttachment} message InterconnectAttachment message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InterconnectAttachment.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.region);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InterconnectAttachment message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IInterconnectAttachment} message InterconnectAttachment message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InterconnectAttachment.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InterconnectAttachment message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment} InterconnectAttachment
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InterconnectAttachment.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.region = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InterconnectAttachment message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment} InterconnectAttachment
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InterconnectAttachment.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InterconnectAttachment message.
+                             * @function verify
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InterconnectAttachment.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.region != null && message.hasOwnProperty("region"))
+                                    if (!$util.isString(message.region))
+                                        return "region: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InterconnectAttachment message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment} InterconnectAttachment
+                             */
+                            InterconnectAttachment.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment)
+                                    return object;
+                                var message = new $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment();
+                                if (object.region != null)
+                                    message.region = String(object.region);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InterconnectAttachment message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment} message InterconnectAttachment
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InterconnectAttachment.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.region = "";
+                                if (message.region != null && message.hasOwnProperty("region"))
+                                    object.region = message.region;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InterconnectAttachment to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InterconnectAttachment.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InterconnectAttachment
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InterconnectAttachment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment";
+                            };
+    
+                            return InterconnectAttachment;
+                        })();
+    
+                        PolicyBasedRoute.Filter = (function() {
+    
+                            /**
+                             * Properties of a Filter.
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                             * @interface IFilter
+                             * @property {string|null} [ipProtocol] Filter ipProtocol
+                             * @property {string|null} [srcRange] Filter srcRange
+                             * @property {string|null} [destRange] Filter destRange
+                             * @property {google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter.ProtocolVersion|null} [protocolVersion] Filter protocolVersion
+                             */
+    
+                            /**
+                             * Constructs a new Filter.
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                             * @classdesc Represents a Filter.
+                             * @implements IFilter
+                             * @constructor
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IFilter=} [properties] Properties to set
+                             */
+                            function Filter(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Filter ipProtocol.
+                             * @member {string} ipProtocol
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter
+                             * @instance
+                             */
+                            Filter.prototype.ipProtocol = "";
+    
+                            /**
+                             * Filter srcRange.
+                             * @member {string} srcRange
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter
+                             * @instance
+                             */
+                            Filter.prototype.srcRange = "";
+    
+                            /**
+                             * Filter destRange.
+                             * @member {string} destRange
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter
+                             * @instance
+                             */
+                            Filter.prototype.destRange = "";
+    
+                            /**
+                             * Filter protocolVersion.
+                             * @member {google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter.ProtocolVersion} protocolVersion
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter
+                             * @instance
+                             */
+                            Filter.prototype.protocolVersion = 0;
+    
+                            /**
+                             * Creates a new Filter instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IFilter=} [properties] Properties to set
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter} Filter instance
+                             */
+                            Filter.create = function create(properties) {
+                                return new Filter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Filter message. Does not implicitly {@link google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IFilter} message Filter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Filter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.ipProtocol != null && Object.hasOwnProperty.call(message, "ipProtocol"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.ipProtocol);
+                                if (message.srcRange != null && Object.hasOwnProperty.call(message, "srcRange"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.srcRange);
+                                if (message.destRange != null && Object.hasOwnProperty.call(message, "destRange"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.destRange);
+                                if (message.protocolVersion != null && Object.hasOwnProperty.call(message, "protocolVersion"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.protocolVersion);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IFilter} message Filter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Filter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Filter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter} Filter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Filter.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.ipProtocol = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.srcRange = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.destRange = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.protocolVersion = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Filter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter} Filter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Filter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Filter message.
+                             * @function verify
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Filter.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.ipProtocol != null && message.hasOwnProperty("ipProtocol"))
+                                    if (!$util.isString(message.ipProtocol))
+                                        return "ipProtocol: string expected";
+                                if (message.srcRange != null && message.hasOwnProperty("srcRange"))
+                                    if (!$util.isString(message.srcRange))
+                                        return "srcRange: string expected";
+                                if (message.destRange != null && message.hasOwnProperty("destRange"))
+                                    if (!$util.isString(message.destRange))
+                                        return "destRange: string expected";
+                                if (message.protocolVersion != null && message.hasOwnProperty("protocolVersion"))
+                                    switch (message.protocolVersion) {
+                                    default:
+                                        return "protocolVersion: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Filter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter} Filter
+                             */
+                            Filter.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter)
+                                    return object;
+                                var message = new $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter();
+                                if (object.ipProtocol != null)
+                                    message.ipProtocol = String(object.ipProtocol);
+                                if (object.srcRange != null)
+                                    message.srcRange = String(object.srcRange);
+                                if (object.destRange != null)
+                                    message.destRange = String(object.destRange);
+                                switch (object.protocolVersion) {
+                                default:
+                                    if (typeof object.protocolVersion === "number") {
+                                        message.protocolVersion = object.protocolVersion;
+                                        break;
+                                    }
+                                    break;
+                                case "PROTOCOL_VERSION_UNSPECIFIED":
+                                case 0:
+                                    message.protocolVersion = 0;
+                                    break;
+                                case "IPV4":
+                                case 1:
+                                    message.protocolVersion = 1;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Filter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter} message Filter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Filter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.ipProtocol = "";
+                                    object.srcRange = "";
+                                    object.destRange = "";
+                                    object.protocolVersion = options.enums === String ? "PROTOCOL_VERSION_UNSPECIFIED" : 0;
+                                }
+                                if (message.ipProtocol != null && message.hasOwnProperty("ipProtocol"))
+                                    object.ipProtocol = message.ipProtocol;
+                                if (message.srcRange != null && message.hasOwnProperty("srcRange"))
+                                    object.srcRange = message.srcRange;
+                                if (message.destRange != null && message.hasOwnProperty("destRange"))
+                                    object.destRange = message.destRange;
+                                if (message.protocolVersion != null && message.hasOwnProperty("protocolVersion"))
+                                    object.protocolVersion = options.enums === String ? $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter.ProtocolVersion[message.protocolVersion] === undefined ? message.protocolVersion : $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter.ProtocolVersion[message.protocolVersion] : message.protocolVersion;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Filter to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Filter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Filter
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Filter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter";
+                            };
+    
+                            /**
+                             * ProtocolVersion enum.
+                             * @name google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter.ProtocolVersion
+                             * @enum {number}
+                             * @property {number} PROTOCOL_VERSION_UNSPECIFIED=0 PROTOCOL_VERSION_UNSPECIFIED value
+                             * @property {number} IPV4=1 IPV4 value
+                             */
+                            Filter.ProtocolVersion = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "PROTOCOL_VERSION_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "IPV4"] = 1;
+                                return values;
+                            })();
+    
+                            return Filter;
+                        })();
+    
+                        PolicyBasedRoute.Warnings = (function() {
+    
+                            /**
+                             * Properties of a Warnings.
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                             * @interface IWarnings
+                             * @property {google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings.Code|null} [code] Warnings code
+                             * @property {Object.<string,string>|null} [data] Warnings data
+                             * @property {string|null} [warningMessage] Warnings warningMessage
+                             */
+    
+                            /**
+                             * Constructs a new Warnings.
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute
+                             * @classdesc Represents a Warnings.
+                             * @implements IWarnings
+                             * @constructor
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IWarnings=} [properties] Properties to set
+                             */
+                            function Warnings(properties) {
+                                this.data = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Warnings code.
+                             * @member {google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings.Code} code
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings
+                             * @instance
+                             */
+                            Warnings.prototype.code = 0;
+    
+                            /**
+                             * Warnings data.
+                             * @member {Object.<string,string>} data
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings
+                             * @instance
+                             */
+                            Warnings.prototype.data = $util.emptyObject;
+    
+                            /**
+                             * Warnings warningMessage.
+                             * @member {string} warningMessage
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings
+                             * @instance
+                             */
+                            Warnings.prototype.warningMessage = "";
+    
+                            /**
+                             * Creates a new Warnings instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IWarnings=} [properties] Properties to set
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings} Warnings instance
+                             */
+                            Warnings.create = function create(properties) {
+                                return new Warnings(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Warnings message. Does not implicitly {@link google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IWarnings} message Warnings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Warnings.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                                if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                                    for (var keys = Object.keys(message.data), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.data[keys[i]]).ldelim();
+                                if (message.warningMessage != null && Object.hasOwnProperty.call(message, "warningMessage"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.warningMessage);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Warnings message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.IWarnings} message Warnings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Warnings.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Warnings message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings} Warnings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Warnings.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.code = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (message.data === $util.emptyObject)
+                                                message.data = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.data[key] = value;
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.warningMessage = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Warnings message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings} Warnings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Warnings.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Warnings message.
+                             * @function verify
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Warnings.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.code != null && message.hasOwnProperty("code"))
+                                    switch (message.code) {
+                                    default:
+                                        return "code: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.data != null && message.hasOwnProperty("data")) {
+                                    if (!$util.isObject(message.data))
+                                        return "data: object expected";
+                                    var key = Object.keys(message.data);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.data[key[i]]))
+                                            return "data: string{k:string} expected";
+                                }
+                                if (message.warningMessage != null && message.hasOwnProperty("warningMessage"))
+                                    if (!$util.isString(message.warningMessage))
+                                        return "warningMessage: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Warnings message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings} Warnings
+                             */
+                            Warnings.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings)
+                                    return object;
+                                var message = new $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings();
+                                switch (object.code) {
+                                default:
+                                    if (typeof object.code === "number") {
+                                        message.code = object.code;
+                                        break;
+                                    }
+                                    break;
+                                case "WARNING_UNSPECIFIED":
+                                case 0:
+                                    message.code = 0;
+                                    break;
+                                case "RESOURCE_NOT_ACTIVE":
+                                case 1:
+                                    message.code = 1;
+                                    break;
+                                case "RESOURCE_BEING_MODIFIED":
+                                case 2:
+                                    message.code = 2;
+                                    break;
+                                }
+                                if (object.data) {
+                                    if (typeof object.data !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings.data: object expected");
+                                    message.data = {};
+                                    for (var keys = Object.keys(object.data), i = 0; i < keys.length; ++i)
+                                        message.data[keys[i]] = String(object.data[keys[i]]);
+                                }
+                                if (object.warningMessage != null)
+                                    message.warningMessage = String(object.warningMessage);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Warnings message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings} message Warnings
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Warnings.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.data = {};
+                                if (options.defaults) {
+                                    object.code = options.enums === String ? "WARNING_UNSPECIFIED" : 0;
+                                    object.warningMessage = "";
+                                }
+                                if (message.code != null && message.hasOwnProperty("code"))
+                                    object.code = options.enums === String ? $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings.Code[message.code] === undefined ? message.code : $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings.Code[message.code] : message.code;
+                                var keys2;
+                                if (message.data && (keys2 = Object.keys(message.data)).length) {
+                                    object.data = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.data[keys2[j]] = message.data[keys2[j]];
+                                }
+                                if (message.warningMessage != null && message.hasOwnProperty("warningMessage"))
+                                    object.warningMessage = message.warningMessage;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Warnings to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Warnings.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Warnings
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Warnings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings";
+                            };
+    
+                            /**
+                             * Code enum.
+                             * @name google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings.Code
+                             * @enum {number}
+                             * @property {number} WARNING_UNSPECIFIED=0 WARNING_UNSPECIFIED value
+                             * @property {number} RESOURCE_NOT_ACTIVE=1 RESOURCE_NOT_ACTIVE value
+                             * @property {number} RESOURCE_BEING_MODIFIED=2 RESOURCE_BEING_MODIFIED value
+                             */
+                            Warnings.Code = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "WARNING_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "RESOURCE_NOT_ACTIVE"] = 1;
+                                values[valuesById[2] = "RESOURCE_BEING_MODIFIED"] = 2;
+                                return values;
+                            })();
+    
+                            return Warnings;
+                        })();
+    
+                        return PolicyBasedRoute;
+                    })();
+    
+                    v1.ListPolicyBasedRoutesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListPolicyBasedRoutesRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListPolicyBasedRoutesRequest
+                         * @property {string|null} [parent] ListPolicyBasedRoutesRequest parent
+                         * @property {number|null} [pageSize] ListPolicyBasedRoutesRequest pageSize
+                         * @property {string|null} [pageToken] ListPolicyBasedRoutesRequest pageToken
+                         * @property {string|null} [filter] ListPolicyBasedRoutesRequest filter
+                         * @property {string|null} [orderBy] ListPolicyBasedRoutesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListPolicyBasedRoutesRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListPolicyBasedRoutesRequest.
+                         * @implements IListPolicyBasedRoutesRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListPolicyBasedRoutesRequest=} [properties] Properties to set
+                         */
+                        function ListPolicyBasedRoutesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPolicyBasedRoutesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @instance
+                         */
+                        ListPolicyBasedRoutesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListPolicyBasedRoutesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @instance
+                         */
+                        ListPolicyBasedRoutesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListPolicyBasedRoutesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @instance
+                         */
+                        ListPolicyBasedRoutesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListPolicyBasedRoutesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @instance
+                         */
+                        ListPolicyBasedRoutesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListPolicyBasedRoutesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @instance
+                         */
+                        ListPolicyBasedRoutesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListPolicyBasedRoutesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListPolicyBasedRoutesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest} ListPolicyBasedRoutesRequest instance
+                         */
+                        ListPolicyBasedRoutesRequest.create = function create(properties) {
+                            return new ListPolicyBasedRoutesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPolicyBasedRoutesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListPolicyBasedRoutesRequest} message ListPolicyBasedRoutesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPolicyBasedRoutesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPolicyBasedRoutesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListPolicyBasedRoutesRequest} message ListPolicyBasedRoutesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPolicyBasedRoutesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPolicyBasedRoutesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest} ListPolicyBasedRoutesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPolicyBasedRoutesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPolicyBasedRoutesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest} ListPolicyBasedRoutesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPolicyBasedRoutesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPolicyBasedRoutesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPolicyBasedRoutesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPolicyBasedRoutesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest} ListPolicyBasedRoutesRequest
+                         */
+                        ListPolicyBasedRoutesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPolicyBasedRoutesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest} message ListPolicyBasedRoutesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPolicyBasedRoutesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPolicyBasedRoutesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPolicyBasedRoutesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListPolicyBasedRoutesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListPolicyBasedRoutesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesRequest";
+                        };
+    
+                        return ListPolicyBasedRoutesRequest;
+                    })();
+    
+                    v1.ListPolicyBasedRoutesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListPolicyBasedRoutesResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListPolicyBasedRoutesResponse
+                         * @property {Array.<google.cloud.networkconnectivity.v1.IPolicyBasedRoute>|null} [policyBasedRoutes] ListPolicyBasedRoutesResponse policyBasedRoutes
+                         * @property {string|null} [nextPageToken] ListPolicyBasedRoutesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListPolicyBasedRoutesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListPolicyBasedRoutesResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListPolicyBasedRoutesResponse.
+                         * @implements IListPolicyBasedRoutesResponse
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListPolicyBasedRoutesResponse=} [properties] Properties to set
+                         */
+                        function ListPolicyBasedRoutesResponse(properties) {
+                            this.policyBasedRoutes = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPolicyBasedRoutesResponse policyBasedRoutes.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.IPolicyBasedRoute>} policyBasedRoutes
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse
+                         * @instance
+                         */
+                        ListPolicyBasedRoutesResponse.prototype.policyBasedRoutes = $util.emptyArray;
+    
+                        /**
+                         * ListPolicyBasedRoutesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse
+                         * @instance
+                         */
+                        ListPolicyBasedRoutesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListPolicyBasedRoutesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse
+                         * @instance
+                         */
+                        ListPolicyBasedRoutesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListPolicyBasedRoutesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListPolicyBasedRoutesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse} ListPolicyBasedRoutesResponse instance
+                         */
+                        ListPolicyBasedRoutesResponse.create = function create(properties) {
+                            return new ListPolicyBasedRoutesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPolicyBasedRoutesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListPolicyBasedRoutesResponse} message ListPolicyBasedRoutesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPolicyBasedRoutesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.policyBasedRoutes != null && message.policyBasedRoutes.length)
+                                for (var i = 0; i < message.policyBasedRoutes.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.encode(message.policyBasedRoutes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPolicyBasedRoutesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListPolicyBasedRoutesResponse} message ListPolicyBasedRoutesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPolicyBasedRoutesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPolicyBasedRoutesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse} ListPolicyBasedRoutesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPolicyBasedRoutesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.policyBasedRoutes && message.policyBasedRoutes.length))
+                                            message.policyBasedRoutes = [];
+                                        message.policyBasedRoutes.push($root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPolicyBasedRoutesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse} ListPolicyBasedRoutesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPolicyBasedRoutesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPolicyBasedRoutesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPolicyBasedRoutesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.policyBasedRoutes != null && message.hasOwnProperty("policyBasedRoutes")) {
+                                if (!Array.isArray(message.policyBasedRoutes))
+                                    return "policyBasedRoutes: array expected";
+                                for (var i = 0; i < message.policyBasedRoutes.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.verify(message.policyBasedRoutes[i]);
+                                    if (error)
+                                        return "policyBasedRoutes." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPolicyBasedRoutesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse} ListPolicyBasedRoutesResponse
+                         */
+                        ListPolicyBasedRoutesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse();
+                            if (object.policyBasedRoutes) {
+                                if (!Array.isArray(object.policyBasedRoutes))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse.policyBasedRoutes: array expected");
+                                message.policyBasedRoutes = [];
+                                for (var i = 0; i < object.policyBasedRoutes.length; ++i) {
+                                    if (typeof object.policyBasedRoutes[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse.policyBasedRoutes: object expected");
+                                    message.policyBasedRoutes[i] = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.fromObject(object.policyBasedRoutes[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPolicyBasedRoutesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse} message ListPolicyBasedRoutesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPolicyBasedRoutesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.policyBasedRoutes = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.policyBasedRoutes && message.policyBasedRoutes.length) {
+                                object.policyBasedRoutes = [];
+                                for (var j = 0; j < message.policyBasedRoutes.length; ++j)
+                                    object.policyBasedRoutes[j] = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.toObject(message.policyBasedRoutes[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPolicyBasedRoutesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPolicyBasedRoutesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListPolicyBasedRoutesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListPolicyBasedRoutesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListPolicyBasedRoutesResponse";
+                        };
+    
+                        return ListPolicyBasedRoutesResponse;
+                    })();
+    
+                    v1.GetPolicyBasedRouteRequest = (function() {
+    
+                        /**
+                         * Properties of a GetPolicyBasedRouteRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IGetPolicyBasedRouteRequest
+                         * @property {string|null} [name] GetPolicyBasedRouteRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetPolicyBasedRouteRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a GetPolicyBasedRouteRequest.
+                         * @implements IGetPolicyBasedRouteRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IGetPolicyBasedRouteRequest=} [properties] Properties to set
+                         */
+                        function GetPolicyBasedRouteRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetPolicyBasedRouteRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest
+                         * @instance
+                         */
+                        GetPolicyBasedRouteRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetPolicyBasedRouteRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetPolicyBasedRouteRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest} GetPolicyBasedRouteRequest instance
+                         */
+                        GetPolicyBasedRouteRequest.create = function create(properties) {
+                            return new GetPolicyBasedRouteRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetPolicyBasedRouteRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetPolicyBasedRouteRequest} message GetPolicyBasedRouteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPolicyBasedRouteRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetPolicyBasedRouteRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetPolicyBasedRouteRequest} message GetPolicyBasedRouteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPolicyBasedRouteRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetPolicyBasedRouteRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest} GetPolicyBasedRouteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPolicyBasedRouteRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetPolicyBasedRouteRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest} GetPolicyBasedRouteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPolicyBasedRouteRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetPolicyBasedRouteRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetPolicyBasedRouteRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetPolicyBasedRouteRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest} GetPolicyBasedRouteRequest
+                         */
+                        GetPolicyBasedRouteRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetPolicyBasedRouteRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest} message GetPolicyBasedRouteRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetPolicyBasedRouteRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetPolicyBasedRouteRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetPolicyBasedRouteRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetPolicyBasedRouteRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetPolicyBasedRouteRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.GetPolicyBasedRouteRequest";
+                        };
+    
+                        return GetPolicyBasedRouteRequest;
+                    })();
+    
+                    v1.CreatePolicyBasedRouteRequest = (function() {
+    
+                        /**
+                         * Properties of a CreatePolicyBasedRouteRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface ICreatePolicyBasedRouteRequest
+                         * @property {string|null} [parent] CreatePolicyBasedRouteRequest parent
+                         * @property {string|null} [policyBasedRouteId] CreatePolicyBasedRouteRequest policyBasedRouteId
+                         * @property {google.cloud.networkconnectivity.v1.IPolicyBasedRoute|null} [policyBasedRoute] CreatePolicyBasedRouteRequest policyBasedRoute
+                         * @property {string|null} [requestId] CreatePolicyBasedRouteRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreatePolicyBasedRouteRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a CreatePolicyBasedRouteRequest.
+                         * @implements ICreatePolicyBasedRouteRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.ICreatePolicyBasedRouteRequest=} [properties] Properties to set
+                         */
+                        function CreatePolicyBasedRouteRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreatePolicyBasedRouteRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest
+                         * @instance
+                         */
+                        CreatePolicyBasedRouteRequest.prototype.parent = "";
+    
+                        /**
+                         * CreatePolicyBasedRouteRequest policyBasedRouteId.
+                         * @member {string} policyBasedRouteId
+                         * @memberof google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest
+                         * @instance
+                         */
+                        CreatePolicyBasedRouteRequest.prototype.policyBasedRouteId = "";
+    
+                        /**
+                         * CreatePolicyBasedRouteRequest policyBasedRoute.
+                         * @member {google.cloud.networkconnectivity.v1.IPolicyBasedRoute|null|undefined} policyBasedRoute
+                         * @memberof google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest
+                         * @instance
+                         */
+                        CreatePolicyBasedRouteRequest.prototype.policyBasedRoute = null;
+    
+                        /**
+                         * CreatePolicyBasedRouteRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest
+                         * @instance
+                         */
+                        CreatePolicyBasedRouteRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreatePolicyBasedRouteRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ICreatePolicyBasedRouteRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest} CreatePolicyBasedRouteRequest instance
+                         */
+                        CreatePolicyBasedRouteRequest.create = function create(properties) {
+                            return new CreatePolicyBasedRouteRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreatePolicyBasedRouteRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ICreatePolicyBasedRouteRequest} message CreatePolicyBasedRouteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreatePolicyBasedRouteRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.policyBasedRouteId != null && Object.hasOwnProperty.call(message, "policyBasedRouteId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.policyBasedRouteId);
+                            if (message.policyBasedRoute != null && Object.hasOwnProperty.call(message, "policyBasedRoute"))
+                                $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.encode(message.policyBasedRoute, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreatePolicyBasedRouteRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ICreatePolicyBasedRouteRequest} message CreatePolicyBasedRouteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreatePolicyBasedRouteRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreatePolicyBasedRouteRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest} CreatePolicyBasedRouteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreatePolicyBasedRouteRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.policyBasedRouteId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.policyBasedRoute = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreatePolicyBasedRouteRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest} CreatePolicyBasedRouteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreatePolicyBasedRouteRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreatePolicyBasedRouteRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreatePolicyBasedRouteRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.policyBasedRouteId != null && message.hasOwnProperty("policyBasedRouteId"))
+                                if (!$util.isString(message.policyBasedRouteId))
+                                    return "policyBasedRouteId: string expected";
+                            if (message.policyBasedRoute != null && message.hasOwnProperty("policyBasedRoute")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.verify(message.policyBasedRoute);
+                                if (error)
+                                    return "policyBasedRoute." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreatePolicyBasedRouteRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest} CreatePolicyBasedRouteRequest
+                         */
+                        CreatePolicyBasedRouteRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.policyBasedRouteId != null)
+                                message.policyBasedRouteId = String(object.policyBasedRouteId);
+                            if (object.policyBasedRoute != null) {
+                                if (typeof object.policyBasedRoute !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest.policyBasedRoute: object expected");
+                                message.policyBasedRoute = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.fromObject(object.policyBasedRoute);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreatePolicyBasedRouteRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest} message CreatePolicyBasedRouteRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreatePolicyBasedRouteRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.policyBasedRouteId = "";
+                                object.policyBasedRoute = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.policyBasedRouteId != null && message.hasOwnProperty("policyBasedRouteId"))
+                                object.policyBasedRouteId = message.policyBasedRouteId;
+                            if (message.policyBasedRoute != null && message.hasOwnProperty("policyBasedRoute"))
+                                object.policyBasedRoute = $root.google.cloud.networkconnectivity.v1.PolicyBasedRoute.toObject(message.policyBasedRoute, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreatePolicyBasedRouteRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreatePolicyBasedRouteRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreatePolicyBasedRouteRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreatePolicyBasedRouteRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.CreatePolicyBasedRouteRequest";
+                        };
+    
+                        return CreatePolicyBasedRouteRequest;
+                    })();
+    
+                    v1.DeletePolicyBasedRouteRequest = (function() {
+    
+                        /**
+                         * Properties of a DeletePolicyBasedRouteRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IDeletePolicyBasedRouteRequest
+                         * @property {string|null} [name] DeletePolicyBasedRouteRequest name
+                         * @property {string|null} [requestId] DeletePolicyBasedRouteRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeletePolicyBasedRouteRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a DeletePolicyBasedRouteRequest.
+                         * @implements IDeletePolicyBasedRouteRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IDeletePolicyBasedRouteRequest=} [properties] Properties to set
+                         */
+                        function DeletePolicyBasedRouteRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeletePolicyBasedRouteRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest
+                         * @instance
+                         */
+                        DeletePolicyBasedRouteRequest.prototype.name = "";
+    
+                        /**
+                         * DeletePolicyBasedRouteRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest
+                         * @instance
+                         */
+                        DeletePolicyBasedRouteRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeletePolicyBasedRouteRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDeletePolicyBasedRouteRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest} DeletePolicyBasedRouteRequest instance
+                         */
+                        DeletePolicyBasedRouteRequest.create = function create(properties) {
+                            return new DeletePolicyBasedRouteRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeletePolicyBasedRouteRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDeletePolicyBasedRouteRequest} message DeletePolicyBasedRouteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeletePolicyBasedRouteRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeletePolicyBasedRouteRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDeletePolicyBasedRouteRequest} message DeletePolicyBasedRouteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeletePolicyBasedRouteRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeletePolicyBasedRouteRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest} DeletePolicyBasedRouteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeletePolicyBasedRouteRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeletePolicyBasedRouteRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest} DeletePolicyBasedRouteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeletePolicyBasedRouteRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeletePolicyBasedRouteRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeletePolicyBasedRouteRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeletePolicyBasedRouteRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest} DeletePolicyBasedRouteRequest
+                         */
+                        DeletePolicyBasedRouteRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeletePolicyBasedRouteRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest} message DeletePolicyBasedRouteRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeletePolicyBasedRouteRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeletePolicyBasedRouteRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeletePolicyBasedRouteRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeletePolicyBasedRouteRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeletePolicyBasedRouteRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.DeletePolicyBasedRouteRequest";
+                        };
+    
+                        return DeletePolicyBasedRouteRequest;
                     })();
     
                     return v1;
@@ -11512,6 +14737,690 @@
                 return values;
             })();
     
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.pattern && message.pattern.length))
+                                    message.pattern = [];
+                                message.pattern.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                message.nameField = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.history = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.plural = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.singular = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.style && message.style.length))
+                                    message.style = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.style.push(reader.int32());
+                                } else
+                                    message.style.push(reader.int32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.childType = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceReference
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceReference";
+                };
+    
+                return ResourceReference;
+            })();
+    
             api.Http = (function() {
     
                 /**
@@ -12473,690 +16382,6 @@
                 };
     
                 return CustomHttpPattern;
-            })();
-    
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    this.style = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * ResourceDescriptor style.
-                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.style = $util.emptyArray;
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    if (message.style != null && message.style.length) {
-                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
-                        for (var i = 0; i < message.style.length; ++i)
-                            writer.int32(message.style[i]);
-                        writer.ldelim();
-                    }
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                if (!(message.pattern && message.pattern.length))
-                                    message.pattern = [];
-                                message.pattern.push(reader.string());
-                                break;
-                            }
-                        case 3: {
-                                message.nameField = reader.string();
-                                break;
-                            }
-                        case 4: {
-                                message.history = reader.int32();
-                                break;
-                            }
-                        case 5: {
-                                message.plural = reader.string();
-                                break;
-                            }
-                        case 6: {
-                                message.singular = reader.string();
-                                break;
-                            }
-                        case 10: {
-                                if (!(message.style && message.style.length))
-                                    message.style = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
-                                        message.style.push(reader.int32());
-                                } else
-                                    message.style.push(reader.int32());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    if (message.style != null && message.hasOwnProperty("style")) {
-                        if (!Array.isArray(message.style))
-                            return "style: array expected";
-                        for (var i = 0; i < message.style.length; ++i)
-                            switch (message.style[i]) {
-                            default:
-                                return "style: enum value[] expected";
-                            case 0:
-                            case 1:
-                                break;
-                            }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    default:
-                        if (typeof object.history === "number") {
-                            message.history = object.history;
-                            break;
-                        }
-                        break;
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    if (object.style) {
-                        if (!Array.isArray(object.style))
-                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
-                        message.style = [];
-                        for (var i = 0; i < object.style.length; ++i)
-                            switch (object.style[i]) {
-                            default:
-                                if (typeof object.style[i] === "number") {
-                                    message.style[i] = object.style[i];
-                                    break;
-                                }
-                            case "STYLE_UNSPECIFIED":
-                            case 0:
-                                message.style[i] = 0;
-                                break;
-                            case "DECLARATIVE_FRIENDLY":
-                            case 1:
-                                message.style[i] = 1;
-                                break;
-                            }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.pattern = [];
-                        object.style = [];
-                    }
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    if (message.style && message.style.length) {
-                        object.style = [];
-                        for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for ResourceDescriptor
-                 * @function getTypeUrl
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {number}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * Style enum.
-                 * @name google.api.ResourceDescriptor.Style
-                 * @enum {number}
-                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
-                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
-                 */
-                ResourceDescriptor.Style = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.childType = reader.string();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for ResourceReference
-                 * @function getTypeUrl
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.ResourceReference";
-                };
-    
-                return ResourceReference;
             })();
     
             return api;

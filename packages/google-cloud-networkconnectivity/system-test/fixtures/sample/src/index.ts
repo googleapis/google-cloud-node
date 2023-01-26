@@ -16,10 +16,18 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {HubServiceClient} from '@google-cloud/network-connectivity';
+import {
+  HubServiceClient,
+  PolicyBasedRoutingServiceClient,
+} from '@google-cloud/network-connectivity';
 
 // check that the client class type name can be used
 function doStuffWithHubServiceClient(client: HubServiceClient) {
+  client.close();
+}
+function doStuffWithPolicyBasedRoutingServiceClient(
+  client: PolicyBasedRoutingServiceClient
+) {
   client.close();
 }
 
@@ -27,6 +35,9 @@ function main() {
   // check that the client instance can be created
   const hubServiceClient = new HubServiceClient();
   doStuffWithHubServiceClient(hubServiceClient);
+  // check that the client instance can be created
+  const policyBasedRoutingServiceClient = new PolicyBasedRoutingServiceClient();
+  doStuffWithPolicyBasedRoutingServiceClient(policyBasedRoutingServiceClient);
 }
 
 main();
