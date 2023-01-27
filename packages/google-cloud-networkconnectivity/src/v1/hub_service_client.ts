@@ -263,15 +263,6 @@ export class HubServiceClient {
             {
               get: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:getIamPolicy',
             },
-            {
-              get: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:getIamPolicy',
-            },
           ],
         },
         {
@@ -287,18 +278,6 @@ export class HubServiceClient {
               post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:setIamPolicy',
               body: '*',
             },
-            {
-              post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:setIamPolicy',
-              body: '*',
-            },
           ],
         },
         {
@@ -312,18 +291,6 @@ export class HubServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:testIamPermissions',
               body: '*',
             },
           ],
