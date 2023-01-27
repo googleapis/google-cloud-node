@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the billing account to retrieve. For example,
-   *  `billingAccounts/012345-567890-ABCDEF`.
+   *  Required. The resource name of the billing account to retrieve. For
+   *  example, `billingAccounts/012345-567890-ABCDEF`.
    */
   // const name = 'abc123'
 
