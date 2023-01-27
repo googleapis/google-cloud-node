@@ -361,8 +361,8 @@ export class CloudBillingClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the billing account to retrieve. For example,
-   *   `billingAccounts/012345-567890-ABCDEF`.
+   *   Required. The resource name of the billing account to retrieve. For
+   *   example, `billingAccounts/012345-567890-ABCDEF`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -460,7 +460,8 @@ export class CloudBillingClient {
    * @param {string} request.name
    *   Required. The name of the billing account resource to be updated.
    * @param {google.cloud.billing.v1.BillingAccount} request.account
-   *   Required. The billing account resource to replace the resource on the server.
+   *   Required. The billing account resource to replace the resource on the
+   *   server.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   The update mask applied to the resource.
    *   Only "display_name" is currently supported.
@@ -784,8 +785,9 @@ export class CloudBillingClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the project associated with the billing information
-   *   that you want to update. For example, `projects/tokyo-rain-123`.
+   *   Required. The resource name of the project associated with the billing
+   *   information that you want to update. For example,
+   *   `projects/tokyo-rain-123`.
    * @param {google.cloud.billing.v1.ProjectBillingInfo} request.projectBillingInfo
    *   The new billing information for the project. Read-only fields are ignored;
    *   thus, you can leave empty all fields except `billing_account_name`.
@@ -1376,8 +1378,9 @@ export class CloudBillingClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the billing account associated with the projects that
-   *   you want to list. For example, `billingAccounts/012345-567890-ABCDEF`.
+   *   Required. The resource name of the billing account associated with the
+   *   projects that you want to list. For example,
+   *   `billingAccounts/012345-567890-ABCDEF`.
    * @param {number} request.pageSize
    *   Requested page size. The maximum page size is 100; this is also the
    *   default.
@@ -1482,8 +1485,9 @@ export class CloudBillingClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the billing account associated with the projects that
-   *   you want to list. For example, `billingAccounts/012345-567890-ABCDEF`.
+   *   Required. The resource name of the billing account associated with the
+   *   projects that you want to list. For example,
+   *   `billingAccounts/012345-567890-ABCDEF`.
    * @param {number} request.pageSize
    *   Requested page size. The maximum page size is 100; this is also the
    *   default.
@@ -1532,8 +1536,9 @@ export class CloudBillingClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the billing account associated with the projects that
-   *   you want to list. For example, `billingAccounts/012345-567890-ABCDEF`.
+   *   Required. The resource name of the billing account associated with the
+   *   projects that you want to list. For example,
+   *   `billingAccounts/012345-567890-ABCDEF`.
    * @param {number} request.pageSize
    *   Requested page size. The maximum page size is 100; this is also the
    *   default.

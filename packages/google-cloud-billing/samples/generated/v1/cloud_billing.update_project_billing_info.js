@@ -29,8 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the project associated with the billing information
-   *  that you want to update. For example, `projects/tokyo-rain-123`.
+   *  Required. The resource name of the project associated with the billing
+   *  information that you want to update. For example,
+   *  `projects/tokyo-rain-123`.
    */
   // const name = 'abc123'
   /**
