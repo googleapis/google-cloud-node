@@ -49,7 +49,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Cloud_memcache.apply_parameters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.apply_parameters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.apply_parameters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.apply_parameters.js,samples/README.md)
 
@@ -66,7 +66,7 @@ __Usage:__
 
 ### Cloud_memcache.create_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.create_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.create_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.create_instance.js,samples/README.md)
 
@@ -83,7 +83,7 @@ __Usage:__
 
 ### Cloud_memcache.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.delete_instance.js,samples/README.md)
 
@@ -100,7 +100,7 @@ __Usage:__
 
 ### Cloud_memcache.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.get_instance.js,samples/README.md)
 
@@ -117,7 +117,7 @@ __Usage:__
 
 ### Cloud_memcache.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.list_instances.js,samples/README.md)
 
@@ -134,7 +134,7 @@ __Usage:__
 
 ### Cloud_memcache.reschedule_maintenance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.reschedule_maintenance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.reschedule_maintenance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.reschedule_maintenance.js,samples/README.md)
 
@@ -151,7 +151,7 @@ __Usage:__
 
 ### Cloud_memcache.update_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.update_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.update_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.update_instance.js,samples/README.md)
 
@@ -168,7 +168,7 @@ __Usage:__
 
 ### Cloud_memcache.update_parameters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.update_parameters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.update_parameters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1/cloud_memcache.update_parameters.js,samples/README.md)
 
@@ -185,7 +185,7 @@ __Usage:__
 
 ### Cloud_memcache.apply_parameters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.apply_parameters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.apply_parameters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.apply_parameters.js,samples/README.md)
 
@@ -202,7 +202,7 @@ __Usage:__
 
 ### Cloud_memcache.apply_software_update
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.apply_software_update.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.apply_software_update.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.apply_software_update.js,samples/README.md)
 
@@ -219,7 +219,7 @@ __Usage:__
 
 ### Cloud_memcache.create_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.create_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.create_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.create_instance.js,samples/README.md)
 
@@ -236,7 +236,7 @@ __Usage:__
 
 ### Cloud_memcache.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.delete_instance.js,samples/README.md)
 
@@ -253,7 +253,7 @@ __Usage:__
 
 ### Cloud_memcache.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.get_instance.js,samples/README.md)
 
@@ -270,7 +270,7 @@ __Usage:__
 
 ### Cloud_memcache.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.list_instances.js,samples/README.md)
 
@@ -287,7 +287,7 @@ __Usage:__
 
 ### Cloud_memcache.reschedule_maintenance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.reschedule_maintenance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.reschedule_maintenance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.reschedule_maintenance.js,samples/README.md)
 
@@ -304,7 +304,7 @@ __Usage:__
 
 ### Cloud_memcache.update_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.update_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.update_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.update_instance.js,samples/README.md)
 
@@ -321,7 +321,7 @@ __Usage:__
 
 ### Cloud_memcache.update_parameters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.update_parameters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.update_parameters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/generated/v1beta2/cloud_memcache.update_parameters.js,samples/README.md)
 
@@ -338,7 +338,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/quickstart.js,samples/README.md)
 
@@ -355,7 +355,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memcache/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-memcache/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-memcache/samples/test/quickstart.js,samples/README.md)
 
