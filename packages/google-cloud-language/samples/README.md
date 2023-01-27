@@ -44,7 +44,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Language_service.analyze_entities
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-language/samples/generated/v1/language_service.analyze_entities.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1/language_service.analyze_entities.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1/language_service.analyze_entities.js,samples/README.md)
 
@@ -61,7 +61,7 @@ __Usage:__
 
 ### Language_service.analyze_entity_sentiment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-language/samples/generated/v1/language_service.analyze_entity_sentiment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1/language_service.analyze_entity_sentiment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1/language_service.analyze_entity_sentiment.js,samples/README.md)
 
@@ -78,7 +78,7 @@ __Usage:__
 
 ### Language_service.analyze_sentiment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-language/samples/generated/v1/language_service.analyze_sentiment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1/language_service.analyze_sentiment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1/language_service.analyze_sentiment.js,samples/README.md)
 
@@ -95,7 +95,7 @@ __Usage:__
 
 ### Language_service.analyze_syntax
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-language/samples/generated/v1/language_service.analyze_syntax.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1/language_service.analyze_syntax.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1/language_service.analyze_syntax.js,samples/README.md)
 
@@ -112,7 +112,7 @@ __Usage:__
 
 ### Language_service.annotate_text
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-language/samples/generated/v1/language_service.annotate_text.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1/language_service.annotate_text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1/language_service.annotate_text.js,samples/README.md)
 
@@ -129,7 +129,7 @@ __Usage:__
 
 ### Language_service.classify_text
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-language/samples/generated/v1/language_service.classify_text.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1/language_service.classify_text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1/language_service.classify_text.js,samples/README.md)
 
@@ -146,7 +146,7 @@ __Usage:__
 
 ### Language_service.analyze_entities
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_entities.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_entities.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_entities.js,samples/README.md)
 
@@ -163,7 +163,7 @@ __Usage:__
 
 ### Language_service.analyze_entity_sentiment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_entity_sentiment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_entity_sentiment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_entity_sentiment.js,samples/README.md)
 
@@ -180,7 +180,7 @@ __Usage:__
 
 ### Language_service.analyze_sentiment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_sentiment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_sentiment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_sentiment.js,samples/README.md)
 
@@ -197,7 +197,7 @@ __Usage:__
 
 ### Language_service.analyze_syntax
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_syntax.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_syntax.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_syntax.js,samples/README.md)
 
@@ -214,7 +214,7 @@ __Usage:__
 
 ### Language_service.annotate_text
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-language/samples/generated/v1beta2/language_service.annotate_text.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.annotate_text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.annotate_text.js,samples/README.md)
 
@@ -231,7 +231,7 @@ __Usage:__
 
 ### Language_service.classify_text
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-language/samples/generated/v1beta2/language_service.classify_text.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.classify_text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.classify_text.js,samples/README.md)
 
@@ -248,7 +248,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-language/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/quickstart.js,samples/README.md)
 
@@ -265,7 +265,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-language/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/test/quickstart.test.js,samples/README.md)
 
