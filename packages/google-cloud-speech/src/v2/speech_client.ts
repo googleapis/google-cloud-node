@@ -1161,7 +1161,7 @@ export class SpeechClient {
    * @example <caption>include:samples/generated/v2/speech.streaming_recognize.js</caption>
    * region_tag:speech_v2_generated_Speech_StreamingRecognize_async
    */
-  _streamingRecognize(options?: CallOptions): gax.CancellableStream {
+  streamingRecognize(options?: CallOptions): gax.CancellableStream {
     this.initialize();
     return this.innerApiCalls.streamingRecognize(null, options);
   }
@@ -4376,7 +4376,3 @@ export class SpeechClient {
     return Promise.resolve();
   }
 }
-
-import {ImprovedStreamingClient} from '../helpers';
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface SpeechClient extends ImprovedStreamingClient {}

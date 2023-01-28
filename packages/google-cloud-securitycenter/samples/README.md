@@ -109,7 +109,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Security_center.bulk_mute_findings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.bulk_mute_findings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.bulk_mute_findings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.bulk_mute_findings.js,samples/README.md)
 
@@ -126,7 +126,7 @@ __Usage:__
 
 ### Security_center.create_big_query_export
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_big_query_export.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_big_query_export.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_big_query_export.js,samples/README.md)
 
@@ -143,7 +143,7 @@ __Usage:__
 
 ### Security_center.create_finding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_finding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_finding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_finding.js,samples/README.md)
 
@@ -160,7 +160,7 @@ __Usage:__
 
 ### Security_center.create_mute_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_mute_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_mute_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_mute_config.js,samples/README.md)
 
@@ -177,7 +177,7 @@ __Usage:__
 
 ### Security_center.create_notification_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_notification_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_notification_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_notification_config.js,samples/README.md)
 
@@ -194,7 +194,7 @@ __Usage:__
 
 ### Security_center.create_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_source.js,samples/README.md)
 
@@ -211,7 +211,7 @@ __Usage:__
 
 ### Security_center.delete_big_query_export
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.delete_big_query_export.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.delete_big_query_export.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.delete_big_query_export.js,samples/README.md)
 
@@ -228,7 +228,7 @@ __Usage:__
 
 ### Security_center.delete_mute_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.delete_mute_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.delete_mute_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.delete_mute_config.js,samples/README.md)
 
@@ -245,7 +245,7 @@ __Usage:__
 
 ### Security_center.delete_notification_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.delete_notification_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.delete_notification_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.delete_notification_config.js,samples/README.md)
 
@@ -262,7 +262,7 @@ __Usage:__
 
 ### Security_center.get_big_query_export
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_big_query_export.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_big_query_export.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_big_query_export.js,samples/README.md)
 
@@ -279,7 +279,7 @@ __Usage:__
 
 ### Security_center.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_iam_policy.js,samples/README.md)
 
@@ -296,7 +296,7 @@ __Usage:__
 
 ### Security_center.get_mute_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_mute_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_mute_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_mute_config.js,samples/README.md)
 
@@ -313,7 +313,7 @@ __Usage:__
 
 ### Security_center.get_notification_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_notification_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_notification_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_notification_config.js,samples/README.md)
 
@@ -330,7 +330,7 @@ __Usage:__
 
 ### Security_center.get_organization_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_organization_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_organization_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_organization_settings.js,samples/README.md)
 
@@ -347,7 +347,7 @@ __Usage:__
 
 ### Security_center.get_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_source.js,samples/README.md)
 
@@ -364,7 +364,7 @@ __Usage:__
 
 ### Security_center.group_assets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.group_assets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.group_assets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.group_assets.js,samples/README.md)
 
@@ -381,7 +381,7 @@ __Usage:__
 
 ### Security_center.group_findings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.group_findings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.group_findings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.group_findings.js,samples/README.md)
 
@@ -398,7 +398,7 @@ __Usage:__
 
 ### Security_center.list_assets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_assets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_assets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_assets.js,samples/README.md)
 
@@ -415,7 +415,7 @@ __Usage:__
 
 ### Security_center.list_big_query_exports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_big_query_exports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_big_query_exports.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_big_query_exports.js,samples/README.md)
 
@@ -432,7 +432,7 @@ __Usage:__
 
 ### Security_center.list_findings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_findings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_findings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_findings.js,samples/README.md)
 
@@ -449,7 +449,7 @@ __Usage:__
 
 ### Security_center.list_mute_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_mute_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_mute_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_mute_configs.js,samples/README.md)
 
@@ -466,7 +466,7 @@ __Usage:__
 
 ### Security_center.list_notification_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_notification_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_notification_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_notification_configs.js,samples/README.md)
 
@@ -483,7 +483,7 @@ __Usage:__
 
 ### Security_center.list_sources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_sources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_sources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_sources.js,samples/README.md)
 
@@ -500,7 +500,7 @@ __Usage:__
 
 ### Security_center.run_asset_discovery
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.run_asset_discovery.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.run_asset_discovery.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.run_asset_discovery.js,samples/README.md)
 
@@ -517,7 +517,7 @@ __Usage:__
 
 ### Security_center.set_finding_state
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.set_finding_state.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.set_finding_state.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.set_finding_state.js,samples/README.md)
 
@@ -534,7 +534,7 @@ __Usage:__
 
 ### Security_center.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.set_iam_policy.js,samples/README.md)
 
@@ -551,7 +551,7 @@ __Usage:__
 
 ### Security_center.set_mute
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.set_mute.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.set_mute.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.set_mute.js,samples/README.md)
 
@@ -568,7 +568,7 @@ __Usage:__
 
 ### Security_center.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.test_iam_permissions.js,samples/README.md)
 
@@ -585,7 +585,7 @@ __Usage:__
 
 ### Security_center.update_big_query_export
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_big_query_export.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_big_query_export.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_big_query_export.js,samples/README.md)
 
@@ -602,7 +602,7 @@ __Usage:__
 
 ### Security_center.update_external_system
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_external_system.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_external_system.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_external_system.js,samples/README.md)
 
@@ -619,7 +619,7 @@ __Usage:__
 
 ### Security_center.update_finding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_finding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_finding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_finding.js,samples/README.md)
 
@@ -636,7 +636,7 @@ __Usage:__
 
 ### Security_center.update_mute_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_mute_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_mute_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_mute_config.js,samples/README.md)
 
@@ -653,7 +653,7 @@ __Usage:__
 
 ### Security_center.update_notification_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_notification_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_notification_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_notification_config.js,samples/README.md)
 
@@ -670,7 +670,7 @@ __Usage:__
 
 ### Security_center.update_organization_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_organization_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_organization_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_organization_settings.js,samples/README.md)
 
@@ -687,7 +687,7 @@ __Usage:__
 
 ### Security_center.update_security_marks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_security_marks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_security_marks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_security_marks.js,samples/README.md)
 
@@ -704,7 +704,7 @@ __Usage:__
 
 ### Security_center.update_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_source.js,samples/README.md)
 
@@ -721,7 +721,7 @@ __Usage:__
 
 ### Security_center.create_finding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.create_finding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.create_finding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.create_finding.js,samples/README.md)
 
@@ -738,7 +738,7 @@ __Usage:__
 
 ### Security_center.create_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.create_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.create_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.create_source.js,samples/README.md)
 
@@ -755,7 +755,7 @@ __Usage:__
 
 ### Security_center.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.get_iam_policy.js,samples/README.md)
 
@@ -772,7 +772,7 @@ __Usage:__
 
 ### Security_center.get_organization_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.get_organization_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.get_organization_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.get_organization_settings.js,samples/README.md)
 
@@ -789,7 +789,7 @@ __Usage:__
 
 ### Security_center.get_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.get_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.get_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.get_source.js,samples/README.md)
 
@@ -806,7 +806,7 @@ __Usage:__
 
 ### Security_center.group_assets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.group_assets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.group_assets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.group_assets.js,samples/README.md)
 
@@ -823,7 +823,7 @@ __Usage:__
 
 ### Security_center.group_findings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.group_findings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.group_findings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.group_findings.js,samples/README.md)
 
@@ -840,7 +840,7 @@ __Usage:__
 
 ### Security_center.list_assets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.list_assets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.list_assets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.list_assets.js,samples/README.md)
 
@@ -857,7 +857,7 @@ __Usage:__
 
 ### Security_center.list_findings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.list_findings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.list_findings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.list_findings.js,samples/README.md)
 
@@ -874,7 +874,7 @@ __Usage:__
 
 ### Security_center.list_sources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.list_sources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.list_sources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.list_sources.js,samples/README.md)
 
@@ -891,7 +891,7 @@ __Usage:__
 
 ### Security_center.run_asset_discovery
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.run_asset_discovery.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.run_asset_discovery.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.run_asset_discovery.js,samples/README.md)
 
@@ -908,7 +908,7 @@ __Usage:__
 
 ### Security_center.set_finding_state
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.set_finding_state.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.set_finding_state.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.set_finding_state.js,samples/README.md)
 
@@ -925,7 +925,7 @@ __Usage:__
 
 ### Security_center.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.set_iam_policy.js,samples/README.md)
 
@@ -942,7 +942,7 @@ __Usage:__
 
 ### Security_center.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.test_iam_permissions.js,samples/README.md)
 
@@ -959,7 +959,7 @@ __Usage:__
 
 ### Security_center.update_finding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.update_finding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.update_finding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.update_finding.js,samples/README.md)
 
@@ -976,7 +976,7 @@ __Usage:__
 
 ### Security_center.update_organization_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.update_organization_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.update_organization_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.update_organization_settings.js,samples/README.md)
 
@@ -993,7 +993,7 @@ __Usage:__
 
 ### Security_center.update_security_marks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.update_security_marks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.update_security_marks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.update_security_marks.js,samples/README.md)
 
@@ -1010,7 +1010,7 @@ __Usage:__
 
 ### Security_center.update_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.update_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.update_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1beta1/security_center.update_source.js,samples/README.md)
 
@@ -1027,7 +1027,7 @@ __Usage:__
 
 ### Security_center.create_finding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.create_finding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.create_finding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.create_finding.js,samples/README.md)
 
@@ -1044,7 +1044,7 @@ __Usage:__
 
 ### Security_center.create_notification_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.create_notification_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.create_notification_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.create_notification_config.js,samples/README.md)
 
@@ -1061,7 +1061,7 @@ __Usage:__
 
 ### Security_center.create_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.create_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.create_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.create_source.js,samples/README.md)
 
@@ -1078,7 +1078,7 @@ __Usage:__
 
 ### Security_center.delete_notification_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.delete_notification_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.delete_notification_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.delete_notification_config.js,samples/README.md)
 
@@ -1095,7 +1095,7 @@ __Usage:__
 
 ### Security_center.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.get_iam_policy.js,samples/README.md)
 
@@ -1112,7 +1112,7 @@ __Usage:__
 
 ### Security_center.get_notification_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.get_notification_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.get_notification_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.get_notification_config.js,samples/README.md)
 
@@ -1129,7 +1129,7 @@ __Usage:__
 
 ### Security_center.get_organization_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.get_organization_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.get_organization_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.get_organization_settings.js,samples/README.md)
 
@@ -1146,7 +1146,7 @@ __Usage:__
 
 ### Security_center.get_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.get_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.get_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.get_source.js,samples/README.md)
 
@@ -1163,7 +1163,7 @@ __Usage:__
 
 ### Security_center.group_assets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.group_assets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.group_assets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.group_assets.js,samples/README.md)
 
@@ -1180,7 +1180,7 @@ __Usage:__
 
 ### Security_center.group_findings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.group_findings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.group_findings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.group_findings.js,samples/README.md)
 
@@ -1197,7 +1197,7 @@ __Usage:__
 
 ### Security_center.list_assets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.list_assets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.list_assets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.list_assets.js,samples/README.md)
 
@@ -1214,7 +1214,7 @@ __Usage:__
 
 ### Security_center.list_findings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.list_findings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.list_findings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.list_findings.js,samples/README.md)
 
@@ -1231,7 +1231,7 @@ __Usage:__
 
 ### Security_center.list_notification_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.list_notification_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.list_notification_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.list_notification_configs.js,samples/README.md)
 
@@ -1248,7 +1248,7 @@ __Usage:__
 
 ### Security_center.list_sources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.list_sources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.list_sources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.list_sources.js,samples/README.md)
 
@@ -1265,7 +1265,7 @@ __Usage:__
 
 ### Security_center.run_asset_discovery
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.run_asset_discovery.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.run_asset_discovery.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.run_asset_discovery.js,samples/README.md)
 
@@ -1282,7 +1282,7 @@ __Usage:__
 
 ### Security_center.set_finding_state
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.set_finding_state.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.set_finding_state.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.set_finding_state.js,samples/README.md)
 
@@ -1299,7 +1299,7 @@ __Usage:__
 
 ### Security_center.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.set_iam_policy.js,samples/README.md)
 
@@ -1316,7 +1316,7 @@ __Usage:__
 
 ### Security_center.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.test_iam_permissions.js,samples/README.md)
 
@@ -1333,7 +1333,7 @@ __Usage:__
 
 ### Security_center.update_finding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_finding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_finding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_finding.js,samples/README.md)
 
@@ -1350,7 +1350,7 @@ __Usage:__
 
 ### Security_center.update_notification_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_notification_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_notification_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_notification_config.js,samples/README.md)
 
@@ -1367,7 +1367,7 @@ __Usage:__
 
 ### Security_center.update_organization_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_organization_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_organization_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_organization_settings.js,samples/README.md)
 
@@ -1384,7 +1384,7 @@ __Usage:__
 
 ### Security_center.update_security_marks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_security_marks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_security_marks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_security_marks.js,samples/README.md)
 
@@ -1401,7 +1401,7 @@ __Usage:__
 
 ### Security_center.update_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1p1beta1/security_center.update_source.js,samples/README.md)
 
@@ -1418,7 +1418,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/quickstart.js,samples/README.md)
 
@@ -1435,7 +1435,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-securitycenter/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/test/quickstart.test.js,samples/README.md)
 

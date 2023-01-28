@@ -76,7 +76,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Company_service.create_company
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/company_service.create_company.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/company_service.create_company.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/company_service.create_company.js,samples/README.md)
 
@@ -93,7 +93,7 @@ __Usage:__
 
 ### Company_service.delete_company
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/company_service.delete_company.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/company_service.delete_company.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/company_service.delete_company.js,samples/README.md)
 
@@ -110,7 +110,7 @@ __Usage:__
 
 ### Company_service.get_company
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/company_service.get_company.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/company_service.get_company.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/company_service.get_company.js,samples/README.md)
 
@@ -127,7 +127,7 @@ __Usage:__
 
 ### Company_service.list_companies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/company_service.list_companies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/company_service.list_companies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/company_service.list_companies.js,samples/README.md)
 
@@ -144,7 +144,7 @@ __Usage:__
 
 ### Company_service.update_company
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/company_service.update_company.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/company_service.update_company.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/company_service.update_company.js,samples/README.md)
 
@@ -161,7 +161,7 @@ __Usage:__
 
 ### Completion.complete_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/completion.complete_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/completion.complete_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/completion.complete_query.js,samples/README.md)
 
@@ -178,7 +178,7 @@ __Usage:__
 
 ### Event_service.create_client_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/event_service.create_client_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/event_service.create_client_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/event_service.create_client_event.js,samples/README.md)
 
@@ -195,7 +195,7 @@ __Usage:__
 
 ### Job_service.batch_create_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/job_service.batch_create_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/job_service.batch_create_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/job_service.batch_create_jobs.js,samples/README.md)
 
@@ -212,7 +212,7 @@ __Usage:__
 
 ### Job_service.batch_delete_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/job_service.batch_delete_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/job_service.batch_delete_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/job_service.batch_delete_jobs.js,samples/README.md)
 
@@ -229,7 +229,7 @@ __Usage:__
 
 ### Job_service.batch_update_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/job_service.batch_update_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/job_service.batch_update_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/job_service.batch_update_jobs.js,samples/README.md)
 
@@ -246,7 +246,7 @@ __Usage:__
 
 ### Job_service.create_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/job_service.create_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/job_service.create_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/job_service.create_job.js,samples/README.md)
 
@@ -263,7 +263,7 @@ __Usage:__
 
 ### Job_service.delete_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/job_service.delete_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/job_service.delete_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/job_service.delete_job.js,samples/README.md)
 
@@ -280,7 +280,7 @@ __Usage:__
 
 ### Job_service.get_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/job_service.get_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/job_service.get_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/job_service.get_job.js,samples/README.md)
 
@@ -297,7 +297,7 @@ __Usage:__
 
 ### Job_service.list_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/job_service.list_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/job_service.list_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/job_service.list_jobs.js,samples/README.md)
 
@@ -314,7 +314,7 @@ __Usage:__
 
 ### Job_service.search_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/job_service.search_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/job_service.search_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/job_service.search_jobs.js,samples/README.md)
 
@@ -331,7 +331,7 @@ __Usage:__
 
 ### Job_service.search_jobs_for_alert
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/job_service.search_jobs_for_alert.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/job_service.search_jobs_for_alert.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/job_service.search_jobs_for_alert.js,samples/README.md)
 
@@ -348,7 +348,7 @@ __Usage:__
 
 ### Job_service.update_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/job_service.update_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/job_service.update_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/job_service.update_job.js,samples/README.md)
 
@@ -365,7 +365,7 @@ __Usage:__
 
 ### Tenant_service.create_tenant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/tenant_service.create_tenant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/tenant_service.create_tenant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/tenant_service.create_tenant.js,samples/README.md)
 
@@ -382,7 +382,7 @@ __Usage:__
 
 ### Tenant_service.delete_tenant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/tenant_service.delete_tenant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/tenant_service.delete_tenant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/tenant_service.delete_tenant.js,samples/README.md)
 
@@ -399,7 +399,7 @@ __Usage:__
 
 ### Tenant_service.get_tenant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/tenant_service.get_tenant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/tenant_service.get_tenant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/tenant_service.get_tenant.js,samples/README.md)
 
@@ -416,7 +416,7 @@ __Usage:__
 
 ### Tenant_service.list_tenants
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/tenant_service.list_tenants.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/tenant_service.list_tenants.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/tenant_service.list_tenants.js,samples/README.md)
 
@@ -433,7 +433,7 @@ __Usage:__
 
 ### Tenant_service.update_tenant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/tenant_service.update_tenant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4/tenant_service.update_tenant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4/tenant_service.update_tenant.js,samples/README.md)
 
@@ -450,7 +450,7 @@ __Usage:__
 
 ### Company_service.create_company
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/company_service.create_company.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/company_service.create_company.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/company_service.create_company.js,samples/README.md)
 
@@ -467,7 +467,7 @@ __Usage:__
 
 ### Company_service.delete_company
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/company_service.delete_company.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/company_service.delete_company.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/company_service.delete_company.js,samples/README.md)
 
@@ -484,7 +484,7 @@ __Usage:__
 
 ### Company_service.get_company
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/company_service.get_company.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/company_service.get_company.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/company_service.get_company.js,samples/README.md)
 
@@ -501,7 +501,7 @@ __Usage:__
 
 ### Company_service.list_companies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/company_service.list_companies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/company_service.list_companies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/company_service.list_companies.js,samples/README.md)
 
@@ -518,7 +518,7 @@ __Usage:__
 
 ### Company_service.update_company
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/company_service.update_company.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/company_service.update_company.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/company_service.update_company.js,samples/README.md)
 
@@ -535,7 +535,7 @@ __Usage:__
 
 ### Completion.complete_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/completion.complete_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/completion.complete_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/completion.complete_query.js,samples/README.md)
 
@@ -552,7 +552,7 @@ __Usage:__
 
 ### Event_service.create_client_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/event_service.create_client_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/event_service.create_client_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/event_service.create_client_event.js,samples/README.md)
 
@@ -569,7 +569,7 @@ __Usage:__
 
 ### Job_service.batch_create_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/job_service.batch_create_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/job_service.batch_create_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/job_service.batch_create_jobs.js,samples/README.md)
 
@@ -586,7 +586,7 @@ __Usage:__
 
 ### Job_service.batch_delete_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/job_service.batch_delete_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/job_service.batch_delete_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/job_service.batch_delete_jobs.js,samples/README.md)
 
@@ -603,7 +603,7 @@ __Usage:__
 
 ### Job_service.batch_update_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/job_service.batch_update_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/job_service.batch_update_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/job_service.batch_update_jobs.js,samples/README.md)
 
@@ -620,7 +620,7 @@ __Usage:__
 
 ### Job_service.create_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/job_service.create_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/job_service.create_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/job_service.create_job.js,samples/README.md)
 
@@ -637,7 +637,7 @@ __Usage:__
 
 ### Job_service.delete_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/job_service.delete_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/job_service.delete_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/job_service.delete_job.js,samples/README.md)
 
@@ -654,7 +654,7 @@ __Usage:__
 
 ### Job_service.get_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/job_service.get_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/job_service.get_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/job_service.get_job.js,samples/README.md)
 
@@ -671,7 +671,7 @@ __Usage:__
 
 ### Job_service.list_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/job_service.list_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/job_service.list_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/job_service.list_jobs.js,samples/README.md)
 
@@ -688,7 +688,7 @@ __Usage:__
 
 ### Job_service.search_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/job_service.search_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/job_service.search_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/job_service.search_jobs.js,samples/README.md)
 
@@ -705,7 +705,7 @@ __Usage:__
 
 ### Job_service.search_jobs_for_alert
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/job_service.search_jobs_for_alert.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/job_service.search_jobs_for_alert.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/job_service.search_jobs_for_alert.js,samples/README.md)
 
@@ -722,7 +722,7 @@ __Usage:__
 
 ### Job_service.update_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/job_service.update_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/job_service.update_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/job_service.update_job.js,samples/README.md)
 
@@ -739,7 +739,7 @@ __Usage:__
 
 ### Tenant_service.create_tenant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.create_tenant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.create_tenant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.create_tenant.js,samples/README.md)
 
@@ -756,7 +756,7 @@ __Usage:__
 
 ### Tenant_service.delete_tenant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.delete_tenant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.delete_tenant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.delete_tenant.js,samples/README.md)
 
@@ -773,7 +773,7 @@ __Usage:__
 
 ### Tenant_service.get_tenant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.get_tenant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.get_tenant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.get_tenant.js,samples/README.md)
 
@@ -790,7 +790,7 @@ __Usage:__
 
 ### Tenant_service.list_tenants
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.list_tenants.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.list_tenants.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.list_tenants.js,samples/README.md)
 
@@ -807,7 +807,7 @@ __Usage:__
 
 ### Tenant_service.update_tenant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.update_tenant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.update_tenant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.update_tenant.js,samples/README.md)
 
@@ -824,7 +824,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/quickstart.js,samples/README.md)
 
@@ -841,7 +841,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-talent/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-talent/samples/test/quickstart.test.js,samples/README.md)
 
