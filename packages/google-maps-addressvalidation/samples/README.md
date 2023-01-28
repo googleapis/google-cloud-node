@@ -34,7 +34,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Address_validation.provide_validation_feedback
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/samples/generated/v1/address_validation.provide_validation_feedback.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-addressvalidation/samples/generated/v1/address_validation.provide_validation_feedback.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-addressvalidation/samples/generated/v1/address_validation.provide_validation_feedback.js,samples/README.md)
 
@@ -51,7 +51,7 @@ __Usage:__
 
 ### Address_validation.validate_address
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/samples/generated/v1/address_validation.validate_address.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-addressvalidation/samples/generated/v1/address_validation.validate_address.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-addressvalidation/samples/generated/v1/address_validation.validate_address.js,samples/README.md)
 
@@ -68,7 +68,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-addressvalidation/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-addressvalidation/samples/quickstart.js,samples/README.md)
 
@@ -85,7 +85,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-addressvalidation/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-addressvalidation/samples/test/quickstart.js,samples/README.md)
 
