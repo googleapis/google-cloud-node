@@ -36,7 +36,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Vpc_access_service.create_connector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.create_connector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.create_connector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.create_connector.js,samples/README.md)
 
@@ -53,7 +53,7 @@ __Usage:__
 
 ### Vpc_access_service.delete_connector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.delete_connector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.delete_connector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.delete_connector.js,samples/README.md)
 
@@ -70,7 +70,7 @@ __Usage:__
 
 ### Vpc_access_service.get_connector
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.get_connector.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.get_connector.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.get_connector.js,samples/README.md)
 
@@ -87,7 +87,7 @@ __Usage:__
 
 ### Vpc_access_service.list_connectors
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.list_connectors.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.list_connectors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.list_connectors.js,samples/README.md)
 
@@ -104,7 +104,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vpcaccess/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vpcaccess/samples/quickstart.js,samples/README.md)
 
@@ -121,7 +121,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vpcaccess/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vpcaccess/samples/test/quickstart.js,samples/README.md)
 

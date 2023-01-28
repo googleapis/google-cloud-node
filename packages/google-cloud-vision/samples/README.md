@@ -101,7 +101,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Image_annotator.async_batch_annotate_files
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/image_annotator.async_batch_annotate_files.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/image_annotator.async_batch_annotate_files.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/image_annotator.async_batch_annotate_files.js,samples/README.md)
 
@@ -118,7 +118,7 @@ __Usage:__
 
 ### Image_annotator.async_batch_annotate_images
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/image_annotator.async_batch_annotate_images.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/image_annotator.async_batch_annotate_images.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/image_annotator.async_batch_annotate_images.js,samples/README.md)
 
@@ -135,7 +135,7 @@ __Usage:__
 
 ### Image_annotator.batch_annotate_files
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/image_annotator.batch_annotate_files.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/image_annotator.batch_annotate_files.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/image_annotator.batch_annotate_files.js,samples/README.md)
 
@@ -152,7 +152,7 @@ __Usage:__
 
 ### Image_annotator.batch_annotate_images
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/image_annotator.batch_annotate_images.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/image_annotator.batch_annotate_images.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/image_annotator.batch_annotate_images.js,samples/README.md)
 
@@ -169,7 +169,7 @@ __Usage:__
 
 ### Product_search.add_product_to_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.add_product_to_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.add_product_to_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.add_product_to_product_set.js,samples/README.md)
 
@@ -186,7 +186,7 @@ __Usage:__
 
 ### Product_search.create_product
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.create_product.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.create_product.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.create_product.js,samples/README.md)
 
@@ -203,7 +203,7 @@ __Usage:__
 
 ### Product_search.create_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.create_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.create_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.create_product_set.js,samples/README.md)
 
@@ -220,7 +220,7 @@ __Usage:__
 
 ### Product_search.create_reference_image
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.create_reference_image.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.create_reference_image.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.create_reference_image.js,samples/README.md)
 
@@ -237,7 +237,7 @@ __Usage:__
 
 ### Product_search.delete_product
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.delete_product.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.delete_product.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.delete_product.js,samples/README.md)
 
@@ -254,7 +254,7 @@ __Usage:__
 
 ### Product_search.delete_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.delete_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.delete_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.delete_product_set.js,samples/README.md)
 
@@ -271,7 +271,7 @@ __Usage:__
 
 ### Product_search.delete_reference_image
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.delete_reference_image.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.delete_reference_image.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.delete_reference_image.js,samples/README.md)
 
@@ -288,7 +288,7 @@ __Usage:__
 
 ### Product_search.get_product
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.get_product.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.get_product.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.get_product.js,samples/README.md)
 
@@ -305,7 +305,7 @@ __Usage:__
 
 ### Product_search.get_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.get_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.get_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.get_product_set.js,samples/README.md)
 
@@ -322,7 +322,7 @@ __Usage:__
 
 ### Product_search.get_reference_image
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.get_reference_image.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.get_reference_image.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.get_reference_image.js,samples/README.md)
 
@@ -339,7 +339,7 @@ __Usage:__
 
 ### Product_search.import_product_sets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.import_product_sets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.import_product_sets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.import_product_sets.js,samples/README.md)
 
@@ -356,7 +356,7 @@ __Usage:__
 
 ### Product_search.list_product_sets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.list_product_sets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.list_product_sets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.list_product_sets.js,samples/README.md)
 
@@ -373,7 +373,7 @@ __Usage:__
 
 ### Product_search.list_products
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.list_products.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.list_products.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.list_products.js,samples/README.md)
 
@@ -390,7 +390,7 @@ __Usage:__
 
 ### Product_search.list_products_in_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.list_products_in_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.list_products_in_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.list_products_in_product_set.js,samples/README.md)
 
@@ -407,7 +407,7 @@ __Usage:__
 
 ### Product_search.list_reference_images
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.list_reference_images.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.list_reference_images.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.list_reference_images.js,samples/README.md)
 
@@ -424,7 +424,7 @@ __Usage:__
 
 ### Product_search.purge_products
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.purge_products.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.purge_products.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.purge_products.js,samples/README.md)
 
@@ -441,7 +441,7 @@ __Usage:__
 
 ### Product_search.remove_product_from_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.remove_product_from_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.remove_product_from_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.remove_product_from_product_set.js,samples/README.md)
 
@@ -458,7 +458,7 @@ __Usage:__
 
 ### Product_search.update_product
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.update_product.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.update_product.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.update_product.js,samples/README.md)
 
@@ -475,7 +475,7 @@ __Usage:__
 
 ### Product_search.update_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1/product_search.update_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.update_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1/product_search.update_product_set.js,samples/README.md)
 
@@ -492,7 +492,7 @@ __Usage:__
 
 ### Image_annotator.batch_annotate_images
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p1beta1/image_annotator.batch_annotate_images.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p1beta1/image_annotator.batch_annotate_images.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p1beta1/image_annotator.batch_annotate_images.js,samples/README.md)
 
@@ -509,7 +509,7 @@ __Usage:__
 
 ### Image_annotator.async_batch_annotate_files
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p2beta1/image_annotator.async_batch_annotate_files.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p2beta1/image_annotator.async_batch_annotate_files.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p2beta1/image_annotator.async_batch_annotate_files.js,samples/README.md)
 
@@ -526,7 +526,7 @@ __Usage:__
 
 ### Image_annotator.batch_annotate_images
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p2beta1/image_annotator.batch_annotate_images.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p2beta1/image_annotator.batch_annotate_images.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p2beta1/image_annotator.batch_annotate_images.js,samples/README.md)
 
@@ -543,7 +543,7 @@ __Usage:__
 
 ### Image_annotator.async_batch_annotate_files
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/image_annotator.async_batch_annotate_files.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/image_annotator.async_batch_annotate_files.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/image_annotator.async_batch_annotate_files.js,samples/README.md)
 
@@ -560,7 +560,7 @@ __Usage:__
 
 ### Image_annotator.batch_annotate_images
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/image_annotator.batch_annotate_images.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/image_annotator.batch_annotate_images.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/image_annotator.batch_annotate_images.js,samples/README.md)
 
@@ -577,7 +577,7 @@ __Usage:__
 
 ### Product_search.add_product_to_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.add_product_to_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.add_product_to_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.add_product_to_product_set.js,samples/README.md)
 
@@ -594,7 +594,7 @@ __Usage:__
 
 ### Product_search.create_product
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_product.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_product.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_product.js,samples/README.md)
 
@@ -611,7 +611,7 @@ __Usage:__
 
 ### Product_search.create_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_product_set.js,samples/README.md)
 
@@ -628,7 +628,7 @@ __Usage:__
 
 ### Product_search.create_reference_image
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_reference_image.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_reference_image.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.create_reference_image.js,samples/README.md)
 
@@ -645,7 +645,7 @@ __Usage:__
 
 ### Product_search.delete_product
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_product.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_product.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_product.js,samples/README.md)
 
@@ -662,7 +662,7 @@ __Usage:__
 
 ### Product_search.delete_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_product_set.js,samples/README.md)
 
@@ -679,7 +679,7 @@ __Usage:__
 
 ### Product_search.delete_reference_image
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_reference_image.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_reference_image.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.delete_reference_image.js,samples/README.md)
 
@@ -696,7 +696,7 @@ __Usage:__
 
 ### Product_search.get_product
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_product.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_product.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_product.js,samples/README.md)
 
@@ -713,7 +713,7 @@ __Usage:__
 
 ### Product_search.get_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_product_set.js,samples/README.md)
 
@@ -730,7 +730,7 @@ __Usage:__
 
 ### Product_search.get_reference_image
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_reference_image.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_reference_image.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.get_reference_image.js,samples/README.md)
 
@@ -747,7 +747,7 @@ __Usage:__
 
 ### Product_search.import_product_sets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.import_product_sets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.import_product_sets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.import_product_sets.js,samples/README.md)
 
@@ -764,7 +764,7 @@ __Usage:__
 
 ### Product_search.list_product_sets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_product_sets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_product_sets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_product_sets.js,samples/README.md)
 
@@ -781,7 +781,7 @@ __Usage:__
 
 ### Product_search.list_products
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_products.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_products.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_products.js,samples/README.md)
 
@@ -798,7 +798,7 @@ __Usage:__
 
 ### Product_search.list_products_in_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_products_in_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_products_in_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_products_in_product_set.js,samples/README.md)
 
@@ -815,7 +815,7 @@ __Usage:__
 
 ### Product_search.list_reference_images
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_reference_images.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_reference_images.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.list_reference_images.js,samples/README.md)
 
@@ -832,7 +832,7 @@ __Usage:__
 
 ### Product_search.remove_product_from_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.remove_product_from_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.remove_product_from_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.remove_product_from_product_set.js,samples/README.md)
 
@@ -849,7 +849,7 @@ __Usage:__
 
 ### Product_search.update_product
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.update_product.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.update_product.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.update_product.js,samples/README.md)
 
@@ -866,7 +866,7 @@ __Usage:__
 
 ### Product_search.update_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.update_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.update_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.update_product_set.js,samples/README.md)
 
@@ -883,7 +883,7 @@ __Usage:__
 
 ### Image_annotator.async_batch_annotate_files
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.async_batch_annotate_files.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.async_batch_annotate_files.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.async_batch_annotate_files.js,samples/README.md)
 
@@ -900,7 +900,7 @@ __Usage:__
 
 ### Image_annotator.async_batch_annotate_images
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.async_batch_annotate_images.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.async_batch_annotate_images.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.async_batch_annotate_images.js,samples/README.md)
 
@@ -917,7 +917,7 @@ __Usage:__
 
 ### Image_annotator.batch_annotate_files
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.batch_annotate_files.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.batch_annotate_files.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.batch_annotate_files.js,samples/README.md)
 
@@ -934,7 +934,7 @@ __Usage:__
 
 ### Image_annotator.batch_annotate_images
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.batch_annotate_images.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.batch_annotate_images.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.batch_annotate_images.js,samples/README.md)
 
@@ -951,7 +951,7 @@ __Usage:__
 
 ### Product_search.add_product_to_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.add_product_to_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.add_product_to_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.add_product_to_product_set.js,samples/README.md)
 
@@ -968,7 +968,7 @@ __Usage:__
 
 ### Product_search.create_product
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_product.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_product.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_product.js,samples/README.md)
 
@@ -985,7 +985,7 @@ __Usage:__
 
 ### Product_search.create_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_product_set.js,samples/README.md)
 
@@ -1002,7 +1002,7 @@ __Usage:__
 
 ### Product_search.create_reference_image
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_reference_image.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_reference_image.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.create_reference_image.js,samples/README.md)
 
@@ -1019,7 +1019,7 @@ __Usage:__
 
 ### Product_search.delete_product
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_product.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_product.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_product.js,samples/README.md)
 
@@ -1036,7 +1036,7 @@ __Usage:__
 
 ### Product_search.delete_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_product_set.js,samples/README.md)
 
@@ -1053,7 +1053,7 @@ __Usage:__
 
 ### Product_search.delete_reference_image
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_reference_image.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_reference_image.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.delete_reference_image.js,samples/README.md)
 
@@ -1070,7 +1070,7 @@ __Usage:__
 
 ### Product_search.get_product
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_product.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_product.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_product.js,samples/README.md)
 
@@ -1087,7 +1087,7 @@ __Usage:__
 
 ### Product_search.get_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_product_set.js,samples/README.md)
 
@@ -1104,7 +1104,7 @@ __Usage:__
 
 ### Product_search.get_reference_image
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_reference_image.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_reference_image.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.get_reference_image.js,samples/README.md)
 
@@ -1121,7 +1121,7 @@ __Usage:__
 
 ### Product_search.import_product_sets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.import_product_sets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.import_product_sets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.import_product_sets.js,samples/README.md)
 
@@ -1138,7 +1138,7 @@ __Usage:__
 
 ### Product_search.list_product_sets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_product_sets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_product_sets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_product_sets.js,samples/README.md)
 
@@ -1155,7 +1155,7 @@ __Usage:__
 
 ### Product_search.list_products
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_products.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_products.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_products.js,samples/README.md)
 
@@ -1172,7 +1172,7 @@ __Usage:__
 
 ### Product_search.list_products_in_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_products_in_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_products_in_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_products_in_product_set.js,samples/README.md)
 
@@ -1189,7 +1189,7 @@ __Usage:__
 
 ### Product_search.list_reference_images
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_reference_images.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_reference_images.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.list_reference_images.js,samples/README.md)
 
@@ -1206,7 +1206,7 @@ __Usage:__
 
 ### Product_search.purge_products
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.purge_products.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.purge_products.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.purge_products.js,samples/README.md)
 
@@ -1223,7 +1223,7 @@ __Usage:__
 
 ### Product_search.remove_product_from_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.remove_product_from_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.remove_product_from_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.remove_product_from_product_set.js,samples/README.md)
 
@@ -1240,7 +1240,7 @@ __Usage:__
 
 ### Product_search.update_product
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product.js,samples/README.md)
 
@@ -1257,7 +1257,7 @@ __Usage:__
 
 ### Product_search.update_product_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product_set.js,samples/README.md)
 
@@ -1274,7 +1274,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/quickstart.js,samples/README.md)
 
@@ -1291,7 +1291,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-vision/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vision/samples/test/quickstart.test.js,samples/README.md)
 
