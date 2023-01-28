@@ -37,7 +37,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Cloud_shell_service.add_public_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.add_public_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.add_public_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.add_public_key.js,samples/README.md)
 
@@ -54,7 +54,7 @@ __Usage:__
 
 ### Cloud_shell_service.authorize_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.authorize_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.authorize_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.authorize_environment.js,samples/README.md)
 
@@ -71,7 +71,7 @@ __Usage:__
 
 ### Cloud_shell_service.get_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.get_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.get_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.get_environment.js,samples/README.md)
 
@@ -88,7 +88,7 @@ __Usage:__
 
 ### Cloud_shell_service.remove_public_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.remove_public_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.remove_public_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.remove_public_key.js,samples/README.md)
 
@@ -105,7 +105,7 @@ __Usage:__
 
 ### Cloud_shell_service.start_environment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.start_environment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.start_environment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.start_environment.js,samples/README.md)
 
@@ -122,7 +122,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-shell/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-shell/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-shell/samples/quickstart.js,samples/README.md)
 
@@ -139,7 +139,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-shell/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-shell/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-shell/samples/test/quickstart.js,samples/README.md)
 
