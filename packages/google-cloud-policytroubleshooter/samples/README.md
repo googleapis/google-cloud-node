@@ -33,7 +33,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Iam_checker.troubleshoot_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-policytroubleshooter/samples/generated/v1/iam_checker.troubleshoot_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter/samples/generated/v1/iam_checker.troubleshoot_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter/samples/generated/v1/iam_checker.troubleshoot_iam_policy.js,samples/README.md)
 
@@ -50,7 +50,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-policytroubleshooter/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter/samples/quickstart.js,samples/README.md)
 
@@ -67,7 +67,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-policytroubleshooter/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter/samples/test/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter/samples/test/quickstart.js,samples/README.md)
 

@@ -88,7 +88,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Os_config_service.cancel_patch_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.cancel_patch_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.cancel_patch_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_service.cancel_patch_job.js,samples/README.md)
 
@@ -105,7 +105,7 @@ __Usage:__
 
 ### Os_config_service.create_patch_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.create_patch_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.create_patch_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_service.create_patch_deployment.js,samples/README.md)
 
@@ -122,7 +122,7 @@ __Usage:__
 
 ### Os_config_service.delete_patch_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.delete_patch_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.delete_patch_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_service.delete_patch_deployment.js,samples/README.md)
 
@@ -139,7 +139,7 @@ __Usage:__
 
 ### Os_config_service.execute_patch_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.execute_patch_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.execute_patch_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_service.execute_patch_job.js,samples/README.md)
 
@@ -156,7 +156,7 @@ __Usage:__
 
 ### Os_config_service.get_patch_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.get_patch_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.get_patch_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_service.get_patch_deployment.js,samples/README.md)
 
@@ -173,7 +173,7 @@ __Usage:__
 
 ### Os_config_service.get_patch_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.get_patch_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.get_patch_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_service.get_patch_job.js,samples/README.md)
 
@@ -190,7 +190,7 @@ __Usage:__
 
 ### Os_config_service.list_patch_deployments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.list_patch_deployments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.list_patch_deployments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_service.list_patch_deployments.js,samples/README.md)
 
@@ -207,7 +207,7 @@ __Usage:__
 
 ### Os_config_service.list_patch_job_instance_details
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.list_patch_job_instance_details.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.list_patch_job_instance_details.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_service.list_patch_job_instance_details.js,samples/README.md)
 
@@ -224,7 +224,7 @@ __Usage:__
 
 ### Os_config_service.list_patch_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.list_patch_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.list_patch_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_service.list_patch_jobs.js,samples/README.md)
 
@@ -241,7 +241,7 @@ __Usage:__
 
 ### Os_config_service.pause_patch_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.pause_patch_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.pause_patch_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_service.pause_patch_deployment.js,samples/README.md)
 
@@ -258,7 +258,7 @@ __Usage:__
 
 ### Os_config_service.resume_patch_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.resume_patch_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.resume_patch_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_service.resume_patch_deployment.js,samples/README.md)
 
@@ -275,7 +275,7 @@ __Usage:__
 
 ### Os_config_service.update_patch_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.update_patch_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_service.update_patch_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_service.update_patch_deployment.js,samples/README.md)
 
@@ -292,7 +292,7 @@ __Usage:__
 
 ### Os_config_zonal_service.create_o_s_policy_assignment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.create_o_s_policy_assignment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.create_o_s_policy_assignment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.create_o_s_policy_assignment.js,samples/README.md)
 
@@ -309,7 +309,7 @@ __Usage:__
 
 ### Os_config_zonal_service.delete_o_s_policy_assignment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.delete_o_s_policy_assignment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.delete_o_s_policy_assignment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.delete_o_s_policy_assignment.js,samples/README.md)
 
@@ -326,7 +326,7 @@ __Usage:__
 
 ### Os_config_zonal_service.get_inventory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.get_inventory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.get_inventory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.get_inventory.js,samples/README.md)
 
@@ -343,7 +343,7 @@ __Usage:__
 
 ### Os_config_zonal_service.get_o_s_policy_assignment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.get_o_s_policy_assignment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.get_o_s_policy_assignment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.get_o_s_policy_assignment.js,samples/README.md)
 
@@ -360,7 +360,7 @@ __Usage:__
 
 ### Os_config_zonal_service.get_o_s_policy_assignment_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.get_o_s_policy_assignment_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.get_o_s_policy_assignment_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.get_o_s_policy_assignment_report.js,samples/README.md)
 
@@ -377,7 +377,7 @@ __Usage:__
 
 ### Os_config_zonal_service.get_vulnerability_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.get_vulnerability_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.get_vulnerability_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.get_vulnerability_report.js,samples/README.md)
 
@@ -394,7 +394,7 @@ __Usage:__
 
 ### Os_config_zonal_service.list_inventories
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_inventories.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_inventories.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_inventories.js,samples/README.md)
 
@@ -411,7 +411,7 @@ __Usage:__
 
 ### Os_config_zonal_service.list_o_s_policy_assignment_reports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_o_s_policy_assignment_reports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_o_s_policy_assignment_reports.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_o_s_policy_assignment_reports.js,samples/README.md)
 
@@ -428,7 +428,7 @@ __Usage:__
 
 ### Os_config_zonal_service.list_o_s_policy_assignment_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_o_s_policy_assignment_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_o_s_policy_assignment_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_o_s_policy_assignment_revisions.js,samples/README.md)
 
@@ -445,7 +445,7 @@ __Usage:__
 
 ### Os_config_zonal_service.list_o_s_policy_assignments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_o_s_policy_assignments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_o_s_policy_assignments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_o_s_policy_assignments.js,samples/README.md)
 
@@ -462,7 +462,7 @@ __Usage:__
 
 ### Os_config_zonal_service.list_vulnerability_reports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_vulnerability_reports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_vulnerability_reports.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.list_vulnerability_reports.js,samples/README.md)
 
@@ -479,7 +479,7 @@ __Usage:__
 
 ### Os_config_zonal_service.update_o_s_policy_assignment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.update_o_s_policy_assignment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.update_o_s_policy_assignment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1/os_config_zonal_service.update_o_s_policy_assignment.js,samples/README.md)
 
@@ -496,7 +496,7 @@ __Usage:__
 
 ### Os_config_zonal_service.create_o_s_policy_assignment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.create_o_s_policy_assignment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.create_o_s_policy_assignment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.create_o_s_policy_assignment.js,samples/README.md)
 
@@ -513,7 +513,7 @@ __Usage:__
 
 ### Os_config_zonal_service.delete_o_s_policy_assignment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.delete_o_s_policy_assignment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.delete_o_s_policy_assignment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.delete_o_s_policy_assignment.js,samples/README.md)
 
@@ -530,7 +530,7 @@ __Usage:__
 
 ### Os_config_zonal_service.get_instance_o_s_policies_compliance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_instance_o_s_policies_compliance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_instance_o_s_policies_compliance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_instance_o_s_policies_compliance.js,samples/README.md)
 
@@ -547,7 +547,7 @@ __Usage:__
 
 ### Os_config_zonal_service.get_inventory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_inventory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_inventory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_inventory.js,samples/README.md)
 
@@ -564,7 +564,7 @@ __Usage:__
 
 ### Os_config_zonal_service.get_o_s_policy_assignment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_o_s_policy_assignment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_o_s_policy_assignment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_o_s_policy_assignment.js,samples/README.md)
 
@@ -581,7 +581,7 @@ __Usage:__
 
 ### Os_config_zonal_service.get_o_s_policy_assignment_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_o_s_policy_assignment_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_o_s_policy_assignment_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_o_s_policy_assignment_report.js,samples/README.md)
 
@@ -598,7 +598,7 @@ __Usage:__
 
 ### Os_config_zonal_service.get_vulnerability_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_vulnerability_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_vulnerability_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.get_vulnerability_report.js,samples/README.md)
 
@@ -615,7 +615,7 @@ __Usage:__
 
 ### Os_config_zonal_service.list_instance_o_s_policies_compliances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_instance_o_s_policies_compliances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_instance_o_s_policies_compliances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_instance_o_s_policies_compliances.js,samples/README.md)
 
@@ -632,7 +632,7 @@ __Usage:__
 
 ### Os_config_zonal_service.list_inventories
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_inventories.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_inventories.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_inventories.js,samples/README.md)
 
@@ -649,7 +649,7 @@ __Usage:__
 
 ### Os_config_zonal_service.list_o_s_policy_assignment_reports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_o_s_policy_assignment_reports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_o_s_policy_assignment_reports.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_o_s_policy_assignment_reports.js,samples/README.md)
 
@@ -666,7 +666,7 @@ __Usage:__
 
 ### Os_config_zonal_service.list_o_s_policy_assignment_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_o_s_policy_assignment_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_o_s_policy_assignment_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_o_s_policy_assignment_revisions.js,samples/README.md)
 
@@ -683,7 +683,7 @@ __Usage:__
 
 ### Os_config_zonal_service.list_o_s_policy_assignments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_o_s_policy_assignments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_o_s_policy_assignments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_o_s_policy_assignments.js,samples/README.md)
 
@@ -700,7 +700,7 @@ __Usage:__
 
 ### Os_config_zonal_service.list_vulnerability_reports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_vulnerability_reports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_vulnerability_reports.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.list_vulnerability_reports.js,samples/README.md)
 
@@ -717,7 +717,7 @@ __Usage:__
 
 ### Os_config_zonal_service.update_o_s_policy_assignment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.update_o_s_policy_assignment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.update_o_s_policy_assignment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1alpha/os_config_zonal_service.update_o_s_policy_assignment.js,samples/README.md)
 
@@ -734,7 +734,7 @@ __Usage:__
 
 ### Os_config_service.cancel_patch_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.cancel_patch_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.cancel_patch_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.cancel_patch_job.js,samples/README.md)
 
@@ -751,7 +751,7 @@ __Usage:__
 
 ### Os_config_service.create_guest_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.create_guest_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.create_guest_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.create_guest_policy.js,samples/README.md)
 
@@ -768,7 +768,7 @@ __Usage:__
 
 ### Os_config_service.create_patch_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.create_patch_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.create_patch_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.create_patch_deployment.js,samples/README.md)
 
@@ -785,7 +785,7 @@ __Usage:__
 
 ### Os_config_service.delete_guest_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.delete_guest_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.delete_guest_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.delete_guest_policy.js,samples/README.md)
 
@@ -802,7 +802,7 @@ __Usage:__
 
 ### Os_config_service.delete_patch_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.delete_patch_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.delete_patch_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.delete_patch_deployment.js,samples/README.md)
 
@@ -819,7 +819,7 @@ __Usage:__
 
 ### Os_config_service.execute_patch_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.execute_patch_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.execute_patch_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.execute_patch_job.js,samples/README.md)
 
@@ -836,7 +836,7 @@ __Usage:__
 
 ### Os_config_service.get_guest_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.get_guest_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.get_guest_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.get_guest_policy.js,samples/README.md)
 
@@ -853,7 +853,7 @@ __Usage:__
 
 ### Os_config_service.get_patch_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.get_patch_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.get_patch_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.get_patch_deployment.js,samples/README.md)
 
@@ -870,7 +870,7 @@ __Usage:__
 
 ### Os_config_service.get_patch_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.get_patch_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.get_patch_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.get_patch_job.js,samples/README.md)
 
@@ -887,7 +887,7 @@ __Usage:__
 
 ### Os_config_service.list_guest_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.list_guest_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.list_guest_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.list_guest_policies.js,samples/README.md)
 
@@ -904,7 +904,7 @@ __Usage:__
 
 ### Os_config_service.list_patch_deployments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.list_patch_deployments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.list_patch_deployments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.list_patch_deployments.js,samples/README.md)
 
@@ -921,7 +921,7 @@ __Usage:__
 
 ### Os_config_service.list_patch_job_instance_details
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.list_patch_job_instance_details.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.list_patch_job_instance_details.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.list_patch_job_instance_details.js,samples/README.md)
 
@@ -938,7 +938,7 @@ __Usage:__
 
 ### Os_config_service.list_patch_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.list_patch_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.list_patch_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.list_patch_jobs.js,samples/README.md)
 
@@ -955,7 +955,7 @@ __Usage:__
 
 ### Os_config_service.lookup_effective_guest_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.lookup_effective_guest_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.lookup_effective_guest_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.lookup_effective_guest_policy.js,samples/README.md)
 
@@ -972,7 +972,7 @@ __Usage:__
 
 ### Os_config_service.pause_patch_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.pause_patch_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.pause_patch_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.pause_patch_deployment.js,samples/README.md)
 
@@ -989,7 +989,7 @@ __Usage:__
 
 ### Os_config_service.resume_patch_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.resume_patch_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.resume_patch_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.resume_patch_deployment.js,samples/README.md)
 
@@ -1006,7 +1006,7 @@ __Usage:__
 
 ### Os_config_service.update_guest_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.update_guest_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.update_guest_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.update_guest_policy.js,samples/README.md)
 
@@ -1023,7 +1023,7 @@ __Usage:__
 
 ### Os_config_service.update_patch_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.update_patch_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.update_patch_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/generated/v1beta/os_config_service.update_patch_deployment.js,samples/README.md)
 
@@ -1040,7 +1040,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/quickstart.js,samples/README.md)
 
@@ -1057,7 +1057,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-osconfig/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-osconfig/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-osconfig/samples/test/quickstart.test.js,samples/README.md)
 
