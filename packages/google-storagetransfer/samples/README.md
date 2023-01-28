@@ -50,7 +50,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Storage_transfer_service.create_agent_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.create_agent_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.create_agent_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.create_agent_pool.js,samples/README.md)
 
@@ -67,7 +67,7 @@ __Usage:__
 
 ### Storage_transfer_service.create_transfer_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.create_transfer_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.create_transfer_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.create_transfer_job.js,samples/README.md)
 
@@ -84,7 +84,7 @@ __Usage:__
 
 ### Storage_transfer_service.delete_agent_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.delete_agent_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.delete_agent_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.delete_agent_pool.js,samples/README.md)
 
@@ -101,7 +101,7 @@ __Usage:__
 
 ### Storage_transfer_service.delete_transfer_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.delete_transfer_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.delete_transfer_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.delete_transfer_job.js,samples/README.md)
 
@@ -118,7 +118,7 @@ __Usage:__
 
 ### Storage_transfer_service.get_agent_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.get_agent_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.get_agent_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.get_agent_pool.js,samples/README.md)
 
@@ -135,7 +135,7 @@ __Usage:__
 
 ### Storage_transfer_service.get_google_service_account
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.get_google_service_account.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.get_google_service_account.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.get_google_service_account.js,samples/README.md)
 
@@ -152,7 +152,7 @@ __Usage:__
 
 ### Storage_transfer_service.get_transfer_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.get_transfer_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.get_transfer_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.get_transfer_job.js,samples/README.md)
 
@@ -169,7 +169,7 @@ __Usage:__
 
 ### Storage_transfer_service.list_agent_pools
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.list_agent_pools.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.list_agent_pools.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.list_agent_pools.js,samples/README.md)
 
@@ -186,7 +186,7 @@ __Usage:__
 
 ### Storage_transfer_service.list_transfer_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.list_transfer_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.list_transfer_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.list_transfer_jobs.js,samples/README.md)
 
@@ -203,7 +203,7 @@ __Usage:__
 
 ### Storage_transfer_service.pause_transfer_operation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.pause_transfer_operation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.pause_transfer_operation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.pause_transfer_operation.js,samples/README.md)
 
@@ -220,7 +220,7 @@ __Usage:__
 
 ### Storage_transfer_service.resume_transfer_operation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.resume_transfer_operation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.resume_transfer_operation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.resume_transfer_operation.js,samples/README.md)
 
@@ -237,7 +237,7 @@ __Usage:__
 
 ### Storage_transfer_service.run_transfer_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.run_transfer_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.run_transfer_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.run_transfer_job.js,samples/README.md)
 
@@ -254,7 +254,7 @@ __Usage:__
 
 ### Storage_transfer_service.update_agent_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.update_agent_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.update_agent_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.update_agent_pool.js,samples/README.md)
 
@@ -271,7 +271,7 @@ __Usage:__
 
 ### Storage_transfer_service.update_transfer_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.update_transfer_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.update_transfer_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/generated/v1/storage_transfer_service.update_transfer_job.js,samples/README.md)
 
@@ -288,7 +288,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/quickstart.js,samples/README.md)
 
@@ -305,7 +305,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/test/quickstart.test.js,samples/README.md)
 
@@ -322,7 +322,7 @@ __Usage:__
 
 ### Bucket
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/test/utils/bucket.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/test/utils/bucket.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/test/utils/bucket.js,samples/README.md)
 
@@ -339,7 +339,7 @@ __Usage:__
 
 ### Index
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/test/utils/index.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/test/utils/index.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/test/utils/index.js,samples/README.md)
 
@@ -356,7 +356,7 @@ __Usage:__
 
 ### Sample
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/test/utils/sample.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/test/utils/sample.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/test/utils/sample.js,samples/README.md)
 
@@ -373,7 +373,7 @@ __Usage:__
 
 ### Transfer
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-storagetransfer/samples/test/utils/transfer.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storagetransfer/samples/test/utils/transfer.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storagetransfer/samples/test/utils/transfer.js,samples/README.md)
 
