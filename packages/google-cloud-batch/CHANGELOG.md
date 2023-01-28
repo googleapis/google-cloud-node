@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.4.0...batch-v0.5.0) (2023-01-28)
+
+
+### Features
+
+* Support secret and encrypted environment variables in v1 ([#3828](https://github.com/googleapis/google-cloud-node/issues/3828)) ([b233565](https://github.com/googleapis/google-cloud-node/commit/b2335658eb4a0c6ef3d771004fde73c53c7f2673))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.3.2...batch-v0.4.0) (2022-12-16)
 
 

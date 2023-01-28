@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.4.0...aiplatform-v2.5.0) (2023-01-28)
+
+
+### Features
+
+* Add enable_dashboard_access in aiplatform v1 and v1beta1 ([#460](https://github.com/googleapis/google-cloud-node/issues/460)) ([58d9da5](https://github.com/googleapis/google-cloud-node/commit/58d9da5b38285ea729c7dcbfb28940265751ac21))
+
+
+### Bug Fixes
+
+* Removing migrated samples (to nodejs-docs-samples) from repo ([#555](https://github.com/googleapis/google-cloud-node/issues/555)) ([c97bb20](https://github.com/googleapis/google-cloud-node/commit/c97bb20334af2f1d469e8fcdd2cc01fe7182d64f))
+
 ## [2.4.0](https://github.com/googleapis/nodejs-ai-platform/compare/v2.3.0...v2.4.0) (2023-01-25)
 
 
