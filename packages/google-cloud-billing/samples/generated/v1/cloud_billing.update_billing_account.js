@@ -33,7 +33,8 @@ function main(name, account) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The billing account resource to replace the resource on the server.
+   *  Required. The billing account resource to replace the resource on the
+   *  server.
    */
   // const account = {}
   /**
