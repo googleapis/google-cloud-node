@@ -41,7 +41,9 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
    */
   // const nodeVersion = 'abc123'
   /**
-   *  Required. The desired image type for the node pool.
+   *  Required. The desired image type for the node pool. Please see
+   *  https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+   *  available image types.
    */
   // const imageType = 'abc123'
   /**
