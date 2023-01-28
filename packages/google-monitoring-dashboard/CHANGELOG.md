@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v2.8.0...monitoring-dashboards-v2.9.0) (2023-01-28)
+
+
+### Features
+
+* Added support for horizontal bar rendering and column settings on time series tables ([#3842](https://github.com/googleapis/google-cloud-node/issues/3842)) ([7ac180a](https://github.com/googleapis/google-cloud-node/commit/7ac180aab738144ffe7479a7575b5e3937985ce4))
+
 ## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v2.7.2...monitoring-dashboards-v2.8.0) (2022-11-10)
 
 
