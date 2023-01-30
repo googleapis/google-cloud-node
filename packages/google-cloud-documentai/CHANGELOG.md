@@ -1,5 +1,14 @@
 # Changelog
 
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v6.2.0...documentai-v6.3.0) (2023-01-28)
+
+
+### Features
+
+* [documentai] added advanced_ocr_options field in OcrConfig ([#3890](https://github.com/googleapis/google-cloud-node/issues/3890)) ([babcf2f](https://github.com/googleapis/google-cloud-node/commit/babcf2fbe347fc278c321c0a08b124af05a3358b))
+* Added SuggestConversationSummary RPC ([#3852](https://github.com/googleapis/google-cloud-node/issues/3852)) ([d83d70a](https://github.com/googleapis/google-cloud-node/commit/d83d70a25f78812a44c4476b2149fbdef0a2baa1))
+* Exposed GetProcessorType to v1 ([#3856](https://github.com/googleapis/google-cloud-node/issues/3856)) ([1195e83](https://github.com/googleapis/google-cloud-node/commit/1195e833447ef2d448284b807ef1a8c3c8ff5f01))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v6.1.0...documentai-v6.2.0) (2022-12-16)
 
 

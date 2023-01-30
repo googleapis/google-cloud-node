@@ -1,13 +1,13 @@
 {
   "name": "@google-cloud/monitoring-dashboards",
-  "version": "2.8.0",
+  "version": "2.9.0",
   "description": "interact with dashboards for viewing and analyzing metric data",
   "repository": {
     "type": "git",
     "url": "https://github.com/googleapis/google-cloud-node.git",
     "directory": "packages/google-monitoring-dashboard"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-monitoring-dashboard",  
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-monitoring-dashboard",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "files": [

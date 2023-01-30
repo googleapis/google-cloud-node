@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v0.2.0...contentwarehouse-v0.3.0) (2023-01-28)
+
+
+### Features
+
+* Exposed GetProcessorType to v1 ([#3857](https://github.com/googleapis/google-cloud-node/issues/3857)) ([26adeba](https://github.com/googleapis/google-cloud-node/commit/26adeba0625a05b17a7e87a2976520325621c307))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v0.1.2...contentwarehouse-v0.2.0) (2022-12-16)
 
 

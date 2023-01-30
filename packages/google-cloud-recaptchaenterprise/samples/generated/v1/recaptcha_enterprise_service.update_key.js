@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,8 +33,8 @@ function main(key) {
    */
   // const key = {}
   /**
-   *  Optional. The mask to control which fields of the key get updated. If the mask is not
-   *  present, all fields will be updated.
+   *  Optional. The mask to control which fields of the key get updated. If the
+   *  mask is not present, all fields will be updated.
    */
   // const updateMask = {}
 
