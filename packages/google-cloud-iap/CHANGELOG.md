@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/iap-v2.1.0...iap-v2.2.0) (2023-01-28)
+
+
+### Features
+
+* Added Snooze API support ([#3832](https://github.com/googleapis/google-cloud-node/issues/3832)) ([f715797](https://github.com/googleapis/google-cloud-node/commit/f715797a46cdd2bf4dffc1a82378986941fd6d79))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/iap-v2.0.3...iap-v2.1.0) (2022-12-21)
 
 

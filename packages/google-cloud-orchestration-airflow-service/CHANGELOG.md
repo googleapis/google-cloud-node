@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v2.2.0...orchestration-airflow-v2.3.0) (2023-01-28)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3853](https://github.com/googleapis/google-cloud-node/issues/3853)) ([cc352db](https://github.com/googleapis/google-cloud-node/commit/cc352db97f3bd8925bf1a7631a0ae64ff976fa4e))
+
 ## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v2.1.2...orchestration-airflow-v2.2.0) (2022-12-16)
 
 
