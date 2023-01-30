@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v4.1.2...security-private-ca-v4.2.0) (2023-01-28)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3853](https://github.com/googleapis/google-cloud-node/issues/3853)) ([cc352db](https://github.com/googleapis/google-cloud-node/commit/cc352db97f3bd8925bf1a7631a0ae64ff976fa4e))
+
 ## [4.1.2](https://github.com/googleapis/nodejs-security-private-ca/compare/v4.1.1...v4.1.2) (2022-11-11)
 
 

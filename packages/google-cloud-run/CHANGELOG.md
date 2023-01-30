@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/run-v0.3.0...run-v0.4.0) (2023-01-28)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3853](https://github.com/googleapis/google-cloud-node/issues/3853)) ([cc352db](https://github.com/googleapis/google-cloud-node/commit/cc352db97f3bd8925bf1a7631a0ae64ff976fa4e))
+* Adding support for encryption_key_revocation_action and encryption_key_shutdown_duration for RevisionTemplate and ExecutionTemplate ([#3874](https://github.com/googleapis/google-cloud-node/issues/3874)) ([4693692](https://github.com/googleapis/google-cloud-node/commit/4693692a0271966bb29e94c6c7659fd89cbe7b33))
+
 ## [0.3.0](https://github.com/googleapis/nodejs-run/compare/v0.2.3...v0.3.0) (2023-01-06)
 
 

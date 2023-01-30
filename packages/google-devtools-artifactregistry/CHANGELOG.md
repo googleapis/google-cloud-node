@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v2.0.2...artifact-registry-v2.1.0) (2023-01-28)
+
+
+### Features
+
+* Add location methods ([#3826](https://github.com/googleapis/google-cloud-node/issues/3826)) ([b525661](https://github.com/googleapis/google-cloud-node/commit/b525661ed04cf91720cf75cb4b0ad0e2ab540ff7))
+
 ## [2.0.2](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v2.0.1...artifact-registry-v2.0.2) (2022-11-10)
 
 
