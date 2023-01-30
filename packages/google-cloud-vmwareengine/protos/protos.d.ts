@@ -701,510 +701,6 @@ export namespace google {
                     type ListVmwareEngineNetworksCallback = (error: (Error|null), response?: google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse) => void;
                 }
 
-                /** Properties of a NetworkConfig. */
-                interface INetworkConfig {
-
-                    /** NetworkConfig managementCidr */
-                    managementCidr?: (string|null);
-
-                    /** NetworkConfig vmwareEngineNetwork */
-                    vmwareEngineNetwork?: (string|null);
-
-                    /** NetworkConfig vmwareEngineNetworkCanonical */
-                    vmwareEngineNetworkCanonical?: (string|null);
-
-                    /** NetworkConfig managementIpAddressLayoutVersion */
-                    managementIpAddressLayoutVersion?: (number|null);
-                }
-
-                /** Represents a NetworkConfig. */
-                class NetworkConfig implements INetworkConfig {
-
-                    /**
-                     * Constructs a new NetworkConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vmwareengine.v1.INetworkConfig);
-
-                    /** NetworkConfig managementCidr. */
-                    public managementCidr: string;
-
-                    /** NetworkConfig vmwareEngineNetwork. */
-                    public vmwareEngineNetwork: string;
-
-                    /** NetworkConfig vmwareEngineNetworkCanonical. */
-                    public vmwareEngineNetworkCanonical: string;
-
-                    /** NetworkConfig managementIpAddressLayoutVersion. */
-                    public managementIpAddressLayoutVersion: number;
-
-                    /**
-                     * Creates a new NetworkConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns NetworkConfig instance
-                     */
-                    public static create(properties?: google.cloud.vmwareengine.v1.INetworkConfig): google.cloud.vmwareengine.v1.NetworkConfig;
-
-                    /**
-                     * Encodes the specified NetworkConfig message. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkConfig.verify|verify} messages.
-                     * @param message NetworkConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vmwareengine.v1.INetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified NetworkConfig message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkConfig.verify|verify} messages.
-                     * @param message NetworkConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.INetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a NetworkConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns NetworkConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.NetworkConfig;
-
-                    /**
-                     * Decodes a NetworkConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns NetworkConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.NetworkConfig;
-
-                    /**
-                     * Verifies a NetworkConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a NetworkConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns NetworkConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.NetworkConfig;
-
-                    /**
-                     * Creates a plain object from a NetworkConfig message. Also converts values to other types if specified.
-                     * @param message NetworkConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vmwareengine.v1.NetworkConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this NetworkConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for NetworkConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a NodeTypeConfig. */
-                interface INodeTypeConfig {
-
-                    /** NodeTypeConfig nodeCount */
-                    nodeCount?: (number|null);
-
-                    /** NodeTypeConfig customCoreCount */
-                    customCoreCount?: (number|null);
-                }
-
-                /** Represents a NodeTypeConfig. */
-                class NodeTypeConfig implements INodeTypeConfig {
-
-                    /**
-                     * Constructs a new NodeTypeConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vmwareengine.v1.INodeTypeConfig);
-
-                    /** NodeTypeConfig nodeCount. */
-                    public nodeCount: number;
-
-                    /** NodeTypeConfig customCoreCount. */
-                    public customCoreCount: number;
-
-                    /**
-                     * Creates a new NodeTypeConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns NodeTypeConfig instance
-                     */
-                    public static create(properties?: google.cloud.vmwareengine.v1.INodeTypeConfig): google.cloud.vmwareengine.v1.NodeTypeConfig;
-
-                    /**
-                     * Encodes the specified NodeTypeConfig message. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeTypeConfig.verify|verify} messages.
-                     * @param message NodeTypeConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vmwareengine.v1.INodeTypeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified NodeTypeConfig message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeTypeConfig.verify|verify} messages.
-                     * @param message NodeTypeConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.INodeTypeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a NodeTypeConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns NodeTypeConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.NodeTypeConfig;
-
-                    /**
-                     * Decodes a NodeTypeConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns NodeTypeConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.NodeTypeConfig;
-
-                    /**
-                     * Verifies a NodeTypeConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a NodeTypeConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns NodeTypeConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.NodeTypeConfig;
-
-                    /**
-                     * Creates a plain object from a NodeTypeConfig message. Also converts values to other types if specified.
-                     * @param message NodeTypeConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vmwareengine.v1.NodeTypeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this NodeTypeConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for NodeTypeConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a PrivateCloud. */
-                interface IPrivateCloud {
-
-                    /** PrivateCloud name */
-                    name?: (string|null);
-
-                    /** PrivateCloud createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** PrivateCloud updateTime */
-                    updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** PrivateCloud deleteTime */
-                    deleteTime?: (google.protobuf.ITimestamp|null);
-
-                    /** PrivateCloud expireTime */
-                    expireTime?: (google.protobuf.ITimestamp|null);
-
-                    /** PrivateCloud state */
-                    state?: (google.cloud.vmwareengine.v1.PrivateCloud.State|keyof typeof google.cloud.vmwareengine.v1.PrivateCloud.State|null);
-
-                    /** PrivateCloud networkConfig */
-                    networkConfig?: (google.cloud.vmwareengine.v1.INetworkConfig|null);
-
-                    /** PrivateCloud managementCluster */
-                    managementCluster?: (google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster|null);
-
-                    /** PrivateCloud description */
-                    description?: (string|null);
-
-                    /** PrivateCloud hcx */
-                    hcx?: (google.cloud.vmwareengine.v1.IHcx|null);
-
-                    /** PrivateCloud nsx */
-                    nsx?: (google.cloud.vmwareengine.v1.INsx|null);
-
-                    /** PrivateCloud vcenter */
-                    vcenter?: (google.cloud.vmwareengine.v1.IVcenter|null);
-
-                    /** PrivateCloud uid */
-                    uid?: (string|null);
-                }
-
-                /** Represents a PrivateCloud. */
-                class PrivateCloud implements IPrivateCloud {
-
-                    /**
-                     * Constructs a new PrivateCloud.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vmwareengine.v1.IPrivateCloud);
-
-                    /** PrivateCloud name. */
-                    public name: string;
-
-                    /** PrivateCloud createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** PrivateCloud updateTime. */
-                    public updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** PrivateCloud deleteTime. */
-                    public deleteTime?: (google.protobuf.ITimestamp|null);
-
-                    /** PrivateCloud expireTime. */
-                    public expireTime?: (google.protobuf.ITimestamp|null);
-
-                    /** PrivateCloud state. */
-                    public state: (google.cloud.vmwareengine.v1.PrivateCloud.State|keyof typeof google.cloud.vmwareengine.v1.PrivateCloud.State);
-
-                    /** PrivateCloud networkConfig. */
-                    public networkConfig?: (google.cloud.vmwareengine.v1.INetworkConfig|null);
-
-                    /** PrivateCloud managementCluster. */
-                    public managementCluster?: (google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster|null);
-
-                    /** PrivateCloud description. */
-                    public description: string;
-
-                    /** PrivateCloud hcx. */
-                    public hcx?: (google.cloud.vmwareengine.v1.IHcx|null);
-
-                    /** PrivateCloud nsx. */
-                    public nsx?: (google.cloud.vmwareengine.v1.INsx|null);
-
-                    /** PrivateCloud vcenter. */
-                    public vcenter?: (google.cloud.vmwareengine.v1.IVcenter|null);
-
-                    /** PrivateCloud uid. */
-                    public uid: string;
-
-                    /**
-                     * Creates a new PrivateCloud instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns PrivateCloud instance
-                     */
-                    public static create(properties?: google.cloud.vmwareengine.v1.IPrivateCloud): google.cloud.vmwareengine.v1.PrivateCloud;
-
-                    /**
-                     * Encodes the specified PrivateCloud message. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.verify|verify} messages.
-                     * @param message PrivateCloud message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vmwareengine.v1.IPrivateCloud, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified PrivateCloud message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.verify|verify} messages.
-                     * @param message PrivateCloud message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IPrivateCloud, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a PrivateCloud message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns PrivateCloud
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.PrivateCloud;
-
-                    /**
-                     * Decodes a PrivateCloud message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns PrivateCloud
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.PrivateCloud;
-
-                    /**
-                     * Verifies a PrivateCloud message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a PrivateCloud message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns PrivateCloud
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.PrivateCloud;
-
-                    /**
-                     * Creates a plain object from a PrivateCloud message. Also converts values to other types if specified.
-                     * @param message PrivateCloud
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vmwareengine.v1.PrivateCloud, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this PrivateCloud to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for PrivateCloud
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace PrivateCloud {
-
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        ACTIVE = 1,
-                        CREATING = 2,
-                        UPDATING = 3,
-                        FAILED = 5,
-                        DELETED = 6,
-                        PURGING = 7
-                    }
-
-                    /** Properties of a ManagementCluster. */
-                    interface IManagementCluster {
-
-                        /** ManagementCluster clusterId */
-                        clusterId?: (string|null);
-
-                        /** ManagementCluster nodeTypeConfigs */
-                        nodeTypeConfigs?: ({ [k: string]: google.cloud.vmwareengine.v1.INodeTypeConfig }|null);
-                    }
-
-                    /** Represents a ManagementCluster. */
-                    class ManagementCluster implements IManagementCluster {
-
-                        /**
-                         * Constructs a new ManagementCluster.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster);
-
-                        /** ManagementCluster clusterId. */
-                        public clusterId: string;
-
-                        /** ManagementCluster nodeTypeConfigs. */
-                        public nodeTypeConfigs: { [k: string]: google.cloud.vmwareengine.v1.INodeTypeConfig };
-
-                        /**
-                         * Creates a new ManagementCluster instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ManagementCluster instance
-                         */
-                        public static create(properties?: google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster): google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster;
-
-                        /**
-                         * Encodes the specified ManagementCluster message. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.verify|verify} messages.
-                         * @param message ManagementCluster message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ManagementCluster message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.verify|verify} messages.
-                         * @param message ManagementCluster message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ManagementCluster message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ManagementCluster
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster;
-
-                        /**
-                         * Decodes a ManagementCluster message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ManagementCluster
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster;
-
-                        /**
-                         * Verifies a ManagementCluster message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ManagementCluster message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ManagementCluster
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster;
-
-                        /**
-                         * Creates a plain object from a ManagementCluster message. Also converts values to other types if specified.
-                         * @param message ManagementCluster
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ManagementCluster to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for ManagementCluster
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-                }
-
                 /** Properties of a ListPrivateCloudsRequest. */
                 interface IListPrivateCloudsRequest {
 
@@ -1983,152 +1479,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a Cluster. */
-                interface ICluster {
-
-                    /** Cluster name */
-                    name?: (string|null);
-
-                    /** Cluster createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Cluster updateTime */
-                    updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Cluster state */
-                    state?: (google.cloud.vmwareengine.v1.Cluster.State|keyof typeof google.cloud.vmwareengine.v1.Cluster.State|null);
-
-                    /** Cluster management */
-                    management?: (boolean|null);
-
-                    /** Cluster uid */
-                    uid?: (string|null);
-
-                    /** Cluster nodeTypeConfigs */
-                    nodeTypeConfigs?: ({ [k: string]: google.cloud.vmwareengine.v1.INodeTypeConfig }|null);
-                }
-
-                /** Represents a Cluster. */
-                class Cluster implements ICluster {
-
-                    /**
-                     * Constructs a new Cluster.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vmwareengine.v1.ICluster);
-
-                    /** Cluster name. */
-                    public name: string;
-
-                    /** Cluster createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Cluster updateTime. */
-                    public updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Cluster state. */
-                    public state: (google.cloud.vmwareengine.v1.Cluster.State|keyof typeof google.cloud.vmwareengine.v1.Cluster.State);
-
-                    /** Cluster management. */
-                    public management: boolean;
-
-                    /** Cluster uid. */
-                    public uid: string;
-
-                    /** Cluster nodeTypeConfigs. */
-                    public nodeTypeConfigs: { [k: string]: google.cloud.vmwareengine.v1.INodeTypeConfig };
-
-                    /**
-                     * Creates a new Cluster instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Cluster instance
-                     */
-                    public static create(properties?: google.cloud.vmwareengine.v1.ICluster): google.cloud.vmwareengine.v1.Cluster;
-
-                    /**
-                     * Encodes the specified Cluster message. Does not implicitly {@link google.cloud.vmwareengine.v1.Cluster.verify|verify} messages.
-                     * @param message Cluster message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vmwareengine.v1.ICluster, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Cluster message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Cluster.verify|verify} messages.
-                     * @param message Cluster message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.ICluster, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Cluster message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Cluster
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.Cluster;
-
-                    /**
-                     * Decodes a Cluster message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Cluster
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.Cluster;
-
-                    /**
-                     * Verifies a Cluster message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Cluster message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Cluster
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.Cluster;
-
-                    /**
-                     * Creates a plain object from a Cluster message. Also converts values to other types if specified.
-                     * @param message Cluster
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vmwareengine.v1.Cluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Cluster to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Cluster
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace Cluster {
-
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        ACTIVE = 1,
-                        CREATING = 2,
-                        UPDATING = 3,
-                        DELETING = 4,
-                        REPAIRING = 5
-                    }
-                }
-
                 /** Properties of a ListClustersRequest. */
                 interface IListClustersRequest {
 
@@ -2795,139 +2145,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a Subnet. */
-                interface ISubnet {
-
-                    /** Subnet name */
-                    name?: (string|null);
-
-                    /** Subnet ipCidrRange */
-                    ipCidrRange?: (string|null);
-
-                    /** Subnet gatewayIp */
-                    gatewayIp?: (string|null);
-
-                    /** Subnet type */
-                    type?: (string|null);
-
-                    /** Subnet state */
-                    state?: (google.cloud.vmwareengine.v1.Subnet.State|keyof typeof google.cloud.vmwareengine.v1.Subnet.State|null);
-                }
-
-                /** Represents a Subnet. */
-                class Subnet implements ISubnet {
-
-                    /**
-                     * Constructs a new Subnet.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vmwareengine.v1.ISubnet);
-
-                    /** Subnet name. */
-                    public name: string;
-
-                    /** Subnet ipCidrRange. */
-                    public ipCidrRange: string;
-
-                    /** Subnet gatewayIp. */
-                    public gatewayIp: string;
-
-                    /** Subnet type. */
-                    public type: string;
-
-                    /** Subnet state. */
-                    public state: (google.cloud.vmwareengine.v1.Subnet.State|keyof typeof google.cloud.vmwareengine.v1.Subnet.State);
-
-                    /**
-                     * Creates a new Subnet instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Subnet instance
-                     */
-                    public static create(properties?: google.cloud.vmwareengine.v1.ISubnet): google.cloud.vmwareengine.v1.Subnet;
-
-                    /**
-                     * Encodes the specified Subnet message. Does not implicitly {@link google.cloud.vmwareengine.v1.Subnet.verify|verify} messages.
-                     * @param message Subnet message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vmwareengine.v1.ISubnet, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Subnet message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Subnet.verify|verify} messages.
-                     * @param message Subnet message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.ISubnet, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Subnet message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Subnet
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.Subnet;
-
-                    /**
-                     * Decodes a Subnet message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Subnet
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.Subnet;
-
-                    /**
-                     * Verifies a Subnet message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Subnet message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Subnet
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.Subnet;
-
-                    /**
-                     * Creates a plain object from a Subnet message. Also converts values to other types if specified.
-                     * @param message Subnet
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vmwareengine.v1.Subnet, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Subnet to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Subnet
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace Subnet {
-
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        ACTIVE = 1,
-                        CREATING = 2,
-                        UPDATING = 3,
-                        DELETING = 4
-                    }
-                }
-
                 /** Properties of a ListSubnetsRequest. */
                 interface IListSubnetsRequest {
 
@@ -3273,145 +2490,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a NodeType. */
-                interface INodeType {
-
-                    /** NodeType name */
-                    name?: (string|null);
-
-                    /** NodeType nodeTypeId */
-                    nodeTypeId?: (string|null);
-
-                    /** NodeType displayName */
-                    displayName?: (string|null);
-
-                    /** NodeType virtualCpuCount */
-                    virtualCpuCount?: (number|null);
-
-                    /** NodeType totalCoreCount */
-                    totalCoreCount?: (number|null);
-
-                    /** NodeType memoryGb */
-                    memoryGb?: (number|null);
-
-                    /** NodeType diskSizeGb */
-                    diskSizeGb?: (number|null);
-
-                    /** NodeType availableCustomCoreCounts */
-                    availableCustomCoreCounts?: (number[]|null);
-                }
-
-                /** Represents a NodeType. */
-                class NodeType implements INodeType {
-
-                    /**
-                     * Constructs a new NodeType.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vmwareengine.v1.INodeType);
-
-                    /** NodeType name. */
-                    public name: string;
-
-                    /** NodeType nodeTypeId. */
-                    public nodeTypeId: string;
-
-                    /** NodeType displayName. */
-                    public displayName: string;
-
-                    /** NodeType virtualCpuCount. */
-                    public virtualCpuCount: number;
-
-                    /** NodeType totalCoreCount. */
-                    public totalCoreCount: number;
-
-                    /** NodeType memoryGb. */
-                    public memoryGb: number;
-
-                    /** NodeType diskSizeGb. */
-                    public diskSizeGb: number;
-
-                    /** NodeType availableCustomCoreCounts. */
-                    public availableCustomCoreCounts: number[];
-
-                    /**
-                     * Creates a new NodeType instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns NodeType instance
-                     */
-                    public static create(properties?: google.cloud.vmwareengine.v1.INodeType): google.cloud.vmwareengine.v1.NodeType;
-
-                    /**
-                     * Encodes the specified NodeType message. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeType.verify|verify} messages.
-                     * @param message NodeType message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vmwareengine.v1.INodeType, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified NodeType message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeType.verify|verify} messages.
-                     * @param message NodeType message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.INodeType, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a NodeType message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns NodeType
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.NodeType;
-
-                    /**
-                     * Decodes a NodeType message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns NodeType
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.NodeType;
-
-                    /**
-                     * Verifies a NodeType message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a NodeType message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns NodeType
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.NodeType;
-
-                    /**
-                     * Creates a plain object from a NodeType message. Also converts values to other types if specified.
-                     * @param message NodeType
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vmwareengine.v1.NodeType, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this NodeType to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for NodeType
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Properties of a ListNodeTypesRequest. */
                 interface IListNodeTypesRequest {
 
@@ -3727,109 +2805,6 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetNodeTypeRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a Credentials. */
-                interface ICredentials {
-
-                    /** Credentials username */
-                    username?: (string|null);
-
-                    /** Credentials password */
-                    password?: (string|null);
-                }
-
-                /** Represents a Credentials. */
-                class Credentials implements ICredentials {
-
-                    /**
-                     * Constructs a new Credentials.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vmwareengine.v1.ICredentials);
-
-                    /** Credentials username. */
-                    public username: string;
-
-                    /** Credentials password. */
-                    public password: string;
-
-                    /**
-                     * Creates a new Credentials instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Credentials instance
-                     */
-                    public static create(properties?: google.cloud.vmwareengine.v1.ICredentials): google.cloud.vmwareengine.v1.Credentials;
-
-                    /**
-                     * Encodes the specified Credentials message. Does not implicitly {@link google.cloud.vmwareengine.v1.Credentials.verify|verify} messages.
-                     * @param message Credentials message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vmwareengine.v1.ICredentials, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Credentials message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Credentials.verify|verify} messages.
-                     * @param message Credentials message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.ICredentials, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Credentials message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Credentials
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.Credentials;
-
-                    /**
-                     * Decodes a Credentials message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Credentials
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.Credentials;
-
-                    /**
-                     * Verifies a Credentials message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Credentials message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Credentials
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.Credentials;
-
-                    /**
-                     * Creates a plain object from a Credentials message. Also converts values to other types if specified.
-                     * @param message Credentials
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vmwareengine.v1.Credentials, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Credentials to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Credentials
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4345,138 +3320,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a HcxActivationKey. */
-                interface IHcxActivationKey {
-
-                    /** HcxActivationKey name */
-                    name?: (string|null);
-
-                    /** HcxActivationKey createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** HcxActivationKey state */
-                    state?: (google.cloud.vmwareengine.v1.HcxActivationKey.State|keyof typeof google.cloud.vmwareengine.v1.HcxActivationKey.State|null);
-
-                    /** HcxActivationKey activationKey */
-                    activationKey?: (string|null);
-
-                    /** HcxActivationKey uid */
-                    uid?: (string|null);
-                }
-
-                /** Represents a HcxActivationKey. */
-                class HcxActivationKey implements IHcxActivationKey {
-
-                    /**
-                     * Constructs a new HcxActivationKey.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vmwareengine.v1.IHcxActivationKey);
-
-                    /** HcxActivationKey name. */
-                    public name: string;
-
-                    /** HcxActivationKey createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** HcxActivationKey state. */
-                    public state: (google.cloud.vmwareengine.v1.HcxActivationKey.State|keyof typeof google.cloud.vmwareengine.v1.HcxActivationKey.State);
-
-                    /** HcxActivationKey activationKey. */
-                    public activationKey: string;
-
-                    /** HcxActivationKey uid. */
-                    public uid: string;
-
-                    /**
-                     * Creates a new HcxActivationKey instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns HcxActivationKey instance
-                     */
-                    public static create(properties?: google.cloud.vmwareengine.v1.IHcxActivationKey): google.cloud.vmwareengine.v1.HcxActivationKey;
-
-                    /**
-                     * Encodes the specified HcxActivationKey message. Does not implicitly {@link google.cloud.vmwareengine.v1.HcxActivationKey.verify|verify} messages.
-                     * @param message HcxActivationKey message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vmwareengine.v1.IHcxActivationKey, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified HcxActivationKey message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.HcxActivationKey.verify|verify} messages.
-                     * @param message HcxActivationKey message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IHcxActivationKey, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a HcxActivationKey message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns HcxActivationKey
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.HcxActivationKey;
-
-                    /**
-                     * Decodes a HcxActivationKey message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns HcxActivationKey
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.HcxActivationKey;
-
-                    /**
-                     * Verifies a HcxActivationKey message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a HcxActivationKey message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns HcxActivationKey
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.HcxActivationKey;
-
-                    /**
-                     * Creates a plain object from a HcxActivationKey message. Also converts values to other types if specified.
-                     * @param message HcxActivationKey
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vmwareengine.v1.HcxActivationKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this HcxActivationKey to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for HcxActivationKey
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace HcxActivationKey {
-
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        AVAILABLE = 1,
-                        CONSUMED = 2,
-                        CREATING = 3
-                    }
-                }
-
                 /** Properties of a ListHcxActivationKeysRequest. */
                 interface IListHcxActivationKeysRequest {
 
@@ -4796,649 +3639,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a Hcx. */
-                interface IHcx {
-
-                    /** Hcx internalIp */
-                    internalIp?: (string|null);
-
-                    /** Hcx version */
-                    version?: (string|null);
-
-                    /** Hcx state */
-                    state?: (google.cloud.vmwareengine.v1.Hcx.State|keyof typeof google.cloud.vmwareengine.v1.Hcx.State|null);
-
-                    /** Hcx fqdn */
-                    fqdn?: (string|null);
-                }
-
-                /** Represents a Hcx. */
-                class Hcx implements IHcx {
-
-                    /**
-                     * Constructs a new Hcx.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vmwareengine.v1.IHcx);
-
-                    /** Hcx internalIp. */
-                    public internalIp: string;
-
-                    /** Hcx version. */
-                    public version: string;
-
-                    /** Hcx state. */
-                    public state: (google.cloud.vmwareengine.v1.Hcx.State|keyof typeof google.cloud.vmwareengine.v1.Hcx.State);
-
-                    /** Hcx fqdn. */
-                    public fqdn: string;
-
-                    /**
-                     * Creates a new Hcx instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Hcx instance
-                     */
-                    public static create(properties?: google.cloud.vmwareengine.v1.IHcx): google.cloud.vmwareengine.v1.Hcx;
-
-                    /**
-                     * Encodes the specified Hcx message. Does not implicitly {@link google.cloud.vmwareengine.v1.Hcx.verify|verify} messages.
-                     * @param message Hcx message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vmwareengine.v1.IHcx, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Hcx message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Hcx.verify|verify} messages.
-                     * @param message Hcx message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IHcx, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Hcx message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Hcx
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.Hcx;
-
-                    /**
-                     * Decodes a Hcx message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Hcx
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.Hcx;
-
-                    /**
-                     * Verifies a Hcx message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Hcx message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Hcx
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.Hcx;
-
-                    /**
-                     * Creates a plain object from a Hcx message. Also converts values to other types if specified.
-                     * @param message Hcx
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vmwareengine.v1.Hcx, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Hcx to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Hcx
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace Hcx {
-
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        ACTIVE = 1,
-                        CREATING = 2
-                    }
-                }
-
-                /** Properties of a Nsx. */
-                interface INsx {
-
-                    /** Nsx internalIp */
-                    internalIp?: (string|null);
-
-                    /** Nsx version */
-                    version?: (string|null);
-
-                    /** Nsx state */
-                    state?: (google.cloud.vmwareengine.v1.Nsx.State|keyof typeof google.cloud.vmwareengine.v1.Nsx.State|null);
-
-                    /** Nsx fqdn */
-                    fqdn?: (string|null);
-                }
-
-                /** Represents a Nsx. */
-                class Nsx implements INsx {
-
-                    /**
-                     * Constructs a new Nsx.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vmwareengine.v1.INsx);
-
-                    /** Nsx internalIp. */
-                    public internalIp: string;
-
-                    /** Nsx version. */
-                    public version: string;
-
-                    /** Nsx state. */
-                    public state: (google.cloud.vmwareengine.v1.Nsx.State|keyof typeof google.cloud.vmwareengine.v1.Nsx.State);
-
-                    /** Nsx fqdn. */
-                    public fqdn: string;
-
-                    /**
-                     * Creates a new Nsx instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Nsx instance
-                     */
-                    public static create(properties?: google.cloud.vmwareengine.v1.INsx): google.cloud.vmwareengine.v1.Nsx;
-
-                    /**
-                     * Encodes the specified Nsx message. Does not implicitly {@link google.cloud.vmwareengine.v1.Nsx.verify|verify} messages.
-                     * @param message Nsx message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vmwareengine.v1.INsx, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Nsx message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Nsx.verify|verify} messages.
-                     * @param message Nsx message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.INsx, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Nsx message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Nsx
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.Nsx;
-
-                    /**
-                     * Decodes a Nsx message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Nsx
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.Nsx;
-
-                    /**
-                     * Verifies a Nsx message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Nsx message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Nsx
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.Nsx;
-
-                    /**
-                     * Creates a plain object from a Nsx message. Also converts values to other types if specified.
-                     * @param message Nsx
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vmwareengine.v1.Nsx, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Nsx to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Nsx
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace Nsx {
-
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        ACTIVE = 1,
-                        CREATING = 2
-                    }
-                }
-
-                /** Properties of a Vcenter. */
-                interface IVcenter {
-
-                    /** Vcenter internalIp */
-                    internalIp?: (string|null);
-
-                    /** Vcenter version */
-                    version?: (string|null);
-
-                    /** Vcenter state */
-                    state?: (google.cloud.vmwareengine.v1.Vcenter.State|keyof typeof google.cloud.vmwareengine.v1.Vcenter.State|null);
-
-                    /** Vcenter fqdn */
-                    fqdn?: (string|null);
-                }
-
-                /** Represents a Vcenter. */
-                class Vcenter implements IVcenter {
-
-                    /**
-                     * Constructs a new Vcenter.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vmwareengine.v1.IVcenter);
-
-                    /** Vcenter internalIp. */
-                    public internalIp: string;
-
-                    /** Vcenter version. */
-                    public version: string;
-
-                    /** Vcenter state. */
-                    public state: (google.cloud.vmwareengine.v1.Vcenter.State|keyof typeof google.cloud.vmwareengine.v1.Vcenter.State);
-
-                    /** Vcenter fqdn. */
-                    public fqdn: string;
-
-                    /**
-                     * Creates a new Vcenter instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Vcenter instance
-                     */
-                    public static create(properties?: google.cloud.vmwareengine.v1.IVcenter): google.cloud.vmwareengine.v1.Vcenter;
-
-                    /**
-                     * Encodes the specified Vcenter message. Does not implicitly {@link google.cloud.vmwareengine.v1.Vcenter.verify|verify} messages.
-                     * @param message Vcenter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vmwareengine.v1.IVcenter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Vcenter message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Vcenter.verify|verify} messages.
-                     * @param message Vcenter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IVcenter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Vcenter message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Vcenter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.Vcenter;
-
-                    /**
-                     * Decodes a Vcenter message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Vcenter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.Vcenter;
-
-                    /**
-                     * Verifies a Vcenter message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Vcenter message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Vcenter
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.Vcenter;
-
-                    /**
-                     * Creates a plain object from a Vcenter message. Also converts values to other types if specified.
-                     * @param message Vcenter
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vmwareengine.v1.Vcenter, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Vcenter to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Vcenter
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace Vcenter {
-
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        ACTIVE = 1,
-                        CREATING = 2
-                    }
-                }
-
-                /** Properties of a NetworkPolicy. */
-                interface INetworkPolicy {
-
-                    /** NetworkPolicy name */
-                    name?: (string|null);
-
-                    /** NetworkPolicy createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** NetworkPolicy updateTime */
-                    updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** NetworkPolicy internetAccess */
-                    internetAccess?: (google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService|null);
-
-                    /** NetworkPolicy externalIp */
-                    externalIp?: (google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService|null);
-
-                    /** NetworkPolicy edgeServicesCidr */
-                    edgeServicesCidr?: (string|null);
-
-                    /** NetworkPolicy uid */
-                    uid?: (string|null);
-
-                    /** NetworkPolicy vmwareEngineNetwork */
-                    vmwareEngineNetwork?: (string|null);
-
-                    /** NetworkPolicy description */
-                    description?: (string|null);
-
-                    /** NetworkPolicy vmwareEngineNetworkCanonical */
-                    vmwareEngineNetworkCanonical?: (string|null);
-                }
-
-                /** Represents a NetworkPolicy. */
-                class NetworkPolicy implements INetworkPolicy {
-
-                    /**
-                     * Constructs a new NetworkPolicy.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vmwareengine.v1.INetworkPolicy);
-
-                    /** NetworkPolicy name. */
-                    public name: string;
-
-                    /** NetworkPolicy createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** NetworkPolicy updateTime. */
-                    public updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** NetworkPolicy internetAccess. */
-                    public internetAccess?: (google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService|null);
-
-                    /** NetworkPolicy externalIp. */
-                    public externalIp?: (google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService|null);
-
-                    /** NetworkPolicy edgeServicesCidr. */
-                    public edgeServicesCidr: string;
-
-                    /** NetworkPolicy uid. */
-                    public uid: string;
-
-                    /** NetworkPolicy vmwareEngineNetwork. */
-                    public vmwareEngineNetwork: string;
-
-                    /** NetworkPolicy description. */
-                    public description: string;
-
-                    /** NetworkPolicy vmwareEngineNetworkCanonical. */
-                    public vmwareEngineNetworkCanonical: string;
-
-                    /**
-                     * Creates a new NetworkPolicy instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns NetworkPolicy instance
-                     */
-                    public static create(properties?: google.cloud.vmwareengine.v1.INetworkPolicy): google.cloud.vmwareengine.v1.NetworkPolicy;
-
-                    /**
-                     * Encodes the specified NetworkPolicy message. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkPolicy.verify|verify} messages.
-                     * @param message NetworkPolicy message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vmwareengine.v1.INetworkPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified NetworkPolicy message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkPolicy.verify|verify} messages.
-                     * @param message NetworkPolicy message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.INetworkPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a NetworkPolicy message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns NetworkPolicy
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.NetworkPolicy;
-
-                    /**
-                     * Decodes a NetworkPolicy message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns NetworkPolicy
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.NetworkPolicy;
-
-                    /**
-                     * Verifies a NetworkPolicy message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a NetworkPolicy message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns NetworkPolicy
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.NetworkPolicy;
-
-                    /**
-                     * Creates a plain object from a NetworkPolicy message. Also converts values to other types if specified.
-                     * @param message NetworkPolicy
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vmwareengine.v1.NetworkPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this NetworkPolicy to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for NetworkPolicy
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace NetworkPolicy {
-
-                    /** Properties of a NetworkService. */
-                    interface INetworkService {
-
-                        /** NetworkService enabled */
-                        enabled?: (boolean|null);
-
-                        /** NetworkService state */
-                        state?: (google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService.State|keyof typeof google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService.State|null);
-                    }
-
-                    /** Represents a NetworkService. */
-                    class NetworkService implements INetworkService {
-
-                        /**
-                         * Constructs a new NetworkService.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService);
-
-                        /** NetworkService enabled. */
-                        public enabled: boolean;
-
-                        /** NetworkService state. */
-                        public state: (google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService.State|keyof typeof google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService.State);
-
-                        /**
-                         * Creates a new NetworkService instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns NetworkService instance
-                         */
-                        public static create(properties?: google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService): google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService;
-
-                        /**
-                         * Encodes the specified NetworkService message. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService.verify|verify} messages.
-                         * @param message NetworkService message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified NetworkService message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService.verify|verify} messages.
-                         * @param message NetworkService message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a NetworkService message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns NetworkService
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService;
-
-                        /**
-                         * Decodes a NetworkService message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns NetworkService
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService;
-
-                        /**
-                         * Verifies a NetworkService message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a NetworkService message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns NetworkService
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService;
-
-                        /**
-                         * Creates a plain object from a NetworkService message. Also converts values to other types if specified.
-                         * @param message NetworkService
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this NetworkService to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for NetworkService
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace NetworkService {
-
-                        /** State enum. */
-                        enum State {
-                            STATE_UNSPECIFIED = 0,
-                            UNPROVISIONED = 1,
-                            RECONCILING = 2,
-                            ACTIVE = 3
-                        }
-                    }
                 }
 
                 /** Properties of a ListNetworkPoliciesRequest. */
@@ -6093,283 +4293,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a VmwareEngineNetwork. */
-                interface IVmwareEngineNetwork {
-
-                    /** VmwareEngineNetwork name */
-                    name?: (string|null);
-
-                    /** VmwareEngineNetwork createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** VmwareEngineNetwork updateTime */
-                    updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** VmwareEngineNetwork description */
-                    description?: (string|null);
-
-                    /** VmwareEngineNetwork vpcNetworks */
-                    vpcNetworks?: (google.cloud.vmwareengine.v1.VmwareEngineNetwork.IVpcNetwork[]|null);
-
-                    /** VmwareEngineNetwork state */
-                    state?: (google.cloud.vmwareengine.v1.VmwareEngineNetwork.State|keyof typeof google.cloud.vmwareengine.v1.VmwareEngineNetwork.State|null);
-
-                    /** VmwareEngineNetwork type */
-                    type?: (google.cloud.vmwareengine.v1.VmwareEngineNetwork.Type|keyof typeof google.cloud.vmwareengine.v1.VmwareEngineNetwork.Type|null);
-
-                    /** VmwareEngineNetwork uid */
-                    uid?: (string|null);
-
-                    /** VmwareEngineNetwork etag */
-                    etag?: (string|null);
-                }
-
-                /** Represents a VmwareEngineNetwork. */
-                class VmwareEngineNetwork implements IVmwareEngineNetwork {
-
-                    /**
-                     * Constructs a new VmwareEngineNetwork.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vmwareengine.v1.IVmwareEngineNetwork);
-
-                    /** VmwareEngineNetwork name. */
-                    public name: string;
-
-                    /** VmwareEngineNetwork createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** VmwareEngineNetwork updateTime. */
-                    public updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** VmwareEngineNetwork description. */
-                    public description: string;
-
-                    /** VmwareEngineNetwork vpcNetworks. */
-                    public vpcNetworks: google.cloud.vmwareengine.v1.VmwareEngineNetwork.IVpcNetwork[];
-
-                    /** VmwareEngineNetwork state. */
-                    public state: (google.cloud.vmwareengine.v1.VmwareEngineNetwork.State|keyof typeof google.cloud.vmwareengine.v1.VmwareEngineNetwork.State);
-
-                    /** VmwareEngineNetwork type. */
-                    public type: (google.cloud.vmwareengine.v1.VmwareEngineNetwork.Type|keyof typeof google.cloud.vmwareengine.v1.VmwareEngineNetwork.Type);
-
-                    /** VmwareEngineNetwork uid. */
-                    public uid: string;
-
-                    /** VmwareEngineNetwork etag. */
-                    public etag: string;
-
-                    /**
-                     * Creates a new VmwareEngineNetwork instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns VmwareEngineNetwork instance
-                     */
-                    public static create(properties?: google.cloud.vmwareengine.v1.IVmwareEngineNetwork): google.cloud.vmwareengine.v1.VmwareEngineNetwork;
-
-                    /**
-                     * Encodes the specified VmwareEngineNetwork message. Does not implicitly {@link google.cloud.vmwareengine.v1.VmwareEngineNetwork.verify|verify} messages.
-                     * @param message VmwareEngineNetwork message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vmwareengine.v1.IVmwareEngineNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified VmwareEngineNetwork message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.VmwareEngineNetwork.verify|verify} messages.
-                     * @param message VmwareEngineNetwork message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IVmwareEngineNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a VmwareEngineNetwork message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns VmwareEngineNetwork
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.VmwareEngineNetwork;
-
-                    /**
-                     * Decodes a VmwareEngineNetwork message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns VmwareEngineNetwork
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.VmwareEngineNetwork;
-
-                    /**
-                     * Verifies a VmwareEngineNetwork message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a VmwareEngineNetwork message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns VmwareEngineNetwork
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.VmwareEngineNetwork;
-
-                    /**
-                     * Creates a plain object from a VmwareEngineNetwork message. Also converts values to other types if specified.
-                     * @param message VmwareEngineNetwork
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vmwareengine.v1.VmwareEngineNetwork, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this VmwareEngineNetwork to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for VmwareEngineNetwork
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace VmwareEngineNetwork {
-
-                    /** Properties of a VpcNetwork. */
-                    interface IVpcNetwork {
-
-                        /** VpcNetwork type */
-                        type?: (google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork.Type|keyof typeof google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork.Type|null);
-
-                        /** VpcNetwork network */
-                        network?: (string|null);
-                    }
-
-                    /** Represents a VpcNetwork. */
-                    class VpcNetwork implements IVpcNetwork {
-
-                        /**
-                         * Constructs a new VpcNetwork.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.vmwareengine.v1.VmwareEngineNetwork.IVpcNetwork);
-
-                        /** VpcNetwork type. */
-                        public type: (google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork.Type|keyof typeof google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork.Type);
-
-                        /** VpcNetwork network. */
-                        public network: string;
-
-                        /**
-                         * Creates a new VpcNetwork instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns VpcNetwork instance
-                         */
-                        public static create(properties?: google.cloud.vmwareengine.v1.VmwareEngineNetwork.IVpcNetwork): google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork;
-
-                        /**
-                         * Encodes the specified VpcNetwork message. Does not implicitly {@link google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork.verify|verify} messages.
-                         * @param message VpcNetwork message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.vmwareengine.v1.VmwareEngineNetwork.IVpcNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified VpcNetwork message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork.verify|verify} messages.
-                         * @param message VpcNetwork message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.vmwareengine.v1.VmwareEngineNetwork.IVpcNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a VpcNetwork message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns VpcNetwork
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork;
-
-                        /**
-                         * Decodes a VpcNetwork message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns VpcNetwork
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork;
-
-                        /**
-                         * Verifies a VpcNetwork message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a VpcNetwork message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns VpcNetwork
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork;
-
-                        /**
-                         * Creates a plain object from a VpcNetwork message. Also converts values to other types if specified.
-                         * @param message VpcNetwork
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this VpcNetwork to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for VpcNetwork
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace VpcNetwork {
-
-                        /** Type enum. */
-                        enum Type {
-                            TYPE_UNSPECIFIED = 0,
-                            INTRANET = 1,
-                            INTERNET = 2,
-                            GOOGLE_CLOUD = 3
-                        }
-                    }
-
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        CREATING = 1,
-                        ACTIVE = 2,
-                        UPDATING = 3,
-                        DELETING = 4
-                    }
-
-                    /** Type enum. */
-                    enum Type {
-                        TYPE_UNSPECIFIED = 0,
-                        LEGACY = 1
-                    }
                 }
 
                 /** Properties of a CreateVmwareEngineNetworkRequest. */
@@ -7030,6 +4953,2083 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NetworkConfig. */
+                interface INetworkConfig {
+
+                    /** NetworkConfig managementCidr */
+                    managementCidr?: (string|null);
+
+                    /** NetworkConfig vmwareEngineNetwork */
+                    vmwareEngineNetwork?: (string|null);
+
+                    /** NetworkConfig vmwareEngineNetworkCanonical */
+                    vmwareEngineNetworkCanonical?: (string|null);
+
+                    /** NetworkConfig managementIpAddressLayoutVersion */
+                    managementIpAddressLayoutVersion?: (number|null);
+                }
+
+                /** Represents a NetworkConfig. */
+                class NetworkConfig implements INetworkConfig {
+
+                    /**
+                     * Constructs a new NetworkConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.INetworkConfig);
+
+                    /** NetworkConfig managementCidr. */
+                    public managementCidr: string;
+
+                    /** NetworkConfig vmwareEngineNetwork. */
+                    public vmwareEngineNetwork: string;
+
+                    /** NetworkConfig vmwareEngineNetworkCanonical. */
+                    public vmwareEngineNetworkCanonical: string;
+
+                    /** NetworkConfig managementIpAddressLayoutVersion. */
+                    public managementIpAddressLayoutVersion: number;
+
+                    /**
+                     * Creates a new NetworkConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NetworkConfig instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.INetworkConfig): google.cloud.vmwareengine.v1.NetworkConfig;
+
+                    /**
+                     * Encodes the specified NetworkConfig message. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkConfig.verify|verify} messages.
+                     * @param message NetworkConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.INetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NetworkConfig message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkConfig.verify|verify} messages.
+                     * @param message NetworkConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.INetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NetworkConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NetworkConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.NetworkConfig;
+
+                    /**
+                     * Decodes a NetworkConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NetworkConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.NetworkConfig;
+
+                    /**
+                     * Verifies a NetworkConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NetworkConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NetworkConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.NetworkConfig;
+
+                    /**
+                     * Creates a plain object from a NetworkConfig message. Also converts values to other types if specified.
+                     * @param message NetworkConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.NetworkConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NetworkConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NetworkConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NodeTypeConfig. */
+                interface INodeTypeConfig {
+
+                    /** NodeTypeConfig nodeCount */
+                    nodeCount?: (number|null);
+
+                    /** NodeTypeConfig customCoreCount */
+                    customCoreCount?: (number|null);
+                }
+
+                /** Represents a NodeTypeConfig. */
+                class NodeTypeConfig implements INodeTypeConfig {
+
+                    /**
+                     * Constructs a new NodeTypeConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.INodeTypeConfig);
+
+                    /** NodeTypeConfig nodeCount. */
+                    public nodeCount: number;
+
+                    /** NodeTypeConfig customCoreCount. */
+                    public customCoreCount: number;
+
+                    /**
+                     * Creates a new NodeTypeConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NodeTypeConfig instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.INodeTypeConfig): google.cloud.vmwareengine.v1.NodeTypeConfig;
+
+                    /**
+                     * Encodes the specified NodeTypeConfig message. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeTypeConfig.verify|verify} messages.
+                     * @param message NodeTypeConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.INodeTypeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NodeTypeConfig message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeTypeConfig.verify|verify} messages.
+                     * @param message NodeTypeConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.INodeTypeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NodeTypeConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NodeTypeConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.NodeTypeConfig;
+
+                    /**
+                     * Decodes a NodeTypeConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NodeTypeConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.NodeTypeConfig;
+
+                    /**
+                     * Verifies a NodeTypeConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NodeTypeConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NodeTypeConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.NodeTypeConfig;
+
+                    /**
+                     * Creates a plain object from a NodeTypeConfig message. Also converts values to other types if specified.
+                     * @param message NodeTypeConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.NodeTypeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NodeTypeConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NodeTypeConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PrivateCloud. */
+                interface IPrivateCloud {
+
+                    /** PrivateCloud name */
+                    name?: (string|null);
+
+                    /** PrivateCloud createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateCloud updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateCloud deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateCloud expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateCloud state */
+                    state?: (google.cloud.vmwareengine.v1.PrivateCloud.State|keyof typeof google.cloud.vmwareengine.v1.PrivateCloud.State|null);
+
+                    /** PrivateCloud networkConfig */
+                    networkConfig?: (google.cloud.vmwareengine.v1.INetworkConfig|null);
+
+                    /** PrivateCloud managementCluster */
+                    managementCluster?: (google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster|null);
+
+                    /** PrivateCloud description */
+                    description?: (string|null);
+
+                    /** PrivateCloud hcx */
+                    hcx?: (google.cloud.vmwareengine.v1.IHcx|null);
+
+                    /** PrivateCloud nsx */
+                    nsx?: (google.cloud.vmwareengine.v1.INsx|null);
+
+                    /** PrivateCloud vcenter */
+                    vcenter?: (google.cloud.vmwareengine.v1.IVcenter|null);
+
+                    /** PrivateCloud uid */
+                    uid?: (string|null);
+                }
+
+                /** Represents a PrivateCloud. */
+                class PrivateCloud implements IPrivateCloud {
+
+                    /**
+                     * Constructs a new PrivateCloud.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IPrivateCloud);
+
+                    /** PrivateCloud name. */
+                    public name: string;
+
+                    /** PrivateCloud createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateCloud updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateCloud deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateCloud expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PrivateCloud state. */
+                    public state: (google.cloud.vmwareengine.v1.PrivateCloud.State|keyof typeof google.cloud.vmwareengine.v1.PrivateCloud.State);
+
+                    /** PrivateCloud networkConfig. */
+                    public networkConfig?: (google.cloud.vmwareengine.v1.INetworkConfig|null);
+
+                    /** PrivateCloud managementCluster. */
+                    public managementCluster?: (google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster|null);
+
+                    /** PrivateCloud description. */
+                    public description: string;
+
+                    /** PrivateCloud hcx. */
+                    public hcx?: (google.cloud.vmwareengine.v1.IHcx|null);
+
+                    /** PrivateCloud nsx. */
+                    public nsx?: (google.cloud.vmwareengine.v1.INsx|null);
+
+                    /** PrivateCloud vcenter. */
+                    public vcenter?: (google.cloud.vmwareengine.v1.IVcenter|null);
+
+                    /** PrivateCloud uid. */
+                    public uid: string;
+
+                    /**
+                     * Creates a new PrivateCloud instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PrivateCloud instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IPrivateCloud): google.cloud.vmwareengine.v1.PrivateCloud;
+
+                    /**
+                     * Encodes the specified PrivateCloud message. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.verify|verify} messages.
+                     * @param message PrivateCloud message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IPrivateCloud, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PrivateCloud message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.verify|verify} messages.
+                     * @param message PrivateCloud message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IPrivateCloud, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PrivateCloud message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PrivateCloud
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.PrivateCloud;
+
+                    /**
+                     * Decodes a PrivateCloud message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PrivateCloud
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.PrivateCloud;
+
+                    /**
+                     * Verifies a PrivateCloud message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PrivateCloud message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PrivateCloud
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.PrivateCloud;
+
+                    /**
+                     * Creates a plain object from a PrivateCloud message. Also converts values to other types if specified.
+                     * @param message PrivateCloud
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.PrivateCloud, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PrivateCloud to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PrivateCloud
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PrivateCloud {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        CREATING = 2,
+                        UPDATING = 3,
+                        FAILED = 5,
+                        DELETED = 6,
+                        PURGING = 7
+                    }
+
+                    /** Properties of a ManagementCluster. */
+                    interface IManagementCluster {
+
+                        /** ManagementCluster clusterId */
+                        clusterId?: (string|null);
+
+                        /** ManagementCluster nodeTypeConfigs */
+                        nodeTypeConfigs?: ({ [k: string]: google.cloud.vmwareengine.v1.INodeTypeConfig }|null);
+                    }
+
+                    /** Represents a ManagementCluster. */
+                    class ManagementCluster implements IManagementCluster {
+
+                        /**
+                         * Constructs a new ManagementCluster.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster);
+
+                        /** ManagementCluster clusterId. */
+                        public clusterId: string;
+
+                        /** ManagementCluster nodeTypeConfigs. */
+                        public nodeTypeConfigs: { [k: string]: google.cloud.vmwareengine.v1.INodeTypeConfig };
+
+                        /**
+                         * Creates a new ManagementCluster instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ManagementCluster instance
+                         */
+                        public static create(properties?: google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster): google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster;
+
+                        /**
+                         * Encodes the specified ManagementCluster message. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.verify|verify} messages.
+                         * @param message ManagementCluster message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ManagementCluster message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.verify|verify} messages.
+                         * @param message ManagementCluster message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ManagementCluster message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ManagementCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster;
+
+                        /**
+                         * Decodes a ManagementCluster message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ManagementCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster;
+
+                        /**
+                         * Verifies a ManagementCluster message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ManagementCluster message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ManagementCluster
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster;
+
+                        /**
+                         * Creates a plain object from a ManagementCluster message. Also converts values to other types if specified.
+                         * @param message ManagementCluster
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ManagementCluster to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ManagementCluster
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Cluster. */
+                interface ICluster {
+
+                    /** Cluster name */
+                    name?: (string|null);
+
+                    /** Cluster createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Cluster updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Cluster state */
+                    state?: (google.cloud.vmwareengine.v1.Cluster.State|keyof typeof google.cloud.vmwareengine.v1.Cluster.State|null);
+
+                    /** Cluster management */
+                    management?: (boolean|null);
+
+                    /** Cluster uid */
+                    uid?: (string|null);
+
+                    /** Cluster nodeTypeConfigs */
+                    nodeTypeConfigs?: ({ [k: string]: google.cloud.vmwareengine.v1.INodeTypeConfig }|null);
+                }
+
+                /** Represents a Cluster. */
+                class Cluster implements ICluster {
+
+                    /**
+                     * Constructs a new Cluster.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.ICluster);
+
+                    /** Cluster name. */
+                    public name: string;
+
+                    /** Cluster createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Cluster updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Cluster state. */
+                    public state: (google.cloud.vmwareengine.v1.Cluster.State|keyof typeof google.cloud.vmwareengine.v1.Cluster.State);
+
+                    /** Cluster management. */
+                    public management: boolean;
+
+                    /** Cluster uid. */
+                    public uid: string;
+
+                    /** Cluster nodeTypeConfigs. */
+                    public nodeTypeConfigs: { [k: string]: google.cloud.vmwareengine.v1.INodeTypeConfig };
+
+                    /**
+                     * Creates a new Cluster instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Cluster instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.ICluster): google.cloud.vmwareengine.v1.Cluster;
+
+                    /**
+                     * Encodes the specified Cluster message. Does not implicitly {@link google.cloud.vmwareengine.v1.Cluster.verify|verify} messages.
+                     * @param message Cluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.ICluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Cluster message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Cluster.verify|verify} messages.
+                     * @param message Cluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.ICluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Cluster message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Cluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.Cluster;
+
+                    /**
+                     * Decodes a Cluster message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Cluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.Cluster;
+
+                    /**
+                     * Verifies a Cluster message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Cluster message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Cluster
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.Cluster;
+
+                    /**
+                     * Creates a plain object from a Cluster message. Also converts values to other types if specified.
+                     * @param message Cluster
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.Cluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Cluster to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Cluster
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Cluster {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        CREATING = 2,
+                        UPDATING = 3,
+                        DELETING = 4,
+                        REPAIRING = 5
+                    }
+                }
+
+                /** Properties of a Subnet. */
+                interface ISubnet {
+
+                    /** Subnet name */
+                    name?: (string|null);
+
+                    /** Subnet ipCidrRange */
+                    ipCidrRange?: (string|null);
+
+                    /** Subnet gatewayIp */
+                    gatewayIp?: (string|null);
+
+                    /** Subnet type */
+                    type?: (string|null);
+
+                    /** Subnet state */
+                    state?: (google.cloud.vmwareengine.v1.Subnet.State|keyof typeof google.cloud.vmwareengine.v1.Subnet.State|null);
+                }
+
+                /** Represents a Subnet. */
+                class Subnet implements ISubnet {
+
+                    /**
+                     * Constructs a new Subnet.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.ISubnet);
+
+                    /** Subnet name. */
+                    public name: string;
+
+                    /** Subnet ipCidrRange. */
+                    public ipCidrRange: string;
+
+                    /** Subnet gatewayIp. */
+                    public gatewayIp: string;
+
+                    /** Subnet type. */
+                    public type: string;
+
+                    /** Subnet state. */
+                    public state: (google.cloud.vmwareengine.v1.Subnet.State|keyof typeof google.cloud.vmwareengine.v1.Subnet.State);
+
+                    /**
+                     * Creates a new Subnet instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Subnet instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.ISubnet): google.cloud.vmwareengine.v1.Subnet;
+
+                    /**
+                     * Encodes the specified Subnet message. Does not implicitly {@link google.cloud.vmwareengine.v1.Subnet.verify|verify} messages.
+                     * @param message Subnet message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.ISubnet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Subnet message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Subnet.verify|verify} messages.
+                     * @param message Subnet message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.ISubnet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Subnet message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Subnet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.Subnet;
+
+                    /**
+                     * Decodes a Subnet message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Subnet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.Subnet;
+
+                    /**
+                     * Verifies a Subnet message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Subnet message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Subnet
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.Subnet;
+
+                    /**
+                     * Creates a plain object from a Subnet message. Also converts values to other types if specified.
+                     * @param message Subnet
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.Subnet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Subnet to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Subnet
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Subnet {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        CREATING = 2,
+                        UPDATING = 3,
+                        DELETING = 4
+                    }
+                }
+
+                /** Properties of a NodeType. */
+                interface INodeType {
+
+                    /** NodeType name */
+                    name?: (string|null);
+
+                    /** NodeType nodeTypeId */
+                    nodeTypeId?: (string|null);
+
+                    /** NodeType displayName */
+                    displayName?: (string|null);
+
+                    /** NodeType virtualCpuCount */
+                    virtualCpuCount?: (number|null);
+
+                    /** NodeType totalCoreCount */
+                    totalCoreCount?: (number|null);
+
+                    /** NodeType memoryGb */
+                    memoryGb?: (number|null);
+
+                    /** NodeType diskSizeGb */
+                    diskSizeGb?: (number|null);
+
+                    /** NodeType availableCustomCoreCounts */
+                    availableCustomCoreCounts?: (number[]|null);
+                }
+
+                /** Represents a NodeType. */
+                class NodeType implements INodeType {
+
+                    /**
+                     * Constructs a new NodeType.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.INodeType);
+
+                    /** NodeType name. */
+                    public name: string;
+
+                    /** NodeType nodeTypeId. */
+                    public nodeTypeId: string;
+
+                    /** NodeType displayName. */
+                    public displayName: string;
+
+                    /** NodeType virtualCpuCount. */
+                    public virtualCpuCount: number;
+
+                    /** NodeType totalCoreCount. */
+                    public totalCoreCount: number;
+
+                    /** NodeType memoryGb. */
+                    public memoryGb: number;
+
+                    /** NodeType diskSizeGb. */
+                    public diskSizeGb: number;
+
+                    /** NodeType availableCustomCoreCounts. */
+                    public availableCustomCoreCounts: number[];
+
+                    /**
+                     * Creates a new NodeType instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NodeType instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.INodeType): google.cloud.vmwareengine.v1.NodeType;
+
+                    /**
+                     * Encodes the specified NodeType message. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeType.verify|verify} messages.
+                     * @param message NodeType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.INodeType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NodeType message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeType.verify|verify} messages.
+                     * @param message NodeType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.INodeType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NodeType message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NodeType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.NodeType;
+
+                    /**
+                     * Decodes a NodeType message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NodeType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.NodeType;
+
+                    /**
+                     * Verifies a NodeType message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NodeType message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NodeType
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.NodeType;
+
+                    /**
+                     * Creates a plain object from a NodeType message. Also converts values to other types if specified.
+                     * @param message NodeType
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.NodeType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NodeType to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NodeType
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Credentials. */
+                interface ICredentials {
+
+                    /** Credentials username */
+                    username?: (string|null);
+
+                    /** Credentials password */
+                    password?: (string|null);
+                }
+
+                /** Represents a Credentials. */
+                class Credentials implements ICredentials {
+
+                    /**
+                     * Constructs a new Credentials.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.ICredentials);
+
+                    /** Credentials username. */
+                    public username: string;
+
+                    /** Credentials password. */
+                    public password: string;
+
+                    /**
+                     * Creates a new Credentials instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Credentials instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.ICredentials): google.cloud.vmwareengine.v1.Credentials;
+
+                    /**
+                     * Encodes the specified Credentials message. Does not implicitly {@link google.cloud.vmwareengine.v1.Credentials.verify|verify} messages.
+                     * @param message Credentials message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.ICredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Credentials message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Credentials.verify|verify} messages.
+                     * @param message Credentials message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.ICredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Credentials message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Credentials
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.Credentials;
+
+                    /**
+                     * Decodes a Credentials message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Credentials
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.Credentials;
+
+                    /**
+                     * Verifies a Credentials message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Credentials message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Credentials
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.Credentials;
+
+                    /**
+                     * Creates a plain object from a Credentials message. Also converts values to other types if specified.
+                     * @param message Credentials
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.Credentials, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Credentials to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Credentials
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a HcxActivationKey. */
+                interface IHcxActivationKey {
+
+                    /** HcxActivationKey name */
+                    name?: (string|null);
+
+                    /** HcxActivationKey createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** HcxActivationKey state */
+                    state?: (google.cloud.vmwareengine.v1.HcxActivationKey.State|keyof typeof google.cloud.vmwareengine.v1.HcxActivationKey.State|null);
+
+                    /** HcxActivationKey activationKey */
+                    activationKey?: (string|null);
+
+                    /** HcxActivationKey uid */
+                    uid?: (string|null);
+                }
+
+                /** Represents a HcxActivationKey. */
+                class HcxActivationKey implements IHcxActivationKey {
+
+                    /**
+                     * Constructs a new HcxActivationKey.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IHcxActivationKey);
+
+                    /** HcxActivationKey name. */
+                    public name: string;
+
+                    /** HcxActivationKey createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** HcxActivationKey state. */
+                    public state: (google.cloud.vmwareengine.v1.HcxActivationKey.State|keyof typeof google.cloud.vmwareengine.v1.HcxActivationKey.State);
+
+                    /** HcxActivationKey activationKey. */
+                    public activationKey: string;
+
+                    /** HcxActivationKey uid. */
+                    public uid: string;
+
+                    /**
+                     * Creates a new HcxActivationKey instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HcxActivationKey instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IHcxActivationKey): google.cloud.vmwareengine.v1.HcxActivationKey;
+
+                    /**
+                     * Encodes the specified HcxActivationKey message. Does not implicitly {@link google.cloud.vmwareengine.v1.HcxActivationKey.verify|verify} messages.
+                     * @param message HcxActivationKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IHcxActivationKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HcxActivationKey message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.HcxActivationKey.verify|verify} messages.
+                     * @param message HcxActivationKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IHcxActivationKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HcxActivationKey message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HcxActivationKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.HcxActivationKey;
+
+                    /**
+                     * Decodes a HcxActivationKey message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HcxActivationKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.HcxActivationKey;
+
+                    /**
+                     * Verifies a HcxActivationKey message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HcxActivationKey message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HcxActivationKey
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.HcxActivationKey;
+
+                    /**
+                     * Creates a plain object from a HcxActivationKey message. Also converts values to other types if specified.
+                     * @param message HcxActivationKey
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.HcxActivationKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HcxActivationKey to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for HcxActivationKey
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace HcxActivationKey {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        AVAILABLE = 1,
+                        CONSUMED = 2,
+                        CREATING = 3
+                    }
+                }
+
+                /** Properties of a Hcx. */
+                interface IHcx {
+
+                    /** Hcx internalIp */
+                    internalIp?: (string|null);
+
+                    /** Hcx version */
+                    version?: (string|null);
+
+                    /** Hcx state */
+                    state?: (google.cloud.vmwareengine.v1.Hcx.State|keyof typeof google.cloud.vmwareengine.v1.Hcx.State|null);
+
+                    /** Hcx fqdn */
+                    fqdn?: (string|null);
+                }
+
+                /** Represents a Hcx. */
+                class Hcx implements IHcx {
+
+                    /**
+                     * Constructs a new Hcx.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IHcx);
+
+                    /** Hcx internalIp. */
+                    public internalIp: string;
+
+                    /** Hcx version. */
+                    public version: string;
+
+                    /** Hcx state. */
+                    public state: (google.cloud.vmwareengine.v1.Hcx.State|keyof typeof google.cloud.vmwareengine.v1.Hcx.State);
+
+                    /** Hcx fqdn. */
+                    public fqdn: string;
+
+                    /**
+                     * Creates a new Hcx instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Hcx instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IHcx): google.cloud.vmwareengine.v1.Hcx;
+
+                    /**
+                     * Encodes the specified Hcx message. Does not implicitly {@link google.cloud.vmwareengine.v1.Hcx.verify|verify} messages.
+                     * @param message Hcx message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IHcx, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Hcx message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Hcx.verify|verify} messages.
+                     * @param message Hcx message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IHcx, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Hcx message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Hcx
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.Hcx;
+
+                    /**
+                     * Decodes a Hcx message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Hcx
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.Hcx;
+
+                    /**
+                     * Verifies a Hcx message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Hcx message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Hcx
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.Hcx;
+
+                    /**
+                     * Creates a plain object from a Hcx message. Also converts values to other types if specified.
+                     * @param message Hcx
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.Hcx, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Hcx to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Hcx
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Hcx {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        CREATING = 2
+                    }
+                }
+
+                /** Properties of a Nsx. */
+                interface INsx {
+
+                    /** Nsx internalIp */
+                    internalIp?: (string|null);
+
+                    /** Nsx version */
+                    version?: (string|null);
+
+                    /** Nsx state */
+                    state?: (google.cloud.vmwareengine.v1.Nsx.State|keyof typeof google.cloud.vmwareengine.v1.Nsx.State|null);
+
+                    /** Nsx fqdn */
+                    fqdn?: (string|null);
+                }
+
+                /** Represents a Nsx. */
+                class Nsx implements INsx {
+
+                    /**
+                     * Constructs a new Nsx.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.INsx);
+
+                    /** Nsx internalIp. */
+                    public internalIp: string;
+
+                    /** Nsx version. */
+                    public version: string;
+
+                    /** Nsx state. */
+                    public state: (google.cloud.vmwareengine.v1.Nsx.State|keyof typeof google.cloud.vmwareengine.v1.Nsx.State);
+
+                    /** Nsx fqdn. */
+                    public fqdn: string;
+
+                    /**
+                     * Creates a new Nsx instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Nsx instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.INsx): google.cloud.vmwareengine.v1.Nsx;
+
+                    /**
+                     * Encodes the specified Nsx message. Does not implicitly {@link google.cloud.vmwareengine.v1.Nsx.verify|verify} messages.
+                     * @param message Nsx message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.INsx, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Nsx message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Nsx.verify|verify} messages.
+                     * @param message Nsx message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.INsx, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Nsx message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Nsx
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.Nsx;
+
+                    /**
+                     * Decodes a Nsx message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Nsx
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.Nsx;
+
+                    /**
+                     * Verifies a Nsx message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Nsx message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Nsx
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.Nsx;
+
+                    /**
+                     * Creates a plain object from a Nsx message. Also converts values to other types if specified.
+                     * @param message Nsx
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.Nsx, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Nsx to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Nsx
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Nsx {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        CREATING = 2
+                    }
+                }
+
+                /** Properties of a Vcenter. */
+                interface IVcenter {
+
+                    /** Vcenter internalIp */
+                    internalIp?: (string|null);
+
+                    /** Vcenter version */
+                    version?: (string|null);
+
+                    /** Vcenter state */
+                    state?: (google.cloud.vmwareengine.v1.Vcenter.State|keyof typeof google.cloud.vmwareengine.v1.Vcenter.State|null);
+
+                    /** Vcenter fqdn */
+                    fqdn?: (string|null);
+                }
+
+                /** Represents a Vcenter. */
+                class Vcenter implements IVcenter {
+
+                    /**
+                     * Constructs a new Vcenter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IVcenter);
+
+                    /** Vcenter internalIp. */
+                    public internalIp: string;
+
+                    /** Vcenter version. */
+                    public version: string;
+
+                    /** Vcenter state. */
+                    public state: (google.cloud.vmwareengine.v1.Vcenter.State|keyof typeof google.cloud.vmwareengine.v1.Vcenter.State);
+
+                    /** Vcenter fqdn. */
+                    public fqdn: string;
+
+                    /**
+                     * Creates a new Vcenter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Vcenter instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IVcenter): google.cloud.vmwareengine.v1.Vcenter;
+
+                    /**
+                     * Encodes the specified Vcenter message. Does not implicitly {@link google.cloud.vmwareengine.v1.Vcenter.verify|verify} messages.
+                     * @param message Vcenter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IVcenter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Vcenter message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Vcenter.verify|verify} messages.
+                     * @param message Vcenter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IVcenter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Vcenter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Vcenter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.Vcenter;
+
+                    /**
+                     * Decodes a Vcenter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Vcenter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.Vcenter;
+
+                    /**
+                     * Verifies a Vcenter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Vcenter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Vcenter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.Vcenter;
+
+                    /**
+                     * Creates a plain object from a Vcenter message. Also converts values to other types if specified.
+                     * @param message Vcenter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.Vcenter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Vcenter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Vcenter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Vcenter {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        CREATING = 2
+                    }
+                }
+
+                /** Properties of a NetworkPolicy. */
+                interface INetworkPolicy {
+
+                    /** NetworkPolicy name */
+                    name?: (string|null);
+
+                    /** NetworkPolicy createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** NetworkPolicy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** NetworkPolicy internetAccess */
+                    internetAccess?: (google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService|null);
+
+                    /** NetworkPolicy externalIp */
+                    externalIp?: (google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService|null);
+
+                    /** NetworkPolicy edgeServicesCidr */
+                    edgeServicesCidr?: (string|null);
+
+                    /** NetworkPolicy uid */
+                    uid?: (string|null);
+
+                    /** NetworkPolicy vmwareEngineNetwork */
+                    vmwareEngineNetwork?: (string|null);
+
+                    /** NetworkPolicy description */
+                    description?: (string|null);
+
+                    /** NetworkPolicy vmwareEngineNetworkCanonical */
+                    vmwareEngineNetworkCanonical?: (string|null);
+                }
+
+                /** Represents a NetworkPolicy. */
+                class NetworkPolicy implements INetworkPolicy {
+
+                    /**
+                     * Constructs a new NetworkPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.INetworkPolicy);
+
+                    /** NetworkPolicy name. */
+                    public name: string;
+
+                    /** NetworkPolicy createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** NetworkPolicy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** NetworkPolicy internetAccess. */
+                    public internetAccess?: (google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService|null);
+
+                    /** NetworkPolicy externalIp. */
+                    public externalIp?: (google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService|null);
+
+                    /** NetworkPolicy edgeServicesCidr. */
+                    public edgeServicesCidr: string;
+
+                    /** NetworkPolicy uid. */
+                    public uid: string;
+
+                    /** NetworkPolicy vmwareEngineNetwork. */
+                    public vmwareEngineNetwork: string;
+
+                    /** NetworkPolicy description. */
+                    public description: string;
+
+                    /** NetworkPolicy vmwareEngineNetworkCanonical. */
+                    public vmwareEngineNetworkCanonical: string;
+
+                    /**
+                     * Creates a new NetworkPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NetworkPolicy instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.INetworkPolicy): google.cloud.vmwareengine.v1.NetworkPolicy;
+
+                    /**
+                     * Encodes the specified NetworkPolicy message. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkPolicy.verify|verify} messages.
+                     * @param message NetworkPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.INetworkPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NetworkPolicy message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkPolicy.verify|verify} messages.
+                     * @param message NetworkPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.INetworkPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NetworkPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NetworkPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.NetworkPolicy;
+
+                    /**
+                     * Decodes a NetworkPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NetworkPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.NetworkPolicy;
+
+                    /**
+                     * Verifies a NetworkPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NetworkPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NetworkPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.NetworkPolicy;
+
+                    /**
+                     * Creates a plain object from a NetworkPolicy message. Also converts values to other types if specified.
+                     * @param message NetworkPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.NetworkPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NetworkPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NetworkPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NetworkPolicy {
+
+                    /** Properties of a NetworkService. */
+                    interface INetworkService {
+
+                        /** NetworkService enabled */
+                        enabled?: (boolean|null);
+
+                        /** NetworkService state */
+                        state?: (google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService.State|keyof typeof google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService.State|null);
+                    }
+
+                    /** Represents a NetworkService. */
+                    class NetworkService implements INetworkService {
+
+                        /**
+                         * Constructs a new NetworkService.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService);
+
+                        /** NetworkService enabled. */
+                        public enabled: boolean;
+
+                        /** NetworkService state. */
+                        public state: (google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService.State|keyof typeof google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService.State);
+
+                        /**
+                         * Creates a new NetworkService instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NetworkService instance
+                         */
+                        public static create(properties?: google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService): google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService;
+
+                        /**
+                         * Encodes the specified NetworkService message. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService.verify|verify} messages.
+                         * @param message NetworkService message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NetworkService message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService.verify|verify} messages.
+                         * @param message NetworkService message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vmwareengine.v1.NetworkPolicy.INetworkService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NetworkService message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NetworkService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService;
+
+                        /**
+                         * Decodes a NetworkService message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NetworkService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService;
+
+                        /**
+                         * Verifies a NetworkService message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NetworkService message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NetworkService
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService;
+
+                        /**
+                         * Creates a plain object from a NetworkService message. Also converts values to other types if specified.
+                         * @param message NetworkService
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NetworkService to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NetworkService
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace NetworkService {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            UNPROVISIONED = 1,
+                            RECONCILING = 2,
+                            ACTIVE = 3
+                        }
+                    }
+                }
+
+                /** Properties of a VmwareEngineNetwork. */
+                interface IVmwareEngineNetwork {
+
+                    /** VmwareEngineNetwork name */
+                    name?: (string|null);
+
+                    /** VmwareEngineNetwork createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VmwareEngineNetwork updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VmwareEngineNetwork description */
+                    description?: (string|null);
+
+                    /** VmwareEngineNetwork vpcNetworks */
+                    vpcNetworks?: (google.cloud.vmwareengine.v1.VmwareEngineNetwork.IVpcNetwork[]|null);
+
+                    /** VmwareEngineNetwork state */
+                    state?: (google.cloud.vmwareengine.v1.VmwareEngineNetwork.State|keyof typeof google.cloud.vmwareengine.v1.VmwareEngineNetwork.State|null);
+
+                    /** VmwareEngineNetwork type */
+                    type?: (google.cloud.vmwareengine.v1.VmwareEngineNetwork.Type|keyof typeof google.cloud.vmwareengine.v1.VmwareEngineNetwork.Type|null);
+
+                    /** VmwareEngineNetwork uid */
+                    uid?: (string|null);
+
+                    /** VmwareEngineNetwork etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a VmwareEngineNetwork. */
+                class VmwareEngineNetwork implements IVmwareEngineNetwork {
+
+                    /**
+                     * Constructs a new VmwareEngineNetwork.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vmwareengine.v1.IVmwareEngineNetwork);
+
+                    /** VmwareEngineNetwork name. */
+                    public name: string;
+
+                    /** VmwareEngineNetwork createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VmwareEngineNetwork updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VmwareEngineNetwork description. */
+                    public description: string;
+
+                    /** VmwareEngineNetwork vpcNetworks. */
+                    public vpcNetworks: google.cloud.vmwareengine.v1.VmwareEngineNetwork.IVpcNetwork[];
+
+                    /** VmwareEngineNetwork state. */
+                    public state: (google.cloud.vmwareengine.v1.VmwareEngineNetwork.State|keyof typeof google.cloud.vmwareengine.v1.VmwareEngineNetwork.State);
+
+                    /** VmwareEngineNetwork type. */
+                    public type: (google.cloud.vmwareengine.v1.VmwareEngineNetwork.Type|keyof typeof google.cloud.vmwareengine.v1.VmwareEngineNetwork.Type);
+
+                    /** VmwareEngineNetwork uid. */
+                    public uid: string;
+
+                    /** VmwareEngineNetwork etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new VmwareEngineNetwork instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VmwareEngineNetwork instance
+                     */
+                    public static create(properties?: google.cloud.vmwareengine.v1.IVmwareEngineNetwork): google.cloud.vmwareengine.v1.VmwareEngineNetwork;
+
+                    /**
+                     * Encodes the specified VmwareEngineNetwork message. Does not implicitly {@link google.cloud.vmwareengine.v1.VmwareEngineNetwork.verify|verify} messages.
+                     * @param message VmwareEngineNetwork message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vmwareengine.v1.IVmwareEngineNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VmwareEngineNetwork message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.VmwareEngineNetwork.verify|verify} messages.
+                     * @param message VmwareEngineNetwork message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vmwareengine.v1.IVmwareEngineNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VmwareEngineNetwork message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VmwareEngineNetwork
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.VmwareEngineNetwork;
+
+                    /**
+                     * Decodes a VmwareEngineNetwork message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VmwareEngineNetwork
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.VmwareEngineNetwork;
+
+                    /**
+                     * Verifies a VmwareEngineNetwork message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VmwareEngineNetwork message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VmwareEngineNetwork
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.VmwareEngineNetwork;
+
+                    /**
+                     * Creates a plain object from a VmwareEngineNetwork message. Also converts values to other types if specified.
+                     * @param message VmwareEngineNetwork
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vmwareengine.v1.VmwareEngineNetwork, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VmwareEngineNetwork to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VmwareEngineNetwork
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VmwareEngineNetwork {
+
+                    /** Properties of a VpcNetwork. */
+                    interface IVpcNetwork {
+
+                        /** VpcNetwork type */
+                        type?: (google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork.Type|keyof typeof google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork.Type|null);
+
+                        /** VpcNetwork network */
+                        network?: (string|null);
+                    }
+
+                    /** Represents a VpcNetwork. */
+                    class VpcNetwork implements IVpcNetwork {
+
+                        /**
+                         * Constructs a new VpcNetwork.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vmwareengine.v1.VmwareEngineNetwork.IVpcNetwork);
+
+                        /** VpcNetwork type. */
+                        public type: (google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork.Type|keyof typeof google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork.Type);
+
+                        /** VpcNetwork network. */
+                        public network: string;
+
+                        /**
+                         * Creates a new VpcNetwork instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VpcNetwork instance
+                         */
+                        public static create(properties?: google.cloud.vmwareengine.v1.VmwareEngineNetwork.IVpcNetwork): google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork;
+
+                        /**
+                         * Encodes the specified VpcNetwork message. Does not implicitly {@link google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork.verify|verify} messages.
+                         * @param message VpcNetwork message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vmwareengine.v1.VmwareEngineNetwork.IVpcNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VpcNetwork message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork.verify|verify} messages.
+                         * @param message VpcNetwork message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vmwareengine.v1.VmwareEngineNetwork.IVpcNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VpcNetwork message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VpcNetwork
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork;
+
+                        /**
+                         * Decodes a VpcNetwork message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VpcNetwork
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork;
+
+                        /**
+                         * Verifies a VpcNetwork message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VpcNetwork message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VpcNetwork
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork;
+
+                        /**
+                         * Creates a plain object from a VpcNetwork message. Also converts values to other types if specified.
+                         * @param message VpcNetwork
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vmwareengine.v1.VmwareEngineNetwork.VpcNetwork, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VpcNetwork to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VpcNetwork
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace VpcNetwork {
+
+                        /** Type enum. */
+                        enum Type {
+                            TYPE_UNSPECIFIED = 0,
+                            INTRANET = 1,
+                            INTERNET = 2,
+                            GOOGLE_CLOUD = 3
+                        }
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        UPDATING = 3,
+                        DELETING = 4
+                    }
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        LEGACY = 1
+                    }
                 }
             }
         }
@@ -11012,6 +11012,109 @@ export namespace google {
             }
         }
 
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of an Any. */
         interface IAny {
 
@@ -11400,109 +11503,6 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Timestamp
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
