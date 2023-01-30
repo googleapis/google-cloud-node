@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/compute-v3.7.0...compute-v3.8.0) (2023-01-28)
+
+
+### Features
+
+* Added Snooze API support ([#3832](https://github.com/googleapis/google-cloud-node/issues/3832)) ([f715797](https://github.com/googleapis/google-cloud-node/commit/f715797a46cdd2bf4dffc1a82378986941fd6d79))
+* Added SuggestConversationSummary RPC ([#3851](https://github.com/googleapis/google-cloud-node/issues/3851)) ([79fbaa8](https://github.com/googleapis/google-cloud-node/commit/79fbaa833d08738fa37aa37158ddb5b1c91710e1))
+* Update Compute Engine API to revision 20230103 ([#769](https://github.com/googleapis/google-cloud-node/issues/769)) ([#3873](https://github.com/googleapis/google-cloud-node/issues/3873)) ([d3ec9cf](https://github.com/googleapis/google-cloud-node/commit/d3ec9cf20cf811cd2458e5497aae5a1d24f001ea))
+
 ## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/compute-v3.6.0...compute-v3.7.0) (2022-12-16)
 
 
