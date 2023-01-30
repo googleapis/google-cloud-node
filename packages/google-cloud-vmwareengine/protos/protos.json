@@ -11,7 +11,7 @@
                     "csharp_namespace": "Google.Cloud.VmwareEngine.V1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/vmwareengine/v1;vmwareengine",
                     "java_multiple_files": true,
-                    "java_outer_classname": "VmwareengineProto",
+                    "java_outer_classname": "VmwareengineResourcesProto",
                     "java_package": "com.google.cloud.vmwareengine.v1",
                     "php_namespace": "Google\\Cloud\\VmwareEngine\\V1",
                     "ruby_package": "Google::Cloud::VmwareEngine::V1",
@@ -737,186 +737,6 @@
                         }
                       }
                     },
-                    "NetworkConfig": {
-                      "fields": {
-                        "managementCidr": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "vmwareEngineNetwork": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "vmwareengine.googleapis.com/VmwareEngineNetwork"
-                          }
-                        },
-                        "vmwareEngineNetworkCanonical": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "vmwareengine.googleapis.com/VmwareEngineNetwork"
-                          }
-                        },
-                        "managementIpAddressLayoutVersion": {
-                          "type": "int32",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "NodeTypeConfig": {
-                      "fields": {
-                        "nodeCount": {
-                          "type": "int32",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "customCoreCount": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "PrivateCloud": {
-                      "options": {
-                        "(google.api.resource).type": "vmwareengine.googleapis.com/PrivateCloud",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/privateClouds/{private_cloud}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "deleteTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "expireTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "networkConfig": {
-                          "type": "NetworkConfig",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "managementCluster": {
-                          "type": "ManagementCluster",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "INPUT_ONLY"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 11
-                        },
-                        "hcx": {
-                          "type": "Hcx",
-                          "id": 17,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "nsx": {
-                          "type": "Nsx",
-                          "id": 18,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "vcenter": {
-                          "type": "Vcenter",
-                          "id": 19,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "uid": {
-                          "type": "string",
-                          "id": 20,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "ACTIVE": 1,
-                            "CREATING": 2,
-                            "UPDATING": 3,
-                            "FAILED": 5,
-                            "DELETED": 6,
-                            "PURGING": 7
-                          }
-                        },
-                        "ManagementCluster": {
-                          "fields": {
-                            "clusterId": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "nodeTypeConfigs": {
-                              "keyType": "string",
-                              "type": "NodeTypeConfig",
-                              "id": 7,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
                     "ListPrivateCloudsRequest": {
                       "fields": {
                         "parent": {
@@ -1100,76 +920,6 @@
                         }
                       }
                     },
-                    "Cluster": {
-                      "options": {
-                        "(google.api.resource).type": "vmwareengine.googleapis.com/Cluster",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/privateClouds/{private_cloud}/clusters/{cluster}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "management": {
-                          "type": "bool",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "uid": {
-                          "type": "string",
-                          "id": 14,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "nodeTypeConfigs": {
-                          "keyType": "string",
-                          "type": "NodeTypeConfig",
-                          "id": 16,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "ACTIVE": 1,
-                            "CREATING": 2,
-                            "UPDATING": 3,
-                            "DELETING": 4,
-                            "REPAIRING": 5
-                          }
-                        }
-                      }
-                    },
                     "ListClustersRequest": {
                       "fields": {
                         "parent": {
@@ -1319,54 +1069,6 @@
                         }
                       }
                     },
-                    "Subnet": {
-                      "options": {
-                        "(google.api.resource).type": "vmwareengine.googleapis.com/Subnet",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/privateClouds/{private_cloud}/subnets/{subnet}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "ipCidrRange": {
-                          "type": "string",
-                          "id": 7
-                        },
-                        "gatewayIp": {
-                          "type": "string",
-                          "id": 8
-                        },
-                        "type": {
-                          "type": "string",
-                          "id": 11,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 13,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "ACTIVE": 1,
-                            "CREATING": 2,
-                            "UPDATING": 3,
-                            "DELETING": 4
-                          }
-                        }
-                      }
-                    },
                     "ListSubnetsRequest": {
                       "fields": {
                         "parent": {
@@ -1453,71 +1155,6 @@
                         }
                       }
                     },
-                    "NodeType": {
-                      "options": {
-                        "(google.api.resource).type": "vmwareengine.googleapis.com/NodeType",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/nodeTypes/{node_type}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "nodeTypeId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "virtualCpuCount": {
-                          "type": "int32",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "totalCoreCount": {
-                          "type": "int32",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "memoryGb": {
-                          "type": "int32",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "diskSizeGb": {
-                          "type": "int32",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "availableCustomCoreCounts": {
-                          "rule": "repeated",
-                          "type": "int32",
-                          "id": 11,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
                     "ListNodeTypesRequest": {
                       "fields": {
                         "parent": {
@@ -1569,18 +1206,6 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "vmwareengine.googleapis.com/NodeType"
                           }
-                        }
-                      }
-                    },
-                    "Credentials": {
-                      "fields": {
-                        "username": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "password": {
-                          "type": "string",
-                          "id": 2
                         }
                       }
                     },
@@ -1664,59 +1289,6 @@
                         }
                       }
                     },
-                    "HcxActivationKey": {
-                      "options": {
-                        "(google.api.resource).type": "vmwareengine.googleapis.com/HcxActivationKey",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/privateClouds/{private_cloud}/hcxActivationKeys/{hcx_activation_key}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "activationKey": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "uid": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "AVAILABLE": 1,
-                            "CONSUMED": 2,
-                            "CREATING": 3
-                          }
-                        }
-                      }
-                    },
                     "ListHcxActivationKeysRequest": {
                       "fields": {
                         "parent": {
@@ -1776,6 +1348,711 @@
                         "requestId": {
                           "type": "string",
                           "id": 4
+                        }
+                      }
+                    },
+                    "ListNetworkPoliciesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "vmwareengine.googleapis.com/NetworkPolicy"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListNetworkPoliciesResponse": {
+                      "fields": {
+                        "networkPolicies": {
+                          "rule": "repeated",
+                          "type": "NetworkPolicy",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetNetworkPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmwareengine.googleapis.com/NetworkPolicy"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateNetworkPolicyRequest": {
+                      "fields": {
+                        "networkPolicy": {
+                          "type": "NetworkPolicy",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreateNetworkPolicyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "vmwareengine.googleapis.com/NetworkPolicy"
+                          }
+                        },
+                        "networkPolicyId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "networkPolicy": {
+                          "type": "NetworkPolicy",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteNetworkPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmwareengine.googleapis.com/NetworkPolicy"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreateVmwareEngineNetworkRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "vmwareengine.googleapis.com/VmwareEngineNetwork"
+                          }
+                        },
+                        "vmwareEngineNetworkId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "vmwareEngineNetwork": {
+                          "type": "VmwareEngineNetwork",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateVmwareEngineNetworkRequest": {
+                      "fields": {
+                        "vmwareEngineNetwork": {
+                          "type": "VmwareEngineNetwork",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteVmwareEngineNetworkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmwareengine.googleapis.com/VmwareEngineNetwork"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetVmwareEngineNetworkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vmwareengine.googleapis.com/VmwareEngineNetwork"
+                          }
+                        }
+                      }
+                    },
+                    "ListVmwareEngineNetworksRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListVmwareEngineNetworksResponse": {
+                      "fields": {
+                        "vmwareEngineNetworks": {
+                          "rule": "repeated",
+                          "type": "VmwareEngineNetwork",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "NetworkConfig": {
+                      "fields": {
+                        "managementCidr": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "vmwareEngineNetwork": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "vmwareengine.googleapis.com/VmwareEngineNetwork"
+                          }
+                        },
+                        "vmwareEngineNetworkCanonical": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "vmwareengine.googleapis.com/VmwareEngineNetwork"
+                          }
+                        },
+                        "managementIpAddressLayoutVersion": {
+                          "type": "int32",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "NodeTypeConfig": {
+                      "fields": {
+                        "nodeCount": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "customCoreCount": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PrivateCloud": {
+                      "options": {
+                        "(google.api.resource).type": "vmwareengine.googleapis.com/PrivateCloud",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/privateClouds/{private_cloud}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "networkConfig": {
+                          "type": "NetworkConfig",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "managementCluster": {
+                          "type": "ManagementCluster",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "hcx": {
+                          "type": "Hcx",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nsx": {
+                          "type": "Nsx",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "vcenter": {
+                          "type": "Vcenter",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "CREATING": 2,
+                            "UPDATING": 3,
+                            "FAILED": 5,
+                            "DELETED": 6,
+                            "PURGING": 7
+                          }
+                        },
+                        "ManagementCluster": {
+                          "fields": {
+                            "clusterId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "nodeTypeConfigs": {
+                              "keyType": "string",
+                              "type": "NodeTypeConfig",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Cluster": {
+                      "options": {
+                        "(google.api.resource).type": "vmwareengine.googleapis.com/Cluster",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/privateClouds/{private_cloud}/clusters/{cluster}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "management": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nodeTypeConfigs": {
+                          "keyType": "string",
+                          "type": "NodeTypeConfig",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "CREATING": 2,
+                            "UPDATING": 3,
+                            "DELETING": 4,
+                            "REPAIRING": 5
+                          }
+                        }
+                      }
+                    },
+                    "Subnet": {
+                      "options": {
+                        "(google.api.resource).type": "vmwareengine.googleapis.com/Subnet",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/privateClouds/{private_cloud}/subnets/{subnet}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "ipCidrRange": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "gatewayIp": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "CREATING": 2,
+                            "UPDATING": 3,
+                            "DELETING": 4
+                          }
+                        }
+                      }
+                    },
+                    "NodeType": {
+                      "options": {
+                        "(google.api.resource).type": "vmwareengine.googleapis.com/NodeType",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/nodeTypes/{node_type}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nodeTypeId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "virtualCpuCount": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "totalCoreCount": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "memoryGb": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "diskSizeGb": {
+                          "type": "int32",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "availableCustomCoreCounts": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "Credentials": {
+                      "fields": {
+                        "username": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "password": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "HcxActivationKey": {
+                      "options": {
+                        "(google.api.resource).type": "vmwareengine.googleapis.com/HcxActivationKey",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/privateClouds/{private_cloud}/hcxActivationKeys/{hcx_activation_key}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "activationKey": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "AVAILABLE": 1,
+                            "CONSUMED": 2,
+                            "CREATING": 3
+                          }
                         }
                       }
                     },
@@ -1976,141 +2253,6 @@
                         }
                       }
                     },
-                    "ListNetworkPoliciesRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "vmwareengine.googleapis.com/NetworkPolicy"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "ListNetworkPoliciesResponse": {
-                      "fields": {
-                        "networkPolicies": {
-                          "rule": "repeated",
-                          "type": "NetworkPolicy",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "unreachable": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "GetNetworkPolicyRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "vmwareengine.googleapis.com/NetworkPolicy"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateNetworkPolicyRequest": {
-                      "fields": {
-                        "networkPolicy": {
-                          "type": "NetworkPolicy",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "CreateNetworkPolicyRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "vmwareengine.googleapis.com/NetworkPolicy"
-                          }
-                        },
-                        "networkPolicyId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "networkPolicy": {
-                          "type": "NetworkPolicy",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "DeleteNetworkPolicyRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "vmwareengine.googleapis.com/NetworkPolicy"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
                     "VmwareEngineNetwork": {
                       "options": {
                         "(google.api.resource).type": "vmwareengine.googleapis.com/VmwareEngineNetwork",
@@ -2220,148 +2362,6 @@
                             "TYPE_UNSPECIFIED": 0,
                             "LEGACY": 1
                           }
-                        }
-                      }
-                    },
-                    "CreateVmwareEngineNetworkRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "vmwareengine.googleapis.com/VmwareEngineNetwork"
-                          }
-                        },
-                        "vmwareEngineNetworkId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "vmwareEngineNetwork": {
-                          "type": "VmwareEngineNetwork",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateVmwareEngineNetworkRequest": {
-                      "fields": {
-                        "vmwareEngineNetwork": {
-                          "type": "VmwareEngineNetwork",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "DeleteVmwareEngineNetworkRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "vmwareengine.googleapis.com/VmwareEngineNetwork"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "etag": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "GetVmwareEngineNetworkRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "vmwareengine.googleapis.com/VmwareEngineNetwork"
-                          }
-                        }
-                      }
-                    },
-                    "ListVmwareEngineNetworksRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "ListVmwareEngineNetworksResponse": {
-                      "fields": {
-                        "vmwareEngineNetworks": {
-                          "rule": "repeated",
-                          "type": "VmwareEngineNetwork",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "unreachable": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
                         }
                       }
                     }
@@ -3512,6 +3512,18 @@
                 }
               }
             },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -3545,18 +3557,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
-                }
-              }
-            },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
                 }
               }
             }
