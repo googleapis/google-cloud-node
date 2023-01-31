@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/shell-v2.0.4...shell-v2.1.0) (2023-01-28)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3853](https://github.com/googleapis/google-cloud-node/issues/3853)) ([cc352db](https://github.com/googleapis/google-cloud-node/commit/cc352db97f3bd8925bf1a7631a0ae64ff976fa4e))
+
 ## [2.0.4](https://github.com/googleapis/google-cloud-node/compare/shell-v2.0.3...shell-v2.0.4) (2022-11-10)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/service-control-v2.0.3...service-control-v2.1.0) (2023-01-28)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3851](https://github.com/googleapis/google-cloud-node/issues/3851)) ([79fbaa8](https://github.com/googleapis/google-cloud-node/commit/79fbaa833d08738fa37aa37158ddb5b1c91710e1))
+
 ## [2.0.3](https://github.com/googleapis/nodejs-service-control/compare/v2.0.2...v2.0.3) (2022-11-10)
 
 
