@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1122,1368 +1122,6 @@
                          */
     
                         return VmwareEngine;
-                    })();
-    
-                    v1.NetworkConfig = (function() {
-    
-                        /**
-                         * Properties of a NetworkConfig.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface INetworkConfig
-                         * @property {string|null} [managementCidr] NetworkConfig managementCidr
-                         * @property {string|null} [vmwareEngineNetwork] NetworkConfig vmwareEngineNetwork
-                         * @property {string|null} [vmwareEngineNetworkCanonical] NetworkConfig vmwareEngineNetworkCanonical
-                         * @property {number|null} [managementIpAddressLayoutVersion] NetworkConfig managementIpAddressLayoutVersion
-                         */
-    
-                        /**
-                         * Constructs a new NetworkConfig.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a NetworkConfig.
-                         * @implements INetworkConfig
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.INetworkConfig=} [properties] Properties to set
-                         */
-                        function NetworkConfig(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * NetworkConfig managementCidr.
-                         * @member {string} managementCidr
-                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
-                         * @instance
-                         */
-                        NetworkConfig.prototype.managementCidr = "";
-    
-                        /**
-                         * NetworkConfig vmwareEngineNetwork.
-                         * @member {string} vmwareEngineNetwork
-                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
-                         * @instance
-                         */
-                        NetworkConfig.prototype.vmwareEngineNetwork = "";
-    
-                        /**
-                         * NetworkConfig vmwareEngineNetworkCanonical.
-                         * @member {string} vmwareEngineNetworkCanonical
-                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
-                         * @instance
-                         */
-                        NetworkConfig.prototype.vmwareEngineNetworkCanonical = "";
-    
-                        /**
-                         * NetworkConfig managementIpAddressLayoutVersion.
-                         * @member {number} managementIpAddressLayoutVersion
-                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
-                         * @instance
-                         */
-                        NetworkConfig.prototype.managementIpAddressLayoutVersion = 0;
-    
-                        /**
-                         * Creates a new NetworkConfig instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.INetworkConfig=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.NetworkConfig} NetworkConfig instance
-                         */
-                        NetworkConfig.create = function create(properties) {
-                            return new NetworkConfig(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified NetworkConfig message. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkConfig.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.INetworkConfig} message NetworkConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        NetworkConfig.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.managementCidr != null && Object.hasOwnProperty.call(message, "managementCidr"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.managementCidr);
-                            if (message.vmwareEngineNetwork != null && Object.hasOwnProperty.call(message, "vmwareEngineNetwork"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.vmwareEngineNetwork);
-                            if (message.vmwareEngineNetworkCanonical != null && Object.hasOwnProperty.call(message, "vmwareEngineNetworkCanonical"))
-                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.vmwareEngineNetworkCanonical);
-                            if (message.managementIpAddressLayoutVersion != null && Object.hasOwnProperty.call(message, "managementIpAddressLayoutVersion"))
-                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.managementIpAddressLayoutVersion);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified NetworkConfig message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkConfig.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.INetworkConfig} message NetworkConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        NetworkConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a NetworkConfig message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.NetworkConfig} NetworkConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        NetworkConfig.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.NetworkConfig();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 4: {
-                                        message.managementCidr = reader.string();
-                                        break;
-                                    }
-                                case 5: {
-                                        message.vmwareEngineNetwork = reader.string();
-                                        break;
-                                    }
-                                case 6: {
-                                        message.vmwareEngineNetworkCanonical = reader.string();
-                                        break;
-                                    }
-                                case 8: {
-                                        message.managementIpAddressLayoutVersion = reader.int32();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a NetworkConfig message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.NetworkConfig} NetworkConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        NetworkConfig.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a NetworkConfig message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        NetworkConfig.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.managementCidr != null && message.hasOwnProperty("managementCidr"))
-                                if (!$util.isString(message.managementCidr))
-                                    return "managementCidr: string expected";
-                            if (message.vmwareEngineNetwork != null && message.hasOwnProperty("vmwareEngineNetwork"))
-                                if (!$util.isString(message.vmwareEngineNetwork))
-                                    return "vmwareEngineNetwork: string expected";
-                            if (message.vmwareEngineNetworkCanonical != null && message.hasOwnProperty("vmwareEngineNetworkCanonical"))
-                                if (!$util.isString(message.vmwareEngineNetworkCanonical))
-                                    return "vmwareEngineNetworkCanonical: string expected";
-                            if (message.managementIpAddressLayoutVersion != null && message.hasOwnProperty("managementIpAddressLayoutVersion"))
-                                if (!$util.isInteger(message.managementIpAddressLayoutVersion))
-                                    return "managementIpAddressLayoutVersion: integer expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a NetworkConfig message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.NetworkConfig} NetworkConfig
-                         */
-                        NetworkConfig.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.NetworkConfig)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.NetworkConfig();
-                            if (object.managementCidr != null)
-                                message.managementCidr = String(object.managementCidr);
-                            if (object.vmwareEngineNetwork != null)
-                                message.vmwareEngineNetwork = String(object.vmwareEngineNetwork);
-                            if (object.vmwareEngineNetworkCanonical != null)
-                                message.vmwareEngineNetworkCanonical = String(object.vmwareEngineNetworkCanonical);
-                            if (object.managementIpAddressLayoutVersion != null)
-                                message.managementIpAddressLayoutVersion = object.managementIpAddressLayoutVersion | 0;
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a NetworkConfig message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.NetworkConfig} message NetworkConfig
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        NetworkConfig.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.managementCidr = "";
-                                object.vmwareEngineNetwork = "";
-                                object.vmwareEngineNetworkCanonical = "";
-                                object.managementIpAddressLayoutVersion = 0;
-                            }
-                            if (message.managementCidr != null && message.hasOwnProperty("managementCidr"))
-                                object.managementCidr = message.managementCidr;
-                            if (message.vmwareEngineNetwork != null && message.hasOwnProperty("vmwareEngineNetwork"))
-                                object.vmwareEngineNetwork = message.vmwareEngineNetwork;
-                            if (message.vmwareEngineNetworkCanonical != null && message.hasOwnProperty("vmwareEngineNetworkCanonical"))
-                                object.vmwareEngineNetworkCanonical = message.vmwareEngineNetworkCanonical;
-                            if (message.managementIpAddressLayoutVersion != null && message.hasOwnProperty("managementIpAddressLayoutVersion"))
-                                object.managementIpAddressLayoutVersion = message.managementIpAddressLayoutVersion;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this NetworkConfig to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        NetworkConfig.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for NetworkConfig
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        NetworkConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.NetworkConfig";
-                        };
-    
-                        return NetworkConfig;
-                    })();
-    
-                    v1.NodeTypeConfig = (function() {
-    
-                        /**
-                         * Properties of a NodeTypeConfig.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface INodeTypeConfig
-                         * @property {number|null} [nodeCount] NodeTypeConfig nodeCount
-                         * @property {number|null} [customCoreCount] NodeTypeConfig customCoreCount
-                         */
-    
-                        /**
-                         * Constructs a new NodeTypeConfig.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a NodeTypeConfig.
-                         * @implements INodeTypeConfig
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.INodeTypeConfig=} [properties] Properties to set
-                         */
-                        function NodeTypeConfig(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * NodeTypeConfig nodeCount.
-                         * @member {number} nodeCount
-                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
-                         * @instance
-                         */
-                        NodeTypeConfig.prototype.nodeCount = 0;
-    
-                        /**
-                         * NodeTypeConfig customCoreCount.
-                         * @member {number} customCoreCount
-                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
-                         * @instance
-                         */
-                        NodeTypeConfig.prototype.customCoreCount = 0;
-    
-                        /**
-                         * Creates a new NodeTypeConfig instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.INodeTypeConfig=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.NodeTypeConfig} NodeTypeConfig instance
-                         */
-                        NodeTypeConfig.create = function create(properties) {
-                            return new NodeTypeConfig(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified NodeTypeConfig message. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeTypeConfig.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.INodeTypeConfig} message NodeTypeConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        NodeTypeConfig.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.nodeCount != null && Object.hasOwnProperty.call(message, "nodeCount"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.nodeCount);
-                            if (message.customCoreCount != null && Object.hasOwnProperty.call(message, "customCoreCount"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.customCoreCount);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified NodeTypeConfig message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeTypeConfig.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.INodeTypeConfig} message NodeTypeConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        NodeTypeConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a NodeTypeConfig message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.NodeTypeConfig} NodeTypeConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        NodeTypeConfig.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.NodeTypeConfig();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.nodeCount = reader.int32();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.customCoreCount = reader.int32();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a NodeTypeConfig message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.NodeTypeConfig} NodeTypeConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        NodeTypeConfig.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a NodeTypeConfig message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        NodeTypeConfig.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.nodeCount != null && message.hasOwnProperty("nodeCount"))
-                                if (!$util.isInteger(message.nodeCount))
-                                    return "nodeCount: integer expected";
-                            if (message.customCoreCount != null && message.hasOwnProperty("customCoreCount"))
-                                if (!$util.isInteger(message.customCoreCount))
-                                    return "customCoreCount: integer expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a NodeTypeConfig message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.NodeTypeConfig} NodeTypeConfig
-                         */
-                        NodeTypeConfig.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.NodeTypeConfig)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.NodeTypeConfig();
-                            if (object.nodeCount != null)
-                                message.nodeCount = object.nodeCount | 0;
-                            if (object.customCoreCount != null)
-                                message.customCoreCount = object.customCoreCount | 0;
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a NodeTypeConfig message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.NodeTypeConfig} message NodeTypeConfig
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        NodeTypeConfig.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.nodeCount = 0;
-                                object.customCoreCount = 0;
-                            }
-                            if (message.nodeCount != null && message.hasOwnProperty("nodeCount"))
-                                object.nodeCount = message.nodeCount;
-                            if (message.customCoreCount != null && message.hasOwnProperty("customCoreCount"))
-                                object.customCoreCount = message.customCoreCount;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this NodeTypeConfig to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        NodeTypeConfig.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for NodeTypeConfig
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        NodeTypeConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.NodeTypeConfig";
-                        };
-    
-                        return NodeTypeConfig;
-                    })();
-    
-                    v1.PrivateCloud = (function() {
-    
-                        /**
-                         * Properties of a PrivateCloud.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface IPrivateCloud
-                         * @property {string|null} [name] PrivateCloud name
-                         * @property {google.protobuf.ITimestamp|null} [createTime] PrivateCloud createTime
-                         * @property {google.protobuf.ITimestamp|null} [updateTime] PrivateCloud updateTime
-                         * @property {google.protobuf.ITimestamp|null} [deleteTime] PrivateCloud deleteTime
-                         * @property {google.protobuf.ITimestamp|null} [expireTime] PrivateCloud expireTime
-                         * @property {google.cloud.vmwareengine.v1.PrivateCloud.State|null} [state] PrivateCloud state
-                         * @property {google.cloud.vmwareengine.v1.INetworkConfig|null} [networkConfig] PrivateCloud networkConfig
-                         * @property {google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster|null} [managementCluster] PrivateCloud managementCluster
-                         * @property {string|null} [description] PrivateCloud description
-                         * @property {google.cloud.vmwareengine.v1.IHcx|null} [hcx] PrivateCloud hcx
-                         * @property {google.cloud.vmwareengine.v1.INsx|null} [nsx] PrivateCloud nsx
-                         * @property {google.cloud.vmwareengine.v1.IVcenter|null} [vcenter] PrivateCloud vcenter
-                         * @property {string|null} [uid] PrivateCloud uid
-                         */
-    
-                        /**
-                         * Constructs a new PrivateCloud.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a PrivateCloud.
-                         * @implements IPrivateCloud
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.IPrivateCloud=} [properties] Properties to set
-                         */
-                        function PrivateCloud(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * PrivateCloud name.
-                         * @member {string} name
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @instance
-                         */
-                        PrivateCloud.prototype.name = "";
-    
-                        /**
-                         * PrivateCloud createTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @instance
-                         */
-                        PrivateCloud.prototype.createTime = null;
-    
-                        /**
-                         * PrivateCloud updateTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @instance
-                         */
-                        PrivateCloud.prototype.updateTime = null;
-    
-                        /**
-                         * PrivateCloud deleteTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @instance
-                         */
-                        PrivateCloud.prototype.deleteTime = null;
-    
-                        /**
-                         * PrivateCloud expireTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @instance
-                         */
-                        PrivateCloud.prototype.expireTime = null;
-    
-                        /**
-                         * PrivateCloud state.
-                         * @member {google.cloud.vmwareengine.v1.PrivateCloud.State} state
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @instance
-                         */
-                        PrivateCloud.prototype.state = 0;
-    
-                        /**
-                         * PrivateCloud networkConfig.
-                         * @member {google.cloud.vmwareengine.v1.INetworkConfig|null|undefined} networkConfig
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @instance
-                         */
-                        PrivateCloud.prototype.networkConfig = null;
-    
-                        /**
-                         * PrivateCloud managementCluster.
-                         * @member {google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster|null|undefined} managementCluster
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @instance
-                         */
-                        PrivateCloud.prototype.managementCluster = null;
-    
-                        /**
-                         * PrivateCloud description.
-                         * @member {string} description
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @instance
-                         */
-                        PrivateCloud.prototype.description = "";
-    
-                        /**
-                         * PrivateCloud hcx.
-                         * @member {google.cloud.vmwareengine.v1.IHcx|null|undefined} hcx
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @instance
-                         */
-                        PrivateCloud.prototype.hcx = null;
-    
-                        /**
-                         * PrivateCloud nsx.
-                         * @member {google.cloud.vmwareengine.v1.INsx|null|undefined} nsx
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @instance
-                         */
-                        PrivateCloud.prototype.nsx = null;
-    
-                        /**
-                         * PrivateCloud vcenter.
-                         * @member {google.cloud.vmwareengine.v1.IVcenter|null|undefined} vcenter
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @instance
-                         */
-                        PrivateCloud.prototype.vcenter = null;
-    
-                        /**
-                         * PrivateCloud uid.
-                         * @member {string} uid
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @instance
-                         */
-                        PrivateCloud.prototype.uid = "";
-    
-                        /**
-                         * Creates a new PrivateCloud instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IPrivateCloud=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.PrivateCloud} PrivateCloud instance
-                         */
-                        PrivateCloud.create = function create(properties) {
-                            return new PrivateCloud(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified PrivateCloud message. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IPrivateCloud} message PrivateCloud message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        PrivateCloud.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
-                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
-                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
-                                $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
-                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
-                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.state);
-                            if (message.networkConfig != null && Object.hasOwnProperty.call(message, "networkConfig"))
-                                $root.google.cloud.vmwareengine.v1.NetworkConfig.encode(message.networkConfig, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-                            if (message.managementCluster != null && Object.hasOwnProperty.call(message, "managementCluster"))
-                                $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.encode(message.managementCluster, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
-                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
-                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.description);
-                            if (message.hcx != null && Object.hasOwnProperty.call(message, "hcx"))
-                                $root.google.cloud.vmwareengine.v1.Hcx.encode(message.hcx, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
-                            if (message.nsx != null && Object.hasOwnProperty.call(message, "nsx"))
-                                $root.google.cloud.vmwareengine.v1.Nsx.encode(message.nsx, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
-                            if (message.vcenter != null && Object.hasOwnProperty.call(message, "vcenter"))
-                                $root.google.cloud.vmwareengine.v1.Vcenter.encode(message.vcenter, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
-                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                                writer.uint32(/* id 20, wireType 2 =*/162).string(message.uid);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified PrivateCloud message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IPrivateCloud} message PrivateCloud message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        PrivateCloud.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a PrivateCloud message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.PrivateCloud} PrivateCloud
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        PrivateCloud.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.PrivateCloud();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 4: {
-                                        message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 5: {
-                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 8: {
-                                        message.state = reader.int32();
-                                        break;
-                                    }
-                                case 9: {
-                                        message.networkConfig = $root.google.cloud.vmwareengine.v1.NetworkConfig.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 10: {
-                                        message.managementCluster = $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 11: {
-                                        message.description = reader.string();
-                                        break;
-                                    }
-                                case 17: {
-                                        message.hcx = $root.google.cloud.vmwareengine.v1.Hcx.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 18: {
-                                        message.nsx = $root.google.cloud.vmwareengine.v1.Nsx.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 19: {
-                                        message.vcenter = $root.google.cloud.vmwareengine.v1.Vcenter.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 20: {
-                                        message.uid = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a PrivateCloud message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.PrivateCloud} PrivateCloud
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        PrivateCloud.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a PrivateCloud message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        PrivateCloud.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
-                                if (error)
-                                    return "createTime." + error;
-                            }
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
-                                if (error)
-                                    return "updateTime." + error;
-                            }
-                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.deleteTime);
-                                if (error)
-                                    return "deleteTime." + error;
-                            }
-                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
-                                if (error)
-                                    return "expireTime." + error;
-                            }
-                            if (message.state != null && message.hasOwnProperty("state"))
-                                switch (message.state) {
-                                default:
-                                    return "state: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 5:
-                                case 6:
-                                case 7:
-                                    break;
-                                }
-                            if (message.networkConfig != null && message.hasOwnProperty("networkConfig")) {
-                                var error = $root.google.cloud.vmwareengine.v1.NetworkConfig.verify(message.networkConfig);
-                                if (error)
-                                    return "networkConfig." + error;
-                            }
-                            if (message.managementCluster != null && message.hasOwnProperty("managementCluster")) {
-                                var error = $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.verify(message.managementCluster);
-                                if (error)
-                                    return "managementCluster." + error;
-                            }
-                            if (message.description != null && message.hasOwnProperty("description"))
-                                if (!$util.isString(message.description))
-                                    return "description: string expected";
-                            if (message.hcx != null && message.hasOwnProperty("hcx")) {
-                                var error = $root.google.cloud.vmwareengine.v1.Hcx.verify(message.hcx);
-                                if (error)
-                                    return "hcx." + error;
-                            }
-                            if (message.nsx != null && message.hasOwnProperty("nsx")) {
-                                var error = $root.google.cloud.vmwareengine.v1.Nsx.verify(message.nsx);
-                                if (error)
-                                    return "nsx." + error;
-                            }
-                            if (message.vcenter != null && message.hasOwnProperty("vcenter")) {
-                                var error = $root.google.cloud.vmwareengine.v1.Vcenter.verify(message.vcenter);
-                                if (error)
-                                    return "vcenter." + error;
-                            }
-                            if (message.uid != null && message.hasOwnProperty("uid"))
-                                if (!$util.isString(message.uid))
-                                    return "uid: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a PrivateCloud message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.PrivateCloud} PrivateCloud
-                         */
-                        PrivateCloud.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.PrivateCloud)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.PrivateCloud();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.createTime: object expected");
-                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
-                            }
-                            if (object.updateTime != null) {
-                                if (typeof object.updateTime !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.updateTime: object expected");
-                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
-                            }
-                            if (object.deleteTime != null) {
-                                if (typeof object.deleteTime !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.deleteTime: object expected");
-                                message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime);
-                            }
-                            if (object.expireTime != null) {
-                                if (typeof object.expireTime !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.expireTime: object expected");
-                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
-                            }
-                            switch (object.state) {
-                            default:
-                                if (typeof object.state === "number") {
-                                    message.state = object.state;
-                                    break;
-                                }
-                                break;
-                            case "STATE_UNSPECIFIED":
-                            case 0:
-                                message.state = 0;
-                                break;
-                            case "ACTIVE":
-                            case 1:
-                                message.state = 1;
-                                break;
-                            case "CREATING":
-                            case 2:
-                                message.state = 2;
-                                break;
-                            case "UPDATING":
-                            case 3:
-                                message.state = 3;
-                                break;
-                            case "FAILED":
-                            case 5:
-                                message.state = 5;
-                                break;
-                            case "DELETED":
-                            case 6:
-                                message.state = 6;
-                                break;
-                            case "PURGING":
-                            case 7:
-                                message.state = 7;
-                                break;
-                            }
-                            if (object.networkConfig != null) {
-                                if (typeof object.networkConfig !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.networkConfig: object expected");
-                                message.networkConfig = $root.google.cloud.vmwareengine.v1.NetworkConfig.fromObject(object.networkConfig);
-                            }
-                            if (object.managementCluster != null) {
-                                if (typeof object.managementCluster !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.managementCluster: object expected");
-                                message.managementCluster = $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.fromObject(object.managementCluster);
-                            }
-                            if (object.description != null)
-                                message.description = String(object.description);
-                            if (object.hcx != null) {
-                                if (typeof object.hcx !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.hcx: object expected");
-                                message.hcx = $root.google.cloud.vmwareengine.v1.Hcx.fromObject(object.hcx);
-                            }
-                            if (object.nsx != null) {
-                                if (typeof object.nsx !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.nsx: object expected");
-                                message.nsx = $root.google.cloud.vmwareengine.v1.Nsx.fromObject(object.nsx);
-                            }
-                            if (object.vcenter != null) {
-                                if (typeof object.vcenter !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.vcenter: object expected");
-                                message.vcenter = $root.google.cloud.vmwareengine.v1.Vcenter.fromObject(object.vcenter);
-                            }
-                            if (object.uid != null)
-                                message.uid = String(object.uid);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a PrivateCloud message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.PrivateCloud} message PrivateCloud
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        PrivateCloud.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.createTime = null;
-                                object.updateTime = null;
-                                object.deleteTime = null;
-                                object.expireTime = null;
-                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
-                                object.networkConfig = null;
-                                object.managementCluster = null;
-                                object.description = "";
-                                object.hcx = null;
-                                object.nsx = null;
-                                object.vcenter = null;
-                                object.uid = "";
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
-                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
-                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
-                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
-                                object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
-                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
-                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
-                            if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.vmwareengine.v1.PrivateCloud.State[message.state] === undefined ? message.state : $root.google.cloud.vmwareengine.v1.PrivateCloud.State[message.state] : message.state;
-                            if (message.networkConfig != null && message.hasOwnProperty("networkConfig"))
-                                object.networkConfig = $root.google.cloud.vmwareengine.v1.NetworkConfig.toObject(message.networkConfig, options);
-                            if (message.managementCluster != null && message.hasOwnProperty("managementCluster"))
-                                object.managementCluster = $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.toObject(message.managementCluster, options);
-                            if (message.description != null && message.hasOwnProperty("description"))
-                                object.description = message.description;
-                            if (message.hcx != null && message.hasOwnProperty("hcx"))
-                                object.hcx = $root.google.cloud.vmwareengine.v1.Hcx.toObject(message.hcx, options);
-                            if (message.nsx != null && message.hasOwnProperty("nsx"))
-                                object.nsx = $root.google.cloud.vmwareengine.v1.Nsx.toObject(message.nsx, options);
-                            if (message.vcenter != null && message.hasOwnProperty("vcenter"))
-                                object.vcenter = $root.google.cloud.vmwareengine.v1.Vcenter.toObject(message.vcenter, options);
-                            if (message.uid != null && message.hasOwnProperty("uid"))
-                                object.uid = message.uid;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this PrivateCloud to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        PrivateCloud.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for PrivateCloud
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        PrivateCloud.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.PrivateCloud";
-                        };
-    
-                        /**
-                         * State enum.
-                         * @name google.cloud.vmwareengine.v1.PrivateCloud.State
-                         * @enum {number}
-                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                         * @property {number} ACTIVE=1 ACTIVE value
-                         * @property {number} CREATING=2 CREATING value
-                         * @property {number} UPDATING=3 UPDATING value
-                         * @property {number} FAILED=5 FAILED value
-                         * @property {number} DELETED=6 DELETED value
-                         * @property {number} PURGING=7 PURGING value
-                         */
-                        PrivateCloud.State = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "ACTIVE"] = 1;
-                            values[valuesById[2] = "CREATING"] = 2;
-                            values[valuesById[3] = "UPDATING"] = 3;
-                            values[valuesById[5] = "FAILED"] = 5;
-                            values[valuesById[6] = "DELETED"] = 6;
-                            values[valuesById[7] = "PURGING"] = 7;
-                            return values;
-                        })();
-    
-                        PrivateCloud.ManagementCluster = (function() {
-    
-                            /**
-                             * Properties of a ManagementCluster.
-                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                             * @interface IManagementCluster
-                             * @property {string|null} [clusterId] ManagementCluster clusterId
-                             * @property {Object.<string,google.cloud.vmwareengine.v1.INodeTypeConfig>|null} [nodeTypeConfigs] ManagementCluster nodeTypeConfigs
-                             */
-    
-                            /**
-                             * Constructs a new ManagementCluster.
-                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud
-                             * @classdesc Represents a ManagementCluster.
-                             * @implements IManagementCluster
-                             * @constructor
-                             * @param {google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster=} [properties] Properties to set
-                             */
-                            function ManagementCluster(properties) {
-                                this.nodeTypeConfigs = {};
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ManagementCluster clusterId.
-                             * @member {string} clusterId
-                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
-                             * @instance
-                             */
-                            ManagementCluster.prototype.clusterId = "";
-    
-                            /**
-                             * ManagementCluster nodeTypeConfigs.
-                             * @member {Object.<string,google.cloud.vmwareengine.v1.INodeTypeConfig>} nodeTypeConfigs
-                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
-                             * @instance
-                             */
-                            ManagementCluster.prototype.nodeTypeConfigs = $util.emptyObject;
-    
-                            /**
-                             * Creates a new ManagementCluster instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
-                             * @static
-                             * @param {google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster=} [properties] Properties to set
-                             * @returns {google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster} ManagementCluster instance
-                             */
-                            ManagementCluster.create = function create(properties) {
-                                return new ManagementCluster(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ManagementCluster message. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
-                             * @static
-                             * @param {google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster} message ManagementCluster message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ManagementCluster.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.clusterId != null && Object.hasOwnProperty.call(message, "clusterId"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.clusterId);
-                                if (message.nodeTypeConfigs != null && Object.hasOwnProperty.call(message, "nodeTypeConfigs"))
-                                    for (var keys = Object.keys(message.nodeTypeConfigs), i = 0; i < keys.length; ++i) {
-                                        writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                                        $root.google.cloud.vmwareengine.v1.NodeTypeConfig.encode(message.nodeTypeConfigs[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
-                                    }
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ManagementCluster message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
-                             * @static
-                             * @param {google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster} message ManagementCluster message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ManagementCluster.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ManagementCluster message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster} ManagementCluster
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ManagementCluster.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster(), key, value;
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.clusterId = reader.string();
-                                            break;
-                                        }
-                                    case 7: {
-                                            if (message.nodeTypeConfigs === $util.emptyObject)
-                                                message.nodeTypeConfigs = {};
-                                            var end2 = reader.uint32() + reader.pos;
-                                            key = "";
-                                            value = null;
-                                            while (reader.pos < end2) {
-                                                var tag2 = reader.uint32();
-                                                switch (tag2 >>> 3) {
-                                                case 1:
-                                                    key = reader.string();
-                                                    break;
-                                                case 2:
-                                                    value = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.decode(reader, reader.uint32());
-                                                    break;
-                                                default:
-                                                    reader.skipType(tag2 & 7);
-                                                    break;
-                                                }
-                                            }
-                                            message.nodeTypeConfigs[key] = value;
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ManagementCluster message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster} ManagementCluster
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ManagementCluster.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ManagementCluster message.
-                             * @function verify
-                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ManagementCluster.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.clusterId != null && message.hasOwnProperty("clusterId"))
-                                    if (!$util.isString(message.clusterId))
-                                        return "clusterId: string expected";
-                                if (message.nodeTypeConfigs != null && message.hasOwnProperty("nodeTypeConfigs")) {
-                                    if (!$util.isObject(message.nodeTypeConfigs))
-                                        return "nodeTypeConfigs: object expected";
-                                    var key = Object.keys(message.nodeTypeConfigs);
-                                    for (var i = 0; i < key.length; ++i) {
-                                        var error = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.verify(message.nodeTypeConfigs[key[i]]);
-                                        if (error)
-                                            return "nodeTypeConfigs." + error;
-                                    }
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ManagementCluster message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster} ManagementCluster
-                             */
-                            ManagementCluster.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster)
-                                    return object;
-                                var message = new $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster();
-                                if (object.clusterId != null)
-                                    message.clusterId = String(object.clusterId);
-                                if (object.nodeTypeConfigs) {
-                                    if (typeof object.nodeTypeConfigs !== "object")
-                                        throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.nodeTypeConfigs: object expected");
-                                    message.nodeTypeConfigs = {};
-                                    for (var keys = Object.keys(object.nodeTypeConfigs), i = 0; i < keys.length; ++i) {
-                                        if (typeof object.nodeTypeConfigs[keys[i]] !== "object")
-                                            throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.nodeTypeConfigs: object expected");
-                                        message.nodeTypeConfigs[keys[i]] = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.fromObject(object.nodeTypeConfigs[keys[i]]);
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ManagementCluster message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
-                             * @static
-                             * @param {google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster} message ManagementCluster
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ManagementCluster.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.objects || options.defaults)
-                                    object.nodeTypeConfigs = {};
-                                if (options.defaults)
-                                    object.clusterId = "";
-                                if (message.clusterId != null && message.hasOwnProperty("clusterId"))
-                                    object.clusterId = message.clusterId;
-                                var keys2;
-                                if (message.nodeTypeConfigs && (keys2 = Object.keys(message.nodeTypeConfigs)).length) {
-                                    object.nodeTypeConfigs = {};
-                                    for (var j = 0; j < keys2.length; ++j)
-                                        object.nodeTypeConfigs[keys2[j]] = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.toObject(message.nodeTypeConfigs[keys2[j]], options);
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ManagementCluster to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ManagementCluster.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ManagementCluster
-                             * @function getTypeUrl
-                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ManagementCluster.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster";
-                            };
-    
-                            return ManagementCluster;
-                        })();
-    
-                        return PrivateCloud;
                     })();
     
                     v1.ListPrivateCloudsRequest = (function() {
@@ -4353,462 +2991,6 @@
                         return UndeletePrivateCloudRequest;
                     })();
     
-                    v1.Cluster = (function() {
-    
-                        /**
-                         * Properties of a Cluster.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface ICluster
-                         * @property {string|null} [name] Cluster name
-                         * @property {google.protobuf.ITimestamp|null} [createTime] Cluster createTime
-                         * @property {google.protobuf.ITimestamp|null} [updateTime] Cluster updateTime
-                         * @property {google.cloud.vmwareengine.v1.Cluster.State|null} [state] Cluster state
-                         * @property {boolean|null} [management] Cluster management
-                         * @property {string|null} [uid] Cluster uid
-                         * @property {Object.<string,google.cloud.vmwareengine.v1.INodeTypeConfig>|null} [nodeTypeConfigs] Cluster nodeTypeConfigs
-                         */
-    
-                        /**
-                         * Constructs a new Cluster.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a Cluster.
-                         * @implements ICluster
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.ICluster=} [properties] Properties to set
-                         */
-                        function Cluster(properties) {
-                            this.nodeTypeConfigs = {};
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Cluster name.
-                         * @member {string} name
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @instance
-                         */
-                        Cluster.prototype.name = "";
-    
-                        /**
-                         * Cluster createTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @instance
-                         */
-                        Cluster.prototype.createTime = null;
-    
-                        /**
-                         * Cluster updateTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @instance
-                         */
-                        Cluster.prototype.updateTime = null;
-    
-                        /**
-                         * Cluster state.
-                         * @member {google.cloud.vmwareengine.v1.Cluster.State} state
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @instance
-                         */
-                        Cluster.prototype.state = 0;
-    
-                        /**
-                         * Cluster management.
-                         * @member {boolean} management
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @instance
-                         */
-                        Cluster.prototype.management = false;
-    
-                        /**
-                         * Cluster uid.
-                         * @member {string} uid
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @instance
-                         */
-                        Cluster.prototype.uid = "";
-    
-                        /**
-                         * Cluster nodeTypeConfigs.
-                         * @member {Object.<string,google.cloud.vmwareengine.v1.INodeTypeConfig>} nodeTypeConfigs
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @instance
-                         */
-                        Cluster.prototype.nodeTypeConfigs = $util.emptyObject;
-    
-                        /**
-                         * Creates a new Cluster instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ICluster=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.Cluster} Cluster instance
-                         */
-                        Cluster.create = function create(properties) {
-                            return new Cluster(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified Cluster message. Does not implicitly {@link google.cloud.vmwareengine.v1.Cluster.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ICluster} message Cluster message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Cluster.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
-                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
-                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
-                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.state);
-                            if (message.management != null && Object.hasOwnProperty.call(message, "management"))
-                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.management);
-                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.uid);
-                            if (message.nodeTypeConfigs != null && Object.hasOwnProperty.call(message, "nodeTypeConfigs"))
-                                for (var keys = Object.keys(message.nodeTypeConfigs), i = 0; i < keys.length; ++i) {
-                                    writer.uint32(/* id 16, wireType 2 =*/130).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                                    $root.google.cloud.vmwareengine.v1.NodeTypeConfig.encode(message.nodeTypeConfigs[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
-                                }
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified Cluster message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Cluster.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ICluster} message Cluster message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Cluster.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a Cluster message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.Cluster} Cluster
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Cluster.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.Cluster(), key, value;
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 6: {
-                                        message.state = reader.int32();
-                                        break;
-                                    }
-                                case 7: {
-                                        message.management = reader.bool();
-                                        break;
-                                    }
-                                case 14: {
-                                        message.uid = reader.string();
-                                        break;
-                                    }
-                                case 16: {
-                                        if (message.nodeTypeConfigs === $util.emptyObject)
-                                            message.nodeTypeConfigs = {};
-                                        var end2 = reader.uint32() + reader.pos;
-                                        key = "";
-                                        value = null;
-                                        while (reader.pos < end2) {
-                                            var tag2 = reader.uint32();
-                                            switch (tag2 >>> 3) {
-                                            case 1:
-                                                key = reader.string();
-                                                break;
-                                            case 2:
-                                                value = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.decode(reader, reader.uint32());
-                                                break;
-                                            default:
-                                                reader.skipType(tag2 & 7);
-                                                break;
-                                            }
-                                        }
-                                        message.nodeTypeConfigs[key] = value;
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a Cluster message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.Cluster} Cluster
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Cluster.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a Cluster message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        Cluster.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
-                                if (error)
-                                    return "createTime." + error;
-                            }
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
-                                if (error)
-                                    return "updateTime." + error;
-                            }
-                            if (message.state != null && message.hasOwnProperty("state"))
-                                switch (message.state) {
-                                default:
-                                    return "state: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                    break;
-                                }
-                            if (message.management != null && message.hasOwnProperty("management"))
-                                if (typeof message.management !== "boolean")
-                                    return "management: boolean expected";
-                            if (message.uid != null && message.hasOwnProperty("uid"))
-                                if (!$util.isString(message.uid))
-                                    return "uid: string expected";
-                            if (message.nodeTypeConfigs != null && message.hasOwnProperty("nodeTypeConfigs")) {
-                                if (!$util.isObject(message.nodeTypeConfigs))
-                                    return "nodeTypeConfigs: object expected";
-                                var key = Object.keys(message.nodeTypeConfigs);
-                                for (var i = 0; i < key.length; ++i) {
-                                    var error = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.verify(message.nodeTypeConfigs[key[i]]);
-                                    if (error)
-                                        return "nodeTypeConfigs." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a Cluster message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.Cluster} Cluster
-                         */
-                        Cluster.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.Cluster)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.Cluster();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.Cluster.createTime: object expected");
-                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
-                            }
-                            if (object.updateTime != null) {
-                                if (typeof object.updateTime !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.Cluster.updateTime: object expected");
-                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
-                            }
-                            switch (object.state) {
-                            default:
-                                if (typeof object.state === "number") {
-                                    message.state = object.state;
-                                    break;
-                                }
-                                break;
-                            case "STATE_UNSPECIFIED":
-                            case 0:
-                                message.state = 0;
-                                break;
-                            case "ACTIVE":
-                            case 1:
-                                message.state = 1;
-                                break;
-                            case "CREATING":
-                            case 2:
-                                message.state = 2;
-                                break;
-                            case "UPDATING":
-                            case 3:
-                                message.state = 3;
-                                break;
-                            case "DELETING":
-                            case 4:
-                                message.state = 4;
-                                break;
-                            case "REPAIRING":
-                            case 5:
-                                message.state = 5;
-                                break;
-                            }
-                            if (object.management != null)
-                                message.management = Boolean(object.management);
-                            if (object.uid != null)
-                                message.uid = String(object.uid);
-                            if (object.nodeTypeConfigs) {
-                                if (typeof object.nodeTypeConfigs !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.Cluster.nodeTypeConfigs: object expected");
-                                message.nodeTypeConfigs = {};
-                                for (var keys = Object.keys(object.nodeTypeConfigs), i = 0; i < keys.length; ++i) {
-                                    if (typeof object.nodeTypeConfigs[keys[i]] !== "object")
-                                        throw TypeError(".google.cloud.vmwareengine.v1.Cluster.nodeTypeConfigs: object expected");
-                                    message.nodeTypeConfigs[keys[i]] = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.fromObject(object.nodeTypeConfigs[keys[i]]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a Cluster message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.Cluster} message Cluster
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        Cluster.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.objects || options.defaults)
-                                object.nodeTypeConfigs = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.createTime = null;
-                                object.updateTime = null;
-                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
-                                object.management = false;
-                                object.uid = "";
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
-                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
-                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
-                            if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.vmwareengine.v1.Cluster.State[message.state] === undefined ? message.state : $root.google.cloud.vmwareengine.v1.Cluster.State[message.state] : message.state;
-                            if (message.management != null && message.hasOwnProperty("management"))
-                                object.management = message.management;
-                            if (message.uid != null && message.hasOwnProperty("uid"))
-                                object.uid = message.uid;
-                            var keys2;
-                            if (message.nodeTypeConfigs && (keys2 = Object.keys(message.nodeTypeConfigs)).length) {
-                                object.nodeTypeConfigs = {};
-                                for (var j = 0; j < keys2.length; ++j)
-                                    object.nodeTypeConfigs[keys2[j]] = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.toObject(message.nodeTypeConfigs[keys2[j]], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this Cluster to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        Cluster.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for Cluster
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.Cluster
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        Cluster.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.Cluster";
-                        };
-    
-                        /**
-                         * State enum.
-                         * @name google.cloud.vmwareengine.v1.Cluster.State
-                         * @enum {number}
-                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                         * @property {number} ACTIVE=1 ACTIVE value
-                         * @property {number} CREATING=2 CREATING value
-                         * @property {number} UPDATING=3 UPDATING value
-                         * @property {number} DELETING=4 DELETING value
-                         * @property {number} REPAIRING=5 REPAIRING value
-                         */
-                        Cluster.State = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "ACTIVE"] = 1;
-                            values[valuesById[2] = "CREATING"] = 2;
-                            values[valuesById[3] = "UPDATING"] = 3;
-                            values[valuesById[4] = "DELETING"] = 4;
-                            values[valuesById[5] = "REPAIRING"] = 5;
-                            return values;
-                        })();
-    
-                        return Cluster;
-                    })();
-    
                     v1.ListClustersRequest = (function() {
     
                         /**
@@ -6407,356 +4589,6 @@
                         return DeleteClusterRequest;
                     })();
     
-                    v1.Subnet = (function() {
-    
-                        /**
-                         * Properties of a Subnet.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface ISubnet
-                         * @property {string|null} [name] Subnet name
-                         * @property {string|null} [ipCidrRange] Subnet ipCidrRange
-                         * @property {string|null} [gatewayIp] Subnet gatewayIp
-                         * @property {string|null} [type] Subnet type
-                         * @property {google.cloud.vmwareengine.v1.Subnet.State|null} [state] Subnet state
-                         */
-    
-                        /**
-                         * Constructs a new Subnet.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a Subnet.
-                         * @implements ISubnet
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.ISubnet=} [properties] Properties to set
-                         */
-                        function Subnet(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Subnet name.
-                         * @member {string} name
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @instance
-                         */
-                        Subnet.prototype.name = "";
-    
-                        /**
-                         * Subnet ipCidrRange.
-                         * @member {string} ipCidrRange
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @instance
-                         */
-                        Subnet.prototype.ipCidrRange = "";
-    
-                        /**
-                         * Subnet gatewayIp.
-                         * @member {string} gatewayIp
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @instance
-                         */
-                        Subnet.prototype.gatewayIp = "";
-    
-                        /**
-                         * Subnet type.
-                         * @member {string} type
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @instance
-                         */
-                        Subnet.prototype.type = "";
-    
-                        /**
-                         * Subnet state.
-                         * @member {google.cloud.vmwareengine.v1.Subnet.State} state
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @instance
-                         */
-                        Subnet.prototype.state = 0;
-    
-                        /**
-                         * Creates a new Subnet instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ISubnet=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.Subnet} Subnet instance
-                         */
-                        Subnet.create = function create(properties) {
-                            return new Subnet(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified Subnet message. Does not implicitly {@link google.cloud.vmwareengine.v1.Subnet.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ISubnet} message Subnet message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Subnet.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.ipCidrRange != null && Object.hasOwnProperty.call(message, "ipCidrRange"))
-                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.ipCidrRange);
-                            if (message.gatewayIp != null && Object.hasOwnProperty.call(message, "gatewayIp"))
-                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.gatewayIp);
-                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.type);
-                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
-                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.state);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified Subnet message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Subnet.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ISubnet} message Subnet message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Subnet.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a Subnet message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.Subnet} Subnet
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Subnet.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.Subnet();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 7: {
-                                        message.ipCidrRange = reader.string();
-                                        break;
-                                    }
-                                case 8: {
-                                        message.gatewayIp = reader.string();
-                                        break;
-                                    }
-                                case 11: {
-                                        message.type = reader.string();
-                                        break;
-                                    }
-                                case 13: {
-                                        message.state = reader.int32();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a Subnet message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.Subnet} Subnet
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Subnet.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a Subnet message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        Subnet.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.ipCidrRange != null && message.hasOwnProperty("ipCidrRange"))
-                                if (!$util.isString(message.ipCidrRange))
-                                    return "ipCidrRange: string expected";
-                            if (message.gatewayIp != null && message.hasOwnProperty("gatewayIp"))
-                                if (!$util.isString(message.gatewayIp))
-                                    return "gatewayIp: string expected";
-                            if (message.type != null && message.hasOwnProperty("type"))
-                                if (!$util.isString(message.type))
-                                    return "type: string expected";
-                            if (message.state != null && message.hasOwnProperty("state"))
-                                switch (message.state) {
-                                default:
-                                    return "state: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                    break;
-                                }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a Subnet message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.Subnet} Subnet
-                         */
-                        Subnet.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.Subnet)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.Subnet();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.ipCidrRange != null)
-                                message.ipCidrRange = String(object.ipCidrRange);
-                            if (object.gatewayIp != null)
-                                message.gatewayIp = String(object.gatewayIp);
-                            if (object.type != null)
-                                message.type = String(object.type);
-                            switch (object.state) {
-                            default:
-                                if (typeof object.state === "number") {
-                                    message.state = object.state;
-                                    break;
-                                }
-                                break;
-                            case "STATE_UNSPECIFIED":
-                            case 0:
-                                message.state = 0;
-                                break;
-                            case "ACTIVE":
-                            case 1:
-                                message.state = 1;
-                                break;
-                            case "CREATING":
-                            case 2:
-                                message.state = 2;
-                                break;
-                            case "UPDATING":
-                            case 3:
-                                message.state = 3;
-                                break;
-                            case "DELETING":
-                            case 4:
-                                message.state = 4;
-                                break;
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a Subnet message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.Subnet} message Subnet
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        Subnet.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.ipCidrRange = "";
-                                object.gatewayIp = "";
-                                object.type = "";
-                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.ipCidrRange != null && message.hasOwnProperty("ipCidrRange"))
-                                object.ipCidrRange = message.ipCidrRange;
-                            if (message.gatewayIp != null && message.hasOwnProperty("gatewayIp"))
-                                object.gatewayIp = message.gatewayIp;
-                            if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = message.type;
-                            if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.vmwareengine.v1.Subnet.State[message.state] === undefined ? message.state : $root.google.cloud.vmwareengine.v1.Subnet.State[message.state] : message.state;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this Subnet to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        Subnet.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for Subnet
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.Subnet
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        Subnet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.Subnet";
-                        };
-    
-                        /**
-                         * State enum.
-                         * @name google.cloud.vmwareengine.v1.Subnet.State
-                         * @enum {number}
-                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                         * @property {number} ACTIVE=1 ACTIVE value
-                         * @property {number} CREATING=2 CREATING value
-                         * @property {number} UPDATING=3 UPDATING value
-                         * @property {number} DELETING=4 DELETING value
-                         */
-                        Subnet.State = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "ACTIVE"] = 1;
-                            values[valuesById[2] = "CREATING"] = 2;
-                            values[valuesById[3] = "UPDATING"] = 3;
-                            values[valuesById[4] = "DELETING"] = 4;
-                            return values;
-                        })();
-    
-                        return Subnet;
-                    })();
-    
                     v1.ListSubnetsRequest = (function() {
     
                         /**
@@ -7607,396 +5439,6 @@
                         return OperationMetadata;
                     })();
     
-                    v1.NodeType = (function() {
-    
-                        /**
-                         * Properties of a NodeType.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface INodeType
-                         * @property {string|null} [name] NodeType name
-                         * @property {string|null} [nodeTypeId] NodeType nodeTypeId
-                         * @property {string|null} [displayName] NodeType displayName
-                         * @property {number|null} [virtualCpuCount] NodeType virtualCpuCount
-                         * @property {number|null} [totalCoreCount] NodeType totalCoreCount
-                         * @property {number|null} [memoryGb] NodeType memoryGb
-                         * @property {number|null} [diskSizeGb] NodeType diskSizeGb
-                         * @property {Array.<number>|null} [availableCustomCoreCounts] NodeType availableCustomCoreCounts
-                         */
-    
-                        /**
-                         * Constructs a new NodeType.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a NodeType.
-                         * @implements INodeType
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.INodeType=} [properties] Properties to set
-                         */
-                        function NodeType(properties) {
-                            this.availableCustomCoreCounts = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * NodeType name.
-                         * @member {string} name
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @instance
-                         */
-                        NodeType.prototype.name = "";
-    
-                        /**
-                         * NodeType nodeTypeId.
-                         * @member {string} nodeTypeId
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @instance
-                         */
-                        NodeType.prototype.nodeTypeId = "";
-    
-                        /**
-                         * NodeType displayName.
-                         * @member {string} displayName
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @instance
-                         */
-                        NodeType.prototype.displayName = "";
-    
-                        /**
-                         * NodeType virtualCpuCount.
-                         * @member {number} virtualCpuCount
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @instance
-                         */
-                        NodeType.prototype.virtualCpuCount = 0;
-    
-                        /**
-                         * NodeType totalCoreCount.
-                         * @member {number} totalCoreCount
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @instance
-                         */
-                        NodeType.prototype.totalCoreCount = 0;
-    
-                        /**
-                         * NodeType memoryGb.
-                         * @member {number} memoryGb
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @instance
-                         */
-                        NodeType.prototype.memoryGb = 0;
-    
-                        /**
-                         * NodeType diskSizeGb.
-                         * @member {number} diskSizeGb
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @instance
-                         */
-                        NodeType.prototype.diskSizeGb = 0;
-    
-                        /**
-                         * NodeType availableCustomCoreCounts.
-                         * @member {Array.<number>} availableCustomCoreCounts
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @instance
-                         */
-                        NodeType.prototype.availableCustomCoreCounts = $util.emptyArray;
-    
-                        /**
-                         * Creates a new NodeType instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.INodeType=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.NodeType} NodeType instance
-                         */
-                        NodeType.create = function create(properties) {
-                            return new NodeType(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified NodeType message. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeType.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.INodeType} message NodeType message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        NodeType.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.nodeTypeId != null && Object.hasOwnProperty.call(message, "nodeTypeId"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nodeTypeId);
-                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
-                            if (message.virtualCpuCount != null && Object.hasOwnProperty.call(message, "virtualCpuCount"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.virtualCpuCount);
-                            if (message.totalCoreCount != null && Object.hasOwnProperty.call(message, "totalCoreCount"))
-                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.totalCoreCount);
-                            if (message.memoryGb != null && Object.hasOwnProperty.call(message, "memoryGb"))
-                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.memoryGb);
-                            if (message.diskSizeGb != null && Object.hasOwnProperty.call(message, "diskSizeGb"))
-                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.diskSizeGb);
-                            if (message.availableCustomCoreCounts != null && message.availableCustomCoreCounts.length) {
-                                writer.uint32(/* id 11, wireType 2 =*/90).fork();
-                                for (var i = 0; i < message.availableCustomCoreCounts.length; ++i)
-                                    writer.int32(message.availableCustomCoreCounts[i]);
-                                writer.ldelim();
-                            }
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified NodeType message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeType.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.INodeType} message NodeType message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        NodeType.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a NodeType message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.NodeType} NodeType
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        NodeType.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.NodeType();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.nodeTypeId = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.displayName = reader.string();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.virtualCpuCount = reader.int32();
-                                        break;
-                                    }
-                                case 5: {
-                                        message.totalCoreCount = reader.int32();
-                                        break;
-                                    }
-                                case 7: {
-                                        message.memoryGb = reader.int32();
-                                        break;
-                                    }
-                                case 8: {
-                                        message.diskSizeGb = reader.int32();
-                                        break;
-                                    }
-                                case 11: {
-                                        if (!(message.availableCustomCoreCounts && message.availableCustomCoreCounts.length))
-                                            message.availableCustomCoreCounts = [];
-                                        if ((tag & 7) === 2) {
-                                            var end2 = reader.uint32() + reader.pos;
-                                            while (reader.pos < end2)
-                                                message.availableCustomCoreCounts.push(reader.int32());
-                                        } else
-                                            message.availableCustomCoreCounts.push(reader.int32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a NodeType message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.NodeType} NodeType
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        NodeType.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a NodeType message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        NodeType.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.nodeTypeId != null && message.hasOwnProperty("nodeTypeId"))
-                                if (!$util.isString(message.nodeTypeId))
-                                    return "nodeTypeId: string expected";
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                if (!$util.isString(message.displayName))
-                                    return "displayName: string expected";
-                            if (message.virtualCpuCount != null && message.hasOwnProperty("virtualCpuCount"))
-                                if (!$util.isInteger(message.virtualCpuCount))
-                                    return "virtualCpuCount: integer expected";
-                            if (message.totalCoreCount != null && message.hasOwnProperty("totalCoreCount"))
-                                if (!$util.isInteger(message.totalCoreCount))
-                                    return "totalCoreCount: integer expected";
-                            if (message.memoryGb != null && message.hasOwnProperty("memoryGb"))
-                                if (!$util.isInteger(message.memoryGb))
-                                    return "memoryGb: integer expected";
-                            if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
-                                if (!$util.isInteger(message.diskSizeGb))
-                                    return "diskSizeGb: integer expected";
-                            if (message.availableCustomCoreCounts != null && message.hasOwnProperty("availableCustomCoreCounts")) {
-                                if (!Array.isArray(message.availableCustomCoreCounts))
-                                    return "availableCustomCoreCounts: array expected";
-                                for (var i = 0; i < message.availableCustomCoreCounts.length; ++i)
-                                    if (!$util.isInteger(message.availableCustomCoreCounts[i]))
-                                        return "availableCustomCoreCounts: integer[] expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a NodeType message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.NodeType} NodeType
-                         */
-                        NodeType.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.NodeType)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.NodeType();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.nodeTypeId != null)
-                                message.nodeTypeId = String(object.nodeTypeId);
-                            if (object.displayName != null)
-                                message.displayName = String(object.displayName);
-                            if (object.virtualCpuCount != null)
-                                message.virtualCpuCount = object.virtualCpuCount | 0;
-                            if (object.totalCoreCount != null)
-                                message.totalCoreCount = object.totalCoreCount | 0;
-                            if (object.memoryGb != null)
-                                message.memoryGb = object.memoryGb | 0;
-                            if (object.diskSizeGb != null)
-                                message.diskSizeGb = object.diskSizeGb | 0;
-                            if (object.availableCustomCoreCounts) {
-                                if (!Array.isArray(object.availableCustomCoreCounts))
-                                    throw TypeError(".google.cloud.vmwareengine.v1.NodeType.availableCustomCoreCounts: array expected");
-                                message.availableCustomCoreCounts = [];
-                                for (var i = 0; i < object.availableCustomCoreCounts.length; ++i)
-                                    message.availableCustomCoreCounts[i] = object.availableCustomCoreCounts[i] | 0;
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a NodeType message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.NodeType} message NodeType
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        NodeType.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.availableCustomCoreCounts = [];
-                            if (options.defaults) {
-                                object.name = "";
-                                object.nodeTypeId = "";
-                                object.displayName = "";
-                                object.virtualCpuCount = 0;
-                                object.totalCoreCount = 0;
-                                object.memoryGb = 0;
-                                object.diskSizeGb = 0;
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.nodeTypeId != null && message.hasOwnProperty("nodeTypeId"))
-                                object.nodeTypeId = message.nodeTypeId;
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                object.displayName = message.displayName;
-                            if (message.virtualCpuCount != null && message.hasOwnProperty("virtualCpuCount"))
-                                object.virtualCpuCount = message.virtualCpuCount;
-                            if (message.totalCoreCount != null && message.hasOwnProperty("totalCoreCount"))
-                                object.totalCoreCount = message.totalCoreCount;
-                            if (message.memoryGb != null && message.hasOwnProperty("memoryGb"))
-                                object.memoryGb = message.memoryGb;
-                            if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
-                                object.diskSizeGb = message.diskSizeGb;
-                            if (message.availableCustomCoreCounts && message.availableCustomCoreCounts.length) {
-                                object.availableCustomCoreCounts = [];
-                                for (var j = 0; j < message.availableCustomCoreCounts.length; ++j)
-                                    object.availableCustomCoreCounts[j] = message.availableCustomCoreCounts[j];
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this NodeType to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        NodeType.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for NodeType
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.NodeType
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        NodeType.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.NodeType";
-                        };
-    
-                        return NodeType;
-                    })();
-    
                     v1.ListNodeTypesRequest = (function() {
     
                         /**
@@ -8759,233 +6201,6 @@
                         };
     
                         return GetNodeTypeRequest;
-                    })();
-    
-                    v1.Credentials = (function() {
-    
-                        /**
-                         * Properties of a Credentials.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface ICredentials
-                         * @property {string|null} [username] Credentials username
-                         * @property {string|null} [password] Credentials password
-                         */
-    
-                        /**
-                         * Constructs a new Credentials.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a Credentials.
-                         * @implements ICredentials
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.ICredentials=} [properties] Properties to set
-                         */
-                        function Credentials(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Credentials username.
-                         * @member {string} username
-                         * @memberof google.cloud.vmwareengine.v1.Credentials
-                         * @instance
-                         */
-                        Credentials.prototype.username = "";
-    
-                        /**
-                         * Credentials password.
-                         * @member {string} password
-                         * @memberof google.cloud.vmwareengine.v1.Credentials
-                         * @instance
-                         */
-                        Credentials.prototype.password = "";
-    
-                        /**
-                         * Creates a new Credentials instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.Credentials
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ICredentials=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.Credentials} Credentials instance
-                         */
-                        Credentials.create = function create(properties) {
-                            return new Credentials(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified Credentials message. Does not implicitly {@link google.cloud.vmwareengine.v1.Credentials.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.Credentials
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ICredentials} message Credentials message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Credentials.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.username != null && Object.hasOwnProperty.call(message, "username"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.username);
-                            if (message.password != null && Object.hasOwnProperty.call(message, "password"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.password);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified Credentials message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Credentials.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.Credentials
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ICredentials} message Credentials message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Credentials.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a Credentials message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.Credentials
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.Credentials} Credentials
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Credentials.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.Credentials();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.username = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.password = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a Credentials message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.Credentials
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.Credentials} Credentials
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Credentials.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a Credentials message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.Credentials
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        Credentials.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.username != null && message.hasOwnProperty("username"))
-                                if (!$util.isString(message.username))
-                                    return "username: string expected";
-                            if (message.password != null && message.hasOwnProperty("password"))
-                                if (!$util.isString(message.password))
-                                    return "password: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a Credentials message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.Credentials
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.Credentials} Credentials
-                         */
-                        Credentials.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.Credentials)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.Credentials();
-                            if (object.username != null)
-                                message.username = String(object.username);
-                            if (object.password != null)
-                                message.password = String(object.password);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a Credentials message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.Credentials
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.Credentials} message Credentials
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        Credentials.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.username = "";
-                                object.password = "";
-                            }
-                            if (message.username != null && message.hasOwnProperty("username"))
-                                object.username = message.username;
-                            if (message.password != null && message.hasOwnProperty("password"))
-                                object.password = message.password;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this Credentials to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.Credentials
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        Credentials.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for Credentials
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.Credentials
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        Credentials.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.Credentials";
-                        };
-    
-                        return Credentials;
                     })();
     
                     v1.ShowNsxCredentialsRequest = (function() {
@@ -10136,354 +7351,6 @@
                         return ListHcxActivationKeysResponse;
                     })();
     
-                    v1.HcxActivationKey = (function() {
-    
-                        /**
-                         * Properties of a HcxActivationKey.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface IHcxActivationKey
-                         * @property {string|null} [name] HcxActivationKey name
-                         * @property {google.protobuf.ITimestamp|null} [createTime] HcxActivationKey createTime
-                         * @property {google.cloud.vmwareengine.v1.HcxActivationKey.State|null} [state] HcxActivationKey state
-                         * @property {string|null} [activationKey] HcxActivationKey activationKey
-                         * @property {string|null} [uid] HcxActivationKey uid
-                         */
-    
-                        /**
-                         * Constructs a new HcxActivationKey.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a HcxActivationKey.
-                         * @implements IHcxActivationKey
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.IHcxActivationKey=} [properties] Properties to set
-                         */
-                        function HcxActivationKey(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * HcxActivationKey name.
-                         * @member {string} name
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @instance
-                         */
-                        HcxActivationKey.prototype.name = "";
-    
-                        /**
-                         * HcxActivationKey createTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @instance
-                         */
-                        HcxActivationKey.prototype.createTime = null;
-    
-                        /**
-                         * HcxActivationKey state.
-                         * @member {google.cloud.vmwareengine.v1.HcxActivationKey.State} state
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @instance
-                         */
-                        HcxActivationKey.prototype.state = 0;
-    
-                        /**
-                         * HcxActivationKey activationKey.
-                         * @member {string} activationKey
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @instance
-                         */
-                        HcxActivationKey.prototype.activationKey = "";
-    
-                        /**
-                         * HcxActivationKey uid.
-                         * @member {string} uid
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @instance
-                         */
-                        HcxActivationKey.prototype.uid = "";
-    
-                        /**
-                         * Creates a new HcxActivationKey instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IHcxActivationKey=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.HcxActivationKey} HcxActivationKey instance
-                         */
-                        HcxActivationKey.create = function create(properties) {
-                            return new HcxActivationKey(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified HcxActivationKey message. Does not implicitly {@link google.cloud.vmwareengine.v1.HcxActivationKey.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IHcxActivationKey} message HcxActivationKey message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        HcxActivationKey.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
-                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
-                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
-                            if (message.activationKey != null && Object.hasOwnProperty.call(message, "activationKey"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.activationKey);
-                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.uid);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified HcxActivationKey message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.HcxActivationKey.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IHcxActivationKey} message HcxActivationKey message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        HcxActivationKey.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a HcxActivationKey message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.HcxActivationKey} HcxActivationKey
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        HcxActivationKey.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.HcxActivationKey();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.state = reader.int32();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.activationKey = reader.string();
-                                        break;
-                                    }
-                                case 5: {
-                                        message.uid = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a HcxActivationKey message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.HcxActivationKey} HcxActivationKey
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        HcxActivationKey.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a HcxActivationKey message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        HcxActivationKey.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
-                                if (error)
-                                    return "createTime." + error;
-                            }
-                            if (message.state != null && message.hasOwnProperty("state"))
-                                switch (message.state) {
-                                default:
-                                    return "state: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                    break;
-                                }
-                            if (message.activationKey != null && message.hasOwnProperty("activationKey"))
-                                if (!$util.isString(message.activationKey))
-                                    return "activationKey: string expected";
-                            if (message.uid != null && message.hasOwnProperty("uid"))
-                                if (!$util.isString(message.uid))
-                                    return "uid: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a HcxActivationKey message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.HcxActivationKey} HcxActivationKey
-                         */
-                        HcxActivationKey.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.HcxActivationKey)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.HcxActivationKey();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.HcxActivationKey.createTime: object expected");
-                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
-                            }
-                            switch (object.state) {
-                            default:
-                                if (typeof object.state === "number") {
-                                    message.state = object.state;
-                                    break;
-                                }
-                                break;
-                            case "STATE_UNSPECIFIED":
-                            case 0:
-                                message.state = 0;
-                                break;
-                            case "AVAILABLE":
-                            case 1:
-                                message.state = 1;
-                                break;
-                            case "CONSUMED":
-                            case 2:
-                                message.state = 2;
-                                break;
-                            case "CREATING":
-                            case 3:
-                                message.state = 3;
-                                break;
-                            }
-                            if (object.activationKey != null)
-                                message.activationKey = String(object.activationKey);
-                            if (object.uid != null)
-                                message.uid = String(object.uid);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a HcxActivationKey message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.HcxActivationKey} message HcxActivationKey
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        HcxActivationKey.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.createTime = null;
-                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
-                                object.activationKey = "";
-                                object.uid = "";
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
-                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
-                            if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.vmwareengine.v1.HcxActivationKey.State[message.state] === undefined ? message.state : $root.google.cloud.vmwareengine.v1.HcxActivationKey.State[message.state] : message.state;
-                            if (message.activationKey != null && message.hasOwnProperty("activationKey"))
-                                object.activationKey = message.activationKey;
-                            if (message.uid != null && message.hasOwnProperty("uid"))
-                                object.uid = message.uid;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this HcxActivationKey to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        HcxActivationKey.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for HcxActivationKey
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        HcxActivationKey.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.HcxActivationKey";
-                        };
-    
-                        /**
-                         * State enum.
-                         * @name google.cloud.vmwareengine.v1.HcxActivationKey.State
-                         * @enum {number}
-                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                         * @property {number} AVAILABLE=1 AVAILABLE value
-                         * @property {number} CONSUMED=2 CONSUMED value
-                         * @property {number} CREATING=3 CREATING value
-                         */
-                        HcxActivationKey.State = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "AVAILABLE"] = 1;
-                            values[valuesById[2] = "CONSUMED"] = 2;
-                            values[valuesById[3] = "CREATING"] = 3;
-                            return values;
-                        })();
-    
-                        return HcxActivationKey;
-                    })();
-    
                     v1.ListHcxActivationKeysRequest = (function() {
     
                         /**
@@ -11213,6 +8080,6266 @@
                         };
     
                         return CreateHcxActivationKeyRequest;
+                    })();
+    
+                    v1.ListNetworkPoliciesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListNetworkPoliciesRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IListNetworkPoliciesRequest
+                         * @property {string|null} [parent] ListNetworkPoliciesRequest parent
+                         * @property {number|null} [pageSize] ListNetworkPoliciesRequest pageSize
+                         * @property {string|null} [pageToken] ListNetworkPoliciesRequest pageToken
+                         * @property {string|null} [filter] ListNetworkPoliciesRequest filter
+                         * @property {string|null} [orderBy] ListNetworkPoliciesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListNetworkPoliciesRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a ListNetworkPoliciesRequest.
+                         * @implements IListNetworkPoliciesRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesRequest=} [properties] Properties to set
+                         */
+                        function ListNetworkPoliciesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListNetworkPoliciesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @instance
+                         */
+                        ListNetworkPoliciesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListNetworkPoliciesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @instance
+                         */
+                        ListNetworkPoliciesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListNetworkPoliciesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @instance
+                         */
+                        ListNetworkPoliciesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListNetworkPoliciesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @instance
+                         */
+                        ListNetworkPoliciesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListNetworkPoliciesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @instance
+                         */
+                        ListNetworkPoliciesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListNetworkPoliciesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest} ListNetworkPoliciesRequest instance
+                         */
+                        ListNetworkPoliciesRequest.create = function create(properties) {
+                            return new ListNetworkPoliciesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListNetworkPoliciesRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesRequest} message ListNetworkPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListNetworkPoliciesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListNetworkPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesRequest} message ListNetworkPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListNetworkPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListNetworkPoliciesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest} ListNetworkPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListNetworkPoliciesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListNetworkPoliciesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest} ListNetworkPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListNetworkPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListNetworkPoliciesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListNetworkPoliciesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListNetworkPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest} ListNetworkPoliciesRequest
+                         */
+                        ListNetworkPoliciesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListNetworkPoliciesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest} message ListNetworkPoliciesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListNetworkPoliciesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListNetworkPoliciesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListNetworkPoliciesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListNetworkPoliciesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListNetworkPoliciesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest";
+                        };
+    
+                        return ListNetworkPoliciesRequest;
+                    })();
+    
+                    v1.ListNetworkPoliciesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListNetworkPoliciesResponse.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IListNetworkPoliciesResponse
+                         * @property {Array.<google.cloud.vmwareengine.v1.INetworkPolicy>|null} [networkPolicies] ListNetworkPoliciesResponse networkPolicies
+                         * @property {string|null} [nextPageToken] ListNetworkPoliciesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListNetworkPoliciesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListNetworkPoliciesResponse.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a ListNetworkPoliciesResponse.
+                         * @implements IListNetworkPoliciesResponse
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesResponse=} [properties] Properties to set
+                         */
+                        function ListNetworkPoliciesResponse(properties) {
+                            this.networkPolicies = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListNetworkPoliciesResponse networkPolicies.
+                         * @member {Array.<google.cloud.vmwareengine.v1.INetworkPolicy>} networkPolicies
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
+                         * @instance
+                         */
+                        ListNetworkPoliciesResponse.prototype.networkPolicies = $util.emptyArray;
+    
+                        /**
+                         * ListNetworkPoliciesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
+                         * @instance
+                         */
+                        ListNetworkPoliciesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListNetworkPoliciesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
+                         * @instance
+                         */
+                        ListNetworkPoliciesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListNetworkPoliciesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse} ListNetworkPoliciesResponse instance
+                         */
+                        ListNetworkPoliciesResponse.create = function create(properties) {
+                            return new ListNetworkPoliciesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListNetworkPoliciesResponse message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesResponse} message ListNetworkPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListNetworkPoliciesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.networkPolicies != null && message.networkPolicies.length)
+                                for (var i = 0; i < message.networkPolicies.length; ++i)
+                                    $root.google.cloud.vmwareengine.v1.NetworkPolicy.encode(message.networkPolicies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListNetworkPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesResponse} message ListNetworkPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListNetworkPoliciesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListNetworkPoliciesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse} ListNetworkPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListNetworkPoliciesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.networkPolicies && message.networkPolicies.length))
+                                            message.networkPolicies = [];
+                                        message.networkPolicies.push($root.google.cloud.vmwareengine.v1.NetworkPolicy.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListNetworkPoliciesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse} ListNetworkPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListNetworkPoliciesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListNetworkPoliciesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListNetworkPoliciesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.networkPolicies != null && message.hasOwnProperty("networkPolicies")) {
+                                if (!Array.isArray(message.networkPolicies))
+                                    return "networkPolicies: array expected";
+                                for (var i = 0; i < message.networkPolicies.length; ++i) {
+                                    var error = $root.google.cloud.vmwareengine.v1.NetworkPolicy.verify(message.networkPolicies[i]);
+                                    if (error)
+                                        return "networkPolicies." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListNetworkPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse} ListNetworkPoliciesResponse
+                         */
+                        ListNetworkPoliciesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse();
+                            if (object.networkPolicies) {
+                                if (!Array.isArray(object.networkPolicies))
+                                    throw TypeError(".google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse.networkPolicies: array expected");
+                                message.networkPolicies = [];
+                                for (var i = 0; i < object.networkPolicies.length; ++i) {
+                                    if (typeof object.networkPolicies[i] !== "object")
+                                        throw TypeError(".google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse.networkPolicies: object expected");
+                                    message.networkPolicies[i] = $root.google.cloud.vmwareengine.v1.NetworkPolicy.fromObject(object.networkPolicies[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListNetworkPoliciesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse} message ListNetworkPoliciesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListNetworkPoliciesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.networkPolicies = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.networkPolicies && message.networkPolicies.length) {
+                                object.networkPolicies = [];
+                                for (var j = 0; j < message.networkPolicies.length; ++j)
+                                    object.networkPolicies[j] = $root.google.cloud.vmwareengine.v1.NetworkPolicy.toObject(message.networkPolicies[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListNetworkPoliciesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListNetworkPoliciesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListNetworkPoliciesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListNetworkPoliciesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse";
+                        };
+    
+                        return ListNetworkPoliciesResponse;
+                    })();
+    
+                    v1.GetNetworkPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a GetNetworkPolicyRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IGetNetworkPolicyRequest
+                         * @property {string|null} [name] GetNetworkPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetNetworkPolicyRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a GetNetworkPolicyRequest.
+                         * @implements IGetNetworkPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IGetNetworkPolicyRequest=} [properties] Properties to set
+                         */
+                        function GetNetworkPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetNetworkPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
+                         * @instance
+                         */
+                        GetNetworkPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetNetworkPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IGetNetworkPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.GetNetworkPolicyRequest} GetNetworkPolicyRequest instance
+                         */
+                        GetNetworkPolicyRequest.create = function create(properties) {
+                            return new GetNetworkPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetNetworkPolicyRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.GetNetworkPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IGetNetworkPolicyRequest} message GetNetworkPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetNetworkPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetNetworkPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.GetNetworkPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IGetNetworkPolicyRequest} message GetNetworkPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetNetworkPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetNetworkPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.GetNetworkPolicyRequest} GetNetworkPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetNetworkPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.GetNetworkPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetNetworkPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.GetNetworkPolicyRequest} GetNetworkPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetNetworkPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetNetworkPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetNetworkPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetNetworkPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.GetNetworkPolicyRequest} GetNetworkPolicyRequest
+                         */
+                        GetNetworkPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.GetNetworkPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.GetNetworkPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetNetworkPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.GetNetworkPolicyRequest} message GetNetworkPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetNetworkPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetNetworkPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetNetworkPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetNetworkPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetNetworkPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.GetNetworkPolicyRequest";
+                        };
+    
+                        return GetNetworkPolicyRequest;
+                    })();
+    
+                    v1.UpdateNetworkPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateNetworkPolicyRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IUpdateNetworkPolicyRequest
+                         * @property {google.cloud.vmwareengine.v1.INetworkPolicy|null} [networkPolicy] UpdateNetworkPolicyRequest networkPolicy
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateNetworkPolicyRequest updateMask
+                         * @property {string|null} [requestId] UpdateNetworkPolicyRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateNetworkPolicyRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents an UpdateNetworkPolicyRequest.
+                         * @implements IUpdateNetworkPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IUpdateNetworkPolicyRequest=} [properties] Properties to set
+                         */
+                        function UpdateNetworkPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateNetworkPolicyRequest networkPolicy.
+                         * @member {google.cloud.vmwareengine.v1.INetworkPolicy|null|undefined} networkPolicy
+                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
+                         * @instance
+                         */
+                        UpdateNetworkPolicyRequest.prototype.networkPolicy = null;
+    
+                        /**
+                         * UpdateNetworkPolicyRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
+                         * @instance
+                         */
+                        UpdateNetworkPolicyRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateNetworkPolicyRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
+                         * @instance
+                         */
+                        UpdateNetworkPolicyRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateNetworkPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IUpdateNetworkPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest} UpdateNetworkPolicyRequest instance
+                         */
+                        UpdateNetworkPolicyRequest.create = function create(properties) {
+                            return new UpdateNetworkPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateNetworkPolicyRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IUpdateNetworkPolicyRequest} message UpdateNetworkPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateNetworkPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.networkPolicy != null && Object.hasOwnProperty.call(message, "networkPolicy"))
+                                $root.google.cloud.vmwareengine.v1.NetworkPolicy.encode(message.networkPolicy, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateNetworkPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IUpdateNetworkPolicyRequest} message UpdateNetworkPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateNetworkPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateNetworkPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest} UpdateNetworkPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateNetworkPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.networkPolicy = $root.google.cloud.vmwareengine.v1.NetworkPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateNetworkPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest} UpdateNetworkPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateNetworkPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateNetworkPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateNetworkPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.networkPolicy != null && message.hasOwnProperty("networkPolicy")) {
+                                var error = $root.google.cloud.vmwareengine.v1.NetworkPolicy.verify(message.networkPolicy);
+                                if (error)
+                                    return "networkPolicy." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateNetworkPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest} UpdateNetworkPolicyRequest
+                         */
+                        UpdateNetworkPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest();
+                            if (object.networkPolicy != null) {
+                                if (typeof object.networkPolicy !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest.networkPolicy: object expected");
+                                message.networkPolicy = $root.google.cloud.vmwareengine.v1.NetworkPolicy.fromObject(object.networkPolicy);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateNetworkPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest} message UpdateNetworkPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateNetworkPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.networkPolicy = null;
+                                object.updateMask = null;
+                                object.requestId = "";
+                            }
+                            if (message.networkPolicy != null && message.hasOwnProperty("networkPolicy"))
+                                object.networkPolicy = $root.google.cloud.vmwareengine.v1.NetworkPolicy.toObject(message.networkPolicy, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateNetworkPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateNetworkPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateNetworkPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateNetworkPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest";
+                        };
+    
+                        return UpdateNetworkPolicyRequest;
+                    })();
+    
+                    v1.CreateNetworkPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateNetworkPolicyRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface ICreateNetworkPolicyRequest
+                         * @property {string|null} [parent] CreateNetworkPolicyRequest parent
+                         * @property {string|null} [networkPolicyId] CreateNetworkPolicyRequest networkPolicyId
+                         * @property {google.cloud.vmwareengine.v1.INetworkPolicy|null} [networkPolicy] CreateNetworkPolicyRequest networkPolicy
+                         * @property {string|null} [requestId] CreateNetworkPolicyRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateNetworkPolicyRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a CreateNetworkPolicyRequest.
+                         * @implements ICreateNetworkPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.ICreateNetworkPolicyRequest=} [properties] Properties to set
+                         */
+                        function CreateNetworkPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateNetworkPolicyRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
+                         * @instance
+                         */
+                        CreateNetworkPolicyRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateNetworkPolicyRequest networkPolicyId.
+                         * @member {string} networkPolicyId
+                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
+                         * @instance
+                         */
+                        CreateNetworkPolicyRequest.prototype.networkPolicyId = "";
+    
+                        /**
+                         * CreateNetworkPolicyRequest networkPolicy.
+                         * @member {google.cloud.vmwareengine.v1.INetworkPolicy|null|undefined} networkPolicy
+                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
+                         * @instance
+                         */
+                        CreateNetworkPolicyRequest.prototype.networkPolicy = null;
+    
+                        /**
+                         * CreateNetworkPolicyRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
+                         * @instance
+                         */
+                        CreateNetworkPolicyRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateNetworkPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICreateNetworkPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest} CreateNetworkPolicyRequest instance
+                         */
+                        CreateNetworkPolicyRequest.create = function create(properties) {
+                            return new CreateNetworkPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateNetworkPolicyRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICreateNetworkPolicyRequest} message CreateNetworkPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateNetworkPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.networkPolicyId != null && Object.hasOwnProperty.call(message, "networkPolicyId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.networkPolicyId);
+                            if (message.networkPolicy != null && Object.hasOwnProperty.call(message, "networkPolicy"))
+                                $root.google.cloud.vmwareengine.v1.NetworkPolicy.encode(message.networkPolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateNetworkPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICreateNetworkPolicyRequest} message CreateNetworkPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateNetworkPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateNetworkPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest} CreateNetworkPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateNetworkPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.networkPolicyId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.networkPolicy = $root.google.cloud.vmwareengine.v1.NetworkPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateNetworkPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest} CreateNetworkPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateNetworkPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateNetworkPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateNetworkPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.networkPolicyId != null && message.hasOwnProperty("networkPolicyId"))
+                                if (!$util.isString(message.networkPolicyId))
+                                    return "networkPolicyId: string expected";
+                            if (message.networkPolicy != null && message.hasOwnProperty("networkPolicy")) {
+                                var error = $root.google.cloud.vmwareengine.v1.NetworkPolicy.verify(message.networkPolicy);
+                                if (error)
+                                    return "networkPolicy." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateNetworkPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest} CreateNetworkPolicyRequest
+                         */
+                        CreateNetworkPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.networkPolicyId != null)
+                                message.networkPolicyId = String(object.networkPolicyId);
+                            if (object.networkPolicy != null) {
+                                if (typeof object.networkPolicy !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest.networkPolicy: object expected");
+                                message.networkPolicy = $root.google.cloud.vmwareengine.v1.NetworkPolicy.fromObject(object.networkPolicy);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateNetworkPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest} message CreateNetworkPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateNetworkPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.networkPolicyId = "";
+                                object.networkPolicy = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.networkPolicyId != null && message.hasOwnProperty("networkPolicyId"))
+                                object.networkPolicyId = message.networkPolicyId;
+                            if (message.networkPolicy != null && message.hasOwnProperty("networkPolicy"))
+                                object.networkPolicy = $root.google.cloud.vmwareengine.v1.NetworkPolicy.toObject(message.networkPolicy, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateNetworkPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateNetworkPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateNetworkPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateNetworkPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest";
+                        };
+    
+                        return CreateNetworkPolicyRequest;
+                    })();
+    
+                    v1.DeleteNetworkPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteNetworkPolicyRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IDeleteNetworkPolicyRequest
+                         * @property {string|null} [name] DeleteNetworkPolicyRequest name
+                         * @property {string|null} [requestId] DeleteNetworkPolicyRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteNetworkPolicyRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a DeleteNetworkPolicyRequest.
+                         * @implements IDeleteNetworkPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IDeleteNetworkPolicyRequest=} [properties] Properties to set
+                         */
+                        function DeleteNetworkPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteNetworkPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
+                         * @instance
+                         */
+                        DeleteNetworkPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteNetworkPolicyRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
+                         * @instance
+                         */
+                        DeleteNetworkPolicyRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteNetworkPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IDeleteNetworkPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest} DeleteNetworkPolicyRequest instance
+                         */
+                        DeleteNetworkPolicyRequest.create = function create(properties) {
+                            return new DeleteNetworkPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteNetworkPolicyRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IDeleteNetworkPolicyRequest} message DeleteNetworkPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteNetworkPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteNetworkPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IDeleteNetworkPolicyRequest} message DeleteNetworkPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteNetworkPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteNetworkPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest} DeleteNetworkPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteNetworkPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteNetworkPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest} DeleteNetworkPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteNetworkPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteNetworkPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteNetworkPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteNetworkPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest} DeleteNetworkPolicyRequest
+                         */
+                        DeleteNetworkPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteNetworkPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest} message DeleteNetworkPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteNetworkPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteNetworkPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteNetworkPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteNetworkPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteNetworkPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest";
+                        };
+    
+                        return DeleteNetworkPolicyRequest;
+                    })();
+    
+                    v1.CreateVmwareEngineNetworkRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateVmwareEngineNetworkRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface ICreateVmwareEngineNetworkRequest
+                         * @property {string|null} [parent] CreateVmwareEngineNetworkRequest parent
+                         * @property {string|null} [vmwareEngineNetworkId] CreateVmwareEngineNetworkRequest vmwareEngineNetworkId
+                         * @property {google.cloud.vmwareengine.v1.IVmwareEngineNetwork|null} [vmwareEngineNetwork] CreateVmwareEngineNetworkRequest vmwareEngineNetwork
+                         * @property {string|null} [requestId] CreateVmwareEngineNetworkRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateVmwareEngineNetworkRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a CreateVmwareEngineNetworkRequest.
+                         * @implements ICreateVmwareEngineNetworkRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.ICreateVmwareEngineNetworkRequest=} [properties] Properties to set
+                         */
+                        function CreateVmwareEngineNetworkRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateVmwareEngineNetworkRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
+                         * @instance
+                         */
+                        CreateVmwareEngineNetworkRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateVmwareEngineNetworkRequest vmwareEngineNetworkId.
+                         * @member {string} vmwareEngineNetworkId
+                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
+                         * @instance
+                         */
+                        CreateVmwareEngineNetworkRequest.prototype.vmwareEngineNetworkId = "";
+    
+                        /**
+                         * CreateVmwareEngineNetworkRequest vmwareEngineNetwork.
+                         * @member {google.cloud.vmwareengine.v1.IVmwareEngineNetwork|null|undefined} vmwareEngineNetwork
+                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
+                         * @instance
+                         */
+                        CreateVmwareEngineNetworkRequest.prototype.vmwareEngineNetwork = null;
+    
+                        /**
+                         * CreateVmwareEngineNetworkRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
+                         * @instance
+                         */
+                        CreateVmwareEngineNetworkRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateVmwareEngineNetworkRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICreateVmwareEngineNetworkRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest} CreateVmwareEngineNetworkRequest instance
+                         */
+                        CreateVmwareEngineNetworkRequest.create = function create(properties) {
+                            return new CreateVmwareEngineNetworkRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateVmwareEngineNetworkRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICreateVmwareEngineNetworkRequest} message CreateVmwareEngineNetworkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateVmwareEngineNetworkRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.vmwareEngineNetworkId != null && Object.hasOwnProperty.call(message, "vmwareEngineNetworkId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.vmwareEngineNetworkId);
+                            if (message.vmwareEngineNetwork != null && Object.hasOwnProperty.call(message, "vmwareEngineNetwork"))
+                                $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.encode(message.vmwareEngineNetwork, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateVmwareEngineNetworkRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICreateVmwareEngineNetworkRequest} message CreateVmwareEngineNetworkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateVmwareEngineNetworkRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateVmwareEngineNetworkRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest} CreateVmwareEngineNetworkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateVmwareEngineNetworkRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.vmwareEngineNetworkId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.vmwareEngineNetwork = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateVmwareEngineNetworkRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest} CreateVmwareEngineNetworkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateVmwareEngineNetworkRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateVmwareEngineNetworkRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateVmwareEngineNetworkRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.vmwareEngineNetworkId != null && message.hasOwnProperty("vmwareEngineNetworkId"))
+                                if (!$util.isString(message.vmwareEngineNetworkId))
+                                    return "vmwareEngineNetworkId: string expected";
+                            if (message.vmwareEngineNetwork != null && message.hasOwnProperty("vmwareEngineNetwork")) {
+                                var error = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.verify(message.vmwareEngineNetwork);
+                                if (error)
+                                    return "vmwareEngineNetwork." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateVmwareEngineNetworkRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest} CreateVmwareEngineNetworkRequest
+                         */
+                        CreateVmwareEngineNetworkRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.vmwareEngineNetworkId != null)
+                                message.vmwareEngineNetworkId = String(object.vmwareEngineNetworkId);
+                            if (object.vmwareEngineNetwork != null) {
+                                if (typeof object.vmwareEngineNetwork !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest.vmwareEngineNetwork: object expected");
+                                message.vmwareEngineNetwork = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.fromObject(object.vmwareEngineNetwork);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateVmwareEngineNetworkRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest} message CreateVmwareEngineNetworkRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateVmwareEngineNetworkRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.vmwareEngineNetworkId = "";
+                                object.vmwareEngineNetwork = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.vmwareEngineNetworkId != null && message.hasOwnProperty("vmwareEngineNetworkId"))
+                                object.vmwareEngineNetworkId = message.vmwareEngineNetworkId;
+                            if (message.vmwareEngineNetwork != null && message.hasOwnProperty("vmwareEngineNetwork"))
+                                object.vmwareEngineNetwork = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.toObject(message.vmwareEngineNetwork, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateVmwareEngineNetworkRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateVmwareEngineNetworkRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateVmwareEngineNetworkRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateVmwareEngineNetworkRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest";
+                        };
+    
+                        return CreateVmwareEngineNetworkRequest;
+                    })();
+    
+                    v1.UpdateVmwareEngineNetworkRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateVmwareEngineNetworkRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IUpdateVmwareEngineNetworkRequest
+                         * @property {google.cloud.vmwareengine.v1.IVmwareEngineNetwork|null} [vmwareEngineNetwork] UpdateVmwareEngineNetworkRequest vmwareEngineNetwork
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateVmwareEngineNetworkRequest updateMask
+                         * @property {string|null} [requestId] UpdateVmwareEngineNetworkRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateVmwareEngineNetworkRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents an UpdateVmwareEngineNetworkRequest.
+                         * @implements IUpdateVmwareEngineNetworkRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IUpdateVmwareEngineNetworkRequest=} [properties] Properties to set
+                         */
+                        function UpdateVmwareEngineNetworkRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateVmwareEngineNetworkRequest vmwareEngineNetwork.
+                         * @member {google.cloud.vmwareengine.v1.IVmwareEngineNetwork|null|undefined} vmwareEngineNetwork
+                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
+                         * @instance
+                         */
+                        UpdateVmwareEngineNetworkRequest.prototype.vmwareEngineNetwork = null;
+    
+                        /**
+                         * UpdateVmwareEngineNetworkRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
+                         * @instance
+                         */
+                        UpdateVmwareEngineNetworkRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateVmwareEngineNetworkRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
+                         * @instance
+                         */
+                        UpdateVmwareEngineNetworkRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateVmwareEngineNetworkRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IUpdateVmwareEngineNetworkRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest} UpdateVmwareEngineNetworkRequest instance
+                         */
+                        UpdateVmwareEngineNetworkRequest.create = function create(properties) {
+                            return new UpdateVmwareEngineNetworkRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateVmwareEngineNetworkRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IUpdateVmwareEngineNetworkRequest} message UpdateVmwareEngineNetworkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateVmwareEngineNetworkRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.vmwareEngineNetwork != null && Object.hasOwnProperty.call(message, "vmwareEngineNetwork"))
+                                $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.encode(message.vmwareEngineNetwork, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateVmwareEngineNetworkRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IUpdateVmwareEngineNetworkRequest} message UpdateVmwareEngineNetworkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateVmwareEngineNetworkRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateVmwareEngineNetworkRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest} UpdateVmwareEngineNetworkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateVmwareEngineNetworkRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.vmwareEngineNetwork = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateVmwareEngineNetworkRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest} UpdateVmwareEngineNetworkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateVmwareEngineNetworkRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateVmwareEngineNetworkRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateVmwareEngineNetworkRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.vmwareEngineNetwork != null && message.hasOwnProperty("vmwareEngineNetwork")) {
+                                var error = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.verify(message.vmwareEngineNetwork);
+                                if (error)
+                                    return "vmwareEngineNetwork." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateVmwareEngineNetworkRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest} UpdateVmwareEngineNetworkRequest
+                         */
+                        UpdateVmwareEngineNetworkRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest();
+                            if (object.vmwareEngineNetwork != null) {
+                                if (typeof object.vmwareEngineNetwork !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest.vmwareEngineNetwork: object expected");
+                                message.vmwareEngineNetwork = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.fromObject(object.vmwareEngineNetwork);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateVmwareEngineNetworkRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest} message UpdateVmwareEngineNetworkRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateVmwareEngineNetworkRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.vmwareEngineNetwork = null;
+                                object.updateMask = null;
+                                object.requestId = "";
+                            }
+                            if (message.vmwareEngineNetwork != null && message.hasOwnProperty("vmwareEngineNetwork"))
+                                object.vmwareEngineNetwork = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.toObject(message.vmwareEngineNetwork, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateVmwareEngineNetworkRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateVmwareEngineNetworkRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateVmwareEngineNetworkRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateVmwareEngineNetworkRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest";
+                        };
+    
+                        return UpdateVmwareEngineNetworkRequest;
+                    })();
+    
+                    v1.DeleteVmwareEngineNetworkRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteVmwareEngineNetworkRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IDeleteVmwareEngineNetworkRequest
+                         * @property {string|null} [name] DeleteVmwareEngineNetworkRequest name
+                         * @property {string|null} [requestId] DeleteVmwareEngineNetworkRequest requestId
+                         * @property {string|null} [etag] DeleteVmwareEngineNetworkRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new DeleteVmwareEngineNetworkRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a DeleteVmwareEngineNetworkRequest.
+                         * @implements IDeleteVmwareEngineNetworkRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IDeleteVmwareEngineNetworkRequest=} [properties] Properties to set
+                         */
+                        function DeleteVmwareEngineNetworkRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteVmwareEngineNetworkRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
+                         * @instance
+                         */
+                        DeleteVmwareEngineNetworkRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteVmwareEngineNetworkRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
+                         * @instance
+                         */
+                        DeleteVmwareEngineNetworkRequest.prototype.requestId = "";
+    
+                        /**
+                         * DeleteVmwareEngineNetworkRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
+                         * @instance
+                         */
+                        DeleteVmwareEngineNetworkRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new DeleteVmwareEngineNetworkRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IDeleteVmwareEngineNetworkRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest} DeleteVmwareEngineNetworkRequest instance
+                         */
+                        DeleteVmwareEngineNetworkRequest.create = function create(properties) {
+                            return new DeleteVmwareEngineNetworkRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteVmwareEngineNetworkRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IDeleteVmwareEngineNetworkRequest} message DeleteVmwareEngineNetworkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteVmwareEngineNetworkRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteVmwareEngineNetworkRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IDeleteVmwareEngineNetworkRequest} message DeleteVmwareEngineNetworkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteVmwareEngineNetworkRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteVmwareEngineNetworkRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest} DeleteVmwareEngineNetworkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteVmwareEngineNetworkRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteVmwareEngineNetworkRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest} DeleteVmwareEngineNetworkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteVmwareEngineNetworkRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteVmwareEngineNetworkRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteVmwareEngineNetworkRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteVmwareEngineNetworkRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest} DeleteVmwareEngineNetworkRequest
+                         */
+                        DeleteVmwareEngineNetworkRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteVmwareEngineNetworkRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest} message DeleteVmwareEngineNetworkRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteVmwareEngineNetworkRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteVmwareEngineNetworkRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteVmwareEngineNetworkRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteVmwareEngineNetworkRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteVmwareEngineNetworkRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest";
+                        };
+    
+                        return DeleteVmwareEngineNetworkRequest;
+                    })();
+    
+                    v1.GetVmwareEngineNetworkRequest = (function() {
+    
+                        /**
+                         * Properties of a GetVmwareEngineNetworkRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IGetVmwareEngineNetworkRequest
+                         * @property {string|null} [name] GetVmwareEngineNetworkRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetVmwareEngineNetworkRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a GetVmwareEngineNetworkRequest.
+                         * @implements IGetVmwareEngineNetworkRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IGetVmwareEngineNetworkRequest=} [properties] Properties to set
+                         */
+                        function GetVmwareEngineNetworkRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetVmwareEngineNetworkRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
+                         * @instance
+                         */
+                        GetVmwareEngineNetworkRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetVmwareEngineNetworkRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IGetVmwareEngineNetworkRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest} GetVmwareEngineNetworkRequest instance
+                         */
+                        GetVmwareEngineNetworkRequest.create = function create(properties) {
+                            return new GetVmwareEngineNetworkRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetVmwareEngineNetworkRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IGetVmwareEngineNetworkRequest} message GetVmwareEngineNetworkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetVmwareEngineNetworkRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetVmwareEngineNetworkRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IGetVmwareEngineNetworkRequest} message GetVmwareEngineNetworkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetVmwareEngineNetworkRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetVmwareEngineNetworkRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest} GetVmwareEngineNetworkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetVmwareEngineNetworkRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetVmwareEngineNetworkRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest} GetVmwareEngineNetworkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetVmwareEngineNetworkRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetVmwareEngineNetworkRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetVmwareEngineNetworkRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetVmwareEngineNetworkRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest} GetVmwareEngineNetworkRequest
+                         */
+                        GetVmwareEngineNetworkRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetVmwareEngineNetworkRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest} message GetVmwareEngineNetworkRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetVmwareEngineNetworkRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetVmwareEngineNetworkRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetVmwareEngineNetworkRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetVmwareEngineNetworkRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetVmwareEngineNetworkRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest";
+                        };
+    
+                        return GetVmwareEngineNetworkRequest;
+                    })();
+    
+                    v1.ListVmwareEngineNetworksRequest = (function() {
+    
+                        /**
+                         * Properties of a ListVmwareEngineNetworksRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IListVmwareEngineNetworksRequest
+                         * @property {string|null} [parent] ListVmwareEngineNetworksRequest parent
+                         * @property {number|null} [pageSize] ListVmwareEngineNetworksRequest pageSize
+                         * @property {string|null} [pageToken] ListVmwareEngineNetworksRequest pageToken
+                         * @property {string|null} [filter] ListVmwareEngineNetworksRequest filter
+                         * @property {string|null} [orderBy] ListVmwareEngineNetworksRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListVmwareEngineNetworksRequest.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a ListVmwareEngineNetworksRequest.
+                         * @implements IListVmwareEngineNetworksRequest
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksRequest=} [properties] Properties to set
+                         */
+                        function ListVmwareEngineNetworksRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListVmwareEngineNetworksRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @instance
+                         */
+                        ListVmwareEngineNetworksRequest.prototype.parent = "";
+    
+                        /**
+                         * ListVmwareEngineNetworksRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @instance
+                         */
+                        ListVmwareEngineNetworksRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListVmwareEngineNetworksRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @instance
+                         */
+                        ListVmwareEngineNetworksRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListVmwareEngineNetworksRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @instance
+                         */
+                        ListVmwareEngineNetworksRequest.prototype.filter = "";
+    
+                        /**
+                         * ListVmwareEngineNetworksRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @instance
+                         */
+                        ListVmwareEngineNetworksRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListVmwareEngineNetworksRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest} ListVmwareEngineNetworksRequest instance
+                         */
+                        ListVmwareEngineNetworksRequest.create = function create(properties) {
+                            return new ListVmwareEngineNetworksRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListVmwareEngineNetworksRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksRequest} message ListVmwareEngineNetworksRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListVmwareEngineNetworksRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListVmwareEngineNetworksRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksRequest} message ListVmwareEngineNetworksRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListVmwareEngineNetworksRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListVmwareEngineNetworksRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest} ListVmwareEngineNetworksRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListVmwareEngineNetworksRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListVmwareEngineNetworksRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest} ListVmwareEngineNetworksRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListVmwareEngineNetworksRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListVmwareEngineNetworksRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListVmwareEngineNetworksRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListVmwareEngineNetworksRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest} ListVmwareEngineNetworksRequest
+                         */
+                        ListVmwareEngineNetworksRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListVmwareEngineNetworksRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest} message ListVmwareEngineNetworksRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListVmwareEngineNetworksRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListVmwareEngineNetworksRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListVmwareEngineNetworksRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListVmwareEngineNetworksRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListVmwareEngineNetworksRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest";
+                        };
+    
+                        return ListVmwareEngineNetworksRequest;
+                    })();
+    
+                    v1.ListVmwareEngineNetworksResponse = (function() {
+    
+                        /**
+                         * Properties of a ListVmwareEngineNetworksResponse.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IListVmwareEngineNetworksResponse
+                         * @property {Array.<google.cloud.vmwareengine.v1.IVmwareEngineNetwork>|null} [vmwareEngineNetworks] ListVmwareEngineNetworksResponse vmwareEngineNetworks
+                         * @property {string|null} [nextPageToken] ListVmwareEngineNetworksResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListVmwareEngineNetworksResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListVmwareEngineNetworksResponse.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a ListVmwareEngineNetworksResponse.
+                         * @implements IListVmwareEngineNetworksResponse
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksResponse=} [properties] Properties to set
+                         */
+                        function ListVmwareEngineNetworksResponse(properties) {
+                            this.vmwareEngineNetworks = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListVmwareEngineNetworksResponse vmwareEngineNetworks.
+                         * @member {Array.<google.cloud.vmwareengine.v1.IVmwareEngineNetwork>} vmwareEngineNetworks
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
+                         * @instance
+                         */
+                        ListVmwareEngineNetworksResponse.prototype.vmwareEngineNetworks = $util.emptyArray;
+    
+                        /**
+                         * ListVmwareEngineNetworksResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
+                         * @instance
+                         */
+                        ListVmwareEngineNetworksResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListVmwareEngineNetworksResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
+                         * @instance
+                         */
+                        ListVmwareEngineNetworksResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListVmwareEngineNetworksResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksResponse=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse} ListVmwareEngineNetworksResponse instance
+                         */
+                        ListVmwareEngineNetworksResponse.create = function create(properties) {
+                            return new ListVmwareEngineNetworksResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListVmwareEngineNetworksResponse message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksResponse} message ListVmwareEngineNetworksResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListVmwareEngineNetworksResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.vmwareEngineNetworks != null && message.vmwareEngineNetworks.length)
+                                for (var i = 0; i < message.vmwareEngineNetworks.length; ++i)
+                                    $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.encode(message.vmwareEngineNetworks[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListVmwareEngineNetworksResponse message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksResponse} message ListVmwareEngineNetworksResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListVmwareEngineNetworksResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListVmwareEngineNetworksResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse} ListVmwareEngineNetworksResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListVmwareEngineNetworksResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.vmwareEngineNetworks && message.vmwareEngineNetworks.length))
+                                            message.vmwareEngineNetworks = [];
+                                        message.vmwareEngineNetworks.push($root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListVmwareEngineNetworksResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse} ListVmwareEngineNetworksResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListVmwareEngineNetworksResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListVmwareEngineNetworksResponse message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListVmwareEngineNetworksResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.vmwareEngineNetworks != null && message.hasOwnProperty("vmwareEngineNetworks")) {
+                                if (!Array.isArray(message.vmwareEngineNetworks))
+                                    return "vmwareEngineNetworks: array expected";
+                                for (var i = 0; i < message.vmwareEngineNetworks.length; ++i) {
+                                    var error = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.verify(message.vmwareEngineNetworks[i]);
+                                    if (error)
+                                        return "vmwareEngineNetworks." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListVmwareEngineNetworksResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse} ListVmwareEngineNetworksResponse
+                         */
+                        ListVmwareEngineNetworksResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse();
+                            if (object.vmwareEngineNetworks) {
+                                if (!Array.isArray(object.vmwareEngineNetworks))
+                                    throw TypeError(".google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse.vmwareEngineNetworks: array expected");
+                                message.vmwareEngineNetworks = [];
+                                for (var i = 0; i < object.vmwareEngineNetworks.length; ++i) {
+                                    if (typeof object.vmwareEngineNetworks[i] !== "object")
+                                        throw TypeError(".google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse.vmwareEngineNetworks: object expected");
+                                    message.vmwareEngineNetworks[i] = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.fromObject(object.vmwareEngineNetworks[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListVmwareEngineNetworksResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse} message ListVmwareEngineNetworksResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListVmwareEngineNetworksResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.vmwareEngineNetworks = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.vmwareEngineNetworks && message.vmwareEngineNetworks.length) {
+                                object.vmwareEngineNetworks = [];
+                                for (var j = 0; j < message.vmwareEngineNetworks.length; ++j)
+                                    object.vmwareEngineNetworks[j] = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.toObject(message.vmwareEngineNetworks[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListVmwareEngineNetworksResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListVmwareEngineNetworksResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListVmwareEngineNetworksResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListVmwareEngineNetworksResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse";
+                        };
+    
+                        return ListVmwareEngineNetworksResponse;
+                    })();
+    
+                    v1.NetworkConfig = (function() {
+    
+                        /**
+                         * Properties of a NetworkConfig.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface INetworkConfig
+                         * @property {string|null} [managementCidr] NetworkConfig managementCidr
+                         * @property {string|null} [vmwareEngineNetwork] NetworkConfig vmwareEngineNetwork
+                         * @property {string|null} [vmwareEngineNetworkCanonical] NetworkConfig vmwareEngineNetworkCanonical
+                         * @property {number|null} [managementIpAddressLayoutVersion] NetworkConfig managementIpAddressLayoutVersion
+                         */
+    
+                        /**
+                         * Constructs a new NetworkConfig.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a NetworkConfig.
+                         * @implements INetworkConfig
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.INetworkConfig=} [properties] Properties to set
+                         */
+                        function NetworkConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NetworkConfig managementCidr.
+                         * @member {string} managementCidr
+                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
+                         * @instance
+                         */
+                        NetworkConfig.prototype.managementCidr = "";
+    
+                        /**
+                         * NetworkConfig vmwareEngineNetwork.
+                         * @member {string} vmwareEngineNetwork
+                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
+                         * @instance
+                         */
+                        NetworkConfig.prototype.vmwareEngineNetwork = "";
+    
+                        /**
+                         * NetworkConfig vmwareEngineNetworkCanonical.
+                         * @member {string} vmwareEngineNetworkCanonical
+                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
+                         * @instance
+                         */
+                        NetworkConfig.prototype.vmwareEngineNetworkCanonical = "";
+    
+                        /**
+                         * NetworkConfig managementIpAddressLayoutVersion.
+                         * @member {number} managementIpAddressLayoutVersion
+                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
+                         * @instance
+                         */
+                        NetworkConfig.prototype.managementIpAddressLayoutVersion = 0;
+    
+                        /**
+                         * Creates a new NetworkConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.INetworkConfig=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.NetworkConfig} NetworkConfig instance
+                         */
+                        NetworkConfig.create = function create(properties) {
+                            return new NetworkConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NetworkConfig message. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.INetworkConfig} message NetworkConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NetworkConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.managementCidr != null && Object.hasOwnProperty.call(message, "managementCidr"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.managementCidr);
+                            if (message.vmwareEngineNetwork != null && Object.hasOwnProperty.call(message, "vmwareEngineNetwork"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.vmwareEngineNetwork);
+                            if (message.vmwareEngineNetworkCanonical != null && Object.hasOwnProperty.call(message, "vmwareEngineNetworkCanonical"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.vmwareEngineNetworkCanonical);
+                            if (message.managementIpAddressLayoutVersion != null && Object.hasOwnProperty.call(message, "managementIpAddressLayoutVersion"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.managementIpAddressLayoutVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NetworkConfig message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NetworkConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.INetworkConfig} message NetworkConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NetworkConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NetworkConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.NetworkConfig} NetworkConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NetworkConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.NetworkConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 4: {
+                                        message.managementCidr = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.vmwareEngineNetwork = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.vmwareEngineNetworkCanonical = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.managementIpAddressLayoutVersion = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NetworkConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.NetworkConfig} NetworkConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NetworkConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NetworkConfig message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NetworkConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.managementCidr != null && message.hasOwnProperty("managementCidr"))
+                                if (!$util.isString(message.managementCidr))
+                                    return "managementCidr: string expected";
+                            if (message.vmwareEngineNetwork != null && message.hasOwnProperty("vmwareEngineNetwork"))
+                                if (!$util.isString(message.vmwareEngineNetwork))
+                                    return "vmwareEngineNetwork: string expected";
+                            if (message.vmwareEngineNetworkCanonical != null && message.hasOwnProperty("vmwareEngineNetworkCanonical"))
+                                if (!$util.isString(message.vmwareEngineNetworkCanonical))
+                                    return "vmwareEngineNetworkCanonical: string expected";
+                            if (message.managementIpAddressLayoutVersion != null && message.hasOwnProperty("managementIpAddressLayoutVersion"))
+                                if (!$util.isInteger(message.managementIpAddressLayoutVersion))
+                                    return "managementIpAddressLayoutVersion: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NetworkConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.NetworkConfig} NetworkConfig
+                         */
+                        NetworkConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.NetworkConfig)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.NetworkConfig();
+                            if (object.managementCidr != null)
+                                message.managementCidr = String(object.managementCidr);
+                            if (object.vmwareEngineNetwork != null)
+                                message.vmwareEngineNetwork = String(object.vmwareEngineNetwork);
+                            if (object.vmwareEngineNetworkCanonical != null)
+                                message.vmwareEngineNetworkCanonical = String(object.vmwareEngineNetworkCanonical);
+                            if (object.managementIpAddressLayoutVersion != null)
+                                message.managementIpAddressLayoutVersion = object.managementIpAddressLayoutVersion | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NetworkConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.NetworkConfig} message NetworkConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NetworkConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.managementCidr = "";
+                                object.vmwareEngineNetwork = "";
+                                object.vmwareEngineNetworkCanonical = "";
+                                object.managementIpAddressLayoutVersion = 0;
+                            }
+                            if (message.managementCidr != null && message.hasOwnProperty("managementCidr"))
+                                object.managementCidr = message.managementCidr;
+                            if (message.vmwareEngineNetwork != null && message.hasOwnProperty("vmwareEngineNetwork"))
+                                object.vmwareEngineNetwork = message.vmwareEngineNetwork;
+                            if (message.vmwareEngineNetworkCanonical != null && message.hasOwnProperty("vmwareEngineNetworkCanonical"))
+                                object.vmwareEngineNetworkCanonical = message.vmwareEngineNetworkCanonical;
+                            if (message.managementIpAddressLayoutVersion != null && message.hasOwnProperty("managementIpAddressLayoutVersion"))
+                                object.managementIpAddressLayoutVersion = message.managementIpAddressLayoutVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NetworkConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NetworkConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NetworkConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.NetworkConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NetworkConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.NetworkConfig";
+                        };
+    
+                        return NetworkConfig;
+                    })();
+    
+                    v1.NodeTypeConfig = (function() {
+    
+                        /**
+                         * Properties of a NodeTypeConfig.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface INodeTypeConfig
+                         * @property {number|null} [nodeCount] NodeTypeConfig nodeCount
+                         * @property {number|null} [customCoreCount] NodeTypeConfig customCoreCount
+                         */
+    
+                        /**
+                         * Constructs a new NodeTypeConfig.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a NodeTypeConfig.
+                         * @implements INodeTypeConfig
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.INodeTypeConfig=} [properties] Properties to set
+                         */
+                        function NodeTypeConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NodeTypeConfig nodeCount.
+                         * @member {number} nodeCount
+                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
+                         * @instance
+                         */
+                        NodeTypeConfig.prototype.nodeCount = 0;
+    
+                        /**
+                         * NodeTypeConfig customCoreCount.
+                         * @member {number} customCoreCount
+                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
+                         * @instance
+                         */
+                        NodeTypeConfig.prototype.customCoreCount = 0;
+    
+                        /**
+                         * Creates a new NodeTypeConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.INodeTypeConfig=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.NodeTypeConfig} NodeTypeConfig instance
+                         */
+                        NodeTypeConfig.create = function create(properties) {
+                            return new NodeTypeConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NodeTypeConfig message. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeTypeConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.INodeTypeConfig} message NodeTypeConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NodeTypeConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.nodeCount != null && Object.hasOwnProperty.call(message, "nodeCount"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.nodeCount);
+                            if (message.customCoreCount != null && Object.hasOwnProperty.call(message, "customCoreCount"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.customCoreCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NodeTypeConfig message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeTypeConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.INodeTypeConfig} message NodeTypeConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NodeTypeConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NodeTypeConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.NodeTypeConfig} NodeTypeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NodeTypeConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.NodeTypeConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.nodeCount = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.customCoreCount = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NodeTypeConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.NodeTypeConfig} NodeTypeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NodeTypeConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NodeTypeConfig message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NodeTypeConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.nodeCount != null && message.hasOwnProperty("nodeCount"))
+                                if (!$util.isInteger(message.nodeCount))
+                                    return "nodeCount: integer expected";
+                            if (message.customCoreCount != null && message.hasOwnProperty("customCoreCount"))
+                                if (!$util.isInteger(message.customCoreCount))
+                                    return "customCoreCount: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NodeTypeConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.NodeTypeConfig} NodeTypeConfig
+                         */
+                        NodeTypeConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.NodeTypeConfig)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.NodeTypeConfig();
+                            if (object.nodeCount != null)
+                                message.nodeCount = object.nodeCount | 0;
+                            if (object.customCoreCount != null)
+                                message.customCoreCount = object.customCoreCount | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NodeTypeConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.NodeTypeConfig} message NodeTypeConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NodeTypeConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.nodeCount = 0;
+                                object.customCoreCount = 0;
+                            }
+                            if (message.nodeCount != null && message.hasOwnProperty("nodeCount"))
+                                object.nodeCount = message.nodeCount;
+                            if (message.customCoreCount != null && message.hasOwnProperty("customCoreCount"))
+                                object.customCoreCount = message.customCoreCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NodeTypeConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NodeTypeConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NodeTypeConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.NodeTypeConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NodeTypeConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.NodeTypeConfig";
+                        };
+    
+                        return NodeTypeConfig;
+                    })();
+    
+                    v1.PrivateCloud = (function() {
+    
+                        /**
+                         * Properties of a PrivateCloud.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IPrivateCloud
+                         * @property {string|null} [name] PrivateCloud name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] PrivateCloud createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] PrivateCloud updateTime
+                         * @property {google.protobuf.ITimestamp|null} [deleteTime] PrivateCloud deleteTime
+                         * @property {google.protobuf.ITimestamp|null} [expireTime] PrivateCloud expireTime
+                         * @property {google.cloud.vmwareengine.v1.PrivateCloud.State|null} [state] PrivateCloud state
+                         * @property {google.cloud.vmwareengine.v1.INetworkConfig|null} [networkConfig] PrivateCloud networkConfig
+                         * @property {google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster|null} [managementCluster] PrivateCloud managementCluster
+                         * @property {string|null} [description] PrivateCloud description
+                         * @property {google.cloud.vmwareengine.v1.IHcx|null} [hcx] PrivateCloud hcx
+                         * @property {google.cloud.vmwareengine.v1.INsx|null} [nsx] PrivateCloud nsx
+                         * @property {google.cloud.vmwareengine.v1.IVcenter|null} [vcenter] PrivateCloud vcenter
+                         * @property {string|null} [uid] PrivateCloud uid
+                         */
+    
+                        /**
+                         * Constructs a new PrivateCloud.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a PrivateCloud.
+                         * @implements IPrivateCloud
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IPrivateCloud=} [properties] Properties to set
+                         */
+                        function PrivateCloud(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PrivateCloud name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         */
+                        PrivateCloud.prototype.name = "";
+    
+                        /**
+                         * PrivateCloud createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         */
+                        PrivateCloud.prototype.createTime = null;
+    
+                        /**
+                         * PrivateCloud updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         */
+                        PrivateCloud.prototype.updateTime = null;
+    
+                        /**
+                         * PrivateCloud deleteTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         */
+                        PrivateCloud.prototype.deleteTime = null;
+    
+                        /**
+                         * PrivateCloud expireTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         */
+                        PrivateCloud.prototype.expireTime = null;
+    
+                        /**
+                         * PrivateCloud state.
+                         * @member {google.cloud.vmwareengine.v1.PrivateCloud.State} state
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         */
+                        PrivateCloud.prototype.state = 0;
+    
+                        /**
+                         * PrivateCloud networkConfig.
+                         * @member {google.cloud.vmwareengine.v1.INetworkConfig|null|undefined} networkConfig
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         */
+                        PrivateCloud.prototype.networkConfig = null;
+    
+                        /**
+                         * PrivateCloud managementCluster.
+                         * @member {google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster|null|undefined} managementCluster
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         */
+                        PrivateCloud.prototype.managementCluster = null;
+    
+                        /**
+                         * PrivateCloud description.
+                         * @member {string} description
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         */
+                        PrivateCloud.prototype.description = "";
+    
+                        /**
+                         * PrivateCloud hcx.
+                         * @member {google.cloud.vmwareengine.v1.IHcx|null|undefined} hcx
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         */
+                        PrivateCloud.prototype.hcx = null;
+    
+                        /**
+                         * PrivateCloud nsx.
+                         * @member {google.cloud.vmwareengine.v1.INsx|null|undefined} nsx
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         */
+                        PrivateCloud.prototype.nsx = null;
+    
+                        /**
+                         * PrivateCloud vcenter.
+                         * @member {google.cloud.vmwareengine.v1.IVcenter|null|undefined} vcenter
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         */
+                        PrivateCloud.prototype.vcenter = null;
+    
+                        /**
+                         * PrivateCloud uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         */
+                        PrivateCloud.prototype.uid = "";
+    
+                        /**
+                         * Creates a new PrivateCloud instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IPrivateCloud=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.PrivateCloud} PrivateCloud instance
+                         */
+                        PrivateCloud.create = function create(properties) {
+                            return new PrivateCloud(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PrivateCloud message. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IPrivateCloud} message PrivateCloud message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PrivateCloud.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.state);
+                            if (message.networkConfig != null && Object.hasOwnProperty.call(message, "networkConfig"))
+                                $root.google.cloud.vmwareengine.v1.NetworkConfig.encode(message.networkConfig, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.managementCluster != null && Object.hasOwnProperty.call(message, "managementCluster"))
+                                $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.encode(message.managementCluster, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.description);
+                            if (message.hcx != null && Object.hasOwnProperty.call(message, "hcx"))
+                                $root.google.cloud.vmwareengine.v1.Hcx.encode(message.hcx, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            if (message.nsx != null && Object.hasOwnProperty.call(message, "nsx"))
+                                $root.google.cloud.vmwareengine.v1.Nsx.encode(message.nsx, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                            if (message.vcenter != null && Object.hasOwnProperty.call(message, "vcenter"))
+                                $root.google.cloud.vmwareengine.v1.Vcenter.encode(message.vcenter, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 20, wireType 2 =*/162).string(message.uid);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PrivateCloud message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IPrivateCloud} message PrivateCloud message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PrivateCloud.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PrivateCloud message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.PrivateCloud} PrivateCloud
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PrivateCloud.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.PrivateCloud();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.networkConfig = $root.google.cloud.vmwareengine.v1.NetworkConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.managementCluster = $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.hcx = $root.google.cloud.vmwareengine.v1.Hcx.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 18: {
+                                        message.nsx = $root.google.cloud.vmwareengine.v1.Nsx.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 19: {
+                                        message.vcenter = $root.google.cloud.vmwareengine.v1.Vcenter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 20: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PrivateCloud message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.PrivateCloud} PrivateCloud
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PrivateCloud.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PrivateCloud message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PrivateCloud.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deleteTime);
+                                if (error)
+                                    return "deleteTime." + error;
+                            }
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                if (error)
+                                    return "expireTime." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.networkConfig != null && message.hasOwnProperty("networkConfig")) {
+                                var error = $root.google.cloud.vmwareengine.v1.NetworkConfig.verify(message.networkConfig);
+                                if (error)
+                                    return "networkConfig." + error;
+                            }
+                            if (message.managementCluster != null && message.hasOwnProperty("managementCluster")) {
+                                var error = $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.verify(message.managementCluster);
+                                if (error)
+                                    return "managementCluster." + error;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.hcx != null && message.hasOwnProperty("hcx")) {
+                                var error = $root.google.cloud.vmwareengine.v1.Hcx.verify(message.hcx);
+                                if (error)
+                                    return "hcx." + error;
+                            }
+                            if (message.nsx != null && message.hasOwnProperty("nsx")) {
+                                var error = $root.google.cloud.vmwareengine.v1.Nsx.verify(message.nsx);
+                                if (error)
+                                    return "nsx." + error;
+                            }
+                            if (message.vcenter != null && message.hasOwnProperty("vcenter")) {
+                                var error = $root.google.cloud.vmwareengine.v1.Vcenter.verify(message.vcenter);
+                                if (error)
+                                    return "vcenter." + error;
+                            }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PrivateCloud message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.PrivateCloud} PrivateCloud
+                         */
+                        PrivateCloud.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.PrivateCloud)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.PrivateCloud();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.deleteTime != null) {
+                                if (typeof object.deleteTime !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.deleteTime: object expected");
+                                message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime);
+                            }
+                            if (object.expireTime != null) {
+                                if (typeof object.expireTime !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.expireTime: object expected");
+                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ACTIVE":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "CREATING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "UPDATING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "FAILED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "DELETED":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "PURGING":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            }
+                            if (object.networkConfig != null) {
+                                if (typeof object.networkConfig !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.networkConfig: object expected");
+                                message.networkConfig = $root.google.cloud.vmwareengine.v1.NetworkConfig.fromObject(object.networkConfig);
+                            }
+                            if (object.managementCluster != null) {
+                                if (typeof object.managementCluster !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.managementCluster: object expected");
+                                message.managementCluster = $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.fromObject(object.managementCluster);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.hcx != null) {
+                                if (typeof object.hcx !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.hcx: object expected");
+                                message.hcx = $root.google.cloud.vmwareengine.v1.Hcx.fromObject(object.hcx);
+                            }
+                            if (object.nsx != null) {
+                                if (typeof object.nsx !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.nsx: object expected");
+                                message.nsx = $root.google.cloud.vmwareengine.v1.Nsx.fromObject(object.nsx);
+                            }
+                            if (object.vcenter != null) {
+                                if (typeof object.vcenter !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.vcenter: object expected");
+                                message.vcenter = $root.google.cloud.vmwareengine.v1.Vcenter.fromObject(object.vcenter);
+                            }
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PrivateCloud message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.PrivateCloud} message PrivateCloud
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PrivateCloud.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.deleteTime = null;
+                                object.expireTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.networkConfig = null;
+                                object.managementCluster = null;
+                                object.description = "";
+                                object.hcx = null;
+                                object.nsx = null;
+                                object.vcenter = null;
+                                object.uid = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
+                                object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.vmwareengine.v1.PrivateCloud.State[message.state] === undefined ? message.state : $root.google.cloud.vmwareengine.v1.PrivateCloud.State[message.state] : message.state;
+                            if (message.networkConfig != null && message.hasOwnProperty("networkConfig"))
+                                object.networkConfig = $root.google.cloud.vmwareengine.v1.NetworkConfig.toObject(message.networkConfig, options);
+                            if (message.managementCluster != null && message.hasOwnProperty("managementCluster"))
+                                object.managementCluster = $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.toObject(message.managementCluster, options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.hcx != null && message.hasOwnProperty("hcx"))
+                                object.hcx = $root.google.cloud.vmwareengine.v1.Hcx.toObject(message.hcx, options);
+                            if (message.nsx != null && message.hasOwnProperty("nsx"))
+                                object.nsx = $root.google.cloud.vmwareengine.v1.Nsx.toObject(message.nsx, options);
+                            if (message.vcenter != null && message.hasOwnProperty("vcenter"))
+                                object.vcenter = $root.google.cloud.vmwareengine.v1.Vcenter.toObject(message.vcenter, options);
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PrivateCloud to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PrivateCloud.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PrivateCloud
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PrivateCloud.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.PrivateCloud";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.vmwareengine.v1.PrivateCloud.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} ACTIVE=1 ACTIVE value
+                         * @property {number} CREATING=2 CREATING value
+                         * @property {number} UPDATING=3 UPDATING value
+                         * @property {number} FAILED=5 FAILED value
+                         * @property {number} DELETED=6 DELETED value
+                         * @property {number} PURGING=7 PURGING value
+                         */
+                        PrivateCloud.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ACTIVE"] = 1;
+                            values[valuesById[2] = "CREATING"] = 2;
+                            values[valuesById[3] = "UPDATING"] = 3;
+                            values[valuesById[5] = "FAILED"] = 5;
+                            values[valuesById[6] = "DELETED"] = 6;
+                            values[valuesById[7] = "PURGING"] = 7;
+                            return values;
+                        })();
+    
+                        PrivateCloud.ManagementCluster = (function() {
+    
+                            /**
+                             * Properties of a ManagementCluster.
+                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                             * @interface IManagementCluster
+                             * @property {string|null} [clusterId] ManagementCluster clusterId
+                             * @property {Object.<string,google.cloud.vmwareengine.v1.INodeTypeConfig>|null} [nodeTypeConfigs] ManagementCluster nodeTypeConfigs
+                             */
+    
+                            /**
+                             * Constructs a new ManagementCluster.
+                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud
+                             * @classdesc Represents a ManagementCluster.
+                             * @implements IManagementCluster
+                             * @constructor
+                             * @param {google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster=} [properties] Properties to set
+                             */
+                            function ManagementCluster(properties) {
+                                this.nodeTypeConfigs = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ManagementCluster clusterId.
+                             * @member {string} clusterId
+                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
+                             * @instance
+                             */
+                            ManagementCluster.prototype.clusterId = "";
+    
+                            /**
+                             * ManagementCluster nodeTypeConfigs.
+                             * @member {Object.<string,google.cloud.vmwareengine.v1.INodeTypeConfig>} nodeTypeConfigs
+                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
+                             * @instance
+                             */
+                            ManagementCluster.prototype.nodeTypeConfigs = $util.emptyObject;
+    
+                            /**
+                             * Creates a new ManagementCluster instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
+                             * @static
+                             * @param {google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster=} [properties] Properties to set
+                             * @returns {google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster} ManagementCluster instance
+                             */
+                            ManagementCluster.create = function create(properties) {
+                                return new ManagementCluster(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ManagementCluster message. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
+                             * @static
+                             * @param {google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster} message ManagementCluster message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ManagementCluster.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.clusterId != null && Object.hasOwnProperty.call(message, "clusterId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.clusterId);
+                                if (message.nodeTypeConfigs != null && Object.hasOwnProperty.call(message, "nodeTypeConfigs"))
+                                    for (var keys = Object.keys(message.nodeTypeConfigs), i = 0; i < keys.length; ++i) {
+                                        writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                        $root.google.cloud.vmwareengine.v1.NodeTypeConfig.encode(message.nodeTypeConfigs[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                    }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ManagementCluster message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
+                             * @static
+                             * @param {google.cloud.vmwareengine.v1.PrivateCloud.IManagementCluster} message ManagementCluster message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ManagementCluster.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ManagementCluster message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster} ManagementCluster
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ManagementCluster.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.clusterId = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            if (message.nodeTypeConfigs === $util.emptyObject)
+                                                message.nodeTypeConfigs = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = null;
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.decode(reader, reader.uint32());
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.nodeTypeConfigs[key] = value;
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ManagementCluster message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster} ManagementCluster
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ManagementCluster.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ManagementCluster message.
+                             * @function verify
+                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ManagementCluster.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.clusterId != null && message.hasOwnProperty("clusterId"))
+                                    if (!$util.isString(message.clusterId))
+                                        return "clusterId: string expected";
+                                if (message.nodeTypeConfigs != null && message.hasOwnProperty("nodeTypeConfigs")) {
+                                    if (!$util.isObject(message.nodeTypeConfigs))
+                                        return "nodeTypeConfigs: object expected";
+                                    var key = Object.keys(message.nodeTypeConfigs);
+                                    for (var i = 0; i < key.length; ++i) {
+                                        var error = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.verify(message.nodeTypeConfigs[key[i]]);
+                                        if (error)
+                                            return "nodeTypeConfigs." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ManagementCluster message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster} ManagementCluster
+                             */
+                            ManagementCluster.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster)
+                                    return object;
+                                var message = new $root.google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster();
+                                if (object.clusterId != null)
+                                    message.clusterId = String(object.clusterId);
+                                if (object.nodeTypeConfigs) {
+                                    if (typeof object.nodeTypeConfigs !== "object")
+                                        throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.nodeTypeConfigs: object expected");
+                                    message.nodeTypeConfigs = {};
+                                    for (var keys = Object.keys(object.nodeTypeConfigs), i = 0; i < keys.length; ++i) {
+                                        if (typeof object.nodeTypeConfigs[keys[i]] !== "object")
+                                            throw TypeError(".google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster.nodeTypeConfigs: object expected");
+                                        message.nodeTypeConfigs[keys[i]] = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.fromObject(object.nodeTypeConfigs[keys[i]]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ManagementCluster message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
+                             * @static
+                             * @param {google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster} message ManagementCluster
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ManagementCluster.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.nodeTypeConfigs = {};
+                                if (options.defaults)
+                                    object.clusterId = "";
+                                if (message.clusterId != null && message.hasOwnProperty("clusterId"))
+                                    object.clusterId = message.clusterId;
+                                var keys2;
+                                if (message.nodeTypeConfigs && (keys2 = Object.keys(message.nodeTypeConfigs)).length) {
+                                    object.nodeTypeConfigs = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.nodeTypeConfigs[keys2[j]] = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.toObject(message.nodeTypeConfigs[keys2[j]], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ManagementCluster to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ManagementCluster.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ManagementCluster
+                             * @function getTypeUrl
+                             * @memberof google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ManagementCluster.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.vmwareengine.v1.PrivateCloud.ManagementCluster";
+                            };
+    
+                            return ManagementCluster;
+                        })();
+    
+                        return PrivateCloud;
+                    })();
+    
+                    v1.Cluster = (function() {
+    
+                        /**
+                         * Properties of a Cluster.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface ICluster
+                         * @property {string|null} [name] Cluster name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Cluster createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Cluster updateTime
+                         * @property {google.cloud.vmwareengine.v1.Cluster.State|null} [state] Cluster state
+                         * @property {boolean|null} [management] Cluster management
+                         * @property {string|null} [uid] Cluster uid
+                         * @property {Object.<string,google.cloud.vmwareengine.v1.INodeTypeConfig>|null} [nodeTypeConfigs] Cluster nodeTypeConfigs
+                         */
+    
+                        /**
+                         * Constructs a new Cluster.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a Cluster.
+                         * @implements ICluster
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.ICluster=} [properties] Properties to set
+                         */
+                        function Cluster(properties) {
+                            this.nodeTypeConfigs = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Cluster name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.name = "";
+    
+                        /**
+                         * Cluster createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.createTime = null;
+    
+                        /**
+                         * Cluster updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.updateTime = null;
+    
+                        /**
+                         * Cluster state.
+                         * @member {google.cloud.vmwareengine.v1.Cluster.State} state
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.state = 0;
+    
+                        /**
+                         * Cluster management.
+                         * @member {boolean} management
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.management = false;
+    
+                        /**
+                         * Cluster uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.uid = "";
+    
+                        /**
+                         * Cluster nodeTypeConfigs.
+                         * @member {Object.<string,google.cloud.vmwareengine.v1.INodeTypeConfig>} nodeTypeConfigs
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.nodeTypeConfigs = $util.emptyObject;
+    
+                        /**
+                         * Creates a new Cluster instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICluster=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.Cluster} Cluster instance
+                         */
+                        Cluster.create = function create(properties) {
+                            return new Cluster(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Cluster message. Does not implicitly {@link google.cloud.vmwareengine.v1.Cluster.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICluster} message Cluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Cluster.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.state);
+                            if (message.management != null && Object.hasOwnProperty.call(message, "management"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.management);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.uid);
+                            if (message.nodeTypeConfigs != null && Object.hasOwnProperty.call(message, "nodeTypeConfigs"))
+                                for (var keys = Object.keys(message.nodeTypeConfigs), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 16, wireType 2 =*/130).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.vmwareengine.v1.NodeTypeConfig.encode(message.nodeTypeConfigs[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Cluster message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Cluster.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICluster} message Cluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Cluster.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Cluster message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.Cluster} Cluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Cluster.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.Cluster(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.management = reader.bool();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        if (message.nodeTypeConfigs === $util.emptyObject)
+                                            message.nodeTypeConfigs = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.nodeTypeConfigs[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Cluster message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.Cluster} Cluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Cluster.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Cluster message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Cluster.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.management != null && message.hasOwnProperty("management"))
+                                if (typeof message.management !== "boolean")
+                                    return "management: boolean expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.nodeTypeConfigs != null && message.hasOwnProperty("nodeTypeConfigs")) {
+                                if (!$util.isObject(message.nodeTypeConfigs))
+                                    return "nodeTypeConfigs: object expected";
+                                var key = Object.keys(message.nodeTypeConfigs);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.verify(message.nodeTypeConfigs[key[i]]);
+                                    if (error)
+                                        return "nodeTypeConfigs." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Cluster message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.Cluster} Cluster
+                         */
+                        Cluster.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.Cluster)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.Cluster();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.Cluster.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.Cluster.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ACTIVE":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "CREATING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "UPDATING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "DELETING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "REPAIRING":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.management != null)
+                                message.management = Boolean(object.management);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.nodeTypeConfigs) {
+                                if (typeof object.nodeTypeConfigs !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.Cluster.nodeTypeConfigs: object expected");
+                                message.nodeTypeConfigs = {};
+                                for (var keys = Object.keys(object.nodeTypeConfigs), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.nodeTypeConfigs[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.vmwareengine.v1.Cluster.nodeTypeConfigs: object expected");
+                                    message.nodeTypeConfigs[keys[i]] = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.fromObject(object.nodeTypeConfigs[keys[i]]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Cluster message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.Cluster} message Cluster
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Cluster.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.nodeTypeConfigs = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.management = false;
+                                object.uid = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.vmwareengine.v1.Cluster.State[message.state] === undefined ? message.state : $root.google.cloud.vmwareengine.v1.Cluster.State[message.state] : message.state;
+                            if (message.management != null && message.hasOwnProperty("management"))
+                                object.management = message.management;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            var keys2;
+                            if (message.nodeTypeConfigs && (keys2 = Object.keys(message.nodeTypeConfigs)).length) {
+                                object.nodeTypeConfigs = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.nodeTypeConfigs[keys2[j]] = $root.google.cloud.vmwareengine.v1.NodeTypeConfig.toObject(message.nodeTypeConfigs[keys2[j]], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Cluster to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Cluster.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Cluster
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.Cluster
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Cluster.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.Cluster";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.vmwareengine.v1.Cluster.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} ACTIVE=1 ACTIVE value
+                         * @property {number} CREATING=2 CREATING value
+                         * @property {number} UPDATING=3 UPDATING value
+                         * @property {number} DELETING=4 DELETING value
+                         * @property {number} REPAIRING=5 REPAIRING value
+                         */
+                        Cluster.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ACTIVE"] = 1;
+                            values[valuesById[2] = "CREATING"] = 2;
+                            values[valuesById[3] = "UPDATING"] = 3;
+                            values[valuesById[4] = "DELETING"] = 4;
+                            values[valuesById[5] = "REPAIRING"] = 5;
+                            return values;
+                        })();
+    
+                        return Cluster;
+                    })();
+    
+                    v1.Subnet = (function() {
+    
+                        /**
+                         * Properties of a Subnet.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface ISubnet
+                         * @property {string|null} [name] Subnet name
+                         * @property {string|null} [ipCidrRange] Subnet ipCidrRange
+                         * @property {string|null} [gatewayIp] Subnet gatewayIp
+                         * @property {string|null} [type] Subnet type
+                         * @property {google.cloud.vmwareengine.v1.Subnet.State|null} [state] Subnet state
+                         */
+    
+                        /**
+                         * Constructs a new Subnet.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a Subnet.
+                         * @implements ISubnet
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.ISubnet=} [properties] Properties to set
+                         */
+                        function Subnet(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Subnet name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @instance
+                         */
+                        Subnet.prototype.name = "";
+    
+                        /**
+                         * Subnet ipCidrRange.
+                         * @member {string} ipCidrRange
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @instance
+                         */
+                        Subnet.prototype.ipCidrRange = "";
+    
+                        /**
+                         * Subnet gatewayIp.
+                         * @member {string} gatewayIp
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @instance
+                         */
+                        Subnet.prototype.gatewayIp = "";
+    
+                        /**
+                         * Subnet type.
+                         * @member {string} type
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @instance
+                         */
+                        Subnet.prototype.type = "";
+    
+                        /**
+                         * Subnet state.
+                         * @member {google.cloud.vmwareengine.v1.Subnet.State} state
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @instance
+                         */
+                        Subnet.prototype.state = 0;
+    
+                        /**
+                         * Creates a new Subnet instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ISubnet=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.Subnet} Subnet instance
+                         */
+                        Subnet.create = function create(properties) {
+                            return new Subnet(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Subnet message. Does not implicitly {@link google.cloud.vmwareengine.v1.Subnet.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ISubnet} message Subnet message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Subnet.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.ipCidrRange != null && Object.hasOwnProperty.call(message, "ipCidrRange"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.ipCidrRange);
+                            if (message.gatewayIp != null && Object.hasOwnProperty.call(message, "gatewayIp"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.gatewayIp);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.type);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.state);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Subnet message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Subnet.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ISubnet} message Subnet message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Subnet.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Subnet message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.Subnet} Subnet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Subnet.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.Subnet();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.ipCidrRange = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.gatewayIp = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.type = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Subnet message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.Subnet} Subnet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Subnet.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Subnet message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Subnet.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.ipCidrRange != null && message.hasOwnProperty("ipCidrRange"))
+                                if (!$util.isString(message.ipCidrRange))
+                                    return "ipCidrRange: string expected";
+                            if (message.gatewayIp != null && message.hasOwnProperty("gatewayIp"))
+                                if (!$util.isString(message.gatewayIp))
+                                    return "gatewayIp: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Subnet message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.Subnet} Subnet
+                         */
+                        Subnet.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.Subnet)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.Subnet();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.ipCidrRange != null)
+                                message.ipCidrRange = String(object.ipCidrRange);
+                            if (object.gatewayIp != null)
+                                message.gatewayIp = String(object.gatewayIp);
+                            if (object.type != null)
+                                message.type = String(object.type);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ACTIVE":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "CREATING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "UPDATING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "DELETING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Subnet message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.Subnet} message Subnet
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Subnet.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.ipCidrRange = "";
+                                object.gatewayIp = "";
+                                object.type = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.ipCidrRange != null && message.hasOwnProperty("ipCidrRange"))
+                                object.ipCidrRange = message.ipCidrRange;
+                            if (message.gatewayIp != null && message.hasOwnProperty("gatewayIp"))
+                                object.gatewayIp = message.gatewayIp;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = message.type;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.vmwareengine.v1.Subnet.State[message.state] === undefined ? message.state : $root.google.cloud.vmwareengine.v1.Subnet.State[message.state] : message.state;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Subnet to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Subnet.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Subnet
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.Subnet
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Subnet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.Subnet";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.vmwareengine.v1.Subnet.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} ACTIVE=1 ACTIVE value
+                         * @property {number} CREATING=2 CREATING value
+                         * @property {number} UPDATING=3 UPDATING value
+                         * @property {number} DELETING=4 DELETING value
+                         */
+                        Subnet.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ACTIVE"] = 1;
+                            values[valuesById[2] = "CREATING"] = 2;
+                            values[valuesById[3] = "UPDATING"] = 3;
+                            values[valuesById[4] = "DELETING"] = 4;
+                            return values;
+                        })();
+    
+                        return Subnet;
+                    })();
+    
+                    v1.NodeType = (function() {
+    
+                        /**
+                         * Properties of a NodeType.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface INodeType
+                         * @property {string|null} [name] NodeType name
+                         * @property {string|null} [nodeTypeId] NodeType nodeTypeId
+                         * @property {string|null} [displayName] NodeType displayName
+                         * @property {number|null} [virtualCpuCount] NodeType virtualCpuCount
+                         * @property {number|null} [totalCoreCount] NodeType totalCoreCount
+                         * @property {number|null} [memoryGb] NodeType memoryGb
+                         * @property {number|null} [diskSizeGb] NodeType diskSizeGb
+                         * @property {Array.<number>|null} [availableCustomCoreCounts] NodeType availableCustomCoreCounts
+                         */
+    
+                        /**
+                         * Constructs a new NodeType.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a NodeType.
+                         * @implements INodeType
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.INodeType=} [properties] Properties to set
+                         */
+                        function NodeType(properties) {
+                            this.availableCustomCoreCounts = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NodeType name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @instance
+                         */
+                        NodeType.prototype.name = "";
+    
+                        /**
+                         * NodeType nodeTypeId.
+                         * @member {string} nodeTypeId
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @instance
+                         */
+                        NodeType.prototype.nodeTypeId = "";
+    
+                        /**
+                         * NodeType displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @instance
+                         */
+                        NodeType.prototype.displayName = "";
+    
+                        /**
+                         * NodeType virtualCpuCount.
+                         * @member {number} virtualCpuCount
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @instance
+                         */
+                        NodeType.prototype.virtualCpuCount = 0;
+    
+                        /**
+                         * NodeType totalCoreCount.
+                         * @member {number} totalCoreCount
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @instance
+                         */
+                        NodeType.prototype.totalCoreCount = 0;
+    
+                        /**
+                         * NodeType memoryGb.
+                         * @member {number} memoryGb
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @instance
+                         */
+                        NodeType.prototype.memoryGb = 0;
+    
+                        /**
+                         * NodeType diskSizeGb.
+                         * @member {number} diskSizeGb
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @instance
+                         */
+                        NodeType.prototype.diskSizeGb = 0;
+    
+                        /**
+                         * NodeType availableCustomCoreCounts.
+                         * @member {Array.<number>} availableCustomCoreCounts
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @instance
+                         */
+                        NodeType.prototype.availableCustomCoreCounts = $util.emptyArray;
+    
+                        /**
+                         * Creates a new NodeType instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.INodeType=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.NodeType} NodeType instance
+                         */
+                        NodeType.create = function create(properties) {
+                            return new NodeType(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NodeType message. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeType.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.INodeType} message NodeType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NodeType.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.nodeTypeId != null && Object.hasOwnProperty.call(message, "nodeTypeId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nodeTypeId);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
+                            if (message.virtualCpuCount != null && Object.hasOwnProperty.call(message, "virtualCpuCount"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.virtualCpuCount);
+                            if (message.totalCoreCount != null && Object.hasOwnProperty.call(message, "totalCoreCount"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.totalCoreCount);
+                            if (message.memoryGb != null && Object.hasOwnProperty.call(message, "memoryGb"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.memoryGb);
+                            if (message.diskSizeGb != null && Object.hasOwnProperty.call(message, "diskSizeGb"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.diskSizeGb);
+                            if (message.availableCustomCoreCounts != null && message.availableCustomCoreCounts.length) {
+                                writer.uint32(/* id 11, wireType 2 =*/90).fork();
+                                for (var i = 0; i < message.availableCustomCoreCounts.length; ++i)
+                                    writer.int32(message.availableCustomCoreCounts[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NodeType message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.NodeType.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.INodeType} message NodeType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NodeType.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NodeType message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.NodeType} NodeType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NodeType.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.NodeType();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nodeTypeId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.virtualCpuCount = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.totalCoreCount = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.memoryGb = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.diskSizeGb = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.availableCustomCoreCounts && message.availableCustomCoreCounts.length))
+                                            message.availableCustomCoreCounts = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.availableCustomCoreCounts.push(reader.int32());
+                                        } else
+                                            message.availableCustomCoreCounts.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NodeType message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.NodeType} NodeType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NodeType.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NodeType message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NodeType.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.nodeTypeId != null && message.hasOwnProperty("nodeTypeId"))
+                                if (!$util.isString(message.nodeTypeId))
+                                    return "nodeTypeId: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.virtualCpuCount != null && message.hasOwnProperty("virtualCpuCount"))
+                                if (!$util.isInteger(message.virtualCpuCount))
+                                    return "virtualCpuCount: integer expected";
+                            if (message.totalCoreCount != null && message.hasOwnProperty("totalCoreCount"))
+                                if (!$util.isInteger(message.totalCoreCount))
+                                    return "totalCoreCount: integer expected";
+                            if (message.memoryGb != null && message.hasOwnProperty("memoryGb"))
+                                if (!$util.isInteger(message.memoryGb))
+                                    return "memoryGb: integer expected";
+                            if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
+                                if (!$util.isInteger(message.diskSizeGb))
+                                    return "diskSizeGb: integer expected";
+                            if (message.availableCustomCoreCounts != null && message.hasOwnProperty("availableCustomCoreCounts")) {
+                                if (!Array.isArray(message.availableCustomCoreCounts))
+                                    return "availableCustomCoreCounts: array expected";
+                                for (var i = 0; i < message.availableCustomCoreCounts.length; ++i)
+                                    if (!$util.isInteger(message.availableCustomCoreCounts[i]))
+                                        return "availableCustomCoreCounts: integer[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NodeType message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.NodeType} NodeType
+                         */
+                        NodeType.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.NodeType)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.NodeType();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.nodeTypeId != null)
+                                message.nodeTypeId = String(object.nodeTypeId);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.virtualCpuCount != null)
+                                message.virtualCpuCount = object.virtualCpuCount | 0;
+                            if (object.totalCoreCount != null)
+                                message.totalCoreCount = object.totalCoreCount | 0;
+                            if (object.memoryGb != null)
+                                message.memoryGb = object.memoryGb | 0;
+                            if (object.diskSizeGb != null)
+                                message.diskSizeGb = object.diskSizeGb | 0;
+                            if (object.availableCustomCoreCounts) {
+                                if (!Array.isArray(object.availableCustomCoreCounts))
+                                    throw TypeError(".google.cloud.vmwareengine.v1.NodeType.availableCustomCoreCounts: array expected");
+                                message.availableCustomCoreCounts = [];
+                                for (var i = 0; i < object.availableCustomCoreCounts.length; ++i)
+                                    message.availableCustomCoreCounts[i] = object.availableCustomCoreCounts[i] | 0;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NodeType message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.NodeType} message NodeType
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NodeType.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.availableCustomCoreCounts = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.nodeTypeId = "";
+                                object.displayName = "";
+                                object.virtualCpuCount = 0;
+                                object.totalCoreCount = 0;
+                                object.memoryGb = 0;
+                                object.diskSizeGb = 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.nodeTypeId != null && message.hasOwnProperty("nodeTypeId"))
+                                object.nodeTypeId = message.nodeTypeId;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.virtualCpuCount != null && message.hasOwnProperty("virtualCpuCount"))
+                                object.virtualCpuCount = message.virtualCpuCount;
+                            if (message.totalCoreCount != null && message.hasOwnProperty("totalCoreCount"))
+                                object.totalCoreCount = message.totalCoreCount;
+                            if (message.memoryGb != null && message.hasOwnProperty("memoryGb"))
+                                object.memoryGb = message.memoryGb;
+                            if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
+                                object.diskSizeGb = message.diskSizeGb;
+                            if (message.availableCustomCoreCounts && message.availableCustomCoreCounts.length) {
+                                object.availableCustomCoreCounts = [];
+                                for (var j = 0; j < message.availableCustomCoreCounts.length; ++j)
+                                    object.availableCustomCoreCounts[j] = message.availableCustomCoreCounts[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NodeType to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NodeType.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NodeType
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.NodeType
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NodeType.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.NodeType";
+                        };
+    
+                        return NodeType;
+                    })();
+    
+                    v1.Credentials = (function() {
+    
+                        /**
+                         * Properties of a Credentials.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface ICredentials
+                         * @property {string|null} [username] Credentials username
+                         * @property {string|null} [password] Credentials password
+                         */
+    
+                        /**
+                         * Constructs a new Credentials.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a Credentials.
+                         * @implements ICredentials
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.ICredentials=} [properties] Properties to set
+                         */
+                        function Credentials(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Credentials username.
+                         * @member {string} username
+                         * @memberof google.cloud.vmwareengine.v1.Credentials
+                         * @instance
+                         */
+                        Credentials.prototype.username = "";
+    
+                        /**
+                         * Credentials password.
+                         * @member {string} password
+                         * @memberof google.cloud.vmwareengine.v1.Credentials
+                         * @instance
+                         */
+                        Credentials.prototype.password = "";
+    
+                        /**
+                         * Creates a new Credentials instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.Credentials
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICredentials=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.Credentials} Credentials instance
+                         */
+                        Credentials.create = function create(properties) {
+                            return new Credentials(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Credentials message. Does not implicitly {@link google.cloud.vmwareengine.v1.Credentials.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.Credentials
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICredentials} message Credentials message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Credentials.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.username);
+                            if (message.password != null && Object.hasOwnProperty.call(message, "password"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.password);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Credentials message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.Credentials.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.Credentials
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.ICredentials} message Credentials message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Credentials.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Credentials message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.Credentials
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.Credentials} Credentials
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Credentials.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.Credentials();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.username = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.password = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Credentials message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.Credentials
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.Credentials} Credentials
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Credentials.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Credentials message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.Credentials
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Credentials.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                if (!$util.isString(message.username))
+                                    return "username: string expected";
+                            if (message.password != null && message.hasOwnProperty("password"))
+                                if (!$util.isString(message.password))
+                                    return "password: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Credentials message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.Credentials
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.Credentials} Credentials
+                         */
+                        Credentials.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.Credentials)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.Credentials();
+                            if (object.username != null)
+                                message.username = String(object.username);
+                            if (object.password != null)
+                                message.password = String(object.password);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Credentials message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.Credentials
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.Credentials} message Credentials
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Credentials.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.username = "";
+                                object.password = "";
+                            }
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                object.username = message.username;
+                            if (message.password != null && message.hasOwnProperty("password"))
+                                object.password = message.password;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Credentials to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.Credentials
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Credentials.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Credentials
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.Credentials
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Credentials.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.Credentials";
+                        };
+    
+                        return Credentials;
+                    })();
+    
+                    v1.HcxActivationKey = (function() {
+    
+                        /**
+                         * Properties of a HcxActivationKey.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @interface IHcxActivationKey
+                         * @property {string|null} [name] HcxActivationKey name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] HcxActivationKey createTime
+                         * @property {google.cloud.vmwareengine.v1.HcxActivationKey.State|null} [state] HcxActivationKey state
+                         * @property {string|null} [activationKey] HcxActivationKey activationKey
+                         * @property {string|null} [uid] HcxActivationKey uid
+                         */
+    
+                        /**
+                         * Constructs a new HcxActivationKey.
+                         * @memberof google.cloud.vmwareengine.v1
+                         * @classdesc Represents a HcxActivationKey.
+                         * @implements IHcxActivationKey
+                         * @constructor
+                         * @param {google.cloud.vmwareengine.v1.IHcxActivationKey=} [properties] Properties to set
+                         */
+                        function HcxActivationKey(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HcxActivationKey name.
+                         * @member {string} name
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @instance
+                         */
+                        HcxActivationKey.prototype.name = "";
+    
+                        /**
+                         * HcxActivationKey createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @instance
+                         */
+                        HcxActivationKey.prototype.createTime = null;
+    
+                        /**
+                         * HcxActivationKey state.
+                         * @member {google.cloud.vmwareengine.v1.HcxActivationKey.State} state
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @instance
+                         */
+                        HcxActivationKey.prototype.state = 0;
+    
+                        /**
+                         * HcxActivationKey activationKey.
+                         * @member {string} activationKey
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @instance
+                         */
+                        HcxActivationKey.prototype.activationKey = "";
+    
+                        /**
+                         * HcxActivationKey uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @instance
+                         */
+                        HcxActivationKey.prototype.uid = "";
+    
+                        /**
+                         * Creates a new HcxActivationKey instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IHcxActivationKey=} [properties] Properties to set
+                         * @returns {google.cloud.vmwareengine.v1.HcxActivationKey} HcxActivationKey instance
+                         */
+                        HcxActivationKey.create = function create(properties) {
+                            return new HcxActivationKey(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HcxActivationKey message. Does not implicitly {@link google.cloud.vmwareengine.v1.HcxActivationKey.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IHcxActivationKey} message HcxActivationKey message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HcxActivationKey.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.activationKey != null && Object.hasOwnProperty.call(message, "activationKey"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.activationKey);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.uid);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HcxActivationKey message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.HcxActivationKey.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.IHcxActivationKey} message HcxActivationKey message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HcxActivationKey.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HcxActivationKey message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vmwareengine.v1.HcxActivationKey} HcxActivationKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HcxActivationKey.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.HcxActivationKey();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.activationKey = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HcxActivationKey message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vmwareengine.v1.HcxActivationKey} HcxActivationKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HcxActivationKey.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HcxActivationKey message.
+                         * @function verify
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HcxActivationKey.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.activationKey != null && message.hasOwnProperty("activationKey"))
+                                if (!$util.isString(message.activationKey))
+                                    return "activationKey: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HcxActivationKey message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vmwareengine.v1.HcxActivationKey} HcxActivationKey
+                         */
+                        HcxActivationKey.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vmwareengine.v1.HcxActivationKey)
+                                return object;
+                            var message = new $root.google.cloud.vmwareengine.v1.HcxActivationKey();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.vmwareengine.v1.HcxActivationKey.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "AVAILABLE":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "CONSUMED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "CREATING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            if (object.activationKey != null)
+                                message.activationKey = String(object.activationKey);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HcxActivationKey message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @static
+                         * @param {google.cloud.vmwareengine.v1.HcxActivationKey} message HcxActivationKey
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HcxActivationKey.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.activationKey = "";
+                                object.uid = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.vmwareengine.v1.HcxActivationKey.State[message.state] === undefined ? message.state : $root.google.cloud.vmwareengine.v1.HcxActivationKey.State[message.state] : message.state;
+                            if (message.activationKey != null && message.hasOwnProperty("activationKey"))
+                                object.activationKey = message.activationKey;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HcxActivationKey to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HcxActivationKey.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for HcxActivationKey
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vmwareengine.v1.HcxActivationKey
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HcxActivationKey.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.HcxActivationKey";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.vmwareengine.v1.HcxActivationKey.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} AVAILABLE=1 AVAILABLE value
+                         * @property {number} CONSUMED=2 CONSUMED value
+                         * @property {number} CREATING=3 CREATING value
+                         */
+                        HcxActivationKey.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AVAILABLE"] = 1;
+                            values[valuesById[2] = "CONSUMED"] = 2;
+                            values[valuesById[3] = "CREATING"] = 3;
+                            return values;
+                        })();
+    
+                        return HcxActivationKey;
                     })();
     
                     v1.Hcx = (function() {
@@ -12859,1558 +15986,6 @@
                         return NetworkPolicy;
                     })();
     
-                    v1.ListNetworkPoliciesRequest = (function() {
-    
-                        /**
-                         * Properties of a ListNetworkPoliciesRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface IListNetworkPoliciesRequest
-                         * @property {string|null} [parent] ListNetworkPoliciesRequest parent
-                         * @property {number|null} [pageSize] ListNetworkPoliciesRequest pageSize
-                         * @property {string|null} [pageToken] ListNetworkPoliciesRequest pageToken
-                         * @property {string|null} [filter] ListNetworkPoliciesRequest filter
-                         * @property {string|null} [orderBy] ListNetworkPoliciesRequest orderBy
-                         */
-    
-                        /**
-                         * Constructs a new ListNetworkPoliciesRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a ListNetworkPoliciesRequest.
-                         * @implements IListNetworkPoliciesRequest
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesRequest=} [properties] Properties to set
-                         */
-                        function ListNetworkPoliciesRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ListNetworkPoliciesRequest parent.
-                         * @member {string} parent
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @instance
-                         */
-                        ListNetworkPoliciesRequest.prototype.parent = "";
-    
-                        /**
-                         * ListNetworkPoliciesRequest pageSize.
-                         * @member {number} pageSize
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @instance
-                         */
-                        ListNetworkPoliciesRequest.prototype.pageSize = 0;
-    
-                        /**
-                         * ListNetworkPoliciesRequest pageToken.
-                         * @member {string} pageToken
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @instance
-                         */
-                        ListNetworkPoliciesRequest.prototype.pageToken = "";
-    
-                        /**
-                         * ListNetworkPoliciesRequest filter.
-                         * @member {string} filter
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @instance
-                         */
-                        ListNetworkPoliciesRequest.prototype.filter = "";
-    
-                        /**
-                         * ListNetworkPoliciesRequest orderBy.
-                         * @member {string} orderBy
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @instance
-                         */
-                        ListNetworkPoliciesRequest.prototype.orderBy = "";
-    
-                        /**
-                         * Creates a new ListNetworkPoliciesRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesRequest=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest} ListNetworkPoliciesRequest instance
-                         */
-                        ListNetworkPoliciesRequest.create = function create(properties) {
-                            return new ListNetworkPoliciesRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ListNetworkPoliciesRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesRequest} message ListNetworkPoliciesRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ListNetworkPoliciesRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
-                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
-                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
-                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ListNetworkPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesRequest} message ListNetworkPoliciesRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ListNetworkPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ListNetworkPoliciesRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest} ListNetworkPoliciesRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ListNetworkPoliciesRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.parent = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.pageSize = reader.int32();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.pageToken = reader.string();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.filter = reader.string();
-                                        break;
-                                    }
-                                case 5: {
-                                        message.orderBy = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ListNetworkPoliciesRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest} ListNetworkPoliciesRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ListNetworkPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ListNetworkPoliciesRequest message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ListNetworkPoliciesRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                if (!$util.isString(message.parent))
-                                    return "parent: string expected";
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                                if (!$util.isInteger(message.pageSize))
-                                    return "pageSize: integer expected";
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                                if (!$util.isString(message.pageToken))
-                                    return "pageToken: string expected";
-                            if (message.filter != null && message.hasOwnProperty("filter"))
-                                if (!$util.isString(message.filter))
-                                    return "filter: string expected";
-                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
-                                if (!$util.isString(message.orderBy))
-                                    return "orderBy: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ListNetworkPoliciesRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest} ListNetworkPoliciesRequest
-                         */
-                        ListNetworkPoliciesRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest();
-                            if (object.parent != null)
-                                message.parent = String(object.parent);
-                            if (object.pageSize != null)
-                                message.pageSize = object.pageSize | 0;
-                            if (object.pageToken != null)
-                                message.pageToken = String(object.pageToken);
-                            if (object.filter != null)
-                                message.filter = String(object.filter);
-                            if (object.orderBy != null)
-                                message.orderBy = String(object.orderBy);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ListNetworkPoliciesRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest} message ListNetworkPoliciesRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ListNetworkPoliciesRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.parent = "";
-                                object.pageSize = 0;
-                                object.pageToken = "";
-                                object.filter = "";
-                                object.orderBy = "";
-                            }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                object.parent = message.parent;
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                                object.pageSize = message.pageSize;
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                                object.pageToken = message.pageToken;
-                            if (message.filter != null && message.hasOwnProperty("filter"))
-                                object.filter = message.filter;
-                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
-                                object.orderBy = message.orderBy;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ListNetworkPoliciesRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ListNetworkPoliciesRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ListNetworkPoliciesRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ListNetworkPoliciesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest";
-                        };
-    
-                        return ListNetworkPoliciesRequest;
-                    })();
-    
-                    v1.ListNetworkPoliciesResponse = (function() {
-    
-                        /**
-                         * Properties of a ListNetworkPoliciesResponse.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface IListNetworkPoliciesResponse
-                         * @property {Array.<google.cloud.vmwareengine.v1.INetworkPolicy>|null} [networkPolicies] ListNetworkPoliciesResponse networkPolicies
-                         * @property {string|null} [nextPageToken] ListNetworkPoliciesResponse nextPageToken
-                         * @property {Array.<string>|null} [unreachable] ListNetworkPoliciesResponse unreachable
-                         */
-    
-                        /**
-                         * Constructs a new ListNetworkPoliciesResponse.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a ListNetworkPoliciesResponse.
-                         * @implements IListNetworkPoliciesResponse
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesResponse=} [properties] Properties to set
-                         */
-                        function ListNetworkPoliciesResponse(properties) {
-                            this.networkPolicies = [];
-                            this.unreachable = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ListNetworkPoliciesResponse networkPolicies.
-                         * @member {Array.<google.cloud.vmwareengine.v1.INetworkPolicy>} networkPolicies
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
-                         * @instance
-                         */
-                        ListNetworkPoliciesResponse.prototype.networkPolicies = $util.emptyArray;
-    
-                        /**
-                         * ListNetworkPoliciesResponse nextPageToken.
-                         * @member {string} nextPageToken
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
-                         * @instance
-                         */
-                        ListNetworkPoliciesResponse.prototype.nextPageToken = "";
-    
-                        /**
-                         * ListNetworkPoliciesResponse unreachable.
-                         * @member {Array.<string>} unreachable
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
-                         * @instance
-                         */
-                        ListNetworkPoliciesResponse.prototype.unreachable = $util.emptyArray;
-    
-                        /**
-                         * Creates a new ListNetworkPoliciesResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesResponse=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse} ListNetworkPoliciesResponse instance
-                         */
-                        ListNetworkPoliciesResponse.create = function create(properties) {
-                            return new ListNetworkPoliciesResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ListNetworkPoliciesResponse message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesResponse} message ListNetworkPoliciesResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ListNetworkPoliciesResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.networkPolicies != null && message.networkPolicies.length)
-                                for (var i = 0; i < message.networkPolicies.length; ++i)
-                                    $root.google.cloud.vmwareengine.v1.NetworkPolicy.encode(message.networkPolicies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
-                            if (message.unreachable != null && message.unreachable.length)
-                                for (var i = 0; i < message.unreachable.length; ++i)
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ListNetworkPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IListNetworkPoliciesResponse} message ListNetworkPoliciesResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ListNetworkPoliciesResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ListNetworkPoliciesResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse} ListNetworkPoliciesResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ListNetworkPoliciesResponse.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        if (!(message.networkPolicies && message.networkPolicies.length))
-                                            message.networkPolicies = [];
-                                        message.networkPolicies.push($root.google.cloud.vmwareengine.v1.NetworkPolicy.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 2: {
-                                        message.nextPageToken = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        if (!(message.unreachable && message.unreachable.length))
-                                            message.unreachable = [];
-                                        message.unreachable.push(reader.string());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ListNetworkPoliciesResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse} ListNetworkPoliciesResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ListNetworkPoliciesResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ListNetworkPoliciesResponse message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ListNetworkPoliciesResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.networkPolicies != null && message.hasOwnProperty("networkPolicies")) {
-                                if (!Array.isArray(message.networkPolicies))
-                                    return "networkPolicies: array expected";
-                                for (var i = 0; i < message.networkPolicies.length; ++i) {
-                                    var error = $root.google.cloud.vmwareengine.v1.NetworkPolicy.verify(message.networkPolicies[i]);
-                                    if (error)
-                                        return "networkPolicies." + error;
-                                }
-                            }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
-                                if (!$util.isString(message.nextPageToken))
-                                    return "nextPageToken: string expected";
-                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
-                                if (!Array.isArray(message.unreachable))
-                                    return "unreachable: array expected";
-                                for (var i = 0; i < message.unreachable.length; ++i)
-                                    if (!$util.isString(message.unreachable[i]))
-                                        return "unreachable: string[] expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ListNetworkPoliciesResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse} ListNetworkPoliciesResponse
-                         */
-                        ListNetworkPoliciesResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse();
-                            if (object.networkPolicies) {
-                                if (!Array.isArray(object.networkPolicies))
-                                    throw TypeError(".google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse.networkPolicies: array expected");
-                                message.networkPolicies = [];
-                                for (var i = 0; i < object.networkPolicies.length; ++i) {
-                                    if (typeof object.networkPolicies[i] !== "object")
-                                        throw TypeError(".google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse.networkPolicies: object expected");
-                                    message.networkPolicies[i] = $root.google.cloud.vmwareengine.v1.NetworkPolicy.fromObject(object.networkPolicies[i]);
-                                }
-                            }
-                            if (object.nextPageToken != null)
-                                message.nextPageToken = String(object.nextPageToken);
-                            if (object.unreachable) {
-                                if (!Array.isArray(object.unreachable))
-                                    throw TypeError(".google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse.unreachable: array expected");
-                                message.unreachable = [];
-                                for (var i = 0; i < object.unreachable.length; ++i)
-                                    message.unreachable[i] = String(object.unreachable[i]);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ListNetworkPoliciesResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse} message ListNetworkPoliciesResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ListNetworkPoliciesResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.networkPolicies = [];
-                                object.unreachable = [];
-                            }
-                            if (options.defaults)
-                                object.nextPageToken = "";
-                            if (message.networkPolicies && message.networkPolicies.length) {
-                                object.networkPolicies = [];
-                                for (var j = 0; j < message.networkPolicies.length; ++j)
-                                    object.networkPolicies[j] = $root.google.cloud.vmwareengine.v1.NetworkPolicy.toObject(message.networkPolicies[j], options);
-                            }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
-                                object.nextPageToken = message.nextPageToken;
-                            if (message.unreachable && message.unreachable.length) {
-                                object.unreachable = [];
-                                for (var j = 0; j < message.unreachable.length; ++j)
-                                    object.unreachable[j] = message.unreachable[j];
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ListNetworkPoliciesResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ListNetworkPoliciesResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ListNetworkPoliciesResponse
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ListNetworkPoliciesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.ListNetworkPoliciesResponse";
-                        };
-    
-                        return ListNetworkPoliciesResponse;
-                    })();
-    
-                    v1.GetNetworkPolicyRequest = (function() {
-    
-                        /**
-                         * Properties of a GetNetworkPolicyRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface IGetNetworkPolicyRequest
-                         * @property {string|null} [name] GetNetworkPolicyRequest name
-                         */
-    
-                        /**
-                         * Constructs a new GetNetworkPolicyRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a GetNetworkPolicyRequest.
-                         * @implements IGetNetworkPolicyRequest
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.IGetNetworkPolicyRequest=} [properties] Properties to set
-                         */
-                        function GetNetworkPolicyRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * GetNetworkPolicyRequest name.
-                         * @member {string} name
-                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
-                         * @instance
-                         */
-                        GetNetworkPolicyRequest.prototype.name = "";
-    
-                        /**
-                         * Creates a new GetNetworkPolicyRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IGetNetworkPolicyRequest=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.GetNetworkPolicyRequest} GetNetworkPolicyRequest instance
-                         */
-                        GetNetworkPolicyRequest.create = function create(properties) {
-                            return new GetNetworkPolicyRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified GetNetworkPolicyRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.GetNetworkPolicyRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IGetNetworkPolicyRequest} message GetNetworkPolicyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GetNetworkPolicyRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified GetNetworkPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.GetNetworkPolicyRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IGetNetworkPolicyRequest} message GetNetworkPolicyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GetNetworkPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a GetNetworkPolicyRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.GetNetworkPolicyRequest} GetNetworkPolicyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GetNetworkPolicyRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.GetNetworkPolicyRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a GetNetworkPolicyRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.GetNetworkPolicyRequest} GetNetworkPolicyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GetNetworkPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a GetNetworkPolicyRequest message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        GetNetworkPolicyRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a GetNetworkPolicyRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.GetNetworkPolicyRequest} GetNetworkPolicyRequest
-                         */
-                        GetNetworkPolicyRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.GetNetworkPolicyRequest)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.GetNetworkPolicyRequest();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a GetNetworkPolicyRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.GetNetworkPolicyRequest} message GetNetworkPolicyRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        GetNetworkPolicyRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.name = "";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this GetNetworkPolicyRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        GetNetworkPolicyRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for GetNetworkPolicyRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.GetNetworkPolicyRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        GetNetworkPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.GetNetworkPolicyRequest";
-                        };
-    
-                        return GetNetworkPolicyRequest;
-                    })();
-    
-                    v1.UpdateNetworkPolicyRequest = (function() {
-    
-                        /**
-                         * Properties of an UpdateNetworkPolicyRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface IUpdateNetworkPolicyRequest
-                         * @property {google.cloud.vmwareengine.v1.INetworkPolicy|null} [networkPolicy] UpdateNetworkPolicyRequest networkPolicy
-                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateNetworkPolicyRequest updateMask
-                         * @property {string|null} [requestId] UpdateNetworkPolicyRequest requestId
-                         */
-    
-                        /**
-                         * Constructs a new UpdateNetworkPolicyRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents an UpdateNetworkPolicyRequest.
-                         * @implements IUpdateNetworkPolicyRequest
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.IUpdateNetworkPolicyRequest=} [properties] Properties to set
-                         */
-                        function UpdateNetworkPolicyRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * UpdateNetworkPolicyRequest networkPolicy.
-                         * @member {google.cloud.vmwareengine.v1.INetworkPolicy|null|undefined} networkPolicy
-                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
-                         * @instance
-                         */
-                        UpdateNetworkPolicyRequest.prototype.networkPolicy = null;
-    
-                        /**
-                         * UpdateNetworkPolicyRequest updateMask.
-                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
-                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
-                         * @instance
-                         */
-                        UpdateNetworkPolicyRequest.prototype.updateMask = null;
-    
-                        /**
-                         * UpdateNetworkPolicyRequest requestId.
-                         * @member {string} requestId
-                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
-                         * @instance
-                         */
-                        UpdateNetworkPolicyRequest.prototype.requestId = "";
-    
-                        /**
-                         * Creates a new UpdateNetworkPolicyRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IUpdateNetworkPolicyRequest=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest} UpdateNetworkPolicyRequest instance
-                         */
-                        UpdateNetworkPolicyRequest.create = function create(properties) {
-                            return new UpdateNetworkPolicyRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified UpdateNetworkPolicyRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IUpdateNetworkPolicyRequest} message UpdateNetworkPolicyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UpdateNetworkPolicyRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.networkPolicy != null && Object.hasOwnProperty.call(message, "networkPolicy"))
-                                $root.google.cloud.vmwareengine.v1.NetworkPolicy.encode(message.networkPolicy, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
-                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified UpdateNetworkPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IUpdateNetworkPolicyRequest} message UpdateNetworkPolicyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UpdateNetworkPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an UpdateNetworkPolicyRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest} UpdateNetworkPolicyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UpdateNetworkPolicyRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.networkPolicy = $root.google.cloud.vmwareengine.v1.NetworkPolicy.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 2: {
-                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.requestId = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an UpdateNetworkPolicyRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest} UpdateNetworkPolicyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UpdateNetworkPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an UpdateNetworkPolicyRequest message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        UpdateNetworkPolicyRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.networkPolicy != null && message.hasOwnProperty("networkPolicy")) {
-                                var error = $root.google.cloud.vmwareengine.v1.NetworkPolicy.verify(message.networkPolicy);
-                                if (error)
-                                    return "networkPolicy." + error;
-                            }
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
-                                if (error)
-                                    return "updateMask." + error;
-                            }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                if (!$util.isString(message.requestId))
-                                    return "requestId: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an UpdateNetworkPolicyRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest} UpdateNetworkPolicyRequest
-                         */
-                        UpdateNetworkPolicyRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest();
-                            if (object.networkPolicy != null) {
-                                if (typeof object.networkPolicy !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest.networkPolicy: object expected");
-                                message.networkPolicy = $root.google.cloud.vmwareengine.v1.NetworkPolicy.fromObject(object.networkPolicy);
-                            }
-                            if (object.updateMask != null) {
-                                if (typeof object.updateMask !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest.updateMask: object expected");
-                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
-                            }
-                            if (object.requestId != null)
-                                message.requestId = String(object.requestId);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an UpdateNetworkPolicyRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest} message UpdateNetworkPolicyRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        UpdateNetworkPolicyRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.networkPolicy = null;
-                                object.updateMask = null;
-                                object.requestId = "";
-                            }
-                            if (message.networkPolicy != null && message.hasOwnProperty("networkPolicy"))
-                                object.networkPolicy = $root.google.cloud.vmwareengine.v1.NetworkPolicy.toObject(message.networkPolicy, options);
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
-                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                object.requestId = message.requestId;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this UpdateNetworkPolicyRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        UpdateNetworkPolicyRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for UpdateNetworkPolicyRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        UpdateNetworkPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest";
-                        };
-    
-                        return UpdateNetworkPolicyRequest;
-                    })();
-    
-                    v1.CreateNetworkPolicyRequest = (function() {
-    
-                        /**
-                         * Properties of a CreateNetworkPolicyRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface ICreateNetworkPolicyRequest
-                         * @property {string|null} [parent] CreateNetworkPolicyRequest parent
-                         * @property {string|null} [networkPolicyId] CreateNetworkPolicyRequest networkPolicyId
-                         * @property {google.cloud.vmwareengine.v1.INetworkPolicy|null} [networkPolicy] CreateNetworkPolicyRequest networkPolicy
-                         * @property {string|null} [requestId] CreateNetworkPolicyRequest requestId
-                         */
-    
-                        /**
-                         * Constructs a new CreateNetworkPolicyRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a CreateNetworkPolicyRequest.
-                         * @implements ICreateNetworkPolicyRequest
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.ICreateNetworkPolicyRequest=} [properties] Properties to set
-                         */
-                        function CreateNetworkPolicyRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * CreateNetworkPolicyRequest parent.
-                         * @member {string} parent
-                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
-                         * @instance
-                         */
-                        CreateNetworkPolicyRequest.prototype.parent = "";
-    
-                        /**
-                         * CreateNetworkPolicyRequest networkPolicyId.
-                         * @member {string} networkPolicyId
-                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
-                         * @instance
-                         */
-                        CreateNetworkPolicyRequest.prototype.networkPolicyId = "";
-    
-                        /**
-                         * CreateNetworkPolicyRequest networkPolicy.
-                         * @member {google.cloud.vmwareengine.v1.INetworkPolicy|null|undefined} networkPolicy
-                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
-                         * @instance
-                         */
-                        CreateNetworkPolicyRequest.prototype.networkPolicy = null;
-    
-                        /**
-                         * CreateNetworkPolicyRequest requestId.
-                         * @member {string} requestId
-                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
-                         * @instance
-                         */
-                        CreateNetworkPolicyRequest.prototype.requestId = "";
-    
-                        /**
-                         * Creates a new CreateNetworkPolicyRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ICreateNetworkPolicyRequest=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest} CreateNetworkPolicyRequest instance
-                         */
-                        CreateNetworkPolicyRequest.create = function create(properties) {
-                            return new CreateNetworkPolicyRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified CreateNetworkPolicyRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ICreateNetworkPolicyRequest} message CreateNetworkPolicyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CreateNetworkPolicyRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                            if (message.networkPolicyId != null && Object.hasOwnProperty.call(message, "networkPolicyId"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.networkPolicyId);
-                            if (message.networkPolicy != null && Object.hasOwnProperty.call(message, "networkPolicy"))
-                                $root.google.cloud.vmwareengine.v1.NetworkPolicy.encode(message.networkPolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified CreateNetworkPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ICreateNetworkPolicyRequest} message CreateNetworkPolicyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CreateNetworkPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a CreateNetworkPolicyRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest} CreateNetworkPolicyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CreateNetworkPolicyRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.parent = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.networkPolicyId = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.networkPolicy = $root.google.cloud.vmwareengine.v1.NetworkPolicy.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 4: {
-                                        message.requestId = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a CreateNetworkPolicyRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest} CreateNetworkPolicyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CreateNetworkPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a CreateNetworkPolicyRequest message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        CreateNetworkPolicyRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                if (!$util.isString(message.parent))
-                                    return "parent: string expected";
-                            if (message.networkPolicyId != null && message.hasOwnProperty("networkPolicyId"))
-                                if (!$util.isString(message.networkPolicyId))
-                                    return "networkPolicyId: string expected";
-                            if (message.networkPolicy != null && message.hasOwnProperty("networkPolicy")) {
-                                var error = $root.google.cloud.vmwareengine.v1.NetworkPolicy.verify(message.networkPolicy);
-                                if (error)
-                                    return "networkPolicy." + error;
-                            }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                if (!$util.isString(message.requestId))
-                                    return "requestId: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a CreateNetworkPolicyRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest} CreateNetworkPolicyRequest
-                         */
-                        CreateNetworkPolicyRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest();
-                            if (object.parent != null)
-                                message.parent = String(object.parent);
-                            if (object.networkPolicyId != null)
-                                message.networkPolicyId = String(object.networkPolicyId);
-                            if (object.networkPolicy != null) {
-                                if (typeof object.networkPolicy !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest.networkPolicy: object expected");
-                                message.networkPolicy = $root.google.cloud.vmwareengine.v1.NetworkPolicy.fromObject(object.networkPolicy);
-                            }
-                            if (object.requestId != null)
-                                message.requestId = String(object.requestId);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a CreateNetworkPolicyRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest} message CreateNetworkPolicyRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        CreateNetworkPolicyRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.parent = "";
-                                object.networkPolicyId = "";
-                                object.networkPolicy = null;
-                                object.requestId = "";
-                            }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                object.parent = message.parent;
-                            if (message.networkPolicyId != null && message.hasOwnProperty("networkPolicyId"))
-                                object.networkPolicyId = message.networkPolicyId;
-                            if (message.networkPolicy != null && message.hasOwnProperty("networkPolicy"))
-                                object.networkPolicy = $root.google.cloud.vmwareengine.v1.NetworkPolicy.toObject(message.networkPolicy, options);
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                object.requestId = message.requestId;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this CreateNetworkPolicyRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        CreateNetworkPolicyRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for CreateNetworkPolicyRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        CreateNetworkPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest";
-                        };
-    
-                        return CreateNetworkPolicyRequest;
-                    })();
-    
-                    v1.DeleteNetworkPolicyRequest = (function() {
-    
-                        /**
-                         * Properties of a DeleteNetworkPolicyRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface IDeleteNetworkPolicyRequest
-                         * @property {string|null} [name] DeleteNetworkPolicyRequest name
-                         * @property {string|null} [requestId] DeleteNetworkPolicyRequest requestId
-                         */
-    
-                        /**
-                         * Constructs a new DeleteNetworkPolicyRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a DeleteNetworkPolicyRequest.
-                         * @implements IDeleteNetworkPolicyRequest
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.IDeleteNetworkPolicyRequest=} [properties] Properties to set
-                         */
-                        function DeleteNetworkPolicyRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * DeleteNetworkPolicyRequest name.
-                         * @member {string} name
-                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
-                         * @instance
-                         */
-                        DeleteNetworkPolicyRequest.prototype.name = "";
-    
-                        /**
-                         * DeleteNetworkPolicyRequest requestId.
-                         * @member {string} requestId
-                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
-                         * @instance
-                         */
-                        DeleteNetworkPolicyRequest.prototype.requestId = "";
-    
-                        /**
-                         * Creates a new DeleteNetworkPolicyRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IDeleteNetworkPolicyRequest=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest} DeleteNetworkPolicyRequest instance
-                         */
-                        DeleteNetworkPolicyRequest.create = function create(properties) {
-                            return new DeleteNetworkPolicyRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified DeleteNetworkPolicyRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IDeleteNetworkPolicyRequest} message DeleteNetworkPolicyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeleteNetworkPolicyRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified DeleteNetworkPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IDeleteNetworkPolicyRequest} message DeleteNetworkPolicyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeleteNetworkPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a DeleteNetworkPolicyRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest} DeleteNetworkPolicyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeleteNetworkPolicyRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.requestId = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a DeleteNetworkPolicyRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest} DeleteNetworkPolicyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeleteNetworkPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a DeleteNetworkPolicyRequest message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        DeleteNetworkPolicyRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                if (!$util.isString(message.requestId))
-                                    return "requestId: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a DeleteNetworkPolicyRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest} DeleteNetworkPolicyRequest
-                         */
-                        DeleteNetworkPolicyRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.requestId != null)
-                                message.requestId = String(object.requestId);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a DeleteNetworkPolicyRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest} message DeleteNetworkPolicyRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        DeleteNetworkPolicyRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.requestId = "";
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                object.requestId = message.requestId;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this DeleteNetworkPolicyRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        DeleteNetworkPolicyRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for DeleteNetworkPolicyRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        DeleteNetworkPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest";
-                        };
-    
-                        return DeleteNetworkPolicyRequest;
-                    })();
-    
                     v1.VmwareEngineNetwork = (function() {
     
                         /**
@@ -15190,1581 +16765,6 @@
                         })();
     
                         return VmwareEngineNetwork;
-                    })();
-    
-                    v1.CreateVmwareEngineNetworkRequest = (function() {
-    
-                        /**
-                         * Properties of a CreateVmwareEngineNetworkRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface ICreateVmwareEngineNetworkRequest
-                         * @property {string|null} [parent] CreateVmwareEngineNetworkRequest parent
-                         * @property {string|null} [vmwareEngineNetworkId] CreateVmwareEngineNetworkRequest vmwareEngineNetworkId
-                         * @property {google.cloud.vmwareengine.v1.IVmwareEngineNetwork|null} [vmwareEngineNetwork] CreateVmwareEngineNetworkRequest vmwareEngineNetwork
-                         * @property {string|null} [requestId] CreateVmwareEngineNetworkRequest requestId
-                         */
-    
-                        /**
-                         * Constructs a new CreateVmwareEngineNetworkRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a CreateVmwareEngineNetworkRequest.
-                         * @implements ICreateVmwareEngineNetworkRequest
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.ICreateVmwareEngineNetworkRequest=} [properties] Properties to set
-                         */
-                        function CreateVmwareEngineNetworkRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * CreateVmwareEngineNetworkRequest parent.
-                         * @member {string} parent
-                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
-                         * @instance
-                         */
-                        CreateVmwareEngineNetworkRequest.prototype.parent = "";
-    
-                        /**
-                         * CreateVmwareEngineNetworkRequest vmwareEngineNetworkId.
-                         * @member {string} vmwareEngineNetworkId
-                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
-                         * @instance
-                         */
-                        CreateVmwareEngineNetworkRequest.prototype.vmwareEngineNetworkId = "";
-    
-                        /**
-                         * CreateVmwareEngineNetworkRequest vmwareEngineNetwork.
-                         * @member {google.cloud.vmwareengine.v1.IVmwareEngineNetwork|null|undefined} vmwareEngineNetwork
-                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
-                         * @instance
-                         */
-                        CreateVmwareEngineNetworkRequest.prototype.vmwareEngineNetwork = null;
-    
-                        /**
-                         * CreateVmwareEngineNetworkRequest requestId.
-                         * @member {string} requestId
-                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
-                         * @instance
-                         */
-                        CreateVmwareEngineNetworkRequest.prototype.requestId = "";
-    
-                        /**
-                         * Creates a new CreateVmwareEngineNetworkRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ICreateVmwareEngineNetworkRequest=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest} CreateVmwareEngineNetworkRequest instance
-                         */
-                        CreateVmwareEngineNetworkRequest.create = function create(properties) {
-                            return new CreateVmwareEngineNetworkRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified CreateVmwareEngineNetworkRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ICreateVmwareEngineNetworkRequest} message CreateVmwareEngineNetworkRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CreateVmwareEngineNetworkRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                            if (message.vmwareEngineNetworkId != null && Object.hasOwnProperty.call(message, "vmwareEngineNetworkId"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.vmwareEngineNetworkId);
-                            if (message.vmwareEngineNetwork != null && Object.hasOwnProperty.call(message, "vmwareEngineNetwork"))
-                                $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.encode(message.vmwareEngineNetwork, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified CreateVmwareEngineNetworkRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ICreateVmwareEngineNetworkRequest} message CreateVmwareEngineNetworkRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CreateVmwareEngineNetworkRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a CreateVmwareEngineNetworkRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest} CreateVmwareEngineNetworkRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CreateVmwareEngineNetworkRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.parent = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.vmwareEngineNetworkId = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.vmwareEngineNetwork = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 4: {
-                                        message.requestId = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a CreateVmwareEngineNetworkRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest} CreateVmwareEngineNetworkRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CreateVmwareEngineNetworkRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a CreateVmwareEngineNetworkRequest message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        CreateVmwareEngineNetworkRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                if (!$util.isString(message.parent))
-                                    return "parent: string expected";
-                            if (message.vmwareEngineNetworkId != null && message.hasOwnProperty("vmwareEngineNetworkId"))
-                                if (!$util.isString(message.vmwareEngineNetworkId))
-                                    return "vmwareEngineNetworkId: string expected";
-                            if (message.vmwareEngineNetwork != null && message.hasOwnProperty("vmwareEngineNetwork")) {
-                                var error = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.verify(message.vmwareEngineNetwork);
-                                if (error)
-                                    return "vmwareEngineNetwork." + error;
-                            }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                if (!$util.isString(message.requestId))
-                                    return "requestId: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a CreateVmwareEngineNetworkRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest} CreateVmwareEngineNetworkRequest
-                         */
-                        CreateVmwareEngineNetworkRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest();
-                            if (object.parent != null)
-                                message.parent = String(object.parent);
-                            if (object.vmwareEngineNetworkId != null)
-                                message.vmwareEngineNetworkId = String(object.vmwareEngineNetworkId);
-                            if (object.vmwareEngineNetwork != null) {
-                                if (typeof object.vmwareEngineNetwork !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest.vmwareEngineNetwork: object expected");
-                                message.vmwareEngineNetwork = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.fromObject(object.vmwareEngineNetwork);
-                            }
-                            if (object.requestId != null)
-                                message.requestId = String(object.requestId);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a CreateVmwareEngineNetworkRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest} message CreateVmwareEngineNetworkRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        CreateVmwareEngineNetworkRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.parent = "";
-                                object.vmwareEngineNetworkId = "";
-                                object.vmwareEngineNetwork = null;
-                                object.requestId = "";
-                            }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                object.parent = message.parent;
-                            if (message.vmwareEngineNetworkId != null && message.hasOwnProperty("vmwareEngineNetworkId"))
-                                object.vmwareEngineNetworkId = message.vmwareEngineNetworkId;
-                            if (message.vmwareEngineNetwork != null && message.hasOwnProperty("vmwareEngineNetwork"))
-                                object.vmwareEngineNetwork = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.toObject(message.vmwareEngineNetwork, options);
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                object.requestId = message.requestId;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this CreateVmwareEngineNetworkRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        CreateVmwareEngineNetworkRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for CreateVmwareEngineNetworkRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        CreateVmwareEngineNetworkRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest";
-                        };
-    
-                        return CreateVmwareEngineNetworkRequest;
-                    })();
-    
-                    v1.UpdateVmwareEngineNetworkRequest = (function() {
-    
-                        /**
-                         * Properties of an UpdateVmwareEngineNetworkRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface IUpdateVmwareEngineNetworkRequest
-                         * @property {google.cloud.vmwareengine.v1.IVmwareEngineNetwork|null} [vmwareEngineNetwork] UpdateVmwareEngineNetworkRequest vmwareEngineNetwork
-                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateVmwareEngineNetworkRequest updateMask
-                         * @property {string|null} [requestId] UpdateVmwareEngineNetworkRequest requestId
-                         */
-    
-                        /**
-                         * Constructs a new UpdateVmwareEngineNetworkRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents an UpdateVmwareEngineNetworkRequest.
-                         * @implements IUpdateVmwareEngineNetworkRequest
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.IUpdateVmwareEngineNetworkRequest=} [properties] Properties to set
-                         */
-                        function UpdateVmwareEngineNetworkRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * UpdateVmwareEngineNetworkRequest vmwareEngineNetwork.
-                         * @member {google.cloud.vmwareengine.v1.IVmwareEngineNetwork|null|undefined} vmwareEngineNetwork
-                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
-                         * @instance
-                         */
-                        UpdateVmwareEngineNetworkRequest.prototype.vmwareEngineNetwork = null;
-    
-                        /**
-                         * UpdateVmwareEngineNetworkRequest updateMask.
-                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
-                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
-                         * @instance
-                         */
-                        UpdateVmwareEngineNetworkRequest.prototype.updateMask = null;
-    
-                        /**
-                         * UpdateVmwareEngineNetworkRequest requestId.
-                         * @member {string} requestId
-                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
-                         * @instance
-                         */
-                        UpdateVmwareEngineNetworkRequest.prototype.requestId = "";
-    
-                        /**
-                         * Creates a new UpdateVmwareEngineNetworkRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IUpdateVmwareEngineNetworkRequest=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest} UpdateVmwareEngineNetworkRequest instance
-                         */
-                        UpdateVmwareEngineNetworkRequest.create = function create(properties) {
-                            return new UpdateVmwareEngineNetworkRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified UpdateVmwareEngineNetworkRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IUpdateVmwareEngineNetworkRequest} message UpdateVmwareEngineNetworkRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UpdateVmwareEngineNetworkRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.vmwareEngineNetwork != null && Object.hasOwnProperty.call(message, "vmwareEngineNetwork"))
-                                $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.encode(message.vmwareEngineNetwork, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
-                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified UpdateVmwareEngineNetworkRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IUpdateVmwareEngineNetworkRequest} message UpdateVmwareEngineNetworkRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UpdateVmwareEngineNetworkRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an UpdateVmwareEngineNetworkRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest} UpdateVmwareEngineNetworkRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UpdateVmwareEngineNetworkRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.vmwareEngineNetwork = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 2: {
-                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.requestId = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an UpdateVmwareEngineNetworkRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest} UpdateVmwareEngineNetworkRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UpdateVmwareEngineNetworkRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an UpdateVmwareEngineNetworkRequest message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        UpdateVmwareEngineNetworkRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.vmwareEngineNetwork != null && message.hasOwnProperty("vmwareEngineNetwork")) {
-                                var error = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.verify(message.vmwareEngineNetwork);
-                                if (error)
-                                    return "vmwareEngineNetwork." + error;
-                            }
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
-                                if (error)
-                                    return "updateMask." + error;
-                            }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                if (!$util.isString(message.requestId))
-                                    return "requestId: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an UpdateVmwareEngineNetworkRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest} UpdateVmwareEngineNetworkRequest
-                         */
-                        UpdateVmwareEngineNetworkRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest();
-                            if (object.vmwareEngineNetwork != null) {
-                                if (typeof object.vmwareEngineNetwork !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest.vmwareEngineNetwork: object expected");
-                                message.vmwareEngineNetwork = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.fromObject(object.vmwareEngineNetwork);
-                            }
-                            if (object.updateMask != null) {
-                                if (typeof object.updateMask !== "object")
-                                    throw TypeError(".google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest.updateMask: object expected");
-                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
-                            }
-                            if (object.requestId != null)
-                                message.requestId = String(object.requestId);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an UpdateVmwareEngineNetworkRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest} message UpdateVmwareEngineNetworkRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        UpdateVmwareEngineNetworkRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.vmwareEngineNetwork = null;
-                                object.updateMask = null;
-                                object.requestId = "";
-                            }
-                            if (message.vmwareEngineNetwork != null && message.hasOwnProperty("vmwareEngineNetwork"))
-                                object.vmwareEngineNetwork = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.toObject(message.vmwareEngineNetwork, options);
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
-                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                object.requestId = message.requestId;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this UpdateVmwareEngineNetworkRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        UpdateVmwareEngineNetworkRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for UpdateVmwareEngineNetworkRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        UpdateVmwareEngineNetworkRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest";
-                        };
-    
-                        return UpdateVmwareEngineNetworkRequest;
-                    })();
-    
-                    v1.DeleteVmwareEngineNetworkRequest = (function() {
-    
-                        /**
-                         * Properties of a DeleteVmwareEngineNetworkRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface IDeleteVmwareEngineNetworkRequest
-                         * @property {string|null} [name] DeleteVmwareEngineNetworkRequest name
-                         * @property {string|null} [requestId] DeleteVmwareEngineNetworkRequest requestId
-                         * @property {string|null} [etag] DeleteVmwareEngineNetworkRequest etag
-                         */
-    
-                        /**
-                         * Constructs a new DeleteVmwareEngineNetworkRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a DeleteVmwareEngineNetworkRequest.
-                         * @implements IDeleteVmwareEngineNetworkRequest
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.IDeleteVmwareEngineNetworkRequest=} [properties] Properties to set
-                         */
-                        function DeleteVmwareEngineNetworkRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * DeleteVmwareEngineNetworkRequest name.
-                         * @member {string} name
-                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
-                         * @instance
-                         */
-                        DeleteVmwareEngineNetworkRequest.prototype.name = "";
-    
-                        /**
-                         * DeleteVmwareEngineNetworkRequest requestId.
-                         * @member {string} requestId
-                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
-                         * @instance
-                         */
-                        DeleteVmwareEngineNetworkRequest.prototype.requestId = "";
-    
-                        /**
-                         * DeleteVmwareEngineNetworkRequest etag.
-                         * @member {string} etag
-                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
-                         * @instance
-                         */
-                        DeleteVmwareEngineNetworkRequest.prototype.etag = "";
-    
-                        /**
-                         * Creates a new DeleteVmwareEngineNetworkRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IDeleteVmwareEngineNetworkRequest=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest} DeleteVmwareEngineNetworkRequest instance
-                         */
-                        DeleteVmwareEngineNetworkRequest.create = function create(properties) {
-                            return new DeleteVmwareEngineNetworkRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified DeleteVmwareEngineNetworkRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IDeleteVmwareEngineNetworkRequest} message DeleteVmwareEngineNetworkRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeleteVmwareEngineNetworkRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
-                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified DeleteVmwareEngineNetworkRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IDeleteVmwareEngineNetworkRequest} message DeleteVmwareEngineNetworkRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeleteVmwareEngineNetworkRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a DeleteVmwareEngineNetworkRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest} DeleteVmwareEngineNetworkRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeleteVmwareEngineNetworkRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.requestId = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.etag = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a DeleteVmwareEngineNetworkRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest} DeleteVmwareEngineNetworkRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeleteVmwareEngineNetworkRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a DeleteVmwareEngineNetworkRequest message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        DeleteVmwareEngineNetworkRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                if (!$util.isString(message.requestId))
-                                    return "requestId: string expected";
-                            if (message.etag != null && message.hasOwnProperty("etag"))
-                                if (!$util.isString(message.etag))
-                                    return "etag: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a DeleteVmwareEngineNetworkRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest} DeleteVmwareEngineNetworkRequest
-                         */
-                        DeleteVmwareEngineNetworkRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.requestId != null)
-                                message.requestId = String(object.requestId);
-                            if (object.etag != null)
-                                message.etag = String(object.etag);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a DeleteVmwareEngineNetworkRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest} message DeleteVmwareEngineNetworkRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        DeleteVmwareEngineNetworkRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.requestId = "";
-                                object.etag = "";
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                object.requestId = message.requestId;
-                            if (message.etag != null && message.hasOwnProperty("etag"))
-                                object.etag = message.etag;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this DeleteVmwareEngineNetworkRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        DeleteVmwareEngineNetworkRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for DeleteVmwareEngineNetworkRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        DeleteVmwareEngineNetworkRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest";
-                        };
-    
-                        return DeleteVmwareEngineNetworkRequest;
-                    })();
-    
-                    v1.GetVmwareEngineNetworkRequest = (function() {
-    
-                        /**
-                         * Properties of a GetVmwareEngineNetworkRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface IGetVmwareEngineNetworkRequest
-                         * @property {string|null} [name] GetVmwareEngineNetworkRequest name
-                         */
-    
-                        /**
-                         * Constructs a new GetVmwareEngineNetworkRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a GetVmwareEngineNetworkRequest.
-                         * @implements IGetVmwareEngineNetworkRequest
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.IGetVmwareEngineNetworkRequest=} [properties] Properties to set
-                         */
-                        function GetVmwareEngineNetworkRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * GetVmwareEngineNetworkRequest name.
-                         * @member {string} name
-                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
-                         * @instance
-                         */
-                        GetVmwareEngineNetworkRequest.prototype.name = "";
-    
-                        /**
-                         * Creates a new GetVmwareEngineNetworkRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IGetVmwareEngineNetworkRequest=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest} GetVmwareEngineNetworkRequest instance
-                         */
-                        GetVmwareEngineNetworkRequest.create = function create(properties) {
-                            return new GetVmwareEngineNetworkRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified GetVmwareEngineNetworkRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IGetVmwareEngineNetworkRequest} message GetVmwareEngineNetworkRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GetVmwareEngineNetworkRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified GetVmwareEngineNetworkRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IGetVmwareEngineNetworkRequest} message GetVmwareEngineNetworkRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GetVmwareEngineNetworkRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a GetVmwareEngineNetworkRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest} GetVmwareEngineNetworkRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GetVmwareEngineNetworkRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a GetVmwareEngineNetworkRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest} GetVmwareEngineNetworkRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GetVmwareEngineNetworkRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a GetVmwareEngineNetworkRequest message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        GetVmwareEngineNetworkRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a GetVmwareEngineNetworkRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest} GetVmwareEngineNetworkRequest
-                         */
-                        GetVmwareEngineNetworkRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a GetVmwareEngineNetworkRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest} message GetVmwareEngineNetworkRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        GetVmwareEngineNetworkRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.name = "";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this GetVmwareEngineNetworkRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        GetVmwareEngineNetworkRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for GetVmwareEngineNetworkRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        GetVmwareEngineNetworkRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest";
-                        };
-    
-                        return GetVmwareEngineNetworkRequest;
-                    })();
-    
-                    v1.ListVmwareEngineNetworksRequest = (function() {
-    
-                        /**
-                         * Properties of a ListVmwareEngineNetworksRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface IListVmwareEngineNetworksRequest
-                         * @property {string|null} [parent] ListVmwareEngineNetworksRequest parent
-                         * @property {number|null} [pageSize] ListVmwareEngineNetworksRequest pageSize
-                         * @property {string|null} [pageToken] ListVmwareEngineNetworksRequest pageToken
-                         * @property {string|null} [filter] ListVmwareEngineNetworksRequest filter
-                         * @property {string|null} [orderBy] ListVmwareEngineNetworksRequest orderBy
-                         */
-    
-                        /**
-                         * Constructs a new ListVmwareEngineNetworksRequest.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a ListVmwareEngineNetworksRequest.
-                         * @implements IListVmwareEngineNetworksRequest
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksRequest=} [properties] Properties to set
-                         */
-                        function ListVmwareEngineNetworksRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ListVmwareEngineNetworksRequest parent.
-                         * @member {string} parent
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @instance
-                         */
-                        ListVmwareEngineNetworksRequest.prototype.parent = "";
-    
-                        /**
-                         * ListVmwareEngineNetworksRequest pageSize.
-                         * @member {number} pageSize
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @instance
-                         */
-                        ListVmwareEngineNetworksRequest.prototype.pageSize = 0;
-    
-                        /**
-                         * ListVmwareEngineNetworksRequest pageToken.
-                         * @member {string} pageToken
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @instance
-                         */
-                        ListVmwareEngineNetworksRequest.prototype.pageToken = "";
-    
-                        /**
-                         * ListVmwareEngineNetworksRequest filter.
-                         * @member {string} filter
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @instance
-                         */
-                        ListVmwareEngineNetworksRequest.prototype.filter = "";
-    
-                        /**
-                         * ListVmwareEngineNetworksRequest orderBy.
-                         * @member {string} orderBy
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @instance
-                         */
-                        ListVmwareEngineNetworksRequest.prototype.orderBy = "";
-    
-                        /**
-                         * Creates a new ListVmwareEngineNetworksRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksRequest=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest} ListVmwareEngineNetworksRequest instance
-                         */
-                        ListVmwareEngineNetworksRequest.create = function create(properties) {
-                            return new ListVmwareEngineNetworksRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ListVmwareEngineNetworksRequest message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksRequest} message ListVmwareEngineNetworksRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ListVmwareEngineNetworksRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
-                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
-                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
-                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ListVmwareEngineNetworksRequest message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksRequest} message ListVmwareEngineNetworksRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ListVmwareEngineNetworksRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ListVmwareEngineNetworksRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest} ListVmwareEngineNetworksRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ListVmwareEngineNetworksRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.parent = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.pageSize = reader.int32();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.pageToken = reader.string();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.filter = reader.string();
-                                        break;
-                                    }
-                                case 5: {
-                                        message.orderBy = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ListVmwareEngineNetworksRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest} ListVmwareEngineNetworksRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ListVmwareEngineNetworksRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ListVmwareEngineNetworksRequest message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ListVmwareEngineNetworksRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                if (!$util.isString(message.parent))
-                                    return "parent: string expected";
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                                if (!$util.isInteger(message.pageSize))
-                                    return "pageSize: integer expected";
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                                if (!$util.isString(message.pageToken))
-                                    return "pageToken: string expected";
-                            if (message.filter != null && message.hasOwnProperty("filter"))
-                                if (!$util.isString(message.filter))
-                                    return "filter: string expected";
-                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
-                                if (!$util.isString(message.orderBy))
-                                    return "orderBy: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ListVmwareEngineNetworksRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest} ListVmwareEngineNetworksRequest
-                         */
-                        ListVmwareEngineNetworksRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest();
-                            if (object.parent != null)
-                                message.parent = String(object.parent);
-                            if (object.pageSize != null)
-                                message.pageSize = object.pageSize | 0;
-                            if (object.pageToken != null)
-                                message.pageToken = String(object.pageToken);
-                            if (object.filter != null)
-                                message.filter = String(object.filter);
-                            if (object.orderBy != null)
-                                message.orderBy = String(object.orderBy);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ListVmwareEngineNetworksRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest} message ListVmwareEngineNetworksRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ListVmwareEngineNetworksRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.parent = "";
-                                object.pageSize = 0;
-                                object.pageToken = "";
-                                object.filter = "";
-                                object.orderBy = "";
-                            }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                object.parent = message.parent;
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                                object.pageSize = message.pageSize;
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                                object.pageToken = message.pageToken;
-                            if (message.filter != null && message.hasOwnProperty("filter"))
-                                object.filter = message.filter;
-                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
-                                object.orderBy = message.orderBy;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ListVmwareEngineNetworksRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ListVmwareEngineNetworksRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ListVmwareEngineNetworksRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ListVmwareEngineNetworksRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest";
-                        };
-    
-                        return ListVmwareEngineNetworksRequest;
-                    })();
-    
-                    v1.ListVmwareEngineNetworksResponse = (function() {
-    
-                        /**
-                         * Properties of a ListVmwareEngineNetworksResponse.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @interface IListVmwareEngineNetworksResponse
-                         * @property {Array.<google.cloud.vmwareengine.v1.IVmwareEngineNetwork>|null} [vmwareEngineNetworks] ListVmwareEngineNetworksResponse vmwareEngineNetworks
-                         * @property {string|null} [nextPageToken] ListVmwareEngineNetworksResponse nextPageToken
-                         * @property {Array.<string>|null} [unreachable] ListVmwareEngineNetworksResponse unreachable
-                         */
-    
-                        /**
-                         * Constructs a new ListVmwareEngineNetworksResponse.
-                         * @memberof google.cloud.vmwareengine.v1
-                         * @classdesc Represents a ListVmwareEngineNetworksResponse.
-                         * @implements IListVmwareEngineNetworksResponse
-                         * @constructor
-                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksResponse=} [properties] Properties to set
-                         */
-                        function ListVmwareEngineNetworksResponse(properties) {
-                            this.vmwareEngineNetworks = [];
-                            this.unreachable = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ListVmwareEngineNetworksResponse vmwareEngineNetworks.
-                         * @member {Array.<google.cloud.vmwareengine.v1.IVmwareEngineNetwork>} vmwareEngineNetworks
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
-                         * @instance
-                         */
-                        ListVmwareEngineNetworksResponse.prototype.vmwareEngineNetworks = $util.emptyArray;
-    
-                        /**
-                         * ListVmwareEngineNetworksResponse nextPageToken.
-                         * @member {string} nextPageToken
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
-                         * @instance
-                         */
-                        ListVmwareEngineNetworksResponse.prototype.nextPageToken = "";
-    
-                        /**
-                         * ListVmwareEngineNetworksResponse unreachable.
-                         * @member {Array.<string>} unreachable
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
-                         * @instance
-                         */
-                        ListVmwareEngineNetworksResponse.prototype.unreachable = $util.emptyArray;
-    
-                        /**
-                         * Creates a new ListVmwareEngineNetworksResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksResponse=} [properties] Properties to set
-                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse} ListVmwareEngineNetworksResponse instance
-                         */
-                        ListVmwareEngineNetworksResponse.create = function create(properties) {
-                            return new ListVmwareEngineNetworksResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ListVmwareEngineNetworksResponse message. Does not implicitly {@link google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksResponse} message ListVmwareEngineNetworksResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ListVmwareEngineNetworksResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.vmwareEngineNetworks != null && message.vmwareEngineNetworks.length)
-                                for (var i = 0; i < message.vmwareEngineNetworks.length; ++i)
-                                    $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.encode(message.vmwareEngineNetworks[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
-                            if (message.unreachable != null && message.unreachable.length)
-                                for (var i = 0; i < message.unreachable.length; ++i)
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ListVmwareEngineNetworksResponse message, length delimited. Does not implicitly {@link google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.IListVmwareEngineNetworksResponse} message ListVmwareEngineNetworksResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ListVmwareEngineNetworksResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ListVmwareEngineNetworksResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse} ListVmwareEngineNetworksResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ListVmwareEngineNetworksResponse.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        if (!(message.vmwareEngineNetworks && message.vmwareEngineNetworks.length))
-                                            message.vmwareEngineNetworks = [];
-                                        message.vmwareEngineNetworks.push($root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 2: {
-                                        message.nextPageToken = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        if (!(message.unreachable && message.unreachable.length))
-                                            message.unreachable = [];
-                                        message.unreachable.push(reader.string());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ListVmwareEngineNetworksResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse} ListVmwareEngineNetworksResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ListVmwareEngineNetworksResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ListVmwareEngineNetworksResponse message.
-                         * @function verify
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ListVmwareEngineNetworksResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.vmwareEngineNetworks != null && message.hasOwnProperty("vmwareEngineNetworks")) {
-                                if (!Array.isArray(message.vmwareEngineNetworks))
-                                    return "vmwareEngineNetworks: array expected";
-                                for (var i = 0; i < message.vmwareEngineNetworks.length; ++i) {
-                                    var error = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.verify(message.vmwareEngineNetworks[i]);
-                                    if (error)
-                                        return "vmwareEngineNetworks." + error;
-                                }
-                            }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
-                                if (!$util.isString(message.nextPageToken))
-                                    return "nextPageToken: string expected";
-                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
-                                if (!Array.isArray(message.unreachable))
-                                    return "unreachable: array expected";
-                                for (var i = 0; i < message.unreachable.length; ++i)
-                                    if (!$util.isString(message.unreachable[i]))
-                                        return "unreachable: string[] expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ListVmwareEngineNetworksResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse} ListVmwareEngineNetworksResponse
-                         */
-                        ListVmwareEngineNetworksResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse)
-                                return object;
-                            var message = new $root.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse();
-                            if (object.vmwareEngineNetworks) {
-                                if (!Array.isArray(object.vmwareEngineNetworks))
-                                    throw TypeError(".google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse.vmwareEngineNetworks: array expected");
-                                message.vmwareEngineNetworks = [];
-                                for (var i = 0; i < object.vmwareEngineNetworks.length; ++i) {
-                                    if (typeof object.vmwareEngineNetworks[i] !== "object")
-                                        throw TypeError(".google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse.vmwareEngineNetworks: object expected");
-                                    message.vmwareEngineNetworks[i] = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.fromObject(object.vmwareEngineNetworks[i]);
-                                }
-                            }
-                            if (object.nextPageToken != null)
-                                message.nextPageToken = String(object.nextPageToken);
-                            if (object.unreachable) {
-                                if (!Array.isArray(object.unreachable))
-                                    throw TypeError(".google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse.unreachable: array expected");
-                                message.unreachable = [];
-                                for (var i = 0; i < object.unreachable.length; ++i)
-                                    message.unreachable[i] = String(object.unreachable[i]);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ListVmwareEngineNetworksResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
-                         * @static
-                         * @param {google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse} message ListVmwareEngineNetworksResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ListVmwareEngineNetworksResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.vmwareEngineNetworks = [];
-                                object.unreachable = [];
-                            }
-                            if (options.defaults)
-                                object.nextPageToken = "";
-                            if (message.vmwareEngineNetworks && message.vmwareEngineNetworks.length) {
-                                object.vmwareEngineNetworks = [];
-                                for (var j = 0; j < message.vmwareEngineNetworks.length; ++j)
-                                    object.vmwareEngineNetworks[j] = $root.google.cloud.vmwareengine.v1.VmwareEngineNetwork.toObject(message.vmwareEngineNetworks[j], options);
-                            }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
-                                object.nextPageToken = message.nextPageToken;
-                            if (message.unreachable && message.unreachable.length) {
-                                object.unreachable = [];
-                                for (var j = 0; j < message.unreachable.length; ++j)
-                                    object.unreachable[j] = message.unreachable[j];
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ListVmwareEngineNetworksResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ListVmwareEngineNetworksResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ListVmwareEngineNetworksResponse
-                         * @function getTypeUrl
-                         * @memberof google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ListVmwareEngineNetworksResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.vmwareengine.v1.ListVmwareEngineNetworksResponse";
-                        };
-    
-                        return ListVmwareEngineNetworksResponse;
                     })();
     
                     return v1;
@@ -27870,6 +27870,247 @@
                 return GeneratedCodeInfo;
             })();
     
+            protobuf.Timestamp = (function() {
+    
+                /**
+                 * Properties of a Timestamp.
+                 * @memberof google.protobuf
+                 * @interface ITimestamp
+                 * @property {number|Long|null} [seconds] Timestamp seconds
+                 * @property {number|null} [nanos] Timestamp nanos
+                 */
+    
+                /**
+                 * Constructs a new Timestamp.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Timestamp.
+                 * @implements ITimestamp
+                 * @constructor
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 */
+                function Timestamp(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Timestamp seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Timestamp nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Timestamp instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 * @returns {google.protobuf.Timestamp} Timestamp instance
+                 */
+                Timestamp.create = function create(properties) {
+                    return new Timestamp(properties);
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Timestamp message.
+                 * @function verify
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Timestamp.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 */
+                Timestamp.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Timestamp)
+                        return object;
+                    var message = new $root.google.protobuf.Timestamp();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.Timestamp} message Timestamp
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Timestamp.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Timestamp to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Timestamp.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Timestamp
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Timestamp";
+                };
+    
+                return Timestamp;
+            })();
+    
             protobuf.Any = (function() {
     
                 /**
@@ -28739,247 +28980,6 @@
                 };
     
                 return FieldMask;
-            })();
-    
-            protobuf.Timestamp = (function() {
-    
-                /**
-                 * Properties of a Timestamp.
-                 * @memberof google.protobuf
-                 * @interface ITimestamp
-                 * @property {number|Long|null} [seconds] Timestamp seconds
-                 * @property {number|null} [nanos] Timestamp nanos
-                 */
-    
-                /**
-                 * Constructs a new Timestamp.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Timestamp.
-                 * @implements ITimestamp
-                 * @constructor
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 */
-                function Timestamp(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Timestamp seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Timestamp nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Timestamp instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 * @returns {google.protobuf.Timestamp} Timestamp instance
-                 */
-                Timestamp.create = function create(properties) {
-                    return new Timestamp(properties);
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.seconds = reader.int64();
-                                break;
-                            }
-                        case 2: {
-                                message.nanos = reader.int32();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Timestamp message.
-                 * @function verify
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Timestamp.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 */
-                Timestamp.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Timestamp)
-                        return object;
-                    var message = new $root.google.protobuf.Timestamp();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.Timestamp} message Timestamp
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Timestamp.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Timestamp to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Timestamp.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Timestamp
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Timestamp";
-                };
-    
-                return Timestamp;
             })();
     
             return protobuf;

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,7 +42,8 @@ import * as gapicConfig from './environments_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.cx.v3.Environment|Environments}.
+ *  Service for managing
+ *  {@link google.cloud.dialogflow.cx.v3.Environment|Environments}.
  * @class
  * @memberof v3
  */
@@ -125,6 +126,9 @@ export class EnvironmentsClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -518,13 +522,15 @@ export class EnvironmentsClient {
   // -- Service calls --
   // -------------------
   /**
-   * Retrieves the specified {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   * Retrieves the specified
+   * {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   Required. The name of the
+   *   {@link google.cloud.dialogflow.cx.v3.Environment|Environment}. Format:
+   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -611,13 +617,15 @@ export class EnvironmentsClient {
     return this.innerApiCalls.getEnvironment(request, options, callback);
   }
   /**
-   * Deletes the specified {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   * Deletes the specified
+   * {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3.Environment|Environment} to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   Required. The name of the
+   *   {@link google.cloud.dialogflow.cx.v3.Environment|Environment} to delete. Format:
+   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/environments/<Environment ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -711,7 +719,8 @@ export class EnvironmentsClient {
   }
 
   /**
-   * Creates an {@link google.cloud.dialogflow.cx.v3.Environment|Environment} in the specified {@link google.cloud.dialogflow.cx.v3.Agent|Agent}.
+   * Creates an {@link google.cloud.dialogflow.cx.v3.Environment|Environment} in the
+   * specified {@link google.cloud.dialogflow.cx.v3.Agent|Agent}.
    *
    * This method is a [long-running
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
@@ -724,8 +733,9 @@ export class EnvironmentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Agent|Agent} to create an {@link google.cloud.dialogflow.cx.v3.Environment|Environment} for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3.Agent|Agent} to create an
+   *   {@link google.cloud.dialogflow.cx.v3.Environment|Environment} for. Format:
+   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
    * @param {google.cloud.dialogflow.cx.v3.Environment} request.environment
    *   Required. The environment to create.
    * @param {object} [options]
@@ -860,7 +870,8 @@ export class EnvironmentsClient {
     >;
   }
   /**
-   * Updates the specified {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   * Updates the specified
+   * {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
    * This method is a [long-running
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
@@ -1008,20 +1019,23 @@ export class EnvironmentsClient {
     >;
   }
   /**
-   * Kicks off a continuous test under the specified {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   * Kicks off a continuous test under the specified
+   * {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
    * This method is a [long-running
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata|RunContinuousTestMetadata}
-   * - `response`: {@link google.cloud.dialogflow.cx.v3.RunContinuousTestResponse|RunContinuousTestResponse}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata|RunContinuousTestMetadata}
+   * - `response`:
+   * {@link google.cloud.dialogflow.cx.v3.RunContinuousTestResponse|RunContinuousTestResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.environment
-   *   Required. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
+   *   Required. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>/environments/<Environment ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1154,14 +1168,17 @@ export class EnvironmentsClient {
     >;
   }
   /**
-   * Deploys a flow to the specified {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   * Deploys a flow to the specified
+   * {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
    * This method is a [long-running
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.cx.v3.DeployFlowMetadata|DeployFlowMetadata}
-   * - `response`: {@link google.cloud.dialogflow.cx.v3.DeployFlowResponse|DeployFlowResponse}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.cx.v3.DeployFlowMetadata|DeployFlowMetadata}
+   * - `response`:
+   * {@link google.cloud.dialogflow.cx.v3.DeployFlowResponse|DeployFlowResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1305,13 +1322,15 @@ export class EnvironmentsClient {
     >;
   }
   /**
-   * Returns the list of all environments in the specified {@link google.cloud.dialogflow.cx.v3.Agent|Agent}.
+   * Returns the list of all environments in the specified
+   * {@link google.cloud.dialogflow.cx.v3.Agent|Agent}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Agent|Agent} to list all environments for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
+   *   environments for. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1410,8 +1429,9 @@ export class EnvironmentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Agent|Agent} to list all environments for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
+   *   environments for. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1458,8 +1478,9 @@ export class EnvironmentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Agent|Agent} to list all environments for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3.Agent|Agent} to list all
+   *   environments for. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1500,7 +1521,8 @@ export class EnvironmentsClient {
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3.IEnvironment>;
   }
   /**
-   * Looks up the history of the specified {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   * Looks up the history of the specified
+   * {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
    * @param {Object} request
    *   The request object that will be sent.

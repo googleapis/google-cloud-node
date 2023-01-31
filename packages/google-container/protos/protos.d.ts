@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -4927,6 +4927,12 @@ export namespace google {
 
                 /** IPAllocationPolicy ipv6AccessType */
                 ipv6AccessType?: (google.container.v1.IPv6AccessType|keyof typeof google.container.v1.IPv6AccessType|null);
+
+                /** IPAllocationPolicy subnetIpv6CidrBlock */
+                subnetIpv6CidrBlock?: (string|null);
+
+                /** IPAllocationPolicy servicesIpv6CidrBlock */
+                servicesIpv6CidrBlock?: (string|null);
             }
 
             /** Represents a IPAllocationPolicy. */
@@ -4982,6 +4988,12 @@ export namespace google {
 
                 /** IPAllocationPolicy ipv6AccessType. */
                 public ipv6AccessType: (google.container.v1.IPv6AccessType|keyof typeof google.container.v1.IPv6AccessType);
+
+                /** IPAllocationPolicy subnetIpv6CidrBlock. */
+                public subnetIpv6CidrBlock: string;
+
+                /** IPAllocationPolicy servicesIpv6CidrBlock. */
+                public servicesIpv6CidrBlock: string;
 
                 /**
                  * Creates a new IPAllocationPolicy instance using the specified properties.
@@ -5249,6 +5261,9 @@ export namespace google {
 
                 /** Cluster nodePoolAutoConfig */
                 nodePoolAutoConfig?: (google.container.v1.INodePoolAutoConfig|null);
+
+                /** Cluster etag */
+                etag?: (string|null);
             }
 
             /** Represents a Cluster. */
@@ -5445,6 +5460,9 @@ export namespace google {
 
                 /** Cluster nodePoolAutoConfig. */
                 public nodePoolAutoConfig?: (google.container.v1.INodePoolAutoConfig|null);
+
+                /** Cluster etag. */
+                public etag: string;
 
                 /** Cluster _nodePoolDefaults. */
                 public _nodePoolDefaults?: "nodePoolDefaults";
@@ -5952,6 +5970,9 @@ export namespace google {
                 /** ClusterUpdate desiredGatewayApiConfig */
                 desiredGatewayApiConfig?: (google.container.v1.IGatewayAPIConfig|null);
 
+                /** ClusterUpdate etag */
+                etag?: (string|null);
+
                 /** ClusterUpdate desiredNodePoolLoggingConfig */
                 desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
 
@@ -6078,6 +6099,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredGatewayApiConfig. */
                 public desiredGatewayApiConfig?: (google.container.v1.IGatewayAPIConfig|null);
+
+                /** ClusterUpdate etag. */
+                public etag: string;
 
                 /** ClusterUpdate desiredNodePoolLoggingConfig. */
                 public desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
@@ -7027,6 +7051,9 @@ export namespace google {
                 /** UpdateNodePoolRequest gvnic */
                 gvnic?: (google.container.v1.IVirtualNIC|null);
 
+                /** UpdateNodePoolRequest etag */
+                etag?: (string|null);
+
                 /** UpdateNodePoolRequest fastSocket */
                 fastSocket?: (google.container.v1.IFastSocket|null);
 
@@ -7105,6 +7132,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest gvnic. */
                 public gvnic?: (google.container.v1.IVirtualNIC|null);
+
+                /** UpdateNodePoolRequest etag. */
+                public etag: string;
 
                 /** UpdateNodePoolRequest fastSocket. */
                 public fastSocket?: (google.container.v1.IFastSocket|null);
@@ -9944,6 +9974,9 @@ export namespace google {
 
                 /** NodePool updateInfo */
                 updateInfo?: (google.container.v1.NodePool.IUpdateInfo|null);
+
+                /** NodePool etag */
+                etag?: (string|null);
             }
 
             /** Represents a NodePool. */
@@ -10008,6 +10041,9 @@ export namespace google {
 
                 /** NodePool updateInfo. */
                 public updateInfo?: (google.container.v1.NodePool.IUpdateInfo|null);
+
+                /** NodePool etag. */
+                public etag: string;
 
                 /**
                  * Creates a new NodePool instance using the specified properties.
@@ -24825,6 +24861,9 @@ export namespace google {
 
                 /** Cluster protectConfig */
                 protectConfig?: (google.container.v1beta1.IProtectConfig|null);
+
+                /** Cluster etag */
+                etag?: (string|null);
             }
 
             /** Represents a Cluster. */
@@ -25048,6 +25087,9 @@ export namespace google {
 
                 /** Cluster protectConfig. */
                 public protectConfig?: (google.container.v1beta1.IProtectConfig|null);
+
+                /** Cluster etag. */
+                public etag: string;
 
                 /** Cluster _nodePoolDefaults. */
                 public _nodePoolDefaults?: "nodePoolDefaults";
@@ -25810,6 +25852,9 @@ export namespace google {
                 /** ClusterUpdate desiredGatewayApiConfig */
                 desiredGatewayApiConfig?: (google.container.v1beta1.IGatewayAPIConfig|null);
 
+                /** ClusterUpdate etag */
+                etag?: (string|null);
+
                 /** ClusterUpdate desiredNodePoolLoggingConfig */
                 desiredNodePoolLoggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
 
@@ -25957,6 +26002,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredGatewayApiConfig. */
                 public desiredGatewayApiConfig?: (google.container.v1beta1.IGatewayAPIConfig|null);
+
+                /** ClusterUpdate etag. */
+                public etag: string;
 
                 /** ClusterUpdate desiredNodePoolLoggingConfig. */
                 public desiredNodePoolLoggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
@@ -26909,6 +26957,9 @@ export namespace google {
                 /** UpdateNodePoolRequest gvnic */
                 gvnic?: (google.container.v1beta1.IVirtualNIC|null);
 
+                /** UpdateNodePoolRequest etag */
+                etag?: (string|null);
+
                 /** UpdateNodePoolRequest fastSocket */
                 fastSocket?: (google.container.v1beta1.IFastSocket|null);
 
@@ -26987,6 +27038,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest gvnic. */
                 public gvnic?: (google.container.v1beta1.IVirtualNIC|null);
+
+                /** UpdateNodePoolRequest etag. */
+                public etag: string;
 
                 /** UpdateNodePoolRequest fastSocket. */
                 public fastSocket?: (google.container.v1beta1.IFastSocket|null);
@@ -30153,6 +30207,9 @@ export namespace google {
 
                 /** NodePool updateInfo */
                 updateInfo?: (google.container.v1beta1.NodePool.IUpdateInfo|null);
+
+                /** NodePool etag */
+                etag?: (string|null);
             }
 
             /** Represents a NodePool. */
@@ -30217,6 +30274,9 @@ export namespace google {
 
                 /** NodePool updateInfo. */
                 public updateInfo?: (google.container.v1beta1.NodePool.IUpdateInfo|null);
+
+                /** NodePool etag. */
+                public etag: string;
 
                 /**
                  * Creates a new NodePool instance using the specified properties.

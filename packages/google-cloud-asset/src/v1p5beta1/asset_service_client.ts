@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -119,6 +119,9 @@ export class AssetServiceClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -339,19 +342,32 @@ export class AssetServiceClient {
    * @param {string} request.parent
    *   Required. Name of the organization or project the assets belong to. Format:
    *   "organizations/[organization-number]" (such as "organizations/123"),
-   *   "projects/[project-number]" (such as "projects/my-project-id"), or
-   *   "projects/[project-id]" (such as "projects/12345").
+   *   "projects/[project-id]" (such as "projects/my-project-id"), or
+   *   "projects/[project-number]" (such as "projects/12345").
    * @param {google.protobuf.Timestamp} request.readTime
    *   Timestamp to take an asset snapshot. This can only be set to a timestamp
-   *   between 2018-10-02 UTC (inclusive) and the current time. If not specified,
-   *   the current time will be used. Due to delays in resource data collection
-   *   and indexing, there is a volatile window during which running the same
-   *   query may get different results.
+   *   between the current time and the current time minus 35 days (inclusive).
+   *   If not specified, the current time will be used. Due to delays in resource
+   *   data collection and indexing, there is a volatile window during which
+   *   running the same query may get different results.
    * @param {string[]} request.assetTypes
-   *   A list of asset types of which to take a snapshot for. For  example:
-   *   "compute.googleapis.com/Disk". If specified, only matching assets will be
-   *   returned. See [Introduction to Cloud Asset
-   *   Inventory](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview)
+   *   A list of asset types to take a snapshot for. For example:
+   *   "compute.googleapis.com/Disk".
+   *
+   *   Regular expression is also supported. For example:
+   *
+   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+   *   with "compute.googleapis.com".
+   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+   *
+   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *   regular expression syntax. If the regular expression does not match any
+   *   supported asset type, an INVALID_ARGUMENT error will be returned.
+   *
+   *   If specified, only matching assets will be returned, otherwise, it will
+   *   snapshot all asset types. See [Introduction to Cloud Asset
+   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
    *   for all supported asset types.
    * @param {google.cloud.asset.v1p5beta1.ContentType} request.contentType
    *   Asset content type. If not specified, no content but the asset name will
@@ -458,19 +474,32 @@ export class AssetServiceClient {
    * @param {string} request.parent
    *   Required. Name of the organization or project the assets belong to. Format:
    *   "organizations/[organization-number]" (such as "organizations/123"),
-   *   "projects/[project-number]" (such as "projects/my-project-id"), or
-   *   "projects/[project-id]" (such as "projects/12345").
+   *   "projects/[project-id]" (such as "projects/my-project-id"), or
+   *   "projects/[project-number]" (such as "projects/12345").
    * @param {google.protobuf.Timestamp} request.readTime
    *   Timestamp to take an asset snapshot. This can only be set to a timestamp
-   *   between 2018-10-02 UTC (inclusive) and the current time. If not specified,
-   *   the current time will be used. Due to delays in resource data collection
-   *   and indexing, there is a volatile window during which running the same
-   *   query may get different results.
+   *   between the current time and the current time minus 35 days (inclusive).
+   *   If not specified, the current time will be used. Due to delays in resource
+   *   data collection and indexing, there is a volatile window during which
+   *   running the same query may get different results.
    * @param {string[]} request.assetTypes
-   *   A list of asset types of which to take a snapshot for. For  example:
-   *   "compute.googleapis.com/Disk". If specified, only matching assets will be
-   *   returned. See [Introduction to Cloud Asset
-   *   Inventory](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview)
+   *   A list of asset types to take a snapshot for. For example:
+   *   "compute.googleapis.com/Disk".
+   *
+   *   Regular expression is also supported. For example:
+   *
+   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+   *   with "compute.googleapis.com".
+   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+   *
+   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *   regular expression syntax. If the regular expression does not match any
+   *   supported asset type, an INVALID_ARGUMENT error will be returned.
+   *
+   *   If specified, only matching assets will be returned, otherwise, it will
+   *   snapshot all asset types. See [Introduction to Cloud Asset
+   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
    *   for all supported asset types.
    * @param {google.cloud.asset.v1p5beta1.ContentType} request.contentType
    *   Asset content type. If not specified, no content but the asset name will
@@ -525,19 +554,32 @@ export class AssetServiceClient {
    * @param {string} request.parent
    *   Required. Name of the organization or project the assets belong to. Format:
    *   "organizations/[organization-number]" (such as "organizations/123"),
-   *   "projects/[project-number]" (such as "projects/my-project-id"), or
-   *   "projects/[project-id]" (such as "projects/12345").
+   *   "projects/[project-id]" (such as "projects/my-project-id"), or
+   *   "projects/[project-number]" (such as "projects/12345").
    * @param {google.protobuf.Timestamp} request.readTime
    *   Timestamp to take an asset snapshot. This can only be set to a timestamp
-   *   between 2018-10-02 UTC (inclusive) and the current time. If not specified,
-   *   the current time will be used. Due to delays in resource data collection
-   *   and indexing, there is a volatile window during which running the same
-   *   query may get different results.
+   *   between the current time and the current time minus 35 days (inclusive).
+   *   If not specified, the current time will be used. Due to delays in resource
+   *   data collection and indexing, there is a volatile window during which
+   *   running the same query may get different results.
    * @param {string[]} request.assetTypes
-   *   A list of asset types of which to take a snapshot for. For  example:
-   *   "compute.googleapis.com/Disk". If specified, only matching assets will be
-   *   returned. See [Introduction to Cloud Asset
-   *   Inventory](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview)
+   *   A list of asset types to take a snapshot for. For example:
+   *   "compute.googleapis.com/Disk".
+   *
+   *   Regular expression is also supported. For example:
+   *
+   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+   *   with "compute.googleapis.com".
+   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+   *
+   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *   regular expression syntax. If the regular expression does not match any
+   *   supported asset type, an INVALID_ARGUMENT error will be returned.
+   *
+   *   If specified, only matching assets will be returned, otherwise, it will
+   *   snapshot all asset types. See [Introduction to Cloud Asset
+   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
    *   for all supported asset types.
    * @param {google.cloud.asset.v1p5beta1.ContentType} request.contentType
    *   Asset content type. If not specified, no content but the asset name will

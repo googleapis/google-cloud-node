@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3743,6 +3743,1074 @@ describe('v1.AssetServiceClient', () => {
       );
       assert(
         (client.descriptors.page.listSavedQueries.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('analyzeOrgPolicies', () => {
+    it('invokes analyzeOrgPolicies without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
+        ),
+      ];
+      client.innerApiCalls.analyzeOrgPolicies =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.analyzeOrgPolicies(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.analyzeOrgPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeOrgPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes analyzeOrgPolicies without error using callback', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
+        ),
+      ];
+      client.innerApiCalls.analyzeOrgPolicies =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.analyzeOrgPolicies(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.analyzeOrgPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeOrgPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes analyzeOrgPolicies with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.analyzeOrgPolicies = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.analyzeOrgPolicies(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.analyzeOrgPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeOrgPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes analyzeOrgPoliciesStream without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
+        ),
+      ];
+      client.descriptors.page.analyzeOrgPolicies.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.analyzeOrgPoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.analyzeOrgPolicies.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.analyzeOrgPolicies, request)
+      );
+      assert(
+        (client.descriptors.page.analyzeOrgPolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes analyzeOrgPoliciesStream with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.analyzeOrgPolicies.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.analyzeOrgPoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.analyzeOrgPolicies.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.analyzeOrgPolicies, request)
+      );
+      assert(
+        (client.descriptors.page.analyzeOrgPolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with analyzeOrgPolicies without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult()
+        ),
+      ];
+      client.descriptors.page.analyzeOrgPolicies.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult[] =
+        [];
+      const iterable = client.analyzeOrgPoliciesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.analyzeOrgPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.analyzeOrgPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with analyzeOrgPolicies with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.analyzeOrgPolicies.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.analyzeOrgPoliciesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.analyzeOrgPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.analyzeOrgPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('analyzeOrgPolicyGovernedContainers', () => {
+    it('invokes analyzeOrgPolicyGovernedContainers without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
+        ),
+      ];
+      client.innerApiCalls.analyzeOrgPolicyGovernedContainers =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.analyzeOrgPolicyGovernedContainers(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.analyzeOrgPolicyGovernedContainers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeOrgPolicyGovernedContainers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes analyzeOrgPolicyGovernedContainers without error using callback', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
+        ),
+      ];
+      client.innerApiCalls.analyzeOrgPolicyGovernedContainers =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.analyzeOrgPolicyGovernedContainers(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.analyzeOrgPolicyGovernedContainers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeOrgPolicyGovernedContainers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes analyzeOrgPolicyGovernedContainers with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.analyzeOrgPolicyGovernedContainers = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.analyzeOrgPolicyGovernedContainers(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.analyzeOrgPolicyGovernedContainers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeOrgPolicyGovernedContainers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes analyzeOrgPolicyGovernedContainersStream without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
+        ),
+      ];
+      client.descriptors.page.analyzeOrgPolicyGovernedContainers.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.analyzeOrgPolicyGovernedContainersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedContainers
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.analyzeOrgPolicyGovernedContainers,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedContainers
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes analyzeOrgPolicyGovernedContainersStream with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.analyzeOrgPolicyGovernedContainers.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.analyzeOrgPolicyGovernedContainersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedContainers
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.analyzeOrgPolicyGovernedContainers,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedContainers
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with analyzeOrgPolicyGovernedContainers without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer()
+        ),
+      ];
+      client.descriptors.page.analyzeOrgPolicyGovernedContainers.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer[] =
+        [];
+      const iterable = client.analyzeOrgPolicyGovernedContainersAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedContainers
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedContainers
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with analyzeOrgPolicyGovernedContainers with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.analyzeOrgPolicyGovernedContainers.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.analyzeOrgPolicyGovernedContainersAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedContainers
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedContainers
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('analyzeOrgPolicyGovernedAssets', () => {
+    it('invokes analyzeOrgPolicyGovernedAssets without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
+        ),
+      ];
+      client.innerApiCalls.analyzeOrgPolicyGovernedAssets =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.analyzeOrgPolicyGovernedAssets(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.analyzeOrgPolicyGovernedAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeOrgPolicyGovernedAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes analyzeOrgPolicyGovernedAssets without error using callback', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
+        ),
+      ];
+      client.innerApiCalls.analyzeOrgPolicyGovernedAssets =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.analyzeOrgPolicyGovernedAssets(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.analyzeOrgPolicyGovernedAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeOrgPolicyGovernedAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes analyzeOrgPolicyGovernedAssets with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.analyzeOrgPolicyGovernedAssets = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.analyzeOrgPolicyGovernedAssets(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.analyzeOrgPolicyGovernedAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeOrgPolicyGovernedAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes analyzeOrgPolicyGovernedAssetsStream without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
+        ),
+      ];
+      client.descriptors.page.analyzeOrgPolicyGovernedAssets.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.analyzeOrgPolicyGovernedAssetsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedAssets
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.analyzeOrgPolicyGovernedAssets,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedAssets
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes analyzeOrgPolicyGovernedAssetsStream with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.analyzeOrgPolicyGovernedAssets.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.analyzeOrgPolicyGovernedAssetsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedAssets
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.analyzeOrgPolicyGovernedAssets,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedAssets
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with analyzeOrgPolicyGovernedAssets without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset()
+        ),
+      ];
+      client.descriptors.page.analyzeOrgPolicyGovernedAssets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset[] =
+        [];
+      const iterable = client.analyzeOrgPolicyGovernedAssetsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedAssets
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedAssets
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with analyzeOrgPolicyGovernedAssets with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.analyzeOrgPolicyGovernedAssets.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.analyzeOrgPolicyGovernedAssetsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedAssets
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.analyzeOrgPolicyGovernedAssets
+            .asyncIterate as SinonStub
+        )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams

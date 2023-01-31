@@ -1691,6 +1691,20 @@
                     "ipv6AccessType": {
                       "type": "IPv6AccessType",
                       "id": 17
+                    },
+                    "subnetIpv6CidrBlock": {
+                      "type": "string",
+                      "id": 22,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "servicesIpv6CidrBlock": {
+                      "type": "string",
+                      "id": 23,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -1982,6 +1996,10 @@
                     "nodePoolAutoConfig": {
                       "type": "NodePoolAutoConfig",
                       "id": 136
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 139
                     }
                   },
                   "nested": {
@@ -2186,6 +2204,10 @@
                     "desiredGatewayApiConfig": {
                       "type": "GatewayAPIConfig",
                       "id": 114
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 115
                     },
                     "desiredNodePoolLoggingConfig": {
                       "type": "NodePoolLoggingConfig",
@@ -2557,6 +2579,10 @@
                     "gvnic": {
                       "type": "VirtualNIC",
                       "id": 29
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 30
                     },
                     "fastSocket": {
                       "type": "FastSocket",
@@ -3365,6 +3391,10 @@
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 110
                     }
                   },
                   "nested": {
@@ -7137,6 +7167,10 @@
                       "options": {
                         "proto3_optional": true
                       }
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 139
                     }
                   },
                   "nested": {
@@ -7453,6 +7487,10 @@
                     "desiredGatewayApiConfig": {
                       "type": "GatewayAPIConfig",
                       "id": 114
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 115
                     },
                     "desiredNodePoolLoggingConfig": {
                       "type": "NodePoolLoggingConfig",
@@ -7836,6 +7874,10 @@
                     "gvnic": {
                       "type": "VirtualNIC",
                       "id": 29
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 30
                     },
                     "fastSocket": {
                       "type": "FastSocket",
@@ -8752,6 +8794,10 @@
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 110
                     }
                   },
                   "nested": {

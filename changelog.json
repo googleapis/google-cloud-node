@@ -1,0 +1,1687 @@
+{
+  "repository": "googleapis/google-cloud-node",
+  "entries": [
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f8414ac2f7ea1b8cd11ab49939dc2abec9fd0bb9",
+          "message": "Add support for converting optional chaining to regular chaining (#3891)",
+          "issues": []
+        }
+      ],
+      "version": "1.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/typeless-sample-bot",
+      "id": "c264719e-7468-4ee1-bf4e-aa500b7639a6",
+      "createTime": "2023-01-28T04:18:24.750Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b",
+          "message": "Added SuggestConversationSummary RPC (#3854)",
+          "issues": []
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "0b898df1-a370-457d-b47d-d23f58722450",
+      "createTime": "2023-01-28T04:18:24.750Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b",
+          "message": "Added SuggestConversationSummary RPC (#3854)",
+          "issues": []
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "9c457c64-42c5-443b-a274-83b459b5890e",
+      "createTime": "2023-01-28T04:18:24.749Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7ac180aab738144ffe7479a7575b5e3937985ce4",
+          "message": "Added support for horizontal bar rendering and column settings on time series tables (#3842)",
+          "issues": []
+        }
+      ],
+      "version": "2.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring-dashboards",
+      "id": "fffe878a-1215-4353-9776-f6842a08f162",
+      "createTime": "2023-01-28T04:18:24.749Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3b646fabd5aa4f29a176817d5ed6a23de9583ccb",
+          "message": "Add ExtraComputations feature to ComputeRoutes and ComputeRouteMatrix (#3868)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b",
+          "message": "Added SuggestConversationSummary RPC (#3854)",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "92560772-438e-407c-b91a-195dd74295e6",
+      "createTime": "2023-01-28T04:18:24.748Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b",
+          "message": "Added SuggestConversationSummary RPC (#3854)",
+          "issues": []
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-context-manager",
+      "id": "a4d331eb-789f-4f63-a89b-109c17a6a971",
+      "createTime": "2023-01-28T04:18:24.748Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b",
+          "message": "Added SuggestConversationSummary RPC (#3854)",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam",
+      "id": "30e13a8c-c9fb-4032-a03c-30c864caa12a",
+      "createTime": "2023-01-28T04:18:24.747Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b",
+          "message": "Added SuggestConversationSummary RPC (#3854)",
+          "issues": []
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "ee32a318-c600-4c04-9d1e-592a3a5ed656",
+      "createTime": "2023-01-28T04:18:24.747Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b525661ed04cf91720cf75cb4b0ad0e2ab540ff7",
+          "message": "Add location methods (#3826)",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "d569d3f2-aa1e-4a8a-ab9a-f3e3003dc3c5",
+      "createTime": "2023-01-28T04:18:24.746Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b",
+          "message": "Added SuggestConversationSummary RPC (#3854)",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataflow",
+      "id": "b12289a2-eb04-4a3e-ac83-f6ffb3f13e50",
+      "createTime": "2023-01-28T04:18:24.746Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1a3497a49a09794a1636b3163335b307c1c18d87",
+          "message": "Add field for enabled Beta K8s APIs in proto (#3823)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "076de4c5fce49989efe5ca4465a411df030715f8",
+          "message": "Release GKE CloudDNS Cluster Scope (#3820)",
+          "issues": []
+        }
+      ],
+      "version": "4.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "2ec9cc5b-a883-4ad7-bd79-c00365fb22d9",
+      "createTime": "2023-01-28T04:18:24.745Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b",
+          "message": "Added SuggestConversationSummary RPC (#3854)",
+          "issues": []
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "82284fde-eb4f-41c6-92f5-e372a48b3236",
+      "createTime": "2023-01-28T04:18:24.745Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b",
+          "message": "Added SuggestConversationSummary RPC (#3854)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "237e97f1-bda4-4fc9-8d69-f7686c95c16c",
+      "createTime": "2023-01-28T04:18:24.745Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b1c4b9c89d40c30e8dd9d5a4d460b0f74069195e",
+          "message": "AWS as a source (#3835)",
+          "issues": []
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "2b9c300e-8e3f-4db1-8f94-e9643f7940b9",
+      "createTime": "2023-01-28T04:18:24.744Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7c1bac8a6509634b4011b783bf6895aead1b5f3b",
+          "message": "Update dependency redis to ~4.6.0 (#3896)",
+          "issues": [],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "62774c9f-6b94-46e0-b872-1ce6ec7ee7f0",
+      "createTime": "2023-01-28T04:18:24.744Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b",
+          "message": "Added SuggestConversationSummary RPC (#3854)",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "fd558bed-e370-4b76-83e1-e6d0724b9985",
+      "createTime": "2023-01-28T04:18:24.743Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b",
+          "message": "Added SuggestConversationSummary RPC (#3854)",
+          "issues": []
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "0e659633-41b3-4019-9daf-30e71ed7acd6",
+      "createTime": "2023-01-28T04:18:24.742Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b",
+          "message": "Added SuggestConversationSummary RPC (#3854)",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "5a74281f-a6a8-444c-b522-c5bbdffa9338",
+      "createTime": "2023-01-28T04:18:24.742Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e4b7f8d27dbb1ac011267f9b96ce90d2ff7a74b",
+          "message": "Added SuggestConversationSummary RPC (#3854)",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "a268bed4-16a3-4d4b-98dd-8b51f8673056",
+      "createTime": "2023-01-28T04:18:24.741Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "0d923840ab7c3a35455f655a1f146973492951d1",
+          "message": "Proper http bindings for v2 API (#3884)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "33b32c2e-a898-45d8-98f1-e73b313f64a1",
+      "createTime": "2023-01-28T04:18:24.741Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b30b329f30615c0855c3fb3ae88afd1453bca18f",
+          "message": "Support REST transport (#3855)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "7337b2cc-1158-43ab-95e5-bbbbcde86a3e",
+      "createTime": "2023-01-28T04:18:24.741Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "04288503-c7b9-4722-9503-5702642d29de",
+      "createTime": "2023-01-28T04:18:24.740Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "754a530904e860a0548b2ffc906930c441c8427d",
+          "message": "Added SuggestConversationSummary RPC (#3845)",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "54adec47-b1d4-41b3-8289-fb09ff63ca0f",
+      "createTime": "2023-01-28T04:18:24.740Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a4a17b41cce76a9a923b90d27c38f1b6bd712b97",
+          "message": "Added SuggestConversationSummary RPC (#978)",
+          "issues": []
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "ed5a32cc-f3ac-4c1b-a1b0-0f31da2018d5",
+      "createTime": "2023-01-28T04:18:24.739Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/shell",
+      "id": "04c4277b-ef11-41ad-a473-ee444a8bbc02",
+      "createTime": "2023-01-28T04:18:24.739Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "89dd9916688f5865c776613aa2a9059abfdf4f17",
+          "message": "Added SuggestConversationSummary RPC (#3847)",
+          "issues": []
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "74b43d89-729c-471d-a938-c4aa69347e99",
+      "createTime": "2023-01-28T04:18:24.738Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "f52d2f4f-ce72-4bd0-87b3-51b56513f001",
+      "createTime": "2023-01-28T04:18:24.738Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "764314e5-702a-4363-ac87-48b78dd9a8d9",
+      "createTime": "2023-01-28T04:18:24.738Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4693692a0271966bb29e94c6c7659fd89cbe7b33",
+          "message": "Adding support for encryption_key_revocation_action and encryption_key_shutdown_duration for RevisionTemplate and ExecutionTemplate (#3874)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "ca2ef38e-8f22-45de-a914-f43707eeb271",
+      "createTime": "2023-01-28T04:18:24.737Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "d3daff38-fd08-4d17-80d5-9e6c2a59bc43",
+      "createTime": "2023-01-28T04:18:24.737Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "201a4f5d-28fe-4309-a54a-9e503b796974",
+      "createTime": "2023-01-28T04:18:24.736Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/private-catalog",
+      "id": "5440b730-1873-4e99-b3b3-286f112a3f97",
+      "createTime": "2023-01-28T04:18:24.736Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "63c4db66-6ce6-4625-9adf-487da59d56dc",
+      "createTime": "2023-01-28T04:18:24.736Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f3f7f4f7181ddb76529397675df5b13f1616158b",
+          "message": "Support for OrgPolicy dry runs (#3864)",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "74770c29-fa24-4c02-bb54-9b223eb3ddd3",
+      "createTime": "2023-01-28T04:18:24.735Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "6164cc39-9b00-43a6-843a-20aba52e3c18",
+      "createTime": "2023-01-28T04:18:24.735Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/optimization",
+      "id": "27acd64a-f7af-4526-b103-fc2508388520",
+      "createTime": "2023-01-28T04:18:24.735Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "86df715f-cf83-40f0-a1e7-234126b8053f",
+      "createTime": "2023-01-28T04:18:24.734Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "fa00b485-a828-44a0-9458-1b78d51af0d2",
+      "createTime": "2023-01-28T04:18:24.734Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "de5830bb-4a2d-461c-adbc-0da9f1d859ef",
+      "createTime": "2023-01-28T04:18:24.734Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "21fdfa8b-ba75-465a-a991-95ef763ee5ce",
+      "createTime": "2023-01-28T04:18:24.734Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memcache",
+      "id": "254fecfa-f527-4f2b-99c1-bafd03b39569",
+      "createTime": "2023-01-28T04:18:24.733Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/media-translation",
+      "id": "12c8b775-83fd-4a89-998f-483e05138d9c",
+      "createTime": "2023-01-28T04:18:24.733Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc352db97f3bd8925bf1a7631a0ae64ff976fa4e",
+          "message": "Added SuggestConversationSummary RPC (#3853)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managed-identities",
+      "id": "68b9e9d3-d113-426f-ba02-f837006dd00e",
+      "createTime": "2023-01-28T04:18:24.733Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/life-sciences",
+      "id": "654d156d-ec10-497c-be0f-626e55fd2c26",
+      "createTime": "2023-01-28T04:18:24.732Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "f73276d3-c190-403d-914a-ac9fdd3d00dc",
+      "createTime": "2023-01-28T04:18:24.732Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "99a369ca-edaa-4eb0-aec8-5af419e086f6",
+      "createTime": "2023-01-28T04:18:24.732Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "ce583a24-b819-41b0-b497-7f6adeb8a8f9",
+      "createTime": "2023-01-28T04:18:24.731Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ids",
+      "id": "fbefdb55-c330-42e0-947c-7cc11dd19efa",
+      "createTime": "2023-01-28T04:18:24.731Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "1d58a35f-f3b7-4adb-8cb5-16daf22214cb",
+      "createTime": "2023-01-28T04:18:24.731Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "cf1ab1f2-c2d0-428c-b2a7-df7abda3ba03",
+      "createTime": "2023-01-28T04:18:24.729Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "63f5c0c2-2c0d-4ce1-9b32-8e225bda2a04",
+      "createTime": "2023-01-28T04:18:24.728Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "e246f657-7c0e-4225-9fa2-d77a31ee3637",
+      "createTime": "2023-01-28T04:18:24.728Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/game-servers",
+      "id": "3561c016-f915-4f71-a26f-acb450a1cc6f",
+      "createTime": "2023-01-28T04:18:24.728Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "465ec3d9-9e75-44ab-a20c-09fd3aecd09e",
+      "createTime": "2023-01-28T04:18:24.727Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "c9434e53-f8fc-41e9-a355-e7cd28a8921e",
+      "createTime": "2023-01-28T04:18:24.727Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "db5bda19-f26f-47e7-b29a-32eedfaa6816",
+      "createTime": "2023-01-28T04:18:24.727Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "9006d03c-b1f9-402b-88e3-982e63f7f076",
+      "createTime": "2023-01-28T04:18:24.726Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "a3332798-91b4-40d9-9c46-9595b05db5f0",
+      "createTime": "2023-01-28T04:18:24.726Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/domains",
+      "id": "2125ca0e-6037-4c66-ab09-16c3fe1f81f8",
+      "createTime": "2023-01-28T04:18:24.726Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "babcf2fbe347fc278c321c0a08b124af05a3358b",
+          "message": "[documentai] added advanced_ocr_options field in OcrConfig (#3890)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "1195e833447ef2d448284b807ef1a8c3c8ff5f01",
+          "message": "Exposed GetProcessorType to v1 (#3856)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "14111032-080b-4ad6-b51e-efbd15b04880",
+      "createTime": "2023-01-28T04:18:24.726Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "6efa83bf-9776-4839-9ef9-76f81c611526",
+      "createTime": "2023-01-28T04:18:24.725Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cfe55a5215815c3f9a4b58c6a06d5a261223d775",
+          "message": "Added JSON_PACKAGE field to ExportAgentRequest (#3882)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "638ba10f7e8b3401300977dc231da7849d4b2ac3",
+          "message": "Added JSON_PACKAGE field to ExportAgentRequest (#3876)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "618fd54fce8d95ba9a61200962f249f2ed65148e",
+          "message": "ResponseMessage proto contains channel information (#3848)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fef1c23fb0b2875090afec555f32efaa417b16e4",
+          "message": "ResponseMessage proto contains channel information (#3843)",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "c60c89c6-0a96-4f87-9e62-333a2ba56221",
+      "createTime": "2023-01-28T04:18:24.725Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "5a386248-c9f1-48b1-b2fa-082fdc2b98c6",
+      "createTime": "2023-01-28T04:18:24.725Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "5efafc77-d72e-4682-80a7-fa38f2ed3ed2",
+      "createTime": "2023-01-28T04:18:24.725Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "9ad8e49e-6ed5-4715-8b24-f2eabb13d59d",
+      "createTime": "2023-01-28T04:18:24.724Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-qna",
+      "id": "2bfebece-f49a-41fd-851e-099d80de5f5f",
+      "createTime": "2023-01-28T04:18:24.724Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9ef74ada3aea637aacc7554218c4e5be416264b1",
+          "message": "Add SPOT to Preemptibility enum (#3867)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "54b196d7-13e7-4530-a210-a876a1bda3f3",
+      "createTime": "2023-01-28T04:18:24.724Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datalabeling",
+      "id": "46437e4b-d581-439c-92f1-91680c0f17db",
+      "createTime": "2023-01-28T04:18:24.724Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-fusion",
+      "id": "b871126c-a13b-4630-a321-457ab6094b43",
+      "createTime": "2023-01-28T04:18:24.724Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "8e7f466a-628f-40f7-b095-7f5ef1c96d31",
+      "createTime": "2023-01-28T04:18:24.723Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "26adeba0625a05b17a7e87a2976520325621c307",
+          "message": "Exposed GetProcessorType to v1 (#3857)",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "c6d91002-7475-43a4-9cb8-e138d2e553ce",
+      "createTime": "2023-01-28T04:18:24.723Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d83d70a25f78812a44c4476b2149fbdef0a2baa1",
+          "message": "Added SuggestConversationSummary RPC (#3852)",
+          "issues": []
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "a9c3f068-4637-4b29-926e-686f75d034f1",
+      "createTime": "2023-01-28T04:18:24.723Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d3ec9cf20cf811cd2458e5497aae5a1d24f001ea",
+          "message": "Update Compute Engine API to revision 20230103 (#769) (#3873)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "3.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "613ca8f1-4dc9-482a-b6d5-5aabe175b69d",
+      "createTime": "2023-01-28T04:18:24.723Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dms",
+      "id": "23bec556-f591-4811-8a3a-4929d69d18b8",
+      "createTime": "2023-01-28T04:18:24.723Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "b1bdce49-01b1-4075-8ccb-e5f3ba671448",
+      "createTime": "2023-01-28T04:18:24.722Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "3fc934aa-f092-4d8e-bdaa-37413e338585",
+      "createTime": "2023-01-28T04:18:24.722Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "987bb239-2ade-4edd-9ff5-a74af1c8b263",
+      "createTime": "2023-01-28T04:18:24.722Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing-budgets",
+      "id": "4d829341-dfa4-4660-b7a2-773cf69e63ea",
+      "createTime": "2023-01-28T04:18:24.722Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "6c25b039-1b05-4b75-9e7d-caea6af05780",
+      "createTime": "2023-01-28T04:18:24.722Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "5801bcfa-18da-400d-80bd-4b952089959f",
+      "createTime": "2023-01-28T04:18:24.722Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c33a983e7a5cdd899a998b812e116366c8f3308f",
+          "message": "Add location methods (#3827)",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-transfer",
+      "id": "e137e405-c9f6-4ab7-b976-9ba275f03fe5",
+      "createTime": "2023-01-28T04:18:24.722Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-datapolicies",
+      "id": "cf162027-a95a-46d1-8229-0dfa5be73ffa",
+      "createTime": "2023-01-28T04:18:24.721Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-exchange",
+      "id": "cec0b294-f780-4c95-acd5-f3c4b40f40ca",
+      "createTime": "2023-01-28T04:18:24.721Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-connection",
+      "id": "2e7e1f80-dce0-4c7b-949d-3b3db75afe51",
+      "createTime": "2023-01-28T04:18:24.721Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "a7c9bd5a-ffb3-4770-887d-d09b6b4de818",
+      "createTime": "2023-01-28T04:18:24.721Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientgateways",
+      "id": "a72b3ccb-92a4-4f0c-9b9c-ea31bd2d7798",
+      "createTime": "2023-01-28T04:18:24.721Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientconnectorservices",
+      "id": "35e44613-e95f-4a80-97aa-0fa3cacb0e5e",
+      "createTime": "2023-01-28T04:18:24.721Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appgateways",
+      "id": "c899808d-6d39-48d2-87dd-c18c37bff124",
+      "createTime": "2023-01-28T04:18:24.721Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnectors",
+      "id": "7622e33e-91ce-4594-ad80-5b0c12529083",
+      "createTime": "2023-01-28T04:18:24.721Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnections",
+      "id": "23539ce5-ac76-410e-9ce9-5eac526f7084",
+      "createTime": "2023-01-28T04:18:24.720Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b2335658eb4a0c6ef3d771004fde73c53c7f2673",
+          "message": "Support secret and encrypted environment variables in v1 (#3828)",
+          "issues": []
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "8c12abbe-bc11-478b-8376-5a020796b8ed",
+      "createTime": "2023-01-28T04:18:24.720Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bare-metal-solution",
+      "id": "a69deb0d-e632-49b7-835e-9311b30413e7",
+      "createTime": "2023-01-28T04:18:24.720Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/assured-workloads",
+      "id": "88cd7710-5988-4149-a947-c595d442c659",
+      "createTime": "2023-01-28T04:18:24.720Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "4.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "65d70b8f-475b-474f-b752-eabcb89a8d3b",
+      "createTime": "2023-01-28T04:18:24.720Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-connect",
+      "id": "f283c0eb-521f-4e1e-a7d0-411d5d0c6463",
+      "createTime": "2023-01-28T04:18:24.720Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "5c45c1b8-2bba-4a6d-a3ba-128a93d14359",
+      "createTime": "2023-01-28T04:18:24.720Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "58d9da5b38285ea729c7dcbfb28940265751ac21",
+          "message": "Add enable_dashboard_access in aiplatform v1 and v1beta1 (#460)",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "c97bb20334af2f1d469e8fcdd2cc01fe7182d64f",
+          "message": "Removing migrated samples (to nodejs-docs-samples) from repo (#555)",
+          "issues": []
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "88aeaad9-fffc-4ddc-bd9b-dcb80c9d6fd2",
+      "createTime": "2023-01-28T04:18:24.720Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-approval",
+      "id": "01633ef6-57ec-4187-ac6a-9bfda4f47546",
+      "createTime": "2023-01-28T04:18:24.720Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/area120-tables",
+      "id": "bed5598f-dacc-4aa2-910d-7fe62692a815",
+      "createTime": "2023-01-28T04:18:24.720Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appengine-admin",
+      "id": "d4960339-7fe7-4f06-8eea-b0c4792fe62c",
+      "createTime": "2023-01-28T04:18:24.720Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-usage",
+      "id": "8208ab33-d171-42d1-8d12-f9243429ad6c",
+      "createTime": "2023-01-28T04:18:24.719Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-management",
+      "id": "77de2786-7d0b-4a66-bf16-bdc981b7bd16",
+      "createTime": "2023-01-28T04:18:24.719Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "1835a0bf-92bd-4c5f-854e-ff4461e21e9a",
+      "createTime": "2023-01-28T04:18:24.719Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79fbaa833d08738fa37aa37158ddb5b1c91710e1",
+          "message": "Added SuggestConversationSummary RPC (#3851)",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apikeys",
+      "id": "f0aa71ce-a457-473d-b77e-cfcf0110f6ad",
+      "createTime": "2023-01-28T04:18:24.719Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "a5aec9c7-85a3-4ee4-9811-e47e7ce8b3ff",
+      "createTime": "2023-01-28T04:18:24.719Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f715797a46cdd2bf4dffc1a82378986941fd6d79",
+          "message": "Added Snooze API support (#3832)",
+          "issues": []
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "2b8dcbc7-c7eb-4c17-9423-041bdeb0feec",
+      "createTime": "2023-01-28T04:18:24.718Z"
+    }
+  ],
+  "updateTime": "2023-01-28T04:18:24.750Z"
+}

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,7 +42,8 @@ import * as gapicConfig from './documents_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing knowledge {@link google.cloud.dialogflow.v2beta1.Document|Documents}.
+ *  Service for managing knowledge
+ *  {@link google.cloud.dialogflow.v2beta1.Document|Documents}.
  * @class
  * @memberof v2beta1
  */
@@ -125,6 +126,9 @@ export class DocumentsClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -676,7 +680,8 @@ export class DocumentsClient {
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
    * - `response`: {@link google.cloud.dialogflow.v2beta1.Document|Document}
    *
    * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
@@ -833,8 +838,10 @@ export class DocumentsClient {
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
-   * - `response`: {@link google.cloud.dialogflow.v2beta1.ImportDocumentsResponse|ImportDocumentsResponse}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+   * - `response`:
+   * {@link google.cloud.dialogflow.v2beta1.ImportDocumentsResponse|ImportDocumentsResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -992,7 +999,8 @@ export class DocumentsClient {
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
    * - `response`: An [Empty
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
    *
@@ -1143,7 +1151,8 @@ export class DocumentsClient {
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
    * - `response`: {@link google.cloud.dialogflow.v2beta1.Document|Document}
    *
    * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
@@ -1301,7 +1310,8 @@ export class DocumentsClient {
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
    * - `response`: {@link google.cloud.dialogflow.v2beta1.Document|Document}
    *
    * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;

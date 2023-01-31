@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dialogflow",
-        "version": "5.4.0",
+        "version": "5.5.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -770,7 +770,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 64,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -1302,7 +1302,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 62,
+                    "end": 63,
                     "type": "FULL"
                 }
             ],
@@ -3522,7 +3522,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],
@@ -3994,7 +3994,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 106,
+                    "end": 108,
                     "type": "FULL"
                 }
             ],
@@ -4054,7 +4054,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 122,
+                    "end": 124,
                     "type": "FULL"
                 }
             ],

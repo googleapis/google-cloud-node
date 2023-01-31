@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,7 +40,8 @@ import * as gapicConfig from './participants_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.v2beta1.Participant|Participants}.
+ *  Service for managing
+ *  {@link google.cloud.dialogflow.v2beta1.Participant|Participants}.
  * @class
  * @memberof v2beta1
  */
@@ -122,6 +123,9 @@ export class ParticipantsClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -945,9 +949,12 @@ export class ParticipantsClient {
    * Gets suggested articles for a participant based on specific historical
    * messages.
    *
-   * Note that {@link google.cloud.dialogflow.v2beta1.Participants.ListSuggestions|ListSuggestions} will only list the auto-generated
-   * suggestions, while {@link google.cloud.dialogflow.v2beta1.Participants.CompileSuggestion|CompileSuggestion} will try to compile suggestion
-   * based on the provided conversation context in the real time.
+   * Note that
+   * {@link google.cloud.dialogflow.v2beta1.Participants.ListSuggestions|ListSuggestions}
+   * will only list the auto-generated suggestions, while
+   * {@link google.cloud.dialogflow.v2beta1.Participants.CompileSuggestion|CompileSuggestion}
+   * will try to compile suggestion based on the provided conversation context
+   * in the real time.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -963,8 +970,9 @@ export class ParticipantsClient {
    *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
    * @param {number} [request.contextSize]
    *   Optional. Max number of messages prior to and including
-   *   {@link google.cloud.dialogflow.v2beta1.SuggestArticlesRequest.latest_message|latest_message} to use as context
-   *   when compiling the suggestion. By default 20 and at most 50.
+   *   {@link google.cloud.dialogflow.v2beta1.SuggestArticlesRequest.latest_message|latest_message}
+   *   to use as context when compiling the suggestion. By default 20 and at
+   *   most 50.
    * @param {google.cloud.dialogflow.v2beta1.AssistQueryParameters} [request.assistQueryParams]
    *   Optional. Parameters for a human assist query.
    * @param {object} [options]
@@ -1284,14 +1292,21 @@ export class ParticipantsClient {
     return this.innerApiCalls.suggestSmartReplies(request, options, callback);
   }
   /**
-   * Deprecated. use {@link google.cloud.dialogflow.v2beta1.Participants.SuggestArticles|SuggestArticles} and {@link google.cloud.dialogflow.v2beta1.Participants.SuggestFaqAnswers|SuggestFaqAnswers} instead.
+   * Deprecated. use
+   * {@link google.cloud.dialogflow.v2beta1.Participants.SuggestArticles|SuggestArticles}
+   * and
+   * {@link google.cloud.dialogflow.v2beta1.Participants.SuggestFaqAnswers|SuggestFaqAnswers}
+   * instead.
    *
    * Gets suggestions for a participant based on specific historical
    * messages.
    *
-   * Note that {@link google.cloud.dialogflow.v2beta1.Participants.ListSuggestions|ListSuggestions} will only list the auto-generated
-   * suggestions, while {@link google.cloud.dialogflow.v2beta1.Participants.CompileSuggestion|CompileSuggestion} will try to compile suggestion
-   * based on the provided conversation context in the real time.
+   * Note that
+   * {@link google.cloud.dialogflow.v2beta1.Participants.ListSuggestions|ListSuggestions}
+   * will only list the auto-generated suggestions, while
+   * {@link google.cloud.dialogflow.v2beta1.Participants.CompileSuggestion|CompileSuggestion}
+   * will try to compile suggestion based on the provided conversation context
+   * in the real time.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1641,9 +1656,9 @@ export class ParticipantsClient {
   /**
    * Deprecated: Use inline suggestion, event based suggestion or
    * Suggestion* API instead.
-   * See {@link google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.name|HumanAgentAssistantConfig.name} for more
-   * details.
-   * Removal Date: 2020-09-01.
+   * See
+   * {@link google.cloud.dialogflow.v2beta1.HumanAgentAssistantConfig.name|HumanAgentAssistantConfig.name}
+   * for more details. Removal Date: 2020-09-01.
    *
    * Retrieves suggestions for live agents.
    *

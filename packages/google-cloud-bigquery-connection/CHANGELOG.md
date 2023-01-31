@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-connection-v2.0.2...bigquery-connection-v2.1.0) (2023-01-28)
+
+
+### Features
+
+* Added Snooze API support ([#3832](https://github.com/googleapis/google-cloud-node/issues/3832)) ([f715797](https://github.com/googleapis/google-cloud-node/commit/f715797a46cdd2bf4dffc1a82378986941fd6d79))
+
 ## [2.0.2](https://github.com/googleapis/nodejs-bigquery-connection/compare/v2.0.1...v2.0.2) (2022-09-01)
 
 

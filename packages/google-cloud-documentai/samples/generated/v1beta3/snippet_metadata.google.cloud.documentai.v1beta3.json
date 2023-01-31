@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-documentai",
-        "version": "6.2.0",
+        "version": "6.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -220,6 +220,46 @@
                 "method": {
                     "shortName": "ListProcessorTypes",
                     "fullName": "google.cloud.documentai.v1beta3.DocumentProcessorService.ListProcessorTypes",
+                    "service": {
+                        "shortName": "DocumentProcessorService",
+                        "fullName": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "documentai_v1beta3_generated_DocumentProcessorService_GetProcessorType_async",
+            "title": "DocumentProcessorService getProcessorType Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a processor type detail.",
+            "canonical": true,
+            "file": "document_processor_service.get_processor_type.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetProcessorType",
+                "fullName": "google.cloud.documentai.v1beta3.DocumentProcessorService.GetProcessorType",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.documentai.v1beta3.ProcessorType",
+                "client": {
+                    "shortName": "DocumentProcessorServiceClient",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentProcessorServiceClient"
+                },
+                "method": {
+                    "shortName": "GetProcessorType",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentProcessorService.GetProcessorType",
                     "service": {
                         "shortName": "DocumentProcessorService",
                         "fullName": "google.cloud.documentai.v1beta3.DocumentProcessorService"

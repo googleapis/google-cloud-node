@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14707,6 +14707,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.managedGroupConfig != null && message.hasOwnProperty("managedGroupConfig")) {
@@ -14779,6 +14780,10 @@
                             case "PREEMPTIBLE":
                             case 2:
                                 message.preemptibility = 2;
+                                break;
+                            case "SPOT":
+                            case 3:
+                                message.preemptibility = 3;
                                 break;
                             }
                             if (object.managedGroupConfig != null) {
@@ -14890,12 +14895,14 @@
                          * @property {number} PREEMPTIBILITY_UNSPECIFIED=0 PREEMPTIBILITY_UNSPECIFIED value
                          * @property {number} NON_PREEMPTIBLE=1 NON_PREEMPTIBLE value
                          * @property {number} PREEMPTIBLE=2 PREEMPTIBLE value
+                         * @property {number} SPOT=3 SPOT value
                          */
                         InstanceGroupConfig.Preemptibility = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "PREEMPTIBILITY_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "NON_PREEMPTIBLE"] = 1;
                             values[valuesById[2] = "PREEMPTIBLE"] = 2;
+                            values[valuesById[3] = "SPOT"] = 3;
                             return values;
                         })();
     

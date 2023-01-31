@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,8 +41,8 @@ function main(privateCloud, updateMask) {
    */
   // const updateMask = {}
   /**
-   *  Optional. The request ID must be a valid UUID with the exception that zero UUID is
-   *  not supported (00000000-0000-0000-0000-000000000000).
+   *  Optional. The request ID must be a valid UUID with the exception that zero
+   *  UUID is not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
 

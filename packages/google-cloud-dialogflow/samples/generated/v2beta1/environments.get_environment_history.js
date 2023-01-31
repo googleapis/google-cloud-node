@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,8 +37,8 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of items to return in a single page. By default 100 and
-   *  at most 1000.
+   *  Optional. The maximum number of items to return in a single page. By
+   *  default 100 and at most 1000.
    */
   // const pageSize = 1234
   /**

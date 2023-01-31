@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -43,8 +43,9 @@ function main(parent) {
   // const latestMessage = 'abc123'
   /**
    *  Optional. Max number of messages prior to and including
-   *  latest_message google.cloud.dialogflow.v2beta1.SuggestArticlesRequest.latest_message  to use as context
-   *  when compiling the suggestion. By default 20 and at most 50.
+   *  latest_message google.cloud.dialogflow.v2beta1.SuggestArticlesRequest.latest_message 
+   *  to use as context when compiling the suggestion. By default 20 and at
+   *  most 50.
    */
   // const contextSize = 1234
   /**

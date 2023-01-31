@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-talent",
-        "version": "5.0.1",
+        "version": "5.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -106,7 +106,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -190,7 +190,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 75,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -242,7 +242,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 94,
+                    "end": 96,
                     "type": "FULL"
                 }
             ],
@@ -478,7 +478,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 63,
                     "type": "FULL"
                 }
             ],
@@ -522,7 +522,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 76,
+                    "end": 81,
                     "type": "FULL"
                 }
             ],
@@ -654,7 +654,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 96,
+                    "end": 100,
                     "type": "FULL"
                 }
             ],
@@ -710,7 +710,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 295,
+                    "end": 333,
                     "type": "FULL"
                 }
             ],
@@ -810,7 +810,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 295,
+                    "end": 333,
                     "type": "FULL"
                 }
             ],
@@ -994,7 +994,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],

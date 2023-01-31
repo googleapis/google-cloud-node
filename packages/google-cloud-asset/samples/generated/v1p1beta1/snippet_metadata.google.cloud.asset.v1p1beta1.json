@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-asset",
-        "version": "4.5.0",
+        "version": "4.6.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -15,14 +15,14 @@
             "regionTag": "cloudasset_v1p1beta1_generated_AssetService_SearchAllResources_async",
             "title": "AssetService searchAllResources Sample",
             "origin": "API_DEFINITION",
-            "description": " Searches all the resources under a given accessible CRM scope (project/folder/organization). This RPC gives callers especially admins the ability to search all the resources under a scope, even if they don't have .get permission of all the resources. Callers should have cloud.assets.SearchAllResources permission on the requested scope, otherwise it will be rejected.",
+            "description": " Searches all the resources within a given accessible Resource Manager scope (project/folder/organization). This RPC gives callers especially administrators the ability to search all the resources within a scope, even if they don't have `.get` permission of all the resources. Callers should have `cloud.assets.SearchAllResources` permission on the requested scope, otherwise the request will be rejected.",
             "canonical": true,
             "file": "asset_service.search_all_resources.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 91,
                     "type": "FULL"
                 }
             ],
@@ -75,7 +75,7 @@
             "regionTag": "cloudasset_v1p1beta1_generated_AssetService_SearchAllIamPolicies_async",
             "title": "AssetService searchAllIamPolicies Sample",
             "origin": "API_DEFINITION",
-            "description": " Searches all the IAM policies under a given accessible CRM scope (project/folder/organization). This RPC gives callers especially admins the ability to search all the IAM policies under a scope, even if they don't have .getIamPolicy permission of all the IAM policies. Callers should have cloud.assets.SearchAllIamPolicies permission on the requested scope, otherwise it will be rejected.",
+            "description": " Searches all the IAM policies within a given accessible Resource Manager scope (project/folder/organization). This RPC gives callers especially administrators the ability to search all the IAM policies within a scope, even if they don't have `.getIamPolicy` permission of all the IAM policies. Callers should have `cloud.assets.SearchAllIamPolicies` permission on the requested scope, otherwise the request will be rejected.",
             "canonical": true,
             "file": "asset_service.search_all_iam_policies.js",
             "language": "JAVASCRIPT",

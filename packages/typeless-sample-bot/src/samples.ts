@@ -23,6 +23,7 @@ import path from 'node:path';
 import {typescript as presetTypescript} from './preset-loader.js';
 import importToRequire from './transforms/import-to-require.js';
 import nullCoalescing from './transforms/null-coalescing.js';
+import optionalChaining from './transforms/optional-chaining.js';
 import {addComments} from './transforms/add-comments.js';
 
 // Converts an async iterable into an array of the same type.
@@ -85,7 +86,7 @@ export async function* filterByContents(
 // the transform process.
 const babelConfig = {
   presets: [[presetTypescript, {}]],
-  plugins: [[importToRequire], [nullCoalescing]],
+  plugins: [[importToRequire], [nullCoalescing], [optionalChaining]],
   parserOpts: {} as babel.ParserOptions,
   generatorOpts: {
     // Ensures that Babel keeps newlines so that comments end up

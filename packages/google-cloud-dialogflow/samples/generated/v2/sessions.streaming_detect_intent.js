@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -59,14 +59,15 @@ function main(session, queryInput) {
    */
   // const queryInput = {}
   /**
-   *  Please use InputAudioConfig.single_utterance google.cloud.dialogflow.v2.InputAudioConfig.single_utterance  instead.
-   *  If `false` (default), recognition does not cease until
-   *  the client closes the stream. If `true`, the recognizer will detect a
-   *  single spoken utterance in input audio. Recognition ceases when it detects
-   *  the audio's voice has stopped or paused. In this case, once a detected
-   *  intent is received, the client should close the stream and start a new
-   *  request with a new stream as needed.
-   *  This setting is ignored when `query_input` is a piece of text or an event.
+   *  Please use
+   *  InputAudioConfig.single_utterance google.cloud.dialogflow.v2.InputAudioConfig.single_utterance 
+   *  instead. If `false` (default), recognition does not cease until the client
+   *  closes the stream. If `true`, the recognizer will detect a single spoken
+   *  utterance in input audio. Recognition ceases when it detects the audio's
+   *  voice has stopped or paused. In this case, once a detected intent is
+   *  received, the client should close the stream and start a new request with a
+   *  new stream as needed. This setting is ignored when `query_input` is a piece
+   *  of text or an event.
    */
   // const singleUtterance = true
   /**
@@ -76,11 +77,13 @@ function main(session, queryInput) {
    */
   // const outputAudioConfig = {}
   /**
-   *  Mask for output_audio_config google.cloud.dialogflow.v2.StreamingDetectIntentRequest.output_audio_config  indicating which settings in this
-   *  request-level config should override speech synthesizer settings defined at
-   *  agent-level.
-   *  If unspecified or empty, output_audio_config google.cloud.dialogflow.v2.StreamingDetectIntentRequest.output_audio_config  replaces the agent-level
-   *  config in its entirety.
+   *  Mask for
+   *  output_audio_config google.cloud.dialogflow.v2.StreamingDetectIntentRequest.output_audio_config 
+   *  indicating which settings in this request-level config should override
+   *  speech synthesizer settings defined at agent-level.
+   *  If unspecified or empty,
+   *  output_audio_config google.cloud.dialogflow.v2.StreamingDetectIntentRequest.output_audio_config 
+   *  replaces the agent-level config in its entirety.
    */
   // const outputAudioConfigMask = {}
   /**

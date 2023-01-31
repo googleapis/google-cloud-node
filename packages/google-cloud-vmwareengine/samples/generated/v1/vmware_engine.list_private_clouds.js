@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ function main(parent) {
    *  clusters. Resource names are schemeless URIs that follow the conventions in
    *  https://cloud.google.com/apis/design/resource_names.
    *  For example:
-   *  `projects/my-project/locations/us-west1-a`
+   *  `projects/my-project/locations/us-central1-a`
    */
   // const parent = 'abc123'
   /**

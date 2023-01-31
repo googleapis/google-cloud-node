@@ -55,6 +55,11 @@
                 "getTargetProject"
               ]
             },
+            "GetReplicationCycle": {
+              "methods": [
+                "getReplicationCycle"
+              ]
+            },
             "CreateSource": {
               "methods": [
                 "createSource"
@@ -244,6 +249,13 @@
                 "listTargetProjects",
                 "listTargetProjectsStream",
                 "listTargetProjectsAsync"
+              ]
+            },
+            "ListReplicationCycles": {
+              "methods": [
+                "listReplicationCycles",
+                "listReplicationCyclesStream",
+                "listReplicationCyclesAsync"
               ]
             }
           }
@@ -296,6 +308,11 @@
                 "getTargetProject"
               ]
             },
+            "GetReplicationCycle": {
+              "methods": [
+                "getReplicationCycle"
+              ]
+            },
             "CreateSource": {
               "methods": [
                 "createSource"
@@ -485,6 +502,13 @@
                 "listTargetProjects",
                 "listTargetProjectsStream",
                 "listTargetProjectsAsync"
+              ]
+            },
+            "ListReplicationCycles": {
+              "methods": [
+                "listReplicationCycles",
+                "listReplicationCyclesStream",
+                "listReplicationCyclesAsync"
               ]
             }
           }

@@ -117,6 +117,27 @@
                 "listSavedQueriesStream",
                 "listSavedQueriesAsync"
               ]
+            },
+            "AnalyzeOrgPolicies": {
+              "methods": [
+                "analyzeOrgPolicies",
+                "analyzeOrgPoliciesStream",
+                "analyzeOrgPoliciesAsync"
+              ]
+            },
+            "AnalyzeOrgPolicyGovernedContainers": {
+              "methods": [
+                "analyzeOrgPolicyGovernedContainers",
+                "analyzeOrgPolicyGovernedContainersStream",
+                "analyzeOrgPolicyGovernedContainersAsync"
+              ]
+            },
+            "AnalyzeOrgPolicyGovernedAssets": {
+              "methods": [
+                "analyzeOrgPolicyGovernedAssets",
+                "analyzeOrgPolicyGovernedAssetsStream",
+                "analyzeOrgPolicyGovernedAssetsAsync"
+              ]
             }
           }
         },
@@ -229,6 +250,27 @@
                 "listSavedQueries",
                 "listSavedQueriesStream",
                 "listSavedQueriesAsync"
+              ]
+            },
+            "AnalyzeOrgPolicies": {
+              "methods": [
+                "analyzeOrgPolicies",
+                "analyzeOrgPoliciesStream",
+                "analyzeOrgPoliciesAsync"
+              ]
+            },
+            "AnalyzeOrgPolicyGovernedContainers": {
+              "methods": [
+                "analyzeOrgPolicyGovernedContainers",
+                "analyzeOrgPolicyGovernedContainersStream",
+                "analyzeOrgPolicyGovernedContainersAsync"
+              ]
+            },
+            "AnalyzeOrgPolicyGovernedAssets": {
+              "methods": [
+                "analyzeOrgPolicyGovernedAssets",
+                "analyzeOrgPolicyGovernedAssetsStream",
+                "analyzeOrgPolicyGovernedAssetsAsync"
               ]
             }
           }

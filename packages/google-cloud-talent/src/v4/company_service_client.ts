@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -119,6 +119,9 @@ export class CompanyServiceClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -521,15 +524,19 @@ export class CompanyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.talent.v4.Company} request.company
-   *   Required. The company resource to replace the current resource in the system.
+   *   Required. The company resource to replace the current resource in the
+   *   system.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Strongly recommended for the best service experience.
    *
-   *   If {@link google.cloud.talent.v4.UpdateCompanyRequest.update_mask|update_mask} is provided, only the specified fields in
-   *   {@link google.cloud.talent.v4.UpdateCompanyRequest.company|company} are updated. Otherwise all the fields are updated.
+   *   If {@link google.cloud.talent.v4.UpdateCompanyRequest.update_mask|update_mask}
+   *   is provided, only the specified fields in
+   *   {@link google.cloud.talent.v4.UpdateCompanyRequest.company|company} are updated.
+   *   Otherwise all the fields are updated.
    *
    *   A field mask to specify the company fields to be updated. Only
-   *   top level fields of {@link google.cloud.talent.v4.Company|Company} are supported.
+   *   top level fields of {@link google.cloud.talent.v4.Company|Company} are
+   *   supported.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -719,8 +726,9 @@ export class CompanyServiceClient {
    *
    *   Defaults to false.
    *
-   *   If true, at most {@link google.cloud.talent.v4.ListCompaniesRequest.page_size|page_size} of companies are fetched, among which
-   *   only those with open jobs are returned.
+   *   If true, at most
+   *   {@link google.cloud.talent.v4.ListCompaniesRequest.page_size|page_size} of
+   *   companies are fetched, among which only those with open jobs are returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -822,8 +830,9 @@ export class CompanyServiceClient {
    *
    *   Defaults to false.
    *
-   *   If true, at most {@link google.cloud.talent.v4.ListCompaniesRequest.page_size|page_size} of companies are fetched, among which
-   *   only those with open jobs are returned.
+   *   If true, at most
+   *   {@link google.cloud.talent.v4.ListCompaniesRequest.page_size|page_size} of
+   *   companies are fetched, among which only those with open jobs are returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -879,8 +888,9 @@ export class CompanyServiceClient {
    *
    *   Defaults to false.
    *
-   *   If true, at most {@link google.cloud.talent.v4.ListCompaniesRequest.page_size|page_size} of companies are fetched, among which
-   *   only those with open jobs are returned.
+   *   If true, at most
+   *   {@link google.cloud.talent.v4.ListCompaniesRequest.page_size|page_size} of
+   *   companies are fetched, among which only those with open jobs are returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

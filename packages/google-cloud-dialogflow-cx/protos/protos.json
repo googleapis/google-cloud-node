@@ -12,7 +12,7 @@
                       "options": {
                         "cc_enable_arenas": true,
                         "csharp_namespace": "Google.Cloud.Dialogflow.Cx.V3",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/dialogflow/cx/v3;cx",
+                        "go_package": "cloud.google.com/go/dialogflow/cx/apiv3/cxpb;cxpb",
                         "java_multiple_files": true,
                         "java_outer_classname": "VersionProto",
                         "java_package": "com.google.cloud.dialogflow.cx.v3",
@@ -448,7 +448,8 @@
                             "DataFormat": {
                               "values": {
                                 "DATA_FORMAT_UNSPECIFIED": 0,
-                                "BLOB": 1
+                                "BLOB": 1,
+                                "JSON_PACKAGE": 4
                               }
                             }
                           }
@@ -1699,6 +1700,10 @@
                             "telephonyTransferCall": {
                               "type": "TelephonyTransferCall",
                               "id": 18
+                            },
+                            "channel": {
+                              "type": "string",
+                              "id": 19
                             }
                           },
                           "nested": {
@@ -4879,6 +4884,10 @@
                               "options": {
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Version"
                               }
+                            },
+                            "channel": {
+                              "type": "string",
+                              "id": 15
                             }
                           }
                         },
@@ -7556,7 +7565,7 @@
                       "options": {
                         "cc_enable_arenas": true,
                         "csharp_namespace": "Google.Cloud.Dialogflow.Cx.V3Beta1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/dialogflow/cx/v3beta1;cx",
+                        "go_package": "cloud.google.com/go/dialogflow/cx/apiv3beta1/cxpb;cxpb",
                         "java_multiple_files": true,
                         "java_outer_classname": "VersionProto",
                         "java_package": "com.google.cloud.dialogflow.cx.v3beta1",
@@ -7992,7 +8001,8 @@
                             "DataFormat": {
                               "values": {
                                 "DATA_FORMAT_UNSPECIFIED": 0,
-                                "BLOB": 1
+                                "BLOB": 1,
+                                "JSON_PACKAGE": 4
                               }
                             }
                           }
@@ -9243,6 +9253,10 @@
                             "telephonyTransferCall": {
                               "type": "TelephonyTransferCall",
                               "id": 18
+                            },
+                            "channel": {
+                              "type": "string",
+                              "id": 19
                             }
                           },
                           "nested": {
@@ -12423,6 +12437,10 @@
                               "options": {
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Version"
                               }
+                            },
+                            "channel": {
+                              "type": "string",
+                              "id": 15
                             }
                           }
                         },

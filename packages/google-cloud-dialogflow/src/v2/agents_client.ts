@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -125,6 +125,9 @@ export class AgentsClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -1096,7 +1099,8 @@ export class AgentsClient {
    *
    * - `metadata`: An empty [Struct
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-   * - `response`: {@link google.cloud.dialogflow.v2.ExportAgentResponse|ExportAgentResponse}
+   * - `response`:
+   * {@link google.cloud.dialogflow.v2.ExportAgentResponse|ExportAgentResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1104,10 +1108,10 @@ export class AgentsClient {
    *   Required. The project that the agent to export is associated with.
    *   Format: `projects/<Project ID>`.
    * @param {string} request.agentUri
-   *   Required. The [Google Cloud Storage](https://cloud.google.com/storage/docs/)
-   *   URI to export the agent to.
-   *   The format of this URI must be `gs://<bucket-name>/<object-name>`.
-   *   If left unspecified, the serialized agent is returned inline.
+   *   Required. The [Google Cloud
+   *   Storage](https://cloud.google.com/storage/docs/) URI to export the agent
+   *   to. The format of this URI must be `gs://<bucket-name>/<object-name>`. If
+   *   left unspecified, the serialized agent is returned inline.
    *
    *   Dialogflow performs a write operation for the Cloud Storage object
    *   on the caller's behalf, so your request authentication must
@@ -1250,11 +1254,13 @@ export class AgentsClient {
    *
    * Uploads new intents and entity types without deleting the existing ones.
    * Intents and entity types with the same name are replaced with the new
-   * versions from {@link google.cloud.dialogflow.v2.ImportAgentRequest|ImportAgentRequest}. After the import, the imported draft
-   * agent will be trained automatically (unless disabled in agent settings).
-   * However, once the import is done, training may not be completed yet. Please
-   * call {@link google.cloud.dialogflow.v2.Agents.TrainAgent|TrainAgent} and wait for the operation it returns in order to train
-   * explicitly.
+   * versions from
+   * {@link google.cloud.dialogflow.v2.ImportAgentRequest|ImportAgentRequest}. After
+   * the import, the imported draft agent will be trained automatically (unless
+   * disabled in agent settings). However, once the import is done, training may
+   * not be completed yet. Please call
+   * {@link google.cloud.dialogflow.v2.Agents.TrainAgent|TrainAgent} and wait for the
+   * operation it returns in order to train explicitly.
    *
    * This method is a [long-running
    * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
@@ -1423,8 +1429,9 @@ export class AgentsClient {
    * entity types in the older version are deleted. After the restore, the
    * restored draft agent will be trained automatically (unless disabled in
    * agent settings). However, once the restore is done, training may not be
-   * completed yet. Please call {@link google.cloud.dialogflow.v2.Agents.TrainAgent|TrainAgent} and wait for the operation it
-   * returns in order to train explicitly.
+   * completed yet. Please call
+   * {@link google.cloud.dialogflow.v2.Agents.TrainAgent|TrainAgent} and wait for the
+   * operation it returns in order to train explicitly.
    *
    * This method is a [long-running
    * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).

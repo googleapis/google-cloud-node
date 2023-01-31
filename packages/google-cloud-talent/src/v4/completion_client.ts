@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -117,6 +117,9 @@ export class CompletionClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -352,9 +355,11 @@ export class CompletionClient {
    *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
    *   example, "projects/foo/tenants/bar/companies/baz".
    * @param {google.cloud.talent.v4.CompleteQueryRequest.CompletionScope} request.scope
-   *   The scope of the completion. The defaults is {@link google.cloud.talent.v4.CompleteQueryRequest.CompletionScope.PUBLIC|CompletionScope.PUBLIC}.
+   *   The scope of the completion. The defaults is
+   *   {@link google.cloud.talent.v4.CompleteQueryRequest.CompletionScope.PUBLIC|CompletionScope.PUBLIC}.
    * @param {google.cloud.talent.v4.CompleteQueryRequest.CompletionType} request.type
-   *   The completion topic. The default is {@link google.cloud.talent.v4.CompleteQueryRequest.CompletionType.COMBINED|CompletionType.COMBINED}.
+   *   The completion topic. The default is
+   *   {@link google.cloud.talent.v4.CompleteQueryRequest.CompletionType.COMBINED|CompletionType.COMBINED}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

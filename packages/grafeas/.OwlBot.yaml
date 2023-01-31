@@ -19,3 +19,5 @@ deep-copy-regex:
   - source: /grafeas/(.*)/.*-nodejs
     dest: /owl-bot-staging/grafeas/$1
 
+api-name: grafeas
+
