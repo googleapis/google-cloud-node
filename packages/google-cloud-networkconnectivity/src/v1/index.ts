@@ -17,4 +17,3 @@
 // ** All changes to this file may be overwritten. **
 
 export {HubServiceClient} from './hub_service_client';
-export {PolicyBasedRoutingServiceClient} from './policy_based_routing_service_client';
