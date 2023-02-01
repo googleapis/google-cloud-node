@@ -5,6 +5,36 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "6542d1e8ffaeb35cc0526de8df2ee11fb3c3e75d",
+          "message": "[recaptcha-enterprise] add account_verification field to Assessment for MFA (#3910)",
+          "issues": []
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "efee825c-f16c-4915-b1f0-4ed149ffa4ed",
+      "createTime": "2023-02-01T18:44:32.119Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "685ef7fd29e875c4d35b1a5cd7f41cecb0eb5722",
+          "message": "[networkconnectivity] remove HTTP bindings for serviceConnectionMaps, serviceConnectionPolicies, serviceClasses (#3907)",
+          "issues": []
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "4ebc3bd2-7c1a-4b01-ad40-3b700fc4df3d",
+      "createTime": "2023-02-01T18:44:32.117Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "f8414ac2f7ea1b8cd11ab49939dc2abec9fd0bb9",
           "message": "Add support for converting optional chaining to regular chaining (#3891)",
           "issues": []
@@ -1683,5 +1713,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-01-28T04:18:24.750Z"
+  "updateTime": "2023-02-01T18:44:32.119Z"
 }
