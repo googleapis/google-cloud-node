@@ -15,7 +15,7 @@
     "test": "mocha test"
   },
   "dependencies": {
-    "@google-cloud/iot": "^3.1.2",
+    "@google-cloud/iot": "^3.2.0",
     "@google-cloud/pubsub": "^3.0.0",
     "@google-cloud/storage": "^6.0.0"
   },

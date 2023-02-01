@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v2.3.0...tpu-v2.4.0) (2023-01-28)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3853](https://github.com/googleapis/google-cloud-node/issues/3853)) ([cc352db](https://github.com/googleapis/google-cloud-node/commit/cc352db97f3bd8925bf1a7631a0ae64ff976fa4e))
+
+
+### Bug Fixes
+
+* Proper http bindings for v2 API ([#3884](https://github.com/googleapis/google-cloud-node/issues/3884)) ([0d92384](https://github.com/googleapis/google-cloud-node/commit/0d923840ab7c3a35455f655a1f146973492951d1))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v2.2.0...tpu-v2.3.0) (2022-12-16)
 
 

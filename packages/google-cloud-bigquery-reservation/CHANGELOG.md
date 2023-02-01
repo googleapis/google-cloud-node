@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v2.0.4...bigquery-reservation-v2.1.0) (2023-01-28)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3851](https://github.com/googleapis/google-cloud-node/issues/3851)) ([79fbaa8](https://github.com/googleapis/google-cloud-node/commit/79fbaa833d08738fa37aa37158ddb5b1c91710e1))
+
 ## [2.0.4](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v2.0.3...bigquery-reservation-v2.0.4) (2022-11-10)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,8 @@ function main(key) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The public key name linked to the requested secret key in the format
-   *  "projects/{project}/keys/{key}".
+   *  Required. The public key name linked to the requested secret key in the
+   *  format "projects/{project}/keys/{key}".
    */
   // const key = 'abc123'
 

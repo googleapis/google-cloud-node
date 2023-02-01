@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v3.1.5...bigquery-data-transfer-v3.2.0) (2023-01-28)
+
+
+### Features
+
+* Add location methods ([#3827](https://github.com/googleapis/google-cloud-node/issues/3827)) ([c33a983](https://github.com/googleapis/google-cloud-node/commit/c33a983e7a5cdd899a998b812e116366c8f3308f))
+
 ## [3.1.5](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v3.1.4...bigquery-data-transfer-v3.1.5) (2022-11-10)
 
 

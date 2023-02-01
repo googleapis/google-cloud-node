@@ -1170,25 +1170,6 @@
     "support_documentation": "https://cloud.google.com/livestream/docs/getting-support"
   },
   {
-    "name": "livestream",
-    "api_shortname": "livestream",
-    "name_pretty": "Live Stream API",
-    "product_documentation": "https://cloud.google.com/livestream/",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/livestream/latest",
-    "issue_tracker": "https://github.com/googleapis/nodejs-video-live-stream/issues",
-    "release_level": "stable",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-video-live-stream",
-    "codeowner_team": "@googleapis/cloud-media-team",
-    "distribution_name": "@google-cloud/livestream",
-    "api_id": "livestream.googleapis.com",
-    "default_version": "v1",
-    "requires_billing": true,
-    "library_type": "GAPIC_AUTO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-video-live-stream",
-    "support_documentation": "https://cloud.google.com/livestream/docs/getting-support"
-  },
-  {
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/logging/latest",
     "product_documentation": "https://cloud.google.com/logging/docs",
     "name": "logging",
@@ -1968,25 +1949,6 @@
     "support_documentation": "https://googleapis.dev/nodejs/transcoder/latest/docs/getting-support"
   },
   {
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/video-transcoder/latest",
-    "product_documentation": "https://googleapis.dev/nodejs/transcoder/latest",
-    "name": "transcoder",
-    "requires_billing": true,
-    "release_level": "stable",
-    "language": "nodejs",
-    "api_id": "transcoder.googleapis.com",
-    "distribution_name": "@google-cloud/video-transcoder",
-    "repo": "googleapis/nodejs-video-transcoder",
-    "codeowner_team": "@googleapis/cloud-media-team",
-    "issue_tracker": "https://github.com/googleapis/nodejs-video-transcoder/issues",
-    "name_pretty": "Transcoder API",
-    "default_version": "v1",
-    "api_shortname": "transcoder",
-    "library_type": "GAPIC_AUTO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-video-transcoder",
-    "support_documentation": "https://googleapis.dev/nodejs/transcoder/latest/docs/getting-support"
-  },
-  {
     "distribution_name": "@google-cloud/translate",
     "release_level": "stable",
     "product_documentation": "https://cloud.google.com/translate/docs/",
@@ -2755,23 +2717,6 @@
     "default_version": "v1",
     "requires_billing": true,
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-video-stitcher",
-    "support_documentation": "https://cloud.google.com/video-stitcher/docs/getting-support"
-  },
-  {
-    "name": "videostitcher",
-    "name_pretty": "Video Stitcher API",
-    "product_documentation": "https://cloud.google.com/video-stitcher/",
-    "client_documentation": "https://googleapis.dev/nodejs/videostitcher/latest/",
-    "issue_tracker": "https://github.com/googleapis/nodejs-video-stitcher/issues",
-    "release_level": "beta",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-video-stitcher",
-    "codeowner_team": "@googleapis/cloud-media-team",
-    "distribution_name": "@google-cloud/video-stitcher",
-    "api_id": "stitcher.googleapis.com",
-    "default_version": "v1",
-    "requires_billing": true,
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-video-stitcher",
     "support_documentation": "https://cloud.google.com/video-stitcher/docs/getting-support"
   },
   {
