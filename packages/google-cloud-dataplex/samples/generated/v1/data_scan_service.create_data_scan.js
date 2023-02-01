@@ -30,8 +30,8 @@ function main(parent, dataScan, dataScanId) {
    */
   /**
    *  Required. The resource name of the parent location:
-   *  projects/{project}/locations/{location_id}
-   *  where `{project}` refers to a project_id or project_number and
+   *  `projects/{project}/locations/{location_id}`
+   *  where `project` refers to a *project_id* or *project_number* and
    *  `location_id` refers to a GCP region.
    */
   // const parent = 'abc123'
