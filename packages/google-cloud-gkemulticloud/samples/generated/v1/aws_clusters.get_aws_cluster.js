@@ -35,7 +35,7 @@ function main(name) {
    *  `AwsCluster` names are formatted as
    *  `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
-   *  for more details on GCP resource names.
+   *  for more details on Google Cloud Platform resource names.
    */
   // const name = 'abc123'
 
