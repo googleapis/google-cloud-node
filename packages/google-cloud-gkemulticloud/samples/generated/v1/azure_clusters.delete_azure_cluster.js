@@ -34,7 +34,7 @@ function main(name) {
    *  `AzureCluster` names are formatted as
    *  `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
-   *  for more details on GCP resource names.
+   *  for more details on Google Cloud Platform resource names.
    */
   // const name = 'abc123'
   /**

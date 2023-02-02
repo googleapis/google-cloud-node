@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/network-connectivity",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Networkconnectivity client for Node.js",
   "repository": {
     "type": "git",
