@@ -18,8 +18,11 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/mapsplatformdatasets').v1alpha;
-const mapsplatformdatasetsClient = new Client();
+// Imports the Mapsplatformdatasets library
+const {MapsPlatformDatasetsV1AlphaClient} =
+  require('@google-cloud/mapsplatformdatasets').v1alpha;
+// Instantiates a client
+const mapsplatformdatasetsClient = new MapsPlatformDatasetsV1AlphaClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
