@@ -51,7 +51,7 @@ function main(parent) {
    */
   // const solvingMode = {}
   /**
-   *  Truncates the number of validation errors returned. Those errors are
+   *  Truncates the number of validation errors returned. These errors are
    *  typically attached to an INVALID_ARGUMENT error payload as a BadRequest
    *  error detail (https://cloud.google.com/apis/design/errors#error_details),
    *  unless solving_mode=VALIDATE_ONLY: see the
