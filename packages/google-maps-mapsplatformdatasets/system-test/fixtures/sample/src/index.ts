@@ -16,18 +16,22 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-const config = {
-  "enable-source-maps": true,
-  "throw-deprecation": true,
-  "timeout": 10000
+import {MapsPlatformDatasetsV1AlphaClient} from '@google-cloud/mapsplatformdatasets';
+
+// check that the client class type name can be used
+function doStuffWithMapsPlatformDatasetsV1AlphaClient(
+  client: MapsPlatformDatasetsV1AlphaClient
+) {
+  client.close();
 }
-if (process.env.MOCHA_THROW_DEPRECATION === 'false') {
-  delete config['throw-deprecation'];
+
+function main() {
+  // check that the client instance can be created
+  const mapsPlatformDatasetsV1AlphaClient =
+    new MapsPlatformDatasetsV1AlphaClient();
+  doStuffWithMapsPlatformDatasetsV1AlphaClient(
+    mapsPlatformDatasetsV1AlphaClient
+  );
 }
-if (process.env.MOCHA_REPORTER) {
-  config.reporter = process.env.MOCHA_REPORTER;
-}
-if (process.env.MOCHA_REPORTER_OUTPUT) {
-  config['reporter-option'] = `output=${process.env.MOCHA_REPORTER_OUTPUT}`;
-}
-module.exports = config
+
+main();
