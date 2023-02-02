@@ -27,9 +27,9 @@ def patch(library: Path):
     # Manual helper methods override the streaming API so that it
     # accepts streamingConfig when calling streamingRecognize.
     # Rename the generated methods to avoid confusion.
-    s.replace(f'owl-bot-staging/speech/{version}/src/{version}/{name}_client.ts', r'( +)streamingRecognize\(', '\\1_streamingRecognize(')
-    s.replace(f'owl-bot-staging/speech/{version}/test/gapic_{name}_{version}.ts', r'client\.streamingRecognize\(', 'client._streamingRecognize(')
-    s.replace(f'owl-bot-staging/speech/{version}/src/{version}/{name}_client.ts', r'\Z',
+    s.replace(f'owl-bot-staging/google-cloud-speech/{version}/src/{version}/{name}_client.ts', r'( +)streamingRecognize\(', '\\1_streamingRecognize(')
+    s.replace(f'owl-bot-staging/google-cloud-speech/{version}/test/gapic_{name}_{version}.ts', r'client\.streamingRecognize\(', 'client._streamingRecognize(')
+    s.replace(f'owl-bot-staging/google-cloud-speech/{version}/src/{version}/{name}_client.ts', r'\Z',
         '\n' +
         "import {ImprovedStreamingClient} from '../helpers';\n" +
         '// eslint-disable-next-line @typescript-eslint/no-empty-interface\n' +
