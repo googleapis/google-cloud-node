@@ -19,7 +19,7 @@
 'use strict';
 
 function main(name) {
-  // [START mapsplatformdatasets_quickstart]
+  // [START mapsplatformdatasets_v1alpha_generated_MapsPlatformDatasetsV1Alpha_ListDatasets_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -27,12 +27,12 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the dataset to list all the versions for.
+   *  Required. The name of the project to list all the datasets for.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
    *  The maximum number of versions to return per page.
-   *  If unspecified (or zero), at most 1000 versions will be returned.
+   *  If unspecified (or zero), at most 1000 datasets will be returned.
    *  The maximum value is 1000; values above 1000 will be coerced to 1000.
    */
   // const pageSize = 1234
@@ -56,7 +56,7 @@ function main(name) {
     };
 
     // Run request
-    const iterable = await mapsplatformdatasetsClient.listDatasetVersionsAsync(
+    const iterable = await mapsplatformdatasetsClient.listDatasetsAsync(
       request
     );
     for await (const response of iterable) {
