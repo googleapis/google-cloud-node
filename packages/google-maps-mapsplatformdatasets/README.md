@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,57 +53,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/mapsplatformdatasets
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. The name of the dataset to list all the versions for.
- */
-// const name = 'abc123'
-/**
- *  The maximum number of versions to return per page.
- *  If unspecified (or zero), at most 1000 versions will be returned.
- *  The maximum value is 1000; values above 1000 will be coerced to 1000.
- */
-// const pageSize = 1234
-/**
- *  The page token, received from a previous GetDatasetVersions call.
- *  Provide this to retrieve the subsequent page.
- */
-// const pageToken = 'abc123'
-
-// Imports the Mapsplatformdatasets library
-const {MapsPlatformDatasetsV1AlphaClient} =
-  require('@google-cloud/mapsplatformdatasets').v1alpha;
-
-// Instantiates a client
-const mapsplatformdatasetsClient = new MapsPlatformDatasetsV1AlphaClient();
-
-async function callListDatasetVersions() {
-  // Construct request
-  const request = {
-    name,
-  };
-
-  // Run request
-  const iterable = await mapsplatformdatasetsClient.listDatasetVersionsAsync(
-    request
-  );
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListDatasetVersions();
-
-```
 
 
 
