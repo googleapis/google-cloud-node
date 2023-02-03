@@ -10,7 +10,7 @@
                   "nested": {
                     "v1": {
                       "options": {
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/billing/budgets/v1;budgets",
+                        "go_package": "cloud.google.com/go/billing/budgets/apiv1/budgetspb;budgetspb",
                         "java_multiple_files": true,
                         "java_outer_classname": "BudgetServiceProto",
                         "java_package": "com.google.cloud.billing.budgets.v1"
@@ -469,7 +469,7 @@
                     },
                     "v1beta1": {
                       "options": {
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/billing/budgets/v1beta1;budgets",
+                        "go_package": "cloud.google.com/go/billing/budgets/apiv1beta1/budgetspb;budgetspb",
                         "java_multiple_files": true,
                         "java_package": "com.google.cloud.billing.budgets.v1beta1"
                       },
