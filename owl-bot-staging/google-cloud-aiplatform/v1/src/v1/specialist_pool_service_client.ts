@@ -250,6 +250,12 @@ export class SpecialistPoolServiceClient {
       modelEvaluationSlicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}'
       ),
+      nasJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/nasJobs/{nas_job}'
+      ),
+      nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
+      ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
       ),
@@ -2767,6 +2773,117 @@ export class SpecialistPoolServiceClient {
    */
   matchSliceFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).slice;
+  }
+
+  /**
+   * Return a fully-qualified nasJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} nas_job
+   * @returns {string} Resource name string.
+   */
+  nasJobPath(project:string,location:string,nasJob:string) {
+    return this.pathTemplates.nasJobPathTemplate.render({
+      project: project,
+      location: location,
+      nas_job: nasJob,
+    });
+  }
+
+  /**
+   * Parse the project from NasJob resource.
+   *
+   * @param {string} nasJobName
+   *   A fully-qualified path representing NasJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNasJobName(nasJobName: string) {
+    return this.pathTemplates.nasJobPathTemplate.match(nasJobName).project;
+  }
+
+  /**
+   * Parse the location from NasJob resource.
+   *
+   * @param {string} nasJobName
+   *   A fully-qualified path representing NasJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNasJobName(nasJobName: string) {
+    return this.pathTemplates.nasJobPathTemplate.match(nasJobName).location;
+  }
+
+  /**
+   * Parse the nas_job from NasJob resource.
+   *
+   * @param {string} nasJobName
+   *   A fully-qualified path representing NasJob resource.
+   * @returns {string} A string representing the nas_job.
+   */
+  matchNasJobFromNasJobName(nasJobName: string) {
+    return this.pathTemplates.nasJobPathTemplate.match(nasJobName).nas_job;
+  }
+
+  /**
+   * Return a fully-qualified nasTrialDetail resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} nas_job
+   * @param {string} nas_trial_detail
+   * @returns {string} Resource name string.
+   */
+  nasTrialDetailPath(project:string,location:string,nasJob:string,nasTrialDetail:string) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.render({
+      project: project,
+      location: location,
+      nas_job: nasJob,
+      nas_trial_detail: nasTrialDetail,
+    });
+  }
+
+  /**
+   * Parse the project from NasTrialDetail resource.
+   *
+   * @param {string} nasTrialDetailName
+   *   A fully-qualified path representing NasTrialDetail resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNasTrialDetailName(nasTrialDetailName: string) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).project;
+  }
+
+  /**
+   * Parse the location from NasTrialDetail resource.
+   *
+   * @param {string} nasTrialDetailName
+   *   A fully-qualified path representing NasTrialDetail resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNasTrialDetailName(nasTrialDetailName: string) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).location;
+  }
+
+  /**
+   * Parse the nas_job from NasTrialDetail resource.
+   *
+   * @param {string} nasTrialDetailName
+   *   A fully-qualified path representing NasTrialDetail resource.
+   * @returns {string} A string representing the nas_job.
+   */
+  matchNasJobFromNasTrialDetailName(nasTrialDetailName: string) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).nas_job;
+  }
+
+  /**
+   * Parse the nas_trial_detail from NasTrialDetail resource.
+   *
+   * @param {string} nasTrialDetailName
+   *   A fully-qualified path representing NasTrialDetail resource.
+   * @returns {string} A string representing the nas_trial_detail.
+   */
+  matchNasTrialDetailFromNasTrialDetailName(nasTrialDetailName: string) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).nas_trial_detail;
   }
 
   /**
