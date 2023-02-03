@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/ids/v1;ids",
+                    "go_package": "cloud.google.com/go/ids/apiv1/idspb;idspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "IdsProto",
                     "java_package": "com.google.cloud.ids.v1",

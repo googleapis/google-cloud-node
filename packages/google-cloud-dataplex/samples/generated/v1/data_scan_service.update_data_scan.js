@@ -29,7 +29,7 @@ function main(dataScan, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Update description.
+   *  Required. DataScan resource to be updated.
    *  Only fields specified in `update_mask` are updated.
    */
   // const dataScan = {}

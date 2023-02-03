@@ -1887,7 +1887,7 @@
             "regionTag": "dataplex_v1_generated_DataScanService_CreateDataScan_async",
             "title": "ContentService createDataScan Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a dataScan resource.",
+            "description": " Creates a DataScan resource.",
             "canonical": true,
             "file": "data_scan_service.create_data_scan.js",
             "language": "JAVASCRIPT",
@@ -1935,7 +1935,7 @@
             "regionTag": "dataplex_v1_generated_DataScanService_UpdateDataScan_async",
             "title": "ContentService updateDataScan Sample",
             "origin": "API_DEFINITION",
-            "description": " Update the dataScan resource.",
+            "description": " Updates a DataScan resource.",
             "canonical": true,
             "file": "data_scan_service.update_data_scan.js",
             "language": "JAVASCRIPT",
@@ -1979,7 +1979,7 @@
             "regionTag": "dataplex_v1_generated_DataScanService_DeleteDataScan_async",
             "title": "ContentService deleteDataScan Sample",
             "origin": "API_DEFINITION",
-            "description": " Delete the dataScan resource.",
+            "description": " Deletes a DataScan resource.",
             "canonical": true,
             "file": "data_scan_service.delete_data_scan.js",
             "language": "JAVASCRIPT",
@@ -2019,14 +2019,14 @@
             "regionTag": "dataplex_v1_generated_DataScanService_GetDataScan_async",
             "title": "ContentService getDataScan Sample",
             "origin": "API_DEFINITION",
-            "description": " Get dataScan resource.",
+            "description": " Gets a DataScan resource.",
             "canonical": true,
             "file": "data_scan_service.get_data_scan.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],
@@ -2063,14 +2063,14 @@
             "regionTag": "dataplex_v1_generated_DataScanService_ListDataScans_async",
             "title": "ContentService listDataScans Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists dataScans.",
+            "description": " Lists DataScans.",
             "canonical": true,
             "file": "data_scan_service.list_data_scans.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -2119,7 +2119,7 @@
             "regionTag": "dataplex_v1_generated_DataScanService_RunDataScan_async",
             "title": "ContentService runDataScan Sample",
             "origin": "API_DEFINITION",
-            "description": " Run an on demand execution of a DataScan.",
+            "description": " Runs an on-demand execution of a DataScan",
             "canonical": true,
             "file": "data_scan_service.run_data_scan.js",
             "language": "JAVASCRIPT",
@@ -2159,14 +2159,14 @@
             "regionTag": "dataplex_v1_generated_DataScanService_GetDataScanJob_async",
             "title": "ContentService getDataScanJob Sample",
             "origin": "API_DEFINITION",
-            "description": " Get DataScanJob resource.",
+            "description": " Gets a DataScanJob resource.",
             "canonical": true,
             "file": "data_scan_service.get_data_scan_job.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],
@@ -2203,7 +2203,7 @@
             "regionTag": "dataplex_v1_generated_DataScanService_ListDataScanJobs_async",
             "title": "ContentService listDataScanJobs Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists DataScanJobs under the given dataScan.",
+            "description": " Lists DataScanJobs under the given DataScan.",
             "canonical": true,
             "file": "data_scan_service.list_data_scan_jobs.js",
             "language": "JAVASCRIPT",

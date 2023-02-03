@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/functions/v1;functions",
+                    "go_package": "cloud.google.com/go/functions/apiv1/functionspb;functionspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "FunctionsOperationsProto",
                     "java_package": "com.google.cloud.functions.v1",
@@ -810,7 +810,7 @@
                 },
                 "v2": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/functions/v2;functions",
+                    "go_package": "cloud.google.com/go/functions/apiv2/functionspb;functionspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "FunctionsProto",
                     "java_package": "com.google.cloud.functions.v2",
@@ -1795,7 +1795,7 @@
                 },
                 "v2alpha": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/functions/v2alpha;functions",
+                    "go_package": "cloud.google.com/go/functions/apiv2alpha/functionspb;functionspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "FunctionsProto",
                     "java_package": "com.google.cloud.functions.v2alpha",
@@ -2780,7 +2780,7 @@
                 },
                 "v2beta": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/functions/v2beta;functions",
+                    "go_package": "cloud.google.com/go/functions/apiv2beta/functionspb;functionspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "FunctionsProto",
                     "java_package": "com.google.cloud.functions.v2beta",

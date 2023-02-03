@@ -9,7 +9,7 @@
                 "v1beta": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.DiscoveryEngine.V1Beta",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/discoveryengine/v1beta;discoveryengine",
+                    "go_package": "cloud.google.com/go/discoveryengine/apiv1beta/discoveryenginepb;discoveryenginepb",
                     "java_multiple_files": true,
                     "java_outer_classname": "UserEventServiceProto",
                     "java_package": "com.google.cloud.discoveryengine.v1beta",

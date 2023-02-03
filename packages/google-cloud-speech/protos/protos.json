@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "cc_enable_arenas": true,
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/speech/v1;speech",
+                    "go_package": "cloud.google.com/go/speech/apiv1/speechpb;speechpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "SpeechAdaptationProto",
                     "java_package": "com.google.cloud.speech.v1",
@@ -1134,7 +1134,7 @@
                 "v1p1beta1": {
                   "options": {
                     "cc_enable_arenas": true,
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/speech/v1p1beta1;speech",
+                    "go_package": "cloud.google.com/go/speech/apiv1p1beta1/speechpb;speechpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "SpeechAdaptationProto",
                     "java_package": "com.google.cloud.speech.v1p1beta1",
@@ -2318,7 +2318,7 @@
                 },
                 "v2": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/speech/v2;speech",
+                    "go_package": "cloud.google.com/go/speech/apiv2/speechpb;speechpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "CloudSpeechProto",
                     "java_package": "com.google.cloud.speech.v2",

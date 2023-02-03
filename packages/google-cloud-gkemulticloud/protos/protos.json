@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.GkeMultiCloud.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/gkemulticloud/v1;gkemulticloud",
+                    "go_package": "cloud.google.com/go/gkemulticloud/apiv1/gkemulticloudpb;gkemulticloudpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "AzureServiceProto",
                     "java_package": "com.google.cloud.gkemulticloud.v1",
@@ -2147,7 +2147,7 @@
                           "type": "string",
                           "id": 16,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "networking": {
@@ -2169,6 +2169,13 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "azureServicesAuthentication": {
+                          "type": "AzureServicesAuthentication",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "state": {
@@ -2508,6 +2515,13 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "reconciling": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "annotations": {
                           "keyType": "string",
                           "type": "string",
@@ -2536,6 +2550,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2545,6 +2566,24 @@
                           "rule": "repeated",
                           "type": "AzureClusterUser",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AzureServicesAuthentication": {
+                      "fields": {
+                        "tenantId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "applicationId": {
+                          "type": "string",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }

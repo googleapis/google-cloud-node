@@ -15,7 +15,7 @@
             "regionTag": "gkemulticloud_v1_generated_AttachedClusters_CreateAttachedCluster_async",
             "title": "AttachedClusters createAttachedCluster Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a new [AttachedCluster][google.cloud.gkemulticloud.v1.AttachedCluster] resource on a given GCP project and region. If successful, the response contains a newly created [Operation][google.longrunning.Operation] resource that can be described to track the status of the operation.",
+            "description": " Creates a new [AttachedCluster][google.cloud.gkemulticloud.v1.AttachedCluster] resource on a given Google Cloud Platform project and region. If successful, the response contains a newly created [Operation][google.longrunning.Operation] resource that can be described to track the status of the operation.",
             "canonical": true,
             "file": "attached_clusters.create_attached_cluster.js",
             "language": "JAVASCRIPT",
@@ -403,7 +403,7 @@
             "regionTag": "gkemulticloud_v1_generated_AwsClusters_CreateAwsCluster_async",
             "title": "AttachedClusters createAwsCluster Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a new [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster] resource on a given GCP project and region. If successful, the response contains a newly created [Operation][google.longrunning.Operation] resource that can be described to track the status of the operation.",
+            "description": " Creates a new [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster] resource on a given Google Cloud Platform project and region. If successful, the response contains a newly created [Operation][google.longrunning.Operation] resource that can be described to track the status of the operation.",
             "canonical": true,
             "file": "aws_clusters.create_aws_cluster.js",
             "language": "JAVASCRIPT",
@@ -1151,7 +1151,7 @@
             "regionTag": "gkemulticloud_v1_generated_AzureClusters_CreateAzureCluster_async",
             "title": "AttachedClusters createAzureCluster Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a new [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster] resource on a given GCP project and region. If successful, the response contains a newly created [Operation][google.longrunning.Operation] resource that can be described to track the status of the operation.",
+            "description": " Creates a new [AzureCluster][google.cloud.gkemulticloud.v1.AzureCluster] resource on a given Google Cloud Platform project and region. If successful, the response contains a newly created [Operation][google.longrunning.Operation] resource that can be described to track the status of the operation.",
             "canonical": true,
             "file": "azure_clusters.create_azure_cluster.js",
             "language": "JAVASCRIPT",
@@ -1210,7 +1210,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],

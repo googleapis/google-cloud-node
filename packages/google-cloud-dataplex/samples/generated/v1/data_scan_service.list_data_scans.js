@@ -29,8 +29,9 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. projects/{project}/locations/{location_id}
-   *  where `{project}` refers to a project_id or project_number and
+   *  Required. The resource name of the parent location:
+   *  `projects/{project}/locations/{location_id}`
+   *  where `project` refers to a *project_id* or *project_number* and
    *  `location_id` refers to a GCP region.
    */
   // const parent = 'abc123'
@@ -52,7 +53,7 @@ function main(parent) {
    */
   // const filter = 'abc123'
   /**
-   *  Optional. Order by fields (name or create_time) for the result.
+   *  Optional. Order by fields (`name` or `create_time`) for the result.
    *  If not specified, the ordering is undefined.
    */
   // const orderBy = 'abc123'

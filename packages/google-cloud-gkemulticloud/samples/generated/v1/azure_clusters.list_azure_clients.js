@@ -33,7 +33,7 @@ function main(parent) {
    *  AzureClient google.cloud.gkemulticloud.v1.AzureClient  resources.
    *  Location names are formatted as `projects/<project-id>/locations/<region>`.
    *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
-   *  for more details on GCP resource names.
+   *  for more details on Google Cloud Platform resource names.
    */
   // const parent = 'abc123'
   /**

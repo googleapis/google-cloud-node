@@ -9,7 +9,7 @@
                 "v2": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.BareMetalSolution.V2",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/baremetalsolution/v2;baremetalsolution",
+                    "go_package": "cloud.google.com/go/baremetalsolution/apiv2/baremetalsolutionpb;baremetalsolutionpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VolumeProto",
                     "java_package": "com.google.cloud.baremetalsolution.v2",
