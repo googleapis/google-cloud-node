@@ -26,7 +26,7 @@ import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Google.Cloud.AIPlatform.V1Beta1";
-option go_package = "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1;aiplatform";
+option go_package = "cloud.google.com/go/aiplatform/apiv1beta1/aiplatformpb;aiplatformpb";
 option java_multiple_files = true;
 option java_outer_classname = "ModelProto";
 option java_package = "com.google.cloud.aiplatform.v1beta1";
@@ -88,6 +88,19 @@ message Model {
     // Output only. The content of this Model that may be exported.
     repeated ExportableContent exportable_contents = 2
         [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
+
+  // Contains information about the original Model if this Model is a copy.
+  message OriginalModelInfo {
+    // Output only. The resource name of the Model this Model is a copy of,
+    // including the revision. Format:
+    // `projects/{project}/locations/{location}/models/{model_id}@{version_id}`
+    string model = 1 [
+      (google.api.field_behavior) = OUTPUT_ONLY,
+      (google.api.resource_reference) = {
+        type: "aiplatform.googleapis.com/Model"
+      }
+    ];
   }
 
   // Identifies a type of Model's prediction resources.
@@ -378,6 +391,11 @@ message Model {
   // Output only. Source of a model. It can either be automl training pipeline,
   // custom training pipeline, BigQuery ML, or existing Vertex AI Model.
   ModelSourceInfo model_source_info = 38
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. If this Model is a copy of another Model, this contains info
+  // about the original.
+  OriginalModelInfo original_model_info = 34
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The resource name of the Artifact that was created in
