@@ -1,0 +1,83 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.language.v1",
+  "libraryPackage": "@google-cloud/language",
+  "services": {
+    "LanguageService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LanguageServiceClient",
+          "rpcs": {
+            "AnalyzeSentiment": {
+              "methods": [
+                "analyzeSentiment"
+              ]
+            },
+            "AnalyzeEntities": {
+              "methods": [
+                "analyzeEntities"
+              ]
+            },
+            "AnalyzeEntitySentiment": {
+              "methods": [
+                "analyzeEntitySentiment"
+              ]
+            },
+            "AnalyzeSyntax": {
+              "methods": [
+                "analyzeSyntax"
+              ]
+            },
+            "ClassifyText": {
+              "methods": [
+                "classifyText"
+              ]
+            },
+            "AnnotateText": {
+              "methods": [
+                "annotateText"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LanguageServiceClient",
+          "rpcs": {
+            "AnalyzeSentiment": {
+              "methods": [
+                "analyzeSentiment"
+              ]
+            },
+            "AnalyzeEntities": {
+              "methods": [
+                "analyzeEntities"
+              ]
+            },
+            "AnalyzeEntitySentiment": {
+              "methods": [
+                "analyzeEntitySentiment"
+              ]
+            },
+            "AnalyzeSyntax": {
+              "methods": [
+                "analyzeSyntax"
+              ]
+            },
+            "ClassifyText": {
+              "methods": [
+                "classifyText"
+              ]
+            },
+            "AnnotateText": {
+              "methods": [
+                "annotateText"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
