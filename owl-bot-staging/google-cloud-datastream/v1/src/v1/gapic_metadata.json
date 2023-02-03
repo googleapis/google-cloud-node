@@ -1,0 +1,297 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.datastream.v1",
+  "libraryPackage": "@google-cloud/datastream",
+  "services": {
+    "Datastream": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DatastreamClient",
+          "rpcs": {
+            "GetConnectionProfile": {
+              "methods": [
+                "getConnectionProfile"
+              ]
+            },
+            "DiscoverConnectionProfile": {
+              "methods": [
+                "discoverConnectionProfile"
+              ]
+            },
+            "GetStream": {
+              "methods": [
+                "getStream"
+              ]
+            },
+            "GetStreamObject": {
+              "methods": [
+                "getStreamObject"
+              ]
+            },
+            "LookupStreamObject": {
+              "methods": [
+                "lookupStreamObject"
+              ]
+            },
+            "StartBackfillJob": {
+              "methods": [
+                "startBackfillJob"
+              ]
+            },
+            "StopBackfillJob": {
+              "methods": [
+                "stopBackfillJob"
+              ]
+            },
+            "GetPrivateConnection": {
+              "methods": [
+                "getPrivateConnection"
+              ]
+            },
+            "GetRoute": {
+              "methods": [
+                "getRoute"
+              ]
+            },
+            "CreateConnectionProfile": {
+              "methods": [
+                "createConnectionProfile"
+              ]
+            },
+            "UpdateConnectionProfile": {
+              "methods": [
+                "updateConnectionProfile"
+              ]
+            },
+            "DeleteConnectionProfile": {
+              "methods": [
+                "deleteConnectionProfile"
+              ]
+            },
+            "CreateStream": {
+              "methods": [
+                "createStream"
+              ]
+            },
+            "UpdateStream": {
+              "methods": [
+                "updateStream"
+              ]
+            },
+            "DeleteStream": {
+              "methods": [
+                "deleteStream"
+              ]
+            },
+            "CreatePrivateConnection": {
+              "methods": [
+                "createPrivateConnection"
+              ]
+            },
+            "DeletePrivateConnection": {
+              "methods": [
+                "deletePrivateConnection"
+              ]
+            },
+            "CreateRoute": {
+              "methods": [
+                "createRoute"
+              ]
+            },
+            "DeleteRoute": {
+              "methods": [
+                "deleteRoute"
+              ]
+            },
+            "ListConnectionProfiles": {
+              "methods": [
+                "listConnectionProfiles",
+                "listConnectionProfilesStream",
+                "listConnectionProfilesAsync"
+              ]
+            },
+            "ListStreams": {
+              "methods": [
+                "listStreams",
+                "listStreamsStream",
+                "listStreamsAsync"
+              ]
+            },
+            "ListStreamObjects": {
+              "methods": [
+                "listStreamObjects",
+                "listStreamObjectsStream",
+                "listStreamObjectsAsync"
+              ]
+            },
+            "FetchStaticIps": {
+              "methods": [
+                "fetchStaticIps",
+                "fetchStaticIpsStream",
+                "fetchStaticIpsAsync"
+              ]
+            },
+            "ListPrivateConnections": {
+              "methods": [
+                "listPrivateConnections",
+                "listPrivateConnectionsStream",
+                "listPrivateConnectionsAsync"
+              ]
+            },
+            "ListRoutes": {
+              "methods": [
+                "listRoutes",
+                "listRoutesStream",
+                "listRoutesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DatastreamClient",
+          "rpcs": {
+            "GetConnectionProfile": {
+              "methods": [
+                "getConnectionProfile"
+              ]
+            },
+            "DiscoverConnectionProfile": {
+              "methods": [
+                "discoverConnectionProfile"
+              ]
+            },
+            "GetStream": {
+              "methods": [
+                "getStream"
+              ]
+            },
+            "GetStreamObject": {
+              "methods": [
+                "getStreamObject"
+              ]
+            },
+            "LookupStreamObject": {
+              "methods": [
+                "lookupStreamObject"
+              ]
+            },
+            "StartBackfillJob": {
+              "methods": [
+                "startBackfillJob"
+              ]
+            },
+            "StopBackfillJob": {
+              "methods": [
+                "stopBackfillJob"
+              ]
+            },
+            "GetPrivateConnection": {
+              "methods": [
+                "getPrivateConnection"
+              ]
+            },
+            "GetRoute": {
+              "methods": [
+                "getRoute"
+              ]
+            },
+            "CreateConnectionProfile": {
+              "methods": [
+                "createConnectionProfile"
+              ]
+            },
+            "UpdateConnectionProfile": {
+              "methods": [
+                "updateConnectionProfile"
+              ]
+            },
+            "DeleteConnectionProfile": {
+              "methods": [
+                "deleteConnectionProfile"
+              ]
+            },
+            "CreateStream": {
+              "methods": [
+                "createStream"
+              ]
+            },
+            "UpdateStream": {
+              "methods": [
+                "updateStream"
+              ]
+            },
+            "DeleteStream": {
+              "methods": [
+                "deleteStream"
+              ]
+            },
+            "CreatePrivateConnection": {
+              "methods": [
+                "createPrivateConnection"
+              ]
+            },
+            "DeletePrivateConnection": {
+              "methods": [
+                "deletePrivateConnection"
+              ]
+            },
+            "CreateRoute": {
+              "methods": [
+                "createRoute"
+              ]
+            },
+            "DeleteRoute": {
+              "methods": [
+                "deleteRoute"
+              ]
+            },
+            "ListConnectionProfiles": {
+              "methods": [
+                "listConnectionProfiles",
+                "listConnectionProfilesStream",
+                "listConnectionProfilesAsync"
+              ]
+            },
+            "ListStreams": {
+              "methods": [
+                "listStreams",
+                "listStreamsStream",
+                "listStreamsAsync"
+              ]
+            },
+            "ListStreamObjects": {
+              "methods": [
+                "listStreamObjects",
+                "listStreamObjectsStream",
+                "listStreamObjectsAsync"
+              ]
+            },
+            "FetchStaticIps": {
+              "methods": [
+                "fetchStaticIps",
+                "fetchStaticIpsStream",
+                "fetchStaticIpsAsync"
+              ]
+            },
+            "ListPrivateConnections": {
+              "methods": [
+                "listPrivateConnections",
+                "listPrivateConnectionsStream",
+                "listPrivateConnectionsAsync"
+              ]
+            },
+            "ListRoutes": {
+              "methods": [
+                "listRoutes",
+                "listRoutesStream",
+                "listRoutesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
