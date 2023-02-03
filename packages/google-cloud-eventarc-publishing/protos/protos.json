@@ -11,7 +11,7 @@
                     "v1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.Eventarc.Publishing.V1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/eventarc/publishing/v1;publisher",
+                        "go_package": "cloud.google.com/go/eventarc/publishing/apiv1/publishingpb;publishingpb",
                         "java_multiple_files": true,
                         "java_outer_classname": "PublisherProto",
                         "java_package": "com.google.cloud.eventarc.publishing.v1",

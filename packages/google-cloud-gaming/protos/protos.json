@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/gaming/v1;gaming",
+                    "go_package": "cloud.google.com/go/gaming/apiv1/gamingpb;gamingpb",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.gaming.v1"
                   },
@@ -2076,7 +2076,7 @@
                 },
                 "v1beta": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/gaming/v1beta;gaming",
+                    "go_package": "cloud.google.com/go/gaming/apiv1beta/gamingpb;gamingpb",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.gaming.v1beta",
                     "php_namespace": "Google\\Cloud\\Gaming\\V1beta"

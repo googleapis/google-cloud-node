@@ -10,7 +10,7 @@
                   "options": {
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.DataCatalog.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/datacatalog/v1;datacatalog",
+                    "go_package": "cloud.google.com/go/datacatalog/apiv1/datacatalogpb;datacatalogpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "PolicyTagManagerSerializationProto",
                     "java_package": "com.google.cloud.datacatalog.v1",
@@ -3272,7 +3272,7 @@
                   "options": {
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.DataCatalog.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/datacatalog/v1beta1;datacatalog",
+                    "go_package": "cloud.google.com/go/datacatalog/apiv1beta1/datacatalogpb;datacatalogpb",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.datacatalog.v1beta1",
                     "php_namespace": "Google\\Cloud\\DataCatalog\\V1beta1",

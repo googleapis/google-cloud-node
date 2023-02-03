@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "cc_enable_arenas": true,
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/iot/v1;iot",
+                    "go_package": "cloud.google.com/go/iot/apiv1/iotpb;iotpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ResourcesProto",
                     "java_package": "com.google.cloud.iot.v1"

@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Datastream.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/datastream/v1;datastream",
+                    "go_package": "cloud.google.com/go/datastream/apiv1/datastreampb;datastreampb",
                     "java_multiple_files": true,
                     "java_outer_classname": "DatastreamResourcesProto",
                     "java_package": "com.google.cloud.datastream.v1",
@@ -2780,7 +2780,7 @@
                 "v1alpha1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Datastream.V1Alpha1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/datastream/v1alpha1;datastream",
+                    "go_package": "cloud.google.com/go/datastream/apiv1alpha1/datastreampb;datastreampb",
                     "java_multiple_files": true,
                     "java_outer_classname": "CloudDatastreamResourcesProto",
                     "java_package": "com.google.cloud.datastream.v1alpha1",

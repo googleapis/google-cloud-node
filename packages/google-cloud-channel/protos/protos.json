@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/channel/v1;channel",
+                    "go_package": "cloud.google.com/go/channel/apiv1/channelpb;channelpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "SubscriberEventProto",
                     "java_package": "com.google.cloud.channel.v1"
