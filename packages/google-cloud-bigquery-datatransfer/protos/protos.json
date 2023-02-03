@@ -11,7 +11,7 @@
                     "v1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.BigQuery.DataTransfer.V1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/datatransfer/v1;datatransfer",
+                        "go_package": "cloud.google.com/go/bigquery/datatransfer/apiv1/datatransferpb;datatransferpb",
                         "java_multiple_files": true,
                         "java_outer_classname": "TransferProto",
                         "java_package": "com.google.cloud.bigquery.datatransfer.v1",

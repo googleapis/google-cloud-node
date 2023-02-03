@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/deploy/v1;deploy",
+                    "go_package": "cloud.google.com/go/deploy/apiv1/deploypb;deploypb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TargetNotificationPayloadProto",
                     "java_package": "com.google.cloud.deploy.v1",

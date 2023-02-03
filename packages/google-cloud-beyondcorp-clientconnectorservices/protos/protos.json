@@ -11,7 +11,7 @@
                     "v1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.BeyondCorp.ClientConnectorServices.V1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/beyondcorp/clientconnectorservices/v1;clientconnectorservices",
+                        "go_package": "cloud.google.com/go/beyondcorp/clientconnectorservices/apiv1/clientconnectorservicespb;clientconnectorservicespb",
                         "java_multiple_files": true,
                         "java_outer_classname": "ClientConnectorServicesServiceProto",
                         "java_package": "com.google.cloud.beyondcorp.clientconnectorservices.v1",

@@ -11,7 +11,7 @@
                     "v1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.DataCatalog.Lineage.V1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/datacatalog/lineage/v1;lineage",
+                        "go_package": "cloud.google.com/go/datacatalog/lineage/apiv1/lineagepb;lineagepb",
                         "java_multiple_files": true,
                         "java_outer_classname": "LineageProto",
                         "java_package": "com.google.cloud.datacatalog.lineage.v1",
