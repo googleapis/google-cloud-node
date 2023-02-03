@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.VmwareEngine.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/vmwareengine/v1;vmwareengine",
+                    "go_package": "cloud.google.com/go/vmwareengine/apiv1/vmwareenginepb;vmwareenginepb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VmwareengineResourcesProto",
                     "java_package": "com.google.cloud.vmwareengine.v1",
