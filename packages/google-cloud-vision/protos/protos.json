@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "cc_enable_arenas": true,
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/vision/v1;vision",
+                    "go_package": "cloud.google.com/go/vision/apiv1/visionpb;visionpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WebDetectionProto",
                     "java_package": "com.google.cloud.vision.v1",
@@ -2353,7 +2353,7 @@
                 "v1p1beta1": {
                   "options": {
                     "cc_enable_arenas": true,
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/vision/v1p1beta1;vision",
+                    "go_package": "cloud.google.com/go/vision/apiv1p1beta1/visionpb;visionpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WebDetectionProto",
                     "java_package": "com.google.cloud.vision.v1p1beta1"
@@ -3212,7 +3212,7 @@
                 "v1p2beta1": {
                   "options": {
                     "cc_enable_arenas": true,
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/vision/v1p2beta1;vision",
+                    "go_package": "cloud.google.com/go/vision/apiv1p2beta1/visionpb;visionpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WebDetectionProto",
                     "java_package": "com.google.cloud.vision.v1p2beta1"
@@ -4262,7 +4262,7 @@
                 "v1p3beta1": {
                   "options": {
                     "cc_enable_arenas": true,
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/vision/v1p3beta1;vision",
+                    "go_package": "cloud.google.com/go/vision/apiv1p3beta1/visionpb;visionpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WebDetectionProto",
                     "java_package": "com.google.cloud.vision.v1p3beta1",
@@ -6339,7 +6339,7 @@
                 "v1p4beta1": {
                   "options": {
                     "cc_enable_arenas": true,
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/vision/v1p4beta1;vision",
+                    "go_package": "cloud.google.com/go/vision/apiv1p4beta1/visionpb;visionpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WebDetectionProto",
                     "java_package": "com.google.cloud.vision.v1p4beta1",

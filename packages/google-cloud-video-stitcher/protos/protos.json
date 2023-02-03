@@ -10,7 +10,7 @@
                   "nested": {
                     "v1": {
                       "options": {
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/video/stitcher/v1;stitcher",
+                        "go_package": "cloud.google.com/go/video/stitcher/apiv1/stitcherpb;stitcherpb",
                         "java_multiple_files": true,
                         "java_outer_classname": "VideoStitcherServiceProto",
                         "java_package": "com.google.cloud.video.stitcher.v1"

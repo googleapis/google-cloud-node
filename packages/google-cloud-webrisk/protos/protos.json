@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.WebRisk.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/webrisk/v1;webrisk",
+                    "go_package": "cloud.google.com/go/webrisk/apiv1/webriskpb;webriskpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WebRiskProto",
                     "java_package": "com.google.webrisk.v1",
@@ -393,7 +393,7 @@
                 "v1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.WebRisk.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/webrisk/v1beta1;webrisk",
+                    "go_package": "cloud.google.com/go/webrisk/apiv1beta1/webriskpb;webriskpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WebRiskProto",
                     "java_package": "com.google.webrisk.v1beta1",
