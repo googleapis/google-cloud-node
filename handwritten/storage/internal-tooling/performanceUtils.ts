@@ -26,6 +26,7 @@ export const NODE_DEFAULT_HIGHWATER_MARK_BYTES = 16384;
 export const DEFAULT_DIRECTORY_PROBABILITY = 0.1;
 export const DEFAULT_PROJECT_ID = 'GCS_NODE_PERFORMANCE_METRICS';
 export const DEFAULT_NUMBER_OF_OBJECTS = 1000;
+const SSB_SIZE_THRESHOLD_BYTES = 1048576;
 
 export interface TestResult {
   op: string;
@@ -223,4 +224,60 @@ export function getValidationType(): 'md5' | 'crc32c' | boolean | undefined {
   } else {
     return 'md5';
   }
+}
+
+/**
+ * Converts the supplied test results from javascript objects to a cloud monitoring formatted string.
+ *
+ * @param {TestResult[]} results An array of test iteration result objects that will be converted to cloud monitoring format.
+ * @param {string} bucket The bucket name used for the test.
+ *
+ * @returns {AsyncGenerator<string>} A string containing the results of the conversion to cloud monitoring format.
+ */
+export async function* convertToCloudMonitoringFormat(
+  results: TestResult[],
+  bucketName: string
+): AsyncGenerator<string> {
+  for (const curResult of results) {
+    const throughput =
+      // If the object size is greater than the defined threshold, report in MiB/s, otherwise report in KiB/s.
+      curResult.objectSize >= SSB_SIZE_THRESHOLD_BYTES
+        ? curResult.objectSize /
+          1024 /
+          1024 /
+          (curResult.elapsedTimeUs / 1000000)
+        : curResult.objectSize / 1024 / (curResult.elapsedTimeUs / 1000000);
+    yield `throughput{timestamp=${new Date()},\
+    library="nodejs-storage",\
+    api="${curResult.apiName}",\
+    op="${curResult.op}",\
+    object_size="${curResult.objectSize}",\
+    transfer_offset="0",\
+    transfer_size="${curResult.objectSize}",\
+    app_buffer_size="${curResult.appBufferSize}",\
+    crc32c_enabled="${curResult.crc32Enabled}",\
+    md5_enabled="${curResult.md5Enabled}",\
+    elapsed_time_us="${curResult.elapsedTimeUs}",\
+    cpu_time_us="${curResult.cpuTimeUs}",\
+    elapsedmicroseconds="${curResult.elapsedTimeUs}",\
+    peer="",\
+    bucket_name="${bucketName}",\
+    object_name="",\
+    generation="",\
+    upload_id="",\
+    retry_count="",\
+    status_code=""} ${throughput}`;
+  }
+}
+
+/**
+ * Converts the supplied test results from javascript objects to a CSV formatted string.
+ *
+ * @param {TestResult[]} results An array of test iteration result objects that will be converted to CSV format.
+ *
+ * @returns {string} A string containnig the the CSV results of the conversion.
+ */
+export function convertToCSVFormat(results: TestResult[]): string {
+  const csv = results.map(result => Object.values(result));
+  return csv.join('\n');
 }

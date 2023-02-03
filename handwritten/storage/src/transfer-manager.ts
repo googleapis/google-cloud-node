@@ -41,7 +41,7 @@ const DEFAULT_PARALLEL_CHUNKED_DOWNLOAD_LIMIT = 2;
  * The minimum size threshold in bytes at which to apply a chunked download strategy when calling downloadFileInChunks.
  * @experimental
  */
-const DOWNLOAD_IN_CHUNKS_FILE_SIZE_THRESHOLD = 256 * 1024 * 1024;
+const DOWNLOAD_IN_CHUNKS_FILE_SIZE_THRESHOLD = 32 * 1024 * 1024;
 /**
  * The chunk size in bytes to use when calling downloadFileInChunks.
  * @experimental

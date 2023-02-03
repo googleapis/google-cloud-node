@@ -18,15 +18,19 @@ import {appendFile} from 'fs/promises';
 // eslint-disable-next-line node/no-unsupported-features/node-builtins
 import {Worker} from 'worker_threads';
 import yargs = require('yargs');
-import {TestResult} from './performanceUtils';
+import {
+  convertToCSVFormat,
+  convertToCloudMonitoringFormat,
+  TestResult,
+} from './performanceUtils';
 import {existsSync} from 'fs';
 import {writeFile} from 'fs/promises';
 
+const DEFAULT_BUCKET_NAME = 'nodejs-performance-test';
 const DEFAULT_ITERATIONS = 100;
 const DEFAULT_THREADS = 1;
 const CSV_HEADERS =
   'Op,ObjectSize,AppBufferSize,LibBufferSize,Crc32cEnabled,MD5Enabled,ApiName,ElapsedTimeUs,CpuTimeUs,Status\n';
-const START_TIME = Date.now();
 export const enum TRANSFER_MANAGER_TEST_TYPES {
   WRITE_ONE_READ_THREE = 'w1r3',
   TRANSFER_MANAGER_UPLOAD_MANY_FILES = 'tm-upload',
@@ -37,8 +41,14 @@ export const enum TRANSFER_MANAGER_TEST_TYPES {
   APPLICATION_DOWNLOAD_MULTIPLE_OBJECTS = 'application-download',
 }
 
+const enum OUTPUT_FORMATS {
+  CSV = 'csv',
+  CLOUD_MONITORING = 'cloudmon',
+}
+
 const argv = yargs(process.argv.slice(2))
   .options({
+    bucket: {type: 'string', default: DEFAULT_BUCKET_NAME},
     iterations: {type: 'number', default: DEFAULT_ITERATIONS},
     numthreads: {type: 'number', default: DEFAULT_THREADS},
     testtype: {
@@ -53,6 +63,14 @@ const argv = yargs(process.argv.slice(2))
         TRANSFER_MANAGER_TEST_TYPES.APPLICATION_UPLOAD_MULTIPLE_OBJECTS,
       ],
       default: TRANSFER_MANAGER_TEST_TYPES.WRITE_ONE_READ_THREE,
+    },
+    format: {
+      type: 'string',
+      choices: [OUTPUT_FORMATS.CSV, OUTPUT_FORMATS.CLOUD_MONITORING],
+      default: OUTPUT_FORMATS.CSV,
+    },
+    filename: {
+      type: 'string',
     },
   })
   .parseSync();
@@ -119,7 +137,7 @@ function createWorker() {
 
   w.on('message', data => {
     console.log('Successfully completed iteration.');
-    appendResultToCSV(data);
+    recordResult(data);
     if (iterationsRemaining > 0) {
       createWorker();
     }
@@ -131,22 +149,40 @@ function createWorker() {
 }
 
 /**
- * Appends the test results to the CSV file.
+ * Records the test result to the appropriate place based on specified command line arguments.
  *
- * @param {TestResult[]} results
+ * @param {TestResult[]} results result of a test iteration.
  */
-async function appendResultToCSV(results: TestResult[] | TestResult) {
-  const fileName = `nodejs-perf-metrics-${START_TIME}-${argv.iterations}.csv`;
+async function recordResult(results: TestResult[] | TestResult) {
   const resultsToAppend: TestResult[] = Array.isArray(results)
     ? results
     : [results];
 
-  if (!existsSync(fileName)) {
-    await writeFile(fileName, CSV_HEADERS);
+  if (
+    argv.filename &&
+    argv.format === OUTPUT_FORMATS.CSV &&
+    !existsSync(argv.filename)
+  ) {
+    await writeFile(argv.filename, CSV_HEADERS);
   }
-  const csv = resultsToAppend.map(result => Object.values(result));
-  const csvString = csv.join('\n');
-  await appendFile(fileName, `${csvString}\n`);
+
+  if (argv.format === OUTPUT_FORMATS.CSV) {
+    argv.filename
+      ? await appendFile(
+          argv.filename,
+          `${convertToCSVFormat(resultsToAppend)}\n`
+        )
+      : console.log(convertToCSVFormat(resultsToAppend));
+  } else if (argv.format === OUTPUT_FORMATS.CLOUD_MONITORING) {
+    for await (const outputString of convertToCloudMonitoringFormat(
+      resultsToAppend,
+      argv.bucket
+    )) {
+      argv.filename
+        ? await appendFile(argv.filename, `${outputString}\n`)
+        : console.log(outputString);
+    }
+  }
 }
 
 main();
