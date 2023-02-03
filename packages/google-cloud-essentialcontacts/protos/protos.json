@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/essentialcontacts/v1;essentialcontacts",
+                    "go_package": "cloud.google.com/go/essentialcontacts/apiv1/essentialcontactspb;essentialcontactspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "EnumsProto",
                     "java_package": "com.google.cloud.essentialcontacts.v1",
