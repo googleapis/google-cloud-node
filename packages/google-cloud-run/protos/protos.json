@@ -989,7 +989,7 @@
               "nested": {
                 "v2": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/run/v2;run",
+                    "go_package": "cloud.google.com/go/run/apiv2/runpb;runpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TaskProto",
                     "java_package": "com.google.cloud.run.v2",
