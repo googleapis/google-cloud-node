@@ -2649,6 +2649,10 @@
                             "taskPack": {
                               "type": "int64",
                               "id": 3
+                            },
+                            "bootDisk": {
+                              "type": "AllocationPolicy.Disk",
+                              "id": 4
                             }
                           }
                         },

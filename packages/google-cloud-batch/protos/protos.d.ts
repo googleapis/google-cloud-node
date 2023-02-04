@@ -10608,6 +10608,9 @@ export namespace google {
 
                         /** InstanceStatus taskPack */
                         taskPack?: (number|Long|string|null);
+
+                        /** InstanceStatus bootDisk */
+                        bootDisk?: (google.cloud.batch.v1alpha.AllocationPolicy.IDisk|null);
                     }
 
                     /** Represents an InstanceStatus. */
@@ -10627,6 +10630,9 @@ export namespace google {
 
                         /** InstanceStatus taskPack. */
                         public taskPack: (number|Long|string);
+
+                        /** InstanceStatus bootDisk. */
+                        public bootDisk?: (google.cloud.batch.v1alpha.AllocationPolicy.IDisk|null);
 
                         /**
                          * Creates a new InstanceStatus instance using the specified properties.

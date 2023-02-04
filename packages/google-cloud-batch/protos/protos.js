@@ -27871,6 +27871,7 @@
                              * @property {string|null} [machineType] InstanceStatus machineType
                              * @property {google.cloud.batch.v1alpha.AllocationPolicy.ProvisioningModel|null} [provisioningModel] InstanceStatus provisioningModel
                              * @property {number|Long|null} [taskPack] InstanceStatus taskPack
+                             * @property {google.cloud.batch.v1alpha.AllocationPolicy.IDisk|null} [bootDisk] InstanceStatus bootDisk
                              */
     
                             /**
@@ -27913,6 +27914,14 @@
                             InstanceStatus.prototype.taskPack = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                             /**
+                             * InstanceStatus bootDisk.
+                             * @member {google.cloud.batch.v1alpha.AllocationPolicy.IDisk|null|undefined} bootDisk
+                             * @memberof google.cloud.batch.v1alpha.JobStatus.InstanceStatus
+                             * @instance
+                             */
+                            InstanceStatus.prototype.bootDisk = null;
+    
+                            /**
                              * Creates a new InstanceStatus instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.batch.v1alpha.JobStatus.InstanceStatus
@@ -27942,6 +27951,8 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.provisioningModel);
                                 if (message.taskPack != null && Object.hasOwnProperty.call(message, "taskPack"))
                                     writer.uint32(/* id 3, wireType 0 =*/24).int64(message.taskPack);
+                                if (message.bootDisk != null && Object.hasOwnProperty.call(message, "bootDisk"))
+                                    $root.google.cloud.batch.v1alpha.AllocationPolicy.Disk.encode(message.bootDisk, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 return writer;
                             };
     
@@ -27986,6 +27997,10 @@
                                         }
                                     case 3: {
                                             message.taskPack = reader.int64();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.bootDisk = $root.google.cloud.batch.v1alpha.AllocationPolicy.Disk.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -28039,6 +28054,11 @@
                                 if (message.taskPack != null && message.hasOwnProperty("taskPack"))
                                     if (!$util.isInteger(message.taskPack) && !(message.taskPack && $util.isInteger(message.taskPack.low) && $util.isInteger(message.taskPack.high)))
                                         return "taskPack: integer|Long expected";
+                                if (message.bootDisk != null && message.hasOwnProperty("bootDisk")) {
+                                    var error = $root.google.cloud.batch.v1alpha.AllocationPolicy.Disk.verify(message.bootDisk);
+                                    if (error)
+                                        return "bootDisk." + error;
+                                }
                                 return null;
                             };
     
@@ -28089,6 +28109,11 @@
                                         message.taskPack = object.taskPack;
                                     else if (typeof object.taskPack === "object")
                                         message.taskPack = new $util.LongBits(object.taskPack.low >>> 0, object.taskPack.high >>> 0).toNumber();
+                                if (object.bootDisk != null) {
+                                    if (typeof object.bootDisk !== "object")
+                                        throw TypeError(".google.cloud.batch.v1alpha.JobStatus.InstanceStatus.bootDisk: object expected");
+                                    message.bootDisk = $root.google.cloud.batch.v1alpha.AllocationPolicy.Disk.fromObject(object.bootDisk);
+                                }
                                 return message;
                             };
     
@@ -28113,6 +28138,7 @@
                                         object.taskPack = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                     } else
                                         object.taskPack = options.longs === String ? "0" : 0;
+                                    object.bootDisk = null;
                                 }
                                 if (message.machineType != null && message.hasOwnProperty("machineType"))
                                     object.machineType = message.machineType;
@@ -28123,6 +28149,8 @@
                                         object.taskPack = options.longs === String ? String(message.taskPack) : message.taskPack;
                                     else
                                         object.taskPack = options.longs === String ? $util.Long.prototype.toString.call(message.taskPack) : options.longs === Number ? new $util.LongBits(message.taskPack.low >>> 0, message.taskPack.high >>> 0).toNumber() : message.taskPack;
+                                if (message.bootDisk != null && message.hasOwnProperty("bootDisk"))
+                                    object.bootDisk = $root.google.cloud.batch.v1alpha.AllocationPolicy.Disk.toObject(message.bootDisk, options);
                                 return object;
                             };
     
