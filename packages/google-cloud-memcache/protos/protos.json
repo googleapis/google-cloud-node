@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/memcache/v1;memcache",
+                    "go_package": "cloud.google.com/go/memcache/apiv1/memcachepb;memcachepb",
                     "java_multiple_files": true,
                     "java_outer_classname": "CloudMemcacheProto",
                     "java_package": "com.google.cloud.memcache.v1"
@@ -807,7 +807,7 @@
                 },
                 "v1beta2": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/memcache/v1beta2;memcache",
+                    "go_package": "cloud.google.com/go/memcache/apiv1beta2/memcachepb;memcachepb",
                     "java_multiple_files": true,
                     "java_outer_classname": "CloudMemcacheProto",
                     "java_package": "com.google.cloud.memcache.v1beta2"

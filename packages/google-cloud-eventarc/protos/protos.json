@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Eventarc.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/eventarc/v1;eventarc",
+                    "go_package": "cloud.google.com/go/eventarc/apiv1/eventarcpb;eventarcpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TriggerProto",
                     "java_package": "com.google.cloud.eventarc.v1",

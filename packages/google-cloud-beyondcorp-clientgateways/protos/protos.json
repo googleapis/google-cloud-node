@@ -11,7 +11,7 @@
                     "v1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.BeyondCorp.ClientGateways.V1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/beyondcorp/clientgateways/v1;clientgateways",
+                        "go_package": "cloud.google.com/go/beyondcorp/clientgateways/apiv1/clientgatewayspb;clientgatewayspb",
                         "java_multiple_files": true,
                         "java_outer_classname": "ClientGatewaysServiceProto",
                         "java_package": "com.google.cloud.beyondcorp.clientgateways.v1",

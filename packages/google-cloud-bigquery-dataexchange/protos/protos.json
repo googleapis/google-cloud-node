@@ -11,7 +11,7 @@
                     "v1beta1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.BigQuery.DataExchange.V1Beta1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/dataexchange/v1beta1;dataexchange",
+                        "go_package": "cloud.google.com/go/bigquery/dataexchange/apiv1beta1/dataexchangepb;dataexchangepb",
                         "java_multiple_files": true,
                         "java_outer_classname": "DataExchangeProto",
                         "java_package": "com.google.cloud.bigquery.dataexchange.v1beta1",

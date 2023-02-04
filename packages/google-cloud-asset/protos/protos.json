@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Asset.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1;asset",
+                    "go_package": "cloud.google.com/go/asset/apiv1/assetpb;assetpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
                     "java_package": "com.google.cloud.asset.v1",
@@ -2944,7 +2944,7 @@
                 "v1p1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Asset.V1P1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p1beta1;asset",
+                    "go_package": "cloud.google.com/go/asset/apiv1p1beta1/assetpb;assetpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
                     "java_package": "com.google.cloud.asset.v1p1beta1",
@@ -3189,7 +3189,7 @@
                 "v1p2beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Asset.v1p2beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p2beta1;asset",
+                    "go_package": "cloud.google.com/go/asset/apiv1p2beta1/assetpb;assetpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
                     "java_package": "com.google.cloud.asset.v1p2beta1",
@@ -4059,7 +4059,7 @@
                 "v1p5beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Asset.V1p5Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p5beta1;asset",
+                    "go_package": "cloud.google.com/go/asset/apiv1p5beta1/assetpb;assetpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
                     "java_package": "com.google.cloud.asset.v1p5beta1",
@@ -4240,7 +4240,7 @@
                 "v1p7beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Asset.V1P7Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p7beta1;asset",
+                    "go_package": "cloud.google.com/go/asset/apiv1p7beta1/assetpb;assetpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
                     "java_package": "com.google.cloud.asset.v1p7beta1",
@@ -4717,7 +4717,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.OsConfig.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/osconfig/v1;osconfig",
+                    "go_package": "cloud.google.com/go/osconfig/apiv1/osconfigpb;osconfigpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "Inventories",
                     "java_package": "com.google.cloud.osconfig.v1",

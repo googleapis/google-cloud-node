@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.AIPlatform.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1;aiplatform",
+                    "go_package": "cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VizierServiceProto",
                     "java_package": "com.google.cloud.aiplatform.v1",
@@ -14136,7 +14136,7 @@
                             "instance": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1.Schema.Predict.Instance",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/predict/instance;instance",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1/schema/predict/instance/instancepb;instancepb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionInstanceProto",
                                 "java_package": "com.google.cloud.aiplatform.v1.schema.predict.instance",
@@ -14285,7 +14285,7 @@
                             "params": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1.Schema.Predict.Params",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/predict/params;params",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1/schema/predict/params/paramspb;paramspb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionParamsProto",
                                 "java_package": "com.google.cloud.aiplatform.v1.schema.predict.params",
@@ -14382,7 +14382,7 @@
                             "prediction": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1.Schema.Predict.Prediction",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/predict/prediction;prediction",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1/schema/predict/prediction/predictionpb;predictionpb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionResultProto",
                                 "java_package": "com.google.cloud.aiplatform.v1.schema.predict.prediction",
@@ -14628,7 +14628,7 @@
                             "definition": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1.Schema.TrainingJob.Definition",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/trainingjob/definition;definition",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1/schema/trainingjob/definition/definitionpb;definitionpb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "AutoMLVideoObjectTrackingProto",
                                 "java_package": "com.google.cloud.aiplatform.v1.schema.trainingjob.definition",
@@ -17859,7 +17859,7 @@
                 "v1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1;aiplatform",
+                    "go_package": "cloud.google.com/go/aiplatform/apiv1beta1/aiplatformpb;aiplatformpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VizierServiceProto",
                     "java_package": "com.google.cloud.aiplatform.v1beta1",
@@ -32643,7 +32643,7 @@
                     "schema": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema;schema",
+                        "go_package": "cloud.google.com/go/aiplatform/apiv1beta1/schema/schemapb;schemapb",
                         "java_multiple_files": true,
                         "java_outer_classname": "DatasetMetadataProto",
                         "java_package": "com.google.cloud.aiplatform.v1beta1.schema",
@@ -33127,7 +33127,7 @@
                             "instance": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema.Predict.Instance",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema/predict/instance;instance",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1beta1/schema/predict/instance/instancepb;instancepb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionInstanceProto",
                                 "java_package": "com.google.cloud.aiplatform.v1beta1.schema.predict.instance",
@@ -33276,7 +33276,7 @@
                             "params": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema.Predict.Params",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema/predict/params;params",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1beta1/schema/predict/params/paramspb;paramspb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionParamsProto",
                                 "java_package": "com.google.cloud.aiplatform.v1beta1.schema.predict.params",
@@ -33373,7 +33373,7 @@
                             "prediction": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema.Predict.Prediction",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema/predict/prediction;prediction",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1beta1/schema/predict/prediction/predictionpb;predictionpb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionResultProto",
                                 "java_package": "com.google.cloud.aiplatform.v1beta1.schema.predict.prediction",
@@ -33627,7 +33627,7 @@
                             "definition": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema.TrainingJob.Definition",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema/trainingjob/definition;definition",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1beta1/schema/trainingjob/definition/definitionpb;definitionpb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "AutoMLVideoObjectTrackingProto",
                                 "java_package": "com.google.cloud.aiplatform.v1beta1.schema.trainingjob.definition",

@@ -9728,7 +9728,7 @@
                   "options": {
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.Dialogflow.V2beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/dialogflow/v2beta1;dialogflow",
+                    "go_package": "cloud.google.com/go/dialogflow/apiv2beta1/dialogflowpb;dialogflowpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WebhookProto",
                     "java_package": "com.google.cloud.dialogflow.v2beta1",
