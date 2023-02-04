@@ -10,7 +10,7 @@
                   "nested": {
                     "v1": {
                       "options": {
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/video/transcoder/v1;transcoder",
+                        "go_package": "cloud.google.com/go/video/transcoder/apiv1/transcoderpb;transcoderpb",
                         "java_multiple_files": true,
                         "java_outer_classname": "ServicesProto",
                         "java_package": "com.google.cloud.video.transcoder.v1",

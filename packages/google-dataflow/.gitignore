@@ -4,6 +4,7 @@
 coverage
 .nyc_output
 docs/
+!protos/*
 out/
 build/
 system-test/secrets.js
