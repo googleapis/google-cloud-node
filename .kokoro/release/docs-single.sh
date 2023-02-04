@@ -24,7 +24,8 @@ npm install
 npm run docs
 
 # create docs.metadata, based on package.json and .repo-metadata.json.
-npm i json@9.0.6 -g
+--no-save
+npm install --no-save json@9.0.6
 python3 -m docuploader create-metadata \
   --name=$(cat .repo-metadata.json | json name) \
   --version=$(cat package.json | json version) \
