@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {MapsPlatformDatasetsV1AlphaClient} from '@google-cloud/mapsplatformdatasets';
+import {MapsPlatformDatasetsV1AlphaClient} from '@googlemaps/maps-platform-datasets';
 
 // check that the client class type name can be used
 function doStuffWithMapsPlatformDatasetsV1AlphaClient(

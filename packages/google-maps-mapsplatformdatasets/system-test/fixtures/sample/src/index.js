@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const mapsplatformdatasets = require('@google-cloud/mapsplatformdatasets');
+const mapsplatformdatasets = require('@googlemaps/maps-platform-datasets');
 
 function main() {
   const mapsPlatformDatasetsV1AlphaClient =
