@@ -44,7 +44,8 @@ function main(parent) {
 
   // Imports the Mapsplatformdatasets library
   const {MapsPlatformDatasetsV1AlphaClient} =
-    require('@google-cloud/mapsplatformdatasets').v1alpha;
+    // eslint-disable-next-line node/no-missing-require
+    require('@googlemaps/maps-platform-datasets').v1alpha;
 
   // Instantiates a client
   const mapsplatformdatasetsClient = new MapsPlatformDatasetsV1AlphaClient();
