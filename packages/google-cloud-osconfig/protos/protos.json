@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.OsConfig.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/osconfig/v1;osconfig",
+                    "go_package": "cloud.google.com/go/osconfig/apiv1/osconfigpb;osconfigpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VulnerabilityProto",
                     "java_package": "com.google.cloud.osconfig.v1",
@@ -3357,7 +3357,7 @@
                 "v1alpha": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.OsConfig.V1Alpha",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/osconfig/v1alpha;osconfig",
+                    "go_package": "cloud.google.com/go/osconfig/apiv1alpha/osconfigpb;osconfigpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VulnerabilityProto",
                     "java_package": "com.google.cloud.osconfig.v1alpha",
@@ -5763,7 +5763,7 @@
                 },
                 "v1beta": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/osconfig/v1beta;osconfig",
+                    "go_package": "cloud.google.com/go/osconfig/apiv1beta/osconfigpb;osconfigpb",
                     "java_outer_classname": "PatchJobs",
                     "java_package": "com.google.cloud.osconfig.v1beta"
                   },
