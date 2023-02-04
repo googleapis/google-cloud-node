@@ -38,7 +38,7 @@ describe('Quickstart', () => {
 
   it('should run quickstart', async () => {
     // NOTE: This API does not yet support project ID (vs. just project number)
-    // We should use projectId once they do.
+    // We should use projectId once they do. b/266963679
     // DEVELOPER: change this to your project number when running locally.
     const output = execSync('node ./quickstart.js projects/1046198160504', {
       cwd,
