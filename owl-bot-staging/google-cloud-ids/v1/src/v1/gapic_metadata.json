@@ -1,0 +1,67 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.ids.v1",
+  "libraryPackage": "@google-cloud/ids",
+  "services": {
+    "IDS": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "IDSClient",
+          "rpcs": {
+            "GetEndpoint": {
+              "methods": [
+                "getEndpoint"
+              ]
+            },
+            "CreateEndpoint": {
+              "methods": [
+                "createEndpoint"
+              ]
+            },
+            "DeleteEndpoint": {
+              "methods": [
+                "deleteEndpoint"
+              ]
+            },
+            "ListEndpoints": {
+              "methods": [
+                "listEndpoints",
+                "listEndpointsStream",
+                "listEndpointsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "IDSClient",
+          "rpcs": {
+            "GetEndpoint": {
+              "methods": [
+                "getEndpoint"
+              ]
+            },
+            "CreateEndpoint": {
+              "methods": [
+                "createEndpoint"
+              ]
+            },
+            "DeleteEndpoint": {
+              "methods": [
+                "deleteEndpoint"
+              ]
+            },
+            "ListEndpoints": {
+              "methods": [
+                "listEndpoints",
+                "listEndpointsStream",
+                "listEndpointsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
