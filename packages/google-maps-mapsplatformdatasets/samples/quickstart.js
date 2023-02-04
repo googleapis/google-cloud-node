@@ -18,8 +18,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START mapsplatformdatasets_v1alpha_generated_MapsPlatformDatasetsV1Alpha_ListDatasets_async]
+function main(parent) {
+  // [START mapsplatformdatasets_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -49,10 +49,10 @@ function main(name) {
   // Instantiates a client
   const mapsplatformdatasetsClient = new MapsPlatformDatasetsV1AlphaClient();
 
-  async function callListDatasetVersions() {
+  async function callListDataset() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
@@ -64,7 +64,7 @@ function main(name) {
     }
   }
 
-  callListDatasetVersions();
+  callListDataset();
   // [END mapsplatformdatasets_quickstart]
 }
 

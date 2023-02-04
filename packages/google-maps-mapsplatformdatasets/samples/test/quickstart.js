@@ -36,7 +36,7 @@ describe('Quickstart', () => {
   });
 
   it('should run quickstart', async () => {
-    const output = execSync(`node ./quickstart.js ${projectId}`, {
+    const output = execSync('node ./quickstart.js projects/1046198160504', {
       cwd,
     });
     assert(output !== null);
