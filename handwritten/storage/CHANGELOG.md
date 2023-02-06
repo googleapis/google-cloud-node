@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.9.2](https://github.com/googleapis/nodejs-storage/compare/v6.9.1...v6.9.2) (2023-02-06)
+
+
+### Bug Fixes
+
+* Correctly handle if a user has no permissions when calling iam.testPermissions ([#2140](https://github.com/googleapis/nodejs-storage/issues/2140)) ([cce902d](https://github.com/googleapis/nodejs-storage/commit/cce902d27cf3c4a23730550b72d10dc76425c974))
+
 ## [6.9.1](https://github.com/googleapis/nodejs-storage/compare/v6.9.0...v6.9.1) (2023-01-24)
 
 
