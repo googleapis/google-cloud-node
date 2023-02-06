@@ -240,6 +240,28 @@ describe('storage/iam', () => {
       );
     });
 
+    it('should return false for supplied permissions if user has no permissions', done => {
+      const permissions = ['storage.bucket.list', 'storage.bucket.consume'];
+      const apiResponse = {permissions: undefined};
+
+      iam.request_ = (reqOpts: DecorateRequestOptions, callback: Function) => {
+        callback(null, apiResponse);
+      };
+      iam.testPermissions(
+        permissions,
+        (err: Error, permissions: Array<{}>, apiResp: {}) => {
+          assert.ifError(err);
+          assert.deepStrictEqual(permissions, {
+            'storage.bucket.list': false,
+            'storage.bucket.consume': false,
+          });
+          assert.strictEqual(apiResp, apiResponse);
+
+          done();
+        }
+      );
+    });
+
     it('should accept an options object', done => {
       const permissions = ['storage.bucket.list'];
       const options = {

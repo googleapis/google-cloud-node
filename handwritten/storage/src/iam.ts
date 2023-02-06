@@ -470,7 +470,9 @@ class Iam {
           return;
         }
 
-        const availablePermissions = resp.permissions;
+        const availablePermissions = Array.isArray(resp.permissions)
+          ? resp.permissions
+          : [];
 
         const permissionsHash = permissionsArray.reduce(
           (acc: {[index: string]: boolean}, permission) => {
