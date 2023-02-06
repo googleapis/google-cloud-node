@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.GkeMultiCloud.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/gkemulticloud/v1;gkemulticloud",
+                    "go_package": "cloud.google.com/go/gkemulticloud/apiv1/gkemulticloudpb;gkemulticloudpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "AzureServiceProto",
                     "java_package": "com.google.cloud.gkemulticloud.v1",

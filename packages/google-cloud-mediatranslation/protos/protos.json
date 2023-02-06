@@ -9,7 +9,7 @@
                 "v1beta1": {
                   "options": {
                     "cc_enable_arenas": true,
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/mediatranslation/v1beta1;mediatranslation",
+                    "go_package": "cloud.google.com/go/mediatranslation/apiv1beta1/mediatranslationpb;mediatranslationpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "MediaTranslationProto",
                     "java_package": "com.google.cloud.mediatranslation.v1beta1",
