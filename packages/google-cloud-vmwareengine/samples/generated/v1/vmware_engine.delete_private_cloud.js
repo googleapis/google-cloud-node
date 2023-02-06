@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,19 +33,20 @@ function main(name) {
    *  Resource names are schemeless URIs that follow the conventions in
    *  https://cloud.google.com/apis/design/resource_names.
    *  For example:
-   *  `projects/my-project/locations/us-west1-a/privateClouds/my-cloud`
+   *  `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    */
   // const name = 'abc123'
   /**
-   *  Optional. The request ID must be a valid UUID with the exception that zero UUID is
-   *  not supported (00000000-0000-0000-0000-000000000000).
+   *  Optional. The request ID must be a valid UUID with the exception that zero
+   *  UUID is not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. If set to true, cascade delete is enabled and all children of this private
-   *  cloud resource are also deleted. When this flag is set to false, the
-   *  private cloud will not be deleted if there are any children other than the
-   *  management cluster. The management cluster is always deleted.
+   *  Optional. If set to true, cascade delete is enabled and all children of
+   *  this private cloud resource are also deleted. When this flag is set to
+   *  false, the private cloud will not be deleted if there are any children
+   *  other than the management cluster. The management cluster is always
+   *  deleted.
    */
   // const force = true
   /**
@@ -53,10 +54,10 @@ function main(name) {
    *  is `3`. Specifying a non-zero value for this field changes the value of
    *  `PrivateCloud.state` to `DELETED` and sets `expire_time` to the planned
    *  deletion time. Deletion can be cancelled before `expire_time` elapses using
-   *  VmwareEngine.UndeletePrivateCloud google.cloud.vmwareengine.v1.VmwareEngine.UndeletePrivateCloud. Specifying a value of `0` for
-   *  this field instead begins the deletion process and ceases billing
-   *  immediately. During the final deletion process, the value of
-   *  `PrivateCloud.state` becomes `PURGING`.
+   *  VmwareEngine.UndeletePrivateCloud google.cloud.vmwareengine.v1.VmwareEngine.UndeletePrivateCloud.
+   *  Specifying a value of `0` for this field instead begins the deletion
+   *  process and ceases billing immediately. During the final deletion process,
+   *  the value of `PrivateCloud.state` becomes `PURGING`.
    */
   // const delayHours = 1234
 

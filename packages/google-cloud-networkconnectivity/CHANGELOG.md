@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.3.1](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v2.3.0...network-connectivity-v2.3.1) (2023-02-02)
+
+
+### Bug Fixes
+
+* [networkconnectivity] remove HTTP bindings for serviceConnectionMaps, serviceConnectionPolicies, serviceClasses ([#3907](https://github.com/googleapis/google-cloud-node/issues/3907)) ([685ef7f](https://github.com/googleapis/google-cloud-node/commit/685ef7fd29e875c4d35b1a5cd7f41cecb0eb5722))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v2.2.0...network-connectivity-v2.3.0) (2023-01-28)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3853](https://github.com/googleapis/google-cloud-node/issues/3853)) ([cc352db](https://github.com/googleapis/google-cloud-node/commit/cc352db97f3bd8925bf1a7631a0ae64ff976fa4e))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-network-connectivity/compare/v2.1.2...v2.2.0) (2022-11-15)
 
 

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-container",
-        "version": "4.5.0",
+        "version": "4.7.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 144,
+                    "end": 156,
                     "type": "FULL"
                 }
             ],
@@ -316,6 +316,10 @@
                         "type": ".google.container.v1.VirtualNIC"
                     },
                     {
+                        "name": "etag",
+                        "type": "TYPE_STRING"
+                    },
+                    {
                         "name": "fast_socket",
                         "type": ".google.container.v1.FastSocket"
                     },
@@ -326,6 +330,10 @@
                     {
                         "name": "resource_labels",
                         "type": ".google.container.v1.ResourceLabels"
+                    },
+                    {
+                        "name": "windows_node_config",
+                        "type": ".google.container.v1.WindowsNodeConfig"
                     }
                 ],
                 "resultType": ".google.container.v1.Operation",

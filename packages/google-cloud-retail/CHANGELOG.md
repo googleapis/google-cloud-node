@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/retail-v2.2.0...retail-v2.3.0) (2022-12-21)
+
+
+### Features
+
+* Support async write mode for WriteUserEvent API ([#3779](https://github.com/googleapis/google-cloud-node/issues/3779)) ([1f1795d](https://github.com/googleapis/google-cloud-node/commit/1f1795d07407e41f65b1790f37f3e0e667a013ba))
+
 ## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/retail-v2.1.1...retail-v2.2.0) (2022-12-16)
 
 

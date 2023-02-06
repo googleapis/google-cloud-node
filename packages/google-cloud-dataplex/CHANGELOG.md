@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v2.2.2...dataplex-v2.3.0) (2022-12-21)
+
+
+### Features
+
+* DataScans service ([#3797](https://github.com/googleapis/google-cloud-node/issues/3797)) ([374205f](https://github.com/googleapis/google-cloud-node/commit/374205fe3211b4d13dd17d713c1bccc3c8651265))
+
 ## [2.2.2](https://github.com/googleapis/google-cloud-node/compare/dataplex-v2.2.1...dataplex-v2.2.2) (2022-11-10)
 
 

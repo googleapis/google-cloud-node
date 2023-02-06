@@ -20,6 +20,11 @@
                 "fetchProcessorTypes"
               ]
             },
+            "GetProcessorType": {
+              "methods": [
+                "getProcessorType"
+              ]
+            },
             "GetProcessor": {
               "methods": [
                 "getProcessor"
@@ -114,6 +119,11 @@
             "FetchProcessorTypes": {
               "methods": [
                 "fetchProcessorTypes"
+              ]
+            },
+            "GetProcessorType": {
+              "methods": [
+                "getProcessorType"
               ]
             },
             "GetProcessor": {

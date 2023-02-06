@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -123,6 +123,9 @@ export class SessionsClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -545,12 +548,14 @@ export class SessionsClient {
    *   audio. If this field is not set and agent-level speech synthesizer is not
    *   configured, no output audio is generated.
    * @param {google.protobuf.FieldMask} request.outputAudioConfigMask
-   *   Mask for {@link google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config|output_audio_config} indicating which settings in this
-   *   request-level config should override speech synthesizer settings defined at
-   *   agent-level.
+   *   Mask for
+   *   {@link google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config|output_audio_config}
+   *   indicating which settings in this request-level config should override
+   *   speech synthesizer settings defined at agent-level.
    *
-   *   If unspecified or empty, {@link google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config|output_audio_config} replaces the agent-level
-   *   config in its entirety.
+   *   If unspecified or empty,
+   *   {@link google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config|output_audio_config}
+   *   replaces the agent-level config in its entirety.
    * @param {Buffer} request.inputAudio
    *   The natural language speech audio to be processed. This field
    *   should be populated iff `query_input` is set to an input audio config.

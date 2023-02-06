@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3433,74 +3433,6 @@ describe('v1.HubServiceClient', () => {
         assert.strictEqual(result, 'resourceIdValue');
         assert(
           (client.pathTemplates.networkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('policyBasedRoute', () => {
-      const fakePath = '/rendered/path/policyBasedRoute';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        policy_based_route: 'policyBasedRouteValue',
-      };
-      const client = new hubserviceModule.v1.HubServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.policyBasedRoutePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.policyBasedRoutePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('policyBasedRoutePath', () => {
-        const result = client.policyBasedRoutePath(
-          'projectValue',
-          'locationValue',
-          'policyBasedRouteValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.policyBasedRoutePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromPolicyBasedRouteName', () => {
-        const result = client.matchProjectFromPolicyBasedRouteName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.policyBasedRoutePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromPolicyBasedRouteName', () => {
-        const result = client.matchLocationFromPolicyBasedRouteName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.policyBasedRoutePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchPolicyBasedRouteFromPolicyBasedRouteName', () => {
-        const result =
-          client.matchPolicyBasedRouteFromPolicyBasedRouteName(fakePath);
-        assert.strictEqual(result, 'policyBasedRouteValue');
-        assert(
-          (client.pathTemplates.policyBasedRoutePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

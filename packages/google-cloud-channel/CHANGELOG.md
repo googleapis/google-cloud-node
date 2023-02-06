@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/channel-v2.3.0...channel-v2.4.0) (2023-01-28)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3851](https://github.com/googleapis/google-cloud-node/issues/3851)) ([79fbaa8](https://github.com/googleapis/google-cloud-node/commit/79fbaa833d08738fa37aa37158ddb5b1c91710e1))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/channel-v2.2.0...channel-v2.3.0) (2022-12-16)
 
 

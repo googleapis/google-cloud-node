@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,7 +41,9 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
    */
   // const nodeVersion = 'abc123'
   /**
-   *  Required. The desired image type for the node pool.
+   *  Required. The desired image type for the node pool. Please see
+   *  https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+   *  available image types.
    */
   // const imageType = 'abc123'
   /**
@@ -110,6 +112,12 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
    */
   // const gvnic = {}
   /**
+   *  The current etag of the node pool.
+   *  If an etag is provided and does not match the current etag of the node
+   *  pool, update will be blocked and an ABORTED error will be returned.
+   */
+  // const etag = 'abc123'
+  /**
    *  Enable or disable NCCL fast socket for the node pool.
    */
   // const fastSocket = {}
@@ -122,6 +130,10 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
    *  Google Compute Engine resources.
    */
   // const resourceLabels = {}
+  /**
+   *  Parameters that can be configured on Windows nodes.
+   */
+  // const windowsNodeConfig = {}
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1beta1;

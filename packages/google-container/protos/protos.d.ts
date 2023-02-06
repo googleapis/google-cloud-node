@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -853,6 +853,113 @@ export namespace google {
                 }
             }
 
+            /** Properties of a WindowsNodeConfig. */
+            interface IWindowsNodeConfig {
+
+                /** WindowsNodeConfig osVersion */
+                osVersion?: (google.container.v1.WindowsNodeConfig.OSVersion|keyof typeof google.container.v1.WindowsNodeConfig.OSVersion|null);
+            }
+
+            /** Represents a WindowsNodeConfig. */
+            class WindowsNodeConfig implements IWindowsNodeConfig {
+
+                /**
+                 * Constructs a new WindowsNodeConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IWindowsNodeConfig);
+
+                /** WindowsNodeConfig osVersion. */
+                public osVersion: (google.container.v1.WindowsNodeConfig.OSVersion|keyof typeof google.container.v1.WindowsNodeConfig.OSVersion);
+
+                /**
+                 * Creates a new WindowsNodeConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns WindowsNodeConfig instance
+                 */
+                public static create(properties?: google.container.v1.IWindowsNodeConfig): google.container.v1.WindowsNodeConfig;
+
+                /**
+                 * Encodes the specified WindowsNodeConfig message. Does not implicitly {@link google.container.v1.WindowsNodeConfig.verify|verify} messages.
+                 * @param message WindowsNodeConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IWindowsNodeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified WindowsNodeConfig message, length delimited. Does not implicitly {@link google.container.v1.WindowsNodeConfig.verify|verify} messages.
+                 * @param message WindowsNodeConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IWindowsNodeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a WindowsNodeConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns WindowsNodeConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.WindowsNodeConfig;
+
+                /**
+                 * Decodes a WindowsNodeConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns WindowsNodeConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.WindowsNodeConfig;
+
+                /**
+                 * Verifies a WindowsNodeConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a WindowsNodeConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns WindowsNodeConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.WindowsNodeConfig;
+
+                /**
+                 * Creates a plain object from a WindowsNodeConfig message. Also converts values to other types if specified.
+                 * @param message WindowsNodeConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.WindowsNodeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this WindowsNodeConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for WindowsNodeConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace WindowsNodeConfig {
+
+                /** OSVersion enum. */
+                enum OSVersion {
+                    OS_VERSION_UNSPECIFIED = 0,
+                    OS_VERSION_LTSC2019 = 1,
+                    OS_VERSION_LTSC2022 = 2
+                }
+            }
+
             /** Properties of a NodeKubeletConfig. */
             interface INodeKubeletConfig {
 
@@ -1060,6 +1167,15 @@ export namespace google {
 
                 /** NodeConfig loggingConfig */
                 loggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
+
+                /** NodeConfig windowsNodeConfig */
+                windowsNodeConfig?: (google.container.v1.IWindowsNodeConfig|null);
+
+                /** NodeConfig localNvmeSsdBlockConfig */
+                localNvmeSsdBlockConfig?: (google.container.v1.ILocalNvmeSsdBlockConfig|null);
+
+                /** NodeConfig ephemeralStorageLocalSsdConfig */
+                ephemeralStorageLocalSsdConfig?: (google.container.v1.IEphemeralStorageLocalSsdConfig|null);
             }
 
             /** Represents a NodeConfig. */
@@ -1160,6 +1276,15 @@ export namespace google {
 
                 /** NodeConfig loggingConfig. */
                 public loggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
+
+                /** NodeConfig windowsNodeConfig. */
+                public windowsNodeConfig?: (google.container.v1.IWindowsNodeConfig|null);
+
+                /** NodeConfig localNvmeSsdBlockConfig. */
+                public localNvmeSsdBlockConfig?: (google.container.v1.ILocalNvmeSsdBlockConfig|null);
+
+                /** NodeConfig ephemeralStorageLocalSsdConfig. */
+                public ephemeralStorageLocalSsdConfig?: (google.container.v1.IEphemeralStorageLocalSsdConfig|null);
 
                 /** NodeConfig _fastSocket. */
                 public _fastSocket?: "fastSocket";
@@ -4802,6 +4927,12 @@ export namespace google {
 
                 /** IPAllocationPolicy ipv6AccessType */
                 ipv6AccessType?: (google.container.v1.IPv6AccessType|keyof typeof google.container.v1.IPv6AccessType|null);
+
+                /** IPAllocationPolicy subnetIpv6CidrBlock */
+                subnetIpv6CidrBlock?: (string|null);
+
+                /** IPAllocationPolicy servicesIpv6CidrBlock */
+                servicesIpv6CidrBlock?: (string|null);
             }
 
             /** Represents a IPAllocationPolicy. */
@@ -4857,6 +4988,12 @@ export namespace google {
 
                 /** IPAllocationPolicy ipv6AccessType. */
                 public ipv6AccessType: (google.container.v1.IPv6AccessType|keyof typeof google.container.v1.IPv6AccessType);
+
+                /** IPAllocationPolicy subnetIpv6CidrBlock. */
+                public subnetIpv6CidrBlock: string;
+
+                /** IPAllocationPolicy servicesIpv6CidrBlock. */
+                public servicesIpv6CidrBlock: string;
 
                 /**
                  * Creates a new IPAllocationPolicy instance using the specified properties.
@@ -5124,6 +5261,9 @@ export namespace google {
 
                 /** Cluster nodePoolAutoConfig */
                 nodePoolAutoConfig?: (google.container.v1.INodePoolAutoConfig|null);
+
+                /** Cluster etag */
+                etag?: (string|null);
             }
 
             /** Represents a Cluster. */
@@ -5320,6 +5460,9 @@ export namespace google {
 
                 /** Cluster nodePoolAutoConfig. */
                 public nodePoolAutoConfig?: (google.container.v1.INodePoolAutoConfig|null);
+
+                /** Cluster etag. */
+                public etag: string;
 
                 /** Cluster _nodePoolDefaults. */
                 public _nodePoolDefaults?: "nodePoolDefaults";
@@ -5827,6 +5970,9 @@ export namespace google {
                 /** ClusterUpdate desiredGatewayApiConfig */
                 desiredGatewayApiConfig?: (google.container.v1.IGatewayAPIConfig|null);
 
+                /** ClusterUpdate etag */
+                etag?: (string|null);
+
                 /** ClusterUpdate desiredNodePoolLoggingConfig */
                 desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
 
@@ -5953,6 +6099,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredGatewayApiConfig. */
                 public desiredGatewayApiConfig?: (google.container.v1.IGatewayAPIConfig|null);
+
+                /** ClusterUpdate etag. */
+                public etag: string;
 
                 /** ClusterUpdate desiredNodePoolLoggingConfig. */
                 public desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
@@ -6902,6 +7051,9 @@ export namespace google {
                 /** UpdateNodePoolRequest gvnic */
                 gvnic?: (google.container.v1.IVirtualNIC|null);
 
+                /** UpdateNodePoolRequest etag */
+                etag?: (string|null);
+
                 /** UpdateNodePoolRequest fastSocket */
                 fastSocket?: (google.container.v1.IFastSocket|null);
 
@@ -6910,6 +7062,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest resourceLabels */
                 resourceLabels?: (google.container.v1.IResourceLabels|null);
+
+                /** UpdateNodePoolRequest windowsNodeConfig */
+                windowsNodeConfig?: (google.container.v1.IWindowsNodeConfig|null);
             }
 
             /** Represents an UpdateNodePoolRequest. */
@@ -6978,6 +7133,9 @@ export namespace google {
                 /** UpdateNodePoolRequest gvnic. */
                 public gvnic?: (google.container.v1.IVirtualNIC|null);
 
+                /** UpdateNodePoolRequest etag. */
+                public etag: string;
+
                 /** UpdateNodePoolRequest fastSocket. */
                 public fastSocket?: (google.container.v1.IFastSocket|null);
 
@@ -6986,6 +7144,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest resourceLabels. */
                 public resourceLabels?: (google.container.v1.IResourceLabels|null);
+
+                /** UpdateNodePoolRequest windowsNodeConfig. */
+                public windowsNodeConfig?: (google.container.v1.IWindowsNodeConfig|null);
 
                 /**
                  * Creates a new UpdateNodePoolRequest instance using the specified properties.
@@ -9813,6 +9974,9 @@ export namespace google {
 
                 /** NodePool updateInfo */
                 updateInfo?: (google.container.v1.NodePool.IUpdateInfo|null);
+
+                /** NodePool etag */
+                etag?: (string|null);
             }
 
             /** Represents a NodePool. */
@@ -9877,6 +10041,9 @@ export namespace google {
 
                 /** NodePool updateInfo. */
                 public updateInfo?: (google.container.v1.NodePool.IUpdateInfo|null);
+
+                /** NodePool etag. */
+                public etag: string;
 
                 /**
                  * Creates a new NodePool instance using the specified properties.
@@ -15028,6 +15195,7 @@ export namespace google {
                 /** DNSScope enum. */
                 enum DNSScope {
                     DNS_SCOPE_UNSPECIFIED = 0,
+                    CLUSTER_SCOPE = 1,
                     VPC_SCOPE = 2
                 }
             }
@@ -18447,6 +18615,200 @@ export namespace google {
                 INTERNAL = 1,
                 EXTERNAL = 2
             }
+
+            /** Properties of a LocalNvmeSsdBlockConfig. */
+            interface ILocalNvmeSsdBlockConfig {
+
+                /** LocalNvmeSsdBlockConfig localSsdCount */
+                localSsdCount?: (number|null);
+            }
+
+            /** Represents a LocalNvmeSsdBlockConfig. */
+            class LocalNvmeSsdBlockConfig implements ILocalNvmeSsdBlockConfig {
+
+                /**
+                 * Constructs a new LocalNvmeSsdBlockConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.ILocalNvmeSsdBlockConfig);
+
+                /** LocalNvmeSsdBlockConfig localSsdCount. */
+                public localSsdCount: number;
+
+                /**
+                 * Creates a new LocalNvmeSsdBlockConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns LocalNvmeSsdBlockConfig instance
+                 */
+                public static create(properties?: google.container.v1.ILocalNvmeSsdBlockConfig): google.container.v1.LocalNvmeSsdBlockConfig;
+
+                /**
+                 * Encodes the specified LocalNvmeSsdBlockConfig message. Does not implicitly {@link google.container.v1.LocalNvmeSsdBlockConfig.verify|verify} messages.
+                 * @param message LocalNvmeSsdBlockConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.ILocalNvmeSsdBlockConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified LocalNvmeSsdBlockConfig message, length delimited. Does not implicitly {@link google.container.v1.LocalNvmeSsdBlockConfig.verify|verify} messages.
+                 * @param message LocalNvmeSsdBlockConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.ILocalNvmeSsdBlockConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a LocalNvmeSsdBlockConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns LocalNvmeSsdBlockConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.LocalNvmeSsdBlockConfig;
+
+                /**
+                 * Decodes a LocalNvmeSsdBlockConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns LocalNvmeSsdBlockConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.LocalNvmeSsdBlockConfig;
+
+                /**
+                 * Verifies a LocalNvmeSsdBlockConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a LocalNvmeSsdBlockConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns LocalNvmeSsdBlockConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.LocalNvmeSsdBlockConfig;
+
+                /**
+                 * Creates a plain object from a LocalNvmeSsdBlockConfig message. Also converts values to other types if specified.
+                 * @param message LocalNvmeSsdBlockConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.LocalNvmeSsdBlockConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this LocalNvmeSsdBlockConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for LocalNvmeSsdBlockConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an EphemeralStorageLocalSsdConfig. */
+            interface IEphemeralStorageLocalSsdConfig {
+
+                /** EphemeralStorageLocalSsdConfig localSsdCount */
+                localSsdCount?: (number|null);
+            }
+
+            /** Represents an EphemeralStorageLocalSsdConfig. */
+            class EphemeralStorageLocalSsdConfig implements IEphemeralStorageLocalSsdConfig {
+
+                /**
+                 * Constructs a new EphemeralStorageLocalSsdConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IEphemeralStorageLocalSsdConfig);
+
+                /** EphemeralStorageLocalSsdConfig localSsdCount. */
+                public localSsdCount: number;
+
+                /**
+                 * Creates a new EphemeralStorageLocalSsdConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EphemeralStorageLocalSsdConfig instance
+                 */
+                public static create(properties?: google.container.v1.IEphemeralStorageLocalSsdConfig): google.container.v1.EphemeralStorageLocalSsdConfig;
+
+                /**
+                 * Encodes the specified EphemeralStorageLocalSsdConfig message. Does not implicitly {@link google.container.v1.EphemeralStorageLocalSsdConfig.verify|verify} messages.
+                 * @param message EphemeralStorageLocalSsdConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IEphemeralStorageLocalSsdConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EphemeralStorageLocalSsdConfig message, length delimited. Does not implicitly {@link google.container.v1.EphemeralStorageLocalSsdConfig.verify|verify} messages.
+                 * @param message EphemeralStorageLocalSsdConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IEphemeralStorageLocalSsdConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EphemeralStorageLocalSsdConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EphemeralStorageLocalSsdConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.EphemeralStorageLocalSsdConfig;
+
+                /**
+                 * Decodes an EphemeralStorageLocalSsdConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EphemeralStorageLocalSsdConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.EphemeralStorageLocalSsdConfig;
+
+                /**
+                 * Verifies an EphemeralStorageLocalSsdConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EphemeralStorageLocalSsdConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EphemeralStorageLocalSsdConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.EphemeralStorageLocalSsdConfig;
+
+                /**
+                 * Creates a plain object from an EphemeralStorageLocalSsdConfig message. Also converts values to other types if specified.
+                 * @param message EphemeralStorageLocalSsdConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.EphemeralStorageLocalSsdConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EphemeralStorageLocalSsdConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EphemeralStorageLocalSsdConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Namespace v1beta1. */
@@ -19303,6 +19665,113 @@ export namespace google {
                 }
             }
 
+            /** Properties of a WindowsNodeConfig. */
+            interface IWindowsNodeConfig {
+
+                /** WindowsNodeConfig osVersion */
+                osVersion?: (google.container.v1beta1.WindowsNodeConfig.OSVersion|keyof typeof google.container.v1beta1.WindowsNodeConfig.OSVersion|null);
+            }
+
+            /** Represents a WindowsNodeConfig. */
+            class WindowsNodeConfig implements IWindowsNodeConfig {
+
+                /**
+                 * Constructs a new WindowsNodeConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IWindowsNodeConfig);
+
+                /** WindowsNodeConfig osVersion. */
+                public osVersion: (google.container.v1beta1.WindowsNodeConfig.OSVersion|keyof typeof google.container.v1beta1.WindowsNodeConfig.OSVersion);
+
+                /**
+                 * Creates a new WindowsNodeConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns WindowsNodeConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IWindowsNodeConfig): google.container.v1beta1.WindowsNodeConfig;
+
+                /**
+                 * Encodes the specified WindowsNodeConfig message. Does not implicitly {@link google.container.v1beta1.WindowsNodeConfig.verify|verify} messages.
+                 * @param message WindowsNodeConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IWindowsNodeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified WindowsNodeConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.WindowsNodeConfig.verify|verify} messages.
+                 * @param message WindowsNodeConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IWindowsNodeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a WindowsNodeConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns WindowsNodeConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.WindowsNodeConfig;
+
+                /**
+                 * Decodes a WindowsNodeConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns WindowsNodeConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.WindowsNodeConfig;
+
+                /**
+                 * Verifies a WindowsNodeConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a WindowsNodeConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns WindowsNodeConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.WindowsNodeConfig;
+
+                /**
+                 * Creates a plain object from a WindowsNodeConfig message. Also converts values to other types if specified.
+                 * @param message WindowsNodeConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.WindowsNodeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this WindowsNodeConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for WindowsNodeConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace WindowsNodeConfig {
+
+                /** OSVersion enum. */
+                enum OSVersion {
+                    OS_VERSION_UNSPECIFIED = 0,
+                    OS_VERSION_LTSC2019 = 1,
+                    OS_VERSION_LTSC2022 = 2
+                }
+            }
+
             /** Properties of a NodeKubeletConfig. */
             interface INodeKubeletConfig {
 
@@ -19513,6 +19982,15 @@ export namespace google {
 
                 /** NodeConfig loggingConfig */
                 loggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
+
+                /** NodeConfig windowsNodeConfig */
+                windowsNodeConfig?: (google.container.v1beta1.IWindowsNodeConfig|null);
+
+                /** NodeConfig localNvmeSsdBlockConfig */
+                localNvmeSsdBlockConfig?: (google.container.v1beta1.ILocalNvmeSsdBlockConfig|null);
+
+                /** NodeConfig ephemeralStorageLocalSsdConfig */
+                ephemeralStorageLocalSsdConfig?: (google.container.v1beta1.IEphemeralStorageLocalSsdConfig|null);
             }
 
             /** Represents a NodeConfig. */
@@ -19616,6 +20094,15 @@ export namespace google {
 
                 /** NodeConfig loggingConfig. */
                 public loggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
+
+                /** NodeConfig windowsNodeConfig. */
+                public windowsNodeConfig?: (google.container.v1beta1.IWindowsNodeConfig|null);
+
+                /** NodeConfig localNvmeSsdBlockConfig. */
+                public localNvmeSsdBlockConfig?: (google.container.v1beta1.ILocalNvmeSsdBlockConfig|null);
+
+                /** NodeConfig ephemeralStorageLocalSsdConfig. */
+                public ephemeralStorageLocalSsdConfig?: (google.container.v1beta1.IEphemeralStorageLocalSsdConfig|null);
 
                 /** NodeConfig _fastSocket. */
                 public _fastSocket?: "fastSocket";
@@ -20352,6 +20839,200 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EphemeralStorageConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a LocalNvmeSsdBlockConfig. */
+            interface ILocalNvmeSsdBlockConfig {
+
+                /** LocalNvmeSsdBlockConfig localSsdCount */
+                localSsdCount?: (number|null);
+            }
+
+            /** Represents a LocalNvmeSsdBlockConfig. */
+            class LocalNvmeSsdBlockConfig implements ILocalNvmeSsdBlockConfig {
+
+                /**
+                 * Constructs a new LocalNvmeSsdBlockConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.ILocalNvmeSsdBlockConfig);
+
+                /** LocalNvmeSsdBlockConfig localSsdCount. */
+                public localSsdCount: number;
+
+                /**
+                 * Creates a new LocalNvmeSsdBlockConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns LocalNvmeSsdBlockConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.ILocalNvmeSsdBlockConfig): google.container.v1beta1.LocalNvmeSsdBlockConfig;
+
+                /**
+                 * Encodes the specified LocalNvmeSsdBlockConfig message. Does not implicitly {@link google.container.v1beta1.LocalNvmeSsdBlockConfig.verify|verify} messages.
+                 * @param message LocalNvmeSsdBlockConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.ILocalNvmeSsdBlockConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified LocalNvmeSsdBlockConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.LocalNvmeSsdBlockConfig.verify|verify} messages.
+                 * @param message LocalNvmeSsdBlockConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.ILocalNvmeSsdBlockConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a LocalNvmeSsdBlockConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns LocalNvmeSsdBlockConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.LocalNvmeSsdBlockConfig;
+
+                /**
+                 * Decodes a LocalNvmeSsdBlockConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns LocalNvmeSsdBlockConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.LocalNvmeSsdBlockConfig;
+
+                /**
+                 * Verifies a LocalNvmeSsdBlockConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a LocalNvmeSsdBlockConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns LocalNvmeSsdBlockConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.LocalNvmeSsdBlockConfig;
+
+                /**
+                 * Creates a plain object from a LocalNvmeSsdBlockConfig message. Also converts values to other types if specified.
+                 * @param message LocalNvmeSsdBlockConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.LocalNvmeSsdBlockConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this LocalNvmeSsdBlockConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for LocalNvmeSsdBlockConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an EphemeralStorageLocalSsdConfig. */
+            interface IEphemeralStorageLocalSsdConfig {
+
+                /** EphemeralStorageLocalSsdConfig localSsdCount */
+                localSsdCount?: (number|null);
+            }
+
+            /** Represents an EphemeralStorageLocalSsdConfig. */
+            class EphemeralStorageLocalSsdConfig implements IEphemeralStorageLocalSsdConfig {
+
+                /**
+                 * Constructs a new EphemeralStorageLocalSsdConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IEphemeralStorageLocalSsdConfig);
+
+                /** EphemeralStorageLocalSsdConfig localSsdCount. */
+                public localSsdCount: number;
+
+                /**
+                 * Creates a new EphemeralStorageLocalSsdConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EphemeralStorageLocalSsdConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IEphemeralStorageLocalSsdConfig): google.container.v1beta1.EphemeralStorageLocalSsdConfig;
+
+                /**
+                 * Encodes the specified EphemeralStorageLocalSsdConfig message. Does not implicitly {@link google.container.v1beta1.EphemeralStorageLocalSsdConfig.verify|verify} messages.
+                 * @param message EphemeralStorageLocalSsdConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IEphemeralStorageLocalSsdConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EphemeralStorageLocalSsdConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.EphemeralStorageLocalSsdConfig.verify|verify} messages.
+                 * @param message EphemeralStorageLocalSsdConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IEphemeralStorageLocalSsdConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EphemeralStorageLocalSsdConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EphemeralStorageLocalSsdConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.EphemeralStorageLocalSsdConfig;
+
+                /**
+                 * Decodes an EphemeralStorageLocalSsdConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EphemeralStorageLocalSsdConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.EphemeralStorageLocalSsdConfig;
+
+                /**
+                 * Verifies an EphemeralStorageLocalSsdConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EphemeralStorageLocalSsdConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EphemeralStorageLocalSsdConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.EphemeralStorageLocalSsdConfig;
+
+                /**
+                 * Creates a plain object from an EphemeralStorageLocalSsdConfig message. Also converts values to other types if specified.
+                 * @param message EphemeralStorageLocalSsdConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.EphemeralStorageLocalSsdConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EphemeralStorageLocalSsdConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EphemeralStorageLocalSsdConfig
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -24180,6 +24861,9 @@ export namespace google {
 
                 /** Cluster protectConfig */
                 protectConfig?: (google.container.v1beta1.IProtectConfig|null);
+
+                /** Cluster etag */
+                etag?: (string|null);
             }
 
             /** Represents a Cluster. */
@@ -24403,6 +25087,9 @@ export namespace google {
 
                 /** Cluster protectConfig. */
                 public protectConfig?: (google.container.v1beta1.IProtectConfig|null);
+
+                /** Cluster etag. */
+                public etag: string;
 
                 /** Cluster _nodePoolDefaults. */
                 public _nodePoolDefaults?: "nodePoolDefaults";
@@ -25165,6 +25852,9 @@ export namespace google {
                 /** ClusterUpdate desiredGatewayApiConfig */
                 desiredGatewayApiConfig?: (google.container.v1beta1.IGatewayAPIConfig|null);
 
+                /** ClusterUpdate etag */
+                etag?: (string|null);
+
                 /** ClusterUpdate desiredNodePoolLoggingConfig */
                 desiredNodePoolLoggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
 
@@ -25312,6 +26002,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredGatewayApiConfig. */
                 public desiredGatewayApiConfig?: (google.container.v1beta1.IGatewayAPIConfig|null);
+
+                /** ClusterUpdate etag. */
+                public etag: string;
 
                 /** ClusterUpdate desiredNodePoolLoggingConfig. */
                 public desiredNodePoolLoggingConfig?: (google.container.v1beta1.INodePoolLoggingConfig|null);
@@ -26264,6 +26957,9 @@ export namespace google {
                 /** UpdateNodePoolRequest gvnic */
                 gvnic?: (google.container.v1beta1.IVirtualNIC|null);
 
+                /** UpdateNodePoolRequest etag */
+                etag?: (string|null);
+
                 /** UpdateNodePoolRequest fastSocket */
                 fastSocket?: (google.container.v1beta1.IFastSocket|null);
 
@@ -26272,6 +26968,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest resourceLabels */
                 resourceLabels?: (google.container.v1beta1.IResourceLabels|null);
+
+                /** UpdateNodePoolRequest windowsNodeConfig */
+                windowsNodeConfig?: (google.container.v1beta1.IWindowsNodeConfig|null);
             }
 
             /** Represents an UpdateNodePoolRequest. */
@@ -26340,6 +27039,9 @@ export namespace google {
                 /** UpdateNodePoolRequest gvnic. */
                 public gvnic?: (google.container.v1beta1.IVirtualNIC|null);
 
+                /** UpdateNodePoolRequest etag. */
+                public etag: string;
+
                 /** UpdateNodePoolRequest fastSocket. */
                 public fastSocket?: (google.container.v1beta1.IFastSocket|null);
 
@@ -26348,6 +27050,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest resourceLabels. */
                 public resourceLabels?: (google.container.v1beta1.IResourceLabels|null);
+
+                /** UpdateNodePoolRequest windowsNodeConfig. */
+                public windowsNodeConfig?: (google.container.v1beta1.IWindowsNodeConfig|null);
 
                 /**
                  * Creates a new UpdateNodePoolRequest instance using the specified properties.
@@ -29502,6 +30207,9 @@ export namespace google {
 
                 /** NodePool updateInfo */
                 updateInfo?: (google.container.v1beta1.NodePool.IUpdateInfo|null);
+
+                /** NodePool etag */
+                etag?: (string|null);
             }
 
             /** Represents a NodePool. */
@@ -29566,6 +30274,9 @@ export namespace google {
 
                 /** NodePool updateInfo. */
                 public updateInfo?: (google.container.v1beta1.NodePool.IUpdateInfo|null);
+
+                /** NodePool etag. */
+                public etag: string;
 
                 /**
                  * Creates a new NodePool instance using the specified properties.

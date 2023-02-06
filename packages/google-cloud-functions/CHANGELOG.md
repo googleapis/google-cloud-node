@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/functions-v2.2.3...functions-v2.3.0) (2023-01-28)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3852](https://github.com/googleapis/google-cloud-node/issues/3852)) ([d83d70a](https://github.com/googleapis/google-cloud-node/commit/d83d70a25f78812a44c4476b2149fbdef0a2baa1))
+
 ## [2.2.3](https://github.com/googleapis/nodejs-functions/compare/v2.2.2...v2.2.3) (2022-11-11)
 
 

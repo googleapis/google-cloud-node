@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,8 @@ function main(parent, policy) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Cloud resource that will parent the new Policy. Must be in one of the
-   *  following forms:
+   *  Required. The Cloud resource that will parent the new Policy. Must be in
+   *  one of the following forms:
    *  * `projects/{project_number}`
    *  * `projects/{project_id}`
    *  * `folders/{folder_id}`

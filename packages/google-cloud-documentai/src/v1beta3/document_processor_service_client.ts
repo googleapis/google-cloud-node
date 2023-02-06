@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -498,6 +498,7 @@ export class DocumentProcessorServiceClient {
       'batchProcessDocuments',
       'fetchProcessorTypes',
       'listProcessorTypes',
+      'getProcessorType',
       'listProcessors',
       'getProcessor',
       'trainProcessorVersion',
@@ -809,6 +810,103 @@ export class DocumentProcessorServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.fetchProcessorTypes(request, options, callback);
+  }
+  /**
+   * Gets a processor type detail.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The processor type resource name.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ProcessorType]{@link google.cloud.documentai.v1beta3.ProcessorType}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_processor_service.get_processor_type.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentProcessorService_GetProcessorType_async
+   */
+  getProcessorType(
+    request?: protos.google.cloud.documentai.v1beta3.IGetProcessorTypeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.documentai.v1beta3.IProcessorType,
+      (
+        | protos.google.cloud.documentai.v1beta3.IGetProcessorTypeRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getProcessorType(
+    request: protos.google.cloud.documentai.v1beta3.IGetProcessorTypeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.documentai.v1beta3.IProcessorType,
+      | protos.google.cloud.documentai.v1beta3.IGetProcessorTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getProcessorType(
+    request: protos.google.cloud.documentai.v1beta3.IGetProcessorTypeRequest,
+    callback: Callback<
+      protos.google.cloud.documentai.v1beta3.IProcessorType,
+      | protos.google.cloud.documentai.v1beta3.IGetProcessorTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getProcessorType(
+    request?: protos.google.cloud.documentai.v1beta3.IGetProcessorTypeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.documentai.v1beta3.IProcessorType,
+          | protos.google.cloud.documentai.v1beta3.IGetProcessorTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.documentai.v1beta3.IProcessorType,
+      | protos.google.cloud.documentai.v1beta3.IGetProcessorTypeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.documentai.v1beta3.IProcessorType,
+      (
+        | protos.google.cloud.documentai.v1beta3.IGetProcessorTypeRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getProcessorType(request, options, callback);
   }
   /**
    * Gets a processor detail.

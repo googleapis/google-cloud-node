@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -64,11 +64,13 @@ function main(parent, query, pageSize) {
    */
   // const company = 'abc123'
   /**
-   *  The scope of the completion. The defaults is CompletionScope.PUBLIC google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionScope.PUBLIC.
+   *  The scope of the completion. The defaults is
+   *  CompletionScope.PUBLIC google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionScope.PUBLIC.
    */
   // const scope = {}
   /**
-   *  The completion topic. The default is CompletionType.COMBINED google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionType.COMBINED.
+   *  The completion topic. The default is
+   *  CompletionType.COMBINED google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionType.COMBINED.
    */
   // const type = {}
 

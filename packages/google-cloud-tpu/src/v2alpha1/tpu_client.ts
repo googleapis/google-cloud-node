@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -249,59 +249,27 @@ export class TpuClient {
       lroOptions.httpRules = [
         {
           selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1alpha1/{name=projects/*/locations/*}',
-          additional_bindings: [
-            {get: '/v1/{name=projects/*/locations/*}'},
-            {get: '/v2alpha1/{name=projects/*/locations/*}'},
-            {get: '/v2/{name=projects/*/locations/*}'},
-          ],
+          get: '/v2alpha1/{name=projects/*/locations/*}',
         },
         {
           selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1alpha1/{name=projects/*}/locations',
-          additional_bindings: [
-            {get: '/v1/{name=projects/*}/locations'},
-            {get: '/v2alpha1/{name=projects/*}/locations'},
-            {get: '/v2/{name=projects/*}/locations'},
-          ],
+          get: '/v2alpha1/{name=projects/*}/locations',
         },
         {
           selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1alpha1/{name=projects/*/locations/*/operations/*}:cancel',
-          additional_bindings: [
-            {post: '/v1/{name=projects/*/locations/*/operations/*}:cancel'},
-            {
-              post: '/v2alpha1/{name=projects/*/locations/*/operations/*}:cancel',
-            },
-            {post: '/v2/{name=projects/*/locations/*/operations/*}:cancel'},
-          ],
+          post: '/v2alpha1/{name=projects/*/locations/*/operations/*}:cancel',
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1alpha1/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {delete: '/v1/{name=projects/*/locations/*/operations/*}'},
-            {delete: '/v2alpha1/{name=projects/*/locations/*/operations/*}'},
-            {delete: '/v2/{name=projects/*/locations/*/operations/*}'},
-          ],
+          delete: '/v2alpha1/{name=projects/*/locations/*/operations/*}',
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1alpha1/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v2alpha1/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v2/{name=projects/*/locations/*/operations/*}'},
-          ],
+          get: '/v2alpha1/{name=projects/*/locations/*/operations/*}',
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1alpha1/{name=projects/*/locations/*}/operations',
-          additional_bindings: [
-            {get: '/v1/{name=projects/*/locations/*}/operations'},
-            {get: '/v2alpha1/{name=projects/*/locations/*}/operations'},
-            {get: '/v2/{name=projects/*/locations/*}/operations'},
-          ],
+          get: '/v2alpha1/{name=projects/*/locations/*}/operations',
         },
       ];
     }
@@ -1822,7 +1790,7 @@ export class TpuClient {
    * @param {string} request.parent
    *   Required. The parent resource name.
    * @param {string} request.queuedResourceId
-   *   The unqualified resource name. Should follow the `^[A-Za-z0-9_.~+%-]+$`
+   *   The unqualified resource name. Should follow the ^[A-Za-z0-9_.~+%-]+$
    *   regex format.
    * @param {google.cloud.tpu.v2alpha1.QueuedResource} request.queuedResource
    *   Required. The queued resource.

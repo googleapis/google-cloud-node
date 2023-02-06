@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ function main(parent, attachedClusterId, platformVersion) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. A client provided ID the resource. Must be unique within the
+   *  Required. A client provided ID of the resource. Must be unique within the
    *  parent resource.
    *  The provided ID will be part of the
    *  AttachedCluster google.cloud.gkemulticloud.v1.AttachedCluster  resource
@@ -47,7 +47,7 @@ function main(parent, attachedClusterId, platformVersion) {
    *  Valid characters are `/[a-z][0-9]-/`. Cannot be longer than 63 characters.
    *  When generating an install manifest for importing an existing Membership
    *  resource, the attached_cluster_id field must be the Membership id.
-   *  Membership names are formatted as `resource name formatted as
+   *  Membership names are formatted as
    *  `projects/<project-id>/locations/<region>/memberships/<membership-id>`.
    */
   // const attachedClusterId = 'abc123'

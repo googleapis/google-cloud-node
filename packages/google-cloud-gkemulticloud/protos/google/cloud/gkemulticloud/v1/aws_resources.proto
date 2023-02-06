@@ -22,7 +22,7 @@ import "google/cloud/gkemulticloud/v1/common_resources.proto";
 import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Google.Cloud.GkeMultiCloud.V1";
-option go_package = "google.golang.org/genproto/googleapis/cloud/gkemulticloud/v1;gkemulticloud";
+option go_package = "cloud.google.com/go/gkemulticloud/apiv1/gkemulticloudpb;gkemulticloudpb";
 option java_multiple_files = true;
 option java_outer_classname = "AwsResourcesProto";
 option java_package = "com.google.cloud.gkemulticloud.v1";
@@ -70,7 +70,7 @@ message AwsCluster {
   // `projects/<project-number>/locations/<region>/awsClusters/<cluster-id>`.
   //
   // See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-  // for more details on GCP resource names.
+  // for more details on Google Cloud Platform resource names.
   string name = 1;
 
   // Optional. A human readable description of this cluster.

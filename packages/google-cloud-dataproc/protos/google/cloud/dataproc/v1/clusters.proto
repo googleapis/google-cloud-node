@@ -26,7 +26,7 @@ import "google/protobuf/duration.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "google.golang.org/genproto/googleapis/cloud/dataproc/v1;dataproc";
+option go_package = "cloud.google.com/go/dataproc/apiv1/dataprocpb;dataprocpb";
 option java_multiple_files = true;
 option java_outer_classname = "ClustersProto";
 option java_package = "com.google.cloud.dataproc.v1";
@@ -582,6 +582,16 @@ message InstanceGroupConfig {
     // (https://cloud.google.com/dataproc/docs/concepts/compute/secondary-vms)
     // groups.
     PREEMPTIBLE = 2;
+
+    // Instances are [Spot VMs]
+    // (https://cloud.google.com/compute/docs/instances/spot).
+    //
+    // This option is allowed only for [secondary worker]
+    // (https://cloud.google.com/dataproc/docs/concepts/compute/secondary-vms)
+    // groups. Spot VMs are the latest version of [preemptible VMs]
+    // (https://cloud.google.com/compute/docs/instances/preemptible), and
+    // provide additional features.
+    SPOT = 3;
   }
 
   // Optional. The number of VM instances in the instance group.

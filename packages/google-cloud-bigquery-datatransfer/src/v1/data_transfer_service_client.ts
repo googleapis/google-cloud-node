@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -391,8 +391,8 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The field will contain name of the resource requested, for example:
-   *   `projects/{project_id}/dataSources/{data_source_id}` or
+   *   Required. The field will contain name of the resource requested, for
+   *   example: `projects/{project_id}/dataSources/{data_source_id}` or
    *   `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -490,10 +490,11 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The BigQuery project id where the transfer configuration should be created.
-   *   Must be in the format projects/{project_id}/locations/{location_id} or
-   *   projects/{project_id}. If specified location and location of the
-   *   destination bigquery dataset do not match - the request will fail.
+   *   Required. The BigQuery project id where the transfer configuration should
+   *   be created. Must be in the format
+   *   projects/{project_id}/locations/{location_id} or projects/{project_id}. If
+   *   specified location and location of the destination bigquery dataset do not
+   *   match - the request will fail.
    * @param {google.cloud.bigquery.datatransfer.v1.TransferConfig} request.transferConfig
    *   Required. Data transfer configuration to create.
    * @param {string} request.authorizationCode
@@ -773,8 +774,8 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The field will contain name of the resource requested, for example:
-   *   `projects/{project_id}/transferConfigs/{config_id}` or
+   *   Required. The field will contain name of the resource requested, for
+   *   example: `projects/{project_id}/transferConfigs/{config_id}` or
    *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -872,8 +873,8 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The field will contain name of the resource requested, for example:
-   *   `projects/{project_id}/transferConfigs/{config_id}` or
+   *   Required. The field will contain name of the resource requested, for
+   *   example: `projects/{project_id}/transferConfigs/{config_id}` or
    *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1197,8 +1198,9 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The field will contain name of the resource requested, for example:
-   *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+   *   Required. The field will contain name of the resource requested, for
+   *   example: `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+   *   or
    *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1296,8 +1298,9 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The field will contain name of the resource requested, for example:
-   *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+   *   Required. The field will contain name of the resource requested, for
+   *   example: `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+   *   or
    *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1603,8 +1606,8 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The BigQuery project id for which data sources should be returned.
-   *   Must be in the form: `projects/{project_id}` or
+   *   Required. The BigQuery project id for which data sources should be
+   *   returned. Must be in the form: `projects/{project_id}` or
    *   `projects/{project_id}/locations/{location_id}`
    * @param {string} request.pageToken
    *   Pagination token, which can be used to request a specific page
@@ -1707,8 +1710,8 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The BigQuery project id for which data sources should be returned.
-   *   Must be in the form: `projects/{project_id}` or
+   *   Required. The BigQuery project id for which data sources should be
+   *   returned. Must be in the form: `projects/{project_id}` or
    *   `projects/{project_id}/locations/{location_id}`
    * @param {string} request.pageToken
    *   Pagination token, which can be used to request a specific page
@@ -1759,8 +1762,8 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The BigQuery project id for which data sources should be returned.
-   *   Must be in the form: `projects/{project_id}` or
+   *   Required. The BigQuery project id for which data sources should be
+   *   returned. Must be in the form: `projects/{project_id}` or
    *   `projects/{project_id}/locations/{location_id}`
    * @param {string} request.pageToken
    *   Pagination token, which can be used to request a specific page
@@ -2024,8 +2027,8 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of transfer configuration for which transfer runs should be retrieved.
-   *   Format of transfer configuration resource name is:
+   *   Required. Name of transfer configuration for which transfer runs should be
+   *   retrieved. Format of transfer configuration resource name is:
    *   `projects/{project_id}/transferConfigs/{config_id}` or
    *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
    * @param {number[]} request.states
@@ -2133,8 +2136,8 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of transfer configuration for which transfer runs should be retrieved.
-   *   Format of transfer configuration resource name is:
+   *   Required. Name of transfer configuration for which transfer runs should be
+   *   retrieved. Format of transfer configuration resource name is:
    *   `projects/{project_id}/transferConfigs/{config_id}` or
    *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
    * @param {number[]} request.states
@@ -2190,8 +2193,8 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of transfer configuration for which transfer runs should be retrieved.
-   *   Format of transfer configuration resource name is:
+   *   Required. Name of transfer configuration for which transfer runs should be
+   *   retrieved. Format of transfer configuration resource name is:
    *   `projects/{project_id}/transferConfigs/{config_id}` or
    *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
    * @param {number[]} request.states

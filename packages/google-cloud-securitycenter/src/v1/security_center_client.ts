@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -867,8 +867,8 @@ export class SecurityCenterClient {
    * @param {string} request.configId
    *   Required.
    *   Unique identifier provided by the client within the parent scope.
-   *   It must be between 1 and 128 characters and contain alphanumeric
-   *   characters, underscores, or hyphens only.
+   *   It must be between 1 and 128 characters, and contains alphanumeric
+   *   characters, underscores or hyphens only.
    * @param {google.cloud.securitycenter.v1.NotificationConfig} request.notificationConfig
    *   Required. The notification config being created. The name and the service
    *   account will be ignored as they are both output only fields on this
@@ -1074,9 +1074,7 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the notification config to delete. Its format is
-   *   "organizations/[organization_id]/notificationConfigs/[config_id]",
-   *   "folders/[folder_id]/notificationConfigs/[config_id]",
-   *   or "projects/[project_id]/notificationConfigs/[config_id]".
+   *   "organizations/[organization_id]/notificationConfigs/[config_id]".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1172,12 +1170,12 @@ export class SecurityCenterClient {
     );
   }
   /**
-   * Gets a BigQuery export.
+   * Gets a big query export.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Name of the BigQuery export to retrieve. Its format is
+   *   Required. Name of the big query export to retrieve. Its format is
    *   organizations/{organization}/bigQueryExports/{export_id},
    *   folders/{folder}/bigQueryExports/{export_id}, or
    *   projects/{project}/bigQueryExports/{export_id}
@@ -1459,9 +1457,7 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the notification config to get. Its format is
-   *   "organizations/[organization_id]/notificationConfigs/[config_id]",
-   *   "folders/[folder_id]/notificationConfigs/[config_id]",
-   *   or "projects/[project_id]/notificationConfigs/[config_id]".
+   *   "organizations/[organization_id]/notificationConfigs/[config_id]".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1752,12 +1748,10 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The [relative resource
-   *   name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
-   *   of the finding. Example:
-   *   "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}",
-   *   "folders/{folder_id}/sources/{source_id}/findings/{finding_id}",
-   *   "projects/{project_id}/sources/{source_id}/findings/{finding_id}".
+   *   Required. The relative resource name of the finding. See:
+   *   https://cloud.google.com/apis/design/resource_names#relative_resource_name
+   *   Example:
+   *   "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}".
    * @param {google.cloud.securitycenter.v1.Finding.State} request.state
    *   Required. The desired State of the finding.
    * @param {google.protobuf.Timestamp} request.startTime
@@ -1852,9 +1846,9 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The [relative resource
-   *   name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
-   *   of the finding. Example:
+   *   Required. The relative resource name of the finding. See:
+   *   https://cloud.google.com/apis/design/resource_names#relative_resource_name
+   *   Example:
    *   "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}",
    *   "folders/{folder_id}/sources/{source_id}/findings/{finding_id}",
    *   "projects/{project_id}/sources/{source_id}/findings/{finding_id}".
@@ -2844,16 +2838,16 @@ export class SecurityCenterClient {
     return this.innerApiCalls.updateSecurityMarks(request, options, callback);
   }
   /**
-   * Creates a BigQuery export.
+   * Creates a big query export.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent resource of the new BigQuery export. Its
-   *   format is "organizations/[organization_id]", "folders/[folder_id]", or
+   *   Required. Resource name of the new big query export's parent. Its format is
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
    *   "projects/[project_id]".
    * @param {google.cloud.securitycenter.v1.BigQueryExport} request.bigQueryExport
-   *   Required. The BigQuery export being created.
+   *   Required. The big query export being created.
    * @param {string} request.bigQueryExportId
    *   Required. Unique identifier provided by the client within the parent scope.
    *   It must consist of lower case letters, numbers, and hyphen, with the first
@@ -2950,12 +2944,12 @@ export class SecurityCenterClient {
     return this.innerApiCalls.createBigQueryExport(request, options, callback);
   }
   /**
-   * Deletes an existing BigQuery export.
+   * Deletes an existing big query export.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the BigQuery export to delete. Its format is
+   *   Required. Name of the big query export to delete. Its format is
    *   organizations/{organization}/bigQueryExports/{export_id},
    *   folders/{folder}/bigQueryExports/{export_id}, or
    *   projects/{project}/bigQueryExports/{export_id}
@@ -3468,8 +3462,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent to group the assets by. Its format is
-   *   "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -3686,8 +3680,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent to group the assets by. Its format is
-   *   "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -3852,8 +3846,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent to group the assets by. Its format is
-   *   "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -4580,9 +4574,11 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent that the listed assets belong to. Its
-   *   format is "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   Required. The name of the parent resource that contains the assets. The
+   *   value that you can specify on parent depends on the method in which you
+   *   specify parent. You can specify one of the following values:
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -4802,9 +4798,11 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent that the listed assets belong to. Its
-   *   format is "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   Required. The name of the parent resource that contains the assets. The
+   *   value that you can specify on parent depends on the method in which you
+   *   specify parent. You can specify one of the following values:
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -4972,9 +4970,11 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent that the listed assets belong to. Its
-   *   format is "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   Required. The name of the parent resource that contains the assets. The
+   *   value that you can specify on parent depends on the method in which you
+   *   specify parent. You can specify one of the following values:
+   *   "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -5936,9 +5936,9 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent in which to list the notification
-   *   configurations. Its format is "organizations/[organization_id]",
-   *   "folders/[folder_id]", or "projects/[project_id]".
+   *   Required. Name of the organization to list notification configs. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListNotificationConfigsResponse`; indicates
    *   that this is a continuation of a prior `ListNotificationConfigs` call, and
@@ -6043,9 +6043,9 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent in which to list the notification
-   *   configurations. Its format is "organizations/[organization_id]",
-   *   "folders/[folder_id]", or "projects/[project_id]".
+   *   Required. Name of the organization to list notification configs. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListNotificationConfigsResponse`; indicates
    *   that this is a continuation of a prior `ListNotificationConfigs` call, and
@@ -6094,9 +6094,9 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent in which to list the notification
-   *   configurations. Its format is "organizations/[organization_id]",
-   *   "folders/[folder_id]", or "projects/[project_id]".
+   *   Required. Name of the organization to list notification configs. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListNotificationConfigsResponse`; indicates
    *   that this is a continuation of a prior `ListNotificationConfigs` call, and
@@ -6145,8 +6145,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   be "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -6248,8 +6248,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   be "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -6299,8 +6299,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id], folders/[folder_id], or
-   *   projects/[project_id]".
+   *   be "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and

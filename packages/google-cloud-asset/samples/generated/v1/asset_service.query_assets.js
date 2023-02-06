@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,13 +42,13 @@ function main(parent) {
    */
   // const statement = 'abc123'
   /**
-   *  Optional. Reference to the query job, which is from the `QueryAssetsResponse` of
-   *  previous `QueryAssets` call.
+   *  Optional. Reference to the query job, which is from the
+   *  `QueryAssetsResponse` of previous `QueryAssets` call.
    */
   // const jobReference = 'abc123'
   /**
-   *  Optional. The maximum number of rows to return in the results. Responses are limited
-   *  to 10 MB and 1000 rows.
+   *  Optional. The maximum number of rows to return in the results. Responses
+   *  are limited to 10 MB and 1000 rows.
    *  By default, the maximum row count is 1000. When the byte or row count limit
    *  is reached, the rest of the query results will be paginated.
    *  The field will be ignored when output_config  is specified.
@@ -60,10 +60,11 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Specifies the maximum amount of time that the client is willing to wait
-   *  for the query to complete. By default, this limit is 5 min for the first
-   *  query, and 1 minute for the following queries. If the query is complete,
-   *  the `done` field in the `QueryAssetsResponse` is true, otherwise false.
+   *  Optional. Specifies the maximum amount of time that the client is willing
+   *  to wait for the query to complete. By default, this limit is 5 min for the
+   *  first query, and 1 minute for the following queries. If the query is
+   *  complete, the `done` field in the `QueryAssetsResponse` is true, otherwise
+   *  false.
    *  Like BigQuery jobs.query
    *  API (https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest)
    *  The call is not guaranteed to wait for the specified timeout; it typically
@@ -73,13 +74,14 @@ function main(parent) {
    */
   // const timeout = {}
   /**
-   *  Optional. start_time  is required. start_time  must be less than end_time 
-   *  Defaults end_time  to now if start_time  is set and end_time  isn't.
-   *  Maximum permitted time range is 7 days.
+   *  Optional. start_time  is required. start_time  must be less than
+   *  end_time  Defaults end_time  to now if start_time  is set and
+   *  end_time  isn't. Maximum permitted time range is 7 days.
    */
   // const readTimeWindow = {}
   /**
-   *  Optional. Queries cloud assets as they appeared at the specified point in time.
+   *  Optional. Queries cloud assets as they appeared at the specified point in
+   *  time.
    */
   // const readTime = {}
   /**

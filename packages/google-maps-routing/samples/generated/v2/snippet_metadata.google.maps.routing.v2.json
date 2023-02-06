@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-routing",
-        "version": "0.2.1",
+        "version": "0.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 125,
+                    "end": 132,
                     "type": "FULL"
                 }
             ],
@@ -82,6 +82,10 @@
                     {
                         "name": "requested_reference_routes",
                         "type": "TYPE_ENUM[]"
+                    },
+                    {
+                        "name": "extra_computations",
+                        "type": "TYPE_ENUM[]"
                     }
                 ],
                 "resultType": ".google.maps.routing.v2.ComputeRoutesResponse",
@@ -110,7 +114,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 87,
+                    "end": 94,
                     "type": "FULL"
                 }
             ],
@@ -138,6 +142,10 @@
                     {
                         "name": "departure_time",
                         "type": ".google.protobuf.Timestamp"
+                    },
+                    {
+                        "name": "extra_computations",
+                        "type": "TYPE_ENUM[]"
                     }
                 ],
                 "resultType": ".google.maps.routing.v2.RouteMatrixElement",

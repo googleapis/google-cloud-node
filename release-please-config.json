@@ -10,6 +10,7 @@
     "packages/google-appengine": {},
     "packages/google-area120-tables": {},
     "packages/google-cloud-accessapproval": {},
+    "packages/google-cloud-aiplatform": {},
     "packages/google-cloud-apigateway": {},
     "packages/google-cloud-apigeeconnect": {},
     "packages/google-cloud-asset": {},
@@ -88,6 +89,7 @@
     "packages/google-cloud-resourcemanager": {},
     "packages/google-cloud-resourcesettings": {},
     "packages/google-cloud-retail": {},
+    "packages/google-cloud-run": {},
     "packages/google-cloud-scheduler": {},
     "packages/google-cloud-secretmanager": {},
     "packages/google-cloud-security-privateca": {},
@@ -95,6 +97,7 @@
     "packages/google-cloud-securitycenter": {},
     "packages/google-cloud-servicedirectory": {},
     "packages/google-cloud-shell": {},
+    "packages/google-cloud-speech": {},
     "packages/google-cloud-talent": {},
     "packages/google-cloud-tasks": {},
     "packages/google-cloud-texttospeech": {},
@@ -104,6 +107,7 @@
     "packages/google-cloud-video-stitcher": {},
     "packages/google-cloud-video-transcoder": {},
     "packages/google-cloud-videointelligence": {},
+    "packages/google-cloud-vision": {},
     "packages/google-cloud-vmmigration": {},
     "packages/google-cloud-vmwareengine": {},
     "packages/google-cloud-vpcaccess": {},
@@ -121,9 +125,12 @@
     "packages/google-maps-addressvalidation": {},
     "packages/google-maps-routing": {},
     "packages/google-monitoring-dashboard": {},
+    "packages/google-privacy-dlp": {},
     "packages/google-storagetransfer": {},
     "packages/grafeas": {},
-    "packages/typeless-sample-bot": {}
+    "packages/typeless-sample-bot": {},
+    "packages/google-maps-mapsplatformdatasets": {},
+    "packages/google-cloud-datacatalog-lineage": {}
   },
   "plugins": [
     {

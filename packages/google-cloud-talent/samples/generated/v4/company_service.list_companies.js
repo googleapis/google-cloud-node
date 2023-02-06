@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -46,8 +46,9 @@ function main(parent) {
   /**
    *  Set to true if the companies requested must have open jobs.
    *  Defaults to false.
-   *  If true, at most page_size google.cloud.talent.v4.ListCompaniesRequest.page_size  of companies are fetched, among which
-   *  only those with open jobs are returned.
+   *  If true, at most
+   *  page_size google.cloud.talent.v4.ListCompaniesRequest.page_size  of
+   *  companies are fetched, among which only those with open jobs are returned.
    */
   // const requireOpenJobs = true
 

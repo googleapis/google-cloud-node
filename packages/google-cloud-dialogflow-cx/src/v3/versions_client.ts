@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -125,6 +125,9 @@ export class VersionsClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -584,8 +587,8 @@ export class VersionsClient {
    * @param {google.cloud.dialogflow.cx.v3.Version} request.version
    *   Required. The version to update.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The mask to control which fields get updated. Currently only `description`
-   *   and `display_name` can be updated.
+   *   Required. The mask to control which fields get updated. Currently only
+   *   `description` and `display_name` can be updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -676,9 +679,9 @@ export class VersionsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3.Version|Version} to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3.Version|Version}
+   *   to delete. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -769,8 +772,8 @@ export class VersionsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.baseVersion
-   *   Required. Name of the base flow version to compare with the target version. Use
-   *   version ID `0` to indicate the draft version of the specified flow.
+   *   Required. Name of the base flow version to compare with the target version.
+   *   Use version ID `0` to indicate the draft version of the specified flow.
    *
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/
    *   <Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
@@ -873,20 +876,23 @@ export class VersionsClient {
   }
 
   /**
-   * Creates a {@link google.cloud.dialogflow.cx.v3.Version|Version} in the specified {@link google.cloud.dialogflow.cx.v3.Flow|Flow}.
+   * Creates a {@link google.cloud.dialogflow.cx.v3.Version|Version} in the specified
+   * {@link google.cloud.dialogflow.cx.v3.Flow|Flow}.
    *
    * This method is a [long-running
    * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
    * The returned `Operation` type has the following method-specific fields:
    *
-   * - `metadata`: {@link google.cloud.dialogflow.cx.v3.CreateVersionOperationMetadata|CreateVersionOperationMetadata}
+   * - `metadata`:
+   * {@link google.cloud.dialogflow.cx.v3.CreateVersionOperationMetadata|CreateVersionOperationMetadata}
    * - `response`: {@link google.cloud.dialogflow.cx.v3.Version|Version}
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Flow|Flow} to create an {@link google.cloud.dialogflow.cx.v3.Version|Version} for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   Required. The {@link google.cloud.dialogflow.cx.v3.Flow|Flow} to create an
+   *   {@link google.cloud.dialogflow.cx.v3.Version|Version} for. Format:
+   *   `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/flows/<Flow ID>`.
    * @param {google.cloud.dialogflow.cx.v3.Version} request.version
    *   Required. The version to create.
@@ -1036,9 +1042,9 @@ export class VersionsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Version|Version} to be loaded to draft flow.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3.Version|Version} to be loaded
+   *   to draft flow. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
    * @param {boolean} request.allowOverrideAgentResources
    *   This field is used to prevent accidental overwrite of other agent
    *   resources, which can potentially impact other flow's behavior. If
@@ -1173,14 +1179,15 @@ export class VersionsClient {
     >;
   }
   /**
-   * Returns the list of all versions in the specified {@link google.cloud.dialogflow.cx.v3.Flow|Flow}.
+   * Returns the list of all versions in the specified
+   * {@link google.cloud.dialogflow.cx.v3.Flow|Flow}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Flow|Flow} to list all versions for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3.Flow|Flow} to list all
+   *   versions for. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>/flows/<Flow ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1279,9 +1286,9 @@ export class VersionsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Flow|Flow} to list all versions for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3.Flow|Flow} to list all
+   *   versions for. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>/flows/<Flow ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.
@@ -1328,9 +1335,9 @@ export class VersionsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Flow|Flow} to list all versions for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
+   *   Required. The {@link google.cloud.dialogflow.cx.v3.Flow|Flow} to list all
+   *   versions for. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>/flows/<Flow ID>`.
    * @param {number} request.pageSize
    *   The maximum number of items to return in a single page. By default 20 and
    *   at most 100.

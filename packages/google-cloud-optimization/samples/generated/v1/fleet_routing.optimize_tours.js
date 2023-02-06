@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ function main(parent) {
    */
   // const solvingMode = {}
   /**
-   *  Truncates the number of validation errors returned. Those errors are
+   *  Truncates the number of validation errors returned. These errors are
    *  typically attached to an INVALID_ARGUMENT error payload as a BadRequest
    *  error detail (https://cloud.google.com/apis/design/errors#error_details),
    *  unless solving_mode=VALIDATE_ONLY: see the

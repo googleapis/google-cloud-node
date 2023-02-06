@@ -32,7 +32,7 @@ import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
 
 option csharp_namespace = "Google.Cloud.DocumentAI.V1";
-option go_package = "google.golang.org/genproto/googleapis/cloud/documentai/v1;documentai";
+option go_package = "cloud.google.com/go/documentai/apiv1/documentaipb;documentaipb";
 option java_multiple_files = true;
 option java_outer_classname = "DocumentAiProcessorService";
 option java_package = "com.google.cloud.documentai.v1";
@@ -105,6 +105,14 @@ service DocumentProcessorService {
       get: "/v1/{parent=projects/*/locations/*}/processorTypes"
     };
     option (google.api.method_signature) = "parent";
+  }
+
+  // Gets a processor type detail.
+  rpc GetProcessorType(GetProcessorTypeRequest) returns (ProcessorType) {
+    option (google.api.http) = {
+      get: "/v1/{name=projects/*/locations/*/processorTypes/*}"
+    };
+    option (google.api.method_signature) = "name";
   }
 
   // Lists all processors which belong to this project.
@@ -514,6 +522,17 @@ message ListProcessorsResponse {
 
   // Points to the next processor, otherwise empty.
   string next_page_token = 2;
+}
+
+// Request message for get processor.
+message GetProcessorTypeRequest {
+  // Required. The processor type resource name.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "documentai.googleapis.com/ProcessorType"
+    }
+  ];
 }
 
 // Request message for get processor.

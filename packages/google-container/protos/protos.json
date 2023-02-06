@@ -884,6 +884,23 @@
                     }
                   }
                 },
+                "WindowsNodeConfig": {
+                  "fields": {
+                    "osVersion": {
+                      "type": "OSVersion",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "OSVersion": {
+                      "values": {
+                        "OS_VERSION_UNSPECIFIED": 0,
+                        "OS_VERSION_LTSC2019": 1,
+                        "OS_VERSION_LTSC2022": 2
+                      }
+                    }
+                  }
+                },
                 "NodeKubeletConfig": {
                   "fields": {
                     "cpuManagerPolicy": {
@@ -1042,6 +1059,18 @@
                     "loggingConfig": {
                       "type": "NodePoolLoggingConfig",
                       "id": 38
+                    },
+                    "windowsNodeConfig": {
+                      "type": "WindowsNodeConfig",
+                      "id": 39
+                    },
+                    "localNvmeSsdBlockConfig": {
+                      "type": "LocalNvmeSsdBlockConfig",
+                      "id": 40
+                    },
+                    "ephemeralStorageLocalSsdConfig": {
+                      "type": "EphemeralStorageLocalSsdConfig",
+                      "id": 41
                     }
                   }
                 },
@@ -1662,6 +1691,20 @@
                     "ipv6AccessType": {
                       "type": "IPv6AccessType",
                       "id": 17
+                    },
+                    "subnetIpv6CidrBlock": {
+                      "type": "string",
+                      "id": 22,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "servicesIpv6CidrBlock": {
+                      "type": "string",
+                      "id": 23,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -1953,6 +1996,10 @@
                     "nodePoolAutoConfig": {
                       "type": "NodePoolAutoConfig",
                       "id": 136
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 139
                     }
                   },
                   "nested": {
@@ -2157,6 +2204,10 @@
                     "desiredGatewayApiConfig": {
                       "type": "GatewayAPIConfig",
                       "id": 114
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 115
                     },
                     "desiredNodePoolLoggingConfig": {
                       "type": "NodePoolLoggingConfig",
@@ -2529,6 +2580,10 @@
                       "type": "VirtualNIC",
                       "id": 29
                     },
+                    "etag": {
+                      "type": "string",
+                      "id": 30
+                    },
                     "fastSocket": {
                       "type": "FastSocket",
                       "id": 31
@@ -2540,6 +2595,10 @@
                     "resourceLabels": {
                       "type": "ResourceLabels",
                       "id": 33
+                    },
+                    "windowsNodeConfig": {
+                      "type": "WindowsNodeConfig",
+                      "id": 34
                     }
                   }
                 },
@@ -3332,6 +3391,10 @@
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 110
                     }
                   },
                   "nested": {
@@ -4427,6 +4490,7 @@
                     "DNSScope": {
                       "values": {
                         "DNS_SCOPE_UNSPECIFIED": 0,
+                        "CLUSTER_SCOPE": 1,
                         "VPC_SCOPE": 2
                       }
                     }
@@ -4936,6 +5000,22 @@
                     "IPV6_ACCESS_TYPE_UNSPECIFIED": 0,
                     "INTERNAL": 1,
                     "EXTERNAL": 2
+                  }
+                },
+                "LocalNvmeSsdBlockConfig": {
+                  "fields": {
+                    "localSsdCount": {
+                      "type": "int32",
+                      "id": 1
+                    }
+                  }
+                },
+                "EphemeralStorageLocalSsdConfig": {
+                  "fields": {
+                    "localSsdCount": {
+                      "type": "int32",
+                      "id": 1
+                    }
                   }
                 }
               }
@@ -5781,6 +5861,23 @@
                     }
                   }
                 },
+                "WindowsNodeConfig": {
+                  "fields": {
+                    "osVersion": {
+                      "type": "OSVersion",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "OSVersion": {
+                      "values": {
+                        "OS_VERSION_UNSPECIFIED": 0,
+                        "OS_VERSION_LTSC2019": 1,
+                        "OS_VERSION_LTSC2022": 2
+                      }
+                    }
+                  }
+                },
                 "NodeKubeletConfig": {
                   "fields": {
                     "cpuManagerPolicy": {
@@ -5943,6 +6040,18 @@
                     "loggingConfig": {
                       "type": "NodePoolLoggingConfig",
                       "id": 38
+                    },
+                    "windowsNodeConfig": {
+                      "type": "WindowsNodeConfig",
+                      "id": 39
+                    },
+                    "localNvmeSsdBlockConfig": {
+                      "type": "LocalNvmeSsdBlockConfig",
+                      "id": 40
+                    },
+                    "ephemeralStorageLocalSsdConfig": {
+                      "type": "EphemeralStorageLocalSsdConfig",
+                      "id": 41
                     }
                   }
                 },
@@ -6085,6 +6194,22 @@
                   }
                 },
                 "EphemeralStorageConfig": {
+                  "fields": {
+                    "localSsdCount": {
+                      "type": "int32",
+                      "id": 1
+                    }
+                  }
+                },
+                "LocalNvmeSsdBlockConfig": {
+                  "fields": {
+                    "localSsdCount": {
+                      "type": "int32",
+                      "id": 1
+                    }
+                  }
+                },
+                "EphemeralStorageLocalSsdConfig": {
                   "fields": {
                     "localSsdCount": {
                       "type": "int32",
@@ -7042,6 +7167,10 @@
                       "options": {
                         "proto3_optional": true
                       }
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 139
                     }
                   },
                   "nested": {
@@ -7358,6 +7487,10 @@
                     "desiredGatewayApiConfig": {
                       "type": "GatewayAPIConfig",
                       "id": 114
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 115
                     },
                     "desiredNodePoolLoggingConfig": {
                       "type": "NodePoolLoggingConfig",
@@ -7742,6 +7875,10 @@
                       "type": "VirtualNIC",
                       "id": 29
                     },
+                    "etag": {
+                      "type": "string",
+                      "id": 30
+                    },
                     "fastSocket": {
                       "type": "FastSocket",
                       "id": 31
@@ -7753,6 +7890,10 @@
                     "resourceLabels": {
                       "type": "ResourceLabels",
                       "id": 33
+                    },
+                    "windowsNodeConfig": {
+                      "type": "WindowsNodeConfig",
+                      "id": 34
                     }
                   }
                 },
@@ -8653,6 +8794,10 @@
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 110
                     }
                   },
                   "nested": {

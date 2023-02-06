@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17714,6 +17714,7 @@
                          * @property {google.cloud.gkemulticloud.v1.IAzureClusterNetworking|null} [networking] AzureCluster networking
                          * @property {google.cloud.gkemulticloud.v1.IAzureControlPlane|null} [controlPlane] AzureCluster controlPlane
                          * @property {google.cloud.gkemulticloud.v1.IAzureAuthorization|null} [authorization] AzureCluster authorization
+                         * @property {google.cloud.gkemulticloud.v1.IAzureServicesAuthentication|null} [azureServicesAuthentication] AzureCluster azureServicesAuthentication
                          * @property {google.cloud.gkemulticloud.v1.AzureCluster.State|null} [state] AzureCluster state
                          * @property {string|null} [endpoint] AzureCluster endpoint
                          * @property {string|null} [uid] AzureCluster uid
@@ -17811,6 +17812,14 @@
                          * @instance
                          */
                         AzureCluster.prototype.authorization = null;
+    
+                        /**
+                         * AzureCluster azureServicesAuthentication.
+                         * @member {google.cloud.gkemulticloud.v1.IAzureServicesAuthentication|null|undefined} azureServicesAuthentication
+                         * @memberof google.cloud.gkemulticloud.v1.AzureCluster
+                         * @instance
+                         */
+                        AzureCluster.prototype.azureServicesAuthentication = null;
     
                         /**
                          * AzureCluster state.
@@ -17997,6 +18006,8 @@
                                 $root.google.cloud.gkemulticloud.v1.Fleet.encode(message.fleet, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             if (message.managedResources != null && Object.hasOwnProperty.call(message, "managedResources"))
                                 $root.google.cloud.gkemulticloud.v1.AzureClusterResources.encode(message.managedResources, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.azureServicesAuthentication != null && Object.hasOwnProperty.call(message, "azureServicesAuthentication"))
+                                $root.google.cloud.gkemulticloud.v1.AzureServicesAuthentication.encode(message.azureServicesAuthentication, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             if (message.loggingConfig != null && Object.hasOwnProperty.call(message, "loggingConfig"))
                                 $root.google.cloud.gkemulticloud.v1.LoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                             if (message.errors != null && message.errors.length)
@@ -18068,6 +18079,10 @@
                                     }
                                 case 6: {
                                         message.authorization = $root.google.cloud.gkemulticloud.v1.AzureAuthorization.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 22: {
+                                        message.azureServicesAuthentication = $root.google.cloud.gkemulticloud.v1.AzureServicesAuthentication.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 7: {
@@ -18216,6 +18231,11 @@
                                 if (error)
                                     return "authorization." + error;
                             }
+                            if (message.azureServicesAuthentication != null && message.hasOwnProperty("azureServicesAuthentication")) {
+                                var error = $root.google.cloud.gkemulticloud.v1.AzureServicesAuthentication.verify(message.azureServicesAuthentication);
+                                if (error)
+                                    return "azureServicesAuthentication." + error;
+                            }
                             if (message.state != null && message.hasOwnProperty("state"))
                                 switch (message.state) {
                                 default:
@@ -18335,6 +18355,11 @@
                                 if (typeof object.authorization !== "object")
                                     throw TypeError(".google.cloud.gkemulticloud.v1.AzureCluster.authorization: object expected");
                                 message.authorization = $root.google.cloud.gkemulticloud.v1.AzureAuthorization.fromObject(object.authorization);
+                            }
+                            if (object.azureServicesAuthentication != null) {
+                                if (typeof object.azureServicesAuthentication !== "object")
+                                    throw TypeError(".google.cloud.gkemulticloud.v1.AzureCluster.azureServicesAuthentication: object expected");
+                                message.azureServicesAuthentication = $root.google.cloud.gkemulticloud.v1.AzureServicesAuthentication.fromObject(object.azureServicesAuthentication);
                             }
                             switch (object.state) {
                             default:
@@ -18474,6 +18499,7 @@
                                 object.clusterCaCertificate = "";
                                 object.fleet = null;
                                 object.managedResources = null;
+                                object.azureServicesAuthentication = null;
                                 object.loggingConfig = null;
                                 object.monitoringConfig = null;
                             }
@@ -18521,6 +18547,8 @@
                                 object.fleet = $root.google.cloud.gkemulticloud.v1.Fleet.toObject(message.fleet, options);
                             if (message.managedResources != null && message.hasOwnProperty("managedResources"))
                                 object.managedResources = $root.google.cloud.gkemulticloud.v1.AzureClusterResources.toObject(message.managedResources, options);
+                            if (message.azureServicesAuthentication != null && message.hasOwnProperty("azureServicesAuthentication"))
+                                object.azureServicesAuthentication = $root.google.cloud.gkemulticloud.v1.AzureServicesAuthentication.toObject(message.azureServicesAuthentication, options);
                             if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
                                 object.loggingConfig = $root.google.cloud.gkemulticloud.v1.LoggingConfig.toObject(message.loggingConfig, options);
                             if (message.errors && message.errors.length) {
@@ -20534,10 +20562,12 @@
                          * @property {string|null} [name] AzureClient name
                          * @property {string|null} [tenantId] AzureClient tenantId
                          * @property {string|null} [applicationId] AzureClient applicationId
+                         * @property {boolean|null} [reconciling] AzureClient reconciling
                          * @property {Object.<string,string>|null} [annotations] AzureClient annotations
                          * @property {string|null} [pemCertificate] AzureClient pemCertificate
                          * @property {string|null} [uid] AzureClient uid
                          * @property {google.protobuf.ITimestamp|null} [createTime] AzureClient createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] AzureClient updateTime
                          */
     
                         /**
@@ -20581,6 +20611,14 @@
                         AzureClient.prototype.applicationId = "";
     
                         /**
+                         * AzureClient reconciling.
+                         * @member {boolean} reconciling
+                         * @memberof google.cloud.gkemulticloud.v1.AzureClient
+                         * @instance
+                         */
+                        AzureClient.prototype.reconciling = false;
+    
+                        /**
                          * AzureClient annotations.
                          * @member {Object.<string,string>} annotations
                          * @memberof google.cloud.gkemulticloud.v1.AzureClient
@@ -20611,6 +20649,14 @@
                          * @instance
                          */
                         AzureClient.prototype.createTime = null;
+    
+                        /**
+                         * AzureClient updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.gkemulticloud.v1.AzureClient
+                         * @instance
+                         */
+                        AzureClient.prototype.updateTime = null;
     
                         /**
                          * Creates a new AzureClient instance using the specified properties.
@@ -20651,6 +20697,10 @@
                             if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
                                 for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.reconciling);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -20697,6 +20747,10 @@
                                         message.applicationId = reader.string();
                                         break;
                                     }
+                                case 9: {
+                                        message.reconciling = reader.bool();
+                                        break;
+                                    }
                                 case 8: {
                                         if (message.annotations === $util.emptyObject)
                                             message.annotations = {};
@@ -20730,6 +20784,10 @@
                                     }
                                 case 6: {
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -20776,6 +20834,9 @@
                             if (message.applicationId != null && message.hasOwnProperty("applicationId"))
                                 if (!$util.isString(message.applicationId))
                                     return "applicationId: string expected";
+                            if (message.reconciling != null && message.hasOwnProperty("reconciling"))
+                                if (typeof message.reconciling !== "boolean")
+                                    return "reconciling: boolean expected";
                             if (message.annotations != null && message.hasOwnProperty("annotations")) {
                                 if (!$util.isObject(message.annotations))
                                     return "annotations: object expected";
@@ -20794,6 +20855,11 @@
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime);
                                 if (error)
                                     return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
                             }
                             return null;
                         };
@@ -20816,6 +20882,8 @@
                                 message.tenantId = String(object.tenantId);
                             if (object.applicationId != null)
                                 message.applicationId = String(object.applicationId);
+                            if (object.reconciling != null)
+                                message.reconciling = Boolean(object.reconciling);
                             if (object.annotations) {
                                 if (typeof object.annotations !== "object")
                                     throw TypeError(".google.cloud.gkemulticloud.v1.AzureClient.annotations: object expected");
@@ -20831,6 +20899,11 @@
                                 if (typeof object.createTime !== "object")
                                     throw TypeError(".google.cloud.gkemulticloud.v1.AzureClient.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.gkemulticloud.v1.AzureClient.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
                             return message;
                         };
@@ -20857,6 +20930,8 @@
                                 object.uid = "";
                                 object.createTime = null;
                                 object.pemCertificate = "";
+                                object.reconciling = false;
+                                object.updateTime = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -20876,6 +20951,10 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.annotations[keys2[j]] = message.annotations[keys2[j]];
                             }
+                            if (message.reconciling != null && message.hasOwnProperty("reconciling"))
+                                object.reconciling = message.reconciling;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             return object;
                         };
     
@@ -21130,6 +21209,233 @@
                         };
     
                         return AzureAuthorization;
+                    })();
+    
+                    v1.AzureServicesAuthentication = (function() {
+    
+                        /**
+                         * Properties of an AzureServicesAuthentication.
+                         * @memberof google.cloud.gkemulticloud.v1
+                         * @interface IAzureServicesAuthentication
+                         * @property {string|null} [tenantId] AzureServicesAuthentication tenantId
+                         * @property {string|null} [applicationId] AzureServicesAuthentication applicationId
+                         */
+    
+                        /**
+                         * Constructs a new AzureServicesAuthentication.
+                         * @memberof google.cloud.gkemulticloud.v1
+                         * @classdesc Represents an AzureServicesAuthentication.
+                         * @implements IAzureServicesAuthentication
+                         * @constructor
+                         * @param {google.cloud.gkemulticloud.v1.IAzureServicesAuthentication=} [properties] Properties to set
+                         */
+                        function AzureServicesAuthentication(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AzureServicesAuthentication tenantId.
+                         * @member {string} tenantId
+                         * @memberof google.cloud.gkemulticloud.v1.AzureServicesAuthentication
+                         * @instance
+                         */
+                        AzureServicesAuthentication.prototype.tenantId = "";
+    
+                        /**
+                         * AzureServicesAuthentication applicationId.
+                         * @member {string} applicationId
+                         * @memberof google.cloud.gkemulticloud.v1.AzureServicesAuthentication
+                         * @instance
+                         */
+                        AzureServicesAuthentication.prototype.applicationId = "";
+    
+                        /**
+                         * Creates a new AzureServicesAuthentication instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkemulticloud.v1.AzureServicesAuthentication
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.IAzureServicesAuthentication=} [properties] Properties to set
+                         * @returns {google.cloud.gkemulticloud.v1.AzureServicesAuthentication} AzureServicesAuthentication instance
+                         */
+                        AzureServicesAuthentication.create = function create(properties) {
+                            return new AzureServicesAuthentication(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AzureServicesAuthentication message. Does not implicitly {@link google.cloud.gkemulticloud.v1.AzureServicesAuthentication.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkemulticloud.v1.AzureServicesAuthentication
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.IAzureServicesAuthentication} message AzureServicesAuthentication message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AzureServicesAuthentication.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tenantId != null && Object.hasOwnProperty.call(message, "tenantId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.tenantId);
+                            if (message.applicationId != null && Object.hasOwnProperty.call(message, "applicationId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.applicationId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AzureServicesAuthentication message, length delimited. Does not implicitly {@link google.cloud.gkemulticloud.v1.AzureServicesAuthentication.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkemulticloud.v1.AzureServicesAuthentication
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.IAzureServicesAuthentication} message AzureServicesAuthentication message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AzureServicesAuthentication.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AzureServicesAuthentication message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkemulticloud.v1.AzureServicesAuthentication
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkemulticloud.v1.AzureServicesAuthentication} AzureServicesAuthentication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AzureServicesAuthentication.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkemulticloud.v1.AzureServicesAuthentication();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.tenantId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.applicationId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AzureServicesAuthentication message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkemulticloud.v1.AzureServicesAuthentication
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkemulticloud.v1.AzureServicesAuthentication} AzureServicesAuthentication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AzureServicesAuthentication.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AzureServicesAuthentication message.
+                         * @function verify
+                         * @memberof google.cloud.gkemulticloud.v1.AzureServicesAuthentication
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AzureServicesAuthentication.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.tenantId != null && message.hasOwnProperty("tenantId"))
+                                if (!$util.isString(message.tenantId))
+                                    return "tenantId: string expected";
+                            if (message.applicationId != null && message.hasOwnProperty("applicationId"))
+                                if (!$util.isString(message.applicationId))
+                                    return "applicationId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AzureServicesAuthentication message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkemulticloud.v1.AzureServicesAuthentication
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkemulticloud.v1.AzureServicesAuthentication} AzureServicesAuthentication
+                         */
+                        AzureServicesAuthentication.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkemulticloud.v1.AzureServicesAuthentication)
+                                return object;
+                            var message = new $root.google.cloud.gkemulticloud.v1.AzureServicesAuthentication();
+                            if (object.tenantId != null)
+                                message.tenantId = String(object.tenantId);
+                            if (object.applicationId != null)
+                                message.applicationId = String(object.applicationId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AzureServicesAuthentication message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkemulticloud.v1.AzureServicesAuthentication
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.AzureServicesAuthentication} message AzureServicesAuthentication
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AzureServicesAuthentication.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.tenantId = "";
+                                object.applicationId = "";
+                            }
+                            if (message.tenantId != null && message.hasOwnProperty("tenantId"))
+                                object.tenantId = message.tenantId;
+                            if (message.applicationId != null && message.hasOwnProperty("applicationId"))
+                                object.applicationId = message.applicationId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AzureServicesAuthentication to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkemulticloud.v1.AzureServicesAuthentication
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AzureServicesAuthentication.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AzureServicesAuthentication
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkemulticloud.v1.AzureServicesAuthentication
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AzureServicesAuthentication.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkemulticloud.v1.AzureServicesAuthentication";
+                        };
+    
+                        return AzureServicesAuthentication;
                     })();
     
                     v1.AzureClusterUser = (function() {

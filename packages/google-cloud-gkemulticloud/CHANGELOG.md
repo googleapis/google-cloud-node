@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v0.1.4...gkemulticloud-v0.2.0) (2022-12-21)
+
+
+### Features
+
+* Support AttachedClusters ([#3807](https://github.com/googleapis/google-cloud-node/issues/3807)) ([87c02e9](https://github.com/googleapis/google-cloud-node/commit/87c02e93ef84bcdfcd9fe8fe1838a783a086e122))
+
 ## [0.1.4](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v0.1.3...gkemulticloud-v0.1.4) (2022-11-10)
 
 

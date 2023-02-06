@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-metastore-v3.3.0...dataproc-metastore-v3.4.0) (2023-01-28)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([#3853](https://github.com/googleapis/google-cloud-node/issues/3853)) ([cc352db](https://github.com/googleapis/google-cloud-node/commit/cc352db97f3bd8925bf1a7631a0ae64ff976fa4e))
+
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-metastore-v3.2.0...dataproc-metastore-v3.3.0) (2022-12-21)
+
+
+### Features
+
+* Added RemoveIamPolicy API ([#3791](https://github.com/googleapis/google-cloud-node/issues/3791)) ([e16a9d2](https://github.com/googleapis/google-cloud-node/commit/e16a9d23cccf29180469d2047fe2643bb99493f4))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-metastore-v3.1.2...dataproc-metastore-v3.2.0) (2022-12-16)
 
 

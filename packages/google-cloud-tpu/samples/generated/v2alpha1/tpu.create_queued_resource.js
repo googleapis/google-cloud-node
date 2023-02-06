@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ function main(parent, queuedResource) {
    */
   // const parent = 'abc123'
   /**
-   *  The unqualified resource name. Should follow the `^[A-Za-z0-9_.~+%-]+$`
+   *  The unqualified resource name. Should follow the ^[A-Za-z0-9_.~+%-]+$
    *  regex format.
    */
   // const queuedResourceId = 'abc123'

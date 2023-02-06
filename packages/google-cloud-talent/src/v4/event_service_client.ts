@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -117,6 +117,9 @@ export class EventServiceClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -336,8 +339,8 @@ export class EventServiceClient {
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/foo/tenants/bar".
    * @param {google.cloud.talent.v4.ClientEvent} request.clientEvent
-   *   Required. Events issued when end user interacts with customer's application that
-   *   uses Cloud Talent Solution.
+   *   Required. Events issued when end user interacts with customer's application
+   *   that uses Cloud Talent Solution.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

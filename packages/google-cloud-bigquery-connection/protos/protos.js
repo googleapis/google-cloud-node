@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -4408,6 +4408,3196 @@
                         })();
     
                         return v1;
+                    })();
+    
+                    connection.v1beta1 = (function() {
+    
+                        /**
+                         * Namespace v1beta1.
+                         * @memberof google.cloud.bigquery.connection
+                         * @namespace
+                         */
+                        var v1beta1 = {};
+    
+                        v1beta1.ConnectionService = (function() {
+    
+                            /**
+                             * Constructs a new ConnectionService service.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @classdesc Represents a ConnectionService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function ConnectionService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (ConnectionService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = ConnectionService;
+    
+                            /**
+                             * Creates new ConnectionService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {ConnectionService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            ConnectionService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.connection.v1beta1.ConnectionService|createConnection}.
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @typedef CreateConnectionCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.connection.v1beta1.Connection} [response] Connection
+                             */
+    
+                            /**
+                             * Calls CreateConnection.
+                             * @function createConnection
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest} request CreateConnectionRequest message or plain object
+                             * @param {google.cloud.bigquery.connection.v1beta1.ConnectionService.CreateConnectionCallback} callback Node-style callback called with the error, if any, and Connection
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConnectionService.prototype.createConnection = function createConnection(request, callback) {
+                                return this.rpcCall(createConnection, $root.google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest, $root.google.cloud.bigquery.connection.v1beta1.Connection, request, callback);
+                            }, "name", { value: "CreateConnection" });
+    
+                            /**
+                             * Calls CreateConnection.
+                             * @function createConnection
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest} request CreateConnectionRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.connection.v1beta1.Connection>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.connection.v1beta1.ConnectionService|getConnection}.
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @typedef GetConnectionCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.connection.v1beta1.Connection} [response] Connection
+                             */
+    
+                            /**
+                             * Calls GetConnection.
+                             * @function getConnection
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest} request GetConnectionRequest message or plain object
+                             * @param {google.cloud.bigquery.connection.v1beta1.ConnectionService.GetConnectionCallback} callback Node-style callback called with the error, if any, and Connection
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConnectionService.prototype.getConnection = function getConnection(request, callback) {
+                                return this.rpcCall(getConnection, $root.google.cloud.bigquery.connection.v1beta1.GetConnectionRequest, $root.google.cloud.bigquery.connection.v1beta1.Connection, request, callback);
+                            }, "name", { value: "GetConnection" });
+    
+                            /**
+                             * Calls GetConnection.
+                             * @function getConnection
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest} request GetConnectionRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.connection.v1beta1.Connection>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.connection.v1beta1.ConnectionService|listConnections}.
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @typedef ListConnectionsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse} [response] ListConnectionsResponse
+                             */
+    
+                            /**
+                             * Calls ListConnections.
+                             * @function listConnections
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest} request ListConnectionsRequest message or plain object
+                             * @param {google.cloud.bigquery.connection.v1beta1.ConnectionService.ListConnectionsCallback} callback Node-style callback called with the error, if any, and ListConnectionsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConnectionService.prototype.listConnections = function listConnections(request, callback) {
+                                return this.rpcCall(listConnections, $root.google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest, $root.google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse, request, callback);
+                            }, "name", { value: "ListConnections" });
+    
+                            /**
+                             * Calls ListConnections.
+                             * @function listConnections
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest} request ListConnectionsRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.connection.v1beta1.ConnectionService|updateConnection}.
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @typedef UpdateConnectionCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.connection.v1beta1.Connection} [response] Connection
+                             */
+    
+                            /**
+                             * Calls UpdateConnection.
+                             * @function updateConnection
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest} request UpdateConnectionRequest message or plain object
+                             * @param {google.cloud.bigquery.connection.v1beta1.ConnectionService.UpdateConnectionCallback} callback Node-style callback called with the error, if any, and Connection
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConnectionService.prototype.updateConnection = function updateConnection(request, callback) {
+                                return this.rpcCall(updateConnection, $root.google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest, $root.google.cloud.bigquery.connection.v1beta1.Connection, request, callback);
+                            }, "name", { value: "UpdateConnection" });
+    
+                            /**
+                             * Calls UpdateConnection.
+                             * @function updateConnection
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest} request UpdateConnectionRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.connection.v1beta1.Connection>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.connection.v1beta1.ConnectionService|updateConnectionCredential}.
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @typedef UpdateConnectionCredentialCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls UpdateConnectionCredential.
+                             * @function updateConnectionCredential
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest} request UpdateConnectionCredentialRequest message or plain object
+                             * @param {google.cloud.bigquery.connection.v1beta1.ConnectionService.UpdateConnectionCredentialCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConnectionService.prototype.updateConnectionCredential = function updateConnectionCredential(request, callback) {
+                                return this.rpcCall(updateConnectionCredential, $root.google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "UpdateConnectionCredential" });
+    
+                            /**
+                             * Calls UpdateConnectionCredential.
+                             * @function updateConnectionCredential
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest} request UpdateConnectionCredentialRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.connection.v1beta1.ConnectionService|deleteConnection}.
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @typedef DeleteConnectionCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls DeleteConnection.
+                             * @function deleteConnection
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest} request DeleteConnectionRequest message or plain object
+                             * @param {google.cloud.bigquery.connection.v1beta1.ConnectionService.DeleteConnectionCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConnectionService.prototype.deleteConnection = function deleteConnection(request, callback) {
+                                return this.rpcCall(deleteConnection, $root.google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "DeleteConnection" });
+    
+                            /**
+                             * Calls DeleteConnection.
+                             * @function deleteConnection
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest} request DeleteConnectionRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.connection.v1beta1.ConnectionService|getIamPolicy}.
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @typedef GetIamPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.iam.v1.Policy} [response] Policy
+                             */
+    
+                            /**
+                             * Calls GetIamPolicy.
+                             * @function getIamPolicy
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.connection.v1beta1.ConnectionService.GetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConnectionService.prototype.getIamPolicy = function getIamPolicy(request, callback) {
+                                return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                            }, "name", { value: "GetIamPolicy" });
+    
+                            /**
+                             * Calls GetIamPolicy.
+                             * @function getIamPolicy
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                             * @returns {Promise<google.iam.v1.Policy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.connection.v1beta1.ConnectionService|setIamPolicy}.
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @typedef SetIamPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.iam.v1.Policy} [response] Policy
+                             */
+    
+                            /**
+                             * Calls SetIamPolicy.
+                             * @function setIamPolicy
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.connection.v1beta1.ConnectionService.SetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConnectionService.prototype.setIamPolicy = function setIamPolicy(request, callback) {
+                                return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                            }, "name", { value: "SetIamPolicy" });
+    
+                            /**
+                             * Calls SetIamPolicy.
+                             * @function setIamPolicy
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                             * @returns {Promise<google.iam.v1.Policy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.connection.v1beta1.ConnectionService|testIamPermissions}.
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @typedef TestIamPermissionsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.iam.v1.TestIamPermissionsResponse} [response] TestIamPermissionsResponse
+                             */
+    
+                            /**
+                             * Calls TestIamPermissions.
+                             * @function testIamPermissions
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                             * @param {google.cloud.bigquery.connection.v1beta1.ConnectionService.TestIamPermissionsCallback} callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConnectionService.prototype.testIamPermissions = function testIamPermissions(request, callback) {
+                                return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                            }, "name", { value: "TestIamPermissions" });
+    
+                            /**
+                             * Calls TestIamPermissions.
+                             * @function testIamPermissions
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionService
+                             * @instance
+                             * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                             * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return ConnectionService;
+                        })();
+    
+                        v1beta1.CreateConnectionRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateConnectionRequest.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @interface ICreateConnectionRequest
+                             * @property {string|null} [parent] CreateConnectionRequest parent
+                             * @property {string|null} [connectionId] CreateConnectionRequest connectionId
+                             * @property {google.cloud.bigquery.connection.v1beta1.IConnection|null} [connection] CreateConnectionRequest connection
+                             */
+    
+                            /**
+                             * Constructs a new CreateConnectionRequest.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @classdesc Represents a CreateConnectionRequest.
+                             * @implements ICreateConnectionRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest=} [properties] Properties to set
+                             */
+                            function CreateConnectionRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateConnectionRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest
+                             * @instance
+                             */
+                            CreateConnectionRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateConnectionRequest connectionId.
+                             * @member {string} connectionId
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest
+                             * @instance
+                             */
+                            CreateConnectionRequest.prototype.connectionId = "";
+    
+                            /**
+                             * CreateConnectionRequest connection.
+                             * @member {google.cloud.bigquery.connection.v1beta1.IConnection|null|undefined} connection
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest
+                             * @instance
+                             */
+                            CreateConnectionRequest.prototype.connection = null;
+    
+                            /**
+                             * Creates a new CreateConnectionRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest} CreateConnectionRequest instance
+                             */
+                            CreateConnectionRequest.create = function create(properties) {
+                                return new CreateConnectionRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateConnectionRequest message. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest} message CreateConnectionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateConnectionRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.connectionId != null && Object.hasOwnProperty.call(message, "connectionId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.connectionId);
+                                if (message.connection != null && Object.hasOwnProperty.call(message, "connection"))
+                                    $root.google.cloud.bigquery.connection.v1beta1.Connection.encode(message.connection, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest} message CreateConnectionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateConnectionRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest} CreateConnectionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateConnectionRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.connectionId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.connection = $root.google.cloud.bigquery.connection.v1beta1.Connection.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateConnectionRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest} CreateConnectionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateConnectionRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateConnectionRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.connectionId != null && message.hasOwnProperty("connectionId"))
+                                    if (!$util.isString(message.connectionId))
+                                        return "connectionId: string expected";
+                                if (message.connection != null && message.hasOwnProperty("connection")) {
+                                    var error = $root.google.cloud.bigquery.connection.v1beta1.Connection.verify(message.connection);
+                                    if (error)
+                                        return "connection." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest} CreateConnectionRequest
+                             */
+                            CreateConnectionRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.connectionId != null)
+                                    message.connectionId = String(object.connectionId);
+                                if (object.connection != null) {
+                                    if (typeof object.connection !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest.connection: object expected");
+                                    message.connection = $root.google.cloud.bigquery.connection.v1beta1.Connection.fromObject(object.connection);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateConnectionRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest} message CreateConnectionRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateConnectionRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.connectionId = "";
+                                    object.connection = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.connectionId != null && message.hasOwnProperty("connectionId"))
+                                    object.connectionId = message.connectionId;
+                                if (message.connection != null && message.hasOwnProperty("connection"))
+                                    object.connection = $root.google.cloud.bigquery.connection.v1beta1.Connection.toObject(message.connection, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateConnectionRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateConnectionRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateConnectionRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateConnectionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1beta1.CreateConnectionRequest";
+                            };
+    
+                            return CreateConnectionRequest;
+                        })();
+    
+                        v1beta1.GetConnectionRequest = (function() {
+    
+                            /**
+                             * Properties of a GetConnectionRequest.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @interface IGetConnectionRequest
+                             * @property {string|null} [name] GetConnectionRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetConnectionRequest.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @classdesc Represents a GetConnectionRequest.
+                             * @implements IGetConnectionRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest=} [properties] Properties to set
+                             */
+                            function GetConnectionRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetConnectionRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.connection.v1beta1.GetConnectionRequest
+                             * @instance
+                             */
+                            GetConnectionRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetConnectionRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1beta1.GetConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1beta1.GetConnectionRequest} GetConnectionRequest instance
+                             */
+                            GetConnectionRequest.create = function create(properties) {
+                                return new GetConnectionRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetConnectionRequest message. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.GetConnectionRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.GetConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest} message GetConnectionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetConnectionRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.GetConnectionRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.GetConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest} message GetConnectionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetConnectionRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.GetConnectionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1beta1.GetConnectionRequest} GetConnectionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetConnectionRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1beta1.GetConnectionRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetConnectionRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.GetConnectionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1beta1.GetConnectionRequest} GetConnectionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetConnectionRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1beta1.GetConnectionRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetConnectionRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.GetConnectionRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1beta1.GetConnectionRequest} GetConnectionRequest
+                             */
+                            GetConnectionRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1beta1.GetConnectionRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1beta1.GetConnectionRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetConnectionRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.GetConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.GetConnectionRequest} message GetConnectionRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetConnectionRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetConnectionRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1beta1.GetConnectionRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetConnectionRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetConnectionRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1beta1.GetConnectionRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetConnectionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1beta1.GetConnectionRequest";
+                            };
+    
+                            return GetConnectionRequest;
+                        })();
+    
+                        v1beta1.ListConnectionsRequest = (function() {
+    
+                            /**
+                             * Properties of a ListConnectionsRequest.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @interface IListConnectionsRequest
+                             * @property {string|null} [parent] ListConnectionsRequest parent
+                             * @property {google.protobuf.IUInt32Value|null} [maxResults] ListConnectionsRequest maxResults
+                             * @property {string|null} [pageToken] ListConnectionsRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListConnectionsRequest.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @classdesc Represents a ListConnectionsRequest.
+                             * @implements IListConnectionsRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest=} [properties] Properties to set
+                             */
+                            function ListConnectionsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListConnectionsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest
+                             * @instance
+                             */
+                            ListConnectionsRequest.prototype.parent = "";
+    
+                            /**
+                             * ListConnectionsRequest maxResults.
+                             * @member {google.protobuf.IUInt32Value|null|undefined} maxResults
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest
+                             * @instance
+                             */
+                            ListConnectionsRequest.prototype.maxResults = null;
+    
+                            /**
+                             * ListConnectionsRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest
+                             * @instance
+                             */
+                            ListConnectionsRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new ListConnectionsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest} ListConnectionsRequest instance
+                             */
+                            ListConnectionsRequest.create = function create(properties) {
+                                return new ListConnectionsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListConnectionsRequest message. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest} message ListConnectionsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListConnectionsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.maxResults != null && Object.hasOwnProperty.call(message, "maxResults"))
+                                    $root.google.protobuf.UInt32Value.encode(message.maxResults, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListConnectionsRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest} message ListConnectionsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListConnectionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListConnectionsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest} ListConnectionsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListConnectionsRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.maxResults = $root.google.protobuf.UInt32Value.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListConnectionsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest} ListConnectionsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListConnectionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListConnectionsRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListConnectionsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.maxResults != null && message.hasOwnProperty("maxResults")) {
+                                    var error = $root.google.protobuf.UInt32Value.verify(message.maxResults);
+                                    if (error)
+                                        return "maxResults." + error;
+                                }
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListConnectionsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest} ListConnectionsRequest
+                             */
+                            ListConnectionsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.maxResults != null) {
+                                    if (typeof object.maxResults !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest.maxResults: object expected");
+                                    message.maxResults = $root.google.protobuf.UInt32Value.fromObject(object.maxResults);
+                                }
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListConnectionsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest} message ListConnectionsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListConnectionsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.maxResults = null;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.maxResults != null && message.hasOwnProperty("maxResults"))
+                                    object.maxResults = $root.google.protobuf.UInt32Value.toObject(message.maxResults, options);
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListConnectionsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListConnectionsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListConnectionsRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListConnectionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1beta1.ListConnectionsRequest";
+                            };
+    
+                            return ListConnectionsRequest;
+                        })();
+    
+                        v1beta1.ListConnectionsResponse = (function() {
+    
+                            /**
+                             * Properties of a ListConnectionsResponse.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @interface IListConnectionsResponse
+                             * @property {string|null} [nextPageToken] ListConnectionsResponse nextPageToken
+                             * @property {Array.<google.cloud.bigquery.connection.v1beta1.IConnection>|null} [connections] ListConnectionsResponse connections
+                             */
+    
+                            /**
+                             * Constructs a new ListConnectionsResponse.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @classdesc Represents a ListConnectionsResponse.
+                             * @implements IListConnectionsResponse
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse=} [properties] Properties to set
+                             */
+                            function ListConnectionsResponse(properties) {
+                                this.connections = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListConnectionsResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse
+                             * @instance
+                             */
+                            ListConnectionsResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * ListConnectionsResponse connections.
+                             * @member {Array.<google.cloud.bigquery.connection.v1beta1.IConnection>} connections
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse
+                             * @instance
+                             */
+                            ListConnectionsResponse.prototype.connections = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ListConnectionsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse} ListConnectionsResponse instance
+                             */
+                            ListConnectionsResponse.create = function create(properties) {
+                                return new ListConnectionsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListConnectionsResponse message. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse} message ListConnectionsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListConnectionsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.nextPageToken);
+                                if (message.connections != null && message.connections.length)
+                                    for (var i = 0; i < message.connections.length; ++i)
+                                        $root.google.cloud.bigquery.connection.v1beta1.Connection.encode(message.connections[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListConnectionsResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse} message ListConnectionsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListConnectionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListConnectionsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse} ListConnectionsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListConnectionsResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.connections && message.connections.length))
+                                                message.connections = [];
+                                            message.connections.push($root.google.cloud.bigquery.connection.v1beta1.Connection.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListConnectionsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse} ListConnectionsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListConnectionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListConnectionsResponse message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListConnectionsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                if (message.connections != null && message.hasOwnProperty("connections")) {
+                                    if (!Array.isArray(message.connections))
+                                        return "connections: array expected";
+                                    for (var i = 0; i < message.connections.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.connection.v1beta1.Connection.verify(message.connections[i]);
+                                        if (error)
+                                            return "connections." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListConnectionsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse} ListConnectionsResponse
+                             */
+                            ListConnectionsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse();
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                if (object.connections) {
+                                    if (!Array.isArray(object.connections))
+                                        throw TypeError(".google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse.connections: array expected");
+                                    message.connections = [];
+                                    for (var i = 0; i < object.connections.length; ++i) {
+                                        if (typeof object.connections[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse.connections: object expected");
+                                        message.connections[i] = $root.google.cloud.bigquery.connection.v1beta1.Connection.fromObject(object.connections[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListConnectionsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse} message ListConnectionsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListConnectionsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.connections = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                if (message.connections && message.connections.length) {
+                                    object.connections = [];
+                                    for (var j = 0; j < message.connections.length; ++j)
+                                        object.connections[j] = $root.google.cloud.bigquery.connection.v1beta1.Connection.toObject(message.connections[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListConnectionsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListConnectionsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListConnectionsResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListConnectionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse";
+                            };
+    
+                            return ListConnectionsResponse;
+                        })();
+    
+                        v1beta1.UpdateConnectionRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateConnectionRequest.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @interface IUpdateConnectionRequest
+                             * @property {string|null} [name] UpdateConnectionRequest name
+                             * @property {google.cloud.bigquery.connection.v1beta1.IConnection|null} [connection] UpdateConnectionRequest connection
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateConnectionRequest updateMask
+                             */
+    
+                            /**
+                             * Constructs a new UpdateConnectionRequest.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @classdesc Represents an UpdateConnectionRequest.
+                             * @implements IUpdateConnectionRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest=} [properties] Properties to set
+                             */
+                            function UpdateConnectionRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateConnectionRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest
+                             * @instance
+                             */
+                            UpdateConnectionRequest.prototype.name = "";
+    
+                            /**
+                             * UpdateConnectionRequest connection.
+                             * @member {google.cloud.bigquery.connection.v1beta1.IConnection|null|undefined} connection
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest
+                             * @instance
+                             */
+                            UpdateConnectionRequest.prototype.connection = null;
+    
+                            /**
+                             * UpdateConnectionRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest
+                             * @instance
+                             */
+                            UpdateConnectionRequest.prototype.updateMask = null;
+    
+                            /**
+                             * Creates a new UpdateConnectionRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest} UpdateConnectionRequest instance
+                             */
+                            UpdateConnectionRequest.create = function create(properties) {
+                                return new UpdateConnectionRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateConnectionRequest message. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest} message UpdateConnectionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateConnectionRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.connection != null && Object.hasOwnProperty.call(message, "connection"))
+                                    $root.google.cloud.bigquery.connection.v1beta1.Connection.encode(message.connection, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest} message UpdateConnectionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateConnectionRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest} UpdateConnectionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateConnectionRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.connection = $root.google.cloud.bigquery.connection.v1beta1.Connection.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateConnectionRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest} UpdateConnectionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateConnectionRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateConnectionRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.connection != null && message.hasOwnProperty("connection")) {
+                                    var error = $root.google.cloud.bigquery.connection.v1beta1.Connection.verify(message.connection);
+                                    if (error)
+                                        return "connection." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest} UpdateConnectionRequest
+                             */
+                            UpdateConnectionRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.connection != null) {
+                                    if (typeof object.connection !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest.connection: object expected");
+                                    message.connection = $root.google.cloud.bigquery.connection.v1beta1.Connection.fromObject(object.connection);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateConnectionRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest} message UpdateConnectionRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateConnectionRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.connection = null;
+                                    object.updateMask = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.connection != null && message.hasOwnProperty("connection"))
+                                    object.connection = $root.google.cloud.bigquery.connection.v1beta1.Connection.toObject(message.connection, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateConnectionRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateConnectionRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateConnectionRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateConnectionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1beta1.UpdateConnectionRequest";
+                            };
+    
+                            return UpdateConnectionRequest;
+                        })();
+    
+                        v1beta1.UpdateConnectionCredentialRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateConnectionCredentialRequest.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @interface IUpdateConnectionCredentialRequest
+                             * @property {string|null} [name] UpdateConnectionCredentialRequest name
+                             * @property {google.cloud.bigquery.connection.v1beta1.IConnectionCredential|null} [credential] UpdateConnectionCredentialRequest credential
+                             */
+    
+                            /**
+                             * Constructs a new UpdateConnectionCredentialRequest.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @classdesc Represents an UpdateConnectionCredentialRequest.
+                             * @implements IUpdateConnectionCredentialRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest=} [properties] Properties to set
+                             */
+                            function UpdateConnectionCredentialRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateConnectionCredentialRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest
+                             * @instance
+                             */
+                            UpdateConnectionCredentialRequest.prototype.name = "";
+    
+                            /**
+                             * UpdateConnectionCredentialRequest credential.
+                             * @member {google.cloud.bigquery.connection.v1beta1.IConnectionCredential|null|undefined} credential
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest
+                             * @instance
+                             */
+                            UpdateConnectionCredentialRequest.prototype.credential = null;
+    
+                            /**
+                             * Creates a new UpdateConnectionCredentialRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest} UpdateConnectionCredentialRequest instance
+                             */
+                            UpdateConnectionCredentialRequest.create = function create(properties) {
+                                return new UpdateConnectionCredentialRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateConnectionCredentialRequest message. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest} message UpdateConnectionCredentialRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateConnectionCredentialRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.credential != null && Object.hasOwnProperty.call(message, "credential"))
+                                    $root.google.cloud.bigquery.connection.v1beta1.ConnectionCredential.encode(message.credential, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateConnectionCredentialRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest} message UpdateConnectionCredentialRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateConnectionCredentialRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateConnectionCredentialRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest} UpdateConnectionCredentialRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateConnectionCredentialRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.credential = $root.google.cloud.bigquery.connection.v1beta1.ConnectionCredential.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateConnectionCredentialRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest} UpdateConnectionCredentialRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateConnectionCredentialRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateConnectionCredentialRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateConnectionCredentialRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.credential != null && message.hasOwnProperty("credential")) {
+                                    var error = $root.google.cloud.bigquery.connection.v1beta1.ConnectionCredential.verify(message.credential);
+                                    if (error)
+                                        return "credential." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateConnectionCredentialRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest} UpdateConnectionCredentialRequest
+                             */
+                            UpdateConnectionCredentialRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.credential != null) {
+                                    if (typeof object.credential !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest.credential: object expected");
+                                    message.credential = $root.google.cloud.bigquery.connection.v1beta1.ConnectionCredential.fromObject(object.credential);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateConnectionCredentialRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest} message UpdateConnectionCredentialRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateConnectionCredentialRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.credential = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.credential != null && message.hasOwnProperty("credential"))
+                                    object.credential = $root.google.cloud.bigquery.connection.v1beta1.ConnectionCredential.toObject(message.credential, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateConnectionCredentialRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateConnectionCredentialRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateConnectionCredentialRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateConnectionCredentialRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1beta1.UpdateConnectionCredentialRequest";
+                            };
+    
+                            return UpdateConnectionCredentialRequest;
+                        })();
+    
+                        v1beta1.DeleteConnectionRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteConnectionRequest.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @interface IDeleteConnectionRequest
+                             * @property {string|null} [name] DeleteConnectionRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteConnectionRequest.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @classdesc Represents a DeleteConnectionRequest.
+                             * @implements IDeleteConnectionRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest=} [properties] Properties to set
+                             */
+                            function DeleteConnectionRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteConnectionRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest
+                             * @instance
+                             */
+                            DeleteConnectionRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteConnectionRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest} DeleteConnectionRequest instance
+                             */
+                            DeleteConnectionRequest.create = function create(properties) {
+                                return new DeleteConnectionRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteConnectionRequest message. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest} message DeleteConnectionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteConnectionRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest} message DeleteConnectionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteConnectionRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest} DeleteConnectionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteConnectionRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteConnectionRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest} DeleteConnectionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteConnectionRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteConnectionRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest} DeleteConnectionRequest
+                             */
+                            DeleteConnectionRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteConnectionRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest} message DeleteConnectionRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteConnectionRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteConnectionRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteConnectionRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteConnectionRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteConnectionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1beta1.DeleteConnectionRequest";
+                            };
+    
+                            return DeleteConnectionRequest;
+                        })();
+    
+                        v1beta1.Connection = (function() {
+    
+                            /**
+                             * Properties of a Connection.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @interface IConnection
+                             * @property {string|null} [name] Connection name
+                             * @property {string|null} [friendlyName] Connection friendlyName
+                             * @property {string|null} [description] Connection description
+                             * @property {google.cloud.bigquery.connection.v1beta1.ICloudSqlProperties|null} [cloudSql] Connection cloudSql
+                             * @property {number|Long|null} [creationTime] Connection creationTime
+                             * @property {number|Long|null} [lastModifiedTime] Connection lastModifiedTime
+                             * @property {boolean|null} [hasCredential] Connection hasCredential
+                             */
+    
+                            /**
+                             * Constructs a new Connection.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @classdesc Represents a Connection.
+                             * @implements IConnection
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1beta1.IConnection=} [properties] Properties to set
+                             */
+                            function Connection(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Connection name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @instance
+                             */
+                            Connection.prototype.name = "";
+    
+                            /**
+                             * Connection friendlyName.
+                             * @member {string} friendlyName
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @instance
+                             */
+                            Connection.prototype.friendlyName = "";
+    
+                            /**
+                             * Connection description.
+                             * @member {string} description
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @instance
+                             */
+                            Connection.prototype.description = "";
+    
+                            /**
+                             * Connection cloudSql.
+                             * @member {google.cloud.bigquery.connection.v1beta1.ICloudSqlProperties|null|undefined} cloudSql
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @instance
+                             */
+                            Connection.prototype.cloudSql = null;
+    
+                            /**
+                             * Connection creationTime.
+                             * @member {number|Long} creationTime
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @instance
+                             */
+                            Connection.prototype.creationTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Connection lastModifiedTime.
+                             * @member {number|Long} lastModifiedTime
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @instance
+                             */
+                            Connection.prototype.lastModifiedTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Connection hasCredential.
+                             * @member {boolean} hasCredential
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @instance
+                             */
+                            Connection.prototype.hasCredential = false;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Connection properties.
+                             * @member {"cloudSql"|undefined} properties
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @instance
+                             */
+                            Object.defineProperty(Connection.prototype, "properties", {
+                                get: $util.oneOfGetter($oneOfFields = ["cloudSql"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Connection instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IConnection=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1beta1.Connection} Connection instance
+                             */
+                            Connection.create = function create(properties) {
+                                return new Connection(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Connection message. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.Connection.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IConnection} message Connection message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Connection.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.friendlyName != null && Object.hasOwnProperty.call(message, "friendlyName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.friendlyName);
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                                if (message.cloudSql != null && Object.hasOwnProperty.call(message, "cloudSql"))
+                                    $root.google.cloud.bigquery.connection.v1beta1.CloudSqlProperties.encode(message.cloudSql, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.creationTime != null && Object.hasOwnProperty.call(message, "creationTime"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int64(message.creationTime);
+                                if (message.lastModifiedTime != null && Object.hasOwnProperty.call(message, "lastModifiedTime"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int64(message.lastModifiedTime);
+                                if (message.hasCredential != null && Object.hasOwnProperty.call(message, "hasCredential"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).bool(message.hasCredential);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Connection message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.Connection.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IConnection} message Connection message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Connection.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Connection message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1beta1.Connection} Connection
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Connection.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1beta1.Connection();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.friendlyName = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.description = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.cloudSql = $root.google.cloud.bigquery.connection.v1beta1.CloudSqlProperties.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.creationTime = reader.int64();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.lastModifiedTime = reader.int64();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.hasCredential = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Connection message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1beta1.Connection} Connection
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Connection.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Connection message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Connection.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.friendlyName != null && message.hasOwnProperty("friendlyName"))
+                                    if (!$util.isString(message.friendlyName))
+                                        return "friendlyName: string expected";
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    if (!$util.isString(message.description))
+                                        return "description: string expected";
+                                if (message.cloudSql != null && message.hasOwnProperty("cloudSql")) {
+                                    properties.properties = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.connection.v1beta1.CloudSqlProperties.verify(message.cloudSql);
+                                        if (error)
+                                            return "cloudSql." + error;
+                                    }
+                                }
+                                if (message.creationTime != null && message.hasOwnProperty("creationTime"))
+                                    if (!$util.isInteger(message.creationTime) && !(message.creationTime && $util.isInteger(message.creationTime.low) && $util.isInteger(message.creationTime.high)))
+                                        return "creationTime: integer|Long expected";
+                                if (message.lastModifiedTime != null && message.hasOwnProperty("lastModifiedTime"))
+                                    if (!$util.isInteger(message.lastModifiedTime) && !(message.lastModifiedTime && $util.isInteger(message.lastModifiedTime.low) && $util.isInteger(message.lastModifiedTime.high)))
+                                        return "lastModifiedTime: integer|Long expected";
+                                if (message.hasCredential != null && message.hasOwnProperty("hasCredential"))
+                                    if (typeof message.hasCredential !== "boolean")
+                                        return "hasCredential: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Connection message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1beta1.Connection} Connection
+                             */
+                            Connection.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1beta1.Connection)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1beta1.Connection();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.friendlyName != null)
+                                    message.friendlyName = String(object.friendlyName);
+                                if (object.description != null)
+                                    message.description = String(object.description);
+                                if (object.cloudSql != null) {
+                                    if (typeof object.cloudSql !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1beta1.Connection.cloudSql: object expected");
+                                    message.cloudSql = $root.google.cloud.bigquery.connection.v1beta1.CloudSqlProperties.fromObject(object.cloudSql);
+                                }
+                                if (object.creationTime != null)
+                                    if ($util.Long)
+                                        (message.creationTime = $util.Long.fromValue(object.creationTime)).unsigned = false;
+                                    else if (typeof object.creationTime === "string")
+                                        message.creationTime = parseInt(object.creationTime, 10);
+                                    else if (typeof object.creationTime === "number")
+                                        message.creationTime = object.creationTime;
+                                    else if (typeof object.creationTime === "object")
+                                        message.creationTime = new $util.LongBits(object.creationTime.low >>> 0, object.creationTime.high >>> 0).toNumber();
+                                if (object.lastModifiedTime != null)
+                                    if ($util.Long)
+                                        (message.lastModifiedTime = $util.Long.fromValue(object.lastModifiedTime)).unsigned = false;
+                                    else if (typeof object.lastModifiedTime === "string")
+                                        message.lastModifiedTime = parseInt(object.lastModifiedTime, 10);
+                                    else if (typeof object.lastModifiedTime === "number")
+                                        message.lastModifiedTime = object.lastModifiedTime;
+                                    else if (typeof object.lastModifiedTime === "object")
+                                        message.lastModifiedTime = new $util.LongBits(object.lastModifiedTime.low >>> 0, object.lastModifiedTime.high >>> 0).toNumber();
+                                if (object.hasCredential != null)
+                                    message.hasCredential = Boolean(object.hasCredential);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Connection message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.Connection} message Connection
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Connection.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.friendlyName = "";
+                                    object.description = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.creationTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.creationTime = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.lastModifiedTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.lastModifiedTime = options.longs === String ? "0" : 0;
+                                    object.hasCredential = false;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.friendlyName != null && message.hasOwnProperty("friendlyName"))
+                                    object.friendlyName = message.friendlyName;
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    object.description = message.description;
+                                if (message.cloudSql != null && message.hasOwnProperty("cloudSql")) {
+                                    object.cloudSql = $root.google.cloud.bigquery.connection.v1beta1.CloudSqlProperties.toObject(message.cloudSql, options);
+                                    if (options.oneofs)
+                                        object.properties = "cloudSql";
+                                }
+                                if (message.creationTime != null && message.hasOwnProperty("creationTime"))
+                                    if (typeof message.creationTime === "number")
+                                        object.creationTime = options.longs === String ? String(message.creationTime) : message.creationTime;
+                                    else
+                                        object.creationTime = options.longs === String ? $util.Long.prototype.toString.call(message.creationTime) : options.longs === Number ? new $util.LongBits(message.creationTime.low >>> 0, message.creationTime.high >>> 0).toNumber() : message.creationTime;
+                                if (message.lastModifiedTime != null && message.hasOwnProperty("lastModifiedTime"))
+                                    if (typeof message.lastModifiedTime === "number")
+                                        object.lastModifiedTime = options.longs === String ? String(message.lastModifiedTime) : message.lastModifiedTime;
+                                    else
+                                        object.lastModifiedTime = options.longs === String ? $util.Long.prototype.toString.call(message.lastModifiedTime) : options.longs === Number ? new $util.LongBits(message.lastModifiedTime.low >>> 0, message.lastModifiedTime.high >>> 0).toNumber() : message.lastModifiedTime;
+                                if (message.hasCredential != null && message.hasOwnProperty("hasCredential"))
+                                    object.hasCredential = message.hasCredential;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Connection to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Connection.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Connection
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1beta1.Connection
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Connection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1beta1.Connection";
+                            };
+    
+                            return Connection;
+                        })();
+    
+                        v1beta1.ConnectionCredential = (function() {
+    
+                            /**
+                             * Properties of a ConnectionCredential.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @interface IConnectionCredential
+                             * @property {google.cloud.bigquery.connection.v1beta1.ICloudSqlCredential|null} [cloudSql] ConnectionCredential cloudSql
+                             */
+    
+                            /**
+                             * Constructs a new ConnectionCredential.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @classdesc Represents a ConnectionCredential.
+                             * @implements IConnectionCredential
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1beta1.IConnectionCredential=} [properties] Properties to set
+                             */
+                            function ConnectionCredential(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConnectionCredential cloudSql.
+                             * @member {google.cloud.bigquery.connection.v1beta1.ICloudSqlCredential|null|undefined} cloudSql
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionCredential
+                             * @instance
+                             */
+                            ConnectionCredential.prototype.cloudSql = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * ConnectionCredential credential.
+                             * @member {"cloudSql"|undefined} credential
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionCredential
+                             * @instance
+                             */
+                            Object.defineProperty(ConnectionCredential.prototype, "credential", {
+                                get: $util.oneOfGetter($oneOfFields = ["cloudSql"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ConnectionCredential instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionCredential
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IConnectionCredential=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1beta1.ConnectionCredential} ConnectionCredential instance
+                             */
+                            ConnectionCredential.create = function create(properties) {
+                                return new ConnectionCredential(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConnectionCredential message. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.ConnectionCredential.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionCredential
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IConnectionCredential} message ConnectionCredential message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConnectionCredential.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.cloudSql != null && Object.hasOwnProperty.call(message, "cloudSql"))
+                                    $root.google.cloud.bigquery.connection.v1beta1.CloudSqlCredential.encode(message.cloudSql, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConnectionCredential message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.ConnectionCredential.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionCredential
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.IConnectionCredential} message ConnectionCredential message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConnectionCredential.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConnectionCredential message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionCredential
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1beta1.ConnectionCredential} ConnectionCredential
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConnectionCredential.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1beta1.ConnectionCredential();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.cloudSql = $root.google.cloud.bigquery.connection.v1beta1.CloudSqlCredential.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConnectionCredential message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionCredential
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1beta1.ConnectionCredential} ConnectionCredential
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConnectionCredential.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConnectionCredential message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionCredential
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConnectionCredential.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.cloudSql != null && message.hasOwnProperty("cloudSql")) {
+                                    properties.credential = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.connection.v1beta1.CloudSqlCredential.verify(message.cloudSql);
+                                        if (error)
+                                            return "cloudSql." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConnectionCredential message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionCredential
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1beta1.ConnectionCredential} ConnectionCredential
+                             */
+                            ConnectionCredential.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1beta1.ConnectionCredential)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1beta1.ConnectionCredential();
+                                if (object.cloudSql != null) {
+                                    if (typeof object.cloudSql !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1beta1.ConnectionCredential.cloudSql: object expected");
+                                    message.cloudSql = $root.google.cloud.bigquery.connection.v1beta1.CloudSqlCredential.fromObject(object.cloudSql);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConnectionCredential message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionCredential
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.ConnectionCredential} message ConnectionCredential
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConnectionCredential.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.cloudSql != null && message.hasOwnProperty("cloudSql")) {
+                                    object.cloudSql = $root.google.cloud.bigquery.connection.v1beta1.CloudSqlCredential.toObject(message.cloudSql, options);
+                                    if (options.oneofs)
+                                        object.credential = "cloudSql";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConnectionCredential to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionCredential
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConnectionCredential.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConnectionCredential
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1beta1.ConnectionCredential
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConnectionCredential.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1beta1.ConnectionCredential";
+                            };
+    
+                            return ConnectionCredential;
+                        })();
+    
+                        v1beta1.CloudSqlProperties = (function() {
+    
+                            /**
+                             * Properties of a CloudSqlProperties.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @interface ICloudSqlProperties
+                             * @property {string|null} [instanceId] CloudSqlProperties instanceId
+                             * @property {string|null} [database] CloudSqlProperties database
+                             * @property {google.cloud.bigquery.connection.v1beta1.CloudSqlProperties.DatabaseType|null} [type] CloudSqlProperties type
+                             * @property {google.cloud.bigquery.connection.v1beta1.ICloudSqlCredential|null} [credential] CloudSqlProperties credential
+                             * @property {string|null} [serviceAccountId] CloudSqlProperties serviceAccountId
+                             */
+    
+                            /**
+                             * Constructs a new CloudSqlProperties.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @classdesc Represents a CloudSqlProperties.
+                             * @implements ICloudSqlProperties
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1beta1.ICloudSqlProperties=} [properties] Properties to set
+                             */
+                            function CloudSqlProperties(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CloudSqlProperties instanceId.
+                             * @member {string} instanceId
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @instance
+                             */
+                            CloudSqlProperties.prototype.instanceId = "";
+    
+                            /**
+                             * CloudSqlProperties database.
+                             * @member {string} database
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @instance
+                             */
+                            CloudSqlProperties.prototype.database = "";
+    
+                            /**
+                             * CloudSqlProperties type.
+                             * @member {google.cloud.bigquery.connection.v1beta1.CloudSqlProperties.DatabaseType} type
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @instance
+                             */
+                            CloudSqlProperties.prototype.type = 0;
+    
+                            /**
+                             * CloudSqlProperties credential.
+                             * @member {google.cloud.bigquery.connection.v1beta1.ICloudSqlCredential|null|undefined} credential
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @instance
+                             */
+                            CloudSqlProperties.prototype.credential = null;
+    
+                            /**
+                             * CloudSqlProperties serviceAccountId.
+                             * @member {string} serviceAccountId
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @instance
+                             */
+                            CloudSqlProperties.prototype.serviceAccountId = "";
+    
+                            /**
+                             * Creates a new CloudSqlProperties instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.ICloudSqlProperties=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1beta1.CloudSqlProperties} CloudSqlProperties instance
+                             */
+                            CloudSqlProperties.create = function create(properties) {
+                                return new CloudSqlProperties(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CloudSqlProperties message. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.CloudSqlProperties.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.ICloudSqlProperties} message CloudSqlProperties message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudSqlProperties.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.instanceId != null && Object.hasOwnProperty.call(message, "instanceId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.instanceId);
+                                if (message.database != null && Object.hasOwnProperty.call(message, "database"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.database);
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+                                if (message.credential != null && Object.hasOwnProperty.call(message, "credential"))
+                                    $root.google.cloud.bigquery.connection.v1beta1.CloudSqlCredential.encode(message.credential, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.serviceAccountId != null && Object.hasOwnProperty.call(message, "serviceAccountId"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceAccountId);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CloudSqlProperties message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.CloudSqlProperties.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.ICloudSqlProperties} message CloudSqlProperties message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudSqlProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CloudSqlProperties message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1beta1.CloudSqlProperties} CloudSqlProperties
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudSqlProperties.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1beta1.CloudSqlProperties();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.instanceId = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.database = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.credential = $root.google.cloud.bigquery.connection.v1beta1.CloudSqlCredential.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.serviceAccountId = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CloudSqlProperties message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1beta1.CloudSqlProperties} CloudSqlProperties
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudSqlProperties.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CloudSqlProperties message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CloudSqlProperties.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                    if (!$util.isString(message.instanceId))
+                                        return "instanceId: string expected";
+                                if (message.database != null && message.hasOwnProperty("database"))
+                                    if (!$util.isString(message.database))
+                                        return "database: string expected";
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.credential != null && message.hasOwnProperty("credential")) {
+                                    var error = $root.google.cloud.bigquery.connection.v1beta1.CloudSqlCredential.verify(message.credential);
+                                    if (error)
+                                        return "credential." + error;
+                                }
+                                if (message.serviceAccountId != null && message.hasOwnProperty("serviceAccountId"))
+                                    if (!$util.isString(message.serviceAccountId))
+                                        return "serviceAccountId: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CloudSqlProperties message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1beta1.CloudSqlProperties} CloudSqlProperties
+                             */
+                            CloudSqlProperties.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1beta1.CloudSqlProperties)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1beta1.CloudSqlProperties();
+                                if (object.instanceId != null)
+                                    message.instanceId = String(object.instanceId);
+                                if (object.database != null)
+                                    message.database = String(object.database);
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "DATABASE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "POSTGRES":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "MYSQL":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                }
+                                if (object.credential != null) {
+                                    if (typeof object.credential !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1beta1.CloudSqlProperties.credential: object expected");
+                                    message.credential = $root.google.cloud.bigquery.connection.v1beta1.CloudSqlCredential.fromObject(object.credential);
+                                }
+                                if (object.serviceAccountId != null)
+                                    message.serviceAccountId = String(object.serviceAccountId);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CloudSqlProperties message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.CloudSqlProperties} message CloudSqlProperties
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CloudSqlProperties.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.instanceId = "";
+                                    object.database = "";
+                                    object.type = options.enums === String ? "DATABASE_TYPE_UNSPECIFIED" : 0;
+                                    object.credential = null;
+                                    object.serviceAccountId = "";
+                                }
+                                if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                    object.instanceId = message.instanceId;
+                                if (message.database != null && message.hasOwnProperty("database"))
+                                    object.database = message.database;
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.cloud.bigquery.connection.v1beta1.CloudSqlProperties.DatabaseType[message.type] === undefined ? message.type : $root.google.cloud.bigquery.connection.v1beta1.CloudSqlProperties.DatabaseType[message.type] : message.type;
+                                if (message.credential != null && message.hasOwnProperty("credential"))
+                                    object.credential = $root.google.cloud.bigquery.connection.v1beta1.CloudSqlCredential.toObject(message.credential, options);
+                                if (message.serviceAccountId != null && message.hasOwnProperty("serviceAccountId"))
+                                    object.serviceAccountId = message.serviceAccountId;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CloudSqlProperties to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CloudSqlProperties.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CloudSqlProperties
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlProperties
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CloudSqlProperties.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1beta1.CloudSqlProperties";
+                            };
+    
+                            /**
+                             * DatabaseType enum.
+                             * @name google.cloud.bigquery.connection.v1beta1.CloudSqlProperties.DatabaseType
+                             * @enum {number}
+                             * @property {number} DATABASE_TYPE_UNSPECIFIED=0 DATABASE_TYPE_UNSPECIFIED value
+                             * @property {number} POSTGRES=1 POSTGRES value
+                             * @property {number} MYSQL=2 MYSQL value
+                             */
+                            CloudSqlProperties.DatabaseType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "DATABASE_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "POSTGRES"] = 1;
+                                values[valuesById[2] = "MYSQL"] = 2;
+                                return values;
+                            })();
+    
+                            return CloudSqlProperties;
+                        })();
+    
+                        v1beta1.CloudSqlCredential = (function() {
+    
+                            /**
+                             * Properties of a CloudSqlCredential.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @interface ICloudSqlCredential
+                             * @property {string|null} [username] CloudSqlCredential username
+                             * @property {string|null} [password] CloudSqlCredential password
+                             */
+    
+                            /**
+                             * Constructs a new CloudSqlCredential.
+                             * @memberof google.cloud.bigquery.connection.v1beta1
+                             * @classdesc Represents a CloudSqlCredential.
+                             * @implements ICloudSqlCredential
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1beta1.ICloudSqlCredential=} [properties] Properties to set
+                             */
+                            function CloudSqlCredential(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CloudSqlCredential username.
+                             * @member {string} username
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlCredential
+                             * @instance
+                             */
+                            CloudSqlCredential.prototype.username = "";
+    
+                            /**
+                             * CloudSqlCredential password.
+                             * @member {string} password
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlCredential
+                             * @instance
+                             */
+                            CloudSqlCredential.prototype.password = "";
+    
+                            /**
+                             * Creates a new CloudSqlCredential instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlCredential
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.ICloudSqlCredential=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1beta1.CloudSqlCredential} CloudSqlCredential instance
+                             */
+                            CloudSqlCredential.create = function create(properties) {
+                                return new CloudSqlCredential(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CloudSqlCredential message. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.CloudSqlCredential.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlCredential
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.ICloudSqlCredential} message CloudSqlCredential message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudSqlCredential.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.username);
+                                if (message.password != null && Object.hasOwnProperty.call(message, "password"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.password);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CloudSqlCredential message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1beta1.CloudSqlCredential.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlCredential
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.ICloudSqlCredential} message CloudSqlCredential message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudSqlCredential.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CloudSqlCredential message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlCredential
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1beta1.CloudSqlCredential} CloudSqlCredential
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudSqlCredential.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1beta1.CloudSqlCredential();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.username = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.password = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CloudSqlCredential message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlCredential
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1beta1.CloudSqlCredential} CloudSqlCredential
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudSqlCredential.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CloudSqlCredential message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlCredential
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CloudSqlCredential.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.username != null && message.hasOwnProperty("username"))
+                                    if (!$util.isString(message.username))
+                                        return "username: string expected";
+                                if (message.password != null && message.hasOwnProperty("password"))
+                                    if (!$util.isString(message.password))
+                                        return "password: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CloudSqlCredential message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlCredential
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1beta1.CloudSqlCredential} CloudSqlCredential
+                             */
+                            CloudSqlCredential.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1beta1.CloudSqlCredential)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1beta1.CloudSqlCredential();
+                                if (object.username != null)
+                                    message.username = String(object.username);
+                                if (object.password != null)
+                                    message.password = String(object.password);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CloudSqlCredential message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlCredential
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1beta1.CloudSqlCredential} message CloudSqlCredential
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CloudSqlCredential.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.username = "";
+                                    object.password = "";
+                                }
+                                if (message.username != null && message.hasOwnProperty("username"))
+                                    object.username = message.username;
+                                if (message.password != null && message.hasOwnProperty("password"))
+                                    object.password = message.password;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CloudSqlCredential to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlCredential
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CloudSqlCredential.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CloudSqlCredential
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1beta1.CloudSqlCredential
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CloudSqlCredential.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1beta1.CloudSqlCredential";
+                            };
+    
+                            return CloudSqlCredential;
+                        })();
+    
+                        return v1beta1;
                     })();
     
                     return connection;
@@ -15877,6 +19067,1870 @@
                 };
     
                 return Empty;
+            })();
+    
+            protobuf.DoubleValue = (function() {
+    
+                /**
+                 * Properties of a DoubleValue.
+                 * @memberof google.protobuf
+                 * @interface IDoubleValue
+                 * @property {number|null} [value] DoubleValue value
+                 */
+    
+                /**
+                 * Constructs a new DoubleValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a DoubleValue.
+                 * @implements IDoubleValue
+                 * @constructor
+                 * @param {google.protobuf.IDoubleValue=} [properties] Properties to set
+                 */
+                function DoubleValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * DoubleValue value.
+                 * @member {number} value
+                 * @memberof google.protobuf.DoubleValue
+                 * @instance
+                 */
+                DoubleValue.prototype.value = 0;
+    
+                /**
+                 * Creates a new DoubleValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {google.protobuf.IDoubleValue=} [properties] Properties to set
+                 * @returns {google.protobuf.DoubleValue} DoubleValue instance
+                 */
+                DoubleValue.create = function create(properties) {
+                    return new DoubleValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified DoubleValue message. Does not implicitly {@link google.protobuf.DoubleValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {google.protobuf.IDoubleValue} message DoubleValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DoubleValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 1 =*/9).double(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified DoubleValue message, length delimited. Does not implicitly {@link google.protobuf.DoubleValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {google.protobuf.IDoubleValue} message DoubleValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DoubleValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a DoubleValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.DoubleValue} DoubleValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DoubleValue.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DoubleValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.double();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a DoubleValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.DoubleValue} DoubleValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DoubleValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a DoubleValue message.
+                 * @function verify
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                DoubleValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value !== "number")
+                            return "value: number expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a DoubleValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.DoubleValue} DoubleValue
+                 */
+                DoubleValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.DoubleValue)
+                        return object;
+                    var message = new $root.google.protobuf.DoubleValue();
+                    if (object.value != null)
+                        message.value = Number(object.value);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a DoubleValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {google.protobuf.DoubleValue} message DoubleValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                DoubleValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.json && !isFinite(message.value) ? String(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this DoubleValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.DoubleValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                DoubleValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DoubleValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.DoubleValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DoubleValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.DoubleValue";
+                };
+    
+                return DoubleValue;
+            })();
+    
+            protobuf.FloatValue = (function() {
+    
+                /**
+                 * Properties of a FloatValue.
+                 * @memberof google.protobuf
+                 * @interface IFloatValue
+                 * @property {number|null} [value] FloatValue value
+                 */
+    
+                /**
+                 * Constructs a new FloatValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FloatValue.
+                 * @implements IFloatValue
+                 * @constructor
+                 * @param {google.protobuf.IFloatValue=} [properties] Properties to set
+                 */
+                function FloatValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FloatValue value.
+                 * @member {number} value
+                 * @memberof google.protobuf.FloatValue
+                 * @instance
+                 */
+                FloatValue.prototype.value = 0;
+    
+                /**
+                 * Creates a new FloatValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {google.protobuf.IFloatValue=} [properties] Properties to set
+                 * @returns {google.protobuf.FloatValue} FloatValue instance
+                 */
+                FloatValue.create = function create(properties) {
+                    return new FloatValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified FloatValue message. Does not implicitly {@link google.protobuf.FloatValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {google.protobuf.IFloatValue} message FloatValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FloatValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 5 =*/13).float(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FloatValue message, length delimited. Does not implicitly {@link google.protobuf.FloatValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {google.protobuf.IFloatValue} message FloatValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FloatValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FloatValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FloatValue} FloatValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FloatValue.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FloatValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.float();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FloatValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FloatValue} FloatValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FloatValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FloatValue message.
+                 * @function verify
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FloatValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value !== "number")
+                            return "value: number expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a FloatValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FloatValue} FloatValue
+                 */
+                FloatValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FloatValue)
+                        return object;
+                    var message = new $root.google.protobuf.FloatValue();
+                    if (object.value != null)
+                        message.value = Number(object.value);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FloatValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {google.protobuf.FloatValue} message FloatValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FloatValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.json && !isFinite(message.value) ? String(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FloatValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FloatValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FloatValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FloatValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FloatValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FloatValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FloatValue";
+                };
+    
+                return FloatValue;
+            })();
+    
+            protobuf.Int64Value = (function() {
+    
+                /**
+                 * Properties of an Int64Value.
+                 * @memberof google.protobuf
+                 * @interface IInt64Value
+                 * @property {number|Long|null} [value] Int64Value value
+                 */
+    
+                /**
+                 * Constructs a new Int64Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Int64Value.
+                 * @implements IInt64Value
+                 * @constructor
+                 * @param {google.protobuf.IInt64Value=} [properties] Properties to set
+                 */
+                function Int64Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Int64Value value.
+                 * @member {number|Long} value
+                 * @memberof google.protobuf.Int64Value
+                 * @instance
+                 */
+                Int64Value.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Creates a new Int64Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {google.protobuf.IInt64Value=} [properties] Properties to set
+                 * @returns {google.protobuf.Int64Value} Int64Value instance
+                 */
+                Int64Value.create = function create(properties) {
+                    return new Int64Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified Int64Value message. Does not implicitly {@link google.protobuf.Int64Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {google.protobuf.IInt64Value} message Int64Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Int64Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Int64Value message, length delimited. Does not implicitly {@link google.protobuf.Int64Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {google.protobuf.IInt64Value} message Int64Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Int64Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Int64Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Int64Value} Int64Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Int64Value.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int64Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.int64();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Int64Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Int64Value} Int64Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Int64Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Int64Value message.
+                 * @function verify
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Int64Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
+                            return "value: integer|Long expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Int64Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Int64Value} Int64Value
+                 */
+                Int64Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Int64Value)
+                        return object;
+                    var message = new $root.google.protobuf.Int64Value();
+                    if (object.value != null)
+                        if ($util.Long)
+                            (message.value = $util.Long.fromValue(object.value)).unsigned = false;
+                        else if (typeof object.value === "string")
+                            message.value = parseInt(object.value, 10);
+                        else if (typeof object.value === "number")
+                            message.value = object.value;
+                        else if (typeof object.value === "object")
+                            message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Int64Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {google.protobuf.Int64Value} message Int64Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Int64Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.value = options.longs === String ? "0" : 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value === "number")
+                            object.value = options.longs === String ? String(message.value) : message.value;
+                        else
+                            object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Int64Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Int64Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Int64Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Int64Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Int64Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Int64Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Int64Value";
+                };
+    
+                return Int64Value;
+            })();
+    
+            protobuf.UInt64Value = (function() {
+    
+                /**
+                 * Properties of a UInt64Value.
+                 * @memberof google.protobuf
+                 * @interface IUInt64Value
+                 * @property {number|Long|null} [value] UInt64Value value
+                 */
+    
+                /**
+                 * Constructs a new UInt64Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a UInt64Value.
+                 * @implements IUInt64Value
+                 * @constructor
+                 * @param {google.protobuf.IUInt64Value=} [properties] Properties to set
+                 */
+                function UInt64Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * UInt64Value value.
+                 * @member {number|Long} value
+                 * @memberof google.protobuf.UInt64Value
+                 * @instance
+                 */
+                UInt64Value.prototype.value = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+                /**
+                 * Creates a new UInt64Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {google.protobuf.IUInt64Value=} [properties] Properties to set
+                 * @returns {google.protobuf.UInt64Value} UInt64Value instance
+                 */
+                UInt64Value.create = function create(properties) {
+                    return new UInt64Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified UInt64Value message. Does not implicitly {@link google.protobuf.UInt64Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {google.protobuf.IUInt64Value} message UInt64Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UInt64Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified UInt64Value message, length delimited. Does not implicitly {@link google.protobuf.UInt64Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {google.protobuf.IUInt64Value} message UInt64Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UInt64Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a UInt64Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.UInt64Value} UInt64Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UInt64Value.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt64Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.uint64();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a UInt64Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.UInt64Value} UInt64Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UInt64Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a UInt64Value message.
+                 * @function verify
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UInt64Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
+                            return "value: integer|Long expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a UInt64Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.UInt64Value} UInt64Value
+                 */
+                UInt64Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.UInt64Value)
+                        return object;
+                    var message = new $root.google.protobuf.UInt64Value();
+                    if (object.value != null)
+                        if ($util.Long)
+                            (message.value = $util.Long.fromValue(object.value)).unsigned = true;
+                        else if (typeof object.value === "string")
+                            message.value = parseInt(object.value, 10);
+                        else if (typeof object.value === "number")
+                            message.value = object.value;
+                        else if (typeof object.value === "object")
+                            message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber(true);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a UInt64Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {google.protobuf.UInt64Value} message UInt64Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UInt64Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, true);
+                            object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.value = options.longs === String ? "0" : 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value === "number")
+                            object.value = options.longs === String ? String(message.value) : message.value;
+                        else
+                            object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber(true) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this UInt64Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.UInt64Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UInt64Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for UInt64Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UInt64Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UInt64Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UInt64Value";
+                };
+    
+                return UInt64Value;
+            })();
+    
+            protobuf.Int32Value = (function() {
+    
+                /**
+                 * Properties of an Int32Value.
+                 * @memberof google.protobuf
+                 * @interface IInt32Value
+                 * @property {number|null} [value] Int32Value value
+                 */
+    
+                /**
+                 * Constructs a new Int32Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Int32Value.
+                 * @implements IInt32Value
+                 * @constructor
+                 * @param {google.protobuf.IInt32Value=} [properties] Properties to set
+                 */
+                function Int32Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Int32Value value.
+                 * @member {number} value
+                 * @memberof google.protobuf.Int32Value
+                 * @instance
+                 */
+                Int32Value.prototype.value = 0;
+    
+                /**
+                 * Creates a new Int32Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {google.protobuf.IInt32Value=} [properties] Properties to set
+                 * @returns {google.protobuf.Int32Value} Int32Value instance
+                 */
+                Int32Value.create = function create(properties) {
+                    return new Int32Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified Int32Value message. Does not implicitly {@link google.protobuf.Int32Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {google.protobuf.IInt32Value} message Int32Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Int32Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Int32Value message, length delimited. Does not implicitly {@link google.protobuf.Int32Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {google.protobuf.IInt32Value} message Int32Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Int32Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Int32Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Int32Value} Int32Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Int32Value.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int32Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Int32Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Int32Value} Int32Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Int32Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Int32Value message.
+                 * @function verify
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Int32Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isInteger(message.value))
+                            return "value: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Int32Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Int32Value} Int32Value
+                 */
+                Int32Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Int32Value)
+                        return object;
+                    var message = new $root.google.protobuf.Int32Value();
+                    if (object.value != null)
+                        message.value = object.value | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Int32Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {google.protobuf.Int32Value} message Int32Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Int32Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Int32Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Int32Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Int32Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Int32Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Int32Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Int32Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Int32Value";
+                };
+    
+                return Int32Value;
+            })();
+    
+            protobuf.UInt32Value = (function() {
+    
+                /**
+                 * Properties of a UInt32Value.
+                 * @memberof google.protobuf
+                 * @interface IUInt32Value
+                 * @property {number|null} [value] UInt32Value value
+                 */
+    
+                /**
+                 * Constructs a new UInt32Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a UInt32Value.
+                 * @implements IUInt32Value
+                 * @constructor
+                 * @param {google.protobuf.IUInt32Value=} [properties] Properties to set
+                 */
+                function UInt32Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * UInt32Value value.
+                 * @member {number} value
+                 * @memberof google.protobuf.UInt32Value
+                 * @instance
+                 */
+                UInt32Value.prototype.value = 0;
+    
+                /**
+                 * Creates a new UInt32Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {google.protobuf.IUInt32Value=} [properties] Properties to set
+                 * @returns {google.protobuf.UInt32Value} UInt32Value instance
+                 */
+                UInt32Value.create = function create(properties) {
+                    return new UInt32Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified UInt32Value message. Does not implicitly {@link google.protobuf.UInt32Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {google.protobuf.IUInt32Value} message UInt32Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UInt32Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified UInt32Value message, length delimited. Does not implicitly {@link google.protobuf.UInt32Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {google.protobuf.IUInt32Value} message UInt32Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UInt32Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a UInt32Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.UInt32Value} UInt32Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UInt32Value.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt32Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.uint32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a UInt32Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.UInt32Value} UInt32Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UInt32Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a UInt32Value message.
+                 * @function verify
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UInt32Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isInteger(message.value))
+                            return "value: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a UInt32Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.UInt32Value} UInt32Value
+                 */
+                UInt32Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.UInt32Value)
+                        return object;
+                    var message = new $root.google.protobuf.UInt32Value();
+                    if (object.value != null)
+                        message.value = object.value >>> 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a UInt32Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {google.protobuf.UInt32Value} message UInt32Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UInt32Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = 0;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this UInt32Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.UInt32Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UInt32Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for UInt32Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.UInt32Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                UInt32Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.UInt32Value";
+                };
+    
+                return UInt32Value;
+            })();
+    
+            protobuf.BoolValue = (function() {
+    
+                /**
+                 * Properties of a BoolValue.
+                 * @memberof google.protobuf
+                 * @interface IBoolValue
+                 * @property {boolean|null} [value] BoolValue value
+                 */
+    
+                /**
+                 * Constructs a new BoolValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a BoolValue.
+                 * @implements IBoolValue
+                 * @constructor
+                 * @param {google.protobuf.IBoolValue=} [properties] Properties to set
+                 */
+                function BoolValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * BoolValue value.
+                 * @member {boolean} value
+                 * @memberof google.protobuf.BoolValue
+                 * @instance
+                 */
+                BoolValue.prototype.value = false;
+    
+                /**
+                 * Creates a new BoolValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {google.protobuf.IBoolValue=} [properties] Properties to set
+                 * @returns {google.protobuf.BoolValue} BoolValue instance
+                 */
+                BoolValue.create = function create(properties) {
+                    return new BoolValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified BoolValue message. Does not implicitly {@link google.protobuf.BoolValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {google.protobuf.IBoolValue} message BoolValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BoolValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified BoolValue message, length delimited. Does not implicitly {@link google.protobuf.BoolValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {google.protobuf.IBoolValue} message BoolValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BoolValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a BoolValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.BoolValue} BoolValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BoolValue.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BoolValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a BoolValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.BoolValue} BoolValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BoolValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a BoolValue message.
+                 * @function verify
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                BoolValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (typeof message.value !== "boolean")
+                            return "value: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a BoolValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.BoolValue} BoolValue
+                 */
+                BoolValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.BoolValue)
+                        return object;
+                    var message = new $root.google.protobuf.BoolValue();
+                    if (object.value != null)
+                        message.value = Boolean(object.value);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a BoolValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {google.protobuf.BoolValue} message BoolValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                BoolValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = false;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this BoolValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.BoolValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                BoolValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for BoolValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.BoolValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BoolValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.BoolValue";
+                };
+    
+                return BoolValue;
+            })();
+    
+            protobuf.StringValue = (function() {
+    
+                /**
+                 * Properties of a StringValue.
+                 * @memberof google.protobuf
+                 * @interface IStringValue
+                 * @property {string|null} [value] StringValue value
+                 */
+    
+                /**
+                 * Constructs a new StringValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a StringValue.
+                 * @implements IStringValue
+                 * @constructor
+                 * @param {google.protobuf.IStringValue=} [properties] Properties to set
+                 */
+                function StringValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * StringValue value.
+                 * @member {string} value
+                 * @memberof google.protobuf.StringValue
+                 * @instance
+                 */
+                StringValue.prototype.value = "";
+    
+                /**
+                 * Creates a new StringValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {google.protobuf.IStringValue=} [properties] Properties to set
+                 * @returns {google.protobuf.StringValue} StringValue instance
+                 */
+                StringValue.create = function create(properties) {
+                    return new StringValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified StringValue message. Does not implicitly {@link google.protobuf.StringValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {google.protobuf.IStringValue} message StringValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                StringValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified StringValue message, length delimited. Does not implicitly {@link google.protobuf.StringValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {google.protobuf.IStringValue} message StringValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                StringValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a StringValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.StringValue} StringValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                StringValue.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.StringValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a StringValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.StringValue} StringValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                StringValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a StringValue message.
+                 * @function verify
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                StringValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!$util.isString(message.value))
+                            return "value: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a StringValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.StringValue} StringValue
+                 */
+                StringValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.StringValue)
+                        return object;
+                    var message = new $root.google.protobuf.StringValue();
+                    if (object.value != null)
+                        message.value = String(object.value);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a StringValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {google.protobuf.StringValue} message StringValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                StringValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.value = "";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this StringValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.StringValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                StringValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for StringValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.StringValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                StringValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.StringValue";
+                };
+    
+                return StringValue;
+            })();
+    
+            protobuf.BytesValue = (function() {
+    
+                /**
+                 * Properties of a BytesValue.
+                 * @memberof google.protobuf
+                 * @interface IBytesValue
+                 * @property {Uint8Array|null} [value] BytesValue value
+                 */
+    
+                /**
+                 * Constructs a new BytesValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a BytesValue.
+                 * @implements IBytesValue
+                 * @constructor
+                 * @param {google.protobuf.IBytesValue=} [properties] Properties to set
+                 */
+                function BytesValue(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * BytesValue value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.BytesValue
+                 * @instance
+                 */
+                BytesValue.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new BytesValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {google.protobuf.IBytesValue=} [properties] Properties to set
+                 * @returns {google.protobuf.BytesValue} BytesValue instance
+                 */
+                BytesValue.create = function create(properties) {
+                    return new BytesValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified BytesValue message. Does not implicitly {@link google.protobuf.BytesValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {google.protobuf.IBytesValue} message BytesValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BytesValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified BytesValue message, length delimited. Does not implicitly {@link google.protobuf.BytesValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {google.protobuf.IBytesValue} message BytesValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BytesValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a BytesValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.BytesValue} BytesValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BytesValue.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BytesValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a BytesValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.BytesValue} BytesValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BytesValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a BytesValue message.
+                 * @function verify
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                BytesValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a BytesValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.BytesValue} BytesValue
+                 */
+                BytesValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.BytesValue)
+                        return object;
+                    var message = new $root.google.protobuf.BytesValue();
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a BytesValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {google.protobuf.BytesValue} message BytesValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                BytesValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this BytesValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.BytesValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                BytesValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for BytesValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.BytesValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BytesValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.BytesValue";
+                };
+    
+                return BytesValue;
             })();
     
             return protobuf;

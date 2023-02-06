@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -122,6 +122,9 @@ export class JobServiceClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -601,8 +604,10 @@ export class JobServiceClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Strongly recommended for the best service experience.
    *
-   *   If {@link google.cloud.talent.v4.UpdateJobRequest.update_mask|update_mask} is provided, only the specified fields in
-   *   {@link google.cloud.talent.v4.UpdateJobRequest.job|job} are updated. Otherwise all the fields are updated.
+   *   If {@link google.cloud.talent.v4.UpdateJobRequest.update_mask|update_mask} is
+   *   provided, only the specified fields in
+   *   {@link google.cloud.talent.v4.UpdateJobRequest.job|job} are updated. Otherwise
+   *   all the fields are updated.
    *
    *   A field mask to restrict the fields that are updated. Only
    *   top level fields of {@link google.cloud.talent.v4.Job|Job} are supported.
@@ -773,11 +778,13 @@ export class JobServiceClient {
     return this.innerApiCalls.deleteJob(request, options, callback);
   }
   /**
-   * Searches for jobs using the provided {@link google.cloud.talent.v4.SearchJobsRequest|SearchJobsRequest}.
+   * Searches for jobs using the provided
+   * {@link google.cloud.talent.v4.SearchJobsRequest|SearchJobsRequest}.
    *
-   * This call constrains the {@link google.cloud.talent.v4.Job.visibility|visibility} of jobs
-   * present in the database, and only returns jobs that the caller has
-   * permission to search against.
+   * This call constrains the
+   * {@link google.cloud.talent.v4.Job.visibility|visibility} of jobs present in the
+   * database, and only returns jobs that the caller has permission to search
+   * against.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -789,11 +796,12 @@ export class JobServiceClient {
    * @param {google.cloud.talent.v4.SearchJobsRequest.SearchMode} request.searchMode
    *   Mode of a search.
    *
-   *   Defaults to {@link google.cloud.talent.v4.SearchJobsRequest.SearchMode.JOB_SEARCH|SearchMode.JOB_SEARCH}.
+   *   Defaults to
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.SearchMode.JOB_SEARCH|SearchMode.JOB_SEARCH}.
    * @param {google.cloud.talent.v4.RequestMetadata} request.requestMetadata
-   *   Required. The meta information collected about the job searcher, used to improve the
-   *   search quality of the service. The identifiers (such as `user_id`) are
-   *   provided by users, and must be unique and consistent.
+   *   Required. The meta information collected about the job searcher, used to
+   *   improve the search quality of the service. The identifiers (such as
+   *   `user_id`) are provided by users, and must be unique and consistent.
    * @param {google.cloud.talent.v4.JobQuery} request.jobQuery
    *   Query used to search against jobs, such as keyword, location filters, etc.
    * @param {boolean} request.enableBroadening
@@ -837,23 +845,32 @@ export class JobServiceClient {
    *
    *   Job histogram facets:
    *
-   *   * company_display_name: histogram by {@link google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}.
-   *   * employment_type: histogram by {@link google.cloud.talent.v4.Job.employment_types|Job.employment_types}, for example,
+   *   * company_display_name: histogram by
+   *   {@link google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}.
+   *   * employment_type: histogram by
+   *   {@link google.cloud.talent.v4.Job.employment_types|Job.employment_types}, for
+   *   example,
    *     "FULL_TIME", "PART_TIME".
-   *   * company_size (DEPRECATED): histogram by {@link google.cloud.talent.v4.CompanySize|CompanySize}, for example,
-   *   "SMALL", "MEDIUM", "BIG".
-   *   * publish_time_in_day: histogram by the {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   * company_size (DEPRECATED): histogram by
+   *   {@link google.cloud.talent.v4.CompanySize|CompanySize}, for example, "SMALL",
+   *   "MEDIUM", "BIG".
+   *   * publish_time_in_day: histogram by the
+   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     in days.
    *     Must specify list of numeric buckets in spec.
-   *   * publish_time_in_month: histogram by the {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   * publish_time_in_month: histogram by the
+   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     in months.
    *     Must specify list of numeric buckets in spec.
-   *   * publish_time_in_year: histogram by the {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   * publish_time_in_year: histogram by the
+   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     in years.
    *     Must specify list of numeric buckets in spec.
-   *   * degree_types: histogram by the {@link google.cloud.talent.v4.Job.degree_types|Job.degree_types}, for example,
+   *   * degree_types: histogram by the
+   *   {@link google.cloud.talent.v4.Job.degree_types|Job.degree_types}, for example,
    *     "Bachelors", "Masters".
-   *   * job_level: histogram by the {@link google.cloud.talent.v4.Job.job_level|Job.job_level}, for example, "Entry
+   *   * job_level: histogram by the
+   *   {@link google.cloud.talent.v4.Job.job_level|Job.job_level}, for example, "Entry
    *     Level".
    *   * country: histogram by the country code of jobs, for example, "US", "FR".
    *   * admin1: histogram by the admin1 code of jobs, which is a global
@@ -868,25 +885,31 @@ export class JobServiceClient {
    *     and longitude), for example, 37.4038522,-122.0987765. Since the
    *     coordinates of a city center can change, customers may need to refresh
    *     them periodically.
-   *   * locale: histogram by the {@link google.cloud.talent.v4.Job.language_code|Job.language_code}, for example, "en-US",
+   *   * locale: histogram by the
+   *   {@link google.cloud.talent.v4.Job.language_code|Job.language_code}, for example,
+   *   "en-US",
    *     "fr-FR".
-   *   * language: histogram by the language subtag of the {@link google.cloud.talent.v4.Job.language_code|Job.language_code},
+   *   * language: histogram by the language subtag of the
+   *   {@link google.cloud.talent.v4.Job.language_code|Job.language_code},
    *     for example, "en", "fr".
-   *   * category: histogram by the {@link google.cloud.talent.v4.JobCategory|JobCategory}, for example,
+   *   * category: histogram by the
+   *   {@link google.cloud.talent.v4.JobCategory|JobCategory}, for example,
    *     "COMPUTER_AND_IT", "HEALTHCARE".
    *   * base_compensation_unit: histogram by the
-   *     {@link google.cloud.talent.v4.CompensationInfo.CompensationUnit|CompensationInfo.CompensationUnit} of base
-   *     salary, for example, "WEEKLY", "MONTHLY".
+   *     {@link google.cloud.talent.v4.CompensationInfo.CompensationUnit|CompensationInfo.CompensationUnit}
+   *     of base salary, for example, "WEEKLY", "MONTHLY".
    *   * base_compensation: histogram by the base salary. Must specify list of
    *     numeric buckets to group results by.
    *   * annualized_base_compensation: histogram by the base annualized salary.
    *     Must specify list of numeric buckets to group results by.
    *   * annualized_total_compensation: histogram by the total annualized salary.
    *     Must specify list of numeric buckets to group results by.
-   *   * string_custom_attribute: histogram by string {@link google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
+   *   * string_custom_attribute: histogram by string
+   *   {@link google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
    *     Values can be accessed via square bracket notations like
    *     string_custom_attribute["key1"].
-   *   * numeric_custom_attribute: histogram by numeric {@link google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
+   *   * numeric_custom_attribute: histogram by numeric
+   *   {@link google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
    *     Values can be accessed via square bracket notations like
    *     numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
    *     group results by.
@@ -901,11 +924,14 @@ export class JobServiceClient {
    *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
    * @param {google.cloud.talent.v4.JobView} request.jobView
    *   The desired job attributes returned for jobs in the search response.
-   *   Defaults to {@link google.cloud.talent.v4.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if no value is specified.
+   *   Defaults to
+   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if
+   *   no value is specified.
    * @param {number} request.offset
    *   An integer that specifies the current offset (that is, starting result
    *   location, amongst the jobs deemed by the API as relevant) in search
-   *   results. This field is only considered if {@link google.cloud.talent.v4.SearchJobsRequest.page_token|page_token} is unset.
+   *   results. This field is only considered if
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.page_token|page_token} is unset.
    *
    *   The maximum allowed value is 5000. Otherwise an error is thrown.
    *
@@ -919,8 +945,9 @@ export class JobServiceClient {
    *   response time. The value can be between 1 and 100.
    * @param {string} request.pageToken
    *   The token specifying the current offset within
-   *   search results. See {@link google.cloud.talent.v4.SearchJobsResponse.next_page_token|SearchJobsResponse.next_page_token} for
-   *   an explanation of how to obtain the next set of query results.
+   *   search results. See
+   *   {@link google.cloud.talent.v4.SearchJobsResponse.next_page_token|SearchJobsResponse.next_page_token}
+   *   for an explanation of how to obtain the next set of query results.
    * @param {string} request.orderBy
    *   The criteria determining how search results are sorted. Default is
    *   `"relevance desc"`.
@@ -930,33 +957,36 @@ export class JobServiceClient {
    *   * `"relevance desc"`: By relevance descending, as determined by the API
    *     algorithms. Relevance thresholding of query results is only available
    *     with this ordering.
-   *   * `"posting_publish_time desc"`: By {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   * `"posting_publish_time desc"`: By
+   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     descending.
-   *   * `"posting_update_time desc"`: By {@link google.cloud.talent.v4.Job.posting_update_time|Job.posting_update_time}
+   *   * `"posting_update_time desc"`: By
+   *   {@link google.cloud.talent.v4.Job.posting_update_time|Job.posting_update_time}
    *     descending.
    *   * `"title"`: By {@link google.cloud.talent.v4.Job.title|Job.title} ascending.
-   *   * `"title desc"`: By {@link google.cloud.talent.v4.Job.title|Job.title} descending.
+   *   * `"title desc"`: By {@link google.cloud.talent.v4.Job.title|Job.title}
+   *   descending.
    *   * `"annualized_base_compensation"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range} ascending. Jobs
-   *     whose annualized base compensation is unspecified are put at the end of
-   *     search results.
+   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
+   *     ascending. Jobs whose annualized base compensation is unspecified are put
+   *     at the end of search results.
    *   * `"annualized_base_compensation desc"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range} descending. Jobs
-   *     whose annualized base compensation is unspecified are put at the end of
-   *     search results.
+   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
+   *     descending. Jobs whose annualized base compensation is unspecified are
+   *     put at the end of search results.
    *   * `"annualized_total_compensation"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range} ascending. Jobs
-   *     whose annualized base compensation is unspecified are put at the end of
-   *     search results.
+   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
+   *     ascending. Jobs whose annualized base compensation is unspecified are put
+   *     at the end of search results.
    *   * `"annualized_total_compensation desc"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range} descending. Jobs
-   *     whose annualized base compensation is unspecified are put at the end of
-   *     search results.
+   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
+   *     descending. Jobs whose annualized base compensation is unspecified are
+   *     put at the end of search results.
    *   * `"custom_ranking desc"`: By the relevance score adjusted to the
-   *     {@link google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ranking_expression|SearchJobsRequest.CustomRankingInfo.ranking_expression} with weight
-   *     factor assigned by
-   *     {@link google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.importance_level|SearchJobsRequest.CustomRankingInfo.importance_level} in descending
-   *     order.
+   *     {@link google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ranking_expression|SearchJobsRequest.CustomRankingInfo.ranking_expression}
+   *     with weight factor assigned by
+   *     {@link google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.importance_level|SearchJobsRequest.CustomRankingInfo.importance_level}
+   *     in descending order.
    *   * Location sorting: Use the special syntax to order jobs by distance:<br>
    *     `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
    *     `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
@@ -980,36 +1010,46 @@ export class JobServiceClient {
    *   displayed to the job seeker higher up in the results, with the other jobs
    *   being displayed lower down in the results.
    *
-   *   Defaults to {@link google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel.SIMPLE|DiversificationLevel.SIMPLE} if no value
-   *   is specified.
+   *   Defaults to
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel.SIMPLE|DiversificationLevel.SIMPLE}
+   *   if no value is specified.
    * @param {google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo} request.customRankingInfo
    *   Controls over how job documents get ranked on top of existing relevance
    *   score (determined by API algorithm).
    * @param {boolean} request.disableKeywordMatch
    *   This field is deprecated. Please use
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode} going forward.
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
+   *   going forward.
    *
    *   To migrate, disable_keyword_match set to false maps to
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
-   *   true maps to {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL},
+   *   and disable_keyword_match set to true maps to
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}.
+   *   If
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
+   *   is set, this field is ignored.
    *
-   *   Controls whether to disable exact keyword match on {@link google.cloud.talent.v4.Job.title|Job.title},
-   *   {@link google.cloud.talent.v4.Job.description|Job.description}, {@link google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}, {@link google.cloud.talent.v4.Job.addresses|Job.addresses},
-   *   {@link google.cloud.talent.v4.Job.qualifications|Job.qualifications}. When disable keyword match is turned off, a
-   *   keyword match returns jobs that do not match given category filters when
-   *   there are matching keywords. For example, for the query "program manager,"
-   *   a result is returned even if the job posting has the title "software
-   *   developer," which doesn't fall into "program manager" ontology, but does
-   *   have "program manager" appearing in its description.
+   *   Controls whether to disable exact keyword match on
+   *   {@link google.cloud.talent.v4.Job.title|Job.title},
+   *   {@link google.cloud.talent.v4.Job.description|Job.description},
+   *   {@link google.cloud.talent.v4.Job.company_display_name|Job.company_display_name},
+   *   {@link google.cloud.talent.v4.Job.addresses|Job.addresses},
+   *   {@link google.cloud.talent.v4.Job.qualifications|Job.qualifications}. When
+   *   disable keyword match is turned off, a keyword match returns jobs that do
+   *   not match given category filters when there are matching keywords. For
+   *   example, for the query "program manager," a result is returned even if the
+   *   job posting has the title "software developer," which doesn't fall into
+   *   "program manager" ontology, but does have "program manager" appearing in
+   *   its description.
    *
    *   For queries like "cloud" that don't contain title or
    *   location specific ontology, jobs with "cloud" keyword matches are returned
    *   regardless of this flag's value.
    *
-   *   Use {@link google.cloud.talent.v4.Company.keyword_searchable_job_custom_attributes|Company.keyword_searchable_job_custom_attributes} if
-   *   company-specific globally matched custom field/attribute string values are
-   *   needed. Enabling keyword match improves recall of subsequent search
+   *   Use
+   *   {@link google.cloud.talent.v4.Company.keyword_searchable_job_custom_attributes|Company.keyword_searchable_job_custom_attributes}
+   *   if company-specific globally matched custom field/attribute string values
+   *   are needed. Enabling keyword match improves recall of subsequent search
    *   requests.
    *
    *   Defaults to false.
@@ -1017,8 +1057,9 @@ export class JobServiceClient {
    *   Controls what keyword match options to use. If both keyword_match_mode and
    *   disable_keyword_match are set, keyword_match_mode will take precedence.
    *
-   *   Defaults to {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
-   *   is specified.
+   *   Defaults to
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}
+   *   if no value is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1096,16 +1137,18 @@ export class JobServiceClient {
     return this.innerApiCalls.searchJobs(request, options, callback);
   }
   /**
-   * Searches for jobs using the provided {@link google.cloud.talent.v4.SearchJobsRequest|SearchJobsRequest}.
+   * Searches for jobs using the provided
+   * {@link google.cloud.talent.v4.SearchJobsRequest|SearchJobsRequest}.
    *
    * This API call is intended for the use case of targeting passive job
    * seekers (for example, job seekers who have signed up to receive email
    * alerts about potential job opportunities), it has different algorithmic
    * adjustments that are designed to specifically target passive job seekers.
    *
-   * This call constrains the {@link google.cloud.talent.v4.Job.visibility|visibility} of jobs
-   * present in the database, and only returns jobs the caller has
-   * permission to search against.
+   * This call constrains the
+   * {@link google.cloud.talent.v4.Job.visibility|visibility} of jobs present in the
+   * database, and only returns jobs the caller has permission to search
+   * against.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1117,11 +1160,12 @@ export class JobServiceClient {
    * @param {google.cloud.talent.v4.SearchJobsRequest.SearchMode} request.searchMode
    *   Mode of a search.
    *
-   *   Defaults to {@link google.cloud.talent.v4.SearchJobsRequest.SearchMode.JOB_SEARCH|SearchMode.JOB_SEARCH}.
+   *   Defaults to
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.SearchMode.JOB_SEARCH|SearchMode.JOB_SEARCH}.
    * @param {google.cloud.talent.v4.RequestMetadata} request.requestMetadata
-   *   Required. The meta information collected about the job searcher, used to improve the
-   *   search quality of the service. The identifiers (such as `user_id`) are
-   *   provided by users, and must be unique and consistent.
+   *   Required. The meta information collected about the job searcher, used to
+   *   improve the search quality of the service. The identifiers (such as
+   *   `user_id`) are provided by users, and must be unique and consistent.
    * @param {google.cloud.talent.v4.JobQuery} request.jobQuery
    *   Query used to search against jobs, such as keyword, location filters, etc.
    * @param {boolean} request.enableBroadening
@@ -1165,23 +1209,32 @@ export class JobServiceClient {
    *
    *   Job histogram facets:
    *
-   *   * company_display_name: histogram by {@link google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}.
-   *   * employment_type: histogram by {@link google.cloud.talent.v4.Job.employment_types|Job.employment_types}, for example,
+   *   * company_display_name: histogram by
+   *   {@link google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}.
+   *   * employment_type: histogram by
+   *   {@link google.cloud.talent.v4.Job.employment_types|Job.employment_types}, for
+   *   example,
    *     "FULL_TIME", "PART_TIME".
-   *   * company_size (DEPRECATED): histogram by {@link google.cloud.talent.v4.CompanySize|CompanySize}, for example,
-   *   "SMALL", "MEDIUM", "BIG".
-   *   * publish_time_in_day: histogram by the {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   * company_size (DEPRECATED): histogram by
+   *   {@link google.cloud.talent.v4.CompanySize|CompanySize}, for example, "SMALL",
+   *   "MEDIUM", "BIG".
+   *   * publish_time_in_day: histogram by the
+   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     in days.
    *     Must specify list of numeric buckets in spec.
-   *   * publish_time_in_month: histogram by the {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   * publish_time_in_month: histogram by the
+   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     in months.
    *     Must specify list of numeric buckets in spec.
-   *   * publish_time_in_year: histogram by the {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   * publish_time_in_year: histogram by the
+   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     in years.
    *     Must specify list of numeric buckets in spec.
-   *   * degree_types: histogram by the {@link google.cloud.talent.v4.Job.degree_types|Job.degree_types}, for example,
+   *   * degree_types: histogram by the
+   *   {@link google.cloud.talent.v4.Job.degree_types|Job.degree_types}, for example,
    *     "Bachelors", "Masters".
-   *   * job_level: histogram by the {@link google.cloud.talent.v4.Job.job_level|Job.job_level}, for example, "Entry
+   *   * job_level: histogram by the
+   *   {@link google.cloud.talent.v4.Job.job_level|Job.job_level}, for example, "Entry
    *     Level".
    *   * country: histogram by the country code of jobs, for example, "US", "FR".
    *   * admin1: histogram by the admin1 code of jobs, which is a global
@@ -1196,25 +1249,31 @@ export class JobServiceClient {
    *     and longitude), for example, 37.4038522,-122.0987765. Since the
    *     coordinates of a city center can change, customers may need to refresh
    *     them periodically.
-   *   * locale: histogram by the {@link google.cloud.talent.v4.Job.language_code|Job.language_code}, for example, "en-US",
+   *   * locale: histogram by the
+   *   {@link google.cloud.talent.v4.Job.language_code|Job.language_code}, for example,
+   *   "en-US",
    *     "fr-FR".
-   *   * language: histogram by the language subtag of the {@link google.cloud.talent.v4.Job.language_code|Job.language_code},
+   *   * language: histogram by the language subtag of the
+   *   {@link google.cloud.talent.v4.Job.language_code|Job.language_code},
    *     for example, "en", "fr".
-   *   * category: histogram by the {@link google.cloud.talent.v4.JobCategory|JobCategory}, for example,
+   *   * category: histogram by the
+   *   {@link google.cloud.talent.v4.JobCategory|JobCategory}, for example,
    *     "COMPUTER_AND_IT", "HEALTHCARE".
    *   * base_compensation_unit: histogram by the
-   *     {@link google.cloud.talent.v4.CompensationInfo.CompensationUnit|CompensationInfo.CompensationUnit} of base
-   *     salary, for example, "WEEKLY", "MONTHLY".
+   *     {@link google.cloud.talent.v4.CompensationInfo.CompensationUnit|CompensationInfo.CompensationUnit}
+   *     of base salary, for example, "WEEKLY", "MONTHLY".
    *   * base_compensation: histogram by the base salary. Must specify list of
    *     numeric buckets to group results by.
    *   * annualized_base_compensation: histogram by the base annualized salary.
    *     Must specify list of numeric buckets to group results by.
    *   * annualized_total_compensation: histogram by the total annualized salary.
    *     Must specify list of numeric buckets to group results by.
-   *   * string_custom_attribute: histogram by string {@link google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
+   *   * string_custom_attribute: histogram by string
+   *   {@link google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
    *     Values can be accessed via square bracket notations like
    *     string_custom_attribute["key1"].
-   *   * numeric_custom_attribute: histogram by numeric {@link google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
+   *   * numeric_custom_attribute: histogram by numeric
+   *   {@link google.cloud.talent.v4.Job.custom_attributes|Job.custom_attributes}.
    *     Values can be accessed via square bracket notations like
    *     numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
    *     group results by.
@@ -1229,11 +1288,14 @@ export class JobServiceClient {
    *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
    * @param {google.cloud.talent.v4.JobView} request.jobView
    *   The desired job attributes returned for jobs in the search response.
-   *   Defaults to {@link google.cloud.talent.v4.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if no value is specified.
+   *   Defaults to
+   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if
+   *   no value is specified.
    * @param {number} request.offset
    *   An integer that specifies the current offset (that is, starting result
    *   location, amongst the jobs deemed by the API as relevant) in search
-   *   results. This field is only considered if {@link google.cloud.talent.v4.SearchJobsRequest.page_token|page_token} is unset.
+   *   results. This field is only considered if
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.page_token|page_token} is unset.
    *
    *   The maximum allowed value is 5000. Otherwise an error is thrown.
    *
@@ -1247,8 +1309,9 @@ export class JobServiceClient {
    *   response time. The value can be between 1 and 100.
    * @param {string} request.pageToken
    *   The token specifying the current offset within
-   *   search results. See {@link google.cloud.talent.v4.SearchJobsResponse.next_page_token|SearchJobsResponse.next_page_token} for
-   *   an explanation of how to obtain the next set of query results.
+   *   search results. See
+   *   {@link google.cloud.talent.v4.SearchJobsResponse.next_page_token|SearchJobsResponse.next_page_token}
+   *   for an explanation of how to obtain the next set of query results.
    * @param {string} request.orderBy
    *   The criteria determining how search results are sorted. Default is
    *   `"relevance desc"`.
@@ -1258,33 +1321,36 @@ export class JobServiceClient {
    *   * `"relevance desc"`: By relevance descending, as determined by the API
    *     algorithms. Relevance thresholding of query results is only available
    *     with this ordering.
-   *   * `"posting_publish_time desc"`: By {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *   * `"posting_publish_time desc"`: By
+   *   {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     descending.
-   *   * `"posting_update_time desc"`: By {@link google.cloud.talent.v4.Job.posting_update_time|Job.posting_update_time}
+   *   * `"posting_update_time desc"`: By
+   *   {@link google.cloud.talent.v4.Job.posting_update_time|Job.posting_update_time}
    *     descending.
    *   * `"title"`: By {@link google.cloud.talent.v4.Job.title|Job.title} ascending.
-   *   * `"title desc"`: By {@link google.cloud.talent.v4.Job.title|Job.title} descending.
+   *   * `"title desc"`: By {@link google.cloud.talent.v4.Job.title|Job.title}
+   *   descending.
    *   * `"annualized_base_compensation"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range} ascending. Jobs
-   *     whose annualized base compensation is unspecified are put at the end of
-   *     search results.
+   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
+   *     ascending. Jobs whose annualized base compensation is unspecified are put
+   *     at the end of search results.
    *   * `"annualized_base_compensation desc"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range} descending. Jobs
-   *     whose annualized base compensation is unspecified are put at the end of
-   *     search results.
+   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_base_compensation_range|CompensationInfo.annualized_base_compensation_range}
+   *     descending. Jobs whose annualized base compensation is unspecified are
+   *     put at the end of search results.
    *   * `"annualized_total_compensation"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range} ascending. Jobs
-   *     whose annualized base compensation is unspecified are put at the end of
-   *     search results.
+   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
+   *     ascending. Jobs whose annualized base compensation is unspecified are put
+   *     at the end of search results.
    *   * `"annualized_total_compensation desc"`: By job's
-   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range} descending. Jobs
-   *     whose annualized base compensation is unspecified are put at the end of
-   *     search results.
+   *     {@link google.cloud.talent.v4.CompensationInfo.annualized_total_compensation_range|CompensationInfo.annualized_total_compensation_range}
+   *     descending. Jobs whose annualized base compensation is unspecified are
+   *     put at the end of search results.
    *   * `"custom_ranking desc"`: By the relevance score adjusted to the
-   *     {@link google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ranking_expression|SearchJobsRequest.CustomRankingInfo.ranking_expression} with weight
-   *     factor assigned by
-   *     {@link google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.importance_level|SearchJobsRequest.CustomRankingInfo.importance_level} in descending
-   *     order.
+   *     {@link google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ranking_expression|SearchJobsRequest.CustomRankingInfo.ranking_expression}
+   *     with weight factor assigned by
+   *     {@link google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.importance_level|SearchJobsRequest.CustomRankingInfo.importance_level}
+   *     in descending order.
    *   * Location sorting: Use the special syntax to order jobs by distance:<br>
    *     `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
    *     `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
@@ -1308,36 +1374,46 @@ export class JobServiceClient {
    *   displayed to the job seeker higher up in the results, with the other jobs
    *   being displayed lower down in the results.
    *
-   *   Defaults to {@link google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel.SIMPLE|DiversificationLevel.SIMPLE} if no value
-   *   is specified.
+   *   Defaults to
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel.SIMPLE|DiversificationLevel.SIMPLE}
+   *   if no value is specified.
    * @param {google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo} request.customRankingInfo
    *   Controls over how job documents get ranked on top of existing relevance
    *   score (determined by API algorithm).
    * @param {boolean} request.disableKeywordMatch
    *   This field is deprecated. Please use
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode} going forward.
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
+   *   going forward.
    *
    *   To migrate, disable_keyword_match set to false maps to
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
-   *   true maps to {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
-   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL},
+   *   and disable_keyword_match set to true maps to
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}.
+   *   If
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode}
+   *   is set, this field is ignored.
    *
-   *   Controls whether to disable exact keyword match on {@link google.cloud.talent.v4.Job.title|Job.title},
-   *   {@link google.cloud.talent.v4.Job.description|Job.description}, {@link google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}, {@link google.cloud.talent.v4.Job.addresses|Job.addresses},
-   *   {@link google.cloud.talent.v4.Job.qualifications|Job.qualifications}. When disable keyword match is turned off, a
-   *   keyword match returns jobs that do not match given category filters when
-   *   there are matching keywords. For example, for the query "program manager,"
-   *   a result is returned even if the job posting has the title "software
-   *   developer," which doesn't fall into "program manager" ontology, but does
-   *   have "program manager" appearing in its description.
+   *   Controls whether to disable exact keyword match on
+   *   {@link google.cloud.talent.v4.Job.title|Job.title},
+   *   {@link google.cloud.talent.v4.Job.description|Job.description},
+   *   {@link google.cloud.talent.v4.Job.company_display_name|Job.company_display_name},
+   *   {@link google.cloud.talent.v4.Job.addresses|Job.addresses},
+   *   {@link google.cloud.talent.v4.Job.qualifications|Job.qualifications}. When
+   *   disable keyword match is turned off, a keyword match returns jobs that do
+   *   not match given category filters when there are matching keywords. For
+   *   example, for the query "program manager," a result is returned even if the
+   *   job posting has the title "software developer," which doesn't fall into
+   *   "program manager" ontology, but does have "program manager" appearing in
+   *   its description.
    *
    *   For queries like "cloud" that don't contain title or
    *   location specific ontology, jobs with "cloud" keyword matches are returned
    *   regardless of this flag's value.
    *
-   *   Use {@link google.cloud.talent.v4.Company.keyword_searchable_job_custom_attributes|Company.keyword_searchable_job_custom_attributes} if
-   *   company-specific globally matched custom field/attribute string values are
-   *   needed. Enabling keyword match improves recall of subsequent search
+   *   Use
+   *   {@link google.cloud.talent.v4.Company.keyword_searchable_job_custom_attributes|Company.keyword_searchable_job_custom_attributes}
+   *   if company-specific globally matched custom field/attribute string values
+   *   are needed. Enabling keyword match improves recall of subsequent search
    *   requests.
    *
    *   Defaults to false.
@@ -1345,8 +1421,9 @@ export class JobServiceClient {
    *   Controls what keyword match options to use. If both keyword_match_mode and
    *   disable_keyword_match are set, keyword_match_mode will take precedence.
    *
-   *   Defaults to {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
-   *   is specified.
+   *   Defaults to
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}
+   *   if no value is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1585,17 +1662,19 @@ export class JobServiceClient {
    *   Strongly recommended for the best service experience. Be aware that it will
    *   also increase latency when checking the status of a batch operation.
    *
-   *   If {@link google.cloud.talent.v4.BatchUpdateJobsRequest.update_mask|update_mask} is provided, only the specified fields in
-   *   {@link google.cloud.talent.v4.Job|Job} are updated. Otherwise all the fields are updated.
+   *   If {@link google.cloud.talent.v4.BatchUpdateJobsRequest.update_mask|update_mask}
+   *   is provided, only the specified fields in {@link google.cloud.talent.v4.Job|Job}
+   *   are updated. Otherwise all the fields are updated.
    *
    *   A field mask to restrict the fields that are updated. Only
    *   top level fields of {@link google.cloud.talent.v4.Job|Job} are supported.
    *
-   *   If {@link google.cloud.talent.v4.BatchUpdateJobsRequest.update_mask|update_mask} is provided, The {@link google.cloud.talent.v4.Job|Job} inside
+   *   If {@link google.cloud.talent.v4.BatchUpdateJobsRequest.update_mask|update_mask}
+   *   is provided, The {@link google.cloud.talent.v4.Job|Job} inside
    *   {@link JobOperationResult.JobResult|JobResult}
    *   will only contains fields that is updated, plus the Id of the Job.
-   *   Otherwise,  {@link google.cloud.talent.v4.Job|Job} will include all fields, which can yield a very
-   *   large response.
+   *   Otherwise,  {@link google.cloud.talent.v4.Job|Job} will include all fields,
+   *   which can yield a very large response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1916,14 +1995,17 @@ export class JobServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of jobs to be returned per page of results.
    *
-   *   If {@link google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to {@link google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY}, the maximum allowed
-   *   page size is 1000. Otherwise, the maximum allowed page size is 100.
+   *   If {@link google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
+   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
+   *   the maximum allowed page size is 1000. Otherwise, the maximum allowed page
+   *   size is 100.
    *
    *   Default is 100 if empty or a number < 1 is specified.
    * @param {google.cloud.talent.v4.JobView} request.jobView
    *   The desired job attributes returned for jobs in the
-   *   search response. Defaults to {@link google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no value is
-   *   specified.
+   *   search response. Defaults to
+   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
+   *   value is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2042,14 +2124,17 @@ export class JobServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of jobs to be returned per page of results.
    *
-   *   If {@link google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to {@link google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY}, the maximum allowed
-   *   page size is 1000. Otherwise, the maximum allowed page size is 100.
+   *   If {@link google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
+   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
+   *   the maximum allowed page size is 1000. Otherwise, the maximum allowed page
+   *   size is 100.
    *
    *   Default is 100 if empty or a number < 1 is specified.
    * @param {google.cloud.talent.v4.JobView} request.jobView
    *   The desired job attributes returned for jobs in the
-   *   search response. Defaults to {@link google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no value is
-   *   specified.
+   *   search response. Defaults to
+   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
+   *   value is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2124,14 +2209,17 @@ export class JobServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of jobs to be returned per page of results.
    *
-   *   If {@link google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to {@link google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY}, the maximum allowed
-   *   page size is 1000. Otherwise, the maximum allowed page size is 100.
+   *   If {@link google.cloud.talent.v4.ListJobsRequest.job_view|job_view} is set to
+   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_ID_ONLY|JobView.JOB_VIEW_ID_ONLY},
+   *   the maximum allowed page size is 1000. Otherwise, the maximum allowed page
+   *   size is 100.
    *
    *   Default is 100 if empty or a number < 1 is specified.
    * @param {google.cloud.talent.v4.JobView} request.jobView
    *   The desired job attributes returned for jobs in the
-   *   search response. Defaults to {@link google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no value is
-   *   specified.
+   *   search response. Defaults to
+   *   {@link google.cloud.talent.v4.JobView.JOB_VIEW_FULL|JobView.JOB_VIEW_FULL} if no
+   *   value is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2166,6 +2254,183 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.talent.v4.IJob>;
   }
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}. The promise has a method named
+   * "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------

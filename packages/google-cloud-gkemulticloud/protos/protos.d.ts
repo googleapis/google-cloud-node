@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7368,6 +7368,9 @@ export namespace google {
                     /** AzureCluster authorization */
                     authorization?: (google.cloud.gkemulticloud.v1.IAzureAuthorization|null);
 
+                    /** AzureCluster azureServicesAuthentication */
+                    azureServicesAuthentication?: (google.cloud.gkemulticloud.v1.IAzureServicesAuthentication|null);
+
                     /** AzureCluster state */
                     state?: (google.cloud.gkemulticloud.v1.AzureCluster.State|keyof typeof google.cloud.gkemulticloud.v1.AzureCluster.State|null);
 
@@ -7446,6 +7449,9 @@ export namespace google {
 
                     /** AzureCluster authorization. */
                     public authorization?: (google.cloud.gkemulticloud.v1.IAzureAuthorization|null);
+
+                    /** AzureCluster azureServicesAuthentication. */
+                    public azureServicesAuthentication?: (google.cloud.gkemulticloud.v1.IAzureServicesAuthentication|null);
 
                     /** AzureCluster state. */
                     public state: (google.cloud.gkemulticloud.v1.AzureCluster.State|keyof typeof google.cloud.gkemulticloud.v1.AzureCluster.State);
@@ -8377,6 +8383,9 @@ export namespace google {
                     /** AzureClient applicationId */
                     applicationId?: (string|null);
 
+                    /** AzureClient reconciling */
+                    reconciling?: (boolean|null);
+
                     /** AzureClient annotations */
                     annotations?: ({ [k: string]: string }|null);
 
@@ -8388,6 +8397,9 @@ export namespace google {
 
                     /** AzureClient createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AzureClient updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents an AzureClient. */
@@ -8408,6 +8420,9 @@ export namespace google {
                     /** AzureClient applicationId. */
                     public applicationId: string;
 
+                    /** AzureClient reconciling. */
+                    public reconciling: boolean;
+
                     /** AzureClient annotations. */
                     public annotations: { [k: string]: string };
 
@@ -8419,6 +8434,9 @@ export namespace google {
 
                     /** AzureClient createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AzureClient updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new AzureClient instance using the specified properties.
@@ -8589,6 +8607,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for AzureAuthorization
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AzureServicesAuthentication. */
+                interface IAzureServicesAuthentication {
+
+                    /** AzureServicesAuthentication tenantId */
+                    tenantId?: (string|null);
+
+                    /** AzureServicesAuthentication applicationId */
+                    applicationId?: (string|null);
+                }
+
+                /** Represents an AzureServicesAuthentication. */
+                class AzureServicesAuthentication implements IAzureServicesAuthentication {
+
+                    /**
+                     * Constructs a new AzureServicesAuthentication.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkemulticloud.v1.IAzureServicesAuthentication);
+
+                    /** AzureServicesAuthentication tenantId. */
+                    public tenantId: string;
+
+                    /** AzureServicesAuthentication applicationId. */
+                    public applicationId: string;
+
+                    /**
+                     * Creates a new AzureServicesAuthentication instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AzureServicesAuthentication instance
+                     */
+                    public static create(properties?: google.cloud.gkemulticloud.v1.IAzureServicesAuthentication): google.cloud.gkemulticloud.v1.AzureServicesAuthentication;
+
+                    /**
+                     * Encodes the specified AzureServicesAuthentication message. Does not implicitly {@link google.cloud.gkemulticloud.v1.AzureServicesAuthentication.verify|verify} messages.
+                     * @param message AzureServicesAuthentication message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkemulticloud.v1.IAzureServicesAuthentication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AzureServicesAuthentication message, length delimited. Does not implicitly {@link google.cloud.gkemulticloud.v1.AzureServicesAuthentication.verify|verify} messages.
+                     * @param message AzureServicesAuthentication message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkemulticloud.v1.IAzureServicesAuthentication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AzureServicesAuthentication message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AzureServicesAuthentication
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkemulticloud.v1.AzureServicesAuthentication;
+
+                    /**
+                     * Decodes an AzureServicesAuthentication message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AzureServicesAuthentication
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkemulticloud.v1.AzureServicesAuthentication;
+
+                    /**
+                     * Verifies an AzureServicesAuthentication message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AzureServicesAuthentication message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AzureServicesAuthentication
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkemulticloud.v1.AzureServicesAuthentication;
+
+                    /**
+                     * Creates a plain object from an AzureServicesAuthentication message. Also converts values to other types if specified.
+                     * @param message AzureServicesAuthentication
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkemulticloud.v1.AzureServicesAuthentication, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AzureServicesAuthentication to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AzureServicesAuthentication
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

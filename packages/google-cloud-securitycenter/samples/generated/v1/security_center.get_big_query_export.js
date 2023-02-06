@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the BigQuery export to retrieve. Its format is
+   *  Required. Name of the big query export to retrieve. Its format is
    *  organizations/{organization}/bigQueryExports/{export_id},
    *  folders/{folder}/bigQueryExports/{export_id}, or
    *  projects/{project}/bigQueryExports/{export_id}

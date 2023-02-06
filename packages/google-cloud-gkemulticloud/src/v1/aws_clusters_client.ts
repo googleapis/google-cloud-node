@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -496,7 +496,7 @@ export class AwsClustersClient {
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
    *
    *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on GCP resource names.
+   *   for more details on Google Cloud Platform resource names.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -900,7 +900,7 @@ export class AwsClustersClient {
 
   /**
    * Creates a new {@link google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
-   * resource on a given GCP project and region.
+   * resource on a given Google Cloud Platform project and region.
    *
    * If successful, the response contains a newly created
    * {@link google.longrunning.Operation|Operation} resource that can be
@@ -1253,7 +1253,7 @@ export class AwsClustersClient {
    *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
    *
    *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on GCP resource names.
+   *   for more details on Google Cloud Platform resource names.
    * @param {boolean} request.validateOnly
    *   If set, only validate the request, but do not actually delete the resource.
    * @param {boolean} request.allowMissing
@@ -1917,7 +1917,7 @@ export class AwsClustersClient {
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
    *
    *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on GCP resource names.
+   *   for more details on Google Cloud Platform resource names.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    *
@@ -2029,7 +2029,7 @@ export class AwsClustersClient {
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
    *
    *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on GCP resource names.
+   *   for more details on Google Cloud Platform resource names.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    *
@@ -2089,7 +2089,7 @@ export class AwsClustersClient {
    *   Location names are formatted as `projects/<project-id>/locations/<region>`.
    *
    *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-   *   for more details on GCP resource names.
+   *   for more details on Google Cloud Platform resource names.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    *

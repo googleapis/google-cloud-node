@@ -22,7 +22,7 @@ import "google/protobuf/duration.proto";
 
 option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2beta1";
-option go_package = "google.golang.org/genproto/googleapis/cloud/dialogflow/v2beta1;dialogflow";
+option go_package = "cloud.google.com/go/dialogflow/apiv2beta1/dialogflowpb;dialogflowpb";
 option java_multiple_files = true;
 option java_outer_classname = "AudioConfigProto";
 option java_package = "com.google.cloud.dialogflow.v2beta1";
@@ -30,6 +30,10 @@ option objc_class_prefix = "DF";
 option (google.api.resource_definition) = {
   type: "automl.googleapis.com/Model"
   pattern: "projects/{project}/locations/{location}/models/{model}"
+};
+option (google.api.resource_definition) = {
+  type: "speech.googleapis.com/PhraseSet"
+  pattern: "projects/{project}/locations/{location}/phraseSets/{phrase_set}"
 };
 
 // Audio encoding of the audio content sent in the conversational query request.

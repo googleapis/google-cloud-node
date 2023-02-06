@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -55,15 +55,15 @@ const version = require('../../../package.json').version;
  *
  *  The Certificates Manager service exposes the following resources:
  *
- *  * `Certificate` which describes a single TLS certificate.
- *  * `CertificateMap` which describes a collection of certificates that can be
+ *  * `Certificate` that describes a single TLS certificate.
+ *  * `CertificateMap` that describes a collection of certificates that can be
  *  attached to a target resource.
- *  * `CertificateMapEntry` which describes a single configuration entry that
+ *  * `CertificateMapEntry` that describes a single configuration entry that
  *  consists of a SNI and a group of certificates. It's a subresource of
  *  CertificateMap.
  *
  *  Certificate, CertificateMap and CertificateMapEntry IDs
- *  have to match "^[a-z0-9-]{1,63}$" regexp, which means that
+ *  have to fully match the regexp `[a-z0-9-]{1,63}`. In other words,
  *  - only lower case letters, digits, and hyphen are allowed
  *  - length of the resource ID has to be in [1,63] range.
  *
@@ -150,6 +150,9 @@ export class CertificateManagerClient {
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/gke-backup",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "gkebackup client for Node.js",
   "repository": {
     "type": "git",
@@ -58,11 +58,11 @@
     "mocha": "^10.0.0",
     "null-loader": "^4.0.1",
     "pack-n-play": "^1.0.0-2",
-    "sinon": "^14.0.0",
+    "sinon": "^15.0.0",
     "ts-loader": "^9.1.2",
     "typescript": "^4.2.4",
     "webpack": "^5.36.2",
-    "webpack-cli": "^4.7.0"
+    "webpack-cli": "^5.0.0"
   },
   "engines": {
     "node": ">=v12.0.0"

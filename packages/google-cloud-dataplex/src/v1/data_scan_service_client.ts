@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,6 +42,9 @@ import * as gapicConfig from './data_scan_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
+ *  DataScanService manages DataScan resources which can be configured to run
+ *  various types of data scanning workload and generate enriched metadata (e.g.
+ *  Data Profile, Data Quality) for the data source.
  * @class
  * @memberof v1
  */
@@ -586,18 +589,17 @@ export class DataScanServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Get dataScan resource.
+   * Gets a DataScan resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the dataScan:
-   *   projects/{project}/locations/{location_id}/dataScans/{data_scan_id}
-   *   where `{project}` refers to a project_id or project_number and
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
    *   `location_id` refers to a GCP region.
    * @param {google.cloud.dataplex.v1.GetDataScanRequest.DataScanView} [request.view]
-   *   Optional. Used to select the subset of DataScan information to return.
-   *   Defaults to `BASIC`.
+   *   Optional. Select the DataScan view to return. Defaults to `BASIC`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -677,16 +679,17 @@ export class DataScanServiceClient {
     return this.innerApiCalls.getDataScan(request, options, callback);
   }
   /**
-   * Run an on demand execution of a DataScan.
+   * Runs an on-demand execution of a DataScan
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the DataScan:
-   *   projects/{project}/locations/{location_id}/dataScans/{data_scan_id}.
-   *   where `{project}` refers to a project_id or project_number and
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`.
+   *   where `project` refers to a *project_id* or *project_number* and
    *   `location_id` refers to a GCP region.
-   *   Only on-demand DataScans are allowed.
+   *
+   *   Only **OnDemand** data scans are allowed.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -766,18 +769,17 @@ export class DataScanServiceClient {
     return this.innerApiCalls.runDataScan(request, options, callback);
   }
   /**
-   * Get DataScanJob resource.
+   * Gets a DataScanJob resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the DataScanJob:
-   *   projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/dataScanJobs/{data_scan_job_id}
-   *   where `{project}` refers to a project_id or project_number and
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/dataScanJobs/{data_scan_job_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
    *   `location_id` refers to a GCP region.
    * @param {google.cloud.dataplex.v1.GetDataScanJobRequest.DataScanJobView} [request.view]
-   *   Optional. Used to select the subset of DataScan information to return.
-   *   Defaults to `BASIC`.
+   *   Optional. Select the DataScanJob view to return. Defaults to `BASIC`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -858,19 +860,20 @@ export class DataScanServiceClient {
   }
 
   /**
-   * Creates a dataScan resource.
+   * Creates a DataScan resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent location:
-   *   projects/{project}/locations/{location_id}
-   *   where `{project}` refers to a project_id or project_number and
+   *   `projects/{project}/locations/{location_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
    *   `location_id` refers to a GCP region.
    * @param {google.cloud.dataplex.v1.DataScan} request.dataScan
    *   Required. DataScan resource.
    * @param {string} request.dataScanId
    *   Required. DataScan identifier.
+   *
    *   * Must contain only lowercase letters, numbers and hyphens.
    *   * Must start with a letter.
    *   * Must end with a number or a letter.
@@ -1008,12 +1011,13 @@ export class DataScanServiceClient {
     >;
   }
   /**
-   * Update the dataScan resource.
+   * Updates a DataScan resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.dataplex.v1.DataScan} request.dataScan
-   *   Required. Update description.
+   *   Required. DataScan resource to be updated.
+   *
    *   Only fields specified in `update_mask` are updated.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update.
@@ -1149,14 +1153,14 @@ export class DataScanServiceClient {
     >;
   }
   /**
-   * Delete the dataScan resource.
+   * Deletes a DataScan resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the dataScan:
-   *   projects/{project}/locations/{location_id}/dataScans/{data_scan_id}
-   *   where `{project}` refers to a project_id or project_number and
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
    *   `location_id` refers to a GCP region.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1290,13 +1294,14 @@ export class DataScanServiceClient {
     >;
   }
   /**
-   * Lists dataScans.
+   * Lists DataScans.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. projects/{project}/locations/{location_id}
-   *   where `{project}` refers to a project_id or project_number and
+   *   Required. The resource name of the parent location:
+   *   `projects/{project}/locations/{location_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
    *   `location_id` refers to a GCP region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of dataScans to return. The service may return
@@ -1310,7 +1315,7 @@ export class DataScanServiceClient {
    * @param {string} [request.filter]
    *   Optional. Filter request.
    * @param {string} [request.orderBy]
-   *   Optional. Order by fields (name or create_time) for the result.
+   *   Optional. Order by fields (`name` or `create_time`) for the result.
    *   If not specified, the ordering is undefined.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1399,8 +1404,9 @@ export class DataScanServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. projects/{project}/locations/{location_id}
-   *   where `{project}` refers to a project_id or project_number and
+   *   Required. The resource name of the parent location:
+   *   `projects/{project}/locations/{location_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
    *   `location_id` refers to a GCP region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of dataScans to return. The service may return
@@ -1414,7 +1420,7 @@ export class DataScanServiceClient {
    * @param {string} [request.filter]
    *   Optional. Filter request.
    * @param {string} [request.orderBy]
-   *   Optional. Order by fields (name or create_time) for the result.
+   *   Optional. Order by fields (`name` or `create_time`) for the result.
    *   If not specified, the ordering is undefined.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1457,8 +1463,9 @@ export class DataScanServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. projects/{project}/locations/{location_id}
-   *   where `{project}` refers to a project_id or project_number and
+   *   Required. The resource name of the parent location:
+   *   `projects/{project}/locations/{location_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
    *   `location_id` refers to a GCP region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of dataScans to return. The service may return
@@ -1472,7 +1479,7 @@ export class DataScanServiceClient {
    * @param {string} [request.filter]
    *   Optional. Filter request.
    * @param {string} [request.orderBy]
-   *   Optional. Order by fields (name or create_time) for the result.
+   *   Optional. Order by fields (`name` or `create_time`) for the result.
    *   If not specified, the ordering is undefined.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1509,14 +1516,14 @@ export class DataScanServiceClient {
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IDataScan>;
   }
   /**
-   * Lists DataScanJobs under the given dataScan.
+   * Lists DataScanJobs under the given DataScan.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent environment:
-   *   projects/{project}/locations/{location_id}/dataScans/{data_scan_id}
-   *   where `{project}` refers to a project_id or project_number and
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
    *   `location_id` refers to a GCP region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of DataScanJobs to return. The service may return
@@ -1622,8 +1629,8 @@ export class DataScanServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent environment:
-   *   projects/{project}/locations/{location_id}/dataScans/{data_scan_id}
-   *   where `{project}` refers to a project_id or project_number and
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
    *   `location_id` refers to a GCP region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of DataScanJobs to return. The service may return
@@ -1677,8 +1684,8 @@ export class DataScanServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent environment:
-   *   projects/{project}/locations/{location_id}/dataScans/{data_scan_id}
-   *   where `{project}` refers to a project_id or project_number and
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
    *   `location_id` refers to a GCP region.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of DataScanJobs to return. The service may return

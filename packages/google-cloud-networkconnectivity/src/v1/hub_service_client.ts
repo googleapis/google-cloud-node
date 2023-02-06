@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -131,6 +131,9 @@ export class HubServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -207,9 +210,6 @@ export class HubServiceClient {
       networkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/global/networks/{resource_id}'
       ),
-      policyBasedRoutePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/{location}/global/PolicyBasedRoutes/{policy_based_route}'
-      ),
       spokePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/spokes/{spoke}'
       ),
@@ -263,15 +263,6 @@ export class HubServiceClient {
             {
               get: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:getIamPolicy',
             },
-            {
-              get: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:getIamPolicy',
-            },
           ],
         },
         {
@@ -287,18 +278,6 @@ export class HubServiceClient {
               post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:setIamPolicy',
               body: '*',
             },
-            {
-              post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:setIamPolicy',
-              body: '*',
-            },
           ],
         },
         {
@@ -312,18 +291,6 @@ export class HubServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -2713,65 +2680,6 @@ export class HubServiceClient {
   matchResourceIdFromNetworkName(networkName: string) {
     return this.pathTemplates.networkPathTemplate.match(networkName)
       .resource_id;
-  }
-
-  /**
-   * Return a fully-qualified policyBasedRoute resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} policy_based_route
-   * @returns {string} Resource name string.
-   */
-  policyBasedRoutePath(
-    project: string,
-    location: string,
-    policyBasedRoute: string
-  ) {
-    return this.pathTemplates.policyBasedRoutePathTemplate.render({
-      project: project,
-      location: location,
-      policy_based_route: policyBasedRoute,
-    });
-  }
-
-  /**
-   * Parse the project from PolicyBasedRoute resource.
-   *
-   * @param {string} policyBasedRouteName
-   *   A fully-qualified path representing PolicyBasedRoute resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromPolicyBasedRouteName(policyBasedRouteName: string) {
-    return this.pathTemplates.policyBasedRoutePathTemplate.match(
-      policyBasedRouteName
-    ).project;
-  }
-
-  /**
-   * Parse the location from PolicyBasedRoute resource.
-   *
-   * @param {string} policyBasedRouteName
-   *   A fully-qualified path representing PolicyBasedRoute resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromPolicyBasedRouteName(policyBasedRouteName: string) {
-    return this.pathTemplates.policyBasedRoutePathTemplate.match(
-      policyBasedRouteName
-    ).location;
-  }
-
-  /**
-   * Parse the policy_based_route from PolicyBasedRoute resource.
-   *
-   * @param {string} policyBasedRouteName
-   *   A fully-qualified path representing PolicyBasedRoute resource.
-   * @returns {string} A string representing the policy_based_route.
-   */
-  matchPolicyBasedRouteFromPolicyBasedRouteName(policyBasedRouteName: string) {
-    return this.pathTemplates.policyBasedRoutePathTemplate.match(
-      policyBasedRouteName
-    ).policy_based_route;
   }
 
   /**

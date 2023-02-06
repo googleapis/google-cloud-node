@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Asset.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1;asset",
+                    "go_package": "cloud.google.com/go/asset/apiv1/assetpb;assetpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
                     "java_package": "com.google.cloud.asset.v1",
@@ -382,6 +382,60 @@
                               "(google.api.http)": {
                                 "get": "/v1/{scope=*/*}/effectiveIamPolicies:batchGet"
                               }
+                            }
+                          ]
+                        },
+                        "AnalyzeOrgPolicies": {
+                          "requestType": "AnalyzeOrgPoliciesRequest",
+                          "responseType": "AnalyzeOrgPoliciesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{scope=*/*}:analyzeOrgPolicies",
+                            "(google.api.method_signature)": "scope,constraint,filter"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{scope=*/*}:analyzeOrgPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "scope,constraint,filter"
+                            }
+                          ]
+                        },
+                        "AnalyzeOrgPolicyGovernedContainers": {
+                          "requestType": "AnalyzeOrgPolicyGovernedContainersRequest",
+                          "responseType": "AnalyzeOrgPolicyGovernedContainersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{scope=*/*}:analyzeOrgPolicyGovernedContainers",
+                            "(google.api.method_signature)": "scope,constraint,filter"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{scope=*/*}:analyzeOrgPolicyGovernedContainers"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "scope,constraint,filter"
+                            }
+                          ]
+                        },
+                        "AnalyzeOrgPolicyGovernedAssets": {
+                          "requestType": "AnalyzeOrgPolicyGovernedAssetsRequest",
+                          "responseType": "AnalyzeOrgPolicyGovernedAssetsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{scope=*/*}:analyzeOrgPolicyGovernedAssets",
+                            "(google.api.method_signature)": "scope,constraint,filter"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{scope=*/*}:analyzeOrgPolicyGovernedAssets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "scope,constraint,filter"
                             }
                           ]
                         }
@@ -1790,6 +1844,506 @@
                         }
                       }
                     },
+                    "AnalyzerOrgPolicy": {
+                      "fields": {
+                        "attachedResource": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "appliedResource": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "rules": {
+                          "rule": "repeated",
+                          "type": "Rule",
+                          "id": 2
+                        },
+                        "inheritFromParent": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "reset": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Rule": {
+                          "oneofs": {
+                            "kind": {
+                              "oneof": [
+                                "values",
+                                "allowAll",
+                                "denyAll",
+                                "enforce"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "values": {
+                              "type": "StringValues",
+                              "id": 3
+                            },
+                            "allowAll": {
+                              "type": "bool",
+                              "id": 4
+                            },
+                            "denyAll": {
+                              "type": "bool",
+                              "id": 5
+                            },
+                            "enforce": {
+                              "type": "bool",
+                              "id": 6
+                            },
+                            "condition": {
+                              "type": "google.type.Expr",
+                              "id": 7
+                            }
+                          },
+                          "nested": {
+                            "StringValues": {
+                              "fields": {
+                                "allowedValues": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "deniedValues": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AnalyzerOrgPolicyConstraint": {
+                      "oneofs": {
+                        "constraintDefinition": {
+                          "oneof": [
+                            "googleDefinedConstraint",
+                            "customConstraint"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "googleDefinedConstraint": {
+                          "type": "Constraint",
+                          "id": 1
+                        },
+                        "customConstraint": {
+                          "type": "CustomConstraint",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Constraint": {
+                          "oneofs": {
+                            "constraintType": {
+                              "oneof": [
+                                "listConstraint",
+                                "booleanConstraint"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "constraintDefault": {
+                              "type": "ConstraintDefault",
+                              "id": 4
+                            },
+                            "listConstraint": {
+                              "type": "ListConstraint",
+                              "id": 5
+                            },
+                            "booleanConstraint": {
+                              "type": "BooleanConstraint",
+                              "id": 6
+                            }
+                          },
+                          "nested": {
+                            "ConstraintDefault": {
+                              "values": {
+                                "CONSTRAINT_DEFAULT_UNSPECIFIED": 0,
+                                "ALLOW": 1,
+                                "DENY": 2
+                              }
+                            },
+                            "ListConstraint": {
+                              "fields": {
+                                "supportsIn": {
+                                  "type": "bool",
+                                  "id": 1
+                                },
+                                "supportsUnder": {
+                                  "type": "bool",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "BooleanConstraint": {
+                              "fields": {}
+                            }
+                          }
+                        },
+                        "CustomConstraint": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "resourceTypes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "methodTypes": {
+                              "rule": "repeated",
+                              "type": "MethodType",
+                              "id": 3
+                            },
+                            "condition": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "actionType": {
+                              "type": "ActionType",
+                              "id": 5
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 6
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 7
+                            }
+                          },
+                          "nested": {
+                            "MethodType": {
+                              "values": {
+                                "METHOD_TYPE_UNSPECIFIED": 0,
+                                "CREATE": 1,
+                                "UPDATE": 2,
+                                "DELETE": 3
+                              }
+                            },
+                            "ActionType": {
+                              "values": {
+                                "ACTION_TYPE_UNSPECIFIED": 0,
+                                "ALLOW": 1,
+                                "DENY": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AnalyzeOrgPoliciesRequest": {
+                      "oneofs": {
+                        "_pageSize": {
+                          "oneof": [
+                            "pageSize"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "scope": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "constraint": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "AnalyzeOrgPoliciesResponse": {
+                      "fields": {
+                        "orgPolicyResults": {
+                          "rule": "repeated",
+                          "type": "OrgPolicyResult",
+                          "id": 1
+                        },
+                        "constraint": {
+                          "type": "AnalyzerOrgPolicyConstraint",
+                          "id": 2
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "OrgPolicyResult": {
+                          "fields": {
+                            "consolidatedPolicy": {
+                              "type": "AnalyzerOrgPolicy",
+                              "id": 1
+                            },
+                            "policyBundle": {
+                              "rule": "repeated",
+                              "type": "AnalyzerOrgPolicy",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AnalyzeOrgPolicyGovernedContainersRequest": {
+                      "oneofs": {
+                        "_pageSize": {
+                          "oneof": [
+                            "pageSize"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "scope": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "constraint": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "AnalyzeOrgPolicyGovernedContainersResponse": {
+                      "fields": {
+                        "governedContainers": {
+                          "rule": "repeated",
+                          "type": "GovernedContainer",
+                          "id": 1
+                        },
+                        "constraint": {
+                          "type": "AnalyzerOrgPolicyConstraint",
+                          "id": 2
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "GovernedContainer": {
+                          "fields": {
+                            "fullResourceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "parent": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "consolidatedPolicy": {
+                              "type": "AnalyzerOrgPolicy",
+                              "id": 3
+                            },
+                            "policyBundle": {
+                              "rule": "repeated",
+                              "type": "AnalyzerOrgPolicy",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AnalyzeOrgPolicyGovernedAssetsRequest": {
+                      "oneofs": {
+                        "_pageSize": {
+                          "oneof": [
+                            "pageSize"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "scope": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "constraint": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "AnalyzeOrgPolicyGovernedAssetsResponse": {
+                      "fields": {
+                        "governedAssets": {
+                          "rule": "repeated",
+                          "type": "GovernedAsset",
+                          "id": 1
+                        },
+                        "constraint": {
+                          "type": "AnalyzerOrgPolicyConstraint",
+                          "id": 2
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "GovernedResource": {
+                          "fields": {
+                            "fullResourceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "parent": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "project": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "folders": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 6
+                            },
+                            "organization": {
+                              "type": "string",
+                              "id": 7
+                            }
+                          }
+                        },
+                        "GovernedIamPolicy": {
+                          "fields": {
+                            "attachedResource": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "policy": {
+                              "type": "google.iam.v1.Policy",
+                              "id": 2
+                            },
+                            "project": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "folders": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 6
+                            },
+                            "organization": {
+                              "type": "string",
+                              "id": 7
+                            }
+                          }
+                        },
+                        "GovernedAsset": {
+                          "oneofs": {
+                            "governedAsset": {
+                              "oneof": [
+                                "governedResource",
+                                "governedIamPolicy"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "governedResource": {
+                              "type": "GovernedResource",
+                              "id": 1
+                            },
+                            "governedIamPolicy": {
+                              "type": "GovernedIamPolicy",
+                              "id": 2
+                            },
+                            "consolidatedPolicy": {
+                              "type": "AnalyzerOrgPolicy",
+                              "id": 3
+                            },
+                            "policyBundle": {
+                              "rule": "repeated",
+                              "type": "AnalyzerOrgPolicy",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
                     "ContentType": {
                       "values": {
                         "CONTENT_TYPE_UNSPECIFIED": 0,
@@ -2390,7 +2944,7 @@
                 "v1p1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Asset.V1P1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p1beta1;asset",
+                    "go_package": "cloud.google.com/go/asset/apiv1p1beta1/assetpb;assetpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
                     "java_package": "com.google.cloud.asset.v1p1beta1",
@@ -2635,7 +3189,7 @@
                 "v1p2beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Asset.v1p2beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p2beta1;asset",
+                    "go_package": "cloud.google.com/go/asset/apiv1p2beta1/assetpb;assetpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
                     "java_package": "com.google.cloud.asset.v1p2beta1",
@@ -3505,7 +4059,7 @@
                 "v1p5beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Asset.V1p5Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p5beta1;asset",
+                    "go_package": "cloud.google.com/go/asset/apiv1p5beta1/assetpb;assetpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
                     "java_package": "com.google.cloud.asset.v1p5beta1",
@@ -3523,13 +4077,17 @@
                           "requestType": "ListAssetsRequest",
                           "responseType": "ListAssetsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1p5beta1/{parent=*/*}/assets"
+                            "(google.api.http).get": "/v1p5beta1/{parent=*/*}/assets",
+                            "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v1p5beta1/{parent=*/*}/assets"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
                             }
                           ]
                         }
@@ -3541,7 +4099,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudasset.googleapis.com/Asset"
                           }
                         },
                         "readTime": {
@@ -3567,15 +4126,6 @@
                         }
                       }
                     },
-                    "ContentType": {
-                      "values": {
-                        "CONTENT_TYPE_UNSPECIFIED": 0,
-                        "RESOURCE": 1,
-                        "IAM_POLICY": 2,
-                        "ORG_POLICY": 4,
-                        "ACCESS_POLICY": 5
-                      }
-                    },
                     "ListAssetsResponse": {
                       "fields": {
                         "readTime": {
@@ -3591,6 +4141,15 @@
                           "type": "string",
                           "id": 3
                         }
+                      }
+                    },
+                    "ContentType": {
+                      "values": {
+                        "CONTENT_TYPE_UNSPECIFIED": 0,
+                        "RESOURCE": 1,
+                        "IAM_POLICY": 2,
+                        "ORG_POLICY": 4,
+                        "ACCESS_POLICY": 5
                       }
                     },
                     "Asset": {
@@ -3681,7 +4240,7 @@
                 "v1p7beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Asset.V1P7Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p7beta1;asset",
+                    "go_package": "cloud.google.com/go/asset/apiv1p7beta1/assetpb;assetpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
                     "java_package": "com.google.cloud.asset.v1p7beta1",
@@ -4158,7 +4717,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.OsConfig.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/osconfig/v1;osconfig",
+                    "go_package": "cloud.google.com/go/osconfig/apiv1/osconfigpb;osconfigpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "Inventories",
                     "java_package": "com.google.cloud.osconfig.v1",
