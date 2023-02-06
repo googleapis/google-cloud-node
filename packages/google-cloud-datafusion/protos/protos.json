@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.DataFusion.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/datafusion/v1;datafusion",
+                    "go_package": "cloud.google.com/go/datafusion/apiv1/datafusionpb;datafusionpb",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.datafusion.v1",
                     "php_namespace": "Google\\Cloud\\DataFusion\\V1",
@@ -657,7 +657,7 @@
                 "v1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.DataFusion.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/datafusion/v1beta1;datafusion",
+                    "go_package": "cloud.google.com/go/datafusion/apiv1beta1/datafusionpb;datafusionpb",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.datafusion.v1beta1",
                     "php_namespace": "Google\\Cloud\\DataFusion\\V1beta1",

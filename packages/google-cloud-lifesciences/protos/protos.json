@@ -9,7 +9,7 @@
                 "v2beta": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.LifeSciences.V2Beta",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/lifesciences/v2beta;lifesciences",
+                    "go_package": "cloud.google.com/go/lifesciences/apiv2beta/lifesciencespb;lifesciencespb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WorkflowsProto",
                     "java_package": "com.google.cloud.lifesciences.v2beta",

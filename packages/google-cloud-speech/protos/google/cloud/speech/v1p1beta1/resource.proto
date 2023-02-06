@@ -19,7 +19,7 @@ package google.cloud.speech.v1p1beta1;
 import "google/api/resource.proto";
 
 option cc_enable_arenas = true;
-option go_package = "google.golang.org/genproto/googleapis/cloud/speech/v1p1beta1;speech";
+option go_package = "cloud.google.com/go/speech/apiv1p1beta1/speechpb;speechpb";
 option java_multiple_files = true;
 option java_outer_classname = "SpeechResourceProto";
 option java_package = "com.google.cloud.speech.v1p1beta1";
@@ -82,8 +82,8 @@ message PhraseSet {
   // Speech-to-Text supports three locations: `global`, `us` (US North America),
   // and `eu` (Europe). If you are calling the `speech.googleapis.com`
   // endpoint, use the `global` location. To specify a region, use a
-  // [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-  // `eu` location value.
+  // [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+  // with matching `us` or `eu` location value.
   message Phrase {
     // The phrase itself.
     string value = 1;

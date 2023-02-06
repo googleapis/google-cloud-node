@@ -981,7 +981,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Batch.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/batch/v1;batch",
+                    "go_package": "cloud.google.com/go/batch/apiv1/batchpb;batchpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VolumeProto",
                     "java_package": "com.google.cloud.batch.v1",
@@ -2133,7 +2133,7 @@
                 "v1alpha": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Batch.V1Alpha",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/batch/v1alpha;batch",
+                    "go_package": "cloud.google.com/go/batch/apiv1alpha/batchpb;batchpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VolumeProto",
                     "java_package": "com.google.cloud.batch.v1alpha",
