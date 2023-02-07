@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/domains/v1;domains",
+                    "go_package": "cloud.google.com/go/domains/apiv1/domainspb;domainspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "DomainsProto",
                     "java_package": "com.google.cloud.domains.v1"
@@ -1207,7 +1207,7 @@
                 },
                 "v1alpha2": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/domains/v1alpha2;domains",
+                    "go_package": "cloud.google.com/go/domains/apiv1alpha2/domainspb;domainspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "DomainsProto",
                     "java_package": "com.google.cloud.domains.v1alpha2"
@@ -2406,7 +2406,7 @@
                 },
                 "v1beta1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/domains/v1beta1;domains",
+                    "go_package": "cloud.google.com/go/domains/apiv1beta1/domainspb;domainspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "DomainsProto",
                     "java_package": "com.google.cloud.domains.v1beta1"

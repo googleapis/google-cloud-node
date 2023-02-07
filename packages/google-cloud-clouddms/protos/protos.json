@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.CloudDms.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/clouddms/v1;clouddms",
+                    "go_package": "cloud.google.com/go/clouddms/apiv1/clouddmspb;clouddmspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ClouddmsResourcesProto",
                     "java_package": "com.google.cloud.clouddms.v1",

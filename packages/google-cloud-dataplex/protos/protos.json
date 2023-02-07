@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/dataplex/v1;dataplex",
+                    "go_package": "cloud.google.com/go/dataplex/apiv1/dataplexpb;dataplexpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TasksProto",
                     "java_package": "com.google.cloud.dataplex.v1"

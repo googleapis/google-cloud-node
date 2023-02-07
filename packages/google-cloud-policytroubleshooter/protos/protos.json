@@ -10,7 +10,7 @@
                   "options": {
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.PolicyTroubleshooter.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/policytroubleshooter/v1;policytroubleshooter",
+                    "go_package": "cloud.google.com/go/policytroubleshooter/apiv1/policytroubleshooterpb;policytroubleshooterpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "IAMCheckerProto",
                     "java_package": "com.google.cloud.policytroubleshooter.v1",

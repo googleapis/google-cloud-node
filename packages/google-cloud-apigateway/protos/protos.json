@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.ApiGateway.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/apigateway/v1;apigateway",
+                    "go_package": "cloud.google.com/go/apigateway/apiv1/apigatewaypb;apigatewaypb",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.apigateway.v1",
                     "php_namespace": "Google\\Cloud\\ApiGateway\\V1",
