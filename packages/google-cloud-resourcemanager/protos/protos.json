@@ -9,7 +9,7 @@
                 "v3": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.ResourceManager.V3",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/resourcemanager/v3;resourcemanager",
+                    "go_package": "cloud.google.com/go/resourcemanager/apiv3/resourcemanagerpb;resourcemanagerpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TagValuesProto",
                     "java_package": "com.google.cloud.resourcemanager.v3",
