@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.AIPlatform.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1;aiplatform",
+                    "go_package": "cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VizierServiceProto",
                     "java_package": "com.google.cloud.aiplatform.v1",
@@ -1590,6 +1590,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "originalModelInfo": {
+                          "type": "OriginalModelInfo",
+                          "id": 34,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "metadataArtifact": {
                           "type": "string",
                           "id": 44,
@@ -1623,6 +1630,18 @@
                                 "EXPORTABLE_CONTENT_UNSPECIFIED": 0,
                                 "ARTIFACT": 1,
                                 "IMAGE": 2
+                              }
+                            }
+                          }
+                        },
+                        "OriginalModelInfo": {
+                          "fields": {
+                            "model": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
                               }
                             }
                           }
@@ -3415,6 +3434,7 @@
                           "type": "string",
                           "id": 13,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
                         },
@@ -6486,6 +6506,13 @@
                       },
                       "nested": {
                         "MetricSpec": {
+                          "oneofs": {
+                            "_safetyConfig": {
+                              "oneof": [
+                                "safetyConfig"
+                              ]
+                            }
+                          },
                           "fields": {
                             "metricId": {
                               "type": "string",
@@ -6500,9 +6527,38 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "safetyConfig": {
+                              "type": "SafetyMetricConfig",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
                             }
                           },
                           "nested": {
+                            "SafetyMetricConfig": {
+                              "oneofs": {
+                                "_desiredMinSafeTrialsFraction": {
+                                  "oneof": [
+                                    "desiredMinSafeTrialsFraction"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "safetyThreshold": {
+                                  "type": "double",
+                                  "id": 1
+                                },
+                                "desiredMinSafeTrialsFraction": {
+                                  "type": "double",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
                             "GoalType": {
                               "values": {
                                 "GOAL_TYPE_UNSPECIFIED": 0,
@@ -7117,6 +7173,13 @@
                             "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "privateServiceConnectConfig": {
+                          "type": "PrivateServiceConnectConfig",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -7246,6 +7309,22 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "PrivateServiceConnectConfig": {
+                      "fields": {
+                        "enablePrivateServiceConnect": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "projectAllowlist": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -8079,7 +8158,7 @@
                     "JobService": {
                       "options": {
                         "(google.api.default_host)": "aiplatform.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only"
                       },
                       "methods": {
                         "CreateCustomJob": {
@@ -8385,6 +8464,144 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateNasJob": {
+                          "requestType": "CreateNasJobRequest",
+                          "responseType": "NasJob",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/nasJobs",
+                            "(google.api.http).body": "nas_job",
+                            "(google.api.method_signature)": "parent,nas_job"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/nasJobs",
+                                "body": "nas_job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,nas_job"
+                            }
+                          ]
+                        },
+                        "GetNasJob": {
+                          "requestType": "GetNasJobRequest",
+                          "responseType": "NasJob",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/nasJobs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/nasJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListNasJobs": {
+                          "requestType": "ListNasJobsRequest",
+                          "responseType": "ListNasJobsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/nasJobs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/nasJobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteNasJob": {
+                          "requestType": "DeleteNasJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/nasJobs/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/nasJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CancelNasJob": {
+                          "requestType": "CancelNasJobRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/nasJobs/*}:cancel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/nasJobs/*}:cancel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetNasTrialDetail": {
+                          "requestType": "GetNasTrialDetailRequest",
+                          "responseType": "NasTrialDetail",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/nasJobs/*/nasTrialDetails/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/nasJobs/*/nasTrialDetails/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListNasTrialDetails": {
+                          "requestType": "ListNasTrialDetailsRequest",
+                          "responseType": "ListNasTrialDetailsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/nasJobs/*}/nasTrialDetails",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/nasJobs/*}/nasTrialDetails"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
                             }
                           ]
                         },
@@ -8951,6 +9168,147 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/HyperparameterTuningJob"
                           }
+                        }
+                      }
+                    },
+                    "CreateNasJobRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "nasJob": {
+                          "type": "NasJob",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetNasJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NasJob"
+                          }
+                        }
+                      }
+                    },
+                    "ListNasJobsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListNasJobsResponse": {
+                      "fields": {
+                        "nasJobs": {
+                          "rule": "repeated",
+                          "type": "NasJob",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteNasJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NasJob"
+                          }
+                        }
+                      }
+                    },
+                    "CancelNasJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NasJob"
+                          }
+                        }
+                      }
+                    },
+                    "GetNasTrialDetailRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NasTrialDetail"
+                          }
+                        }
+                      }
+                    },
+                    "ListNasTrialDetailsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NasJob"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListNasTrialDetailsResponse": {
+                      "fields": {
+                        "nasTrialDetails": {
+                          "rule": "repeated",
+                          "type": "NasTrialDetail",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -9742,6 +10100,356 @@
                               "type": "double",
                               "id": 1
                             }
+                          }
+                        }
+                      }
+                    },
+                    "NasJob": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/NasJob",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/nasJobs/{nas_job}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "nasJobSpec": {
+                          "type": "NasJobSpec",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "nasJobOutput": {
+                          "type": "NasJobOutput",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "JobState",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 12
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 13
+                        },
+                        "enableRestrictedImageTraining": {
+                          "type": "bool",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "NasTrialDetail": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/NasTrialDetail",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "parameters": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "searchTrial": {
+                          "type": "NasTrial",
+                          "id": 3
+                        },
+                        "trainTrial": {
+                          "type": "NasTrial",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "NasJobSpec": {
+                      "oneofs": {
+                        "nasAlgorithmSpec": {
+                          "oneof": [
+                            "multiTrialAlgorithmSpec"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "multiTrialAlgorithmSpec": {
+                          "type": "MultiTrialAlgorithmSpec",
+                          "id": 2
+                        },
+                        "resumeNasJobId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "searchSpaceSpec": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "MultiTrialAlgorithmSpec": {
+                          "fields": {
+                            "multiTrialAlgorithm": {
+                              "type": "MultiTrialAlgorithm",
+                              "id": 1
+                            },
+                            "metric": {
+                              "type": "MetricSpec",
+                              "id": 2
+                            },
+                            "searchTrialSpec": {
+                              "type": "SearchTrialSpec",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "trainTrialSpec": {
+                              "type": "TrainTrialSpec",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "MetricSpec": {
+                              "fields": {
+                                "metricId": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "goal": {
+                                  "type": "GoalType",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "GoalType": {
+                                  "values": {
+                                    "GOAL_TYPE_UNSPECIFIED": 0,
+                                    "MAXIMIZE": 1,
+                                    "MINIMIZE": 2
+                                  }
+                                }
+                              }
+                            },
+                            "SearchTrialSpec": {
+                              "fields": {
+                                "searchTrialJobSpec": {
+                                  "type": "CustomJobSpec",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "maxTrialCount": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "maxParallelTrialCount": {
+                                  "type": "int32",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "maxFailedTrialCount": {
+                                  "type": "int32",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "TrainTrialSpec": {
+                              "fields": {
+                                "trainTrialJobSpec": {
+                                  "type": "CustomJobSpec",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "maxParallelTrialCount": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "frequency": {
+                                  "type": "int32",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "MultiTrialAlgorithm": {
+                              "values": {
+                                "MULTI_TRIAL_ALGORITHM_UNSPECIFIED": 0,
+                                "REINFORCEMENT_LEARNING": 1,
+                                "GRID_SEARCH": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "NasJobOutput": {
+                      "oneofs": {
+                        "output": {
+                          "oneof": [
+                            "multiTrialJobOutput"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "multiTrialJobOutput": {
+                          "type": "MultiTrialJobOutput",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MultiTrialJobOutput": {
+                          "fields": {
+                            "searchTrials": {
+                              "rule": "repeated",
+                              "type": "NasTrial",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trainTrials": {
+                              "rule": "repeated",
+                              "type": "NasTrial",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "NasTrial": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "finalMeasurement": {
+                          "type": "Measurement",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "REQUESTED": 1,
+                            "ACTIVE": 2,
+                            "STOPPING": 3,
+                            "SUCCEEDED": 4,
+                            "INFEASIBLE": 5
                           }
                         }
                       }
@@ -12193,6 +12901,34 @@
                             }
                           ]
                         },
+                        "CopyModel": {
+                          "requestType": "CopyModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/models:copy",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,source_model",
+                            "(google.longrunning.operation_info).response_type": "CopyModelResponse",
+                            "(google.longrunning.operation_info).metadata_type": "CopyModelOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/models:copy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,source_model"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "CopyModelResponse",
+                                "metadata_type": "CopyModelOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ImportModelEvaluation": {
                           "requestType": "ImportModelEvaluationRequest",
                           "responseType": "ModelEvaluation",
@@ -12611,6 +13347,79 @@
                     },
                     "ExportModelResponse": {
                       "fields": {}
+                    },
+                    "CopyModelRequest": {
+                      "oneofs": {
+                        "destinationModel": {
+                          "oneof": [
+                            "modelId",
+                            "parentModel"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "modelId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "parentModel": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "sourceModel": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CopyModelOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CopyModelResponse": {
+                      "fields": {
+                        "model": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "modelVersionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
                     },
                     "ImportModelEvaluationRequest": {
                       "fields": {
@@ -13141,7 +13950,6 @@
                           "type": "CustomJobDetail",
                           "id": 2,
                           "options": {
-                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
@@ -13184,9 +13992,6 @@
                           }
                         },
                         "CustomJobDetail": {
-                          "options": {
-                            "deprecated": true
-                          },
                           "fields": {
                             "job": {
                               "type": "string",
@@ -13194,6 +13999,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "(google.api.resource_reference).type": "aiplatform.googleapis.com/CustomJob"
+                              }
+                            },
+                            "failedJobs": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           }
@@ -14136,7 +14949,7 @@
                             "instance": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1.Schema.Predict.Instance",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/predict/instance;instance",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1/schema/predict/instance/instancepb;instancepb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionInstanceProto",
                                 "java_package": "com.google.cloud.aiplatform.v1.schema.predict.instance",
@@ -14285,7 +15098,7 @@
                             "params": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1.Schema.Predict.Params",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/predict/params;params",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1/schema/predict/params/paramspb;paramspb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionParamsProto",
                                 "java_package": "com.google.cloud.aiplatform.v1.schema.predict.params",
@@ -14382,7 +15195,7 @@
                             "prediction": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1.Schema.Predict.Prediction",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/predict/prediction;prediction",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1/schema/predict/prediction/predictionpb;predictionpb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionResultProto",
                                 "java_package": "com.google.cloud.aiplatform.v1.schema.predict.prediction",
@@ -14628,7 +15441,7 @@
                             "definition": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1.Schema.TrainingJob.Definition",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/trainingjob/definition;definition",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1/schema/trainingjob/definition/definitionpb;definitionpb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "AutoMLVideoObjectTrackingProto",
                                 "java_package": "com.google.cloud.aiplatform.v1.schema.trainingjob.definition",
@@ -17859,7 +18672,7 @@
                 "v1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1;aiplatform",
+                    "go_package": "cloud.google.com/go/aiplatform/apiv1beta1/aiplatformpb;aiplatformpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VizierServiceProto",
                     "java_package": "com.google.cloud.aiplatform.v1beta1",
@@ -20069,6 +20882,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "originalModelInfo": {
+                          "type": "OriginalModelInfo",
+                          "id": 34,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "metadataArtifact": {
                           "type": "string",
                           "id": 44,
@@ -20102,6 +20922,18 @@
                                 "EXPORTABLE_CONTENT_UNSPECIFIED": 0,
                                 "ARTIFACT": 1,
                                 "IMAGE": 2
+                              }
+                            }
+                          }
+                        },
+                        "OriginalModelInfo": {
+                          "fields": {
+                            "model": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
                               }
                             }
                           }
@@ -22186,6 +23018,7 @@
                           "type": "string",
                           "id": 13,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
                         },
@@ -22272,6 +23105,10 @@
                         "explanationSpec": {
                           "type": "ExplanationSpec",
                           "id": 9
+                        },
+                        "disableExplanations": {
+                          "type": "bool",
+                          "id": 19
                         },
                         "serviceAccount": {
                           "type": "string",
@@ -25399,6 +26236,13 @@
                       },
                       "nested": {
                         "MetricSpec": {
+                          "oneofs": {
+                            "_safetyConfig": {
+                              "oneof": [
+                                "safetyConfig"
+                              ]
+                            }
+                          },
                           "fields": {
                             "metricId": {
                               "type": "string",
@@ -25413,9 +26257,38 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "safetyConfig": {
+                              "type": "SafetyMetricConfig",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
                             }
                           },
                           "nested": {
+                            "SafetyMetricConfig": {
+                              "oneofs": {
+                                "_desiredMinSafeTrialsFraction": {
+                                  "oneof": [
+                                    "desiredMinSafeTrialsFraction"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "safetyThreshold": {
+                                  "type": "double",
+                                  "id": 1
+                                },
+                                "desiredMinSafeTrialsFraction": {
+                                  "type": "double",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
                             "GoalType": {
                               "values": {
                                 "GOAL_TYPE_UNSPECIFIED": 0,
@@ -26073,6 +26946,13 @@
                             "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "privateServiceConnectConfig": {
+                          "type": "PrivateServiceConnectConfig",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -26202,6 +27082,22 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "PrivateServiceConnectConfig": {
+                      "fields": {
+                        "enablePrivateServiceConnect": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "projectAllowlist": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -27035,7 +27931,7 @@
                     "JobService": {
                       "options": {
                         "(google.api.default_host)": "aiplatform.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only"
                       },
                       "methods": {
                         "CreateCustomJob": {
@@ -27341,6 +28237,144 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateNasJob": {
+                          "requestType": "CreateNasJobRequest",
+                          "responseType": "NasJob",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/nasJobs",
+                            "(google.api.http).body": "nas_job",
+                            "(google.api.method_signature)": "parent,nas_job"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/nasJobs",
+                                "body": "nas_job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,nas_job"
+                            }
+                          ]
+                        },
+                        "GetNasJob": {
+                          "requestType": "GetNasJobRequest",
+                          "responseType": "NasJob",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/nasJobs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/nasJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListNasJobs": {
+                          "requestType": "ListNasJobsRequest",
+                          "responseType": "ListNasJobsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/nasJobs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/nasJobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteNasJob": {
+                          "requestType": "DeleteNasJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/nasJobs/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/nasJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CancelNasJob": {
+                          "requestType": "CancelNasJobRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/nasJobs/*}:cancel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/nasJobs/*}:cancel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetNasTrialDetail": {
+                          "requestType": "GetNasTrialDetailRequest",
+                          "responseType": "NasTrialDetail",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/nasJobs/*/nasTrialDetails/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/nasJobs/*/nasTrialDetails/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListNasTrialDetails": {
+                          "requestType": "ListNasTrialDetailsRequest",
+                          "responseType": "ListNasTrialDetailsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/nasJobs/*}/nasTrialDetails",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/nasJobs/*}/nasTrialDetails"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
                             }
                           ]
                         },
@@ -27910,6 +28944,147 @@
                         }
                       }
                     },
+                    "CreateNasJobRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "nasJob": {
+                          "type": "NasJob",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetNasJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NasJob"
+                          }
+                        }
+                      }
+                    },
+                    "ListNasJobsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListNasJobsResponse": {
+                      "fields": {
+                        "nasJobs": {
+                          "rule": "repeated",
+                          "type": "NasJob",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteNasJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NasJob"
+                          }
+                        }
+                      }
+                    },
+                    "CancelNasJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NasJob"
+                          }
+                        }
+                      }
+                    },
+                    "GetNasTrialDetailRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NasTrialDetail"
+                          }
+                        }
+                      }
+                    },
+                    "ListNasTrialDetailsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NasJob"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListNasTrialDetailsResponse": {
+                      "fields": {
+                        "nasTrialDetails": {
+                          "rule": "repeated",
+                          "type": "NasTrialDetail",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "CreateBatchPredictionJobRequest": {
                       "fields": {
                         "parent": {
@@ -28211,6 +29386,356 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
+                        }
+                      }
+                    },
+                    "NasJob": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/NasJob",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/nasJobs/{nas_job}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "nasJobSpec": {
+                          "type": "NasJobSpec",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "nasJobOutput": {
+                          "type": "NasJobOutput",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "JobState",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 12
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 13
+                        },
+                        "enableRestrictedImageTraining": {
+                          "type": "bool",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "NasTrialDetail": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/NasTrialDetail",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "parameters": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "searchTrial": {
+                          "type": "NasTrial",
+                          "id": 3
+                        },
+                        "trainTrial": {
+                          "type": "NasTrial",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "NasJobSpec": {
+                      "oneofs": {
+                        "nasAlgorithmSpec": {
+                          "oneof": [
+                            "multiTrialAlgorithmSpec"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "multiTrialAlgorithmSpec": {
+                          "type": "MultiTrialAlgorithmSpec",
+                          "id": 2
+                        },
+                        "resumeNasJobId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "searchSpaceSpec": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "MultiTrialAlgorithmSpec": {
+                          "fields": {
+                            "multiTrialAlgorithm": {
+                              "type": "MultiTrialAlgorithm",
+                              "id": 1
+                            },
+                            "metric": {
+                              "type": "MetricSpec",
+                              "id": 2
+                            },
+                            "searchTrialSpec": {
+                              "type": "SearchTrialSpec",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "trainTrialSpec": {
+                              "type": "TrainTrialSpec",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "MetricSpec": {
+                              "fields": {
+                                "metricId": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "goal": {
+                                  "type": "GoalType",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "GoalType": {
+                                  "values": {
+                                    "GOAL_TYPE_UNSPECIFIED": 0,
+                                    "MAXIMIZE": 1,
+                                    "MINIMIZE": 2
+                                  }
+                                }
+                              }
+                            },
+                            "SearchTrialSpec": {
+                              "fields": {
+                                "searchTrialJobSpec": {
+                                  "type": "CustomJobSpec",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "maxTrialCount": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "maxParallelTrialCount": {
+                                  "type": "int32",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "maxFailedTrialCount": {
+                                  "type": "int32",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "TrainTrialSpec": {
+                              "fields": {
+                                "trainTrialJobSpec": {
+                                  "type": "CustomJobSpec",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "maxParallelTrialCount": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "frequency": {
+                                  "type": "int32",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "MultiTrialAlgorithm": {
+                              "values": {
+                                "MULTI_TRIAL_ALGORITHM_UNSPECIFIED": 0,
+                                "REINFORCEMENT_LEARNING": 1,
+                                "GRID_SEARCH": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "NasJobOutput": {
+                      "oneofs": {
+                        "output": {
+                          "oneof": [
+                            "multiTrialJobOutput"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "multiTrialJobOutput": {
+                          "type": "MultiTrialJobOutput",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MultiTrialJobOutput": {
+                          "fields": {
+                            "searchTrials": {
+                              "rule": "repeated",
+                              "type": "NasTrial",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trainTrials": {
+                              "rule": "repeated",
+                              "type": "NasTrial",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "NasTrial": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "finalMeasurement": {
+                          "type": "Measurement",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "REQUESTED": 1,
+                            "ACTIVE": 2,
+                            "STOPPING": 3,
+                            "SUCCEEDED": 4,
+                            "INFEASIBLE": 5
+                          }
                         }
                       }
                     },
@@ -30681,6 +32206,34 @@
                             }
                           ]
                         },
+                        "CopyModel": {
+                          "requestType": "CopyModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/models:copy",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,source_model",
+                            "(google.longrunning.operation_info).response_type": "CopyModelResponse",
+                            "(google.longrunning.operation_info).metadata_type": "CopyModelOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/models:copy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,source_model"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "CopyModelResponse",
+                                "metadata_type": "CopyModelOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ImportModelEvaluation": {
                           "requestType": "ImportModelEvaluationRequest",
                           "responseType": "ModelEvaluation",
@@ -31122,6 +32675,79 @@
                     },
                     "ExportModelResponse": {
                       "fields": {}
+                    },
+                    "CopyModelRequest": {
+                      "oneofs": {
+                        "destinationModel": {
+                          "oneof": [
+                            "modelId",
+                            "parentModel"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "modelId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "parentModel": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "sourceModel": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CopyModelOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CopyModelResponse": {
+                      "fields": {
+                        "model": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "modelVersionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
                     },
                     "ImportModelEvaluationRequest": {
                       "fields": {
@@ -31652,7 +33278,6 @@
                           "type": "CustomJobDetail",
                           "id": 2,
                           "options": {
-                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
@@ -31695,9 +33320,6 @@
                           }
                         },
                         "CustomJobDetail": {
-                          "options": {
-                            "deprecated": true
-                          },
                           "fields": {
                             "job": {
                               "type": "string",
@@ -31705,6 +33327,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "(google.api.resource_reference).type": "aiplatform.googleapis.com/CustomJob"
+                              }
+                            },
+                            "failedJobs": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           }
@@ -32643,7 +34273,7 @@
                     "schema": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema;schema",
+                        "go_package": "cloud.google.com/go/aiplatform/apiv1beta1/schema/schemapb;schemapb",
                         "java_multiple_files": true,
                         "java_outer_classname": "DatasetMetadataProto",
                         "java_package": "com.google.cloud.aiplatform.v1beta1.schema",
@@ -33127,7 +34757,7 @@
                             "instance": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema.Predict.Instance",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema/predict/instance;instance",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1beta1/schema/predict/instance/instancepb;instancepb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionInstanceProto",
                                 "java_package": "com.google.cloud.aiplatform.v1beta1.schema.predict.instance",
@@ -33276,7 +34906,7 @@
                             "params": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema.Predict.Params",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema/predict/params;params",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1beta1/schema/predict/params/paramspb;paramspb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionParamsProto",
                                 "java_package": "com.google.cloud.aiplatform.v1beta1.schema.predict.params",
@@ -33373,7 +35003,7 @@
                             "prediction": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema.Predict.Prediction",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema/predict/prediction;prediction",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1beta1/schema/predict/prediction/predictionpb;predictionpb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionResultProto",
                                 "java_package": "com.google.cloud.aiplatform.v1beta1.schema.predict.prediction",
@@ -33627,7 +35257,7 @@
                             "definition": {
                               "options": {
                                 "csharp_namespace": "Google.Cloud.AIPlatform.V1Beta1.Schema.TrainingJob.Definition",
-                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1beta1/schema/trainingjob/definition;definition",
+                                "go_package": "cloud.google.com/go/aiplatform/apiv1beta1/schema/trainingjob/definition/definitionpb;definitionpb",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "AutoMLVideoObjectTrackingProto",
                                 "java_package": "com.google.cloud.aiplatform.v1beta1.schema.trainingjob.definition",

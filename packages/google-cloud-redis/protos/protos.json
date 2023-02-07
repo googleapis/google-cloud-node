@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/redis/v1;redis",
+                    "go_package": "cloud.google.com/go/redis/apiv1/redispb;redispb",
                     "java_multiple_files": true,
                     "java_outer_classname": "CloudRedisServiceV1Proto",
                     "java_package": "com.google.cloud.redis.v1"
@@ -1043,7 +1043,7 @@
                 },
                 "v1beta1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/redis/v1beta1;redis",
+                    "go_package": "cloud.google.com/go/redis/apiv1beta1/redispb;redispb",
                     "java_multiple_files": true,
                     "java_outer_classname": "CloudRedisServiceBetaProto",
                     "java_package": "com.google.cloud.redis.v1beta1"

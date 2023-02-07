@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.GkeBackup.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/gkebackup/v1;gkebackup",
+                    "go_package": "cloud.google.com/go/gkebackup/apiv1/gkebackuppb;gkebackuppb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VolumeProto",
                     "java_package": "com.google.cloud.gkebackup.v1",

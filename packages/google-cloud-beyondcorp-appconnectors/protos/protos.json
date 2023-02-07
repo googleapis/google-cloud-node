@@ -11,7 +11,7 @@
                     "v1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.BeyondCorp.AppConnectors.V1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/beyondcorp/appconnectors/v1;appconnectors",
+                        "go_package": "cloud.google.com/go/beyondcorp/appconnectors/apiv1/appconnectorspb;appconnectorspb",
                         "java_multiple_files": true,
                         "java_outer_classname": "ResourceInfoProto",
                         "java_package": "com.google.cloud.beyondcorp.appconnectors.v1",

@@ -9,7 +9,7 @@
                 "common": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.OsLogin.Common",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/oslogin/common;common",
+                    "go_package": "cloud.google.com/go/oslogin/common/commonpb;commonpb",
                     "java_outer_classname": "OsLoginProto",
                     "java_package": "com.google.cloud.oslogin.common",
                     "php_namespace": "Google\\Cloud\\OsLogin\\Common",
@@ -118,7 +118,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.OsLogin.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/oslogin/v1;oslogin",
+                    "go_package": "cloud.google.com/go/oslogin/apiv1/osloginpb;osloginpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "OsLoginProto",
                     "java_package": "com.google.cloud.oslogin.v1",
@@ -431,7 +431,7 @@
                 "v1beta": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.OsLogin.V1Beta",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/oslogin/v1beta;oslogin",
+                    "go_package": "cloud.google.com/go/oslogin/apiv1beta/osloginpb;osloginpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "OsLoginProto",
                     "java_package": "com.google.cloud.oslogin.v1beta",
