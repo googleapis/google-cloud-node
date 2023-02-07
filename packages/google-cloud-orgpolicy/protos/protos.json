@@ -9,7 +9,7 @@
                 "v2": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.OrgPolicy.V2",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/orgpolicy/v2;orgpolicy",
+                    "go_package": "cloud.google.com/go/orgpolicy/apiv2/orgpolicypb;orgpolicypb",
                     "java_multiple_files": true,
                     "java_outer_classname": "OrgPolicyProto",
                     "java_package": "com.google.cloud.orgpolicy.v2",

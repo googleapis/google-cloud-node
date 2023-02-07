@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/optimization/v1;optimization",
+                    "go_package": "cloud.google.com/go/optimization/apiv1/optimizationpb;optimizationpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "FleetRoutingProto",
                     "java_package": "com.google.cloud.optimization.v1"
