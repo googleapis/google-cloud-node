@@ -9,7 +9,7 @@
                 "v1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.PrivateCatalog.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/privatecatalog/v1beta1;privatecatalog",
+                    "go_package": "cloud.google.com/go/privatecatalog/apiv1beta1/privatecatalogpb;privatecatalogpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "PrivateCatalogProto",
                     "java_package": "com.google.cloud.privatecatalog.v1beta1",
