@@ -10,7 +10,7 @@
                   "options": {
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.BinaryAuthorization.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/binaryauthorization/v1;binaryauthorization",
+                    "go_package": "cloud.google.com/go/binaryauthorization/apiv1/binaryauthorizationpb;binaryauthorizationpb",
                     "java_multiple_files": false,
                     "java_package": "com.google.protos.google.cloud.binaryauthorization.v1",
                     "php_namespace": "Google\\Cloud\\BinaryAuthorization\\V1",
@@ -671,7 +671,7 @@
                   "options": {
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.BinaryAuthorization.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/binaryauthorization/v1beta1;binaryauthorization",
+                    "go_package": "cloud.google.com/go/binaryauthorization/apiv1beta1/binaryauthorizationpb;binaryauthorizationpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "BinaryAuthorizationServiceProto",
                     "java_package": "com.google.cloud.binaryauthorization.v1beta1",

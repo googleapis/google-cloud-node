@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/dataproc/v1;dataproc",
+                    "go_package": "cloud.google.com/go/dataproc/apiv1/dataprocpb;dataprocpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WorkflowTemplatesProto",
                     "java_package": "com.google.cloud.dataproc.v1",

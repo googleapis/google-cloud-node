@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/billing/v1;billing",
+                    "go_package": "cloud.google.com/go/billing/apiv1/billingpb;billingpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "CloudCatalogProto",
                     "java_package": "com.google.cloud.billing.v1",

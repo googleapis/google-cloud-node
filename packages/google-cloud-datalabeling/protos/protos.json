@@ -9,7 +9,7 @@
                 "v1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.DataLabeling.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/datalabeling/v1beta1;datalabeling",
+                    "go_package": "cloud.google.com/go/datalabeling/apiv1beta1/datalabelingpb;datalabelingpb",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.datalabeling.v1beta1",
                     "php_namespace": "Google\\Cloud\\DataLabeling\\V1beta1",

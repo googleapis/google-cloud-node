@@ -10,7 +10,7 @@
                   "options": {
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.Translate.V3",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/translate/v3;translate",
+                    "go_package": "cloud.google.com/go/translation/apiv3/translationpb;translationpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TranslationServiceProto",
                     "java_package": "com.google.cloud.translate.v3",
@@ -1286,7 +1286,7 @@
                   "options": {
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.Translate.V3Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/translate/v3beta1;translate",
+                    "go_package": "cloud.google.com/go/translation/apiv3beta1/translationpb;translationpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TranslationServiceProto",
                     "java_package": "com.google.cloud.translate.v3beta1",

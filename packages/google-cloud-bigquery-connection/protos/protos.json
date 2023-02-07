@@ -11,7 +11,7 @@
                     "v1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.BigQuery.Connection.V1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/connection/v1;connection",
+                        "go_package": "cloud.google.com/go/bigquery/connection/apiv1/connectionpb;connectionpb",
                         "java_multiple_files": true,
                         "java_package": "com.google.cloud.bigquery.connection.v1",
                         "php_namespace": "Google\\Cloud\\BigQuery\\Connection\\V1"
@@ -543,7 +543,7 @@
                     "v1beta1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.BigQuery.Connection.V1Beta1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/connection/v1beta1;connection",
+                        "go_package": "cloud.google.com/go/bigquery/connection/apiv1beta1/connectionpb;connectionpb",
                         "java_outer_classname": "ConnectionProto",
                         "java_package": "com.google.cloud.bigquery.connection.v1beta1",
                         "php_namespace": "Google\\Cloud\\BigQuery\\Connection\\V1beta1"

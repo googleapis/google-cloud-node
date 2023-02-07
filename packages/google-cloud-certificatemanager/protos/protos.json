@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.CertificateManager.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/certificatemanager/v1;certificatemanager",
+                    "go_package": "cloud.google.com/go/certificatemanager/apiv1/certificatemanagerpb;certificatemanagerpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "CertificateManagerProto",
                     "java_package": "com.google.cloud.certificatemanager.v1",
