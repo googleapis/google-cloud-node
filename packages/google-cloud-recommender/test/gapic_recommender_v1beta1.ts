@@ -127,38 +127,40 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.RecommenderClient', () => {
+describe('v1beta1.RecommenderClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = recommenderModule.v1.RecommenderClient.servicePath;
+      const servicePath =
+        recommenderModule.v1beta1.RecommenderClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = recommenderModule.v1.RecommenderClient.apiEndpoint;
+      const apiEndpoint =
+        recommenderModule.v1beta1.RecommenderClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port = recommenderModule.v1.RecommenderClient.port;
+      const port = recommenderModule.v1beta1.RecommenderClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new recommenderModule.v1.RecommenderClient();
+      const client = new recommenderModule.v1beta1.RecommenderClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -168,7 +170,7 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('has close method for the initialized client', done => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -180,7 +182,7 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -192,7 +194,7 @@ describe('v1.RecommenderClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -204,7 +206,7 @@ describe('v1.RecommenderClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -227,22 +229,22 @@ describe('v1.RecommenderClient', () => {
 
   describe('getInsight', () => {
     it('invokes getInsight without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetInsightRequest()
+        new protos.google.cloud.recommender.v1beta1.GetInsightRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetInsightRequest',
+        '.google.cloud.recommender.v1beta1.GetInsightRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.Insight()
+        new protos.google.cloud.recommender.v1beta1.Insight()
       );
       client.innerApiCalls.getInsight = stubSimpleCall(expectedResponse);
       const [response] = await client.getInsight(request);
@@ -258,22 +260,22 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes getInsight without error using callback', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetInsightRequest()
+        new protos.google.cloud.recommender.v1beta1.GetInsightRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetInsightRequest',
+        '.google.cloud.recommender.v1beta1.GetInsightRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.Insight()
+        new protos.google.cloud.recommender.v1beta1.Insight()
       );
       client.innerApiCalls.getInsight =
         stubSimpleCallWithCallback(expectedResponse);
@@ -282,7 +284,7 @@ describe('v1.RecommenderClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.recommender.v1.IInsight | null
+            result?: protos.google.cloud.recommender.v1beta1.IInsight | null
           ) => {
             if (err) {
               reject(err);
@@ -305,16 +307,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes getInsight with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetInsightRequest()
+        new protos.google.cloud.recommender.v1beta1.GetInsightRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetInsightRequest',
+        '.google.cloud.recommender.v1beta1.GetInsightRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -336,16 +338,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes getInsight with closed client', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetInsightRequest()
+        new protos.google.cloud.recommender.v1beta1.GetInsightRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetInsightRequest',
+        '.google.cloud.recommender.v1beta1.GetInsightRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -357,22 +359,22 @@ describe('v1.RecommenderClient', () => {
 
   describe('markInsightAccepted', () => {
     it('invokes markInsightAccepted without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkInsightAcceptedRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkInsightAcceptedRequest',
+        '.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.Insight()
+        new protos.google.cloud.recommender.v1beta1.Insight()
       );
       client.innerApiCalls.markInsightAccepted =
         stubSimpleCall(expectedResponse);
@@ -389,22 +391,22 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes markInsightAccepted without error using callback', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkInsightAcceptedRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkInsightAcceptedRequest',
+        '.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.Insight()
+        new protos.google.cloud.recommender.v1beta1.Insight()
       );
       client.innerApiCalls.markInsightAccepted =
         stubSimpleCallWithCallback(expectedResponse);
@@ -413,7 +415,7 @@ describe('v1.RecommenderClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.recommender.v1.IInsight | null
+            result?: protos.google.cloud.recommender.v1beta1.IInsight | null
           ) => {
             if (err) {
               reject(err);
@@ -436,16 +438,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes markInsightAccepted with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkInsightAcceptedRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkInsightAcceptedRequest',
+        '.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -467,16 +469,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes markInsightAccepted with closed client', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkInsightAcceptedRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkInsightAcceptedRequest',
+        '.google.cloud.recommender.v1beta1.MarkInsightAcceptedRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -488,22 +490,22 @@ describe('v1.RecommenderClient', () => {
 
   describe('getRecommendation', () => {
     it('invokes getRecommendation without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetRecommendationRequest()
+        new protos.google.cloud.recommender.v1beta1.GetRecommendationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetRecommendationRequest',
+        '.google.cloud.recommender.v1beta1.GetRecommendationRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.Recommendation()
+        new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
       client.innerApiCalls.getRecommendation = stubSimpleCall(expectedResponse);
       const [response] = await client.getRecommendation(request);
@@ -519,22 +521,22 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes getRecommendation without error using callback', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetRecommendationRequest()
+        new protos.google.cloud.recommender.v1beta1.GetRecommendationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetRecommendationRequest',
+        '.google.cloud.recommender.v1beta1.GetRecommendationRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.Recommendation()
+        new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
       client.innerApiCalls.getRecommendation =
         stubSimpleCallWithCallback(expectedResponse);
@@ -543,7 +545,7 @@ describe('v1.RecommenderClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.recommender.v1.IRecommendation | null
+            result?: protos.google.cloud.recommender.v1beta1.IRecommendation | null
           ) => {
             if (err) {
               reject(err);
@@ -566,16 +568,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes getRecommendation with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetRecommendationRequest()
+        new protos.google.cloud.recommender.v1beta1.GetRecommendationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetRecommendationRequest',
+        '.google.cloud.recommender.v1beta1.GetRecommendationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -597,16 +599,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes getRecommendation with closed client', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetRecommendationRequest()
+        new protos.google.cloud.recommender.v1beta1.GetRecommendationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetRecommendationRequest',
+        '.google.cloud.recommender.v1beta1.GetRecommendationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -618,22 +620,22 @@ describe('v1.RecommenderClient', () => {
 
   describe('markRecommendationClaimed', () => {
     it('invokes markRecommendationClaimed without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkRecommendationClaimedRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkRecommendationClaimedRequest',
+        '.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.Recommendation()
+        new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
       client.innerApiCalls.markRecommendationClaimed =
         stubSimpleCall(expectedResponse);
@@ -650,22 +652,22 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes markRecommendationClaimed without error using callback', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkRecommendationClaimedRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkRecommendationClaimedRequest',
+        '.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.Recommendation()
+        new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
       client.innerApiCalls.markRecommendationClaimed =
         stubSimpleCallWithCallback(expectedResponse);
@@ -674,7 +676,7 @@ describe('v1.RecommenderClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.recommender.v1.IRecommendation | null
+            result?: protos.google.cloud.recommender.v1beta1.IRecommendation | null
           ) => {
             if (err) {
               reject(err);
@@ -697,16 +699,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes markRecommendationClaimed with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkRecommendationClaimedRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkRecommendationClaimedRequest',
+        '.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -731,16 +733,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes markRecommendationClaimed with closed client', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkRecommendationClaimedRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkRecommendationClaimedRequest',
+        '.google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -755,22 +757,22 @@ describe('v1.RecommenderClient', () => {
 
   describe('markRecommendationSucceeded', () => {
     it('invokes markRecommendationSucceeded without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkRecommendationSucceededRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkRecommendationSucceededRequest',
+        '.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.Recommendation()
+        new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
       client.innerApiCalls.markRecommendationSucceeded =
         stubSimpleCall(expectedResponse);
@@ -787,22 +789,22 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes markRecommendationSucceeded without error using callback', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkRecommendationSucceededRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkRecommendationSucceededRequest',
+        '.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.Recommendation()
+        new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
       client.innerApiCalls.markRecommendationSucceeded =
         stubSimpleCallWithCallback(expectedResponse);
@@ -811,7 +813,7 @@ describe('v1.RecommenderClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.recommender.v1.IRecommendation | null
+            result?: protos.google.cloud.recommender.v1beta1.IRecommendation | null
           ) => {
             if (err) {
               reject(err);
@@ -834,16 +836,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes markRecommendationSucceeded with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkRecommendationSucceededRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkRecommendationSucceededRequest',
+        '.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -868,16 +870,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes markRecommendationSucceeded with closed client', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkRecommendationSucceededRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkRecommendationSucceededRequest',
+        '.google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -892,22 +894,22 @@ describe('v1.RecommenderClient', () => {
 
   describe('markRecommendationFailed', () => {
     it('invokes markRecommendationFailed without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkRecommendationFailedRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkRecommendationFailedRequest',
+        '.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.Recommendation()
+        new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
       client.innerApiCalls.markRecommendationFailed =
         stubSimpleCall(expectedResponse);
@@ -924,22 +926,22 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes markRecommendationFailed without error using callback', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkRecommendationFailedRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkRecommendationFailedRequest',
+        '.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.Recommendation()
+        new protos.google.cloud.recommender.v1beta1.Recommendation()
       );
       client.innerApiCalls.markRecommendationFailed =
         stubSimpleCallWithCallback(expectedResponse);
@@ -948,7 +950,7 @@ describe('v1.RecommenderClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.recommender.v1.IRecommendation | null
+            result?: protos.google.cloud.recommender.v1beta1.IRecommendation | null
           ) => {
             if (err) {
               reject(err);
@@ -971,16 +973,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes markRecommendationFailed with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkRecommendationFailedRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkRecommendationFailedRequest',
+        '.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1005,16 +1007,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes markRecommendationFailed with closed client', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.MarkRecommendationFailedRequest()
+        new protos.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.MarkRecommendationFailedRequest',
+        '.google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1029,22 +1031,22 @@ describe('v1.RecommenderClient', () => {
 
   describe('getRecommenderConfig', () => {
     it('invokes getRecommenderConfig without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetRecommenderConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetRecommenderConfigRequest',
+        '.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.RecommenderConfig()
+        new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
       );
       client.innerApiCalls.getRecommenderConfig =
         stubSimpleCall(expectedResponse);
@@ -1061,22 +1063,22 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes getRecommenderConfig without error using callback', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetRecommenderConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetRecommenderConfigRequest',
+        '.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.RecommenderConfig()
+        new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
       );
       client.innerApiCalls.getRecommenderConfig =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1085,7 +1087,7 @@ describe('v1.RecommenderClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.recommender.v1.IRecommenderConfig | null
+            result?: protos.google.cloud.recommender.v1beta1.IRecommenderConfig | null
           ) => {
             if (err) {
               reject(err);
@@ -1108,16 +1110,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes getRecommenderConfig with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetRecommenderConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetRecommenderConfigRequest',
+        '.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1139,16 +1141,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes getRecommenderConfig with closed client', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetRecommenderConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetRecommenderConfigRequest',
+        '.google.cloud.recommender.v1beta1.GetRecommenderConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1160,23 +1162,23 @@ describe('v1.RecommenderClient', () => {
 
   describe('updateRecommenderConfig', () => {
     it('invokes updateRecommenderConfig without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.UpdateRecommenderConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest()
       );
       request.recommenderConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.UpdateRecommenderConfigRequest',
+        '.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest',
         ['recommenderConfig', 'name']
       );
       request.recommenderConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.RecommenderConfig()
+        new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
       );
       client.innerApiCalls.updateRecommenderConfig =
         stubSimpleCall(expectedResponse);
@@ -1193,23 +1195,23 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes updateRecommenderConfig without error using callback', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.UpdateRecommenderConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest()
       );
       request.recommenderConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.UpdateRecommenderConfigRequest',
+        '.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest',
         ['recommenderConfig', 'name']
       );
       request.recommenderConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.RecommenderConfig()
+        new protos.google.cloud.recommender.v1beta1.RecommenderConfig()
       );
       client.innerApiCalls.updateRecommenderConfig =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1218,7 +1220,7 @@ describe('v1.RecommenderClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.recommender.v1.IRecommenderConfig | null
+            result?: protos.google.cloud.recommender.v1beta1.IRecommenderConfig | null
           ) => {
             if (err) {
               reject(err);
@@ -1241,17 +1243,17 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes updateRecommenderConfig with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.UpdateRecommenderConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest()
       );
       request.recommenderConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.UpdateRecommenderConfigRequest',
+        '.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest',
         ['recommenderConfig', 'name']
       );
       request.recommenderConfig.name = defaultValue1;
@@ -1276,17 +1278,17 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes updateRecommenderConfig with closed client', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.UpdateRecommenderConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest()
       );
       request.recommenderConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.UpdateRecommenderConfigRequest',
+        '.google.cloud.recommender.v1beta1.UpdateRecommenderConfigRequest',
         ['recommenderConfig', 'name']
       );
       request.recommenderConfig.name = defaultValue1;
@@ -1301,22 +1303,22 @@ describe('v1.RecommenderClient', () => {
 
   describe('getInsightTypeConfig', () => {
     it('invokes getInsightTypeConfig without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetInsightTypeConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetInsightTypeConfigRequest',
+        '.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.InsightTypeConfig()
+        new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
       );
       client.innerApiCalls.getInsightTypeConfig =
         stubSimpleCall(expectedResponse);
@@ -1333,22 +1335,22 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes getInsightTypeConfig without error using callback', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetInsightTypeConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetInsightTypeConfigRequest',
+        '.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.InsightTypeConfig()
+        new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
       );
       client.innerApiCalls.getInsightTypeConfig =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1357,7 +1359,7 @@ describe('v1.RecommenderClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.recommender.v1.IInsightTypeConfig | null
+            result?: protos.google.cloud.recommender.v1beta1.IInsightTypeConfig | null
           ) => {
             if (err) {
               reject(err);
@@ -1380,16 +1382,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes getInsightTypeConfig with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetInsightTypeConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetInsightTypeConfigRequest',
+        '.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1411,16 +1413,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes getInsightTypeConfig with closed client', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.GetInsightTypeConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.GetInsightTypeConfigRequest',
+        '.google.cloud.recommender.v1beta1.GetInsightTypeConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1432,23 +1434,23 @@ describe('v1.RecommenderClient', () => {
 
   describe('updateInsightTypeConfig', () => {
     it('invokes updateInsightTypeConfig without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest()
       );
       request.insightTypeConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest',
+        '.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest',
         ['insightTypeConfig', 'name']
       );
       request.insightTypeConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.InsightTypeConfig()
+        new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
       );
       client.innerApiCalls.updateInsightTypeConfig =
         stubSimpleCall(expectedResponse);
@@ -1465,23 +1467,23 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes updateInsightTypeConfig without error using callback', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest()
       );
       request.insightTypeConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest',
+        '.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest',
         ['insightTypeConfig', 'name']
       );
       request.insightTypeConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.InsightTypeConfig()
+        new protos.google.cloud.recommender.v1beta1.InsightTypeConfig()
       );
       client.innerApiCalls.updateInsightTypeConfig =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1490,7 +1492,7 @@ describe('v1.RecommenderClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.recommender.v1.IInsightTypeConfig | null
+            result?: protos.google.cloud.recommender.v1beta1.IInsightTypeConfig | null
           ) => {
             if (err) {
               reject(err);
@@ -1513,17 +1515,17 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes updateInsightTypeConfig with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest()
       );
       request.insightTypeConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest',
+        '.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest',
         ['insightTypeConfig', 'name']
       );
       request.insightTypeConfig.name = defaultValue1;
@@ -1548,17 +1550,17 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes updateInsightTypeConfig with closed client', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest()
+        new protos.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest()
       );
       request.insightTypeConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest',
+        '.google.cloud.recommender.v1beta1.UpdateInsightTypeConfigRequest',
         ['insightTypeConfig', 'name']
       );
       request.insightTypeConfig.name = defaultValue1;
@@ -1573,24 +1575,30 @@ describe('v1.RecommenderClient', () => {
 
   describe('listInsights', () => {
     it('invokes listInsights without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.ListInsightsRequest()
+        new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.ListInsightsRequest',
+        '.google.cloud.recommender.v1beta1.ListInsightsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
-        generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
-        generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.Insight()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.Insight()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.Insight()
+        ),
       ];
       client.innerApiCalls.listInsights = stubSimpleCall(expectedResponse);
       const [response] = await client.listInsights(request);
@@ -1606,24 +1614,30 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes listInsights without error using callback', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.ListInsightsRequest()
+        new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.ListInsightsRequest',
+        '.google.cloud.recommender.v1beta1.ListInsightsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
-        generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
-        generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.Insight()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.Insight()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.Insight()
+        ),
       ];
       client.innerApiCalls.listInsights =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1632,7 +1646,7 @@ describe('v1.RecommenderClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.recommender.v1.IInsight[] | null
+            result?: protos.google.cloud.recommender.v1beta1.IInsight[] | null
           ) => {
             if (err) {
               reject(err);
@@ -1655,16 +1669,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes listInsights with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.ListInsightsRequest()
+        new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.ListInsightsRequest',
+        '.google.cloud.recommender.v1beta1.ListInsightsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1686,33 +1700,39 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes listInsightsStream without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.ListInsightsRequest()
+        new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.ListInsightsRequest',
+        '.google.cloud.recommender.v1beta1.ListInsightsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
-        generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
-        generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.Insight()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.Insight()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.Insight()
+        ),
       ];
       client.descriptors.page.listInsights.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listInsightsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.recommender.v1.Insight[] = [];
+        const responses: protos.google.cloud.recommender.v1beta1.Insight[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.recommender.v1.Insight) => {
+          (response: protos.google.cloud.recommender.v1beta1.Insight) => {
             responses.push(response);
           }
         );
@@ -1740,16 +1760,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes listInsightsStream with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.ListInsightsRequest()
+        new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.ListInsightsRequest',
+        '.google.cloud.recommender.v1beta1.ListInsightsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1761,10 +1781,10 @@ describe('v1.RecommenderClient', () => {
       );
       const stream = client.listInsightsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.recommender.v1.Insight[] = [];
+        const responses: protos.google.cloud.recommender.v1beta1.Insight[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.recommender.v1.Insight) => {
+          (response: protos.google.cloud.recommender.v1beta1.Insight) => {
             responses.push(response);
           }
         );
@@ -1791,28 +1811,34 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('uses async iteration with listInsights without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.ListInsightsRequest()
+        new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.ListInsightsRequest',
+        '.google.cloud.recommender.v1beta1.ListInsightsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
-        generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
-        generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.Insight()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.Insight()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.Insight()
+        ),
       ];
       client.descriptors.page.listInsights.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.recommender.v1.IInsight[] = [];
+      const responses: protos.google.cloud.recommender.v1beta1.IInsight[] = [];
       const iterable = client.listInsightsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -1834,16 +1860,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('uses async iteration with listInsights with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.ListInsightsRequest()
+        new protos.google.cloud.recommender.v1beta1.ListInsightsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.ListInsightsRequest',
+        '.google.cloud.recommender.v1beta1.ListInsightsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1853,7 +1879,8 @@ describe('v1.RecommenderClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listInsightsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.recommender.v1.IInsight[] = [];
+        const responses: protos.google.cloud.recommender.v1beta1.IInsight[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -1876,29 +1903,29 @@ describe('v1.RecommenderClient', () => {
 
   describe('listRecommendations', () => {
     it('invokes listRecommendations without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
+        new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.ListRecommendationsRequest',
+        '.google.cloud.recommender.v1beta1.ListRecommendationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.recommender.v1.Recommendation()
+          new protos.google.cloud.recommender.v1beta1.Recommendation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.recommender.v1.Recommendation()
+          new protos.google.cloud.recommender.v1beta1.Recommendation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.recommender.v1.Recommendation()
+          new protos.google.cloud.recommender.v1beta1.Recommendation()
         ),
       ];
       client.innerApiCalls.listRecommendations =
@@ -1916,29 +1943,29 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes listRecommendations without error using callback', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
+        new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.ListRecommendationsRequest',
+        '.google.cloud.recommender.v1beta1.ListRecommendationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.recommender.v1.Recommendation()
+          new protos.google.cloud.recommender.v1beta1.Recommendation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.recommender.v1.Recommendation()
+          new protos.google.cloud.recommender.v1beta1.Recommendation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.recommender.v1.Recommendation()
+          new protos.google.cloud.recommender.v1beta1.Recommendation()
         ),
       ];
       client.innerApiCalls.listRecommendations =
@@ -1948,7 +1975,9 @@ describe('v1.RecommenderClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.recommender.v1.IRecommendation[] | null
+            result?:
+              | protos.google.cloud.recommender.v1beta1.IRecommendation[]
+              | null
           ) => {
             if (err) {
               reject(err);
@@ -1971,16 +2000,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes listRecommendations with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
+        new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.ListRecommendationsRequest',
+        '.google.cloud.recommender.v1beta1.ListRecommendationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2002,40 +2031,42 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes listRecommendationsStream without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
+        new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.ListRecommendationsRequest',
+        '.google.cloud.recommender.v1beta1.ListRecommendationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.recommender.v1.Recommendation()
+          new protos.google.cloud.recommender.v1beta1.Recommendation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.recommender.v1.Recommendation()
+          new protos.google.cloud.recommender.v1beta1.Recommendation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.recommender.v1.Recommendation()
+          new protos.google.cloud.recommender.v1beta1.Recommendation()
         ),
       ];
       client.descriptors.page.listRecommendations.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listRecommendationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.recommender.v1.Recommendation[] =
+        const responses: protos.google.cloud.recommender.v1beta1.Recommendation[] =
           [];
         stream.on(
           'data',
-          (response: protos.google.cloud.recommender.v1.Recommendation) => {
+          (
+            response: protos.google.cloud.recommender.v1beta1.Recommendation
+          ) => {
             responses.push(response);
           }
         );
@@ -2063,16 +2094,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('invokes listRecommendationsStream with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
+        new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.ListRecommendationsRequest',
+        '.google.cloud.recommender.v1beta1.ListRecommendationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2082,11 +2113,13 @@ describe('v1.RecommenderClient', () => {
         stubPageStreamingCall(undefined, expectedError);
       const stream = client.listRecommendationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.recommender.v1.Recommendation[] =
+        const responses: protos.google.cloud.recommender.v1beta1.Recommendation[] =
           [];
         stream.on(
           'data',
-          (response: protos.google.cloud.recommender.v1.Recommendation) => {
+          (
+            response: protos.google.cloud.recommender.v1beta1.Recommendation
+          ) => {
             responses.push(response);
           }
         );
@@ -2113,34 +2146,34 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('uses async iteration with listRecommendations without error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
+        new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.ListRecommendationsRequest',
+        '.google.cloud.recommender.v1beta1.ListRecommendationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.recommender.v1.Recommendation()
+          new protos.google.cloud.recommender.v1beta1.Recommendation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.recommender.v1.Recommendation()
+          new protos.google.cloud.recommender.v1beta1.Recommendation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.recommender.v1.Recommendation()
+          new protos.google.cloud.recommender.v1beta1.Recommendation()
         ),
       ];
       client.descriptors.page.listRecommendations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.recommender.v1.IRecommendation[] =
+      const responses: protos.google.cloud.recommender.v1beta1.IRecommendation[] =
         [];
       const iterable = client.listRecommendationsAsync(request);
       for await (const resource of iterable) {
@@ -2163,16 +2196,16 @@ describe('v1.RecommenderClient', () => {
     });
 
     it('uses async iteration with listRecommendations with error', async () => {
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
+        new protos.google.cloud.recommender.v1beta1.ListRecommendationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.recommender.v1.ListRecommendationsRequest',
+        '.google.cloud.recommender.v1beta1.ListRecommendationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2182,7 +2215,7 @@ describe('v1.RecommenderClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listRecommendationsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.recommender.v1.IRecommendation[] =
+        const responses: protos.google.cloud.recommender.v1beta1.IRecommendation[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2212,7 +2245,7 @@ describe('v1.RecommenderClient', () => {
         location: 'locationValue',
         insight_type: 'insightTypeValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2297,7 +2330,7 @@ describe('v1.RecommenderClient', () => {
         insight_type: 'insightTypeValue',
         insight: 'insightValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2402,7 +2435,7 @@ describe('v1.RecommenderClient', () => {
         location: 'locationValue',
         recommender: 'recommenderValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2487,7 +2520,7 @@ describe('v1.RecommenderClient', () => {
         recommender: 'recommenderValue',
         recommendation: 'recommendationValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2593,7 +2626,7 @@ describe('v1.RecommenderClient', () => {
         location: 'locationValue',
         insight_type: 'insightTypeValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2673,7 +2706,7 @@ describe('v1.RecommenderClient', () => {
         insight_type: 'insightTypeValue',
         insight: 'insightValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2769,7 +2802,7 @@ describe('v1.RecommenderClient', () => {
         location: 'locationValue',
         recommender: 'recommenderValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2849,7 +2882,7 @@ describe('v1.RecommenderClient', () => {
         recommender: 'recommenderValue',
         recommendation: 'recommendationValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2954,7 +2987,7 @@ describe('v1.RecommenderClient', () => {
         location: 'locationValue',
         insight_type: 'insightTypeValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3035,7 +3068,7 @@ describe('v1.RecommenderClient', () => {
         location: 'locationValue',
         insight_type: 'insightTypeValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3123,7 +3156,7 @@ describe('v1.RecommenderClient', () => {
         insight_type: 'insightTypeValue',
         insight: 'insightValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3228,7 +3261,7 @@ describe('v1.RecommenderClient', () => {
         location: 'locationValue',
         recommender: 'recommenderValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3309,7 +3342,7 @@ describe('v1.RecommenderClient', () => {
         location: 'locationValue',
         recommender: 'recommenderValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3398,7 +3431,7 @@ describe('v1.RecommenderClient', () => {
         recommender: 'recommenderValue',
         recommendation: 'recommendationValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3503,7 +3536,7 @@ describe('v1.RecommenderClient', () => {
         location: 'locationValue',
         insight_type: 'insightTypeValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3582,7 +3615,7 @@ describe('v1.RecommenderClient', () => {
         location: 'locationValue',
         insight_type: 'insightTypeValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3664,7 +3697,7 @@ describe('v1.RecommenderClient', () => {
         insight_type: 'insightTypeValue',
         insight: 'insightValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3764,7 +3797,7 @@ describe('v1.RecommenderClient', () => {
         location: 'locationValue',
         recommender: 'recommenderValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3843,7 +3876,7 @@ describe('v1.RecommenderClient', () => {
         location: 'locationValue',
         recommender: 'recommenderValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3926,7 +3959,7 @@ describe('v1.RecommenderClient', () => {
         recommender: 'recommenderValue',
         recommendation: 'recommendationValue',
       };
-      const client = new recommenderModule.v1.RecommenderClient({
+      const client = new recommenderModule.v1beta1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
