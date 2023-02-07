@@ -12,7 +12,7 @@
                       "options": {
                         "cc_enable_arenas": true,
                         "csharp_namespace": "Google.Cloud.Security.PrivateCA.V1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/security/privateca/v1;privateca",
+                        "go_package": "cloud.google.com/go/security/privateca/apiv1/privatecapb;privatecapb",
                         "java_multiple_files": true,
                         "java_outer_classname": "PrivateCaProto",
                         "java_package": "com.google.cloud.security.privateca.v1",
@@ -2877,7 +2877,7 @@
                       "options": {
                         "cc_enable_arenas": true,
                         "csharp_namespace": "Google.Cloud.Security.PrivateCA.V1Beta1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/security/privateca/v1beta1;privateca",
+                        "go_package": "cloud.google.com/go/security/privateca/apiv1beta1/privatecapb;privatecapb",
                         "java_multiple_files": true,
                         "java_outer_classname": "PrivateCaProto",
                         "java_package": "com.google.cloud.security.privateca.v1beta1",

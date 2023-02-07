@@ -37,8 +37,8 @@ function main(parent, configId, notificationConfig) {
   /**
    *  Required.
    *  Unique identifier provided by the client within the parent scope.
-   *  It must be between 1 and 128 characters, and contains alphanumeric
-   *  characters, underscores or hyphens only.
+   *  It must be between 1 and 128 characters and contain alphanumeric
+   *  characters, underscores, or hyphens only.
    */
   // const configId = 'abc123'
   /**
