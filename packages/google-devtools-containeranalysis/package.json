@@ -38,6 +38,7 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
+    "@google-cloud/grafeas": "^4.2.1",
     "google-gax": "^3.5.2"
   },
   "devDependencies": {
