@@ -2161,6 +2161,196 @@ describe('v1beta1.ModelServiceClient', () => {
     });
   });
 
+  describe('copyModel', () => {
+    it('invokes copyModel without error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CopyModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CopyModelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.copyModel = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.copyModel(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.copyModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.copyModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes copyModel without error using callback', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CopyModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CopyModelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.copyModel =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.copyModel(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.ICopyModelResponse,
+              protos.google.cloud.aiplatform.v1beta1.ICopyModelOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.ICopyModelResponse,
+        protos.google.cloud.aiplatform.v1beta1.ICopyModelOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.copyModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.copyModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes copyModel with call error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CopyModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CopyModelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.copyModel = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.copyModel(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.copyModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.copyModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes copyModel with LRO error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CopyModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CopyModelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.copyModel = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.copyModel(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.copyModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.copyModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCopyModelProgress without error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCopyModelProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCopyModelProgress with error', async () => {
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkCopyModelProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listModels', () => {
     it('invokes listModels without error', async () => {
       const client = new modelserviceModule.v1beta1.ModelServiceClient({
@@ -6172,6 +6362,147 @@ describe('v1beta1.ModelServiceClient', () => {
             client.pathTemplates.modelEvaluationSlicePathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('nasJob', () => {
+      const fakePath = '/rendered/path/nasJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        nas_job: 'nasJobValue',
+      };
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.nasJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nasJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nasJobPath', () => {
+        const result = client.nasJobPath(
+          'projectValue',
+          'locationValue',
+          'nasJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNasJobName', () => {
+        const result = client.matchProjectFromNasJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNasJobName', () => {
+        const result = client.matchLocationFromNasJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNasJobFromNasJobName', () => {
+        const result = client.matchNasJobFromNasJobName(fakePath);
+        assert.strictEqual(result, 'nasJobValue');
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('nasTrialDetail', () => {
+      const fakePath = '/rendered/path/nasTrialDetail';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        nas_job: 'nasJobValue',
+        nas_trial_detail: 'nasTrialDetailValue',
+      };
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.nasTrialDetailPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nasTrialDetailPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nasTrialDetailPath', () => {
+        const result = client.nasTrialDetailPath(
+          'projectValue',
+          'locationValue',
+          'nasJobValue',
+          'nasTrialDetailValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNasTrialDetailName', () => {
+        const result = client.matchProjectFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNasTrialDetailName', () => {
+        const result = client.matchLocationFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNasJobFromNasTrialDetailName', () => {
+        const result = client.matchNasJobFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'nasJobValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNasTrialDetailFromNasTrialDetailName', () => {
+        const result =
+          client.matchNasTrialDetailFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'nasTrialDetailValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

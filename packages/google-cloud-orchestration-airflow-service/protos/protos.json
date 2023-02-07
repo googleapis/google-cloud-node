@@ -12,7 +12,7 @@
                       "nested": {
                         "v1": {
                           "options": {
-                            "go_package": "google.golang.org/genproto/googleapis/cloud/orchestration/airflow/service/v1;service",
+                            "go_package": "cloud.google.com/go/orchestration/airflow/service/apiv1/servicepb;servicepb",
                             "java_multiple_files": true,
                             "java_package": "com.google.cloud.orchestration.airflow.service.v1",
                             "java_outer_classname": "OperationsProto"
@@ -1194,7 +1194,7 @@
                         },
                         "v1beta1": {
                           "options": {
-                            "go_package": "google.golang.org/genproto/googleapis/cloud/orchestration/airflow/service/v1beta1;service",
+                            "go_package": "cloud.google.com/go/orchestration/airflow/service/apiv1beta1/servicepb;servicepb",
                             "java_multiple_files": true,
                             "java_package": "com.google.cloud.orchestration.airflow.service.v1beta1",
                             "java_outer_classname": "OperationsProto"

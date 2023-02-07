@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/notebooks/v1;notebooks",
+                    "go_package": "cloud.google.com/go/notebooks/apiv1/notebookspb;notebookspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "NotebooksProto",
                     "java_package": "com.google.cloud.notebooks.v1",
@@ -3750,7 +3750,7 @@
                 "v1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Notebooks.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/notebooks/v1beta1;notebooks",
+                    "go_package": "cloud.google.com/go/notebooks/apiv1beta1/notebookspb;notebookspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "NotebooksProto",
                     "java_package": "com.google.cloud.notebooks.v1beta1",

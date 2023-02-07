@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Recommender.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/recommender/v1;recommender",
+                    "go_package": "cloud.google.com/go/recommender/apiv1/recommenderpb;recommenderpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "RecommenderProto",
                     "java_package": "com.google.cloud.recommender.v1",
@@ -61,6 +61,10 @@
                           "type": "Category",
                           "id": 7
                         },
+                        "severity": {
+                          "type": "Severity",
+                          "id": 15
+                        },
                         "etag": {
                           "type": "string",
                           "id": 11
@@ -72,14 +76,6 @@
                         }
                       },
                       "nested": {
-                        "RecommendationReference": {
-                          "fields": {
-                            "recommendation": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        },
                         "Category": {
                           "values": {
                             "CATEGORY_UNSPECIFIED": 0,
@@ -87,6 +83,23 @@
                             "SECURITY": 2,
                             "PERFORMANCE": 3,
                             "MANAGEABILITY": 4
+                          }
+                        },
+                        "Severity": {
+                          "values": {
+                            "SEVERITY_UNSPECIFIED": 0,
+                            "LOW": 1,
+                            "MEDIUM": 2,
+                            "HIGH": 3,
+                            "CRITICAL": 4
+                          }
+                        },
+                        "RecommendationReference": {
+                          "fields": {
+                            "recommendation": {
+                              "type": "string",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -111,6 +124,54 @@
                             "ACCEPTED": 2,
                             "DISMISSED": 3
                           }
+                        }
+                      }
+                    },
+                    "InsightTypeConfig": {
+                      "options": {
+                        "(google.api.resource).type": "recommender.googleapis.com/InsightTypeConfig",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/insightTypes/{insight_type}/config"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "insightTypeGenerationConfig": {
+                          "type": "InsightTypeGenerationConfig",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "revisionId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "InsightTypeGenerationConfig": {
+                      "fields": {
+                        "params": {
+                          "type": "google.protobuf.Struct",
+                          "id": 1
                         }
                       }
                     },
@@ -145,6 +206,10 @@
                           "type": "Impact",
                           "id": 6
                         },
+                        "priority": {
+                          "type": "Priority",
+                          "id": 17
+                        },
                         "content": {
                           "type": "RecommendationContent",
                           "id": 7
@@ -161,9 +226,22 @@
                           "rule": "repeated",
                           "type": "InsightReference",
                           "id": 14
+                        },
+                        "xorGroupId": {
+                          "type": "string",
+                          "id": 18
                         }
                       },
                       "nested": {
+                        "Priority": {
+                          "values": {
+                            "PRIORITY_UNSPECIFIED": 0,
+                            "P4": 1,
+                            "P3": 2,
+                            "P2": 3,
+                            "P1": 4
+                          }
+                        },
                         "InsightReference": {
                           "fields": {
                             "insight": {
@@ -180,6 +258,10 @@
                           "rule": "repeated",
                           "type": "OperationGroup",
                           "id": 2
+                        },
+                        "overview": {
+                          "type": "google.protobuf.Struct",
+                          "id": 3
                         }
                       }
                     },
@@ -273,11 +355,20 @@
                         }
                       }
                     },
+                    "SecurityProjection": {
+                      "fields": {
+                        "details": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Impact": {
                       "oneofs": {
                         "projection": {
                           "oneof": [
-                            "costProjection"
+                            "costProjection",
+                            "securityProjection"
                           ]
                         }
                       },
@@ -289,6 +380,10 @@
                         "costProjection": {
                           "type": "CostProjection",
                           "id": 100
+                        },
+                        "securityProjection": {
+                          "type": "SecurityProjection",
+                          "id": 101
                         }
                       },
                       "nested": {
@@ -325,6 +420,54 @@
                             "FAILED": 4,
                             "DISMISSED": 5
                           }
+                        }
+                      }
+                    },
+                    "RecommenderConfig": {
+                      "options": {
+                        "(google.api.resource).type": "recommender.googleapis.com/RecommenderConfig",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/recommenders/{recommender}/config"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "recommenderGenerationConfig": {
+                          "type": "RecommenderGenerationConfig",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "revisionId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "RecommenderGenerationConfig": {
+                      "fields": {
+                        "params": {
+                          "type": "google.protobuf.Struct",
+                          "id": 1
                         }
                       }
                     },
@@ -600,6 +743,102 @@
                               "(google.api.method_signature)": "name,state_metadata,etag"
                             }
                           ]
+                        },
+                        "GetRecommenderConfig": {
+                          "requestType": "GetRecommenderConfigRequest",
+                          "responseType": "RecommenderConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/recommenders/*/config}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=organizations/*/locations/*/recommenders/*/config}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/recommenders/*/config}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=organizations/*/locations/*/recommenders/*/config}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateRecommenderConfig": {
+                          "requestType": "UpdateRecommenderConfigRequest",
+                          "responseType": "RecommenderConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{recommender_config.name=projects/*/locations/*/recommenders/*/config}",
+                            "(google.api.http).body": "recommender_config",
+                            "(google.api.http).additional_bindings.patch": "/v1/{recommender_config.name=organizations/*/locations/*/recommenders/*/config}",
+                            "(google.api.http).additional_bindings.body": "recommender_config",
+                            "(google.api.method_signature)": "recommender_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{recommender_config.name=projects/*/locations/*/recommenders/*/config}",
+                                "body": "recommender_config",
+                                "additional_bindings": {
+                                  "patch": "/v1/{recommender_config.name=organizations/*/locations/*/recommenders/*/config}",
+                                  "body": "recommender_config"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "recommender_config,update_mask"
+                            }
+                          ]
+                        },
+                        "GetInsightTypeConfig": {
+                          "requestType": "GetInsightTypeConfigRequest",
+                          "responseType": "InsightTypeConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/insightTypes/*/config}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=organizations/*/locations/*/insightTypes/*/config}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/insightTypes/*/config}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=organizations/*/locations/*/insightTypes/*/config}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateInsightTypeConfig": {
+                          "requestType": "UpdateInsightTypeConfigRequest",
+                          "responseType": "InsightTypeConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{insight_type_config.name=projects/*/locations/*/insightTypes/*/config}",
+                            "(google.api.http).body": "insight_type_config",
+                            "(google.api.http).additional_bindings.patch": "/v1/{insight_type_config.name=organizations/*/locations/*/insightTypes/*/config}",
+                            "(google.api.http).additional_bindings.body": "insight_type_config",
+                            "(google.api.method_signature)": "insight_type_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{insight_type_config.name=projects/*/locations/*/insightTypes/*/config}",
+                                "body": "insight_type_config",
+                                "additional_bindings": {
+                                  "patch": "/v1/{insight_type_config.name=organizations/*/locations/*/insightTypes/*/config}",
+                                  "body": "insight_type_config"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "insight_type_config,update_mask"
+                            }
+                          ]
                         }
                       }
                     },
@@ -814,6 +1053,1195 @@
                           }
                         }
                       }
+                    },
+                    "GetRecommenderConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/RecommenderConfig"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateRecommenderConfigRequest": {
+                      "fields": {
+                        "recommenderConfig": {
+                          "type": "RecommenderConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetInsightTypeConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/InsightTypeConfig"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateInsightTypeConfigRequest": {
+                      "fields": {
+                        "insightTypeConfig": {
+                          "type": "InsightTypeConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
+                },
+                "v1beta1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.Recommender.V1Beta1",
+                    "go_package": "cloud.google.com/go/recommender/apiv1beta1/recommenderpb;recommenderpb",
+                    "java_multiple_files": true,
+                    "java_package": "com.google.cloud.recommender.v1beta1",
+                    "objc_class_prefix": "CREC",
+                    "(google.api.resource_definition).type": "recommender.googleapis.com/Recommender",
+                    "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}/recommenders/{recommender}",
+                    "java_outer_classname": "RecommenderProto"
+                  },
+                  "nested": {
+                    "Insight": {
+                      "options": {
+                        "(google.api.resource).type": "recommender.googleapis.com/Insight",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/insightTypes/{insight_type}/insights/{insight}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "targetResources": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9
+                        },
+                        "insightSubtype": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "content": {
+                          "type": "google.protobuf.Struct",
+                          "id": 3
+                        },
+                        "lastRefreshTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "observationPeriod": {
+                          "type": "google.protobuf.Duration",
+                          "id": 5
+                        },
+                        "stateInfo": {
+                          "type": "InsightStateInfo",
+                          "id": 6
+                        },
+                        "category": {
+                          "type": "Category",
+                          "id": 7
+                        },
+                        "severity": {
+                          "type": "Severity",
+                          "id": 15
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "associatedRecommendations": {
+                          "rule": "repeated",
+                          "type": "RecommendationReference",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "Category": {
+                          "values": {
+                            "CATEGORY_UNSPECIFIED": 0,
+                            "COST": 1,
+                            "SECURITY": 2,
+                            "PERFORMANCE": 3,
+                            "MANAGEABILITY": 4
+                          }
+                        },
+                        "Severity": {
+                          "values": {
+                            "SEVERITY_UNSPECIFIED": 0,
+                            "LOW": 1,
+                            "MEDIUM": 2,
+                            "HIGH": 3,
+                            "CRITICAL": 4
+                          }
+                        },
+                        "RecommendationReference": {
+                          "fields": {
+                            "recommendation": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "InsightStateInfo": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1
+                        },
+                        "stateMetadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "ACCEPTED": 2,
+                            "DISMISSED": 3
+                          }
+                        }
+                      }
+                    },
+                    "InsightTypeConfig": {
+                      "options": {
+                        "(google.api.resource).type": "recommender.googleapis.com/InsightTypeConfig",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/insightTypes/{insight_type}/config"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "insightTypeGenerationConfig": {
+                          "type": "InsightTypeGenerationConfig",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "revisionId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "InsightTypeGenerationConfig": {
+                      "fields": {
+                        "params": {
+                          "type": "google.protobuf.Struct",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Recommendation": {
+                      "options": {
+                        "(google.api.resource).type": "recommender.googleapis.com/Recommendation",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "recommenderSubtype": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "lastRefreshTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "primaryImpact": {
+                          "type": "Impact",
+                          "id": 5
+                        },
+                        "additionalImpact": {
+                          "rule": "repeated",
+                          "type": "Impact",
+                          "id": 6
+                        },
+                        "priority": {
+                          "type": "Priority",
+                          "id": 17
+                        },
+                        "content": {
+                          "type": "RecommendationContent",
+                          "id": 7
+                        },
+                        "stateInfo": {
+                          "type": "RecommendationStateInfo",
+                          "id": 10
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "associatedInsights": {
+                          "rule": "repeated",
+                          "type": "InsightReference",
+                          "id": 14
+                        },
+                        "xorGroupId": {
+                          "type": "string",
+                          "id": 18
+                        }
+                      },
+                      "nested": {
+                        "Priority": {
+                          "values": {
+                            "PRIORITY_UNSPECIFIED": 0,
+                            "P4": 1,
+                            "P3": 2,
+                            "P2": 3,
+                            "P1": 4
+                          }
+                        },
+                        "InsightReference": {
+                          "fields": {
+                            "insight": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "RecommendationContent": {
+                      "fields": {
+                        "operationGroups": {
+                          "rule": "repeated",
+                          "type": "OperationGroup",
+                          "id": 2
+                        },
+                        "overview": {
+                          "type": "google.protobuf.Struct",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "OperationGroup": {
+                      "fields": {
+                        "operations": {
+                          "rule": "repeated",
+                          "type": "Operation",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Operation": {
+                      "oneofs": {
+                        "pathValue": {
+                          "oneof": [
+                            "value",
+                            "valueMatcher"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "action": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "resourceType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "path": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "sourceResource": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "sourcePath": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "value": {
+                          "type": "google.protobuf.Value",
+                          "id": 7
+                        },
+                        "valueMatcher": {
+                          "type": "ValueMatcher",
+                          "id": 10
+                        },
+                        "pathFilters": {
+                          "keyType": "string",
+                          "type": "google.protobuf.Value",
+                          "id": 8
+                        },
+                        "pathValueMatchers": {
+                          "keyType": "string",
+                          "type": "ValueMatcher",
+                          "id": 11
+                        }
+                      }
+                    },
+                    "ValueMatcher": {
+                      "oneofs": {
+                        "matchVariant": {
+                          "oneof": [
+                            "matchesPattern"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "matchesPattern": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CostProjection": {
+                      "fields": {
+                        "cost": {
+                          "type": "google.type.Money",
+                          "id": 1
+                        },
+                        "duration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SecurityProjection": {
+                      "fields": {
+                        "details": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SustainabilityProjection": {
+                      "fields": {
+                        "kgCO2e": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "duration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Impact": {
+                      "oneofs": {
+                        "projection": {
+                          "oneof": [
+                            "costProjection",
+                            "securityProjection",
+                            "sustainabilityProjection"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "category": {
+                          "type": "Category",
+                          "id": 1
+                        },
+                        "costProjection": {
+                          "type": "CostProjection",
+                          "id": 100
+                        },
+                        "securityProjection": {
+                          "type": "SecurityProjection",
+                          "id": 101
+                        },
+                        "sustainabilityProjection": {
+                          "type": "SustainabilityProjection",
+                          "id": 102
+                        }
+                      },
+                      "nested": {
+                        "Category": {
+                          "values": {
+                            "CATEGORY_UNSPECIFIED": 0,
+                            "COST": 1,
+                            "SECURITY": 2,
+                            "PERFORMANCE": 3,
+                            "MANAGEABILITY": 4,
+                            "SUSTAINABILITY": 5
+                          }
+                        }
+                      }
+                    },
+                    "RecommendationStateInfo": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1
+                        },
+                        "stateMetadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "CLAIMED": 6,
+                            "SUCCEEDED": 3,
+                            "FAILED": 4,
+                            "DISMISSED": 5
+                          }
+                        }
+                      }
+                    },
+                    "RecommenderConfig": {
+                      "options": {
+                        "(google.api.resource).type": "recommender.googleapis.com/RecommenderConfig",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/recommenders/{recommender}/config"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "recommenderGenerationConfig": {
+                          "type": "RecommenderGenerationConfig",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "revisionId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "RecommenderGenerationConfig": {
+                      "fields": {
+                        "params": {
+                          "type": "google.protobuf.Struct",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Recommender": {
+                      "options": {
+                        "(google.api.default_host)": "recommender.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListInsights": {
+                          "requestType": "ListInsightsRequest",
+                          "responseType": "ListInsightsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/insightTypes/*}/insights",
+                            "(google.api.http).additional_bindings.get": "/v1beta1/{parent=organizations/*/locations/*/insightTypes/*}/insights",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/insightTypes/*}/insights",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1beta1/{parent=billingAccounts/*/locations/*/insightTypes/*}/insights"
+                                  },
+                                  {
+                                    "get": "/v1beta1/{parent=folders/*/locations/*/insightTypes/*}/insights"
+                                  },
+                                  {
+                                    "get": "/v1beta1/{parent=organizations/*/locations/*/insightTypes/*}/insights"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetInsight": {
+                          "requestType": "GetInsightRequest",
+                          "responseType": "Insight",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/insightTypes/*/insights/*}",
+                            "(google.api.http).additional_bindings.get": "/v1beta1/{name=organizations/*/locations/*/insightTypes/*/insights/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/insightTypes/*/insights/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1beta1/{name=billingAccounts/*/locations/*/insightTypes/*/insights/*}"
+                                  },
+                                  {
+                                    "get": "/v1beta1/{name=folders/*/locations/*/insightTypes/*/insights/*}"
+                                  },
+                                  {
+                                    "get": "/v1beta1/{name=organizations/*/locations/*/insightTypes/*/insights/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "MarkInsightAccepted": {
+                          "requestType": "MarkInsightAcceptedRequest",
+                          "responseType": "Insight",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/insightTypes/*/insights/*}:markAccepted",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{name=organizations/*/locations/*/insightTypes/*/insights/*}:markAccepted",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "name,state_metadata,etag"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/insightTypes/*/insights/*}:markAccepted",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta1/{name=billingAccounts/*/locations/*/insightTypes/*/insights/*}:markAccepted",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{name=folders/*/locations/*/insightTypes/*/insights/*}:markAccepted",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{name=organizations/*/locations/*/insightTypes/*/insights/*}:markAccepted",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,state_metadata,etag"
+                            }
+                          ]
+                        },
+                        "ListRecommendations": {
+                          "requestType": "ListRecommendationsRequest",
+                          "responseType": "ListRecommendationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/recommenders/*}/recommendations",
+                            "(google.api.http).additional_bindings.get": "/v1beta1/{parent=organizations/*/locations/*/recommenders/*}/recommendations",
+                            "(google.api.method_signature)": "parent,filter"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/recommenders/*}/recommendations",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1beta1/{parent=billingAccounts/*/locations/*/recommenders/*}/recommendations"
+                                  },
+                                  {
+                                    "get": "/v1beta1/{parent=folders/*/locations/*/recommenders/*}/recommendations"
+                                  },
+                                  {
+                                    "get": "/v1beta1/{parent=organizations/*/locations/*/recommenders/*}/recommendations"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,filter"
+                            }
+                          ]
+                        },
+                        "GetRecommendation": {
+                          "requestType": "GetRecommendationRequest",
+                          "responseType": "Recommendation",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}",
+                            "(google.api.http).additional_bindings.get": "/v1beta1/{name=organizations/*/locations/*/recommenders/*/recommendations/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1beta1/{name=billingAccounts/*/locations/*/recommenders/*/recommendations/*}"
+                                  },
+                                  {
+                                    "get": "/v1beta1/{name=folders/*/locations/*/recommenders/*/recommendations/*}"
+                                  },
+                                  {
+                                    "get": "/v1beta1/{name=organizations/*/locations/*/recommenders/*/recommendations/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "MarkRecommendationClaimed": {
+                          "requestType": "MarkRecommendationClaimedRequest",
+                          "responseType": "Recommendation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markClaimed",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{name=organizations/*/locations/*/recommenders/*/recommendations/*}:markClaimed",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "name,state_metadata,etag"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markClaimed",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta1/{name=billingAccounts/*/locations/*/recommenders/*/recommendations/*}:markClaimed",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{name=folders/*/locations/*/recommenders/*/recommendations/*}:markClaimed",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{name=organizations/*/locations/*/recommenders/*/recommendations/*}:markClaimed",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,state_metadata,etag"
+                            }
+                          ]
+                        },
+                        "MarkRecommendationSucceeded": {
+                          "requestType": "MarkRecommendationSucceededRequest",
+                          "responseType": "Recommendation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markSucceeded",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{name=organizations/*/locations/*/recommenders/*/recommendations/*}:markSucceeded",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "name,state_metadata,etag"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markSucceeded",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta1/{name=billingAccounts/*/locations/*/recommenders/*/recommendations/*}:markSucceeded",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{name=folders/*/locations/*/recommenders/*/recommendations/*}:markSucceeded",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{name=organizations/*/locations/*/recommenders/*/recommendations/*}:markSucceeded",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,state_metadata,etag"
+                            }
+                          ]
+                        },
+                        "MarkRecommendationFailed": {
+                          "requestType": "MarkRecommendationFailedRequest",
+                          "responseType": "Recommendation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markFailed",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{name=organizations/*/locations/*/recommenders/*/recommendations/*}:markFailed",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "name,state_metadata,etag"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markFailed",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta1/{name=billingAccounts/*/locations/*/recommenders/*/recommendations/*}:markFailed",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{name=folders/*/locations/*/recommenders/*/recommendations/*}:markFailed",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{name=organizations/*/locations/*/recommenders/*/recommendations/*}:markFailed",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,state_metadata,etag"
+                            }
+                          ]
+                        },
+                        "GetRecommenderConfig": {
+                          "requestType": "GetRecommenderConfigRequest",
+                          "responseType": "RecommenderConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/recommenders/*/config}",
+                            "(google.api.http).additional_bindings.get": "/v1beta1/{name=organizations/*/locations/*/recommenders/*/config}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/recommenders/*/config}",
+                                "additional_bindings": {
+                                  "get": "/v1beta1/{name=organizations/*/locations/*/recommenders/*/config}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateRecommenderConfig": {
+                          "requestType": "UpdateRecommenderConfigRequest",
+                          "responseType": "RecommenderConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{recommender_config.name=projects/*/locations/*/recommenders/*/config}",
+                            "(google.api.http).body": "recommender_config",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{recommender_config.name=organizations/*/locations/*/recommenders/*/config}",
+                            "(google.api.http).additional_bindings.body": "recommender_config",
+                            "(google.api.method_signature)": "recommender_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{recommender_config.name=projects/*/locations/*/recommenders/*/config}",
+                                "body": "recommender_config",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{recommender_config.name=organizations/*/locations/*/recommenders/*/config}",
+                                  "body": "recommender_config"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "recommender_config,update_mask"
+                            }
+                          ]
+                        },
+                        "GetInsightTypeConfig": {
+                          "requestType": "GetInsightTypeConfigRequest",
+                          "responseType": "InsightTypeConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/insightTypes/*/config}",
+                            "(google.api.http).additional_bindings.get": "/v1beta1/{name=organizations/*/locations/*/insightTypes/*/config}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/insightTypes/*/config}",
+                                "additional_bindings": {
+                                  "get": "/v1beta1/{name=organizations/*/locations/*/insightTypes/*/config}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateInsightTypeConfig": {
+                          "requestType": "UpdateInsightTypeConfigRequest",
+                          "responseType": "InsightTypeConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{insight_type_config.name=projects/*/locations/*/insightTypes/*/config}",
+                            "(google.api.http).body": "insight_type_config",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{insight_type_config.name=organizations/*/locations/*/insightTypes/*/config}",
+                            "(google.api.http).additional_bindings.body": "insight_type_config",
+                            "(google.api.method_signature)": "insight_type_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{insight_type_config.name=projects/*/locations/*/insightTypes/*/config}",
+                                "body": "insight_type_config",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{insight_type_config.name=organizations/*/locations/*/insightTypes/*/config}",
+                                  "body": "insight_type_config"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "insight_type_config,update_mask"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ListInsightsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/InsightType"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListInsightsResponse": {
+                      "fields": {
+                        "insights": {
+                          "rule": "repeated",
+                          "type": "Insight",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetInsightRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/Insight"
+                          }
+                        }
+                      }
+                    },
+                    "MarkInsightAcceptedRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/Insight"
+                          }
+                        },
+                        "stateMetadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListRecommendationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/Recommender"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListRecommendationsResponse": {
+                      "fields": {
+                        "recommendations": {
+                          "rule": "repeated",
+                          "type": "Recommendation",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetRecommendationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/Recommendation"
+                          }
+                        }
+                      }
+                    },
+                    "MarkRecommendationClaimedRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/Recommendation"
+                          }
+                        },
+                        "stateMetadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MarkRecommendationSucceededRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/Recommendation"
+                          }
+                        },
+                        "stateMetadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MarkRecommendationFailedRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/Recommendation"
+                          }
+                        },
+                        "stateMetadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetRecommenderConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/RecommenderConfig"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateRecommenderConfigRequest": {
+                      "fields": {
+                        "recommenderConfig": {
+                          "type": "RecommenderConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetInsightTypeConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/InsightTypeConfig"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateInsightTypeConfigRequest": {
+                      "fields": {
+                        "insightTypeConfig": {
+                          "type": "InsightTypeConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
                     }
                   }
                 }
@@ -826,7 +2254,7 @@
             "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "FieldBehaviorProto",
+            "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI"
           },
@@ -906,6 +2334,24 @@
                   "type": "string",
                   "id": 2
                 }
+              }
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
               }
             },
             "http": {
@@ -1010,24 +2456,6 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
-              }
             }
           }
         },
@@ -2046,6 +3474,15 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
                 }
               }
             }
