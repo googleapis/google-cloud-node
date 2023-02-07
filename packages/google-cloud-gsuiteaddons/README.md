@@ -98,7 +98,7 @@ async function callListDeployments() {
   // Run request
   const iterable = await gsuiteaddonsClient.listDeploymentsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
