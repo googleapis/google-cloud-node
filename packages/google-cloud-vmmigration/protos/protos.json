@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.VMMigration.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/vmmigration/v1;vmmigration",
+                    "go_package": "cloud.google.com/go/vmmigration/apiv1/vmmigrationpb;vmmigrationpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VmMigrationProto",
                     "java_package": "com.google.cloud.vmmigration.v1",
