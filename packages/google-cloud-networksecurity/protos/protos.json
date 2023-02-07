@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.NetworkSecurity.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/networksecurity/v1;networksecurity",
+                    "go_package": "cloud.google.com/go/networksecurity/apiv1/networksecuritypb;networksecuritypb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ServerTlsPolicyProto",
                     "java_package": "com.google.cloud.networksecurity.v1",
@@ -1101,7 +1101,7 @@
                 "v1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.NetworkSecurity.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/networksecurity/v1beta1;networksecurity",
+                    "go_package": "cloud.google.com/go/networksecurity/apiv1beta1/networksecuritypb;networksecuritypb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ServerTlsPolicyProto",
                     "java_package": "com.google.cloud.networksecurity.v1beta1",
