@@ -10,7 +10,7 @@
                   "nested": {
                     "v1": {
                       "options": {
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/workflows/executions/v1;executions",
+                        "go_package": "cloud.google.com/go/workflows/executions/apiv1/executionspb;executionspb",
                         "java_multiple_files": true,
                         "java_outer_classname": "ExecutionsProto",
                         "java_package": "com.google.cloud.workflows.executions.v1",
@@ -345,7 +345,7 @@
                     },
                     "v1beta": {
                       "options": {
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/workflows/executions/v1beta;executions",
+                        "go_package": "cloud.google.com/go/workflows/executions/apiv1beta/executionspb;executionspb",
                         "java_multiple_files": true,
                         "java_outer_classname": "ExecutionsProto",
                         "java_package": "com.google.cloud.workflows.executions.v1beta",
@@ -624,7 +624,7 @@
                 },
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/workflows/v1;workflows",
+                    "go_package": "cloud.google.com/go/workflows/apiv1/workflowspb;workflowspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WorkflowsProto",
                     "java_package": "com.google.cloud.workflows.v1"
@@ -974,7 +974,7 @@
                 },
                 "v1beta": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/workflows/v1beta;workflows",
+                    "go_package": "cloud.google.com/go/workflows/apiv1beta/workflowspb;workflowspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WorkflowsProto",
                     "java_package": "com.google.cloud.workflows.v1beta"
