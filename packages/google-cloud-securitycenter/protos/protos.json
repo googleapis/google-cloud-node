@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.SecurityCenter.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/securitycenter/v1;securitycenter",
+                    "go_package": "cloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ResourceProto",
                     "java_package": "com.google.cloud.securitycenter.v1",
@@ -57,6 +57,10 @@
                           "rule": "repeated",
                           "type": "ServiceAccountDelegationInfo",
                           "id": 9
+                        },
+                        "userName": {
+                          "type": "string",
+                          "id": 11
                         }
                       }
                     },
@@ -635,6 +639,10 @@
                           "rule": "repeated",
                           "type": "File",
                           "id": 46
+                        },
+                        "kernelRootkit": {
+                          "type": "KernelRootkit",
+                          "id": 50
                         }
                       },
                       "nested": {
@@ -779,6 +787,46 @@
                               }
                             }
                           }
+                        }
+                      }
+                    },
+                    "KernelRootkit": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "unexpectedCodeModification": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "unexpectedReadOnlyDataModification": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "unexpectedFtraceHandler": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "unexpectedKprobeHandler": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "unexpectedKernelCodePages": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "unexpectedSystemCallHandler": {
+                          "type": "bool",
+                          "id": 7
+                        },
+                        "unexpectedInterruptHandler": {
+                          "type": "bool",
+                          "id": 8
+                        },
+                        "unexpectedProcessesInRunqueue": {
+                          "type": "bool",
+                          "id": 9
                         }
                       }
                     },
@@ -3412,7 +3460,7 @@
                 },
                 "v1beta1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/securitycenter/v1beta1;securitycenter",
+                    "go_package": "cloud.google.com/go/securitycenter/apiv1beta1/securitycenterpb;securitycenterpb",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.securitycenter.v1beta1"
                   },
@@ -4486,7 +4534,7 @@
                 "v1p1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.SecurityCenter.V1P1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/securitycenter/v1p1beta1;securitycenter",
+                    "go_package": "cloud.google.com/go/securitycenter/apiv1p1beta1/securitycenterpb;securitycenterpb",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.securitycenter.v1p1beta1",
                     "php_namespace": "Google\\Cloud\\SecurityCenter\\V1p1beta1",
