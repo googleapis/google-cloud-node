@@ -10,15 +10,15 @@
 
 
 
-Container Analysis API client for Node.js
+Containeranalysis client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-devtools-containeranalysis/CHANGELOG.md).
+[the CHANGELOG](googleapis/nodejs-containeranalysis/CHANGELOG.md).
 
 * [Google Container Analysis Node.js Client API Reference][client-docs]
 * [Google Container Analysis Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-devtools-containeranalysis](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-devtools-containeranalysis)
+* [github.com/googleapis/nodejs-containeranalysis](googleapis/nodejs-containeranalysis)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
