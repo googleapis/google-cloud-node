@@ -298,7 +298,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 56,
                     "type": "FULL"
                 }
             ],
@@ -331,7 +331,7 @@
             "regionTag": "securitycenter_v1_generated_SecurityCenter_GetBigQueryExport_async",
             "title": "SecurityCenter getBigQueryExport Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets a big query export.",
+            "description": " Gets a BigQuery export.",
             "canonical": true,
             "file": "security_center.get_big_query_export.js",
             "language": "JAVASCRIPT",
@@ -462,7 +462,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 56,
                     "type": "FULL"
                 }
             ],
@@ -1030,7 +1030,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 66,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -1519,7 +1519,7 @@
             "regionTag": "securitycenter_v1_generated_SecurityCenter_CreateBigQueryExport_async",
             "title": "SecurityCenter createBigQueryExport Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a big query export.",
+            "description": " Creates a BigQuery export.",
             "canonical": true,
             "file": "security_center.create_big_query_export.js",
             "language": "JAVASCRIPT",
@@ -1567,7 +1567,7 @@
             "regionTag": "securitycenter_v1_generated_SecurityCenter_DeleteBigQueryExport_async",
             "title": "SecurityCenter deleteBigQueryExport Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes an existing big query export.",
+            "description": " Deletes an existing BigQuery export.",
             "canonical": true,
             "file": "security_center.delete_big_query_export.js",
             "language": "JAVASCRIPT",

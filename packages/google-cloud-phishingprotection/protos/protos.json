@@ -9,7 +9,7 @@
                 "v1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.PhishingProtection.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/phishingprotection/v1beta1;phishingprotection",
+                    "go_package": "cloud.google.com/go/phishingprotection/apiv1beta1/phishingprotectionpb;phishingprotectionpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "PhishingProtectionProto",
                     "java_package": "com.google.phishingprotection.v1beta1",

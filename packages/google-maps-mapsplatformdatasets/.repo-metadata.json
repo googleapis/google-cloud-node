@@ -1,0 +1,16 @@
+{
+  "name": "mapsplatformdatasets",
+  "name_pretty": "Maps Platform Datasets API",
+  "product_documentation": "",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/mapsplatformdatasets/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/mapsplatformdatasets",
+  "api_id": "mapsplatformdatasets.googleapis.com",
+  "default_version": "v1alpha",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
+}
+

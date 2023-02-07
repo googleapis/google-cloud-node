@@ -9,7 +9,7 @@
                 "v2": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Retail.V2",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/retail/v2;retail",
+                    "go_package": "cloud.google.com/go/retail/apiv2/retailpb;retailpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "UserEventServiceProto",
                     "java_package": "com.google.cloud.retail.v2",
@@ -4058,7 +4058,7 @@
                 "v2alpha": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Retail.V2Alpha",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/retail/v2alpha;retail",
+                    "go_package": "cloud.google.com/go/retail/apiv2alpha/retailpb;retailpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "UserEventServiceProto",
                     "java_package": "com.google.cloud.retail.v2alpha",
@@ -9023,7 +9023,7 @@
                 "v2beta": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Retail.V2Beta",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/retail/v2beta;retail",
+                    "go_package": "cloud.google.com/go/retail/apiv2beta/retailpb;retailpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "UserEventServiceProto",
                     "java_package": "com.google.cloud.retail.v2beta",
