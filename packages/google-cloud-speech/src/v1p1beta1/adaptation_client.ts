@@ -359,7 +359,8 @@ export class AdaptationClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource where this phrase set will be created. Format:
+   *   Required. The parent resource where this phrase set will be created.
+   *   Format:
    *
    *   `projects/{project}/locations/{location}/phraseSets`
    *
@@ -762,7 +763,8 @@ export class AdaptationClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource where this custom class will be created. Format:
+   *   Required. The parent resource where this custom class will be created.
+   *   Format:
    *
    *   `projects/{project}/locations/{location}/customClasses`
    *

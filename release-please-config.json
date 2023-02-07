@@ -129,6 +129,7 @@
     "packages/google-storagetransfer": {},
     "packages/grafeas": {},
     "packages/typeless-sample-bot": {},
+    "packages/google-maps-mapsplatformdatasets": {},
     "packages/google-cloud-datacatalog-lineage": {}
   },
   "plugins": [

@@ -10,7 +10,7 @@
                   "options": {
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.SecretManager.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/secretmanager/v1;secretmanager",
+                    "go_package": "cloud.google.com/go/secretmanager/apiv1/secretmanagerpb;secretmanagerpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ServiceProto",
                     "java_package": "com.google.cloud.secretmanager.v1",

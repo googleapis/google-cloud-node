@@ -11,7 +11,7 @@
                     "v1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.BigQuery.DataPolicies.V1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/datapolicies/v1;datapolicies",
+                        "go_package": "cloud.google.com/go/bigquery/datapolicies/apiv1/datapoliciespb;datapoliciespb",
                         "java_multiple_files": true,
                         "java_outer_classname": "DataPolicyProto",
                         "java_package": "com.google.cloud.bigquery.datapolicies.v1",
@@ -384,7 +384,7 @@
                     "v1beta1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.BigQuery.DataPolicies.V1Beta1",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/datapolicies/v1beta1;datapolicies",
+                        "go_package": "cloud.google.com/go/bigquery/datapolicies/apiv1beta1/datapoliciespb;datapoliciespb",
                         "java_multiple_files": true,
                         "java_outer_classname": "DataPolicyProto",
                         "java_package": "com.google.cloud.bigquery.datapolicies.v1beta1",

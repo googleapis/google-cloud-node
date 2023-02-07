@@ -10,7 +10,7 @@
                   "options": {
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.Kms.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/kms/v1;kms",
+                    "go_package": "cloud.google.com/go/kms/apiv1/kmspb;kmspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "KmsProto",
                     "java_package": "com.google.cloud.kms.v1",

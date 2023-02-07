@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/language/v1;language",
+                    "go_package": "cloud.google.com/go/language/apiv1/languagepb;languagepb",
                     "java_multiple_files": true,
                     "java_outer_classname": "LanguageServiceProto",
                     "java_package": "com.google.cloud.language.v1"
@@ -904,7 +904,7 @@
                 },
                 "v1beta2": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/language/v1beta2;language",
+                    "go_package": "cloud.google.com/go/language/apiv1beta2/languagepb;languagepb",
                     "java_multiple_files": true,
                     "java_outer_classname": "LanguageServiceProto",
                     "java_package": "com.google.cloud.language.v1beta2"

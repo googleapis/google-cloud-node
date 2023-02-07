@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/metastore/v1;metastore",
+                    "go_package": "cloud.google.com/go/metastore/apiv1/metastorepb;metastorepb",
                     "java_multiple_files": true,
                     "java_outer_classname": "MetastoreFederationProto",
                     "java_package": "com.google.cloud.metastore.v1",
@@ -1926,7 +1926,7 @@
                 },
                 "v1alpha": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/metastore/v1alpha;metastore",
+                    "go_package": "cloud.google.com/go/metastore/apiv1alpha/metastorepb;metastorepb",
                     "java_multiple_files": true,
                     "java_outer_classname": "MetastoreFederationProto",
                     "java_package": "com.google.cloud.metastore.v1alpha",
@@ -4141,7 +4141,7 @@
                 },
                 "v1beta": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/metastore/v1beta;metastore",
+                    "go_package": "cloud.google.com/go/metastore/apiv1beta/metastorepb;metastorepb",
                     "java_multiple_files": true,
                     "java_outer_classname": "MetastoreFederationProto",
                     "java_package": "com.google.cloud.metastore.v1beta",
