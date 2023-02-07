@@ -23,7 +23,7 @@ import json
 import pathlib
 
 def patch(library: pathlib.Path):
-    # # fix the URL of grafeas.io (this is already fixed upstream).
+    # fix the URL of grafeas.io (this is already fixed upstream).
     s.replace(library / 'src/v1beta1/*.ts',
             'grafeas.io',
             'https://grafeas.io')

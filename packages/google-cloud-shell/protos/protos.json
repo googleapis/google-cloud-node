@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/shell/v1;shell",
+                    "go_package": "cloud.google.com/go/shell/apiv1/shellpb;shellpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "CloudShellProto",
                     "java_package": "com.google.cloud.shell.v1"
