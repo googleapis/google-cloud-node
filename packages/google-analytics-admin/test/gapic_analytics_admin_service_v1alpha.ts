@@ -8451,6 +8451,568 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('getSearchAds360Link', () => {
+    it('invokes getSearchAds360Link without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetSearchAds360LinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetSearchAds360LinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+      );
+      client.innerApiCalls.getSearchAds360Link =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getSearchAds360Link(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSearchAds360Link as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSearchAds360Link as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSearchAds360Link without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetSearchAds360LinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetSearchAds360LinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+      );
+      client.innerApiCalls.getSearchAds360Link =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getSearchAds360Link(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.ISearchAds360Link | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSearchAds360Link as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSearchAds360Link as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSearchAds360Link with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetSearchAds360LinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetSearchAds360LinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getSearchAds360Link = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getSearchAds360Link(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getSearchAds360Link as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSearchAds360Link as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSearchAds360Link with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetSearchAds360LinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetSearchAds360LinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSearchAds360Link(request), expectedError);
+    });
+  });
+
+  describe('createSearchAds360Link', () => {
+    it('invokes createSearchAds360Link without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateSearchAds360LinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateSearchAds360LinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+      );
+      client.innerApiCalls.createSearchAds360Link =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createSearchAds360Link(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createSearchAds360Link as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSearchAds360Link as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSearchAds360Link without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateSearchAds360LinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateSearchAds360LinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+      );
+      client.innerApiCalls.createSearchAds360Link =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createSearchAds360Link(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.ISearchAds360Link | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createSearchAds360Link as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSearchAds360Link as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSearchAds360Link with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateSearchAds360LinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateSearchAds360LinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createSearchAds360Link = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createSearchAds360Link(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createSearchAds360Link as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSearchAds360Link as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSearchAds360Link with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateSearchAds360LinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateSearchAds360LinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createSearchAds360Link(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('deleteSearchAds360Link', () => {
+    it('invokes deleteSearchAds360Link without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteSearchAds360LinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteSearchAds360LinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteSearchAds360Link =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteSearchAds360Link(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSearchAds360Link as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSearchAds360Link as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSearchAds360Link without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteSearchAds360LinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteSearchAds360LinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteSearchAds360Link =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteSearchAds360Link(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSearchAds360Link as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSearchAds360Link as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSearchAds360Link with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteSearchAds360LinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteSearchAds360LinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteSearchAds360Link = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteSearchAds360Link(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteSearchAds360Link as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSearchAds360Link as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSearchAds360Link with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteSearchAds360LinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteSearchAds360LinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteSearchAds360Link(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateSearchAds360Link', () => {
+    it('invokes updateSearchAds360Link without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateSearchAds360LinkRequest()
+      );
+      request.searchAds_360Link ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateSearchAds360LinkRequest',
+        ['searchAds_360Link', 'name']
+      );
+      request.searchAds_360Link.name = defaultValue1;
+      const expectedHeaderRequestParams = `search_ads_360_link.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+      );
+      client.innerApiCalls.updateSearchAds360Link =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateSearchAds360Link(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSearchAds360Link as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSearchAds360Link as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSearchAds360Link without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateSearchAds360LinkRequest()
+      );
+      request.searchAds_360Link ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateSearchAds360LinkRequest',
+        ['searchAds_360Link', 'name']
+      );
+      request.searchAds_360Link.name = defaultValue1;
+      const expectedHeaderRequestParams = `search_ads_360_link.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+      );
+      client.innerApiCalls.updateSearchAds360Link =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSearchAds360Link(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.ISearchAds360Link | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSearchAds360Link as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSearchAds360Link as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSearchAds360Link with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateSearchAds360LinkRequest()
+      );
+      request.searchAds_360Link ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateSearchAds360LinkRequest',
+        ['searchAds_360Link', 'name']
+      );
+      request.searchAds_360Link.name = defaultValue1;
+      const expectedHeaderRequestParams = `search_ads_360_link.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSearchAds360Link = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateSearchAds360Link(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateSearchAds360Link as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSearchAds360Link as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSearchAds360Link with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateSearchAds360LinkRequest()
+      );
+      request.searchAds_360Link ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateSearchAds360LinkRequest',
+        ['searchAds_360Link', 'name']
+      );
+      request.searchAds_360Link.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateSearchAds360Link(request),
+        expectedError
+      );
+    });
+  });
+
   describe('getAttributionSettings', () => {
     it('invokes getAttributionSettings without error', async () => {
       const client =
@@ -8868,6 +9430,330 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.runAccessReport(request), expectedError);
+    });
+  });
+
+  describe('setAutomatedGa4ConfigurationOptOut', () => {
+    it('invokes setAutomatedGa4ConfigurationOptOut without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse()
+      );
+      client.innerApiCalls.setAutomatedGa4ConfigurationOptOut =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.setAutomatedGa4ConfigurationOptOut(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes setAutomatedGa4ConfigurationOptOut without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse()
+      );
+      client.innerApiCalls.setAutomatedGa4ConfigurationOptOut =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setAutomatedGa4ConfigurationOptOut(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes setAutomatedGa4ConfigurationOptOut with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setAutomatedGa4ConfigurationOptOut = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.setAutomatedGa4ConfigurationOptOut(request),
+        expectedError
+      );
+    });
+
+    it('invokes setAutomatedGa4ConfigurationOptOut with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.setAutomatedGa4ConfigurationOptOut(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('fetchAutomatedGa4ConfigurationOptOut', () => {
+    it('invokes fetchAutomatedGa4ConfigurationOptOut without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse()
+      );
+      client.innerApiCalls.fetchAutomatedGa4ConfigurationOptOut =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchAutomatedGa4ConfigurationOptOut(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes fetchAutomatedGa4ConfigurationOptOut without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse()
+      );
+      client.innerApiCalls.fetchAutomatedGa4ConfigurationOptOut =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchAutomatedGa4ConfigurationOptOut(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes fetchAutomatedGa4ConfigurationOptOut with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchAutomatedGa4ConfigurationOptOut =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.fetchAutomatedGa4ConfigurationOptOut(request),
+        expectedError
+      );
+    });
+
+    it('invokes fetchAutomatedGa4ConfigurationOptOut with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.fetchAutomatedGa4ConfigurationOptOut(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getBigQueryLink', () => {
+    it('invokes getBigQueryLink without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetBigQueryLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetBigQueryLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.BigQueryLink()
+      );
+      client.innerApiCalls.getBigQueryLink = stubSimpleCall(expectedResponse);
+      const [response] = await client.getBigQueryLink(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBigQueryLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBigQueryLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBigQueryLink without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetBigQueryLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetBigQueryLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.BigQueryLink()
+      );
+      client.innerApiCalls.getBigQueryLink =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getBigQueryLink(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IBigQueryLink | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBigQueryLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBigQueryLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBigQueryLink with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetBigQueryLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetBigQueryLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getBigQueryLink = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getBigQueryLink(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getBigQueryLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBigQueryLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBigQueryLink with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetBigQueryLinkRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetBigQueryLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getBigQueryLink(request), expectedError);
     });
   });
 
@@ -14117,6 +15003,710 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('listSearchAds360Links', () => {
+    it('invokes listSearchAds360Links without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+        ),
+      ];
+      client.innerApiCalls.listSearchAds360Links =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listSearchAds360Links(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSearchAds360Links as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSearchAds360Links as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSearchAds360Links without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+        ),
+      ];
+      client.innerApiCalls.listSearchAds360Links =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listSearchAds360Links(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.analytics.admin.v1alpha.ISearchAds360Link[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSearchAds360Links as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSearchAds360Links as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSearchAds360Links with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSearchAds360Links = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listSearchAds360Links(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listSearchAds360Links as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSearchAds360Links as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSearchAds360LinksStream without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+        ),
+      ];
+      client.descriptors.page.listSearchAds360Links.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listSearchAds360LinksStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.SearchAds360Link[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.admin.v1alpha.SearchAds360Link
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listSearchAds360Links
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSearchAds360Links, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listSearchAds360Links
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listSearchAds360LinksStream with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSearchAds360Links.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listSearchAds360LinksStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.SearchAds360Link[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.admin.v1alpha.SearchAds360Link
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listSearchAds360Links
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSearchAds360Links, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listSearchAds360Links
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listSearchAds360Links without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SearchAds360Link()
+        ),
+      ];
+      client.descriptors.page.listSearchAds360Links.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.analytics.admin.v1alpha.ISearchAds360Link[] =
+        [];
+      const iterable = client.listSearchAds360LinksAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSearchAds360Links
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listSearchAds360Links
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listSearchAds360Links with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSearchAds360LinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSearchAds360Links.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listSearchAds360LinksAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.admin.v1alpha.ISearchAds360Link[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSearchAds360Links
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listSearchAds360Links
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listBigQueryLinks', () => {
+    it('invokes listBigQueryLinks without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListBigQueryLinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListBigQueryLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.BigQueryLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.BigQueryLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.BigQueryLink()
+        ),
+      ];
+      client.innerApiCalls.listBigQueryLinks = stubSimpleCall(expectedResponse);
+      const [response] = await client.listBigQueryLinks(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listBigQueryLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBigQueryLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBigQueryLinks without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListBigQueryLinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListBigQueryLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.BigQueryLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.BigQueryLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.BigQueryLink()
+        ),
+      ];
+      client.innerApiCalls.listBigQueryLinks =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listBigQueryLinks(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.analytics.admin.v1alpha.IBigQueryLink[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listBigQueryLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBigQueryLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBigQueryLinks with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListBigQueryLinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListBigQueryLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listBigQueryLinks = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listBigQueryLinks(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listBigQueryLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBigQueryLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBigQueryLinksStream without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListBigQueryLinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListBigQueryLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.BigQueryLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.BigQueryLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.BigQueryLink()
+        ),
+      ];
+      client.descriptors.page.listBigQueryLinks.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listBigQueryLinksStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.BigQueryLink[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.admin.v1alpha.BigQueryLink) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listBigQueryLinks.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBigQueryLinks, request)
+      );
+      assert(
+        (client.descriptors.page.listBigQueryLinks.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listBigQueryLinksStream with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListBigQueryLinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListBigQueryLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBigQueryLinks.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listBigQueryLinksStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.BigQueryLink[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.admin.v1alpha.BigQueryLink) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listBigQueryLinks.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBigQueryLinks, request)
+      );
+      assert(
+        (client.descriptors.page.listBigQueryLinks.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listBigQueryLinks without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListBigQueryLinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListBigQueryLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.BigQueryLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.BigQueryLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.BigQueryLink()
+        ),
+      ];
+      client.descriptors.page.listBigQueryLinks.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.analytics.admin.v1alpha.IBigQueryLink[] =
+        [];
+      const iterable = client.listBigQueryLinksAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listBigQueryLinks.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listBigQueryLinks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listBigQueryLinks with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListBigQueryLinksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListBigQueryLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBigQueryLinks.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listBigQueryLinksAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.admin.v1alpha.IBigQueryLink[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listBigQueryLinks.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listBigQueryLinks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('account', () => {
       const fakePath = '/rendered/path/account';
@@ -14340,6 +15930,59 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         assert.strictEqual(result, 'audienceValue');
         assert(
           (client.pathTemplates.audiencePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('bigQueryLink', () => {
+      const fakePath = '/rendered/path/bigQueryLink';
+      const expectedParameters = {
+        property: 'propertyValue',
+        bigquery_link: 'bigqueryLinkValue',
+      };
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.bigQueryLinkPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.bigQueryLinkPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('bigQueryLinkPath', () => {
+        const result = client.bigQueryLinkPath(
+          'propertyValue',
+          'bigqueryLinkValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.bigQueryLinkPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromBigQueryLinkName', () => {
+        const result = client.matchPropertyFromBigQueryLinkName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (client.pathTemplates.bigQueryLinkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBigqueryLinkFromBigQueryLinkName', () => {
+        const result = client.matchBigqueryLinkFromBigQueryLinkName(fakePath);
+        assert.strictEqual(result, 'bigqueryLinkValue');
+        assert(
+          (client.pathTemplates.bigQueryLinkPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -14745,6 +16388,60 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
     });
 
+    describe('expandedDataSet', () => {
+      const fakePath = '/rendered/path/expandedDataSet';
+      const expectedParameters = {
+        property: 'propertyValue',
+        expanded_data_set: 'expandedDataSetValue',
+      };
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.expandedDataSetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.expandedDataSetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('expandedDataSetPath', () => {
+        const result = client.expandedDataSetPath(
+          'propertyValue',
+          'expandedDataSetValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.expandedDataSetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromExpandedDataSetName', () => {
+        const result = client.matchPropertyFromExpandedDataSetName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (client.pathTemplates.expandedDataSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExpandedDataSetFromExpandedDataSetName', () => {
+        const result =
+          client.matchExpandedDataSetFromExpandedDataSetName(fakePath);
+        assert.strictEqual(result, 'expandedDataSetValue');
+        assert(
+          (client.pathTemplates.expandedDataSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('firebaseLink', () => {
       const fakePath = '/rendered/path/firebaseLink';
       const expectedParameters = {
@@ -15121,6 +16818,48 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         assert.strictEqual(result, 'userLinkValue');
         assert(
           (client.pathTemplates.propertyUserLinkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('searchAds360Link', () => {
+      const fakePath = '/rendered/path/searchAds360Link';
+      const expectedParameters = {
+        property: 'propertyValue',
+      };
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.searchAds360LinkPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.searchAds360LinkPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('searchAds360LinkPath', () => {
+        const result = client.searchAds360LinkPath('propertyValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.searchAds360LinkPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromSearchAds360LinkName', () => {
+        const result = client.matchPropertyFromSearchAds360LinkName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (client.pathTemplates.searchAds360LinkPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
