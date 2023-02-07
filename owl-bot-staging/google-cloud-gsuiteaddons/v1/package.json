@@ -52,7 +52,7 @@
     "mocha": "^10.2.0",
     "null-loader": "^4.0.1",
     "pack-n-play": "^1.0.0-2",
-    "sinon": "^14.0.2",
+    "sinon": "^15.0.1",
     "ts-loader": "^8.4.0",
     "typescript": "^4.8.4",
     "webpack": "^4.46.0",
