@@ -8,7 +8,7 @@
               "nested": {
                 "v4": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/talent/v4;talent",
+                    "go_package": "cloud.google.com/go/talent/apiv4/talentpb;talentpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TenantServiceProto",
                     "java_package": "com.google.cloud.talent.v4",
@@ -2263,7 +2263,7 @@
                 },
                 "v4beta1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/talent/v4beta1;talent",
+                    "go_package": "cloud.google.com/go/talent/apiv4beta1/talentpb;talentpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TenantServiceProto",
                     "java_package": "com.google.cloud.talent.v4beta1",

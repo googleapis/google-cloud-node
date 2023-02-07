@@ -13,7 +13,7 @@
 # limitations under the License.
  
 import synthtool as s
-import synthtool.languages.node as node
+import synthtool.languages.node_mono_repo as node
 import pathlib
 
 
@@ -24,6 +24,7 @@ def patch(library: pathlib.Path):
 
 
 node.owlbot_main(
+    relative_dir="packages/google-cloud-redis",
     staging_excludes=['package.json', 'README.md'],
     patch_staging=patch
 )
