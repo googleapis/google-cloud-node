@@ -5364,6 +5364,7 @@
                          * @property {google.protobuf.ITimestamp|null} [endTime] IngestConversationsMetadata endTime
                          * @property {google.cloud.contactcenterinsights.v1.IIngestConversationsRequest|null} [request] IngestConversationsMetadata request
                          * @property {Array.<google.rpc.IStatus>|null} [partialErrors] IngestConversationsMetadata partialErrors
+                         * @property {google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IIngestConversationsStats|null} [ingestConversationsStats] IngestConversationsMetadata ingestConversationsStats
                          */
     
                         /**
@@ -5415,6 +5416,14 @@
                         IngestConversationsMetadata.prototype.partialErrors = $util.emptyArray;
     
                         /**
+                         * IngestConversationsMetadata ingestConversationsStats.
+                         * @member {google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IIngestConversationsStats|null|undefined} ingestConversationsStats
+                         * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata
+                         * @instance
+                         */
+                        IngestConversationsMetadata.prototype.ingestConversationsStats = null;
+    
+                        /**
                          * Creates a new IngestConversationsMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata
@@ -5447,6 +5456,8 @@
                             if (message.partialErrors != null && message.partialErrors.length)
                                 for (var i = 0; i < message.partialErrors.length; ++i)
                                     $root.google.rpc.Status.encode(message.partialErrors[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.ingestConversationsStats != null && Object.hasOwnProperty.call(message, "ingestConversationsStats"))
+                                $root.google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats.encode(message.ingestConversationsStats, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -5497,6 +5508,10 @@
                                         if (!(message.partialErrors && message.partialErrors.length))
                                             message.partialErrors = [];
                                         message.partialErrors.push($root.google.rpc.Status.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        message.ingestConversationsStats = $root.google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -5558,6 +5573,11 @@
                                         return "partialErrors." + error;
                                 }
                             }
+                            if (message.ingestConversationsStats != null && message.hasOwnProperty("ingestConversationsStats")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats.verify(message.ingestConversationsStats);
+                                if (error)
+                                    return "ingestConversationsStats." + error;
+                            }
                             return null;
                         };
     
@@ -5598,6 +5618,11 @@
                                     message.partialErrors[i] = $root.google.rpc.Status.fromObject(object.partialErrors[i]);
                                 }
                             }
+                            if (object.ingestConversationsStats != null) {
+                                if (typeof object.ingestConversationsStats !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.ingestConversationsStats: object expected");
+                                message.ingestConversationsStats = $root.google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats.fromObject(object.ingestConversationsStats);
+                            }
                             return message;
                         };
     
@@ -5620,6 +5645,7 @@
                                 object.createTime = null;
                                 object.endTime = null;
                                 object.request = null;
+                                object.ingestConversationsStats = null;
                             }
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
@@ -5632,6 +5658,8 @@
                                 for (var j = 0; j < message.partialErrors.length; ++j)
                                     object.partialErrors[j] = $root.google.rpc.Status.toObject(message.partialErrors[j], options);
                             }
+                            if (message.ingestConversationsStats != null && message.hasOwnProperty("ingestConversationsStats"))
+                                object.ingestConversationsStats = $root.google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats.toObject(message.ingestConversationsStats, options);
                             return object;
                         };
     
@@ -5660,6 +5688,279 @@
                             }
                             return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.IngestConversationsMetadata";
                         };
+    
+                        IngestConversationsMetadata.IngestConversationsStats = (function() {
+    
+                            /**
+                             * Properties of an IngestConversationsStats.
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata
+                             * @interface IIngestConversationsStats
+                             * @property {number|null} [processedObjectCount] IngestConversationsStats processedObjectCount
+                             * @property {number|null} [duplicatesSkippedCount] IngestConversationsStats duplicatesSkippedCount
+                             * @property {number|null} [successfulIngestCount] IngestConversationsStats successfulIngestCount
+                             * @property {number|null} [failedIngestCount] IngestConversationsStats failedIngestCount
+                             */
+    
+                            /**
+                             * Constructs a new IngestConversationsStats.
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata
+                             * @classdesc Represents an IngestConversationsStats.
+                             * @implements IIngestConversationsStats
+                             * @constructor
+                             * @param {google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IIngestConversationsStats=} [properties] Properties to set
+                             */
+                            function IngestConversationsStats(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * IngestConversationsStats processedObjectCount.
+                             * @member {number} processedObjectCount
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats
+                             * @instance
+                             */
+                            IngestConversationsStats.prototype.processedObjectCount = 0;
+    
+                            /**
+                             * IngestConversationsStats duplicatesSkippedCount.
+                             * @member {number} duplicatesSkippedCount
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats
+                             * @instance
+                             */
+                            IngestConversationsStats.prototype.duplicatesSkippedCount = 0;
+    
+                            /**
+                             * IngestConversationsStats successfulIngestCount.
+                             * @member {number} successfulIngestCount
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats
+                             * @instance
+                             */
+                            IngestConversationsStats.prototype.successfulIngestCount = 0;
+    
+                            /**
+                             * IngestConversationsStats failedIngestCount.
+                             * @member {number} failedIngestCount
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats
+                             * @instance
+                             */
+                            IngestConversationsStats.prototype.failedIngestCount = 0;
+    
+                            /**
+                             * Creates a new IngestConversationsStats instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IIngestConversationsStats=} [properties] Properties to set
+                             * @returns {google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats} IngestConversationsStats instance
+                             */
+                            IngestConversationsStats.create = function create(properties) {
+                                return new IngestConversationsStats(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified IngestConversationsStats message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IIngestConversationsStats} message IngestConversationsStats message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            IngestConversationsStats.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.processedObjectCount != null && Object.hasOwnProperty.call(message, "processedObjectCount"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.processedObjectCount);
+                                if (message.duplicatesSkippedCount != null && Object.hasOwnProperty.call(message, "duplicatesSkippedCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.duplicatesSkippedCount);
+                                if (message.successfulIngestCount != null && Object.hasOwnProperty.call(message, "successfulIngestCount"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.successfulIngestCount);
+                                if (message.failedIngestCount != null && Object.hasOwnProperty.call(message, "failedIngestCount"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.failedIngestCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified IngestConversationsStats message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IIngestConversationsStats} message IngestConversationsStats message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            IngestConversationsStats.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an IngestConversationsStats message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats} IngestConversationsStats
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            IngestConversationsStats.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.processedObjectCount = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.duplicatesSkippedCount = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.successfulIngestCount = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.failedIngestCount = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an IngestConversationsStats message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats} IngestConversationsStats
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            IngestConversationsStats.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an IngestConversationsStats message.
+                             * @function verify
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            IngestConversationsStats.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.processedObjectCount != null && message.hasOwnProperty("processedObjectCount"))
+                                    if (!$util.isInteger(message.processedObjectCount))
+                                        return "processedObjectCount: integer expected";
+                                if (message.duplicatesSkippedCount != null && message.hasOwnProperty("duplicatesSkippedCount"))
+                                    if (!$util.isInteger(message.duplicatesSkippedCount))
+                                        return "duplicatesSkippedCount: integer expected";
+                                if (message.successfulIngestCount != null && message.hasOwnProperty("successfulIngestCount"))
+                                    if (!$util.isInteger(message.successfulIngestCount))
+                                        return "successfulIngestCount: integer expected";
+                                if (message.failedIngestCount != null && message.hasOwnProperty("failedIngestCount"))
+                                    if (!$util.isInteger(message.failedIngestCount))
+                                        return "failedIngestCount: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an IngestConversationsStats message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats} IngestConversationsStats
+                             */
+                            IngestConversationsStats.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats)
+                                    return object;
+                                var message = new $root.google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats();
+                                if (object.processedObjectCount != null)
+                                    message.processedObjectCount = object.processedObjectCount | 0;
+                                if (object.duplicatesSkippedCount != null)
+                                    message.duplicatesSkippedCount = object.duplicatesSkippedCount | 0;
+                                if (object.successfulIngestCount != null)
+                                    message.successfulIngestCount = object.successfulIngestCount | 0;
+                                if (object.failedIngestCount != null)
+                                    message.failedIngestCount = object.failedIngestCount | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an IngestConversationsStats message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats} message IngestConversationsStats
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            IngestConversationsStats.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.processedObjectCount = 0;
+                                    object.duplicatesSkippedCount = 0;
+                                    object.successfulIngestCount = 0;
+                                    object.failedIngestCount = 0;
+                                }
+                                if (message.processedObjectCount != null && message.hasOwnProperty("processedObjectCount"))
+                                    object.processedObjectCount = message.processedObjectCount;
+                                if (message.duplicatesSkippedCount != null && message.hasOwnProperty("duplicatesSkippedCount"))
+                                    object.duplicatesSkippedCount = message.duplicatesSkippedCount;
+                                if (message.successfulIngestCount != null && message.hasOwnProperty("successfulIngestCount"))
+                                    object.successfulIngestCount = message.successfulIngestCount;
+                                if (message.failedIngestCount != null && message.hasOwnProperty("failedIngestCount"))
+                                    object.failedIngestCount = message.failedIngestCount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this IngestConversationsStats to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            IngestConversationsStats.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for IngestConversationsStats
+                             * @function getTypeUrl
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            IngestConversationsStats.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats";
+                            };
+    
+                            return IngestConversationsStats;
+                        })();
     
                         return IngestConversationsMetadata;
                     })();
@@ -24840,6 +25141,7 @@
                          * @property {string|null} [displayName] IssueModel displayName
                          * @property {google.protobuf.ITimestamp|null} [createTime] IssueModel createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] IssueModel updateTime
+                         * @property {number|Long|null} [issueCount] IssueModel issueCount
                          * @property {google.cloud.contactcenterinsights.v1.IssueModel.State|null} [state] IssueModel state
                          * @property {google.cloud.contactcenterinsights.v1.IssueModel.IInputDataConfig|null} [inputDataConfig] IssueModel inputDataConfig
                          * @property {google.cloud.contactcenterinsights.v1.IIssueModelLabelStats|null} [trainingStats] IssueModel trainingStats
@@ -24891,6 +25193,14 @@
                          * @instance
                          */
                         IssueModel.prototype.updateTime = null;
+    
+                        /**
+                         * IssueModel issueCount.
+                         * @member {number|Long} issueCount
+                         * @memberof google.cloud.contactcenterinsights.v1.IssueModel
+                         * @instance
+                         */
+                        IssueModel.prototype.issueCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                         /**
                          * IssueModel state.
@@ -24954,6 +25264,8 @@
                                 $root.google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig.encode(message.inputDataConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.trainingStats != null && Object.hasOwnProperty.call(message, "trainingStats"))
                                 $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.encode(message.trainingStats, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.issueCount != null && Object.hasOwnProperty.call(message, "issueCount"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.issueCount);
                             return writer;
                         };
     
@@ -25002,6 +25314,10 @@
                                     }
                                 case 4: {
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.issueCount = reader.int64();
                                         break;
                                     }
                                 case 5: {
@@ -25067,6 +25383,9 @@
                                 if (error)
                                     return "updateTime." + error;
                             }
+                            if (message.issueCount != null && message.hasOwnProperty("issueCount"))
+                                if (!$util.isInteger(message.issueCount) && !(message.issueCount && $util.isInteger(message.issueCount.low) && $util.isInteger(message.issueCount.high)))
+                                    return "issueCount: integer|Long expected";
                             if (message.state != null && message.hasOwnProperty("state"))
                                 switch (message.state) {
                                 default:
@@ -25118,6 +25437,15 @@
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.IssueModel.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
+                            if (object.issueCount != null)
+                                if ($util.Long)
+                                    (message.issueCount = $util.Long.fromValue(object.issueCount)).unsigned = false;
+                                else if (typeof object.issueCount === "string")
+                                    message.issueCount = parseInt(object.issueCount, 10);
+                                else if (typeof object.issueCount === "number")
+                                    message.issueCount = object.issueCount;
+                                else if (typeof object.issueCount === "object")
+                                    message.issueCount = new $util.LongBits(object.issueCount.low >>> 0, object.issueCount.high >>> 0).toNumber();
                             switch (object.state) {
                             default:
                                 if (typeof object.state === "number") {
@@ -25184,6 +25512,11 @@
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.inputDataConfig = null;
                                 object.trainingStats = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.issueCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.issueCount = options.longs === String ? "0" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -25199,6 +25532,11 @@
                                 object.inputDataConfig = $root.google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig.toObject(message.inputDataConfig, options);
                             if (message.trainingStats != null && message.hasOwnProperty("trainingStats"))
                                 object.trainingStats = $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.toObject(message.trainingStats, options);
+                            if (message.issueCount != null && message.hasOwnProperty("issueCount"))
+                                if (typeof message.issueCount === "number")
+                                    object.issueCount = options.longs === String ? String(message.issueCount) : message.issueCount;
+                                else
+                                    object.issueCount = options.longs === String ? $util.Long.prototype.toString.call(message.issueCount) : options.longs === Number ? new $util.LongBits(message.issueCount.low >>> 0, message.issueCount.high >>> 0).toNumber() : message.issueCount;
                             return object;
                         };
     

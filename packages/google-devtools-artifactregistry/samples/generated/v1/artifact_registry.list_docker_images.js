@@ -29,7 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource whose docker images will be listed.
+   *  Required. The name of the parent resource whose docker images will be
+   *  listed.
    */
   // const parent = 'abc123'
   /**
@@ -40,6 +41,10 @@ function main(parent) {
    *  The next_page_token value returned from a previous list request, if any.
    */
   // const pageToken = 'abc123'
+  /**
+   *  The field to order the results by.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;

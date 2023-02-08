@@ -5593,6 +5593,147 @@ describe('v1.DatasetServiceClient', () => {
       });
     });
 
+    describe('nasJob', () => {
+      const fakePath = '/rendered/path/nasJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        nas_job: 'nasJobValue',
+      };
+      const client = new datasetserviceModule.v1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.nasJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nasJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nasJobPath', () => {
+        const result = client.nasJobPath(
+          'projectValue',
+          'locationValue',
+          'nasJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNasJobName', () => {
+        const result = client.matchProjectFromNasJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNasJobName', () => {
+        const result = client.matchLocationFromNasJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNasJobFromNasJobName', () => {
+        const result = client.matchNasJobFromNasJobName(fakePath);
+        assert.strictEqual(result, 'nasJobValue');
+        assert(
+          (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('nasTrialDetail', () => {
+      const fakePath = '/rendered/path/nasTrialDetail';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        nas_job: 'nasJobValue',
+        nas_trial_detail: 'nasTrialDetailValue',
+      };
+      const client = new datasetserviceModule.v1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.nasTrialDetailPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nasTrialDetailPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nasTrialDetailPath', () => {
+        const result = client.nasTrialDetailPath(
+          'projectValue',
+          'locationValue',
+          'nasJobValue',
+          'nasTrialDetailValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNasTrialDetailName', () => {
+        const result = client.matchProjectFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNasTrialDetailName', () => {
+        const result = client.matchLocationFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNasJobFromNasTrialDetailName', () => {
+        const result = client.matchNasJobFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'nasJobValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNasTrialDetailFromNasTrialDetailName', () => {
+        const result =
+          client.matchNasTrialDetailFromNasTrialDetailName(fakePath);
+        assert.strictEqual(result, 'nasTrialDetailValue');
+        assert(
+          (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('pipelineJob', () => {
       const fakePath = '/rendered/path/pipelineJob';
       const expectedParameters = {
