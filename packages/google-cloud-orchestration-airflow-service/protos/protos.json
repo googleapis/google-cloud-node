@@ -1048,6 +1048,60 @@
                                 }
                               }
                             },
+                            "OperationMetadata": {
+                              "fields": {
+                                "state": {
+                                  "type": "State",
+                                  "id": 1
+                                },
+                                "operationType": {
+                                  "type": "Type",
+                                  "id": 2
+                                },
+                                "resource": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "resourceUuid": {
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "createTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 5
+                                },
+                                "endTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 6
+                                }
+                              },
+                              "nested": {
+                                "State": {
+                                  "options": {
+                                    "allow_alias": true
+                                  },
+                                  "values": {
+                                    "STATE_UNSPECIFIED": 0,
+                                    "PENDING": 1,
+                                    "RUNNING": 2,
+                                    "SUCCEEDED": 3,
+                                    "SUCCESSFUL": 3,
+                                    "FAILED": 4
+                                  }
+                                },
+                                "Type": {
+                                  "values": {
+                                    "TYPE_UNSPECIFIED": 0,
+                                    "CREATE": 1,
+                                    "DELETE": 2,
+                                    "UPDATE": 3,
+                                    "CHECK": 4,
+                                    "SAVE_SNAPSHOT": 5,
+                                    "LOAD_SNAPSHOT": 6
+                                  }
+                                }
+                              }
+                            },
                             "ImageVersions": {
                               "options": {
                                 "(google.api.default_host)": "composer.googleapis.com",
@@ -1133,60 +1187,6 @@
                                 "upgradeDisabled": {
                                   "type": "bool",
                                   "id": 6
-                                }
-                              }
-                            },
-                            "OperationMetadata": {
-                              "fields": {
-                                "state": {
-                                  "type": "State",
-                                  "id": 1
-                                },
-                                "operationType": {
-                                  "type": "Type",
-                                  "id": 2
-                                },
-                                "resource": {
-                                  "type": "string",
-                                  "id": 3
-                                },
-                                "resourceUuid": {
-                                  "type": "string",
-                                  "id": 4
-                                },
-                                "createTime": {
-                                  "type": "google.protobuf.Timestamp",
-                                  "id": 5
-                                },
-                                "endTime": {
-                                  "type": "google.protobuf.Timestamp",
-                                  "id": 6
-                                }
-                              },
-                              "nested": {
-                                "State": {
-                                  "options": {
-                                    "allow_alias": true
-                                  },
-                                  "values": {
-                                    "STATE_UNSPECIFIED": 0,
-                                    "PENDING": 1,
-                                    "RUNNING": 2,
-                                    "SUCCEEDED": 3,
-                                    "SUCCESSFUL": 3,
-                                    "FAILED": 4
-                                  }
-                                },
-                                "Type": {
-                                  "values": {
-                                    "TYPE_UNSPECIFIED": 0,
-                                    "CREATE": 1,
-                                    "DELETE": 2,
-                                    "UPDATE": 3,
-                                    "CHECK": 4,
-                                    "SAVE_SNAPSHOT": 5,
-                                    "LOAD_SNAPSHOT": 6
-                                  }
                                 }
                               }
                             }
@@ -3753,6 +3753,18 @@
                 }
               }
             },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -3786,18 +3798,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
-                }
-              }
-            },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
                 }
               }
             }
