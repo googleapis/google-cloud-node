@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START artifactregistry_v1_generated_ArtifactRegistry_ListDockerImages_async]
+function main(name) {
+  // [START artifactregistry_v1_generated_ArtifactRegistry_GetMavenArtifact_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,22 +29,9 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource whose docker images will be
-   *  listed.
+   *  Required. The name of the maven artifact.
    */
-  // const parent = 'abc123'
-  /**
-   *  The maximum number of artifacts to return.
-   */
-  // const pageSize = 1234
-  /**
-   *  The next_page_token value returned from a previous list request, if any.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  The field to order the results by.
-   */
-  // const orderBy = 'abc123'
+  // const name = 'abc123'
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;
@@ -52,21 +39,19 @@ function main(parent) {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function callListDockerImages() {
+  async function callGetMavenArtifact() {
     // Construct request
     const request = {
-      parent,
+      name,
     };
 
     // Run request
-    const iterable = await artifactregistryClient.listDockerImagesAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await artifactregistryClient.getMavenArtifact(request);
+    console.log(response);
   }
 
-  callListDockerImages();
-  // [END artifactregistry_v1_generated_ArtifactRegistry_ListDockerImages_async]
+  callGetMavenArtifact();
+  // [END artifactregistry_v1_generated_ArtifactRegistry_GetMavenArtifact_async]
 }
 
 process.on('unhandledRejection', err => {
