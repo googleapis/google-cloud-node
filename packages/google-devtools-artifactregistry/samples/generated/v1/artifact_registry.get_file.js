@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main() {
+function main(name) {
   // [START artifactregistry_v1_generated_ArtifactRegistry_GetFile_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,7 +29,7 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The name of the file to retrieve.
+   *  Required. The name of the file to retrieve.
    */
   // const name = 'abc123'
 
@@ -42,6 +42,7 @@ function main() {
   async function callGetFile() {
     // Construct request
     const request = {
+      name,
     };
 
     // Run request

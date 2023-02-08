@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START artifactregistry_v1_generated_ArtifactRegistry_ListDockerImages_async]
+  // [START artifactregistry_v1_generated_ArtifactRegistry_ListPythonPackages_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,7 +29,7 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource whose docker images will be
+   *  Required. The name of the parent resource whose python packages will be
    *  listed.
    */
   // const parent = 'abc123'
@@ -41,10 +41,6 @@ function main(parent) {
    *  The next_page_token value returned from a previous list request, if any.
    */
   // const pageToken = 'abc123'
-  /**
-   *  The field to order the results by.
-   */
-  // const orderBy = 'abc123'
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;
@@ -52,21 +48,21 @@ function main(parent) {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function callListDockerImages() {
+  async function callListPythonPackages() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await artifactregistryClient.listDockerImagesAsync(request);
+    const iterable = await artifactregistryClient.listPythonPackagesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListDockerImages();
-  // [END artifactregistry_v1_generated_ArtifactRegistry_ListDockerImages_async]
+  callListPythonPackages();
+  // [END artifactregistry_v1_generated_ArtifactRegistry_ListPythonPackages_async]
 }
 
 process.on('unhandledRejection', err => {
