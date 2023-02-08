@@ -263,6 +263,12 @@ export class JobServiceClient {
       modelEvaluationSlicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}'
       ),
+      nasJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/nasJobs/{nas_job}'
+      ),
+      nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
+      ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
       ),
@@ -313,6 +319,16 @@ export class JobServiceClient {
         'pageToken',
         'nextPageToken',
         'hyperparameterTuningJobs'
+      ),
+      listNasJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'nasJobs'
+      ),
+      listNasTrialDetails: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'nasTrialDetails'
       ),
       listBatchPredictionJobs: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -1323,6 +1339,12 @@ export class JobServiceClient {
     const deleteHyperparameterTuningJobMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
+    const deleteNasJobResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteNasJobMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteBatchPredictionJobResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -1363,6 +1385,11 @@ export class JobServiceClient {
         deleteHyperparameterTuningJobMetadata.decode.bind(
           deleteHyperparameterTuningJobMetadata
         )
+      ),
+      deleteNasJob: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteNasJobResponse.decode.bind(deleteNasJobResponse),
+        deleteNasJobMetadata.decode.bind(deleteNasJobMetadata)
       ),
       deleteBatchPredictionJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -1460,6 +1487,13 @@ export class JobServiceClient {
       'listHyperparameterTuningJobs',
       'deleteHyperparameterTuningJob',
       'cancelHyperparameterTuningJob',
+      'createNasJob',
+      'getNasJob',
+      'listNasJobs',
+      'deleteNasJob',
+      'cancelNasJob',
+      'getNasTrialDetail',
+      'listNasTrialDetails',
       'createBatchPredictionJob',
       'getBatchPredictionJob',
       'listBatchPredictionJobs',
@@ -1537,7 +1571,10 @@ export class JobServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform.read-only',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -2461,6 +2498,373 @@ export class JobServiceClient {
       options,
       callback
     );
+  }
+  /**
+   * Creates a NasJob
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to create the NasJob in.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1.NasJob} request.nasJob
+   *   Required. The NasJob to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [NasJob]{@link google.cloud.aiplatform.v1.NasJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.create_nas_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_CreateNasJob_async
+   */
+  createNasJob(
+    request?: protos.google.cloud.aiplatform.v1.ICreateNasJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.ICreateNasJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  createNasJob(
+    request: protos.google.cloud.aiplatform.v1.ICreateNasJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.ICreateNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createNasJob(
+    request: protos.google.cloud.aiplatform.v1.ICreateNasJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.ICreateNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createNasJob(
+    request?: protos.google.cloud.aiplatform.v1.ICreateNasJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.INasJob,
+          | protos.google.cloud.aiplatform.v1.ICreateNasJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.ICreateNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.ICreateNasJobRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createNasJob(request, options, callback);
+  }
+  /**
+   * Gets a NasJob
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NasJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [NasJob]{@link google.cloud.aiplatform.v1.NasJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.get_nas_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_GetNasJob_async
+   */
+  getNasJob(
+    request?: protos.google.cloud.aiplatform.v1.IGetNasJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.IGetNasJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getNasJob(
+    request: protos.google.cloud.aiplatform.v1.IGetNasJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.IGetNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getNasJob(
+    request: protos.google.cloud.aiplatform.v1.IGetNasJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.IGetNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getNasJob(
+    request?: protos.google.cloud.aiplatform.v1.IGetNasJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.INasJob,
+          | protos.google.cloud.aiplatform.v1.IGetNasJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.IGetNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.IGetNasJobRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getNasJob(request, options, callback);
+  }
+  /**
+   * Cancels a NasJob.
+   * Starts asynchronous cancellation on the NasJob. The server
+   * makes a best effort to cancel the job, but success is not
+   * guaranteed. Clients can use
+   * {@link google.cloud.aiplatform.v1.JobService.GetNasJob|JobService.GetNasJob} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * job completed despite cancellation. On successful cancellation,
+   * the NasJob is not deleted; instead it becomes a job with
+   * a {@link google.cloud.aiplatform.v1.NasJob.error|NasJob.error} value with a
+   * {@link google.rpc.Status.code|google.rpc.Status.code} of 1, corresponding to
+   * `Code.CANCELLED`, and
+   * {@link google.cloud.aiplatform.v1.NasJob.state|NasJob.state} is set to
+   * `CANCELLED`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NasJob to cancel.
+   *   Format:
+   *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.cancel_nas_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_CancelNasJob_async
+   */
+  cancelNasJob(
+    request?: protos.google.cloud.aiplatform.v1.ICancelNasJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.ICancelNasJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  cancelNasJob(
+    request: protos.google.cloud.aiplatform.v1.ICancelNasJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.ICancelNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelNasJob(
+    request: protos.google.cloud.aiplatform.v1.ICancelNasJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.ICancelNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelNasJob(
+    request?: protos.google.cloud.aiplatform.v1.ICancelNasJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.ICancelNasJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.ICancelNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.ICancelNasJobRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.cancelNasJob(request, options, callback);
+  }
+  /**
+   * Gets a NasTrialDetail.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NasTrialDetail resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [NasTrialDetail]{@link google.cloud.aiplatform.v1.NasTrialDetail}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.get_nas_trial_detail.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_GetNasTrialDetail_async
+   */
+  getNasTrialDetail(
+    request?: protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasTrialDetail,
+      protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getNasTrialDetail(
+    request: protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.INasTrialDetail,
+      | protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getNasTrialDetail(
+    request: protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.INasTrialDetail,
+      | protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getNasTrialDetail(
+    request?: protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.INasTrialDetail,
+          | protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.INasTrialDetail,
+      | protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasTrialDetail,
+      protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getNasTrialDetail(request, options, callback);
   }
   /**
    * Creates a BatchPredictionJob. A BatchPredictionJob once created will
@@ -3617,6 +4021,146 @@ export class JobServiceClient {
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteHyperparameterTuningJob,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >;
+  }
+  /**
+   * Deletes a NasJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NasJob resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.delete_nas_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_DeleteNasJob_async
+   */
+  deleteNasJob(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteNasJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteNasJob(
+    request: protos.google.cloud.aiplatform.v1.IDeleteNasJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteNasJob(
+    request: protos.google.cloud.aiplatform.v1.IDeleteNasJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteNasJob(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteNasJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteNasJob(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteNasJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.delete_nas_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_DeleteNasJob_async
+   */
+  async checkDeleteNasJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteNasJob,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
@@ -4924,6 +5468,486 @@ export class JobServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob>;
+  }
+  /**
+   * Lists NasJobs in a Location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the NasJobs
+   *   from. Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1.ListNasJobsResponse.next_page_token|ListNasJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListNasJobs|JobService.ListNasJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [NasJob]{@link google.cloud.aiplatform.v1.NasJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNasJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listNasJobs(
+    request?: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasJob[],
+      protos.google.cloud.aiplatform.v1.IListNasJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListNasJobsResponse
+    ]
+  >;
+  listNasJobs(
+    request: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+      protos.google.cloud.aiplatform.v1.IListNasJobsResponse | null | undefined,
+      protos.google.cloud.aiplatform.v1.INasJob
+    >
+  ): void;
+  listNasJobs(
+    request: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+      protos.google.cloud.aiplatform.v1.IListNasJobsResponse | null | undefined,
+      protos.google.cloud.aiplatform.v1.INasJob
+    >
+  ): void;
+  listNasJobs(
+    request?: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListNasJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.INasJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+      protos.google.cloud.aiplatform.v1.IListNasJobsResponse | null | undefined,
+      protos.google.cloud.aiplatform.v1.INasJob
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasJob[],
+      protos.google.cloud.aiplatform.v1.IListNasJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListNasJobsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listNasJobs(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the NasJobs
+   *   from. Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1.ListNasJobsResponse.next_page_token|ListNasJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListNasJobs|JobService.ListNasJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [NasJob]{@link google.cloud.aiplatform.v1.NasJob} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNasJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listNasJobsStream(
+    request?: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNasJobs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listNasJobs.createStream(
+      this.innerApiCalls.listNasJobs as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listNasJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the NasJobs
+   *   from. Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1.ListNasJobsResponse.next_page_token|ListNasJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListNasJobs|JobService.ListNasJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [NasJob]{@link google.cloud.aiplatform.v1.NasJob}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.list_nas_jobs.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_ListNasJobs_async
+   */
+  listNasJobsAsync(
+    request?: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.INasJob> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNasJobs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listNasJobs.asyncIterate(
+      this.innerApiCalls['listNasJobs'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.INasJob>;
+  }
+  /**
+   * List top NasTrialDetails of a NasJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the NasJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1.ListNasTrialDetailsResponse.next_page_token|ListNasTrialDetailsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListNasTrialDetails|JobService.ListNasTrialDetails}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [NasTrialDetail]{@link google.cloud.aiplatform.v1.NasTrialDetail}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNasTrialDetailsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listNasTrialDetails(
+    request?: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasTrialDetail[],
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
+    ]
+  >;
+  listNasTrialDetails(
+    request: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+      | protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.INasTrialDetail
+    >
+  ): void;
+  listNasTrialDetails(
+    request: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+      | protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.INasTrialDetail
+    >
+  ): void;
+  listNasTrialDetails(
+    request?: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+          | protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.INasTrialDetail
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+      | protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.INasTrialDetail
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasTrialDetail[],
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listNasTrialDetails(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the NasJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1.ListNasTrialDetailsResponse.next_page_token|ListNasTrialDetailsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListNasTrialDetails|JobService.ListNasTrialDetails}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [NasTrialDetail]{@link google.cloud.aiplatform.v1.NasTrialDetail} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNasTrialDetailsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listNasTrialDetailsStream(
+    request?: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNasTrialDetails'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listNasTrialDetails.createStream(
+      this.innerApiCalls.listNasTrialDetails as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listNasTrialDetails`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the NasJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1.ListNasTrialDetailsResponse.next_page_token|ListNasTrialDetailsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1.JobService.ListNasTrialDetails|JobService.ListNasTrialDetails}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [NasTrialDetail]{@link google.cloud.aiplatform.v1.NasTrialDetail}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.list_nas_trial_details.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_ListNasTrialDetails_async
+   */
+  listNasTrialDetailsAsync(
+    request?: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.INasTrialDetail> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNasTrialDetails'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listNasTrialDetails.asyncIterate(
+      this.innerApiCalls['listNasTrialDetails'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.INasTrialDetail>;
   }
   /**
    * Lists BatchPredictionJobs in a Location.
@@ -7658,6 +8682,130 @@ export class JobServiceClient {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
       modelEvaluationSliceName
     ).slice;
+  }
+
+  /**
+   * Return a fully-qualified nasJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} nas_job
+   * @returns {string} Resource name string.
+   */
+  nasJobPath(project: string, location: string, nasJob: string) {
+    return this.pathTemplates.nasJobPathTemplate.render({
+      project: project,
+      location: location,
+      nas_job: nasJob,
+    });
+  }
+
+  /**
+   * Parse the project from NasJob resource.
+   *
+   * @param {string} nasJobName
+   *   A fully-qualified path representing NasJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNasJobName(nasJobName: string) {
+    return this.pathTemplates.nasJobPathTemplate.match(nasJobName).project;
+  }
+
+  /**
+   * Parse the location from NasJob resource.
+   *
+   * @param {string} nasJobName
+   *   A fully-qualified path representing NasJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNasJobName(nasJobName: string) {
+    return this.pathTemplates.nasJobPathTemplate.match(nasJobName).location;
+  }
+
+  /**
+   * Parse the nas_job from NasJob resource.
+   *
+   * @param {string} nasJobName
+   *   A fully-qualified path representing NasJob resource.
+   * @returns {string} A string representing the nas_job.
+   */
+  matchNasJobFromNasJobName(nasJobName: string) {
+    return this.pathTemplates.nasJobPathTemplate.match(nasJobName).nas_job;
+  }
+
+  /**
+   * Return a fully-qualified nasTrialDetail resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} nas_job
+   * @param {string} nas_trial_detail
+   * @returns {string} Resource name string.
+   */
+  nasTrialDetailPath(
+    project: string,
+    location: string,
+    nasJob: string,
+    nasTrialDetail: string
+  ) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.render({
+      project: project,
+      location: location,
+      nas_job: nasJob,
+      nas_trial_detail: nasTrialDetail,
+    });
+  }
+
+  /**
+   * Parse the project from NasTrialDetail resource.
+   *
+   * @param {string} nasTrialDetailName
+   *   A fully-qualified path representing NasTrialDetail resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNasTrialDetailName(nasTrialDetailName: string) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).project;
+  }
+
+  /**
+   * Parse the location from NasTrialDetail resource.
+   *
+   * @param {string} nasTrialDetailName
+   *   A fully-qualified path representing NasTrialDetail resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNasTrialDetailName(nasTrialDetailName: string) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).location;
+  }
+
+  /**
+   * Parse the nas_job from NasTrialDetail resource.
+   *
+   * @param {string} nasTrialDetailName
+   *   A fully-qualified path representing NasTrialDetail resource.
+   * @returns {string} A string representing the nas_job.
+   */
+  matchNasJobFromNasTrialDetailName(nasTrialDetailName: string) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).nas_job;
+  }
+
+  /**
+   * Parse the nas_trial_detail from NasTrialDetail resource.
+   *
+   * @param {string} nasTrialDetailName
+   *   A fully-qualified path representing NasTrialDetail resource.
+   * @returns {string} A string representing the nas_trial_detail.
+   */
+  matchNasTrialDetailFromNasTrialDetailName(nasTrialDetailName: string) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).nas_trial_detail;
   }
 
   /**

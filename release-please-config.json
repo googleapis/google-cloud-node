@@ -130,7 +130,8 @@
     "packages/grafeas": {},
     "packages/typeless-sample-bot": {},
     "packages/google-maps-mapsplatformdatasets": {},
-    "packages/google-cloud-datacatalog-lineage": {}
+    "packages/google-cloud-datacatalog-lineage": {},
+    "packages/google-cloud-gsuiteaddons": {}
   },
   "plugins": [
     {

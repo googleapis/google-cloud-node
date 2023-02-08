@@ -184,6 +184,13 @@
                         "buildTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 7
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -203,6 +210,10 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -227,6 +238,275 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "artifactregistry.googleapis.com/DockerImage"
+                          }
+                        }
+                      }
+                    },
+                    "MavenArtifact": {
+                      "options": {
+                        "(google.api.resource).type": "artifactregistry.googleapis.com/MavenArtifact",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/mavenArtifacts/{maven_artifact}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pomUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "groupId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "artifactId": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ListMavenArtifactsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "artifactregistry.googleapis.com/MavenArtifact"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListMavenArtifactsResponse": {
+                      "fields": {
+                        "mavenArtifacts": {
+                          "rule": "repeated",
+                          "type": "MavenArtifact",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetMavenArtifactRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/MavenArtifact"
+                          }
+                        }
+                      }
+                    },
+                    "NpmPackage": {
+                      "options": {
+                        "(google.api.resource).type": "artifactregistry.googleapis.com/NpmPackage",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/npmPackages/{npm_package}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "packageName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ListNpmPackagesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "artifactregistry.googleapis.com/NpmPackage"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListNpmPackagesResponse": {
+                      "fields": {
+                        "npmPackages": {
+                          "rule": "repeated",
+                          "type": "NpmPackage",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetNpmPackageRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/NpmPackage"
+                          }
+                        }
+                      }
+                    },
+                    "PythonPackage": {
+                      "options": {
+                        "(google.api.resource).type": "artifactregistry.googleapis.com/PythonPackage",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/pythonPackages/{python_package}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "packageName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ListPythonPackagesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "artifactregistry.googleapis.com/PythonPackage"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListPythonPackagesResponse": {
+                      "fields": {
+                        "pythonPackages": {
+                          "rule": "repeated",
+                          "type": "PythonPackage",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetPythonPackageRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/PythonPackage"
                           }
                         }
                       }
@@ -273,15 +553,28 @@
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "owner": {
                           "type": "string",
                           "id": 7
+                        },
+                        "fetchTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -289,7 +582,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "artifactregistry.googleapis.com/File"
+                          }
                         },
                         "filter": {
                           "type": "string",
@@ -326,11 +623,19 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/File"
+                          }
                         }
                       }
                     },
                     "Package": {
+                      "options": {
+                        "(google.api.resource).type": "artifactregistry.googleapis.com/Package",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/packages/{package}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -356,7 +661,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "artifactregistry.googleapis.com/Package"
                           }
                         },
                         "pageSize": {
@@ -388,7 +694,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Package"
                           }
                         }
                       }
@@ -399,7 +706,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Package"
                           }
                         }
                       }
@@ -610,6 +918,114 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{name=projects/*/locations/*/repositories/*/dockerImages/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListMavenArtifacts": {
+                          "requestType": "ListMavenArtifactsRequest",
+                          "responseType": "ListMavenArtifactsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/repositories/*}/mavenArtifacts",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/repositories/*}/mavenArtifacts"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetMavenArtifact": {
+                          "requestType": "GetMavenArtifactRequest",
+                          "responseType": "MavenArtifact",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/repositories/*/mavenArtifacts/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/repositories/*/mavenArtifacts/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListNpmPackages": {
+                          "requestType": "ListNpmPackagesRequest",
+                          "responseType": "ListNpmPackagesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/repositories/*}/npmPackages",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/repositories/*}/npmPackages"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetNpmPackage": {
+                          "requestType": "GetNpmPackageRequest",
+                          "responseType": "NpmPackage",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/repositories/*/npmPackages/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/repositories/*/npmPackages/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListPythonPackages": {
+                          "requestType": "ListPythonPackagesRequest",
+                          "responseType": "ListPythonPackagesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/repositories/*}/pythonPackages",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/repositories/*}/pythonPackages"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetPythonPackage": {
+                          "requestType": "GetPythonPackageRequest",
+                          "responseType": "PythonPackage",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/repositories/*/pythonPackages/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/repositories/*/pythonPackages/*}"
                               }
                             },
                             {
@@ -1112,6 +1528,44 @@
                               "(google.api.method_signature)": "project_settings,update_mask"
                             }
                           ]
+                        },
+                        "GetVPCSCConfig": {
+                          "requestType": "GetVPCSCConfigRequest",
+                          "responseType": "VPCSCConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/vpcscConfig}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/vpcscConfig}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateVPCSCConfig": {
+                          "requestType": "UpdateVPCSCConfigRequest",
+                          "responseType": "VPCSCConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{vpcsc_config.name=projects/*/locations/*/vpcscConfig}",
+                            "(google.api.http).body": "vpcsc_config",
+                            "(google.api.method_signature)": "vpcsc_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{vpcsc_config.name=projects/*/locations/*/vpcscConfig}",
+                                "body": "vpcsc_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "vpcsc_config,update_mask"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1135,6 +1589,11 @@
                       },
                       "nested": {
                         "RedirectionState": {
+                          "valuesOptions": {
+                            "REDIRECTION_FROM_GCR_IO_FINALIZED": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "REDIRECTION_STATE_UNSPECIFIED": 0,
                             "REDIRECTION_FROM_GCR_IO_DISABLED": 1,
@@ -1364,6 +1823,64 @@
                         },
                         "force": {
                           "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BatchDeleteVersionsMetadata": {
+                      "fields": {
+                        "failedVersions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "VPCSCConfig": {
+                      "options": {
+                        "(google.api.resource).type": "artifactregistry.googleapis.com/VpcscConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/vpcscConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "vpcscPolicy": {
+                          "type": "VPCSCPolicy",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "VPCSCPolicy": {
+                          "values": {
+                            "VPCSC_POLICY_UNSPECIFIED": 0,
+                            "DENY": 1,
+                            "ALLOW": 2
+                          }
+                        }
+                      }
+                    },
+                    "GetVPCSCConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/VpcscConfig"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateVPCSCConfigRequest": {
+                      "fields": {
+                        "vpcscConfig": {
+                          "type": "VPCSCConfig",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
                           "id": 2
                         }
                       }
