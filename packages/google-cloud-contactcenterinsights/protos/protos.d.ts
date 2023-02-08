@@ -2474,6 +2474,9 @@ export namespace google {
 
                     /** IngestConversationsMetadata partialErrors */
                     partialErrors?: (google.rpc.IStatus[]|null);
+
+                    /** IngestConversationsMetadata ingestConversationsStats */
+                    ingestConversationsStats?: (google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IIngestConversationsStats|null);
                 }
 
                 /** Represents an IngestConversationsMetadata. */
@@ -2496,6 +2499,9 @@ export namespace google {
 
                     /** IngestConversationsMetadata partialErrors. */
                     public partialErrors: google.rpc.IStatus[];
+
+                    /** IngestConversationsMetadata ingestConversationsStats. */
+                    public ingestConversationsStats?: (google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IIngestConversationsStats|null);
 
                     /**
                      * Creates a new IngestConversationsMetadata instance using the specified properties.
@@ -2573,6 +2579,124 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IngestConversationsMetadata {
+
+                    /** Properties of an IngestConversationsStats. */
+                    interface IIngestConversationsStats {
+
+                        /** IngestConversationsStats processedObjectCount */
+                        processedObjectCount?: (number|null);
+
+                        /** IngestConversationsStats duplicatesSkippedCount */
+                        duplicatesSkippedCount?: (number|null);
+
+                        /** IngestConversationsStats successfulIngestCount */
+                        successfulIngestCount?: (number|null);
+
+                        /** IngestConversationsStats failedIngestCount */
+                        failedIngestCount?: (number|null);
+                    }
+
+                    /** Represents an IngestConversationsStats. */
+                    class IngestConversationsStats implements IIngestConversationsStats {
+
+                        /**
+                         * Constructs a new IngestConversationsStats.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IIngestConversationsStats);
+
+                        /** IngestConversationsStats processedObjectCount. */
+                        public processedObjectCount: number;
+
+                        /** IngestConversationsStats duplicatesSkippedCount. */
+                        public duplicatesSkippedCount: number;
+
+                        /** IngestConversationsStats successfulIngestCount. */
+                        public successfulIngestCount: number;
+
+                        /** IngestConversationsStats failedIngestCount. */
+                        public failedIngestCount: number;
+
+                        /**
+                         * Creates a new IngestConversationsStats instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IngestConversationsStats instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IIngestConversationsStats): google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats;
+
+                        /**
+                         * Encodes the specified IngestConversationsStats message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats.verify|verify} messages.
+                         * @param message IngestConversationsStats message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IIngestConversationsStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IngestConversationsStats message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats.verify|verify} messages.
+                         * @param message IngestConversationsStats message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IIngestConversationsStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IngestConversationsStats message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IngestConversationsStats
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats;
+
+                        /**
+                         * Decodes an IngestConversationsStats message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IngestConversationsStats
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats;
+
+                        /**
+                         * Verifies an IngestConversationsStats message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IngestConversationsStats message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IngestConversationsStats
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats;
+
+                        /**
+                         * Creates a plain object from an IngestConversationsStats message. Also converts values to other types if specified.
+                         * @param message IngestConversationsStats
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IngestConversationsStats to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IngestConversationsStats
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of an IngestConversationsResponse. */
@@ -10678,6 +10802,9 @@ export namespace google {
                     /** IssueModel updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
 
+                    /** IssueModel issueCount */
+                    issueCount?: (number|Long|string|null);
+
                     /** IssueModel state */
                     state?: (google.cloud.contactcenterinsights.v1.IssueModel.State|keyof typeof google.cloud.contactcenterinsights.v1.IssueModel.State|null);
 
@@ -10708,6 +10835,9 @@ export namespace google {
 
                     /** IssueModel updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** IssueModel issueCount. */
+                    public issueCount: (number|Long|string);
 
                     /** IssueModel state. */
                     public state: (google.cloud.contactcenterinsights.v1.IssueModel.State|keyof typeof google.cloud.contactcenterinsights.v1.IssueModel.State);
