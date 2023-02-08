@@ -40,6 +40,26 @@
                 "markRecommendationFailed"
               ]
             },
+            "GetRecommenderConfig": {
+              "methods": [
+                "getRecommenderConfig"
+              ]
+            },
+            "UpdateRecommenderConfig": {
+              "methods": [
+                "updateRecommenderConfig"
+              ]
+            },
+            "GetInsightTypeConfig": {
+              "methods": [
+                "getInsightTypeConfig"
+              ]
+            },
+            "UpdateInsightTypeConfig": {
+              "methods": [
+                "updateInsightTypeConfig"
+              ]
+            },
             "ListInsights": {
               "methods": [
                 "listInsights",
@@ -87,6 +107,26 @@
             "MarkRecommendationFailed": {
               "methods": [
                 "markRecommendationFailed"
+              ]
+            },
+            "GetRecommenderConfig": {
+              "methods": [
+                "getRecommenderConfig"
+              ]
+            },
+            "UpdateRecommenderConfig": {
+              "methods": [
+                "updateRecommenderConfig"
+              ]
+            },
+            "GetInsightTypeConfig": {
+              "methods": [
+                "getInsightTypeConfig"
+              ]
+            },
+            "UpdateInsightTypeConfig": {
+              "methods": [
+                "updateInsightTypeConfig"
               ]
             },
             "ListInsights": {

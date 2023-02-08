@@ -47,7 +47,7 @@ message ProjectSettings {
     REDIRECTION_FROM_GCR_IO_ENABLED = 2;
 
     // Redirection is enabled, and has been finalized so cannot be reverted.
-    REDIRECTION_FROM_GCR_IO_FINALIZED = 3;
+    REDIRECTION_FROM_GCR_IO_FINALIZED = 3 [deprecated = true];
   }
 
   // The name of the project's settings.
