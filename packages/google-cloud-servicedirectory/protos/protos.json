@@ -10,7 +10,7 @@
                   "options": {
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.ServiceDirectory.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/servicedirectory/v1;servicedirectory",
+                    "go_package": "cloud.google.com/go/servicedirectory/apiv1/servicedirectorypb;servicedirectorypb",
                     "java_multiple_files": true,
                     "java_outer_classname": "RegistrationServiceProto",
                     "java_package": "com.google.cloud.servicedirectory.v1",
@@ -892,7 +892,7 @@
                   "options": {
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.ServiceDirectory.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/servicedirectory/v1beta1;servicedirectory",
+                    "go_package": "cloud.google.com/go/servicedirectory/apiv1beta1/servicedirectorypb;servicedirectorypb",
                     "java_multiple_files": true,
                     "java_outer_classname": "RegistrationServiceProto",
                     "java_package": "com.google.cloud.servicedirectory.v1beta1",

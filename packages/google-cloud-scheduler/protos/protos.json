@@ -8,7 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/scheduler/v1;scheduler",
+                    "go_package": "cloud.google.com/go/scheduler/apiv1/schedulerpb;schedulerpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TargetProto",
                     "java_package": "com.google.cloud.scheduler.v1",
@@ -559,7 +559,7 @@
                 },
                 "v1beta1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/scheduler/v1beta1;scheduler",
+                    "go_package": "cloud.google.com/go/scheduler/apiv1beta1/schedulerpb;schedulerpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TargetProto",
                     "java_package": "com.google.cloud.scheduler.v1beta1",
