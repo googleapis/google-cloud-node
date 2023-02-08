@@ -1,0 +1,2236 @@
+{
+  "nested": {
+    "google": {
+      "nested": {
+        "apps": {
+          "nested": {
+            "script": {
+              "nested": {
+                "type": {
+                  "options": {
+                    "csharp_namespace": "Google.Apps.Script.Type",
+                    "go_package": "google.golang.org/genproto/googleapis/apps/script/type",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "AddOnWidgetSetProto",
+                    "java_package": "com.google.apps.script.type",
+                    "php_namespace": "Google\\Apps\\Script\\Type",
+                    "ruby_package": "Google::Apps::Script::Type"
+                  },
+                  "nested": {
+                    "AddOnWidgetSet": {
+                      "fields": {
+                        "usedWidgets": {
+                          "rule": "repeated",
+                          "type": "WidgetType",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "WidgetType": {
+                          "values": {
+                            "WIDGET_TYPE_UNSPECIFIED": 0,
+                            "DATE_PICKER": 1,
+                            "STYLED_BUTTONS": 2,
+                            "PERSISTENT_FORMS": 3,
+                            "FIXED_FOOTER": 4,
+                            "UPDATE_SUBJECT_AND_RECIPIENTS": 5,
+                            "GRID_WIDGET": 6,
+                            "ADDON_COMPOSE_UI_ACTION": 7
+                          }
+                        }
+                      }
+                    },
+                    "calendar": {
+                      "options": {
+                        "csharp_namespace": "Google.Apps.Script.Type.Calendar",
+                        "go_package": "google.golang.org/genproto/googleapis/apps/script/type/calendar",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "CalendarAddOnManifestProto",
+                        "java_package": "com.google.apps.script.type.calendar",
+                        "php_namespace": "Google\\Apps\\Script\\Type\\Calendar",
+                        "ruby_package": "Google::Apps::Script::Type::Calendar"
+                      },
+                      "nested": {
+                        "CalendarAddOnManifest": {
+                          "fields": {
+                            "homepageTrigger": {
+                              "type": "google.apps.script.type.HomepageExtensionPoint",
+                              "id": 6
+                            },
+                            "conferenceSolution": {
+                              "rule": "repeated",
+                              "type": "ConferenceSolution",
+                              "id": 3
+                            },
+                            "createSettingsUrlFunction": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "eventOpenTrigger": {
+                              "type": "CalendarExtensionPoint",
+                              "id": 10
+                            },
+                            "eventUpdateTrigger": {
+                              "type": "CalendarExtensionPoint",
+                              "id": 11
+                            },
+                            "currentEventAccess": {
+                              "type": "EventAccess",
+                              "id": 12
+                            }
+                          },
+                          "nested": {
+                            "EventAccess": {
+                              "values": {
+                                "UNSPECIFIED": 0,
+                                "METADATA": 1,
+                                "READ": 3,
+                                "WRITE": 4,
+                                "READ_WRITE": 5
+                              }
+                            }
+                          }
+                        },
+                        "ConferenceSolution": {
+                          "fields": {
+                            "onCreateFunction": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "id": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "logoUrl": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "CalendarExtensionPoint": {
+                          "fields": {
+                            "runFunction": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "MenuItemExtensionPoint": {
+                      "fields": {
+                        "runFunction": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "label": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "logoUrl": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "HomepageExtensionPoint": {
+                      "fields": {
+                        "runFunction": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "enabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UniversalActionExtensionPoint": {
+                      "oneofs": {
+                        "actionType": {
+                          "oneof": [
+                            "openLink",
+                            "runFunction"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "label": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "openLink": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "runFunction": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "docs": {
+                      "options": {
+                        "csharp_namespace": "Google.Apps.Script.Type.Docs",
+                        "go_package": "google.golang.org/genproto/googleapis/apps/script/type/docs",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "DocsAddOnManifestProto",
+                        "java_package": "com.google.apps.script.type.docs",
+                        "php_namespace": "Google\\Apps\\Script\\Type\\Docs",
+                        "ruby_package": "Google::Apps::Script::Type::Docs"
+                      },
+                      "nested": {
+                        "DocsAddOnManifest": {
+                          "fields": {
+                            "homepageTrigger": {
+                              "type": "google.apps.script.type.HomepageExtensionPoint",
+                              "id": 1
+                            },
+                            "onFileScopeGrantedTrigger": {
+                              "type": "DocsExtensionPoint",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DocsExtensionPoint": {
+                          "fields": {
+                            "runFunction": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "drive": {
+                      "options": {
+                        "csharp_namespace": "Google.Apps.Script.Type.Drive",
+                        "go_package": "google.golang.org/genproto/googleapis/apps/script/type/drive",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "DriveAddOnManifestProto",
+                        "java_package": "com.google.apps.script.type.drive",
+                        "php_namespace": "Google\\Apps\\Script\\Type\\Drive",
+                        "ruby_package": "Google::Apps::Script::Type::Drive"
+                      },
+                      "nested": {
+                        "DriveAddOnManifest": {
+                          "fields": {
+                            "homepageTrigger": {
+                              "type": "google.apps.script.type.HomepageExtensionPoint",
+                              "id": 1
+                            },
+                            "onItemsSelectedTrigger": {
+                              "type": "DriveExtensionPoint",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DriveExtensionPoint": {
+                          "fields": {
+                            "runFunction": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "gmail": {
+                      "options": {
+                        "csharp_namespace": "Google.Apps.Script.Type.Gmail",
+                        "go_package": "google.golang.org/genproto/googleapis/apps/script/type/gmail",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "GmailAddOnManifestProto",
+                        "java_package": "com.google.apps.script.type.gmail",
+                        "php_namespace": "Google\\Apps\\Script\\Type\\Gmail",
+                        "ruby_package": "Google::Apps::Script::Type::Gmail"
+                      },
+                      "nested": {
+                        "GmailAddOnManifest": {
+                          "fields": {
+                            "homepageTrigger": {
+                              "type": "google.apps.script.type.HomepageExtensionPoint",
+                              "id": 14
+                            },
+                            "contextualTriggers": {
+                              "rule": "repeated",
+                              "type": "ContextualTrigger",
+                              "id": 3
+                            },
+                            "universalActions": {
+                              "rule": "repeated",
+                              "type": "UniversalAction",
+                              "id": 4
+                            },
+                            "composeTrigger": {
+                              "type": "ComposeTrigger",
+                              "id": 12
+                            },
+                            "authorizationCheckFunction": {
+                              "type": "string",
+                              "id": 7
+                            }
+                          }
+                        },
+                        "UniversalAction": {
+                          "oneofs": {
+                            "actionType": {
+                              "oneof": [
+                                "openLink",
+                                "runFunction"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "text": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "openLink": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "runFunction": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ComposeTrigger": {
+                          "fields": {
+                            "actions": {
+                              "rule": "repeated",
+                              "type": "google.apps.script.type.MenuItemExtensionPoint",
+                              "id": 5
+                            },
+                            "draftAccess": {
+                              "type": "DraftAccess",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "DraftAccess": {
+                              "values": {
+                                "UNSPECIFIED": 0,
+                                "NONE": 1,
+                                "METADATA": 2
+                              }
+                            }
+                          }
+                        },
+                        "ContextualTrigger": {
+                          "oneofs": {
+                            "trigger": {
+                              "oneof": [
+                                "unconditional"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "unconditional": {
+                              "type": "UnconditionalTrigger",
+                              "id": 1
+                            },
+                            "onTriggerFunction": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "UnconditionalTrigger": {
+                          "fields": {}
+                        }
+                      }
+                    },
+                    "CommonAddOnManifest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "logoUrl": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "layoutProperties": {
+                          "type": "LayoutProperties",
+                          "id": 3
+                        },
+                        "addOnWidgetSet": {
+                          "type": "AddOnWidgetSet",
+                          "id": 4
+                        },
+                        "useLocaleFromApp": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "homepageTrigger": {
+                          "type": "HomepageExtensionPoint",
+                          "id": 6
+                        },
+                        "universalActions": {
+                          "rule": "repeated",
+                          "type": "UniversalActionExtensionPoint",
+                          "id": 7
+                        },
+                        "openLinkUrlPrefixes": {
+                          "type": "google.protobuf.ListValue",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "LayoutProperties": {
+                      "fields": {
+                        "primaryColor": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "secondaryColor": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "HttpOptions": {
+                      "fields": {
+                        "authorizationHeader": {
+                          "type": "HttpAuthorizationHeader",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "HttpAuthorizationHeader": {
+                      "values": {
+                        "HTTP_AUTHORIZATION_HEADER_UNSPECIFIED": 0,
+                        "SYSTEM_ID_TOKEN": 1,
+                        "USER_ID_TOKEN": 2,
+                        "NONE": 3
+                      }
+                    },
+                    "sheets": {
+                      "options": {
+                        "csharp_namespace": "Google.Apps.Script.Type.Sheets",
+                        "go_package": "google.golang.org/genproto/googleapis/apps/script/type/sheets",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "SheetsAddOnManifestProto",
+                        "java_package": "com.google.apps.script.type.sheets",
+                        "php_namespace": "Google\\Apps\\Script\\Type\\Sheets",
+                        "ruby_package": "Google::Apps::Script::Type::Sheets"
+                      },
+                      "nested": {
+                        "SheetsAddOnManifest": {
+                          "fields": {
+                            "homepageTrigger": {
+                              "type": "google.apps.script.type.HomepageExtensionPoint",
+                              "id": 3
+                            },
+                            "onFileScopeGrantedTrigger": {
+                              "type": "SheetsExtensionPoint",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "SheetsExtensionPoint": {
+                          "fields": {
+                            "runFunction": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "slides": {
+                      "options": {
+                        "csharp_namespace": "Google.Apps.Script.Type.Slides",
+                        "go_package": "google.golang.org/genproto/googleapis/apps/script/type/slides",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "SlidesAddOnManifestProto",
+                        "java_package": "com.google.apps.script.type.slides",
+                        "php_namespace": "Google\\Apps\\Script\\Type\\Slides",
+                        "ruby_package": "Google::Apps::Script::Type::Slides"
+                      },
+                      "nested": {
+                        "SlidesAddOnManifest": {
+                          "fields": {
+                            "homepageTrigger": {
+                              "type": "google.apps.script.type.HomepageExtensionPoint",
+                              "id": 1
+                            },
+                            "onFileScopeGrantedTrigger": {
+                              "type": "SlidesExtensionPoint",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "SlidesExtensionPoint": {
+                          "fields": {
+                            "runFunction": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "api": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "java_multiple_files": true,
+            "java_outer_classname": "ResourceProto",
+            "java_package": "com.google.api",
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
+              }
+            },
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "protobuf": {
+          "options": {
+            "go_package": "google.golang.org/protobuf/types/descriptorpb",
+            "java_package": "com.google.protobuf",
+            "java_outer_classname": "DescriptorProtos",
+            "csharp_namespace": "Google.Protobuf.Reflection",
+            "objc_class_prefix": "GPB",
+            "cc_enable_arenas": true,
+            "optimize_for": "SPEED"
+          },
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "publicDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weakDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "messageType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "sourceCodeInfo": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                },
+                "edition": {
+                  "type": "string",
+                  "id": 13
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nestedType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extensionRange": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneofDecl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "options": {
+                      "type": "ExtensionRangeOptions",
+                      "id": 3
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "ExtensionRangeOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "typeName": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "defaultValue": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneofIndex": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "jsonName": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                },
+                "proto3Optional": {
+                  "type": "bool",
+                  "id": 17
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "EnumReservedRange",
+                  "id": 4
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "EnumReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "inputType": {
+                  "type": "string",
+                  "id": 2
+                },
+                "outputType": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "clientStreaming": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "serverStreaming": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "default": false
+                  }
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "javaPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "javaOuterClassname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "javaMultipleFiles": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenerateEqualsAndHash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "javaStringCheckUtf8": {
+                  "type": "bool",
+                  "id": 27,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "optimizeFor": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "goPackage": {
+                  "type": "string",
+                  "id": 11
+                },
+                "ccGenericServices": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenericServices": {
+                  "type": "bool",
+                  "id": 17,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "pyGenericServices": {
+                  "type": "bool",
+                  "id": 18,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "phpGenericServices": {
+                  "type": "bool",
+                  "id": 42,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "ccEnableArenas": {
+                  "type": "bool",
+                  "id": 31,
+                  "options": {
+                    "default": true
+                  }
+                },
+                "objcClassPrefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharpNamespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "swiftPrefix": {
+                  "type": "string",
+                  "id": 39
+                },
+                "phpClassPrefix": {
+                  "type": "string",
+                  "id": 40
+                },
+                "phpNamespace": {
+                  "type": "string",
+                  "id": 41
+                },
+                "phpMetadataNamespace": {
+                  "type": "string",
+                  "id": 44
+                },
+                "rubyPackage": {
+                  "type": "string",
+                  "id": 45
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "messageSetWireFormat": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "noStandardDescriptorAccessor": {
+                  "type": "bool",
+                  "id": 2,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "mapEntry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  6,
+                  6
+                ],
+                [
+                  8,
+                  8
+                ],
+                [
+                  9,
+                  9
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "unverifiedLazy": {
+                  "type": "bool",
+                  "id": 15,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allowAlias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  5,
+                  5
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "idempotencyLevel": {
+                  "type": "IdempotencyLevel",
+                  "id": 34,
+                  "options": {
+                    "default": "IDEMPOTENCY_UNKNOWN"
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "nested": {
+                "IdempotencyLevel": {
+                  "values": {
+                    "IDEMPOTENCY_UNKNOWN": 0,
+                    "NO_SIDE_EFFECTS": 1,
+                    "IDEMPOTENT": 2
+                  }
+                }
+              }
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifierValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positiveIntValue": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negativeIntValue": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "doubleValue": {
+                  "type": "double",
+                  "id": 6
+                },
+                "stringValue": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregateValue": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "namePart": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "isExtension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leadingComments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailingComments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leadingDetachedComments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "sourceFile": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    },
+                    "semantic": {
+                      "type": "Semantic",
+                      "id": 5
+                    }
+                  },
+                  "nested": {
+                    "Semantic": {
+                      "values": {
+                        "NONE": 0,
+                        "SET": 1,
+                        "ALIAS": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "DoubleValue": {
+              "fields": {
+                "value": {
+                  "type": "double",
+                  "id": 1
+                }
+              }
+            },
+            "FloatValue": {
+              "fields": {
+                "value": {
+                  "type": "float",
+                  "id": 1
+                }
+              }
+            },
+            "Int64Value": {
+              "fields": {
+                "value": {
+                  "type": "int64",
+                  "id": 1
+                }
+              }
+            },
+            "UInt64Value": {
+              "fields": {
+                "value": {
+                  "type": "uint64",
+                  "id": 1
+                }
+              }
+            },
+            "Int32Value": {
+              "fields": {
+                "value": {
+                  "type": "int32",
+                  "id": 1
+                }
+              }
+            },
+            "UInt32Value": {
+              "fields": {
+                "value": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "BoolValue": {
+              "fields": {
+                "value": {
+                  "type": "bool",
+                  "id": 1
+                }
+              }
+            },
+            "StringValue": {
+              "fields": {
+                "value": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "BytesValue": {
+              "fields": {
+                "value": {
+                  "type": "bytes",
+                  "id": 1
+                }
+              }
+            },
+            "Struct": {
+              "fields": {
+                "fields": {
+                  "keyType": "string",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Value": {
+              "oneofs": {
+                "kind": {
+                  "oneof": [
+                    "nullValue",
+                    "numberValue",
+                    "stringValue",
+                    "boolValue",
+                    "structValue",
+                    "listValue"
+                  ]
+                }
+              },
+              "fields": {
+                "nullValue": {
+                  "type": "NullValue",
+                  "id": 1
+                },
+                "numberValue": {
+                  "type": "double",
+                  "id": 2
+                },
+                "stringValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "boolValue": {
+                  "type": "bool",
+                  "id": 4
+                },
+                "structValue": {
+                  "type": "Struct",
+                  "id": 5
+                },
+                "listValue": {
+                  "type": "ListValue",
+                  "id": 6
+                }
+              }
+            },
+            "NullValue": {
+              "values": {
+                "NULL_VALUE": 0
+              }
+            },
+            "ListValue": {
+              "fields": {
+                "values": {
+                  "rule": "repeated",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            }
+          }
+        },
+        "cloud": {
+          "nested": {
+            "gsuiteaddons": {
+              "nested": {
+                "v1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.GSuiteAddOns.V1",
+                    "go_package": "cloud.google.com/go/gsuiteaddons/apiv1/gsuiteaddonspb;gsuiteaddonspb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "GSuiteAddOnsProto",
+                    "java_package": "com.google.cloud.gsuiteaddons.v1",
+                    "php_namespace": "Google\\Cloud\\GSuiteAddOns\\V1",
+                    "ruby_package": "Google::Cloud::GSuiteAddOns::V1"
+                  },
+                  "nested": {
+                    "GSuiteAddOns": {
+                      "options": {
+                        "(google.api.default_host)": "gsuiteaddons.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "GetAuthorization": {
+                          "requestType": "GetAuthorizationRequest",
+                          "responseType": "Authorization",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/authorization}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/authorization}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateDeployment": {
+                          "requestType": "CreateDeploymentRequest",
+                          "responseType": "Deployment",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*}/deployments",
+                            "(google.api.http).body": "deployment",
+                            "(google.api.method_signature)": "parent,deployment,deployment_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*}/deployments",
+                                "body": "deployment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,deployment,deployment_id"
+                            }
+                          ]
+                        },
+                        "ReplaceDeployment": {
+                          "requestType": "ReplaceDeploymentRequest",
+                          "responseType": "Deployment",
+                          "options": {
+                            "(google.api.http).put": "/v1/{deployment.name=projects/*/deployments/*}",
+                            "(google.api.http).body": "deployment",
+                            "(google.api.method_signature)": "deployment"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "put": "/v1/{deployment.name=projects/*/deployments/*}",
+                                "body": "deployment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "deployment"
+                            }
+                          ]
+                        },
+                        "GetDeployment": {
+                          "requestType": "GetDeploymentRequest",
+                          "responseType": "Deployment",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/deployments/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/deployments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListDeployments": {
+                          "requestType": "ListDeploymentsRequest",
+                          "responseType": "ListDeploymentsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*}/deployments",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*}/deployments"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteDeployment": {
+                          "requestType": "DeleteDeploymentRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/deployments/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/deployments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "InstallDeployment": {
+                          "requestType": "InstallDeploymentRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/deployments/*}:install",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/deployments/*}:install",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UninstallDeployment": {
+                          "requestType": "UninstallDeploymentRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/deployments/*}:uninstall",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/deployments/*}:uninstall",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetInstallStatus": {
+                          "requestType": "GetInstallStatusRequest",
+                          "responseType": "InstallStatus",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/deployments/*/installStatus}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/deployments/*/installStatus}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetAuthorizationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gsuiteaddons.googleapis.com/Authorization"
+                          }
+                        }
+                      }
+                    },
+                    "Authorization": {
+                      "options": {
+                        "(google.api.resource).type": "gsuiteaddons.googleapis.com/Authorization",
+                        "(google.api.resource).pattern": "projects/{project}/authorization"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "serviceAccountEmail": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "oauthClientId": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CreateDeploymentRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "deploymentId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "deployment": {
+                          "type": "Deployment",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ReplaceDeploymentRequest": {
+                      "fields": {
+                        "deployment": {
+                          "type": "Deployment",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetDeploymentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gsuiteaddons.googleapis.com/Deployment"
+                          }
+                        }
+                      }
+                    },
+                    "ListDeploymentsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListDeploymentsResponse": {
+                      "fields": {
+                        "deployments": {
+                          "rule": "repeated",
+                          "type": "Deployment",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteDeploymentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gsuiteaddons.googleapis.com/Deployment"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "InstallDeploymentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gsuiteaddons.googleapis.com/Deployment"
+                          }
+                        }
+                      }
+                    },
+                    "UninstallDeploymentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gsuiteaddons.googleapis.com/Deployment"
+                          }
+                        }
+                      }
+                    },
+                    "GetInstallStatusRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gsuiteaddons.googleapis.com/InstallStatus"
+                          }
+                        }
+                      }
+                    },
+                    "InstallStatus": {
+                      "options": {
+                        "(google.api.resource).type": "gsuiteaddons.googleapis.com/InstallStatus",
+                        "(google.api.resource).pattern": "projects/{project}/deployments/{deployment}/installStatus"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "installed": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Deployment": {
+                      "options": {
+                        "(google.api.resource).type": "gsuiteaddons.googleapis.com/Deployment",
+                        "(google.api.resource).pattern": "projects/{project}/deployments/{deployment}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "oauthScopes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "addOns": {
+                          "type": "AddOns",
+                          "id": 3
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "AddOns": {
+                      "fields": {
+                        "common": {
+                          "type": "google.apps.script.type.CommonAddOnManifest",
+                          "id": 1
+                        },
+                        "gmail": {
+                          "type": "google.apps.script.type.gmail.GmailAddOnManifest",
+                          "id": 2
+                        },
+                        "drive": {
+                          "type": "google.apps.script.type.drive.DriveAddOnManifest",
+                          "id": 5
+                        },
+                        "calendar": {
+                          "type": "google.apps.script.type.calendar.CalendarAddOnManifest",
+                          "id": 6
+                        },
+                        "docs": {
+                          "type": "google.apps.script.type.docs.DocsAddOnManifest",
+                          "id": 7
+                        },
+                        "sheets": {
+                          "type": "google.apps.script.type.sheets.SheetsAddOnManifest",
+                          "id": 8
+                        },
+                        "slides": {
+                          "type": "google.apps.script.type.slides.SlidesAddOnManifest",
+                          "id": 10
+                        },
+                        "httpOptions": {
+                          "type": "google.apps.script.type.HttpOptions",
+                          "id": 15
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

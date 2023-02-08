@@ -209,8 +209,20 @@ export class ArtifactRegistryClient {
       filePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}/files/{file}'
       ),
+      mavenArtifactPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}/mavenArtifacts/{maven_artifact}'
+      ),
+      npmPackagePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}/npmPackages/{npm_package}'
+      ),
+      packagePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}/packages/{package}'
+      ),
       projectSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/projectSettings'
+      ),
+      pythonPackagePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}/pythonPackages/{python_package}'
       ),
       repositoryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}'
@@ -220,6 +232,9 @@ export class ArtifactRegistryClient {
       ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}/packages/{package}/versions/{version}'
+      ),
+      vpcscConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/vpcscConfig'
       ),
       yumArtifactPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}/yumArtifacts/{yum_artifact}'
@@ -234,6 +249,21 @@ export class ArtifactRegistryClient {
         'pageToken',
         'nextPageToken',
         'dockerImages'
+      ),
+      listMavenArtifacts: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'mavenArtifacts'
+      ),
+      listNpmPackages: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'npmPackages'
+      ),
+      listPythonPackages: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'pythonPackages'
       ),
       listRepositories: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -413,6 +443,12 @@ export class ArtifactRegistryClient {
     const artifactRegistryStubMethods = [
       'listDockerImages',
       'getDockerImage',
+      'listMavenArtifacts',
+      'getMavenArtifact',
+      'listNpmPackages',
+      'getNpmPackage',
+      'listPythonPackages',
+      'getPythonPackage',
       'importAptArtifacts',
       'importYumArtifacts',
       'listRepositories',
@@ -438,6 +474,8 @@ export class ArtifactRegistryClient {
       'testIamPermissions',
       'getProjectSettings',
       'updateProjectSettings',
+      'getVpcscConfig',
+      'updateVpcscConfig',
     ];
     for (const methodName of artifactRegistryStubMethods) {
       const callPromise = this.artifactRegistryStub.then(
@@ -623,6 +661,297 @@ export class ArtifactRegistryClient {
       });
     this.initialize();
     return this.innerApiCalls.getDockerImage(request, options, callback);
+  }
+  /**
+   * Gets a maven artifact.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the maven artifact.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [MavenArtifact]{@link google.devtools.artifactregistry.v1.MavenArtifact}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.get_maven_artifact.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetMavenArtifact_async
+   */
+  getMavenArtifact(
+    request?: protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+      (
+        | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getMavenArtifact(
+    request: protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+      | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getMavenArtifact(
+    request: protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+      | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getMavenArtifact(
+    request?: protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+          | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+      | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+      (
+        | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getMavenArtifact(request, options, callback);
+  }
+  /**
+   * Gets a npm package.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the npm package.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [NpmPackage]{@link google.devtools.artifactregistry.v1.NpmPackage}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.get_npm_package.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetNpmPackage_async
+   */
+  getNpmPackage(
+    request?: protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.INpmPackage,
+      (
+        | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getNpmPackage(
+    request: protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.INpmPackage,
+      | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getNpmPackage(
+    request: protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.INpmPackage,
+      | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getNpmPackage(
+    request?: protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.INpmPackage,
+          | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.artifactregistry.v1.INpmPackage,
+      | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.INpmPackage,
+      (
+        | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getNpmPackage(request, options, callback);
+  }
+  /**
+   * Gets a python package.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the python package.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PythonPackage]{@link google.devtools.artifactregistry.v1.PythonPackage}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.get_python_package.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetPythonPackage_async
+   */
+  getPythonPackage(
+    request?: protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IPythonPackage,
+      (
+        | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getPythonPackage(
+    request: protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IPythonPackage,
+      | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPythonPackage(
+    request: protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IPythonPackage,
+      | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPythonPackage(
+    request?: protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IPythonPackage,
+          | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.artifactregistry.v1.IPythonPackage,
+      | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IPythonPackage,
+      (
+        | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getPythonPackage(request, options, callback);
   }
   /**
    * Gets a repository.
@@ -1012,7 +1341,7 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the file to retrieve.
+   *   Required. The name of the file to retrieve.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1936,6 +2265,202 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.innerApiCalls.updateProjectSettings(request, options, callback);
   }
+  /**
+   * Retrieves the VPCSC Config for the Project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the VPCSCConfig resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [VPCSCConfig]{@link google.devtools.artifactregistry.v1.VPCSCConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.get_v_p_c_s_c_config.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetVPCSCConfig_async
+   */
+  getVPCSCConfig(
+    request?: protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+      (
+        | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getVPCSCConfig(
+    request: protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+      | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getVPCSCConfig(
+    request: protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+      | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getVPCSCConfig(
+    request?: protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+          | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+      | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+      (
+        | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getVpcscConfig(request, options, callback);
+  }
+  /**
+   * Updates the VPCSC Config for the Project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devtools.artifactregistry.v1.VPCSCConfig} request.vpcscConfig
+   *   The project config.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask to support partial updates.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [VPCSCConfig]{@link google.devtools.artifactregistry.v1.VPCSCConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.update_v_p_c_s_c_config.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateVPCSCConfig_async
+   */
+  updateVPCSCConfig(
+    request?: protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+      (
+        | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateVPCSCConfig(
+    request: protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+      | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateVPCSCConfig(
+    request: protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest,
+    callback: Callback<
+      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+      | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateVPCSCConfig(
+    request?: protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+          | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+      | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+      (
+        | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'vpcsc_config.name': request.vpcscConfig!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateVpcscConfig(request, options, callback);
+  }
 
   /**
    * Imports Apt artifacts. The returned Operation will complete once the
@@ -2793,11 +3318,14 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent resource whose docker images will be listed.
+   *   Required. The name of the parent resource whose docker images will be
+   *   listed.
    * @param {number} request.pageSize
    *   The maximum number of artifacts to return.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
+   * @param {string} request.orderBy
+   *   The field to order the results by.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2891,11 +3419,14 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent resource whose docker images will be listed.
+   *   Required. The name of the parent resource whose docker images will be
+   *   listed.
    * @param {number} request.pageSize
    *   The maximum number of artifacts to return.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
+   * @param {string} request.orderBy
+   *   The field to order the results by.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2937,11 +3468,14 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent resource whose docker images will be listed.
+   *   Required. The name of the parent resource whose docker images will be
+   *   listed.
    * @param {number} request.pageSize
    *   The maximum number of artifacts to return.
    * @param {string} request.pageToken
    *   The next_page_token value returned from a previous list request, if any.
+   * @param {string} request.orderBy
+   *   The field to order the results by.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2975,6 +3509,582 @@ export class ArtifactRegistryClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IDockerImage>;
+  }
+  /**
+   * Lists maven artifacts.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource whose maven artifacts will be
+   *   listed.
+   * @param {number} request.pageSize
+   *   The maximum number of artifacts to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [MavenArtifact]{@link google.devtools.artifactregistry.v1.MavenArtifact}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMavenArtifactsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listMavenArtifacts(
+    request?: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IMavenArtifact[],
+      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest | null,
+      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
+    ]
+  >;
+  listMavenArtifacts(
+    request: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+      | protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.IMavenArtifact
+    >
+  ): void;
+  listMavenArtifacts(
+    request: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+    callback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+      | protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.IMavenArtifact
+    >
+  ): void;
+  listMavenArtifacts(
+    request?: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+          | protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.IMavenArtifact
+        >,
+    callback?: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+      | protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.IMavenArtifact
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IMavenArtifact[],
+      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest | null,
+      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listMavenArtifacts(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource whose maven artifacts will be
+   *   listed.
+   * @param {number} request.pageSize
+   *   The maximum number of artifacts to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [MavenArtifact]{@link google.devtools.artifactregistry.v1.MavenArtifact} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMavenArtifactsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listMavenArtifactsStream(
+    request?: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMavenArtifacts'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listMavenArtifacts.createStream(
+      this.innerApiCalls.listMavenArtifacts as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listMavenArtifacts`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource whose maven artifacts will be
+   *   listed.
+   * @param {number} request.pageSize
+   *   The maximum number of artifacts to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [MavenArtifact]{@link google.devtools.artifactregistry.v1.MavenArtifact}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.list_maven_artifacts.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListMavenArtifacts_async
+   */
+  listMavenArtifactsAsync(
+    request?: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.IMavenArtifact> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMavenArtifacts'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listMavenArtifacts.asyncIterate(
+      this.innerApiCalls['listMavenArtifacts'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IMavenArtifact>;
+  }
+  /**
+   * Lists npm packages.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource whose npm packages will be
+   *   listed.
+   * @param {number} request.pageSize
+   *   The maximum number of artifacts to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [NpmPackage]{@link google.devtools.artifactregistry.v1.NpmPackage}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNpmPackagesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listNpmPackages(
+    request?: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.INpmPackage[],
+      protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest | null,
+      protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
+    ]
+  >;
+  listNpmPackages(
+    request: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+      | protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.INpmPackage
+    >
+  ): void;
+  listNpmPackages(
+    request: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+    callback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+      | protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.INpmPackage
+    >
+  ): void;
+  listNpmPackages(
+    request?: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+          | protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.INpmPackage
+        >,
+    callback?: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+      | protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.INpmPackage
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.INpmPackage[],
+      protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest | null,
+      protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listNpmPackages(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource whose npm packages will be
+   *   listed.
+   * @param {number} request.pageSize
+   *   The maximum number of artifacts to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [NpmPackage]{@link google.devtools.artifactregistry.v1.NpmPackage} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNpmPackagesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listNpmPackagesStream(
+    request?: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNpmPackages'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listNpmPackages.createStream(
+      this.innerApiCalls.listNpmPackages as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listNpmPackages`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource whose npm packages will be
+   *   listed.
+   * @param {number} request.pageSize
+   *   The maximum number of artifacts to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [NpmPackage]{@link google.devtools.artifactregistry.v1.NpmPackage}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.list_npm_packages.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListNpmPackages_async
+   */
+  listNpmPackagesAsync(
+    request?: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.INpmPackage> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNpmPackages'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listNpmPackages.asyncIterate(
+      this.innerApiCalls['listNpmPackages'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.INpmPackage>;
+  }
+  /**
+   * Lists python packages.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource whose python packages will be
+   *   listed.
+   * @param {number} request.pageSize
+   *   The maximum number of artifacts to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [PythonPackage]{@link google.devtools.artifactregistry.v1.PythonPackage}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPythonPackagesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listPythonPackages(
+    request?: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IPythonPackage[],
+      protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest | null,
+      protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
+    ]
+  >;
+  listPythonPackages(
+    request: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+      | protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.IPythonPackage
+    >
+  ): void;
+  listPythonPackages(
+    request: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+    callback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+      | protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.IPythonPackage
+    >
+  ): void;
+  listPythonPackages(
+    request?: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+          | protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.IPythonPackage
+        >,
+    callback?: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+      | protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1.IPythonPackage
+    >
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1.IPythonPackage[],
+      protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest | null,
+      protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listPythonPackages(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource whose python packages will be
+   *   listed.
+   * @param {number} request.pageSize
+   *   The maximum number of artifacts to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [PythonPackage]{@link google.devtools.artifactregistry.v1.PythonPackage} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPythonPackagesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listPythonPackagesStream(
+    request?: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listPythonPackages'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPythonPackages.createStream(
+      this.innerApiCalls.listPythonPackages as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listPythonPackages`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource whose python packages will be
+   *   listed.
+   * @param {number} request.pageSize
+   *   The maximum number of artifacts to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [PythonPackage]{@link google.devtools.artifactregistry.v1.PythonPackage}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/artifact_registry.list_python_packages.js</caption>
+   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListPythonPackages_async
+   */
+  listPythonPackagesAsync(
+    request?: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.IPythonPackage> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listPythonPackages'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPythonPackages.asyncIterate(
+      this.innerApiCalls['listPythonPackages'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IPythonPackage>;
   }
   /**
    * Lists repositories.
@@ -3561,8 +4671,8 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the repository whose files will be listed. For example:
-   *   "projects/p1/locations/us-central1/repositories/repo1
+   *   Required. The name of the repository whose files will be listed. For
+   *   example: "projects/p1/locations/us-central1/repositories/repo1
    * @param {string} request.filter
    *   An expression for filtering the results of the request. Filter rules are
    *   case insensitive. The fields eligible for filtering are:
@@ -3675,8 +4785,8 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the repository whose files will be listed. For example:
-   *   "projects/p1/locations/us-central1/repositories/repo1
+   *   Required. The name of the repository whose files will be listed. For
+   *   example: "projects/p1/locations/us-central1/repositories/repo1
    * @param {string} request.filter
    *   An expression for filtering the results of the request. Filter rules are
    *   case insensitive. The fields eligible for filtering are:
@@ -3737,8 +4847,8 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the repository whose files will be listed. For example:
-   *   "projects/p1/locations/us-central1/repositories/repo1
+   *   Required. The name of the repository whose files will be listed. For
+   *   example: "projects/p1/locations/us-central1/repositories/repo1
    * @param {string} request.filter
    *   An expression for filtering the results of the request. Filter rules are
    *   case insensitive. The fields eligible for filtering are:
@@ -4091,6 +5201,183 @@ export class ArtifactRegistryClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}. The promise has a method named
+   * "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -4305,6 +5592,215 @@ export class ArtifactRegistryClient {
   }
 
   /**
+   * Return a fully-qualified mavenArtifact resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @param {string} maven_artifact
+   * @returns {string} Resource name string.
+   */
+  mavenArtifactPath(
+    project: string,
+    location: string,
+    repository: string,
+    mavenArtifact: string
+  ) {
+    return this.pathTemplates.mavenArtifactPathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+      maven_artifact: mavenArtifact,
+    });
+  }
+
+  /**
+   * Parse the project from MavenArtifact resource.
+   *
+   * @param {string} mavenArtifactName
+   *   A fully-qualified path representing MavenArtifact resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMavenArtifactName(mavenArtifactName: string) {
+    return this.pathTemplates.mavenArtifactPathTemplate.match(mavenArtifactName)
+      .project;
+  }
+
+  /**
+   * Parse the location from MavenArtifact resource.
+   *
+   * @param {string} mavenArtifactName
+   *   A fully-qualified path representing MavenArtifact resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMavenArtifactName(mavenArtifactName: string) {
+    return this.pathTemplates.mavenArtifactPathTemplate.match(mavenArtifactName)
+      .location;
+  }
+
+  /**
+   * Parse the repository from MavenArtifact resource.
+   *
+   * @param {string} mavenArtifactName
+   *   A fully-qualified path representing MavenArtifact resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromMavenArtifactName(mavenArtifactName: string) {
+    return this.pathTemplates.mavenArtifactPathTemplate.match(mavenArtifactName)
+      .repository;
+  }
+
+  /**
+   * Parse the maven_artifact from MavenArtifact resource.
+   *
+   * @param {string} mavenArtifactName
+   *   A fully-qualified path representing MavenArtifact resource.
+   * @returns {string} A string representing the maven_artifact.
+   */
+  matchMavenArtifactFromMavenArtifactName(mavenArtifactName: string) {
+    return this.pathTemplates.mavenArtifactPathTemplate.match(mavenArtifactName)
+      .maven_artifact;
+  }
+
+  /**
+   * Return a fully-qualified npmPackage resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @param {string} npm_package
+   * @returns {string} Resource name string.
+   */
+  npmPackagePath(
+    project: string,
+    location: string,
+    repository: string,
+    npmPackage: string
+  ) {
+    return this.pathTemplates.npmPackagePathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+      npm_package: npmPackage,
+    });
+  }
+
+  /**
+   * Parse the project from NpmPackage resource.
+   *
+   * @param {string} npmPackageName
+   *   A fully-qualified path representing NpmPackage resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNpmPackageName(npmPackageName: string) {
+    return this.pathTemplates.npmPackagePathTemplate.match(npmPackageName)
+      .project;
+  }
+
+  /**
+   * Parse the location from NpmPackage resource.
+   *
+   * @param {string} npmPackageName
+   *   A fully-qualified path representing NpmPackage resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNpmPackageName(npmPackageName: string) {
+    return this.pathTemplates.npmPackagePathTemplate.match(npmPackageName)
+      .location;
+  }
+
+  /**
+   * Parse the repository from NpmPackage resource.
+   *
+   * @param {string} npmPackageName
+   *   A fully-qualified path representing NpmPackage resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromNpmPackageName(npmPackageName: string) {
+    return this.pathTemplates.npmPackagePathTemplate.match(npmPackageName)
+      .repository;
+  }
+
+  /**
+   * Parse the npm_package from NpmPackage resource.
+   *
+   * @param {string} npmPackageName
+   *   A fully-qualified path representing NpmPackage resource.
+   * @returns {string} A string representing the npm_package.
+   */
+  matchNpmPackageFromNpmPackageName(npmPackageName: string) {
+    return this.pathTemplates.npmPackagePathTemplate.match(npmPackageName)
+      .npm_package;
+  }
+
+  /**
+   * Return a fully-qualified package resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @param {string} packageParam
+   * @returns {string} Resource name string.
+   */
+  packagePath(
+    project: string,
+    location: string,
+    repository: string,
+    packageParam: string
+  ) {
+    return this.pathTemplates.packagePathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+      package: packageParam,
+    });
+  }
+
+  /**
+   * Parse the project from Package resource.
+   *
+   * @param {string} packageName
+   *   A fully-qualified path representing Package resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPackageName(packageName: string) {
+    return this.pathTemplates.packagePathTemplate.match(packageName).project;
+  }
+
+  /**
+   * Parse the location from Package resource.
+   *
+   * @param {string} packageName
+   *   A fully-qualified path representing Package resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPackageName(packageName: string) {
+    return this.pathTemplates.packagePathTemplate.match(packageName).location;
+  }
+
+  /**
+   * Parse the repository from Package resource.
+   *
+   * @param {string} packageName
+   *   A fully-qualified path representing Package resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromPackageName(packageName: string) {
+    return this.pathTemplates.packagePathTemplate.match(packageName).repository;
+  }
+
+  /**
+   * Parse the package from Package resource.
+   *
+   * @param {string} packageName
+   *   A fully-qualified path representing Package resource.
+   * @returns {string} A string representing the package.
+   */
+  matchPackageFromPackageName(packageName: string) {
+    return this.pathTemplates.packagePathTemplate.match(packageName).package;
+  }
+
+  /**
    * Return a fully-qualified projectSettings resource name string.
    *
    * @param {string} project
@@ -4327,6 +5823,77 @@ export class ArtifactRegistryClient {
     return this.pathTemplates.projectSettingsPathTemplate.match(
       projectSettingsName
     ).project;
+  }
+
+  /**
+   * Return a fully-qualified pythonPackage resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @param {string} python_package
+   * @returns {string} Resource name string.
+   */
+  pythonPackagePath(
+    project: string,
+    location: string,
+    repository: string,
+    pythonPackage: string
+  ) {
+    return this.pathTemplates.pythonPackagePathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+      python_package: pythonPackage,
+    });
+  }
+
+  /**
+   * Parse the project from PythonPackage resource.
+   *
+   * @param {string} pythonPackageName
+   *   A fully-qualified path representing PythonPackage resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPythonPackageName(pythonPackageName: string) {
+    return this.pathTemplates.pythonPackagePathTemplate.match(pythonPackageName)
+      .project;
+  }
+
+  /**
+   * Parse the location from PythonPackage resource.
+   *
+   * @param {string} pythonPackageName
+   *   A fully-qualified path representing PythonPackage resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPythonPackageName(pythonPackageName: string) {
+    return this.pathTemplates.pythonPackagePathTemplate.match(pythonPackageName)
+      .location;
+  }
+
+  /**
+   * Parse the repository from PythonPackage resource.
+   *
+   * @param {string} pythonPackageName
+   *   A fully-qualified path representing PythonPackage resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromPythonPackageName(pythonPackageName: string) {
+    return this.pathTemplates.pythonPackagePathTemplate.match(pythonPackageName)
+      .repository;
+  }
+
+  /**
+   * Parse the python_package from PythonPackage resource.
+   *
+   * @param {string} pythonPackageName
+   *   A fully-qualified path representing PythonPackage resource.
+   * @returns {string} A string representing the python_package.
+   */
+  matchPythonPackageFromPythonPackageName(pythonPackageName: string) {
+    return this.pathTemplates.pythonPackagePathTemplate.match(pythonPackageName)
+      .python_package;
   }
 
   /**
@@ -4541,6 +6108,44 @@ export class ArtifactRegistryClient {
    */
   matchVersionFromVersionName(versionName: string) {
     return this.pathTemplates.versionPathTemplate.match(versionName).version;
+  }
+
+  /**
+   * Return a fully-qualified vpcscConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  vpcscConfigPath(project: string, location: string) {
+    return this.pathTemplates.vpcscConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from VpcscConfig resource.
+   *
+   * @param {string} vpcscConfigName
+   *   A fully-qualified path representing VpcscConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromVpcscConfigName(vpcscConfigName: string) {
+    return this.pathTemplates.vpcscConfigPathTemplate.match(vpcscConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from VpcscConfig resource.
+   *
+   * @param {string} vpcscConfigName
+   *   A fully-qualified path representing VpcscConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromVpcscConfigName(vpcscConfigName: string) {
+    return this.pathTemplates.vpcscConfigPathTemplate.match(vpcscConfigName)
+      .location;
   }
 
   /**

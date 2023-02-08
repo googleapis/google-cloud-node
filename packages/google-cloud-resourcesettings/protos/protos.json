@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "cc_enable_arenas": true,
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/resourcesettings/v1;resourcesettings",
+                    "go_package": "cloud.google.com/go/resourcesettings/apiv1/resourcesettingspb;resourcesettingspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ResourceSettingsProto",
                     "java_package": "com.google.cloud.resourcesettings.v1",

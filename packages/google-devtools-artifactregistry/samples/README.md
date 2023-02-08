@@ -21,16 +21,23 @@
   * [Artifact_registry.get_docker_image](#artifact_registry.get_docker_image)
   * [Artifact_registry.get_file](#artifact_registry.get_file)
   * [Artifact_registry.get_iam_policy](#artifact_registry.get_iam_policy)
+  * [Artifact_registry.get_maven_artifact](#artifact_registry.get_maven_artifact)
+  * [Artifact_registry.get_npm_package](#artifact_registry.get_npm_package)
   * [Artifact_registry.get_package](#artifact_registry.get_package)
   * [Artifact_registry.get_project_settings](#artifact_registry.get_project_settings)
+  * [Artifact_registry.get_python_package](#artifact_registry.get_python_package)
   * [Artifact_registry.get_repository](#artifact_registry.get_repository)
   * [Artifact_registry.get_tag](#artifact_registry.get_tag)
+  * [Artifact_registry.get_v_p_c_s_c_config](#artifact_registry.get_v_p_c_s_c_config)
   * [Artifact_registry.get_version](#artifact_registry.get_version)
   * [Artifact_registry.import_apt_artifacts](#artifact_registry.import_apt_artifacts)
   * [Artifact_registry.import_yum_artifacts](#artifact_registry.import_yum_artifacts)
   * [Artifact_registry.list_docker_images](#artifact_registry.list_docker_images)
   * [Artifact_registry.list_files](#artifact_registry.list_files)
+  * [Artifact_registry.list_maven_artifacts](#artifact_registry.list_maven_artifacts)
+  * [Artifact_registry.list_npm_packages](#artifact_registry.list_npm_packages)
   * [Artifact_registry.list_packages](#artifact_registry.list_packages)
+  * [Artifact_registry.list_python_packages](#artifact_registry.list_python_packages)
   * [Artifact_registry.list_repositories](#artifact_registry.list_repositories)
   * [Artifact_registry.list_tags](#artifact_registry.list_tags)
   * [Artifact_registry.list_versions](#artifact_registry.list_versions)
@@ -39,6 +46,7 @@
   * [Artifact_registry.update_project_settings](#artifact_registry.update_project_settings)
   * [Artifact_registry.update_repository](#artifact_registry.update_repository)
   * [Artifact_registry.update_tag](#artifact_registry.update_tag)
+  * [Artifact_registry.update_v_p_c_s_c_config](#artifact_registry.update_v_p_c_s_c_config)
   * [Artifact_registry.create_repository](#artifact_registry.create_repository)
   * [Artifact_registry.create_tag](#artifact_registry.create_tag)
   * [Artifact_registry.delete_package](#artifact_registry.delete_package)
@@ -235,6 +243,40 @@ __Usage:__
 
 
 
+### Artifact_registry.get_maven_artifact
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_maven_artifact.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_maven_artifact.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_maven_artifact.js`
+
+
+-----
+
+
+
+
+### Artifact_registry.get_npm_package
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_npm_package.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_npm_package.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_npm_package.js`
+
+
+-----
+
+
+
+
 ### Artifact_registry.get_package
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_package.js).
@@ -269,6 +311,23 @@ __Usage:__
 
 
 
+### Artifact_registry.get_python_package
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_python_package.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_python_package.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_python_package.js`
+
+
+-----
+
+
+
+
 ### Artifact_registry.get_repository
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_repository.js).
@@ -296,6 +355,23 @@ __Usage:__
 
 
 `node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_tag.js`
+
+
+-----
+
+
+
+
+### Artifact_registry.get_v_p_c_s_c_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_v_p_c_s_c_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_v_p_c_s_c_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.get_v_p_c_s_c_config.js`
 
 
 -----
@@ -388,6 +464,40 @@ __Usage:__
 
 
 
+### Artifact_registry.list_maven_artifacts
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_maven_artifacts.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_maven_artifacts.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_maven_artifacts.js`
+
+
+-----
+
+
+
+
+### Artifact_registry.list_npm_packages
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_npm_packages.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_npm_packages.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_npm_packages.js`
+
+
+-----
+
+
+
+
 ### Artifact_registry.list_packages
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_packages.js).
@@ -398,6 +508,23 @@ __Usage:__
 
 
 `node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_packages.js`
+
+
+-----
+
+
+
+
+### Artifact_registry.list_python_packages
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_python_packages.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_python_packages.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.list_python_packages.js`
 
 
 -----
@@ -534,6 +661,23 @@ __Usage:__
 
 
 `node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_tag.js`
+
+
+-----
+
+
+
+
+### Artifact_registry.update_v_p_c_s_c_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_v_p_c_s_c_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_v_p_c_s_c_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_v_p_c_s_c_config.js`
 
 
 -----

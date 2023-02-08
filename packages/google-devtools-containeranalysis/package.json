@@ -33,8 +33,10 @@
     "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
+    "prelint": "cd samples; npm link ../; npm i",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha build/system-test",
+    "system-test": "npm run compile && c8 mocha build/system-test",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "test": "c8 mocha build/test"
   },
   "dependencies": {
