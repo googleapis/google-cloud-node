@@ -263,6 +263,12 @@ export class ModelServiceClient {
       modelEvaluationSlicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}'
       ),
+      nasJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/nasJobs/{nas_job}'
+      ),
+      nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
+      ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
       ),
@@ -1318,6 +1324,12 @@ export class ModelServiceClient {
     const exportModelMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.ExportModelOperationMetadata'
     ) as gax.protobuf.Type;
+    const copyModelResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.CopyModelResponse'
+    ) as gax.protobuf.Type;
+    const copyModelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.CopyModelOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       uploadModel: new this._gaxModule.LongrunningDescriptor(
@@ -1339,6 +1351,11 @@ export class ModelServiceClient {
         this.operationsClient,
         exportModelResponse.decode.bind(exportModelResponse),
         exportModelMetadata.decode.bind(exportModelMetadata)
+      ),
+      copyModel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        copyModelResponse.decode.bind(copyModelResponse),
+        copyModelMetadata.decode.bind(copyModelMetadata)
       ),
     };
 
@@ -1401,6 +1418,7 @@ export class ModelServiceClient {
       'deleteModelVersion',
       'mergeVersionAliases',
       'exportModel',
+      'copyModel',
       'importModelEvaluation',
       'batchImportModelEvaluationSlices',
       'getModelEvaluation',
@@ -2795,6 +2813,167 @@ export class ModelServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.ExportModelResponse,
       protos.google.cloud.aiplatform.v1.ExportModelOperationMetadata
+    >;
+  }
+  /**
+   * Copies an already existing Vertex AI Model into the specified Location.
+   * The source Model must exist in the same Project.
+   * When copying custom Models, the users themselves are responsible for
+   * {@link google.cloud.aiplatform.v1.Model.metadata|Model.metadata} content to be
+   * region-agnostic, as well as making sure that any resources (e.g. files) it
+   * depends on remain accessible.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} [request.modelId]
+   *   Optional. Copy source_model into a new Model with this ID. The ID will
+   *   become the final component of the model resource name.
+   *
+   *   This value may be up to 63 characters, and valid characters are
+   *   `[a-z0-9_-]`. The first character cannot be a number or hyphen.
+   * @param {string} [request.parentModel]
+   *   Optional. Specify this field to copy source_model into this existing
+   *   Model as a new version. Format:
+   *   `projects/{project}/locations/{location}/models/{model}`
+   * @param {string} request.parent
+   *   Required. The resource name of the Location into which to copy the Model.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.sourceModel
+   *   Required. The resource name of the Model to copy. That Model must be in the
+   *   same Project. Format:
+   *   `projects/{project}/locations/{location}/models/{model}`
+   * @param {google.cloud.aiplatform.v1.EncryptionSpec} request.encryptionSpec
+   *   Customer-managed encryption key options. If this is set,
+   *   then the Model copy will be encrypted with the provided encryption key.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/model_service.copy_model.js</caption>
+   * region_tag:aiplatform_v1_generated_ModelService_CopyModel_async
+   */
+  copyModel(
+    request?: protos.google.cloud.aiplatform.v1.ICopyModelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.ICopyModelResponse,
+        protos.google.cloud.aiplatform.v1.ICopyModelOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  copyModel(
+    request: protos.google.cloud.aiplatform.v1.ICopyModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.ICopyModelResponse,
+        protos.google.cloud.aiplatform.v1.ICopyModelOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  copyModel(
+    request: protos.google.cloud.aiplatform.v1.ICopyModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.ICopyModelResponse,
+        protos.google.cloud.aiplatform.v1.ICopyModelOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  copyModel(
+    request?: protos.google.cloud.aiplatform.v1.ICopyModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.ICopyModelResponse,
+            protos.google.cloud.aiplatform.v1.ICopyModelOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.ICopyModelResponse,
+        protos.google.cloud.aiplatform.v1.ICopyModelOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.ICopyModelResponse,
+        protos.google.cloud.aiplatform.v1.ICopyModelOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.copyModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `copyModel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/model_service.copy_model.js</caption>
+   * region_tag:aiplatform_v1_generated_ModelService_CopyModel_async
+   */
+  async checkCopyModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.CopyModelResponse,
+      protos.google.cloud.aiplatform.v1.CopyModelOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.copyModel,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.CopyModelResponse,
+      protos.google.cloud.aiplatform.v1.CopyModelOperationMetadata
     >;
   }
   /**
@@ -5728,6 +5907,130 @@ export class ModelServiceClient {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
       modelEvaluationSliceName
     ).slice;
+  }
+
+  /**
+   * Return a fully-qualified nasJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} nas_job
+   * @returns {string} Resource name string.
+   */
+  nasJobPath(project: string, location: string, nasJob: string) {
+    return this.pathTemplates.nasJobPathTemplate.render({
+      project: project,
+      location: location,
+      nas_job: nasJob,
+    });
+  }
+
+  /**
+   * Parse the project from NasJob resource.
+   *
+   * @param {string} nasJobName
+   *   A fully-qualified path representing NasJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNasJobName(nasJobName: string) {
+    return this.pathTemplates.nasJobPathTemplate.match(nasJobName).project;
+  }
+
+  /**
+   * Parse the location from NasJob resource.
+   *
+   * @param {string} nasJobName
+   *   A fully-qualified path representing NasJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNasJobName(nasJobName: string) {
+    return this.pathTemplates.nasJobPathTemplate.match(nasJobName).location;
+  }
+
+  /**
+   * Parse the nas_job from NasJob resource.
+   *
+   * @param {string} nasJobName
+   *   A fully-qualified path representing NasJob resource.
+   * @returns {string} A string representing the nas_job.
+   */
+  matchNasJobFromNasJobName(nasJobName: string) {
+    return this.pathTemplates.nasJobPathTemplate.match(nasJobName).nas_job;
+  }
+
+  /**
+   * Return a fully-qualified nasTrialDetail resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} nas_job
+   * @param {string} nas_trial_detail
+   * @returns {string} Resource name string.
+   */
+  nasTrialDetailPath(
+    project: string,
+    location: string,
+    nasJob: string,
+    nasTrialDetail: string
+  ) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.render({
+      project: project,
+      location: location,
+      nas_job: nasJob,
+      nas_trial_detail: nasTrialDetail,
+    });
+  }
+
+  /**
+   * Parse the project from NasTrialDetail resource.
+   *
+   * @param {string} nasTrialDetailName
+   *   A fully-qualified path representing NasTrialDetail resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNasTrialDetailName(nasTrialDetailName: string) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).project;
+  }
+
+  /**
+   * Parse the location from NasTrialDetail resource.
+   *
+   * @param {string} nasTrialDetailName
+   *   A fully-qualified path representing NasTrialDetail resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNasTrialDetailName(nasTrialDetailName: string) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).location;
+  }
+
+  /**
+   * Parse the nas_job from NasTrialDetail resource.
+   *
+   * @param {string} nasTrialDetailName
+   *   A fully-qualified path representing NasTrialDetail resource.
+   * @returns {string} A string representing the nas_job.
+   */
+  matchNasJobFromNasTrialDetailName(nasTrialDetailName: string) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).nas_job;
+  }
+
+  /**
+   * Parse the nas_trial_detail from NasTrialDetail resource.
+   *
+   * @param {string} nasTrialDetailName
+   *   A fully-qualified path representing NasTrialDetail resource.
+   * @returns {string} A string representing the nas_trial_detail.
+   */
+  matchNasTrialDetailFromNasTrialDetailName(nasTrialDetailName: string) {
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).nas_trial_detail;
   }
 
   /**

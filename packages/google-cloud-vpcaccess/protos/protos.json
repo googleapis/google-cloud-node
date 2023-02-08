@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.VpcAccess.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/vpcaccess/v1;vpcaccess",
+                    "go_package": "cloud.google.com/go/vpcaccess/apiv1/vpcaccesspb;vpcaccesspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "VpcAccessProto",
                     "java_package": "com.google.cloud.vpcaccess.v1",

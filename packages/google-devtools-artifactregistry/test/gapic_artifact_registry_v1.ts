@@ -394,6 +394,396 @@ describe('v1.ArtifactRegistryClient', () => {
     });
   });
 
+  describe('getMavenArtifact', () => {
+    it('invokes getMavenArtifact without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetMavenArtifactRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetMavenArtifactRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.MavenArtifact()
+      );
+      client.innerApiCalls.getMavenArtifact = stubSimpleCall(expectedResponse);
+      const [response] = await client.getMavenArtifact(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getMavenArtifact as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMavenArtifact as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMavenArtifact without error using callback', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetMavenArtifactRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetMavenArtifactRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.MavenArtifact()
+      );
+      client.innerApiCalls.getMavenArtifact =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getMavenArtifact(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devtools.artifactregistry.v1.IMavenArtifact | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getMavenArtifact as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMavenArtifact as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMavenArtifact with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetMavenArtifactRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetMavenArtifactRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getMavenArtifact = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getMavenArtifact(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getMavenArtifact as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMavenArtifact as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMavenArtifact with closed client', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetMavenArtifactRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetMavenArtifactRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getMavenArtifact(request), expectedError);
+    });
+  });
+
+  describe('getNpmPackage', () => {
+    it('invokes getNpmPackage without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetNpmPackageRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetNpmPackageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.NpmPackage()
+      );
+      client.innerApiCalls.getNpmPackage = stubSimpleCall(expectedResponse);
+      const [response] = await client.getNpmPackage(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getNpmPackage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNpmPackage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNpmPackage without error using callback', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetNpmPackageRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetNpmPackageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.NpmPackage()
+      );
+      client.innerApiCalls.getNpmPackage =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getNpmPackage(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devtools.artifactregistry.v1.INpmPackage | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getNpmPackage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNpmPackage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNpmPackage with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetNpmPackageRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetNpmPackageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getNpmPackage = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getNpmPackage(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getNpmPackage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNpmPackage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNpmPackage with closed client', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetNpmPackageRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetNpmPackageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getNpmPackage(request), expectedError);
+    });
+  });
+
+  describe('getPythonPackage', () => {
+    it('invokes getPythonPackage without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetPythonPackageRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetPythonPackageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.PythonPackage()
+      );
+      client.innerApiCalls.getPythonPackage = stubSimpleCall(expectedResponse);
+      const [response] = await client.getPythonPackage(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPythonPackage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPythonPackage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPythonPackage without error using callback', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetPythonPackageRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetPythonPackageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.PythonPackage()
+      );
+      client.innerApiCalls.getPythonPackage =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getPythonPackage(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devtools.artifactregistry.v1.IPythonPackage | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPythonPackage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPythonPackage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPythonPackage with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetPythonPackageRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetPythonPackageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getPythonPackage = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getPythonPackage(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getPythonPackage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPythonPackage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPythonPackage with closed client', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetPythonPackageRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetPythonPackageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPythonPackage(request), expectedError);
+    });
+  });
+
   describe('getRepository', () => {
     it('invokes getRepository without error', async () => {
       const client = new artifactregistryModule.v1.ArtifactRegistryClient({
@@ -2220,6 +2610,270 @@ describe('v1.ArtifactRegistryClient', () => {
     });
   });
 
+  describe('getVPCSCConfig', () => {
+    it('invokes getVPCSCConfig without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetVPCSCConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetVPCSCConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.VPCSCConfig()
+      );
+      client.innerApiCalls.getVpcscConfig = stubSimpleCall(expectedResponse);
+      const [response] = await client.getVPCSCConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getVpcscConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getVpcscConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getVPCSCConfig without error using callback', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetVPCSCConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetVPCSCConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.VPCSCConfig()
+      );
+      client.innerApiCalls.getVpcscConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getVPCSCConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devtools.artifactregistry.v1.IVPCSCConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getVpcscConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getVpcscConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getVPCSCConfig with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetVPCSCConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetVPCSCConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getVpcscConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getVPCSCConfig(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getVpcscConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getVpcscConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getVPCSCConfig with closed client', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.GetVPCSCConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.GetVPCSCConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getVPCSCConfig(request), expectedError);
+    });
+  });
+
+  describe('updateVPCSCConfig', () => {
+    it('invokes updateVPCSCConfig without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.UpdateVPCSCConfigRequest()
+      );
+      request.vpcscConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.UpdateVPCSCConfigRequest',
+        ['vpcscConfig', 'name']
+      );
+      request.vpcscConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `vpcsc_config.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.VPCSCConfig()
+      );
+      client.innerApiCalls.updateVpcscConfig = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateVPCSCConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateVpcscConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateVpcscConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateVPCSCConfig without error using callback', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.UpdateVPCSCConfigRequest()
+      );
+      request.vpcscConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.UpdateVPCSCConfigRequest',
+        ['vpcscConfig', 'name']
+      );
+      request.vpcscConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `vpcsc_config.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.VPCSCConfig()
+      );
+      client.innerApiCalls.updateVpcscConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateVPCSCConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devtools.artifactregistry.v1.IVPCSCConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateVpcscConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateVpcscConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateVPCSCConfig with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.UpdateVPCSCConfigRequest()
+      );
+      request.vpcscConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.UpdateVPCSCConfigRequest',
+        ['vpcscConfig', 'name']
+      );
+      request.vpcscConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `vpcsc_config.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateVpcscConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateVPCSCConfig(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateVpcscConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateVpcscConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateVPCSCConfig with closed client', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.UpdateVPCSCConfigRequest()
+      );
+      request.vpcscConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.UpdateVPCSCConfigRequest',
+        ['vpcscConfig', 'name']
+      );
+      request.vpcscConfig.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateVPCSCConfig(request), expectedError);
+    });
+  });
+
   describe('importAptArtifacts', () => {
     it('invokes importAptArtifacts without error', async () => {
       const client = new artifactregistryModule.v1.ArtifactRegistryClient({
@@ -3711,6 +4365,1009 @@ describe('v1.ArtifactRegistryClient', () => {
       );
       assert(
         (client.descriptors.page.listDockerImages.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listMavenArtifacts', () => {
+    it('invokes listMavenArtifacts without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListMavenArtifactsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListMavenArtifactsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.MavenArtifact()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.MavenArtifact()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.MavenArtifact()
+        ),
+      ];
+      client.innerApiCalls.listMavenArtifacts =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listMavenArtifacts(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listMavenArtifacts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMavenArtifacts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMavenArtifacts without error using callback', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListMavenArtifactsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListMavenArtifactsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.MavenArtifact()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.MavenArtifact()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.MavenArtifact()
+        ),
+      ];
+      client.innerApiCalls.listMavenArtifacts =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listMavenArtifacts(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.devtools.artifactregistry.v1.IMavenArtifact[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listMavenArtifacts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMavenArtifacts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMavenArtifacts with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListMavenArtifactsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListMavenArtifactsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listMavenArtifacts = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listMavenArtifacts(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listMavenArtifacts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMavenArtifacts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMavenArtifactsStream without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListMavenArtifactsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListMavenArtifactsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.MavenArtifact()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.MavenArtifact()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.MavenArtifact()
+        ),
+      ];
+      client.descriptors.page.listMavenArtifacts.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listMavenArtifactsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devtools.artifactregistry.v1.MavenArtifact[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.devtools.artifactregistry.v1.MavenArtifact
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listMavenArtifacts.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMavenArtifacts, request)
+      );
+      assert(
+        (client.descriptors.page.listMavenArtifacts.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listMavenArtifactsStream with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListMavenArtifactsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListMavenArtifactsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMavenArtifacts.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listMavenArtifactsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devtools.artifactregistry.v1.MavenArtifact[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.devtools.artifactregistry.v1.MavenArtifact
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listMavenArtifacts.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMavenArtifacts, request)
+      );
+      assert(
+        (client.descriptors.page.listMavenArtifacts.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listMavenArtifacts without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListMavenArtifactsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListMavenArtifactsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.MavenArtifact()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.MavenArtifact()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.MavenArtifact()
+        ),
+      ];
+      client.descriptors.page.listMavenArtifacts.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devtools.artifactregistry.v1.IMavenArtifact[] =
+        [];
+      const iterable = client.listMavenArtifactsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMavenArtifacts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listMavenArtifacts.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listMavenArtifacts with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListMavenArtifactsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListMavenArtifactsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMavenArtifacts.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listMavenArtifactsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.devtools.artifactregistry.v1.IMavenArtifact[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMavenArtifacts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listMavenArtifacts.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listNpmPackages', () => {
+    it('invokes listNpmPackages without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListNpmPackagesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListNpmPackagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.NpmPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.NpmPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.NpmPackage()
+        ),
+      ];
+      client.innerApiCalls.listNpmPackages = stubSimpleCall(expectedResponse);
+      const [response] = await client.listNpmPackages(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listNpmPackages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNpmPackages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNpmPackages without error using callback', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListNpmPackagesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListNpmPackagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.NpmPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.NpmPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.NpmPackage()
+        ),
+      ];
+      client.innerApiCalls.listNpmPackages =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listNpmPackages(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.devtools.artifactregistry.v1.INpmPackage[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listNpmPackages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNpmPackages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNpmPackages with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListNpmPackagesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListNpmPackagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listNpmPackages = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listNpmPackages(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listNpmPackages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNpmPackages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNpmPackagesStream without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListNpmPackagesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListNpmPackagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.NpmPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.NpmPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.NpmPackage()
+        ),
+      ];
+      client.descriptors.page.listNpmPackages.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listNpmPackagesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devtools.artifactregistry.v1.NpmPackage[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.devtools.artifactregistry.v1.NpmPackage) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listNpmPackages.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listNpmPackages, request)
+      );
+      assert(
+        (client.descriptors.page.listNpmPackages.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listNpmPackagesStream with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListNpmPackagesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListNpmPackagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listNpmPackages.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listNpmPackagesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devtools.artifactregistry.v1.NpmPackage[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.devtools.artifactregistry.v1.NpmPackage) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listNpmPackages.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listNpmPackages, request)
+      );
+      assert(
+        (client.descriptors.page.listNpmPackages.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listNpmPackages without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListNpmPackagesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListNpmPackagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.NpmPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.NpmPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.NpmPackage()
+        ),
+      ];
+      client.descriptors.page.listNpmPackages.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devtools.artifactregistry.v1.INpmPackage[] =
+        [];
+      const iterable = client.listNpmPackagesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listNpmPackages.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listNpmPackages.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listNpmPackages with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListNpmPackagesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListNpmPackagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listNpmPackages.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listNpmPackagesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.devtools.artifactregistry.v1.INpmPackage[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listNpmPackages.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listNpmPackages.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listPythonPackages', () => {
+    it('invokes listPythonPackages without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListPythonPackagesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListPythonPackagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.PythonPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.PythonPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.PythonPackage()
+        ),
+      ];
+      client.innerApiCalls.listPythonPackages =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listPythonPackages(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPythonPackages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPythonPackages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPythonPackages without error using callback', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListPythonPackagesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListPythonPackagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.PythonPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.PythonPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.PythonPackage()
+        ),
+      ];
+      client.innerApiCalls.listPythonPackages =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listPythonPackages(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.devtools.artifactregistry.v1.IPythonPackage[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPythonPackages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPythonPackages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPythonPackages with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListPythonPackagesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListPythonPackagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listPythonPackages = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listPythonPackages(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listPythonPackages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPythonPackages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPythonPackagesStream without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListPythonPackagesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListPythonPackagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.PythonPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.PythonPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.PythonPackage()
+        ),
+      ];
+      client.descriptors.page.listPythonPackages.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listPythonPackagesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devtools.artifactregistry.v1.PythonPackage[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.devtools.artifactregistry.v1.PythonPackage
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listPythonPackages.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPythonPackages, request)
+      );
+      assert(
+        (client.descriptors.page.listPythonPackages.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listPythonPackagesStream with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListPythonPackagesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListPythonPackagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPythonPackages.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listPythonPackagesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devtools.artifactregistry.v1.PythonPackage[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.devtools.artifactregistry.v1.PythonPackage
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listPythonPackages.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPythonPackages, request)
+      );
+      assert(
+        (client.descriptors.page.listPythonPackages.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listPythonPackages without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListPythonPackagesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListPythonPackagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.PythonPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.PythonPackage()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.artifactregistry.v1.PythonPackage()
+        ),
+      ];
+      client.descriptors.page.listPythonPackages.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devtools.artifactregistry.v1.IPythonPackage[] =
+        [];
+      const iterable = client.listPythonPackagesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPythonPackages.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listPythonPackages.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listPythonPackages with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.artifactregistry.v1.ListPythonPackagesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1.ListPythonPackagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPythonPackages.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listPythonPackagesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.devtools.artifactregistry.v1.IPythonPackage[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPythonPackages.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listPythonPackages.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -5562,6 +7219,311 @@ describe('v1.ArtifactRegistryClient', () => {
       );
     });
   });
+  describe('getOperation', () => {
+    it('invokes getOperation without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const response = await client.getOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes getOperation without error using callback', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.getOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: operationsProtos.google.longrunning.Operation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+    it('invokes getOperation with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.getOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('cancelOperation', () => {
+    it('invokes cancelOperation without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.cancelOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes cancelOperation without error using callback', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.cancelOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+    });
+    it('invokes cancelOperation with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.cancelOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.cancelOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('deleteOperation', () => {
+    it('invokes deleteOperation without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.deleteOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes deleteOperation without error using callback', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.deleteOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
+    });
+    it('invokes deleteOperation with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.deleteOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.deleteOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('listOperationsAsync', () => {
+    it('uses async iteration with listOperations without error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+      ];
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+        [];
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+    it('uses async iteration with listOperations with error', async () => {
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+  });
 
   describe('Path templates', () => {
     describe('aptArtifact', () => {
@@ -5792,6 +7754,234 @@ describe('v1.ArtifactRegistryClient', () => {
       });
     });
 
+    describe('mavenArtifact', () => {
+      const fakePath = '/rendered/path/mavenArtifact';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        repository: 'repositoryValue',
+        maven_artifact: 'mavenArtifactValue',
+      };
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.mavenArtifactPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.mavenArtifactPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('mavenArtifactPath', () => {
+        const result = client.mavenArtifactPath(
+          'projectValue',
+          'locationValue',
+          'repositoryValue',
+          'mavenArtifactValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.mavenArtifactPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromMavenArtifactName', () => {
+        const result = client.matchProjectFromMavenArtifactName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.mavenArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromMavenArtifactName', () => {
+        const result = client.matchLocationFromMavenArtifactName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.mavenArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRepositoryFromMavenArtifactName', () => {
+        const result = client.matchRepositoryFromMavenArtifactName(fakePath);
+        assert.strictEqual(result, 'repositoryValue');
+        assert(
+          (client.pathTemplates.mavenArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMavenArtifactFromMavenArtifactName', () => {
+        const result = client.matchMavenArtifactFromMavenArtifactName(fakePath);
+        assert.strictEqual(result, 'mavenArtifactValue');
+        assert(
+          (client.pathTemplates.mavenArtifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('npmPackage', () => {
+      const fakePath = '/rendered/path/npmPackage';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        repository: 'repositoryValue',
+        npm_package: 'npmPackageValue',
+      };
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.npmPackagePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.npmPackagePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('npmPackagePath', () => {
+        const result = client.npmPackagePath(
+          'projectValue',
+          'locationValue',
+          'repositoryValue',
+          'npmPackageValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.npmPackagePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNpmPackageName', () => {
+        const result = client.matchProjectFromNpmPackageName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.npmPackagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNpmPackageName', () => {
+        const result = client.matchLocationFromNpmPackageName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.npmPackagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRepositoryFromNpmPackageName', () => {
+        const result = client.matchRepositoryFromNpmPackageName(fakePath);
+        assert.strictEqual(result, 'repositoryValue');
+        assert(
+          (client.pathTemplates.npmPackagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNpmPackageFromNpmPackageName', () => {
+        const result = client.matchNpmPackageFromNpmPackageName(fakePath);
+        assert.strictEqual(result, 'npmPackageValue');
+        assert(
+          (client.pathTemplates.npmPackagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('package', () => {
+      const fakePath = '/rendered/path/package';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        repository: 'repositoryValue',
+        package: 'packageValue',
+      };
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.packagePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.packagePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('packagePath', () => {
+        const result = client.packagePath(
+          'projectValue',
+          'locationValue',
+          'repositoryValue',
+          'packageValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.packagePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPackageName', () => {
+        const result = client.matchProjectFromPackageName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.packagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPackageName', () => {
+        const result = client.matchLocationFromPackageName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.packagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRepositoryFromPackageName', () => {
+        const result = client.matchRepositoryFromPackageName(fakePath);
+        assert.strictEqual(result, 'repositoryValue');
+        assert(
+          (client.pathTemplates.packagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPackageFromPackageName', () => {
+        const result = client.matchPackageFromPackageName(fakePath);
+        assert.strictEqual(result, 'packageValue');
+        assert(
+          (client.pathTemplates.packagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectSettings', () => {
       const fakePath = '/rendered/path/projectSettings';
       const expectedParameters = {
@@ -5824,6 +8014,82 @@ describe('v1.ArtifactRegistryClient', () => {
         assert.strictEqual(result, 'projectValue');
         assert(
           (client.pathTemplates.projectSettingsPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('pythonPackage', () => {
+      const fakePath = '/rendered/path/pythonPackage';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        repository: 'repositoryValue',
+        python_package: 'pythonPackageValue',
+      };
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.pythonPackagePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.pythonPackagePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('pythonPackagePath', () => {
+        const result = client.pythonPackagePath(
+          'projectValue',
+          'locationValue',
+          'repositoryValue',
+          'pythonPackageValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.pythonPackagePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPythonPackageName', () => {
+        const result = client.matchProjectFromPythonPackageName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.pythonPackagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPythonPackageName', () => {
+        const result = client.matchLocationFromPythonPackageName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.pythonPackagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRepositoryFromPythonPackageName', () => {
+        const result = client.matchRepositoryFromPythonPackageName(fakePath);
+        assert.strictEqual(result, 'repositoryValue');
+        assert(
+          (client.pathTemplates.pythonPackagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPythonPackageFromPythonPackageName', () => {
+        const result = client.matchPythonPackageFromPythonPackageName(fakePath);
+        assert.strictEqual(result, 'pythonPackageValue');
+        assert(
+          (client.pathTemplates.pythonPackagePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6064,6 +8330,55 @@ describe('v1.ArtifactRegistryClient', () => {
         assert.strictEqual(result, 'versionValue');
         assert(
           (client.pathTemplates.versionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('vpcscConfig', () => {
+      const fakePath = '/rendered/path/vpcscConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new artifactregistryModule.v1.ArtifactRegistryClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.vpcscConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.vpcscConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('vpcscConfigPath', () => {
+        const result = client.vpcscConfigPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.vpcscConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromVpcscConfigName', () => {
+        const result = client.matchProjectFromVpcscConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.vpcscConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromVpcscConfigName', () => {
+        const result = client.matchLocationFromVpcscConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.vpcscConfigPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
