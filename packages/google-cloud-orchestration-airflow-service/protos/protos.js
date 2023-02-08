@@ -22575,6 +22575,457 @@
                                 return CheckUpgradeResponse;
                             })();
     
+                            v1beta1.OperationMetadata = (function() {
+    
+                                /**
+                                 * Properties of an OperationMetadata.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @interface IOperationMetadata
+                                 * @property {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State|null} [state] OperationMetadata state
+                                 * @property {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type|null} [operationType] OperationMetadata operationType
+                                 * @property {string|null} [resource] OperationMetadata resource
+                                 * @property {string|null} [resourceUuid] OperationMetadata resourceUuid
+                                 * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
+                                 * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
+                                 */
+    
+                                /**
+                                 * Constructs a new OperationMetadata.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @classdesc Represents an OperationMetadata.
+                                 * @implements IOperationMetadata
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata=} [properties] Properties to set
+                                 */
+                                function OperationMetadata(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * OperationMetadata state.
+                                 * @member {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State} state
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @instance
+                                 */
+                                OperationMetadata.prototype.state = 0;
+    
+                                /**
+                                 * OperationMetadata operationType.
+                                 * @member {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type} operationType
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @instance
+                                 */
+                                OperationMetadata.prototype.operationType = 0;
+    
+                                /**
+                                 * OperationMetadata resource.
+                                 * @member {string} resource
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @instance
+                                 */
+                                OperationMetadata.prototype.resource = "";
+    
+                                /**
+                                 * OperationMetadata resourceUuid.
+                                 * @member {string} resourceUuid
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @instance
+                                 */
+                                OperationMetadata.prototype.resourceUuid = "";
+    
+                                /**
+                                 * OperationMetadata createTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @instance
+                                 */
+                                OperationMetadata.prototype.createTime = null;
+    
+                                /**
+                                 * OperationMetadata endTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @instance
+                                 */
+                                OperationMetadata.prototype.endTime = null;
+    
+                                /**
+                                 * Creates a new OperationMetadata instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata} OperationMetadata instance
+                                 */
+                                OperationMetadata.create = function create(properties) {
+                                    return new OperationMetadata(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                OperationMetadata.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                                    if (message.operationType != null && Object.hasOwnProperty.call(message, "operationType"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.operationType);
+                                    if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.resource);
+                                    if (message.resourceUuid != null && Object.hasOwnProperty.call(message, "resourceUuid"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.resourceUuid);
+                                    if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an OperationMetadata message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata} OperationMetadata
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                OperationMetadata.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.state = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.operationType = reader.int32();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.resource = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.resourceUuid = reader.string();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata} OperationMetadata
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an OperationMetadata message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                OperationMetadata.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.state != null && message.hasOwnProperty("state"))
+                                        switch (message.state) {
+                                        default:
+                                            return "state: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                            break;
+                                        }
+                                    if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                        switch (message.operationType) {
+                                        default:
+                                            return "operationType: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                            break;
+                                        }
+                                    if (message.resource != null && message.hasOwnProperty("resource"))
+                                        if (!$util.isString(message.resource))
+                                            return "resource: string expected";
+                                    if (message.resourceUuid != null && message.hasOwnProperty("resourceUuid"))
+                                        if (!$util.isString(message.resourceUuid))
+                                            return "resourceUuid: string expected";
+                                    if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                        if (error)
+                                            return "createTime." + error;
+                                    }
+                                    if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                        if (error)
+                                            return "endTime." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata} OperationMetadata
+                                 */
+                                OperationMetadata.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata();
+                                    switch (object.state) {
+                                    default:
+                                        if (typeof object.state === "number") {
+                                            message.state = object.state;
+                                            break;
+                                        }
+                                        break;
+                                    case "STATE_UNSPECIFIED":
+                                    case 0:
+                                        message.state = 0;
+                                        break;
+                                    case "PENDING":
+                                    case 1:
+                                        message.state = 1;
+                                        break;
+                                    case "RUNNING":
+                                    case 2:
+                                        message.state = 2;
+                                        break;
+                                    case "SUCCESSFUL":
+                                    case 3:
+                                        message.state = 3;
+                                        break;
+                                    case "FAILED":
+                                    case 4:
+                                        message.state = 4;
+                                        break;
+                                    }
+                                    switch (object.operationType) {
+                                    default:
+                                        if (typeof object.operationType === "number") {
+                                            message.operationType = object.operationType;
+                                            break;
+                                        }
+                                        break;
+                                    case "TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.operationType = 0;
+                                        break;
+                                    case "CREATE":
+                                    case 1:
+                                        message.operationType = 1;
+                                        break;
+                                    case "DELETE":
+                                    case 2:
+                                        message.operationType = 2;
+                                        break;
+                                    case "UPDATE":
+                                    case 3:
+                                        message.operationType = 3;
+                                        break;
+                                    case "CHECK":
+                                    case 4:
+                                        message.operationType = 4;
+                                        break;
+                                    case "SAVE_SNAPSHOT":
+                                    case 5:
+                                        message.operationType = 5;
+                                        break;
+                                    case "LOAD_SNAPSHOT":
+                                    case 6:
+                                        message.operationType = 6;
+                                        break;
+                                    }
+                                    if (object.resource != null)
+                                        message.resource = String(object.resource);
+                                    if (object.resourceUuid != null)
+                                        message.resourceUuid = String(object.resourceUuid);
+                                    if (object.createTime != null) {
+                                        if (typeof object.createTime !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.createTime: object expected");
+                                        message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                                    }
+                                    if (object.endTime != null) {
+                                        if (typeof object.endTime !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.endTime: object expected");
+                                        message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata} message OperationMetadata
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                OperationMetadata.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                        object.operationType = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                        object.resource = "";
+                                        object.resourceUuid = "";
+                                        object.createTime = null;
+                                        object.endTime = null;
+                                    }
+                                    if (message.state != null && message.hasOwnProperty("state"))
+                                        object.state = options.enums === String ? $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State[message.state] === undefined ? message.state : $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State[message.state] : message.state;
+                                    if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                        object.operationType = options.enums === String ? $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type[message.operationType] === undefined ? message.operationType : $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type[message.operationType] : message.operationType;
+                                    if (message.resource != null && message.hasOwnProperty("resource"))
+                                        object.resource = message.resource;
+                                    if (message.resourceUuid != null && message.hasOwnProperty("resourceUuid"))
+                                        object.resourceUuid = message.resourceUuid;
+                                    if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                        object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                                    if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                        object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this OperationMetadata to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                OperationMetadata.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for OperationMetadata
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata";
+                                };
+    
+                                /**
+                                 * State enum.
+                                 * @name google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State
+                                 * @enum {number}
+                                 * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                                 * @property {number} PENDING=1 PENDING value
+                                 * @property {number} RUNNING=2 RUNNING value
+                                 * @property {number} SUCCESSFUL=3 SUCCESSFUL value
+                                 * @property {number} FAILED=4 FAILED value
+                                 */
+                                OperationMetadata.State = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "PENDING"] = 1;
+                                    values[valuesById[2] = "RUNNING"] = 2;
+                                    values[valuesById[3] = "SUCCESSFUL"] = 3;
+                                    values[valuesById[4] = "FAILED"] = 4;
+                                    return values;
+                                })();
+    
+                                /**
+                                 * Type enum.
+                                 * @name google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type
+                                 * @enum {number}
+                                 * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                                 * @property {number} CREATE=1 CREATE value
+                                 * @property {number} DELETE=2 DELETE value
+                                 * @property {number} UPDATE=3 UPDATE value
+                                 * @property {number} CHECK=4 CHECK value
+                                 * @property {number} SAVE_SNAPSHOT=5 SAVE_SNAPSHOT value
+                                 * @property {number} LOAD_SNAPSHOT=6 LOAD_SNAPSHOT value
+                                 */
+                                OperationMetadata.Type = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "CREATE"] = 1;
+                                    values[valuesById[2] = "DELETE"] = 2;
+                                    values[valuesById[3] = "UPDATE"] = 3;
+                                    values[valuesById[4] = "CHECK"] = 4;
+                                    values[valuesById[5] = "SAVE_SNAPSHOT"] = 5;
+                                    values[valuesById[6] = "LOAD_SNAPSHOT"] = 6;
+                                    return values;
+                                })();
+    
+                                return OperationMetadata;
+                            })();
+    
                             v1beta1.ImageVersions = (function() {
     
                                 /**
@@ -23503,457 +23954,6 @@
                                 };
     
                                 return ImageVersion;
-                            })();
-    
-                            v1beta1.OperationMetadata = (function() {
-    
-                                /**
-                                 * Properties of an OperationMetadata.
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
-                                 * @interface IOperationMetadata
-                                 * @property {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State|null} [state] OperationMetadata state
-                                 * @property {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type|null} [operationType] OperationMetadata operationType
-                                 * @property {string|null} [resource] OperationMetadata resource
-                                 * @property {string|null} [resourceUuid] OperationMetadata resourceUuid
-                                 * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
-                                 * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
-                                 */
-    
-                                /**
-                                 * Constructs a new OperationMetadata.
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
-                                 * @classdesc Represents an OperationMetadata.
-                                 * @implements IOperationMetadata
-                                 * @constructor
-                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata=} [properties] Properties to set
-                                 */
-                                function OperationMetadata(properties) {
-                                    if (properties)
-                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
-                                                this[keys[i]] = properties[keys[i]];
-                                }
-    
-                                /**
-                                 * OperationMetadata state.
-                                 * @member {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State} state
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @instance
-                                 */
-                                OperationMetadata.prototype.state = 0;
-    
-                                /**
-                                 * OperationMetadata operationType.
-                                 * @member {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type} operationType
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @instance
-                                 */
-                                OperationMetadata.prototype.operationType = 0;
-    
-                                /**
-                                 * OperationMetadata resource.
-                                 * @member {string} resource
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @instance
-                                 */
-                                OperationMetadata.prototype.resource = "";
-    
-                                /**
-                                 * OperationMetadata resourceUuid.
-                                 * @member {string} resourceUuid
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @instance
-                                 */
-                                OperationMetadata.prototype.resourceUuid = "";
-    
-                                /**
-                                 * OperationMetadata createTime.
-                                 * @member {google.protobuf.ITimestamp|null|undefined} createTime
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @instance
-                                 */
-                                OperationMetadata.prototype.createTime = null;
-    
-                                /**
-                                 * OperationMetadata endTime.
-                                 * @member {google.protobuf.ITimestamp|null|undefined} endTime
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @instance
-                                 */
-                                OperationMetadata.prototype.endTime = null;
-    
-                                /**
-                                 * Creates a new OperationMetadata instance using the specified properties.
-                                 * @function create
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @static
-                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata=} [properties] Properties to set
-                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata} OperationMetadata instance
-                                 */
-                                OperationMetadata.create = function create(properties) {
-                                    return new OperationMetadata(properties);
-                                };
-    
-                                /**
-                                 * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.verify|verify} messages.
-                                 * @function encode
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @static
-                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata} message OperationMetadata message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                OperationMetadata.encode = function encode(message, writer) {
-                                    if (!writer)
-                                        writer = $Writer.create();
-                                    if (message.state != null && Object.hasOwnProperty.call(message, "state"))
-                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
-                                    if (message.operationType != null && Object.hasOwnProperty.call(message, "operationType"))
-                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.operationType);
-                                    if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
-                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.resource);
-                                    if (message.resourceUuid != null && Object.hasOwnProperty.call(message, "resourceUuid"))
-                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.resourceUuid);
-                                    if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
-                                        $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                                    if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
-                                        $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                                    return writer;
-                                };
-    
-                                /**
-                                 * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.verify|verify} messages.
-                                 * @function encodeDelimited
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @static
-                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata} message OperationMetadata message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
-                                };
-    
-                                /**
-                                 * Decodes an OperationMetadata message from the specified reader or buffer.
-                                 * @function decode
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @param {number} [length] Message length if known beforehand
-                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata} OperationMetadata
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                OperationMetadata.decode = function decode(reader, length) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = $Reader.create(reader);
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata();
-                                    while (reader.pos < end) {
-                                        var tag = reader.uint32();
-                                        switch (tag >>> 3) {
-                                        case 1: {
-                                                message.state = reader.int32();
-                                                break;
-                                            }
-                                        case 2: {
-                                                message.operationType = reader.int32();
-                                                break;
-                                            }
-                                        case 3: {
-                                                message.resource = reader.string();
-                                                break;
-                                            }
-                                        case 4: {
-                                                message.resourceUuid = reader.string();
-                                                break;
-                                            }
-                                        case 5: {
-                                                message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                                break;
-                                            }
-                                        case 6: {
-                                                message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                                break;
-                                            }
-                                        default:
-                                            reader.skipType(tag & 7);
-                                            break;
-                                        }
-                                    }
-                                    return message;
-                                };
-    
-                                /**
-                                 * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
-                                 * @function decodeDelimited
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata} OperationMetadata
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = new $Reader(reader);
-                                    return this.decode(reader, reader.uint32());
-                                };
-    
-                                /**
-                                 * Verifies an OperationMetadata message.
-                                 * @function verify
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @static
-                                 * @param {Object.<string,*>} message Plain object to verify
-                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                                 */
-                                OperationMetadata.verify = function verify(message) {
-                                    if (typeof message !== "object" || message === null)
-                                        return "object expected";
-                                    if (message.state != null && message.hasOwnProperty("state"))
-                                        switch (message.state) {
-                                        default:
-                                            return "state: enum value expected";
-                                        case 0:
-                                        case 1:
-                                        case 2:
-                                        case 3:
-                                        case 4:
-                                            break;
-                                        }
-                                    if (message.operationType != null && message.hasOwnProperty("operationType"))
-                                        switch (message.operationType) {
-                                        default:
-                                            return "operationType: enum value expected";
-                                        case 0:
-                                        case 1:
-                                        case 2:
-                                        case 3:
-                                        case 4:
-                                        case 5:
-                                        case 6:
-                                            break;
-                                        }
-                                    if (message.resource != null && message.hasOwnProperty("resource"))
-                                        if (!$util.isString(message.resource))
-                                            return "resource: string expected";
-                                    if (message.resourceUuid != null && message.hasOwnProperty("resourceUuid"))
-                                        if (!$util.isString(message.resourceUuid))
-                                            return "resourceUuid: string expected";
-                                    if (message.createTime != null && message.hasOwnProperty("createTime")) {
-                                        var error = $root.google.protobuf.Timestamp.verify(message.createTime);
-                                        if (error)
-                                            return "createTime." + error;
-                                    }
-                                    if (message.endTime != null && message.hasOwnProperty("endTime")) {
-                                        var error = $root.google.protobuf.Timestamp.verify(message.endTime);
-                                        if (error)
-                                            return "endTime." + error;
-                                    }
-                                    return null;
-                                };
-    
-                                /**
-                                 * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
-                                 * @function fromObject
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @static
-                                 * @param {Object.<string,*>} object Plain object
-                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata} OperationMetadata
-                                 */
-                                OperationMetadata.fromObject = function fromObject(object) {
-                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata)
-                                        return object;
-                                    var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata();
-                                    switch (object.state) {
-                                    default:
-                                        if (typeof object.state === "number") {
-                                            message.state = object.state;
-                                            break;
-                                        }
-                                        break;
-                                    case "STATE_UNSPECIFIED":
-                                    case 0:
-                                        message.state = 0;
-                                        break;
-                                    case "PENDING":
-                                    case 1:
-                                        message.state = 1;
-                                        break;
-                                    case "RUNNING":
-                                    case 2:
-                                        message.state = 2;
-                                        break;
-                                    case "SUCCESSFUL":
-                                    case 3:
-                                        message.state = 3;
-                                        break;
-                                    case "FAILED":
-                                    case 4:
-                                        message.state = 4;
-                                        break;
-                                    }
-                                    switch (object.operationType) {
-                                    default:
-                                        if (typeof object.operationType === "number") {
-                                            message.operationType = object.operationType;
-                                            break;
-                                        }
-                                        break;
-                                    case "TYPE_UNSPECIFIED":
-                                    case 0:
-                                        message.operationType = 0;
-                                        break;
-                                    case "CREATE":
-                                    case 1:
-                                        message.operationType = 1;
-                                        break;
-                                    case "DELETE":
-                                    case 2:
-                                        message.operationType = 2;
-                                        break;
-                                    case "UPDATE":
-                                    case 3:
-                                        message.operationType = 3;
-                                        break;
-                                    case "CHECK":
-                                    case 4:
-                                        message.operationType = 4;
-                                        break;
-                                    case "SAVE_SNAPSHOT":
-                                    case 5:
-                                        message.operationType = 5;
-                                        break;
-                                    case "LOAD_SNAPSHOT":
-                                    case 6:
-                                        message.operationType = 6;
-                                        break;
-                                    }
-                                    if (object.resource != null)
-                                        message.resource = String(object.resource);
-                                    if (object.resourceUuid != null)
-                                        message.resourceUuid = String(object.resourceUuid);
-                                    if (object.createTime != null) {
-                                        if (typeof object.createTime !== "object")
-                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.createTime: object expected");
-                                        message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
-                                    }
-                                    if (object.endTime != null) {
-                                        if (typeof object.endTime !== "object")
-                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.endTime: object expected");
-                                        message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
-                                    }
-                                    return message;
-                                };
-    
-                                /**
-                                 * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
-                                 * @function toObject
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @static
-                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata} message OperationMetadata
-                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                                 * @returns {Object.<string,*>} Plain object
-                                 */
-                                OperationMetadata.toObject = function toObject(message, options) {
-                                    if (!options)
-                                        options = {};
-                                    var object = {};
-                                    if (options.defaults) {
-                                        object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
-                                        object.operationType = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
-                                        object.resource = "";
-                                        object.resourceUuid = "";
-                                        object.createTime = null;
-                                        object.endTime = null;
-                                    }
-                                    if (message.state != null && message.hasOwnProperty("state"))
-                                        object.state = options.enums === String ? $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State[message.state] === undefined ? message.state : $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State[message.state] : message.state;
-                                    if (message.operationType != null && message.hasOwnProperty("operationType"))
-                                        object.operationType = options.enums === String ? $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type[message.operationType] === undefined ? message.operationType : $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type[message.operationType] : message.operationType;
-                                    if (message.resource != null && message.hasOwnProperty("resource"))
-                                        object.resource = message.resource;
-                                    if (message.resourceUuid != null && message.hasOwnProperty("resourceUuid"))
-                                        object.resourceUuid = message.resourceUuid;
-                                    if (message.createTime != null && message.hasOwnProperty("createTime"))
-                                        object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
-                                    if (message.endTime != null && message.hasOwnProperty("endTime"))
-                                        object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
-                                    return object;
-                                };
-    
-                                /**
-                                 * Converts this OperationMetadata to JSON.
-                                 * @function toJSON
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @instance
-                                 * @returns {Object.<string,*>} JSON object
-                                 */
-                                OperationMetadata.prototype.toJSON = function toJSON() {
-                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                                };
-    
-                                /**
-                                 * Gets the default type url for OperationMetadata
-                                 * @function getTypeUrl
-                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
-                                 * @static
-                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                                 * @returns {string} The default type url
-                                 */
-                                OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                    if (typeUrlPrefix === undefined) {
-                                        typeUrlPrefix = "type.googleapis.com";
-                                    }
-                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata";
-                                };
-    
-                                /**
-                                 * State enum.
-                                 * @name google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State
-                                 * @enum {number}
-                                 * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                                 * @property {number} PENDING=1 PENDING value
-                                 * @property {number} RUNNING=2 RUNNING value
-                                 * @property {number} SUCCESSFUL=3 SUCCESSFUL value
-                                 * @property {number} FAILED=4 FAILED value
-                                 */
-                                OperationMetadata.State = (function() {
-                                    var valuesById = {}, values = Object.create(valuesById);
-                                    values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                                    values[valuesById[1] = "PENDING"] = 1;
-                                    values[valuesById[2] = "RUNNING"] = 2;
-                                    values[valuesById[3] = "SUCCESSFUL"] = 3;
-                                    values[valuesById[4] = "FAILED"] = 4;
-                                    return values;
-                                })();
-    
-                                /**
-                                 * Type enum.
-                                 * @name google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type
-                                 * @enum {number}
-                                 * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
-                                 * @property {number} CREATE=1 CREATE value
-                                 * @property {number} DELETE=2 DELETE value
-                                 * @property {number} UPDATE=3 UPDATE value
-                                 * @property {number} CHECK=4 CHECK value
-                                 * @property {number} SAVE_SNAPSHOT=5 SAVE_SNAPSHOT value
-                                 * @property {number} LOAD_SNAPSHOT=6 LOAD_SNAPSHOT value
-                                 */
-                                OperationMetadata.Type = (function() {
-                                    var valuesById = {}, values = Object.create(valuesById);
-                                    values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
-                                    values[valuesById[1] = "CREATE"] = 1;
-                                    values[valuesById[2] = "DELETE"] = 2;
-                                    values[valuesById[3] = "UPDATE"] = 3;
-                                    values[valuesById[4] = "CHECK"] = 4;
-                                    values[valuesById[5] = "SAVE_SNAPSHOT"] = 5;
-                                    values[valuesById[6] = "LOAD_SNAPSHOT"] = 6;
-                                    return values;
-                                })();
-    
-                                return OperationMetadata;
                             })();
     
                             return v1beta1;
