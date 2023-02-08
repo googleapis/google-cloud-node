@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,6 +26,21 @@ import * as recommenderModule from '../src';
 import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
+
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -113,84 +128,101 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v1.RecommenderClient', () => {
-  it('has servicePath', () => {
-    const servicePath = recommenderModule.v1.RecommenderClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint = recommenderModule.v1.RecommenderClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port = recommenderModule.v1.RecommenderClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client = new recommenderModule.v1.RecommenderClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client = new recommenderModule.v1.RecommenderClient({
-      fallback: true,
+  describe('Common methods', () => {
+    it('has servicePath', () => {
+      const servicePath = recommenderModule.v1.RecommenderClient.servicePath;
+      assert(servicePath);
     });
-    assert(client);
-  });
 
-  it('has initialize method and supports deferred initialization', async () => {
-    const client = new recommenderModule.v1.RecommenderClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('has apiEndpoint', () => {
+      const apiEndpoint = recommenderModule.v1.RecommenderClient.apiEndpoint;
+      assert(apiEndpoint);
     });
-    assert.strictEqual(client.recommenderStub, undefined);
-    await client.initialize();
-    assert(client.recommenderStub);
-  });
 
-  it('has close method', () => {
-    const client = new recommenderModule.v1.RecommenderClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('has port', () => {
+      const port = recommenderModule.v1.RecommenderClient.port;
+      assert(port);
+      assert(typeof port === 'number');
     });
-    client.close();
-  });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new recommenderModule.v1.RecommenderClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('should create a client with no option', () => {
+      const client = new recommenderModule.v1.RecommenderClient();
+      assert(client);
     });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new recommenderModule.v1.RecommenderClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('should create a client with gRPC fallback', () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        fallback: true,
+      });
+      assert(client);
     });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.recommenderStub, undefined);
+      await client.initialize();
+      assert(client.recommenderStub);
+    });
+
+    it('has close method for the initialized client', done => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      assert(client.recommenderStub);
+      client.close().then(() => {
+        done();
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has close method for the non-initialized client', done => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.recommenderStub, undefined);
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('getInsight', () => {
@@ -203,26 +235,26 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetInsightRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetInsightRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1.Insight()
       );
       client.innerApiCalls.getInsight = stubSimpleCall(expectedResponse);
       const [response] = await client.getInsight(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getInsight as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getInsight as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getInsight as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getInsight without error using callback', async () => {
@@ -234,15 +266,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetInsightRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetInsightRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1.Insight()
       );
@@ -265,11 +294,14 @@ describe('v1.RecommenderClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getInsight as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getInsight as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getInsight as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getInsight with error', async () => {
@@ -281,26 +313,45 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetInsightRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetInsightRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getInsight = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getInsight(request), expectedError);
-      assert(
-        (client.innerApiCalls.getInsight as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.getInsight as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getInsight as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getInsight with closed client', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.GetInsightRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetInsightRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getInsight(request), expectedError);
     });
   });
 
@@ -314,15 +365,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkInsightAcceptedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkInsightAcceptedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1.Insight()
       );
@@ -330,11 +378,14 @@ describe('v1.RecommenderClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.markInsightAccepted(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.markInsightAccepted as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.markInsightAccepted as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markInsightAccepted as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes markInsightAccepted without error using callback', async () => {
@@ -346,15 +397,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkInsightAcceptedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkInsightAcceptedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1.Insight()
       );
@@ -377,11 +425,14 @@ describe('v1.RecommenderClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.markInsightAccepted as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.markInsightAccepted as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markInsightAccepted as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes markInsightAccepted with error', async () => {
@@ -393,26 +444,45 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkInsightAcceptedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkInsightAcceptedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.markInsightAccepted = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.markInsightAccepted(request), expectedError);
-      assert(
-        (client.innerApiCalls.markInsightAccepted as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.markInsightAccepted as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markInsightAccepted as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markInsightAccepted with closed client', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.MarkInsightAcceptedRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkInsightAcceptedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.markInsightAccepted(request), expectedError);
     });
   });
 
@@ -426,26 +496,26 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetRecommendationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetRecommendationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1.Recommendation()
       );
       client.innerApiCalls.getRecommendation = stubSimpleCall(expectedResponse);
       const [response] = await client.getRecommendation(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRecommendation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRecommendation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRecommendation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRecommendation without error using callback', async () => {
@@ -457,15 +527,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetRecommendationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetRecommendationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1.Recommendation()
       );
@@ -488,11 +555,14 @@ describe('v1.RecommenderClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRecommendation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRecommendation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRecommendation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRecommendation with error', async () => {
@@ -504,26 +574,45 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetRecommendationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetRecommendationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRecommendation = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getRecommendation(request), expectedError);
-      assert(
-        (client.innerApiCalls.getRecommendation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.getRecommendation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRecommendation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRecommendation with closed client', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.GetRecommendationRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetRecommendationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getRecommendation(request), expectedError);
     });
   });
 
@@ -537,15 +626,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationClaimedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationClaimedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1.Recommendation()
       );
@@ -553,11 +639,14 @@ describe('v1.RecommenderClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.markRecommendationClaimed(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.markRecommendationClaimed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.markRecommendationClaimed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markRecommendationClaimed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes markRecommendationClaimed without error using callback', async () => {
@@ -569,15 +658,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationClaimedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationClaimedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1.Recommendation()
       );
@@ -600,11 +686,14 @@ describe('v1.RecommenderClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.markRecommendationClaimed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.markRecommendationClaimed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markRecommendationClaimed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes markRecommendationClaimed with error', async () => {
@@ -616,15 +705,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationClaimedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationClaimedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.markRecommendationClaimed = stubSimpleCall(
         undefined,
@@ -634,10 +720,35 @@ describe('v1.RecommenderClient', () => {
         client.markRecommendationClaimed(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.markRecommendationClaimed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.markRecommendationClaimed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markRecommendationClaimed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markRecommendationClaimed with closed client', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.MarkRecommendationClaimedRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationClaimedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.markRecommendationClaimed(request),
+        expectedError
       );
     });
   });
@@ -652,15 +763,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationSucceededRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationSucceededRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1.Recommendation()
       );
@@ -668,11 +776,14 @@ describe('v1.RecommenderClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.markRecommendationSucceeded(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.markRecommendationSucceeded as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.markRecommendationSucceeded as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markRecommendationSucceeded as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes markRecommendationSucceeded without error using callback', async () => {
@@ -684,15 +795,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationSucceededRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationSucceededRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1.Recommendation()
       );
@@ -715,11 +823,14 @@ describe('v1.RecommenderClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.markRecommendationSucceeded as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.markRecommendationSucceeded as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markRecommendationSucceeded as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes markRecommendationSucceeded with error', async () => {
@@ -731,15 +842,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationSucceededRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationSucceededRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.markRecommendationSucceeded = stubSimpleCall(
         undefined,
@@ -749,10 +857,35 @@ describe('v1.RecommenderClient', () => {
         client.markRecommendationSucceeded(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.markRecommendationSucceeded as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.markRecommendationSucceeded as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markRecommendationSucceeded as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markRecommendationSucceeded with closed client', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.MarkRecommendationSucceededRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationSucceededRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.markRecommendationSucceeded(request),
+        expectedError
       );
     });
   });
@@ -767,15 +900,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationFailedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationFailedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1.Recommendation()
       );
@@ -783,11 +913,14 @@ describe('v1.RecommenderClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.markRecommendationFailed(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.markRecommendationFailed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.markRecommendationFailed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markRecommendationFailed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes markRecommendationFailed without error using callback', async () => {
@@ -799,15 +932,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationFailedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationFailedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.recommender.v1.Recommendation()
       );
@@ -830,11 +960,14 @@ describe('v1.RecommenderClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.markRecommendationFailed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.markRecommendationFailed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markRecommendationFailed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes markRecommendationFailed with error', async () => {
@@ -846,15 +979,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationFailedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationFailedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.markRecommendationFailed = stubSimpleCall(
         undefined,
@@ -864,10 +994,579 @@ describe('v1.RecommenderClient', () => {
         client.markRecommendationFailed(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.markRecommendationFailed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.markRecommendationFailed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markRecommendationFailed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markRecommendationFailed with closed client', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.MarkRecommendationFailedRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationFailedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.markRecommendationFailed(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getRecommenderConfig', () => {
+    it('invokes getRecommenderConfig without error', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.GetRecommenderConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetRecommenderConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.RecommenderConfig()
+      );
+      client.innerApiCalls.getRecommenderConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getRecommenderConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRecommenderConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRecommenderConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRecommenderConfig without error using callback', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.GetRecommenderConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetRecommenderConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.RecommenderConfig()
+      );
+      client.innerApiCalls.getRecommenderConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getRecommenderConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.recommender.v1.IRecommenderConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRecommenderConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRecommenderConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRecommenderConfig with error', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.GetRecommenderConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetRecommenderConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getRecommenderConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getRecommenderConfig(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getRecommenderConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRecommenderConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRecommenderConfig with closed client', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.GetRecommenderConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetRecommenderConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getRecommenderConfig(request), expectedError);
+    });
+  });
+
+  describe('updateRecommenderConfig', () => {
+    it('invokes updateRecommenderConfig without error', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.UpdateRecommenderConfigRequest()
+      );
+      request.recommenderConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.UpdateRecommenderConfigRequest',
+        ['recommenderConfig', 'name']
+      );
+      request.recommenderConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.RecommenderConfig()
+      );
+      client.innerApiCalls.updateRecommenderConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateRecommenderConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateRecommenderConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRecommenderConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateRecommenderConfig without error using callback', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.UpdateRecommenderConfigRequest()
+      );
+      request.recommenderConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.UpdateRecommenderConfigRequest',
+        ['recommenderConfig', 'name']
+      );
+      request.recommenderConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.RecommenderConfig()
+      );
+      client.innerApiCalls.updateRecommenderConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateRecommenderConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.recommender.v1.IRecommenderConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateRecommenderConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRecommenderConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateRecommenderConfig with error', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.UpdateRecommenderConfigRequest()
+      );
+      request.recommenderConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.UpdateRecommenderConfigRequest',
+        ['recommenderConfig', 'name']
+      );
+      request.recommenderConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `recommender_config.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateRecommenderConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateRecommenderConfig(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateRecommenderConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRecommenderConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateRecommenderConfig with closed client', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.UpdateRecommenderConfigRequest()
+      );
+      request.recommenderConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.UpdateRecommenderConfigRequest',
+        ['recommenderConfig', 'name']
+      );
+      request.recommenderConfig.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateRecommenderConfig(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getInsightTypeConfig', () => {
+    it('invokes getInsightTypeConfig without error', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.GetInsightTypeConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetInsightTypeConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.InsightTypeConfig()
+      );
+      client.innerApiCalls.getInsightTypeConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getInsightTypeConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getInsightTypeConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getInsightTypeConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getInsightTypeConfig without error using callback', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.GetInsightTypeConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetInsightTypeConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.InsightTypeConfig()
+      );
+      client.innerApiCalls.getInsightTypeConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getInsightTypeConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.recommender.v1.IInsightTypeConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getInsightTypeConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getInsightTypeConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getInsightTypeConfig with error', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.GetInsightTypeConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetInsightTypeConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getInsightTypeConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getInsightTypeConfig(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getInsightTypeConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getInsightTypeConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getInsightTypeConfig with closed client', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.GetInsightTypeConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.GetInsightTypeConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getInsightTypeConfig(request), expectedError);
+    });
+  });
+
+  describe('updateInsightTypeConfig', () => {
+    it('invokes updateInsightTypeConfig without error', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest()
+      );
+      request.insightTypeConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest',
+        ['insightTypeConfig', 'name']
+      );
+      request.insightTypeConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.InsightTypeConfig()
+      );
+      client.innerApiCalls.updateInsightTypeConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateInsightTypeConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateInsightTypeConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateInsightTypeConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateInsightTypeConfig without error using callback', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest()
+      );
+      request.insightTypeConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest',
+        ['insightTypeConfig', 'name']
+      );
+      request.insightTypeConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.InsightTypeConfig()
+      );
+      client.innerApiCalls.updateInsightTypeConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateInsightTypeConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.recommender.v1.IInsightTypeConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateInsightTypeConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateInsightTypeConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateInsightTypeConfig with error', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest()
+      );
+      request.insightTypeConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest',
+        ['insightTypeConfig', 'name']
+      );
+      request.insightTypeConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `insight_type_config.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateInsightTypeConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateInsightTypeConfig(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateInsightTypeConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateInsightTypeConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateInsightTypeConfig with closed client', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest()
+      );
+      request.insightTypeConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest',
+        ['insightTypeConfig', 'name']
+      );
+      request.insightTypeConfig.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateInsightTypeConfig(request),
+        expectedError
       );
     });
   });
@@ -882,15 +1581,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListInsightsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.ListInsightsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
         generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
@@ -899,11 +1595,14 @@ describe('v1.RecommenderClient', () => {
       client.innerApiCalls.listInsights = stubSimpleCall(expectedResponse);
       const [response] = await client.listInsights(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listInsights as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listInsights as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listInsights as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listInsights without error using callback', async () => {
@@ -915,15 +1614,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListInsightsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.ListInsightsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
         generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
@@ -948,11 +1644,14 @@ describe('v1.RecommenderClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listInsights as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listInsights as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listInsights as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listInsights with error', async () => {
@@ -964,26 +1663,26 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListInsightsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.ListInsightsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listInsights = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listInsights(request), expectedError);
-      assert(
-        (client.innerApiCalls.listInsights as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listInsights as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listInsights as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listInsightsStream without error', async () => {
@@ -995,8 +1694,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListInsightsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.ListInsightsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
         generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
@@ -1027,11 +1730,12 @@ describe('v1.RecommenderClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listInsights, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listInsights.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listInsights.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1044,8 +1748,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListInsightsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.ListInsightsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInsights.createStream = stubPageStreamingCall(
         undefined,
@@ -1073,11 +1781,12 @@ describe('v1.RecommenderClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listInsights, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listInsights.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listInsights.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1090,8 +1799,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListInsightsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.ListInsightsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
         generateSampleMessage(new protos.google.cloud.recommender.v1.Insight()),
@@ -1111,11 +1824,12 @@ describe('v1.RecommenderClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listInsights.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listInsights.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1128,8 +1842,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListInsightsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.ListInsightsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInsights.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1146,11 +1864,12 @@ describe('v1.RecommenderClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listInsights.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listInsights.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1165,15 +1884,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.ListRecommendationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recommender.v1.Recommendation()
@@ -1189,11 +1905,14 @@ describe('v1.RecommenderClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listRecommendations(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRecommendations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRecommendations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRecommendations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRecommendations without error using callback', async () => {
@@ -1205,15 +1924,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.ListRecommendationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recommender.v1.Recommendation()
@@ -1244,11 +1960,14 @@ describe('v1.RecommenderClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRecommendations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRecommendations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRecommendations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRecommendations with error', async () => {
@@ -1260,26 +1979,26 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.ListRecommendationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRecommendations = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listRecommendations(request), expectedError);
-      assert(
-        (client.innerApiCalls.listRecommendations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRecommendations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRecommendations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRecommendationsStream without error', async () => {
@@ -1291,8 +2010,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.ListRecommendationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recommender.v1.Recommendation()
@@ -1330,11 +2053,12 @@ describe('v1.RecommenderClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRecommendations, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRecommendations.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRecommendations.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1347,8 +2071,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.ListRecommendationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRecommendations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1375,11 +2103,12 @@ describe('v1.RecommenderClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRecommendations, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRecommendations.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRecommendations.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1392,8 +2121,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.ListRecommendationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.recommender.v1.Recommendation()
@@ -1420,11 +2153,12 @@ describe('v1.RecommenderClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRecommendations.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRecommendations.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1437,8 +2171,12 @@ describe('v1.RecommenderClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.ListRecommendationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRecommendations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1456,11 +2194,12 @@ describe('v1.RecommenderClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRecommendations.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRecommendations.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2289,6 +3028,93 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
+    describe('organizationLocationInsightTypeConfig', () => {
+      const fakePath = '/rendered/path/organizationLocationInsightTypeConfig';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        insight_type: 'insightTypeValue',
+      };
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationLocationInsightTypeConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationInsightTypeConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationInsightTypeConfigPath', () => {
+        const result = client.organizationLocationInsightTypeConfigPath(
+          'organizationValue',
+          'locationValue',
+          'insightTypeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationInsightTypeConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationInsightTypeConfigName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationInsightTypeConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationInsightTypeConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationInsightTypeConfigName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationInsightTypeConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationInsightTypeConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchInsightTypeFromOrganizationLocationInsightTypeConfigName', () => {
+        const result =
+          client.matchInsightTypeFromOrganizationLocationInsightTypeConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'insightTypeValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationInsightTypeConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('organizationLocationInsightTypeInsight', () => {
       const fakePath = '/rendered/path/organizationLocationInsightTypeInsight';
       const expectedParameters = {
@@ -2468,6 +3294,93 @@ describe('v1.RecommenderClient', () => {
         assert(
           (
             client.pathTemplates.organizationLocationRecommenderPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationLocationRecommenderConfig', () => {
+      const fakePath = '/rendered/path/organizationLocationRecommenderConfig';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        recommender: 'recommenderValue',
+      };
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationLocationRecommenderConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationRecommenderConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationRecommenderConfigPath', () => {
+        const result = client.organizationLocationRecommenderConfigPath(
+          'organizationValue',
+          'locationValue',
+          'recommenderValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationRecommenderConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationRecommenderConfigName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationRecommenderConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationRecommenderConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationRecommenderConfigName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationRecommenderConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationRecommenderConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRecommenderFromOrganizationLocationRecommenderConfigName', () => {
+        const result =
+          client.matchRecommenderFromOrganizationLocationRecommenderConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'recommenderValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationRecommenderConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -2662,6 +3575,87 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
+    describe('projectLocationInsightTypeConfig', () => {
+      const fakePath = '/rendered/path/projectLocationInsightTypeConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        insight_type: 'insightTypeValue',
+      };
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationInsightTypeConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationInsightTypeConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationInsightTypeConfigPath', () => {
+        const result = client.projectLocationInsightTypeConfigPath(
+          'projectValue',
+          'locationValue',
+          'insightTypeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationInsightTypeConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationInsightTypeConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationInsightTypeConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationInsightTypeConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationInsightTypeConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationInsightTypeConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationInsightTypeConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchInsightTypeFromProjectLocationInsightTypeConfigName', () => {
+        const result =
+          client.matchInsightTypeFromProjectLocationInsightTypeConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'insightTypeValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationInsightTypeConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationInsightTypeInsight', () => {
       const fakePath = '/rendered/path/projectLocationInsightTypeInsight';
       const expectedParameters = {
@@ -2834,6 +3828,87 @@ describe('v1.RecommenderClient', () => {
         assert(
           (
             client.pathTemplates.projectLocationRecommenderPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationRecommenderConfig', () => {
+      const fakePath = '/rendered/path/projectLocationRecommenderConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        recommender: 'recommenderValue',
+      };
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationRecommenderConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationRecommenderConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationRecommenderConfigPath', () => {
+        const result = client.projectLocationRecommenderConfigPath(
+          'projectValue',
+          'locationValue',
+          'recommenderValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationRecommenderConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationRecommenderConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationRecommenderConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationRecommenderConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationRecommenderConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationRecommenderConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationRecommenderConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRecommenderFromProjectLocationRecommenderConfigName', () => {
+        const result =
+          client.matchRecommenderFromProjectLocationRecommenderConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'recommenderValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationRecommenderConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
