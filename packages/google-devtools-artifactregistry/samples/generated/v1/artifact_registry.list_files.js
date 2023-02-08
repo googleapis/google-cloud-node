@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main() {
+function main(parent) {
   // [START artifactregistry_v1_generated_ArtifactRegistry_ListFiles_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,8 +29,8 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The name of the repository whose files will be listed. For example:
-   *  "projects/p1/locations/us-central1/repositories/repo1
+   *  Required. The name of the repository whose files will be listed. For
+   *  example: "projects/p1/locations/us-central1/repositories/repo1
    */
   // const parent = 'abc123'
   /**
@@ -67,6 +67,7 @@ function main() {
   async function callListFiles() {
     // Construct request
     const request = {
+      parent,
     };
 
     // Run request
