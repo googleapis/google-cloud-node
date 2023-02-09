@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [7.2.0](https://github.com/googleapis/nodejs-datastore/compare/v7.1.0...v7.2.0) (2023-02-09)
+
+
+### Features
+
+* Add dynamic routing header annotation to DatastoreV1 ([b023ab4](https://github.com/googleapis/nodejs-datastore/commit/b023ab47146159c32ebc64dd09da681ad09c4081))
+* Added Snooze API support ([b023ab4](https://github.com/googleapis/nodejs-datastore/commit/b023ab47146159c32ebc64dd09da681ad09c4081))
+* Added SuggestConversationSummary RPC ([b023ab4](https://github.com/googleapis/nodejs-datastore/commit/b023ab47146159c32ebc64dd09da681ad09c4081))
+* New transaction options for datastoreV1 ([b023ab4](https://github.com/googleapis/nodejs-datastore/commit/b023ab47146159c32ebc64dd09da681ad09c4081))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency sinon to v15 ([#1020](https://github.com/googleapis/nodejs-datastore/issues/1020)) ([a61258c](https://github.com/googleapis/nodejs-datastore/commit/a61258c92354df5a62cf6e7d6977f8f83bfd907f))
+
 ## [7.1.0](https://github.com/googleapis/nodejs-datastore/compare/v7.0.0...v7.1.0) (2023-01-18)
 
 
