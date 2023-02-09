@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.5.0...batch-v0.6.0) (2023-02-09)
+
+
+### Features
+
+* [batch] support custom scopes for service account in v1  ([#3950](https://github.com/googleapis/google-cloud-node/issues/3950)) ([f72de27](https://github.com/googleapis/google-cloud-node/commit/f72de2714e5bb69ecd792397dac6d2acc66277e8))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.4.0...batch-v0.5.0) (2023-01-28)
 
 

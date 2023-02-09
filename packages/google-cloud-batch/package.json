@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/batch",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Batch client for Node.js",
   "repository": {
     "type": "git",

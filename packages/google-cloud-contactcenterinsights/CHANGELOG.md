@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.3.0...contact-center-insights-v2.4.0) (2023-02-09)
+
+
+### Features
+
+* Add IngestConversationsStats ([#3941](https://github.com/googleapis/google-cloud-node/issues/3941)) ([7d98066](https://github.com/googleapis/google-cloud-node/commit/7d98066e5335f8e089a9f193a2ec907b99b3e042))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.2.0...contact-center-insights-v2.3.0) (2023-01-28)
 
 
