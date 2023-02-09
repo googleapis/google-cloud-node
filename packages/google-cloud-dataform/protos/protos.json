@@ -9,7 +9,7 @@
                 "v1alpha2": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Dataform.V1Alpha2",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/dataform/v1alpha2;dataform",
+                    "go_package": "cloud.google.com/go/dataform/apiv1alpha2/dataformpb;dataformpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "DataformProto",
                     "java_package": "com.google.cloud.dataform.v1alpha2",
@@ -2316,7 +2316,7 @@
                 "v1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Dataform.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/dataform/v1beta1;dataform",
+                    "go_package": "cloud.google.com/go/dataform/apiv1beta1/dataformpb;dataformpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "DataformProto",
                     "java_package": "com.google.cloud.dataform.v1beta1",
