@@ -11,7 +11,7 @@
                     "v2": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.BigQuery.Migration.V2",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/migration/v2;migration",
+                        "go_package": "cloud.google.com/go/bigquery/migration/apiv2/migrationpb;migrationpb",
                         "java_multiple_files": true,
                         "java_outer_classname": "MigrationServiceProto",
                         "java_package": "com.google.cloud.bigquery.migration.v2",
@@ -947,7 +947,7 @@
                     "v2alpha": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.BigQuery.Migration.V2Alpha",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/migration/v2alpha;migration",
+                        "go_package": "cloud.google.com/go/bigquery/migration/apiv2alpha/migrationpb;migrationpb",
                         "java_multiple_files": true,
                         "java_outer_classname": "MigrationServiceProto",
                         "java_package": "com.google.cloud.bigquery.migration.v2alpha",
