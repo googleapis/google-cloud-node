@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## [5.0.4](https://github.com/googleapis/cloud-profiler-nodejs/compare/v5.0.3...v5.0.4) (2023-02-09)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency protobufjs to ~7.2.0 ([#868](https://github.com/googleapis/cloud-profiler-nodejs/issues/868)) ([e414a04](https://github.com/googleapis/cloud-profiler-nodejs/commit/e414a043e12d9d46b24fecdb761c434a3a225699))
+* Update go installation method ([#862](https://github.com/googleapis/cloud-profiler-nodejs/issues/862)) ([07f69a7](https://github.com/googleapis/cloud-profiler-nodejs/commit/07f69a7ed35ca1c438a63f4d2c7ea71e7f2b9882))
+
 ## [5.0.3](https://github.com/googleapis/cloud-profiler-nodejs/compare/v5.0.2...v5.0.3) (2022-09-09)
 
 
