@@ -16,9 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  ContainerAnalysisClient,
-} from '@google-cloud/containeranalysis';
+import {ContainerAnalysisClient} from '@google-cloud/containeranalysis';
 
 // check that the client class type name can be used
 function doStuffWithContainerAnalysisClient(client: ContainerAnalysisClient) {
