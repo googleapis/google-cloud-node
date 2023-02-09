@@ -72,6 +72,15 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
+export function stubSimpleCall<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
+}
+
 describe('v2.CloudBuildClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
