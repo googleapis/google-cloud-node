@@ -16,13 +16,23 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-/* eslint-disable node/no-missing-require, no-unused-vars */
-const containeranalysis = require('@google-cloud/containeranalysis');
+import {ContainerAnalysisClient, GrafeasClient} from '@google-cloud/containeranalysis';
+
+// check that the client class type name can be used
+function doStuffWithContainerAnalysisClient(client: ContainerAnalysisClient) {
+  client.close();
+}
+function doStuffWithGrafeasClient(client: GrafeasClient) {
+  client.close();
+}
 
 function main() {
-  const containerAnalysisClient =
-    new containeranalysis.ContainerAnalysisClient();
-  const grafeasClient = new containeranalysis.GrafeasClient();
+  // check that the client instance can be created
+  const containerAnalysisClient = new ContainerAnalysisClient();
+  doStuffWithContainerAnalysisClient(containerAnalysisClient);
+  // check that the client instance can be created
+  const grafeasClient = new GrafeasClient();
+  doStuffWithGrafeasClient(grafeasClient);
 }
 
 main();

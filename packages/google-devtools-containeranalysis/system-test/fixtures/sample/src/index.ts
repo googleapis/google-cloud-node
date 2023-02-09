@@ -18,14 +18,10 @@
 
 import {
   ContainerAnalysisClient,
-  GrafeasClient,
 } from '@google-cloud/containeranalysis';
 
 // check that the client class type name can be used
 function doStuffWithContainerAnalysisClient(client: ContainerAnalysisClient) {
-  client.close();
-}
-function doStuffWithGrafeasClient(client: GrafeasClient) {
   client.close();
 }
 
@@ -33,9 +29,6 @@ function main() {
   // check that the client instance can be created
   const containerAnalysisClient = new ContainerAnalysisClient();
   doStuffWithContainerAnalysisClient(containerAnalysisClient);
-  // check that the client instance can be created
-  const grafeasClient = new GrafeasClient();
-  doStuffWithGrafeasClient(grafeasClient);
 }
 
 main();
