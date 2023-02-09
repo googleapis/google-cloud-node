@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v2.1.0...artifact-registry-v2.2.0) (2023-02-09)
+
+
+### Features
+
+* Add format-specific resources MavenArtifact, NpmPackage, `KfpArtifact` and `PythonPackage` ([#3940](https://github.com/googleapis/google-cloud-node/issues/3940)) ([fadd502](https://github.com/googleapis/google-cloud-node/commit/fadd502bd91d470528abec33871776ab1875929d))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v2.0.2...artifact-registry-v2.1.0) (2023-01-28)
 
 
