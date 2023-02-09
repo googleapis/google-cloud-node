@@ -150,7 +150,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 62,
                     "type": "FULL"
                 }
             ],
@@ -407,7 +407,7 @@
             "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteProperty_async",
             "title": "AnalyticsAdminService deleteProperty Sample",
             "origin": "API_DEFINITION",
-            "description": " Marks target Property as soft-deleted (ie: \"trashed\") and returns it. This API does not have a method to restore soft-deleted properties. However, they can be restored using the Trash Can UI. If the properties are not restored before the expiration time, the Property and all child resources (eg: GoogleAdsLinks, Streams, UserLinks) will be permanently purged. https://support.google.com/analytics/answer/6154772 Returns an error if the target is not found, or is not an GA4 Property.",
+            "description": " Marks target Property as soft-deleted (ie: \"trashed\") and returns it. This API does not have a method to restore soft-deleted properties. However, they can be restored using the Trash Can UI. If the properties are not restored before the expiration time, the Property and all child resources (eg: GoogleAdsLinks, Streams, UserLinks) will be permanently purged. https://support.google.com/analytics/answer/6154772 Returns an error if the target is not found, or is not a GA4 Property.",
             "canonical": true,
             "file": "analytics_admin_service.delete_property.js",
             "language": "JAVASCRIPT",
@@ -454,7 +454,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 62,
+                    "end": 63,
                     "type": "FULL"
                 }
             ],
@@ -1158,7 +1158,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 59,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],
@@ -1590,7 +1590,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 96,
+                    "end": 99,
                     "type": "FULL"
                 }
             ],
@@ -1702,7 +1702,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 62,
                     "type": "FULL"
                 }
             ],
@@ -2858,7 +2858,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 62,
                     "type": "FULL"
                 }
             ],
@@ -3111,7 +3111,7 @@
             "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAudience_async",
             "title": "AnalyticsAdminService getAudience Sample",
             "origin": "API_DEFINITION",
-            "description": " Lookup for a single Audience. Audiences created before 2020 may not be supported.",
+            "description": " Lookup for a single Audience. Audiences created before 2020 may not be supported. Default audiences will not show filter definitions.",
             "canonical": true,
             "file": "analytics_admin_service.get_audience.js",
             "language": "JAVASCRIPT",
@@ -3151,7 +3151,7 @@
             "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListAudiences_async",
             "title": "AnalyticsAdminService listAudiences Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists Audiences on a property. Audiences created before 2020 may not be supported.",
+            "description": " Lists Audiences on a property. Audiences created before 2020 may not be supported. Default audiences will not show filter definitions.",
             "canonical": true,
             "file": "analytics_admin_service.list_audiences.js",
             "language": "JAVASCRIPT",
@@ -3250,7 +3250,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 62,
                     "type": "FULL"
                 }
             ],
@@ -3324,6 +3324,222 @@
             }
         },
         {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetSearchAds360Link_async",
+            "title": "AnalyticsAdminService getSearchAds360Link Sample",
+            "origin": "API_DEFINITION",
+            "description": " Look up a single SearchAds360Link",
+            "canonical": true,
+            "file": "analytics_admin_service.get_search_ads360_link.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetSearchAds360Link",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetSearchAds360Link",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1alpha.SearchAds360Link",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "GetSearchAds360Link",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetSearchAds360Link",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListSearchAds360Links_async",
+            "title": "AnalyticsAdminService listSearchAds360Links Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists all SearchAds360Links on a property.",
+            "canonical": true,
+            "file": "analytics_admin_service.list_search_ads360_links.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListSearchAds360Links",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListSearchAds360Links",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1alpha.ListSearchAds360LinksResponse",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "ListSearchAds360Links",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListSearchAds360Links",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateSearchAds360Link_async",
+            "title": "AnalyticsAdminService createSearchAds360Link Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a SearchAds360Link.",
+            "canonical": true,
+            "file": "analytics_admin_service.create_search_ads360_link.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateSearchAds360Link",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateSearchAds360Link",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "search_ads_360_link",
+                        "type": ".google.analytics.admin.v1alpha.SearchAds360Link"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1alpha.SearchAds360Link",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateSearchAds360Link",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateSearchAds360Link",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteSearchAds360Link_async",
+            "title": "AnalyticsAdminService deleteSearchAds360Link Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a SearchAds360Link on a property.",
+            "canonical": true,
+            "file": "analytics_admin_service.delete_search_ads360_link.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteSearchAds360Link",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteSearchAds360Link",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteSearchAds360Link",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteSearchAds360Link",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateSearchAds360Link_async",
+            "title": "AnalyticsAdminService updateSearchAds360Link Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a SearchAds360Link on a property.",
+            "canonical": true,
+            "file": "analytics_admin_service.update_search_ads360_link.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateSearchAds360Link",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateSearchAds360Link",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "search_ads_360_link",
+                        "type": ".google.analytics.admin.v1alpha.SearchAds360Link"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1alpha.SearchAds360Link",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateSearchAds360Link",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateSearchAds360Link",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAttributionSettings_async",
             "title": "AnalyticsAdminService getAttributionSettings Sample",
             "origin": "API_DEFINITION",
@@ -3374,7 +3590,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 62,
                     "type": "FULL"
                 }
             ],
@@ -3480,6 +3696,178 @@
                 "method": {
                     "shortName": "RunAccessReport",
                     "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.RunAccessReport",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_SetAutomatedGa4ConfigurationOptOut_async",
+            "title": "AnalyticsAdminService setAutomatedGa4ConfigurationOptOut Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the opt out status for the automated GA4 setup process for a UA property. Note: this has no effect on GA4 property.",
+            "canonical": true,
+            "file": "analytics_admin_service.set_automated_ga4_configuration_opt_out.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetAutomatedGa4ConfigurationOptOut",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.SetAutomatedGa4ConfigurationOptOut",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "property",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "opt_out",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "SetAutomatedGa4ConfigurationOptOut",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.SetAutomatedGa4ConfigurationOptOut",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_FetchAutomatedGa4ConfigurationOptOut_async",
+            "title": "AnalyticsAdminService fetchAutomatedGa4ConfigurationOptOut Sample",
+            "origin": "API_DEFINITION",
+            "description": " Fetches the opt out status for the automated GA4 setup process for a UA property. Note: this has no effect on GA4 property.",
+            "canonical": true,
+            "file": "analytics_admin_service.fetch_automated_ga4_configuration_opt_out.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "FetchAutomatedGa4ConfigurationOptOut",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.FetchAutomatedGa4ConfigurationOptOut",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "property",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "FetchAutomatedGa4ConfigurationOptOut",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.FetchAutomatedGa4ConfigurationOptOut",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetBigQueryLink_async",
+            "title": "AnalyticsAdminService getBigQueryLink Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lookup for a single BigQuery Link.",
+            "canonical": true,
+            "file": "analytics_admin_service.get_big_query_link.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetBigQueryLink",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetBigQueryLink",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1alpha.BigQueryLink",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "GetBigQueryLink",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetBigQueryLink",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListBigQueryLinks_async",
+            "title": "AnalyticsAdminService listBigQueryLinks Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists BigQuery Links on a property.",
+            "canonical": true,
+            "file": "analytics_admin_service.list_big_query_links.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListBigQueryLinks",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListBigQueryLinks",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1alpha.ListBigQueryLinksResponse",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "ListBigQueryLinks",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListBigQueryLinks",
                     "service": {
                         "shortName": "AnalyticsAdminService",
                         "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
