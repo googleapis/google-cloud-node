@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.ApigeeRegistry.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/apigeeregistry/v1;apigeeregistry",
+                    "go_package": "cloud.google.com/go/apigeeregistry/apiv1/apigeeregistrypb;apigeeregistrypb",
                     "java_multiple_files": true,
                     "java_outer_classname": "RegistryServiceProto",
                     "java_package": "com.google.cloud.apigeeregistry.v1",
