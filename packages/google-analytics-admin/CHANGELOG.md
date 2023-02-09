@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/admin-v4.4.0...admin-v4.5.0) (2023-02-09)
+
+
+### Features
+
+* [analytics-admin] add `GetSearchAds360Link`, `ListSearchAds360Links`, `CreateSearchAds360Link`, `DeleteSearchAds360Link`, `UpdateSearchAds360Link` methods to the Admin API v1alpha ([#3971](https://github.com/googleapis/google-cloud-node/issues/3971)) ([4834b82](https://github.com/googleapis/google-cloud-node/commit/4834b822552f4b1affdb23085ff78715975b72d1))
+
 ## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/admin-v4.3.1...admin-v4.4.0) (2023-01-28)
 
 
