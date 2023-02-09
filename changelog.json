@@ -5,6 +5,161 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "4b97bb91894bfa56e5713e3f550a671e9f27c57c",
+          "message": "Add initial files for google.cloud.gsuiteaddons.v1",
+          "issues": [
+            "3744"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gsuiteaddons",
+      "id": "b801d058-cac1-4ee9-af22-cc720e1f4d22",
+      "createTime": "2023-02-09T00:46:43.601Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54b124cde2b5ee3c624f8c74d76b4dfb0a1dbb86",
+          "message": "Add initial files for google.maps.mapsplatformdatasets.v1alpha",
+          "issues": [
+            "3924"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/maps-platform-datasets",
+      "id": "4d28443f-47a7-4246-9ec8-57548e13ae3a",
+      "createTime": "2023-02-09T00:46:43.601Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fadd502bd91d470528abec33871776ab1875929d",
+          "message": "Add format-specific resources MavenArtifact, NpmPackage, `KfpArtifact` and `PythonPackage`",
+          "issues": [
+            "3940"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "1f8b21e1-d878-41b8-8f5b-c8f81f6980ba",
+      "createTime": "2023-02-09T00:46:43.600Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "48763577ffe3a47a445c3c3f53a4801049f5d217",
+          "message": "[gkemulticloud] Added support for Azure workload identity federation",
+          "issues": [
+            "3925"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "45d82238-e893-46d0-9c9a-83745641b693",
+      "createTime": "2023-02-09T00:46:43.600Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "9825fa99b94aad5cf1c1d6b3a858bc4e3ccfcb15",
+          "message": "[documentai] feat: Added EvaluationReference to evaluation.proto",
+          "issues": [
+            "3954"
+          ],
+          "scope": "gitignore",
+          "breakingChangeNote": "The TrainProcessorVersion parent was incorrectly annotated."
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "3182e5fd-f436-4643-a9b3-d229d309ab51",
+      "createTime": "2023-02-09T00:46:43.599Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7d98066e5335f8e089a9f193a2ec907b99b3e042",
+          "message": "Add IngestConversationsStats",
+          "issues": [
+            "3941"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "f480aebe-9ff5-4261-8900-fe78b1aab576",
+      "createTime": "2023-02-09T00:46:43.599Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f72de2714e5bb69ecd792397dac6d2acc66277e8",
+          "message": "[batch] support custom scopes for service account in v1 ",
+          "issues": [
+            "3950"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "4ddd9fcd-1a3c-4126-8515-e255559e292b",
+      "createTime": "2023-02-09T00:46:43.598Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fcaacbc8060ec8eb750d283dc17febe9fb0f2cd8",
+          "message": "[ai-platform] add service_networking.proto to aiplatform v1",
+          "issues": [
+            "3937"
+          ]
+        }
+      ],
+      "version": "2.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "0f392655-7ea7-48b4-be87-8d703ba8badb",
+      "createTime": "2023-02-09T00:46:43.597Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4834b822552f4b1affdb23085ff78715975b72d1",
+          "message": "[analytics-admin] add `GetSearchAds360Link`, `ListSearchAds360Links`, `CreateSearchAds360Link`, `DeleteSearchAds360Link`, `UpdateSearchAds360Link` methods to the Admin API v1alpha",
+          "issues": [
+            "3971"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "4d8b937b-d9f7-4233-bd09-c98f8e5f0acf",
+      "createTime": "2023-02-09T00:46:43.596Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "772f591c2ada4aec8d17a50c97f7a6be8240bb07",
           "message": "Add initial files for google.cloud.datacatalog.lineage.v1",
           "issues": [
@@ -1734,5 +1889,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-02-02T01:26:10.067Z"
+  "updateTime": "2023-02-09T00:46:43.601Z"
 }

@@ -33,9 +33,9 @@ function main(updateMask) {
    */
   // const displayVideo_360AdvertiserLink = {}
   /**
-   *  Required. The list of fields to be updated. Omitted fields will not be updated.
-   *  To replace the entire entity, use one path with the string "*" to match
-   *  all fields.
+   *  Required. The list of fields to be updated. Omitted fields will not be
+   *  updated. To replace the entire entity, use one path with the string "*" to
+   *  match all fields.
    */
   // const updateMask = {}
 

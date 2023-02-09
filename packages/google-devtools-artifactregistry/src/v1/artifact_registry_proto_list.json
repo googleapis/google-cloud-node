@@ -8,5 +8,6 @@
   "../../protos/google/devtools/artifactregistry/v1/settings.proto",
   "../../protos/google/devtools/artifactregistry/v1/tag.proto",
   "../../protos/google/devtools/artifactregistry/v1/version.proto",
+  "../../protos/google/devtools/artifactregistry/v1/vpcsc_config.proto",
   "../../protos/google/devtools/artifactregistry/v1/yum_artifact.proto"
 ]

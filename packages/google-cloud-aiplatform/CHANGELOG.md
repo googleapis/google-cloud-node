@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.5.0...aiplatform-v2.6.0) (2023-02-09)
+
+
+### Features
+
+* [ai-platform] add service_networking.proto to aiplatform v1 ([#3937](https://github.com/googleapis/google-cloud-node/issues/3937)) ([fcaacbc](https://github.com/googleapis/google-cloud-node/commit/fcaacbc8060ec8eb750d283dc17febe9fb0f2cd8))
+
 ## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.4.0...aiplatform-v2.5.0) (2023-01-28)
 
 

@@ -17,11 +17,12 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v1beta1 from './v1beta1';
 
 const RecommenderClient = v1.RecommenderClient;
 type RecommenderClient = v1.RecommenderClient;
 
-export {v1, RecommenderClient};
-export default {v1, RecommenderClient};
+export {v1, v1beta1, RecommenderClient};
+export default {v1, v1beta1, RecommenderClient};
 import * as protos from '../protos/protos';
 export {protos};

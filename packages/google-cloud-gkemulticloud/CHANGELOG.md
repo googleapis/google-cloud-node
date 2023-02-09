@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v0.2.0...gkemulticloud-v0.3.0) (2023-02-09)
+
+
+### Features
+
+* [gkemulticloud] Added support for Azure workload identity federation ([#3925](https://github.com/googleapis/google-cloud-node/issues/3925)) ([4876357](https://github.com/googleapis/google-cloud-node/commit/48763577ffe3a47a445c3c3f53a4801049f5d217))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v0.1.4...gkemulticloud-v0.2.0) (2022-12-21)
 
 
