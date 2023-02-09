@@ -1149,6 +1149,7 @@
                       "options": {
                         "(google.api.http).post": "/v1/projects/{project_id}:lookup",
                         "(google.api.http).body": "*",
+                        "(google.api.routing).routing_parameters.field": "database_id",
                         "(google.api.method_signature)": "project_id,read_options,keys"
                       },
                       "parsedOptions": [
@@ -1156,6 +1157,18 @@
                           "(google.api.http)": {
                             "post": "/v1/projects/{project_id}:lookup",
                             "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": [
+                              {
+                                "field": "project_id"
+                              },
+                              {
+                                "field": "database_id"
+                              }
+                            ]
                           }
                         },
                         {
@@ -1168,13 +1181,26 @@
                       "responseType": "RunQueryResponse",
                       "options": {
                         "(google.api.http).post": "/v1/projects/{project_id}:runQuery",
-                        "(google.api.http).body": "*"
+                        "(google.api.http).body": "*",
+                        "(google.api.routing).routing_parameters.field": "database_id"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
                             "post": "/v1/projects/{project_id}:runQuery",
                             "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": [
+                              {
+                                "field": "project_id"
+                              },
+                              {
+                                "field": "database_id"
+                              }
+                            ]
                           }
                         }
                       ]
@@ -1184,13 +1210,26 @@
                       "responseType": "RunAggregationQueryResponse",
                       "options": {
                         "(google.api.http).post": "/v1/projects/{project_id}:runAggregationQuery",
-                        "(google.api.http).body": "*"
+                        "(google.api.http).body": "*",
+                        "(google.api.routing).routing_parameters.field": "database_id"
                       },
                       "parsedOptions": [
                         {
                           "(google.api.http)": {
                             "post": "/v1/projects/{project_id}:runAggregationQuery",
                             "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": [
+                              {
+                                "field": "project_id"
+                              },
+                              {
+                                "field": "database_id"
+                              }
+                            ]
                           }
                         }
                       ]
@@ -1201,6 +1240,7 @@
                       "options": {
                         "(google.api.http).post": "/v1/projects/{project_id}:beginTransaction",
                         "(google.api.http).body": "*",
+                        "(google.api.routing).routing_parameters.field": "database_id",
                         "(google.api.method_signature)": "project_id"
                       },
                       "parsedOptions": [
@@ -1208,6 +1248,18 @@
                           "(google.api.http)": {
                             "post": "/v1/projects/{project_id}:beginTransaction",
                             "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": [
+                              {
+                                "field": "project_id"
+                              },
+                              {
+                                "field": "database_id"
+                              }
+                            ]
                           }
                         },
                         {
@@ -1221,6 +1273,7 @@
                       "options": {
                         "(google.api.http).post": "/v1/projects/{project_id}:commit",
                         "(google.api.http).body": "*",
+                        "(google.api.routing).routing_parameters.field": "database_id",
                         "(google.api.method_signature)": "project_id,mode,mutations"
                       },
                       "parsedOptions": [
@@ -1228,6 +1281,18 @@
                           "(google.api.http)": {
                             "post": "/v1/projects/{project_id}:commit",
                             "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": [
+                              {
+                                "field": "project_id"
+                              },
+                              {
+                                "field": "database_id"
+                              }
+                            ]
                           }
                         },
                         {
@@ -1244,6 +1309,7 @@
                       "options": {
                         "(google.api.http).post": "/v1/projects/{project_id}:rollback",
                         "(google.api.http).body": "*",
+                        "(google.api.routing).routing_parameters.field": "database_id",
                         "(google.api.method_signature)": "project_id,transaction"
                       },
                       "parsedOptions": [
@@ -1251,6 +1317,18 @@
                           "(google.api.http)": {
                             "post": "/v1/projects/{project_id}:rollback",
                             "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": [
+                              {
+                                "field": "project_id"
+                              },
+                              {
+                                "field": "database_id"
+                              }
+                            ]
                           }
                         },
                         {
@@ -1264,6 +1342,7 @@
                       "options": {
                         "(google.api.http).post": "/v1/projects/{project_id}:allocateIds",
                         "(google.api.http).body": "*",
+                        "(google.api.routing).routing_parameters.field": "database_id",
                         "(google.api.method_signature)": "project_id,keys"
                       },
                       "parsedOptions": [
@@ -1271,6 +1350,18 @@
                           "(google.api.http)": {
                             "post": "/v1/projects/{project_id}:allocateIds",
                             "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": [
+                              {
+                                "field": "project_id"
+                              },
+                              {
+                                "field": "database_id"
+                              }
+                            ]
                           }
                         },
                         {
@@ -1284,6 +1375,7 @@
                       "options": {
                         "(google.api.http).post": "/v1/projects/{project_id}:reserveIds",
                         "(google.api.http).body": "*",
+                        "(google.api.routing).routing_parameters.field": "database_id",
                         "(google.api.method_signature)": "project_id,keys"
                       },
                       "parsedOptions": [
@@ -1291,6 +1383,18 @@
                           "(google.api.http)": {
                             "post": "/v1/projects/{project_id}:reserveIds",
                             "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": [
+                              {
+                                "field": "project_id"
+                              },
+                              {
+                                "field": "database_id"
+                              }
+                            ]
                           }
                         },
                         {
@@ -1343,6 +1447,10 @@
                       "rule": "repeated",
                       "type": "Key",
                       "id": 3
+                    },
+                    "transaction": {
+                      "type": "bytes",
+                      "id": 5
                     },
                     "readTime": {
                       "type": "google.protobuf.Timestamp",
@@ -1398,6 +1506,10 @@
                     "query": {
                       "type": "Query",
                       "id": 2
+                    },
+                    "transaction": {
+                      "type": "bytes",
+                      "id": 5
                     }
                   }
                 },
@@ -1449,6 +1561,10 @@
                     "query": {
                       "type": "AggregationQuery",
                       "id": 2
+                    },
+                    "transaction": {
+                      "type": "bytes",
+                      "id": 5
                     }
                   }
                 },
@@ -1508,7 +1624,8 @@
                   "oneofs": {
                     "transactionSelector": {
                       "oneof": [
-                        "transaction"
+                        "transaction",
+                        "singleUseTransaction"
                       ]
                     }
                   },
@@ -1531,6 +1648,10 @@
                     "transaction": {
                       "type": "bytes",
                       "id": 1
+                    },
+                    "singleUseTransaction": {
+                      "type": "TransactionOptions",
+                      "id": 10
                     },
                     "mutations": {
                       "rule": "repeated",
@@ -1693,6 +1814,7 @@
                       "oneof": [
                         "readConsistency",
                         "transaction",
+                        "newTransaction",
                         "readTime"
                       ]
                     }
@@ -1705,6 +1827,10 @@
                     "transaction": {
                       "type": "bytes",
                       "id": 2
+                    },
+                    "newTransaction": {
+                      "type": "TransactionOptions",
+                      "id": 3
                     },
                     "readTime": {
                       "type": "google.protobuf.Timestamp",
@@ -1767,7 +1893,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "FieldBehaviorProto",
+            "java_outer_classname": "RoutingProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -1892,6 +2018,32 @@
                 "IMMUTABLE": 5,
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7
+              }
+            },
+            "routing": {
+              "type": "google.api.RoutingRule",
+              "id": 72295729,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "RoutingRule": {
+              "fields": {
+                "routingParameters": {
+                  "rule": "repeated",
+                  "type": "RoutingParameter",
+                  "id": 2
+                }
+              }
+            },
+            "RoutingParameter": {
+              "fields": {
+                "field": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pathTemplate": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             }
           }
