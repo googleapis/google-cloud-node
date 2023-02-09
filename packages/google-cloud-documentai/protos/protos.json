@@ -5199,7 +5199,10 @@
                           "fields": {
                             "revision": {
                               "type": "int32",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "id": {
                               "type": "int32",
@@ -5239,10 +5242,25 @@
                               }
                             },
                             "OperationType": {
+                              "valuesOptions": {
+                                "REPLACE": {
+                                  "deprecated": true
+                                },
+                                "EVAL_REQUESTED": {
+                                  "deprecated": true
+                                },
+                                "EVAL_APPROVED": {
+                                  "deprecated": true
+                                },
+                                "EVAL_SKIPPED": {
+                                  "deprecated": true
+                                }
+                              },
                               "values": {
                                 "OPERATION_TYPE_UNSPECIFIED": 0,
                                 "ADD": 1,
                                 "REMOVE": 2,
+                                "UPDATE": 7,
                                 "REPLACE": 3,
                                 "EVAL_REQUESTED": 4,
                                 "EVAL_APPROVED": 5,
@@ -6590,7 +6608,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "documentai.googleapis.com/ProcessorVersion"
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/Processor"
                           }
                         },
                         "processorVersion": {
@@ -6994,6 +7012,29 @@
                         }
                       }
                     },
+                    "EvaluationReference": {
+                      "fields": {
+                        "operation": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "evaluation": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/Evaluation"
+                          }
+                        },
+                        "aggregateMetrics": {
+                          "type": "Evaluation.Metrics",
+                          "id": 4
+                        },
+                        "aggregateMetricsExact": {
+                          "type": "Evaluation.Metrics",
+                          "id": 5
+                        }
+                      }
+                    },
                     "Evaluation": {
                       "options": {
                         "(google.api.resource).type": "documentai.googleapis.com/Evaluation",
@@ -7216,6 +7257,10 @@
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 7
+                        },
+                        "latestEvaluation": {
+                          "type": "EvaluationReference",
+                          "id": 8
                         },
                         "kmsKeyName": {
                           "type": "string",
