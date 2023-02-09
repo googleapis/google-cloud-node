@@ -49,6 +49,12 @@ function generateSampleMessage<T extends object>(instance: T) {
   ) as T;
 }
 
+function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
+}
+
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -70,15 +76,6 @@ function stubAsyncIterationCall<ResponseType>(
     },
   };
   return sinon.stub().returns(asyncIterable);
-}
-
-export function stubSimpleCall<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
 }
 
 describe('v2.CloudBuildClient', () => {
