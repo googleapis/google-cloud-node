@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/nodejs-bigquery-migration/compare/v0.2.0...v0.2.1) (2023-02-09)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#24](https://github.com/googleapis/nodejs-bigquery-migration/issues/24)) ([4592890](https://github.com/googleapis/nodejs-bigquery-migration/commit/45928906abff16104316fa817dc2860381984c05))
+
 ## [0.2.0](https://github.com/googleapis/nodejs-bigquery-migration/compare/v0.1.0...v0.2.0) (2022-09-14)
 
 
