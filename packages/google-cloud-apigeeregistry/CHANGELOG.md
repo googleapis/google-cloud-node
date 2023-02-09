@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/nodejs-apigee-registry/compare/v0.2.1...v0.3.0) (2023-02-09)
+
+
+### Features
+
+* Added SuggestConversationSummary RPC ([8110940](https://github.com/googleapis/nodejs-apigee-registry/commit/8110940e67c72bd94776c17863fa52d714b270ae))
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#25](https://github.com/googleapis/nodejs-apigee-registry/issues/25)) ([1ee9a1d](https://github.com/googleapis/nodejs-apigee-registry/commit/1ee9a1d07a6cd4930c07651a0e17bb41c0663777))
+
 ## [0.2.1](https://github.com/googleapis/nodejs-apigee-registry/compare/v0.2.0...v0.2.1) (2022-09-21)
 
 
