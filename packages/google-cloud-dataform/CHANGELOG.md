@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/nodejs-dataform/compare/v0.2.0...v0.3.0) (2023-02-09)
+
+
+### Features
+
+* Added Snooze API support ([a261ce7](https://github.com/googleapis/nodejs-dataform/commit/a261ce7bd7138b8b236699e63f5c6030ea3803f0))
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#25](https://github.com/googleapis/nodejs-dataform/issues/25)) ([9df841b](https://github.com/googleapis/nodejs-dataform/commit/9df841b7a8e573e777428e649f60de2076ada2c1))
+* Regenerated protos JS and TS definitions ([#29](https://github.com/googleapis/nodejs-dataform/issues/29)) ([cf713a7](https://github.com/googleapis/nodejs-dataform/commit/cf713a7d8b50323b33efbb0793fbe39c4faf5b89))
+
 ## [0.2.0](https://github.com/googleapis/nodejs-dataform/compare/v0.1.0...v0.2.0) (2022-09-14)
 
 
