@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.AutoML.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/automl/v1;automl",
+                    "go_package": "cloud.google.com/go/automl/apiv1/automlpb;automlpb",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.automl.v1",
                     "php_namespace": "Google\\Cloud\\AutoMl\\V1",
@@ -2224,7 +2224,7 @@
                 },
                 "v1beta1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/automl/v1beta1;automl",
+                    "go_package": "cloud.google.com/go/automl/apiv1beta1/automlpb;automlpb",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.automl.v1beta1",
                     "php_namespace": "Google\\Cloud\\AutoMl\\V1beta1",
