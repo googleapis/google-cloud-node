@@ -20,7 +20,6 @@ if [[ -z "$CREDENTIALS" ]]; then
   # and don't set NPM_CONFIG_PREFIX.
   export NPM_CONFIG_PREFIX=${HOME}/.npm-global
   export PATH="$PATH:${NPM_CONFIG_PREFIX}/bin"
-  cd $(dirname $0)/../..
 fi
 npm install
 npm run docs
