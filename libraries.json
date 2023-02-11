@@ -2199,25 +2199,6 @@
     "support_documentation": "https://area120.google.com/docs/getting-support"
   },
   {
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-area120-tables",
-    "name": "area120tables",
-    "issue_tracker": "",
-    "default_version": "v1alpha1",
-    "api_id": "area120tables.googleapis.com",
-    "distribution_name": "@google/area120-tables",
-    "requires_billing": true,
-    "product_documentation": "https://area120.google.com/",
-    "codeowner_team": "@googleapis/area120-tables",
-    "name_pretty": "Area120 Tables API",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/area120-tables/latest",
-    "release_level": "preview",
-    "api_shortname": "area120tables",
-    "library_type": "GAPIC_AUTO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-area120-tables",
-    "support_documentation": "https://area120.google.com/docs/getting-support"
-  },
-  {
     "name": "baremetalsolution",
     "name_pretty": "Bare Metal Solution API",
     "product_documentation": "https://cloud.google.com/bare-metal",
@@ -2545,25 +2526,6 @@
     "support_documentation": "https://developers.google.com/analytics/trusted-testing/analytics-data/docs/getting-support"
   },
   {
-    "client_documentation": "https://googleapis.dev/nodejs/analytics-data/latest/index.html",
-    "api_id": "analyticsdata.googleapis.com",
-    "distribution_name": "@google-analytics/data",
-    "release_level": "preview",
-    "default_version": "v1beta",
-    "language": "nodejs",
-    "name_pretty": "Google Analytics Data",
-    "repo": "googleapis/nodejs-analytics-data",
-    "codeowner_team": "@googleapis/ga-devrel",
-    "product_documentation": "https://developers.google.com/analytics/trusted-testing/analytics-data",
-    "requires_billing": false,
-    "name": "analytics-data",
-    "issue_tracker": "https://issuetracker.google.com/issues/new?component=326380x",
-    "api_shortname": "analyticsdata",
-    "library_type": "GAPIC_AUTO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-analytics-data",
-    "support_documentation": "https://developers.google.com/analytics/trusted-testing/analytics-data/docs/getting-support"
-  },
-  {
     "name": "routing",
     "name_pretty": "Google Maps Routing",
     "product_documentation": "",
@@ -2578,6 +2540,23 @@
     "requires_billing": true,
     "library_type": "GAPIC_AUTO",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-routing"
+  },
+  {
+    "name": "gsuiteaddons",
+    "name_pretty": "Google Workspace Add-ons API",
+    "product_documentation": "developers.google.com/workspace/add-ons/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gsuiteaddons/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/gsuiteaddons",
+    "api_id": "gsuiteaddons.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gsuiteaddons",
+    "support_documentation": "https://developers.google.com/workspace/add-ons/docs/getting-support"
   },
   {
     "name": "iam",
