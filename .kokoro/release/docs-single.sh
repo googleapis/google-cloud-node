@@ -20,24 +20,12 @@
 set -eo pipefail
 
 echo "PWD"
-current_directory=pwd
 pwd
 # build jsdocs (Python is installed on the Node 10 docker image).
 npm install
 npm run docs
 
-# create docs.metadata, based on package.json and .repo-metadata.json.
-# npm i json@9.0.6 -g
 
-cd ~/bin
-echo "PWD"
-pwd
-curl -L https://github.com/trentm/json/raw/master/lib/json.js > json
-chmod 755 json
-
-echo "PWD"
-cd current_directory
-pwd
 python3 -m docuploader create-metadata \
   --name=$(cat .repo-metadata.json | json name) \
   --version=$(cat package.json | json version) \
