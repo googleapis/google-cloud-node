@@ -8134,6 +8134,9 @@ export namespace google {
                     /** Node queuedResource */
                     queuedResource?: (string|null);
 
+                    /** Node acceleratorConfig */
+                    acceleratorConfig?: (google.cloud.tpu.v2alpha1.IAcceleratorConfig|null);
+
                     /** Node shieldedInstanceConfig */
                     shieldedInstanceConfig?: (google.cloud.tpu.v2alpha1.IShieldedInstanceConfig|null);
                 }
@@ -8209,6 +8212,9 @@ export namespace google {
 
                     /** Node queuedResource. */
                     public queuedResource: string;
+
+                    /** Node acceleratorConfig. */
+                    public acceleratorConfig?: (google.cloud.tpu.v2alpha1.IAcceleratorConfig|null);
 
                     /** Node shieldedInstanceConfig. */
                     public shieldedInstanceConfig?: (google.cloud.tpu.v2alpha1.IShieldedInstanceConfig|null);
@@ -11553,6 +11559,9 @@ export namespace google {
 
                     /** AcceleratorType type */
                     type?: (string|null);
+
+                    /** AcceleratorType acceleratorConfigs */
+                    acceleratorConfigs?: (google.cloud.tpu.v2alpha1.IAcceleratorConfig[]|null);
                 }
 
                 /** Represents an AcceleratorType. */
@@ -11569,6 +11578,9 @@ export namespace google {
 
                     /** AcceleratorType type. */
                     public type: string;
+
+                    /** AcceleratorType acceleratorConfigs. */
+                    public acceleratorConfigs: google.cloud.tpu.v2alpha1.IAcceleratorConfig[];
 
                     /**
                      * Creates a new AcceleratorType instance using the specified properties.
@@ -12974,6 +12986,120 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AcceleratorConfig. */
+                interface IAcceleratorConfig {
+
+                    /** AcceleratorConfig type */
+                    type?: (google.cloud.tpu.v2alpha1.AcceleratorConfig.Type|keyof typeof google.cloud.tpu.v2alpha1.AcceleratorConfig.Type|null);
+
+                    /** AcceleratorConfig topology */
+                    topology?: (string|null);
+                }
+
+                /** Represents an AcceleratorConfig. */
+                class AcceleratorConfig implements IAcceleratorConfig {
+
+                    /**
+                     * Constructs a new AcceleratorConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tpu.v2alpha1.IAcceleratorConfig);
+
+                    /** AcceleratorConfig type. */
+                    public type: (google.cloud.tpu.v2alpha1.AcceleratorConfig.Type|keyof typeof google.cloud.tpu.v2alpha1.AcceleratorConfig.Type);
+
+                    /** AcceleratorConfig topology. */
+                    public topology: string;
+
+                    /**
+                     * Creates a new AcceleratorConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AcceleratorConfig instance
+                     */
+                    public static create(properties?: google.cloud.tpu.v2alpha1.IAcceleratorConfig): google.cloud.tpu.v2alpha1.AcceleratorConfig;
+
+                    /**
+                     * Encodes the specified AcceleratorConfig message. Does not implicitly {@link google.cloud.tpu.v2alpha1.AcceleratorConfig.verify|verify} messages.
+                     * @param message AcceleratorConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tpu.v2alpha1.IAcceleratorConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AcceleratorConfig message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.AcceleratorConfig.verify|verify} messages.
+                     * @param message AcceleratorConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.IAcceleratorConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AcceleratorConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AcceleratorConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.AcceleratorConfig;
+
+                    /**
+                     * Decodes an AcceleratorConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AcceleratorConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.AcceleratorConfig;
+
+                    /**
+                     * Verifies an AcceleratorConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AcceleratorConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AcceleratorConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.AcceleratorConfig;
+
+                    /**
+                     * Creates a plain object from an AcceleratorConfig message. Also converts values to other types if specified.
+                     * @param message AcceleratorConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tpu.v2alpha1.AcceleratorConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AcceleratorConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AcceleratorConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AcceleratorConfig {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        V2 = 2,
+                        V3 = 4,
+                        V4 = 7
+                    }
                 }
 
                 /** Properties of a ShieldedInstanceConfig. */
