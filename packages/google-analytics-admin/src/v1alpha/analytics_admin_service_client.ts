@@ -194,6 +194,9 @@ export class AnalyticsAdminServiceClient {
       audiencePathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/audiences/{audience}'
       ),
+      bigQueryLinkPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/bigQueryLinks/{bigquery_link}'
+      ),
       conversionEventPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/conversionEvents/{conversion_event}'
       ),
@@ -220,6 +223,9 @@ export class AnalyticsAdminServiceClient {
         new this._gaxModule.PathTemplate(
           'properties/{property}/displayVideo360AdvertiserLinkProposals/{display_video_360_advertiser_link_proposal}'
         ),
+      expandedDataSetPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/expandedDataSets/{expanded_data_set}'
+      ),
       firebaseLinkPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/firebaseLinks/{firebase_link}'
       ),
@@ -240,6 +246,9 @@ export class AnalyticsAdminServiceClient {
       ),
       propertyUserLinkPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/userLinks/{user_link}'
+      ),
+      searchAds360LinkPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/searchAds360Links/{search_ads_360_link}'
       ),
     };
 
@@ -327,6 +336,16 @@ export class AnalyticsAdminServiceClient {
         'pageToken',
         'nextPageToken',
         'audiences'
+      ),
+      listSearchAds360Links: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'searchAds_360Links'
+      ),
+      listBigQueryLinks: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'bigqueryLinks'
       ),
     };
 
@@ -457,9 +476,18 @@ export class AnalyticsAdminServiceClient {
       'createAudience',
       'updateAudience',
       'archiveAudience',
+      'getSearchAds360Link',
+      'listSearchAds360Links',
+      'createSearchAds360Link',
+      'deleteSearchAds360Link',
+      'updateSearchAds360Link',
       'getAttributionSettings',
       'updateAttributionSettings',
       'runAccessReport',
+      'setAutomatedGa4ConfigurationOptOut',
+      'fetchAutomatedGa4ConfigurationOptOut',
+      'getBigQueryLink',
+      'listBigQueryLinks',
     ];
     for (const methodName of analyticsAdminServiceStubMethods) {
       const callPromise = this.analyticsAdminServiceStub.then(
@@ -753,9 +781,10 @@ export class AnalyticsAdminServiceClient {
    *   Required. The account to update.
    *   The account's `name` field is used to identify the account.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Field names must be in snake case
-   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-   *   the entire entity, use one path with the string "*" to match all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1132,7 +1161,7 @@ export class AnalyticsAdminServiceClient {
    * will be permanently purged.
    * https://support.google.com/analytics/answer/6154772
    *
-   * Returns an error if the target is not found, or is not an GA4 Property.
+   * Returns an error if the target is not found, or is not a GA4 Property.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1234,9 +1263,10 @@ export class AnalyticsAdminServiceClient {
    *   The property's `name` field is used to identify the property to be
    *   updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Field names must be in snake case
-   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-   *   the entire entity, use one path with the string "*" to match all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1528,8 +1558,8 @@ export class AnalyticsAdminServiceClient {
    * @param {string} request.parent
    *   Required. Example format: accounts/1234
    * @param {boolean} [request.notifyNewUser]
-   *   Optional. If set, then email the new user notifying them that they've been granted
-   *   permissions to the resource.
+   *   Optional. If set, then email the new user notifying them that they've been
+   *   granted permissions to the resource.
    * @param {google.analytics.admin.v1alpha.UserLink} request.userLink
    *   Required. The user link to create.
    * @param {object} [options]
@@ -1625,14 +1655,14 @@ export class AnalyticsAdminServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The account or property that all user links in the request are for.
-   *   This field is required. The parent field in the CreateUserLinkRequest
+   *   Required. The account or property that all user links in the request are
+   *   for. This field is required. The parent field in the CreateUserLinkRequest
    *   messages must either be empty or match this field.
    *   Example format: accounts/1234
    * @param {boolean} [request.notifyNewUsers]
-   *   Optional. If set, then email the new users notifying them that they've been granted
-   *   permissions to the resource. Regardless of whether this is set or not,
-   *   notify_new_user field inside each individual request is ignored.
+   *   Optional. If set, then email the new users notifying them that they've been
+   *   granted permissions to the resource. Regardless of whether this is set or
+   *   not, notify_new_user field inside each individual request is ignored.
    * @param {number[]} request.requests
    *   Required. The requests specifying the user links to create.
    *   A maximum of 1000 user links can be created in a batch.
@@ -2522,9 +2552,10 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1alpha.GoogleAdsLink} request.googleAdsLink
    *   The GoogleAdsLink to update
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Field names must be in snake case
-   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-   *   the entire entity, use one path with the string "*" to match all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3241,8 +3272,8 @@ export class AnalyticsAdminServiceClient {
    * @param {string} request.property
    *   Required. The property for which to acknowledge user data collection.
    * @param {string} request.acknowledgement
-   *   Required. An acknowledgement that the caller of this method understands the terms
-   *   of user data collection.
+   *   Required. An acknowledgement that the caller of this method understands the
+   *   terms of user data collection.
    *
    *   This field must contain the exact value:
    *   "I acknowledge that I have the necessary privacy disclosures and rights
@@ -3454,9 +3485,10 @@ export class AnalyticsAdminServiceClient {
    *   Required. The settings to update.
    *   The `name` field is used to identify the settings to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Field names must be in snake case
-   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-   *   the entire entity, use one path with the string "*" to match all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3560,8 +3592,8 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1alpha.ConversionEvent} request.conversionEvent
    *   Required. The conversion event to create.
    * @param {string} request.parent
-   *   Required. The resource name of the parent property where this conversion event will
-   *   be created. Format: properties/123
+   *   Required. The resource name of the parent property where this conversion
+   *   event will be created. Format: properties/123
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4169,9 +4201,9 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink} request.displayVideo_360AdvertiserLink
    *   The DisplayVideo360AdvertiserLink to update
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Omitted fields will not be
+   *   updated. To replace the entire entity, use one path with the string "*" to
+   *   match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4892,9 +4924,9 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1alpha.CustomDimension} request.customDimension
    *   The CustomDimension to update
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Omitted fields will not be
+   *   updated. To replace the entire entity, use one path with the string "*" to
+   *   match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5292,9 +5324,9 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1alpha.CustomMetric} request.customMetric
    *   The CustomMetric to update
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Omitted fields will not be
+   *   updated. To replace the entire entity, use one path with the string "*" to
+   *   match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5688,9 +5720,10 @@ export class AnalyticsAdminServiceClient {
    *   Required. The settings to update.
    *   The `name` field is used to identify the settings to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Field names must be in snake case
-   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-   *   the entire entity, use one path with the string "*" to match all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5991,9 +6024,9 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1alpha.DataStream} request.dataStream
    *   The DataStream to update
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Omitted fields will not be
+   *   updated. To replace the entire entity, use one path with the string "*" to
+   *   match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6179,6 +6212,7 @@ export class AnalyticsAdminServiceClient {
   /**
    * Lookup for a single Audience.
    * Audiences created before 2020 may not be supported.
+   * Default audiences will not show filter definitions.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -6371,9 +6405,10 @@ export class AnalyticsAdminServiceClient {
    *   Required. The audience to update.
    *   The audience's `name` field is used to identify the audience to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Field names must be in snake case
-   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-   *   the entire entity, use one path with the string "*" to match all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6550,6 +6585,414 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.archiveAudience(request, options, callback);
   }
   /**
+   * Look up a single SearchAds360Link
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the SearchAds360Link to get.
+   *   Example format: properties/1234/SearchAds360Link/5678
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SearchAds360Link]{@link google.analytics.admin.v1alpha.SearchAds360Link}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_search_ads360_link.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetSearchAds360Link_async
+   */
+  getSearchAds360Link(
+    request?: protos.google.analytics.admin.v1alpha.IGetSearchAds360LinkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetSearchAds360LinkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getSearchAds360Link(
+    request: protos.google.analytics.admin.v1alpha.IGetSearchAds360LinkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      | protos.google.analytics.admin.v1alpha.IGetSearchAds360LinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSearchAds360Link(
+    request: protos.google.analytics.admin.v1alpha.IGetSearchAds360LinkRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      | protos.google.analytics.admin.v1alpha.IGetSearchAds360LinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSearchAds360Link(
+    request?: protos.google.analytics.admin.v1alpha.IGetSearchAds360LinkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+          | protos.google.analytics.admin.v1alpha.IGetSearchAds360LinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      | protos.google.analytics.admin.v1alpha.IGetSearchAds360LinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetSearchAds360LinkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getSearchAds360Link(request, options, callback);
+  }
+  /**
+   * Creates a SearchAds360Link.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {google.analytics.admin.v1alpha.SearchAds360Link} request.searchAds_360Link
+   *   Required. The SearchAds360Link to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SearchAds360Link]{@link google.analytics.admin.v1alpha.SearchAds360Link}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_search_ads360_link.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateSearchAds360Link_async
+   */
+  createSearchAds360Link(
+    request?: protos.google.analytics.admin.v1alpha.ICreateSearchAds360LinkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateSearchAds360LinkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createSearchAds360Link(
+    request: protos.google.analytics.admin.v1alpha.ICreateSearchAds360LinkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      | protos.google.analytics.admin.v1alpha.ICreateSearchAds360LinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createSearchAds360Link(
+    request: protos.google.analytics.admin.v1alpha.ICreateSearchAds360LinkRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      | protos.google.analytics.admin.v1alpha.ICreateSearchAds360LinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createSearchAds360Link(
+    request?: protos.google.analytics.admin.v1alpha.ICreateSearchAds360LinkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+          | protos.google.analytics.admin.v1alpha.ICreateSearchAds360LinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      | protos.google.analytics.admin.v1alpha.ICreateSearchAds360LinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateSearchAds360LinkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createSearchAds360Link(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes a SearchAds360Link on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the SearchAds360Link to delete.
+   *   Example format: properties/1234/SearchAds360Links/5678
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_search_ads360_link.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteSearchAds360Link_async
+   */
+  deleteSearchAds360Link(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteSearchAds360LinkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteSearchAds360LinkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteSearchAds360Link(
+    request: protos.google.analytics.admin.v1alpha.IDeleteSearchAds360LinkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteSearchAds360LinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSearchAds360Link(
+    request: protos.google.analytics.admin.v1alpha.IDeleteSearchAds360LinkRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteSearchAds360LinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSearchAds360Link(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteSearchAds360LinkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteSearchAds360LinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteSearchAds360LinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteSearchAds360LinkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteSearchAds360Link(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates a SearchAds360Link on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.SearchAds360Link} request.searchAds_360Link
+   *   The SearchAds360Link to update
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Omitted fields will not be
+   *   updated. To replace the entire entity, use one path with the string "*" to
+   *   match all fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SearchAds360Link]{@link google.analytics.admin.v1alpha.SearchAds360Link}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_search_ads360_link.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateSearchAds360Link_async
+   */
+  updateSearchAds360Link(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateSearchAds360LinkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateSearchAds360LinkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateSearchAds360Link(
+    request: protos.google.analytics.admin.v1alpha.IUpdateSearchAds360LinkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      | protos.google.analytics.admin.v1alpha.IUpdateSearchAds360LinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSearchAds360Link(
+    request: protos.google.analytics.admin.v1alpha.IUpdateSearchAds360LinkRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      | protos.google.analytics.admin.v1alpha.IUpdateSearchAds360LinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSearchAds360Link(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateSearchAds360LinkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+          | protos.google.analytics.admin.v1alpha.IUpdateSearchAds360LinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      | protos.google.analytics.admin.v1alpha.IUpdateSearchAds360LinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateSearchAds360LinkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'search_ads_360_link.name': request.searchAds_360Link!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateSearchAds360Link(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Lookup for a AttributionSettings singleton.
    *
    * @param {Object} request
@@ -6660,9 +7103,10 @@ export class AnalyticsAdminServiceClient {
    *   Required. The attribution settings to update.
    *   The `name` field is used to identify the settings to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Field names must be in snake case
-   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-   *   the entire entity, use one path with the string "*" to match all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6917,6 +7361,305 @@ export class AnalyticsAdminServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.runAccessReport(request, options, callback);
+  }
+  /**
+   * Sets the opt out status for the automated GA4 setup process for a UA
+   * property.
+   * Note: this has no effect on GA4 property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   Required. The UA property to set the opt out status. Note this request uses
+   *   the internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
+   *   Format: properties/{internalWebPropertyId}
+   *   Example: properties/1234
+   * @param {boolean} request.optOut
+   *   The status to set.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SetAutomatedGa4ConfigurationOptOutResponse]{@link google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.set_automated_ga4_configuration_opt_out.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_SetAutomatedGa4ConfigurationOptOut_async
+   */
+  setAutomatedGa4ConfigurationOptOut(
+    request?: protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  setAutomatedGa4ConfigurationOptOut(
+    request: protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
+      | protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setAutomatedGa4ConfigurationOptOut(
+    request: protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
+      | protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setAutomatedGa4ConfigurationOptOut(
+    request?: protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
+          | protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
+      | protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize();
+    return this.innerApiCalls.setAutomatedGa4ConfigurationOptOut(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Fetches the opt out status for the automated GA4 setup process for a UA
+   * property.
+   * Note: this has no effect on GA4 property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   Required. The UA property to get the opt out status. Note this request uses
+   *   the internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
+   *   Format: properties/{internalWebPropertyId}
+   *   Example: properties/1234
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [FetchAutomatedGa4ConfigurationOptOutResponse]{@link google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.fetch_automated_ga4_configuration_opt_out.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_FetchAutomatedGa4ConfigurationOptOut_async
+   */
+  fetchAutomatedGa4ConfigurationOptOut(
+    request?: protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  fetchAutomatedGa4ConfigurationOptOut(
+    request: protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
+      | protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  fetchAutomatedGa4ConfigurationOptOut(
+    request: protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
+      | protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  fetchAutomatedGa4ConfigurationOptOut(
+    request?: protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
+          | protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
+      | protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize();
+    return this.innerApiCalls.fetchAutomatedGa4ConfigurationOptOut(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Lookup for a single BigQuery Link.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the BigQuery link to lookup.
+   *   Format: properties/{property_id}/bigQueryLinks/{bigquery_link_id}
+   *   Example: properties/123/bigQueryLinks/456
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BigQueryLink]{@link google.analytics.admin.v1alpha.BigQueryLink}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_big_query_link.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetBigQueryLink_async
+   */
+  getBigQueryLink(
+    request?: protos.google.analytics.admin.v1alpha.IGetBigQueryLinkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IBigQueryLink,
+      protos.google.analytics.admin.v1alpha.IGetBigQueryLinkRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getBigQueryLink(
+    request: protos.google.analytics.admin.v1alpha.IGetBigQueryLinkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IBigQueryLink,
+      | protos.google.analytics.admin.v1alpha.IGetBigQueryLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBigQueryLink(
+    request: protos.google.analytics.admin.v1alpha.IGetBigQueryLinkRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IBigQueryLink,
+      | protos.google.analytics.admin.v1alpha.IGetBigQueryLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBigQueryLink(
+    request?: protos.google.analytics.admin.v1alpha.IGetBigQueryLinkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IBigQueryLink,
+          | protos.google.analytics.admin.v1alpha.IGetBigQueryLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IBigQueryLink,
+      | protos.google.analytics.admin.v1alpha.IGetBigQueryLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IBigQueryLink,
+      protos.google.analytics.admin.v1alpha.IGetBigQueryLinkRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getBigQueryLink(request, options, callback);
   }
 
   /**
@@ -8009,7 +8752,7 @@ export class AnalyticsAdminServiceClient {
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListFirebaseLinks` call.
    *   Provide this to retrieve the subsequent page.
-   *   When paginating, all other parameters provided to `ListProperties` must
+   *   When paginating, all other parameters provided to `ListFirebaseLinks` must
    *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -8114,7 +8857,7 @@ export class AnalyticsAdminServiceClient {
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListFirebaseLinks` call.
    *   Provide this to retrieve the subsequent page.
-   *   When paginating, all other parameters provided to `ListProperties` must
+   *   When paginating, all other parameters provided to `ListFirebaseLinks` must
    *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -8167,7 +8910,7 @@ export class AnalyticsAdminServiceClient {
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListFirebaseLinks` call.
    *   Provide this to retrieve the subsequent page.
-   *   When paginating, all other parameters provided to `ListProperties` must
+   *   When paginating, all other parameters provided to `ListFirebaseLinks` must
    *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -8634,18 +9377,20 @@ export class AnalyticsAdminServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.account
-   *   Required. The account resource for which to return change history resources.
+   *   Required. The account resource for which to return change history
+   *   resources.
    * @param {string} [request.property]
    *   Optional. Resource name for a child property. If set, only return changes
    *   made to this property or its child resources.
    * @param {number[]} [request.resourceType]
-   *   Optional. If set, only return changes if they are for a resource that matches at
-   *   least one of these types.
+   *   Optional. If set, only return changes if they are for a resource that
+   *   matches at least one of these types.
    * @param {number[]} [request.action]
-   *   Optional. If set, only return changes that match one or more of these types of
-   *   actions.
+   *   Optional. If set, only return changes that match one or more of these types
+   *   of actions.
    * @param {string[]} [request.actorEmail]
-   *   Optional. If set, only return changes if they are made by a user in this list.
+   *   Optional. If set, only return changes if they are made by a user in this
+   *   list.
    * @param {google.protobuf.Timestamp} [request.earliestChangeTime]
    *   Optional. If set, only return changes made after this time (inclusive).
    * @param {google.protobuf.Timestamp} [request.latestChangeTime]
@@ -8656,10 +9401,11 @@ export class AnalyticsAdminServiceClient {
    *   pages. If unspecified, at most 50 items will be returned.
    *   The maximum value is 200 (higher values will be coerced to the maximum).
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `SearchChangeHistoryEvents` must match the call that
-   *   provided the page token.
+   *   Optional. A page token, received from a previous
+   *   `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `SearchChangeHistoryEvents` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -8757,18 +9503,20 @@ export class AnalyticsAdminServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.account
-   *   Required. The account resource for which to return change history resources.
+   *   Required. The account resource for which to return change history
+   *   resources.
    * @param {string} [request.property]
    *   Optional. Resource name for a child property. If set, only return changes
    *   made to this property or its child resources.
    * @param {number[]} [request.resourceType]
-   *   Optional. If set, only return changes if they are for a resource that matches at
-   *   least one of these types.
+   *   Optional. If set, only return changes if they are for a resource that
+   *   matches at least one of these types.
    * @param {number[]} [request.action]
-   *   Optional. If set, only return changes that match one or more of these types of
-   *   actions.
+   *   Optional. If set, only return changes that match one or more of these types
+   *   of actions.
    * @param {string[]} [request.actorEmail]
-   *   Optional. If set, only return changes if they are made by a user in this list.
+   *   Optional. If set, only return changes if they are made by a user in this
+   *   list.
    * @param {google.protobuf.Timestamp} [request.earliestChangeTime]
    *   Optional. If set, only return changes made after this time (inclusive).
    * @param {google.protobuf.Timestamp} [request.latestChangeTime]
@@ -8779,10 +9527,11 @@ export class AnalyticsAdminServiceClient {
    *   pages. If unspecified, at most 50 items will be returned.
    *   The maximum value is 200 (higher values will be coerced to the maximum).
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `SearchChangeHistoryEvents` must match the call that
-   *   provided the page token.
+   *   Optional. A page token, received from a previous
+   *   `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `SearchChangeHistoryEvents` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -8824,18 +9573,20 @@ export class AnalyticsAdminServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.account
-   *   Required. The account resource for which to return change history resources.
+   *   Required. The account resource for which to return change history
+   *   resources.
    * @param {string} [request.property]
    *   Optional. Resource name for a child property. If set, only return changes
    *   made to this property or its child resources.
    * @param {number[]} [request.resourceType]
-   *   Optional. If set, only return changes if they are for a resource that matches at
-   *   least one of these types.
+   *   Optional. If set, only return changes if they are for a resource that
+   *   matches at least one of these types.
    * @param {number[]} [request.action]
-   *   Optional. If set, only return changes that match one or more of these types of
-   *   actions.
+   *   Optional. If set, only return changes that match one or more of these types
+   *   of actions.
    * @param {string[]} [request.actorEmail]
-   *   Optional. If set, only return changes if they are made by a user in this list.
+   *   Optional. If set, only return changes if they are made by a user in this
+   *   list.
    * @param {google.protobuf.Timestamp} [request.earliestChangeTime]
    *   Optional. If set, only return changes made after this time (inclusive).
    * @param {google.protobuf.Timestamp} [request.latestChangeTime]
@@ -8846,10 +9597,11 @@ export class AnalyticsAdminServiceClient {
    *   pages. If unspecified, at most 50 items will be returned.
    *   The maximum value is 200 (higher values will be coerced to the maximum).
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `SearchChangeHistoryEvents` must match the call that
-   *   provided the page token.
+   *   Optional. A page token, received from a previous
+   *   `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `SearchChangeHistoryEvents` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -10154,6 +10906,7 @@ export class AnalyticsAdminServiceClient {
   /**
    * Lists Audiences on a property.
    * Audiences created before 2020 may not be supported.
+   * Default audiences will not show filter definitions.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -10359,6 +11112,429 @@ export class AnalyticsAdminServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IAudience>;
   }
+  /**
+   * Lists all SearchAds360Links on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListSearchAds360Links`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListSearchAds360Links` must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [SearchAds360Link]{@link google.analytics.admin.v1alpha.SearchAds360Link}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSearchAds360LinksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listSearchAds360Links(
+    request?: protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link[],
+      protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest | null,
+      protos.google.analytics.admin.v1alpha.IListSearchAds360LinksResponse
+    ]
+  >;
+  listSearchAds360Links(
+    request: protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest,
+      | protos.google.analytics.admin.v1alpha.IListSearchAds360LinksResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link
+    >
+  ): void;
+  listSearchAds360Links(
+    request: protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest,
+      | protos.google.analytics.admin.v1alpha.IListSearchAds360LinksResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link
+    >
+  ): void;
+  listSearchAds360Links(
+    request?: protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest,
+          | protos.google.analytics.admin.v1alpha.IListSearchAds360LinksResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.ISearchAds360Link
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest,
+      | protos.google.analytics.admin.v1alpha.IListSearchAds360LinksResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISearchAds360Link[],
+      protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest | null,
+      protos.google.analytics.admin.v1alpha.IListSearchAds360LinksResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listSearchAds360Links(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListSearchAds360Links`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListSearchAds360Links` must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [SearchAds360Link]{@link google.analytics.admin.v1alpha.SearchAds360Link} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSearchAds360LinksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listSearchAds360LinksStream(
+    request?: protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSearchAds360Links'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSearchAds360Links.createStream(
+      this.innerApiCalls.listSearchAds360Links as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listSearchAds360Links`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListSearchAds360Links`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListSearchAds360Links` must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [SearchAds360Link]{@link google.analytics.admin.v1alpha.SearchAds360Link}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_search_ads360_links.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListSearchAds360Links_async
+   */
+  listSearchAds360LinksAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListSearchAds360LinksRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.ISearchAds360Link> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSearchAds360Links'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSearchAds360Links.asyncIterate(
+      this.innerApiCalls['listSearchAds360Links'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.ISearchAds360Link>;
+  }
+  /**
+   * Lists BigQuery Links on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the property to list BigQuery links under.
+   *   Format: properties/{property_id}
+   *   Example: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListBigQueryLinks` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListBigQueryLinks` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [BigQueryLink]{@link google.analytics.admin.v1alpha.BigQueryLink}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBigQueryLinksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listBigQueryLinks(
+    request?: protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IBigQueryLink[],
+      protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest | null,
+      protos.google.analytics.admin.v1alpha.IListBigQueryLinksResponse
+    ]
+  >;
+  listBigQueryLinks(
+    request: protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest,
+      | protos.google.analytics.admin.v1alpha.IListBigQueryLinksResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IBigQueryLink
+    >
+  ): void;
+  listBigQueryLinks(
+    request: protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest,
+      | protos.google.analytics.admin.v1alpha.IListBigQueryLinksResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IBigQueryLink
+    >
+  ): void;
+  listBigQueryLinks(
+    request?: protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest,
+          | protos.google.analytics.admin.v1alpha.IListBigQueryLinksResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IBigQueryLink
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest,
+      | protos.google.analytics.admin.v1alpha.IListBigQueryLinksResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IBigQueryLink
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IBigQueryLink[],
+      protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest | null,
+      protos.google.analytics.admin.v1alpha.IListBigQueryLinksResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listBigQueryLinks(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the property to list BigQuery links under.
+   *   Format: properties/{property_id}
+   *   Example: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListBigQueryLinks` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListBigQueryLinks` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [BigQueryLink]{@link google.analytics.admin.v1alpha.BigQueryLink} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listBigQueryLinksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listBigQueryLinksStream(
+    request?: protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listBigQueryLinks'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listBigQueryLinks.createStream(
+      this.innerApiCalls.listBigQueryLinks as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listBigQueryLinks`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the property to list BigQuery links under.
+   *   Format: properties/{property_id}
+   *   Example: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListBigQueryLinks` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListBigQueryLinks` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [BigQueryLink]{@link google.analytics.admin.v1alpha.BigQueryLink}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_big_query_links.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListBigQueryLinks_async
+   */
+  listBigQueryLinksAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListBigQueryLinksRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.IBigQueryLink> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listBigQueryLinks'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listBigQueryLinks.asyncIterate(
+      this.innerApiCalls['listBigQueryLinks'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IBigQueryLink>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -10510,6 +11686,44 @@ export class AnalyticsAdminServiceClient {
    */
   matchAudienceFromAudienceName(audienceName: string) {
     return this.pathTemplates.audiencePathTemplate.match(audienceName).audience;
+  }
+
+  /**
+   * Return a fully-qualified bigQueryLink resource name string.
+   *
+   * @param {string} property
+   * @param {string} bigquery_link
+   * @returns {string} Resource name string.
+   */
+  bigQueryLinkPath(property: string, bigqueryLink: string) {
+    return this.pathTemplates.bigQueryLinkPathTemplate.render({
+      property: property,
+      bigquery_link: bigqueryLink,
+    });
+  }
+
+  /**
+   * Parse the property from BigQueryLink resource.
+   *
+   * @param {string} bigQueryLinkName
+   *   A fully-qualified path representing BigQueryLink resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromBigQueryLinkName(bigQueryLinkName: string) {
+    return this.pathTemplates.bigQueryLinkPathTemplate.match(bigQueryLinkName)
+      .property;
+  }
+
+  /**
+   * Parse the bigquery_link from BigQueryLink resource.
+   *
+   * @param {string} bigQueryLinkName
+   *   A fully-qualified path representing BigQueryLink resource.
+   * @returns {string} A string representing the bigquery_link.
+   */
+  matchBigqueryLinkFromBigQueryLinkName(bigQueryLinkName: string) {
+    return this.pathTemplates.bigQueryLinkPathTemplate.match(bigQueryLinkName)
+      .bigquery_link;
   }
 
   /**
@@ -10774,6 +11988,46 @@ export class AnalyticsAdminServiceClient {
     return this.pathTemplates.displayVideo360AdvertiserLinkProposalPathTemplate.match(
       displayVideo360AdvertiserLinkProposalName
     ).property;
+  }
+
+  /**
+   * Return a fully-qualified expandedDataSet resource name string.
+   *
+   * @param {string} property
+   * @param {string} expanded_data_set
+   * @returns {string} Resource name string.
+   */
+  expandedDataSetPath(property: string, expandedDataSet: string) {
+    return this.pathTemplates.expandedDataSetPathTemplate.render({
+      property: property,
+      expanded_data_set: expandedDataSet,
+    });
+  }
+
+  /**
+   * Parse the property from ExpandedDataSet resource.
+   *
+   * @param {string} expandedDataSetName
+   *   A fully-qualified path representing ExpandedDataSet resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromExpandedDataSetName(expandedDataSetName: string) {
+    return this.pathTemplates.expandedDataSetPathTemplate.match(
+      expandedDataSetName
+    ).property;
+  }
+
+  /**
+   * Parse the expanded_data_set from ExpandedDataSet resource.
+   *
+   * @param {string} expandedDataSetName
+   *   A fully-qualified path representing ExpandedDataSet resource.
+   * @returns {string} A string representing the expanded_data_set.
+   */
+  matchExpandedDataSetFromExpandedDataSetName(expandedDataSetName: string) {
+    return this.pathTemplates.expandedDataSetPathTemplate.match(
+      expandedDataSetName
+    ).expanded_data_set;
   }
 
   /**
@@ -11043,6 +12297,31 @@ export class AnalyticsAdminServiceClient {
     return this.pathTemplates.propertyUserLinkPathTemplate.match(
       propertyUserLinkName
     ).user_link;
+  }
+
+  /**
+   * Return a fully-qualified searchAds360Link resource name string.
+   *
+   * @param {string} property
+   * @returns {string} Resource name string.
+   */
+  searchAds360LinkPath(property: string) {
+    return this.pathTemplates.searchAds360LinkPathTemplate.render({
+      property: property,
+    });
+  }
+
+  /**
+   * Parse the property from SearchAds360Link resource.
+   *
+   * @param {string} searchAds360LinkName
+   *   A fully-qualified path representing SearchAds360Link resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromSearchAds360LinkName(searchAds360LinkName: string) {
+    return this.pathTemplates.searchAds360LinkPathTemplate.match(
+      searchAds360LinkName
+    ).property;
   }
 
   /**

@@ -29,7 +29,8 @@ function main(account) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The account resource for which to return change history resources.
+   *  Required. The account resource for which to return change history
+   *  resources.
    */
   // const account = 'abc123'
   /**
@@ -38,17 +39,18 @@ function main(account) {
    */
   // const property = 'abc123'
   /**
-   *  Optional. If set, only return changes if they are for a resource that matches at
-   *  least one of these types.
+   *  Optional. If set, only return changes if they are for a resource that
+   *  matches at least one of these types.
    */
   // const resourceType = 1234
   /**
-   *  Optional. If set, only return changes that match one or more of these types of
-   *  actions.
+   *  Optional. If set, only return changes that match one or more of these types
+   *  of actions.
    */
   // const action = 1234
   /**
-   *  Optional. If set, only return changes if they are made by a user in this list.
+   *  Optional. If set, only return changes if they are made by a user in this
+   *  list.
    */
   // const actorEmail = 'abc123'
   /**
@@ -67,10 +69,11 @@ function main(account) {
    */
   // const pageSize = 1234
   /**
-   *  Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
-   *  Provide this to retrieve the subsequent page. When paginating, all other
-   *  parameters provided to `SearchChangeHistoryEvents` must match the call that
-   *  provided the page token.
+   *  Optional. A page token, received from a previous
+   *  `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
+   *  page. When paginating, all other parameters provided to
+   *  `SearchChangeHistoryEvents` must match the call that provided the page
+   *  token.
    */
   // const pageToken = 'abc123'
 
