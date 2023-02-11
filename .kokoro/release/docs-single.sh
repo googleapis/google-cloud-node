@@ -12,18 +12,21 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-
-# `-e` enables the script to automatically fail when a command fails
-# `-o pipefail` sets the exit code to the rightmost comment to exit
-# with a non-zero
 set -eo pipefail
 
-echo "PWD"
-pwd
 # build jsdocs (Python is installed on the Node 10 docker image).
+if [[ -z "$CREDENTIALS" ]]; then
+  # if CREDENTIALS are explicitly set, assume we're testing locally
+  # and don't set NPM_CONFIG_PREFIX.
+  export NPM_CONFIG_PREFIX=${HOME}/.npm-global
+  export PATH="$PATH:${NPM_CONFIG_PREFIX}/bin"
+  cd $(dirname $0)/../..
+fi
 npm install
 npm run docs
+
+# create docs.metadata, based on package.json and .repo-metadata.json.
+npm i json@9.0.6 -g
 
 
 python3 -m docuploader create-metadata \
