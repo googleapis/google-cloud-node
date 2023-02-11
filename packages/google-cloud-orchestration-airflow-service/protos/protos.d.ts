@@ -3967,6 +3967,157 @@ export namespace google {
                             }
                         }
 
+                        /** Properties of an OperationMetadata. */
+                        interface IOperationMetadata {
+
+                            /** OperationMetadata state */
+                            state?: (google.cloud.orchestration.airflow.service.v1.OperationMetadata.State|keyof typeof google.cloud.orchestration.airflow.service.v1.OperationMetadata.State|null);
+
+                            /** OperationMetadata operationType */
+                            operationType?: (google.cloud.orchestration.airflow.service.v1.OperationMetadata.Type|keyof typeof google.cloud.orchestration.airflow.service.v1.OperationMetadata.Type|null);
+
+                            /** OperationMetadata resource */
+                            resource?: (string|null);
+
+                            /** OperationMetadata resourceUuid */
+                            resourceUuid?: (string|null);
+
+                            /** OperationMetadata createTime */
+                            createTime?: (google.protobuf.ITimestamp|null);
+
+                            /** OperationMetadata endTime */
+                            endTime?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents an OperationMetadata. */
+                        class OperationMetadata implements IOperationMetadata {
+
+                            /**
+                             * Constructs a new OperationMetadata.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IOperationMetadata);
+
+                            /** OperationMetadata state. */
+                            public state: (google.cloud.orchestration.airflow.service.v1.OperationMetadata.State|keyof typeof google.cloud.orchestration.airflow.service.v1.OperationMetadata.State);
+
+                            /** OperationMetadata operationType. */
+                            public operationType: (google.cloud.orchestration.airflow.service.v1.OperationMetadata.Type|keyof typeof google.cloud.orchestration.airflow.service.v1.OperationMetadata.Type);
+
+                            /** OperationMetadata resource. */
+                            public resource: string;
+
+                            /** OperationMetadata resourceUuid. */
+                            public resourceUuid: string;
+
+                            /** OperationMetadata createTime. */
+                            public createTime?: (google.protobuf.ITimestamp|null);
+
+                            /** OperationMetadata endTime. */
+                            public endTime?: (google.protobuf.ITimestamp|null);
+
+                            /**
+                             * Creates a new OperationMetadata instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns OperationMetadata instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IOperationMetadata): google.cloud.orchestration.airflow.service.v1.OperationMetadata;
+
+                            /**
+                             * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.OperationMetadata.verify|verify} messages.
+                             * @param message OperationMetadata message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.OperationMetadata.verify|verify} messages.
+                             * @param message OperationMetadata message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an OperationMetadata message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns OperationMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.OperationMetadata;
+
+                            /**
+                             * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns OperationMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.OperationMetadata;
+
+                            /**
+                             * Verifies an OperationMetadata message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns OperationMetadata
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.OperationMetadata;
+
+                            /**
+                             * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                             * @param message OperationMetadata
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this OperationMetadata to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for OperationMetadata
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace OperationMetadata {
+
+                            /** State enum. */
+                            enum State {
+                                STATE_UNSPECIFIED = 0,
+                                PENDING = 1,
+                                RUNNING = 2,
+                                SUCCEEDED = 3,
+                                SUCCESSFUL = 3,
+                                FAILED = 4
+                            }
+
+                            /** Type enum. */
+                            enum Type {
+                                TYPE_UNSPECIFIED = 0,
+                                CREATE = 1,
+                                DELETE = 2,
+                                UPDATE = 3,
+                                CHECK = 4,
+                                SAVE_SNAPSHOT = 5,
+                                LOAD_SNAPSHOT = 6
+                            }
+                        }
+
                         /** Represents an ImageVersions */
                         class ImageVersions extends $protobuf.rpc.Service {
 
@@ -4355,157 +4506,6 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-
-                        /** Properties of an OperationMetadata. */
-                        interface IOperationMetadata {
-
-                            /** OperationMetadata state */
-                            state?: (google.cloud.orchestration.airflow.service.v1.OperationMetadata.State|keyof typeof google.cloud.orchestration.airflow.service.v1.OperationMetadata.State|null);
-
-                            /** OperationMetadata operationType */
-                            operationType?: (google.cloud.orchestration.airflow.service.v1.OperationMetadata.Type|keyof typeof google.cloud.orchestration.airflow.service.v1.OperationMetadata.Type|null);
-
-                            /** OperationMetadata resource */
-                            resource?: (string|null);
-
-                            /** OperationMetadata resourceUuid */
-                            resourceUuid?: (string|null);
-
-                            /** OperationMetadata createTime */
-                            createTime?: (google.protobuf.ITimestamp|null);
-
-                            /** OperationMetadata endTime */
-                            endTime?: (google.protobuf.ITimestamp|null);
-                        }
-
-                        /** Represents an OperationMetadata. */
-                        class OperationMetadata implements IOperationMetadata {
-
-                            /**
-                             * Constructs a new OperationMetadata.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IOperationMetadata);
-
-                            /** OperationMetadata state. */
-                            public state: (google.cloud.orchestration.airflow.service.v1.OperationMetadata.State|keyof typeof google.cloud.orchestration.airflow.service.v1.OperationMetadata.State);
-
-                            /** OperationMetadata operationType. */
-                            public operationType: (google.cloud.orchestration.airflow.service.v1.OperationMetadata.Type|keyof typeof google.cloud.orchestration.airflow.service.v1.OperationMetadata.Type);
-
-                            /** OperationMetadata resource. */
-                            public resource: string;
-
-                            /** OperationMetadata resourceUuid. */
-                            public resourceUuid: string;
-
-                            /** OperationMetadata createTime. */
-                            public createTime?: (google.protobuf.ITimestamp|null);
-
-                            /** OperationMetadata endTime. */
-                            public endTime?: (google.protobuf.ITimestamp|null);
-
-                            /**
-                             * Creates a new OperationMetadata instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns OperationMetadata instance
-                             */
-                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IOperationMetadata): google.cloud.orchestration.airflow.service.v1.OperationMetadata;
-
-                            /**
-                             * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.OperationMetadata.verify|verify} messages.
-                             * @param message OperationMetadata message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.OperationMetadata.verify|verify} messages.
-                             * @param message OperationMetadata message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes an OperationMetadata message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns OperationMetadata
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.OperationMetadata;
-
-                            /**
-                             * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns OperationMetadata
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.OperationMetadata;
-
-                            /**
-                             * Verifies an OperationMetadata message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns OperationMetadata
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.OperationMetadata;
-
-                            /**
-                             * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
-                             * @param message OperationMetadata
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this OperationMetadata to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for OperationMetadata
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-
-                        namespace OperationMetadata {
-
-                            /** State enum. */
-                            enum State {
-                                STATE_UNSPECIFIED = 0,
-                                PENDING = 1,
-                                RUNNING = 2,
-                                SUCCEEDED = 3,
-                                SUCCESSFUL = 3,
-                                FAILED = 4
-                            }
-
-                            /** Type enum. */
-                            enum Type {
-                                TYPE_UNSPECIFIED = 0,
-                                CREATE = 1,
-                                DELETE = 2,
-                                UPDATE = 3,
-                                CHECK = 4,
-                                SAVE_SNAPSHOT = 5,
-                                LOAD_SNAPSHOT = 6
-                            }
                         }
                     }
 
@@ -9340,6 +9340,156 @@ export namespace google {
                             }
                         }
 
+                        /** Properties of an OperationMetadata. */
+                        interface IOperationMetadata {
+
+                            /** OperationMetadata state */
+                            state?: (google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State|null);
+
+                            /** OperationMetadata operationType */
+                            operationType?: (google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type|null);
+
+                            /** OperationMetadata resource */
+                            resource?: (string|null);
+
+                            /** OperationMetadata resourceUuid */
+                            resourceUuid?: (string|null);
+
+                            /** OperationMetadata createTime */
+                            createTime?: (google.protobuf.ITimestamp|null);
+
+                            /** OperationMetadata endTime */
+                            endTime?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents an OperationMetadata. */
+                        class OperationMetadata implements IOperationMetadata {
+
+                            /**
+                             * Constructs a new OperationMetadata.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata);
+
+                            /** OperationMetadata state. */
+                            public state: (google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State);
+
+                            /** OperationMetadata operationType. */
+                            public operationType: (google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type);
+
+                            /** OperationMetadata resource. */
+                            public resource: string;
+
+                            /** OperationMetadata resourceUuid. */
+                            public resourceUuid: string;
+
+                            /** OperationMetadata createTime. */
+                            public createTime?: (google.protobuf.ITimestamp|null);
+
+                            /** OperationMetadata endTime. */
+                            public endTime?: (google.protobuf.ITimestamp|null);
+
+                            /**
+                             * Creates a new OperationMetadata instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns OperationMetadata instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata): google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata;
+
+                            /**
+                             * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.verify|verify} messages.
+                             * @param message OperationMetadata message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.verify|verify} messages.
+                             * @param message OperationMetadata message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an OperationMetadata message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns OperationMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata;
+
+                            /**
+                             * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns OperationMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata;
+
+                            /**
+                             * Verifies an OperationMetadata message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns OperationMetadata
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata;
+
+                            /**
+                             * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                             * @param message OperationMetadata
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this OperationMetadata to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for OperationMetadata
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace OperationMetadata {
+
+                            /** State enum. */
+                            enum State {
+                                STATE_UNSPECIFIED = 0,
+                                PENDING = 1,
+                                RUNNING = 2,
+                                SUCCESSFUL = 3,
+                                FAILED = 4
+                            }
+
+                            /** Type enum. */
+                            enum Type {
+                                TYPE_UNSPECIFIED = 0,
+                                CREATE = 1,
+                                DELETE = 2,
+                                UPDATE = 3,
+                                CHECK = 4,
+                                SAVE_SNAPSHOT = 5,
+                                LOAD_SNAPSHOT = 6
+                            }
+                        }
+
                         /** Represents an ImageVersions */
                         class ImageVersions extends $protobuf.rpc.Service {
 
@@ -9728,156 +9878,6 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-
-                        /** Properties of an OperationMetadata. */
-                        interface IOperationMetadata {
-
-                            /** OperationMetadata state */
-                            state?: (google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State|null);
-
-                            /** OperationMetadata operationType */
-                            operationType?: (google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type|null);
-
-                            /** OperationMetadata resource */
-                            resource?: (string|null);
-
-                            /** OperationMetadata resourceUuid */
-                            resourceUuid?: (string|null);
-
-                            /** OperationMetadata createTime */
-                            createTime?: (google.protobuf.ITimestamp|null);
-
-                            /** OperationMetadata endTime */
-                            endTime?: (google.protobuf.ITimestamp|null);
-                        }
-
-                        /** Represents an OperationMetadata. */
-                        class OperationMetadata implements IOperationMetadata {
-
-                            /**
-                             * Constructs a new OperationMetadata.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata);
-
-                            /** OperationMetadata state. */
-                            public state: (google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.State);
-
-                            /** OperationMetadata operationType. */
-                            public operationType: (google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.Type);
-
-                            /** OperationMetadata resource. */
-                            public resource: string;
-
-                            /** OperationMetadata resourceUuid. */
-                            public resourceUuid: string;
-
-                            /** OperationMetadata createTime. */
-                            public createTime?: (google.protobuf.ITimestamp|null);
-
-                            /** OperationMetadata endTime. */
-                            public endTime?: (google.protobuf.ITimestamp|null);
-
-                            /**
-                             * Creates a new OperationMetadata instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns OperationMetadata instance
-                             */
-                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata): google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata;
-
-                            /**
-                             * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.verify|verify} messages.
-                             * @param message OperationMetadata message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata.verify|verify} messages.
-                             * @param message OperationMetadata message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes an OperationMetadata message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns OperationMetadata
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata;
-
-                            /**
-                             * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns OperationMetadata
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata;
-
-                            /**
-                             * Verifies an OperationMetadata message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns OperationMetadata
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata;
-
-                            /**
-                             * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
-                             * @param message OperationMetadata
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this OperationMetadata to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for OperationMetadata
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-
-                        namespace OperationMetadata {
-
-                            /** State enum. */
-                            enum State {
-                                STATE_UNSPECIFIED = 0,
-                                PENDING = 1,
-                                RUNNING = 2,
-                                SUCCESSFUL = 3,
-                                FAILED = 4
-                            }
-
-                            /** Type enum. */
-                            enum Type {
-                                TYPE_UNSPECIFIED = 0,
-                                CREATE = 1,
-                                DELETE = 2,
-                                UPDATE = 3,
-                                CHECK = 4,
-                                SAVE_SNAPSHOT = 5,
-                                LOAD_SNAPSHOT = 6
-                            }
                         }
                     }
                 }
@@ -13862,6 +13862,109 @@ export namespace google {
             }
         }
 
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of an Any. */
         interface IAny {
 
@@ -14250,109 +14353,6 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Timestamp
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
