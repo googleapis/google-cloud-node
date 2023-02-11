@@ -25,5 +25,8 @@ then
   exit 1
 fi
 
+# create docs.metadata, based on package.json and .repo-metadata.json.
+npm i json@9.0.6 -g
+
 SCRIPT=$(realpath $(dirname $0)/./docs-single.sh)
 npx @google-cloud/mono-repo-publish custom --script="${SCRIPT}" --pr-url="${AUTORELEASE_PR}" --exclude-files=**/samples/*
