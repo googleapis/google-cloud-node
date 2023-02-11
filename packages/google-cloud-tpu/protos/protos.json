@@ -2417,6 +2417,10 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "acceleratorConfig": {
+                          "type": "AcceleratorConfig",
+                          "id": 44
+                        },
                         "shieldedInstanceConfig": {
                           "type": "ShieldedInstanceConfig",
                           "id": 45
@@ -2971,6 +2975,11 @@
                         "type": {
                           "type": "string",
                           "id": 2
+                        },
+                        "acceleratorConfigs": {
+                          "rule": "repeated",
+                          "type": "AcceleratorConfig",
+                          "id": 3
                         }
                       }
                     },
@@ -3215,6 +3224,34 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "AcceleratorConfig": {
+                      "fields": {
+                        "type": {
+                          "type": "Type",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "topology": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "V2": 2,
+                            "V3": 4,
+                            "V4": 7
+                          }
                         }
                       }
                     },
