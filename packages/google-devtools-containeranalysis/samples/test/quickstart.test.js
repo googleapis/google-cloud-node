@@ -17,6 +17,7 @@
 const assert = require('assert');
 const {describe, it, before} = require('mocha');
 const {execSync} = require('child_process');
+// eslint-disable-next-line node/no-missing-require
 const {ContainerAnalysisClient} = require('@google-cloud/containeranalysis').v1;
 const containeranalysisClient = new ContainerAnalysisClient();
 
