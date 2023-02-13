@@ -25,6 +25,5 @@ then
   exit 1
 fi
 
-
 SCRIPT=$(realpath $(dirname $0)/./docs-single.sh)
 npx @google-cloud/mono-repo-publish custom --script="${SCRIPT}" --pr-url="${AUTORELEASE_PR}" --exclude-files=**/samples/*
