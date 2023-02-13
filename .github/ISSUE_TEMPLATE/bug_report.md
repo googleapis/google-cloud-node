@@ -19,6 +19,7 @@ If you are still having issues, please be sure to include as much information as
 
 #### Environment details
 
+  - which product (packages/*): 
   - OS:
   - Node.js version:
   - npm version:
@@ -26,8 +27,7 @@ If you are still having issues, please be sure to include as much information as
 
 #### Steps to reproduce
 
-  1. require `google-cloud`
-  2. ?
+  Please include any and all code and/or steps related to reproducing the bug.
 
 Making sure to follow these steps will guarantee the quickest resolution possible.
 
