@@ -24,8 +24,6 @@ type ContainerAnalysisClient = v1.ContainerAnalysisClient;
 const GrafeasClient = v1beta1.GrafeasV1Beta1Client;
 type GrafeasClient = v1beta1.GrafeasV1Beta1Client;
 
-
-
 export {v1, v1beta1, ContainerAnalysisClient, GrafeasClient};
 export default {v1, v1beta1, ContainerAnalysisClient, GrafeasClient};
 import * as protos from '../protos/protos';
