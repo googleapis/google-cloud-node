@@ -20,9 +20,10 @@ import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 
 const ContainerAnalysisClient = v1.ContainerAnalysisClient;
-type ContainerAnalysisClient = v1.ContainerAnalysisClient;
-const GrafeasClient = v1.GrafeasClient;
-type GrafeasClient = v1.GrafeasClient;
+type ContainerAnalysisClient = v1.ContainerAnalysisClient;const GrafeasClient = v1beta1.GrafeasV1Beta1Client;
+type GrafeasClient = v1beta1.GrafeasV1Beta1Client;
+
+
 
 export {v1, v1beta1, ContainerAnalysisClient, GrafeasClient};
 export default {v1, v1beta1, ContainerAnalysisClient, GrafeasClient};
