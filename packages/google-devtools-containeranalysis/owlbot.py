@@ -50,7 +50,6 @@ import {GrafeasClient} from '@google-cloud/grafeas';""")
     }
     """)
     s.replace(library / "src/v1beta1/grafeas_v1_beta1_client*.*", "google.devtools.containeranalysis", "grafeas")
-
     to_remove = [
         library / 'src/v1/grafeas_client.ts',
         library / 'src/v1/grafeas_client_config.json',
@@ -61,7 +60,7 @@ import {GrafeasClient} from '@google-cloud/grafeas';""")
             os.unlink(filePath)
 
 
-node.owlbot_main(relative_dir="packages/google-devtools-containeranalysis",staging_excludes=[
+node.owlbot_main(relative_dir="packages/google-devtools-containeranalysis",templates_excludes=['packages/google-devtools-containeranalysis/src/v1/index.ts', 'packages/google-devtools-containeranalysis/package.json'],staging_excludes=[
     'packages/google-devtools-containeranalysis/package.json', 'packages/google-devtools-containeranalysis/README.md',
     'packages/google-devtools-containeranalysis/src/v1beta1/index.ts', 'packages/google-devtools-containeranalysis/src/v1/index.ts', 'packages/google-devtools-containeranalysis/tslint.json', 'packages/google-devtools-containeranalysis/src/index.ts'],
     patch_staging=patch)
