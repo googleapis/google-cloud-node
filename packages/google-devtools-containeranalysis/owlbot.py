@@ -71,4 +71,4 @@ s.replace('packages/google-devtools-containeranalysis/src/index.ts',
 const GrafeasClient = v1.GrafeasClient;
 type GrafeasClient = v1.GrafeasClient;""",
         '\nconst GrafeasClient = v1beta1.GrafeasV1Beta1Client;\n' +
-        'type GrafeasClient = v1beta1.GrafeasV1Beta1Client;\n\n')
+        'type GrafeasClient = v1beta1.GrafeasV1Beta1Client;')
