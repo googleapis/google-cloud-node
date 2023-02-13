@@ -10,7 +10,7 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/analytics/admin/v1alpha;admin",
                     "java_multiple_files": true,
-                    "java_outer_classname": "ResourcesProto",
+                    "java_outer_classname": "ExpandedDataSetProto",
                     "java_package": "com.google.analytics.admin.v1alpha"
                   },
                   "nested": {
@@ -332,6 +332,10 @@
                         "serverErrorsPerProjectPerHour": {
                           "type": "AccessQuotaStatus",
                           "id": 4
+                        },
+                        "tokensPerProjectPerHour": {
+                          "type": "AccessQuotaStatus",
+                          "id": 5
                         }
                       }
                     },
@@ -1789,6 +1793,100 @@
                             }
                           ]
                         },
+                        "GetSearchAds360Link": {
+                          "requestType": "GetSearchAds360LinkRequest",
+                          "responseType": "SearchAds360Link",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/searchAds360Links/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/searchAds360Links/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListSearchAds360Links": {
+                          "requestType": "ListSearchAds360LinksRequest",
+                          "responseType": "ListSearchAds360LinksResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/searchAds360Links",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/searchAds360Links"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateSearchAds360Link": {
+                          "requestType": "CreateSearchAds360LinkRequest",
+                          "responseType": "SearchAds360Link",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/searchAds360Links",
+                            "(google.api.http).body": "search_ads_360_link",
+                            "(google.api.method_signature)": "parent,search_ads_360_link"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/searchAds360Links",
+                                "body": "search_ads_360_link"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,search_ads_360_link"
+                            }
+                          ]
+                        },
+                        "DeleteSearchAds360Link": {
+                          "requestType": "DeleteSearchAds360LinkRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/searchAds360Links/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/searchAds360Links/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateSearchAds360Link": {
+                          "requestType": "UpdateSearchAds360LinkRequest",
+                          "responseType": "SearchAds360Link",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{search_ads_360_link.name=properties/*/searchAds360Links/*}",
+                            "(google.api.http).body": "search_ads_360_link",
+                            "(google.api.method_signature)": "search_ads_360_link,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{search_ads_360_link.name=properties/*/searchAds360Links/*}",
+                                "body": "search_ads_360_link"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "search_ads_360_link,update_mask"
+                            }
+                          ]
+                        },
                         "GetAttributionSettings": {
                           "requestType": "GetAttributionSettingsRequest",
                           "responseType": "AttributionSettings",
@@ -1840,6 +1938,74 @@
                                 "post": "/v1alpha/{entity=properties/*}:runAccessReport",
                                 "body": "*"
                               }
+                            }
+                          ]
+                        },
+                        "SetAutomatedGa4ConfigurationOptOut": {
+                          "requestType": "SetAutomatedGa4ConfigurationOptOutRequest",
+                          "responseType": "SetAutomatedGa4ConfigurationOptOutResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/properties:setAutomatedGa4ConfigurationOptOut",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/properties:setAutomatedGa4ConfigurationOptOut",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "FetchAutomatedGa4ConfigurationOptOut": {
+                          "requestType": "FetchAutomatedGa4ConfigurationOptOutRequest",
+                          "responseType": "FetchAutomatedGa4ConfigurationOptOutResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/properties:fetchAutomatedGa4ConfigurationOptOut",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/properties:fetchAutomatedGa4ConfigurationOptOut",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "GetBigQueryLink": {
+                          "requestType": "GetBigQueryLinkRequest",
+                          "responseType": "BigQueryLink",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/bigQueryLinks/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/bigQueryLinks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListBigQueryLinks": {
+                          "requestType": "ListBigQueryLinksRequest",
+                          "responseType": "ListBigQueryLinksResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/bigQueryLinks",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/bigQueryLinks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
                             }
                           ]
                         }
@@ -3041,6 +3207,97 @@
                         }
                       }
                     },
+                    "GetSearchAds360LinkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/SearchAds360Link"
+                          }
+                        }
+                      }
+                    },
+                    "ListSearchAds360LinksRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/SearchAds360Link"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListSearchAds360LinksResponse": {
+                      "fields": {
+                        "searchAds_360Links": {
+                          "rule": "repeated",
+                          "type": "SearchAds360Link",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateSearchAds360LinkRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/SearchAds360Link"
+                          }
+                        },
+                        "searchAds_360Link": {
+                          "type": "SearchAds360Link",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteSearchAds360LinkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/SearchAds360Link"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateSearchAds360LinkRequest": {
+                      "fields": {
+                        "searchAds_360Link": {
+                          "type": "SearchAds360Link",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "CreateCustomDimensionRequest": {
                       "fields": {
                         "parent": {
@@ -3468,6 +3725,88 @@
                         }
                       }
                     },
+                    "SetAutomatedGa4ConfigurationOptOutRequest": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "optOut": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SetAutomatedGa4ConfigurationOptOutResponse": {
+                      "fields": {}
+                    },
+                    "FetchAutomatedGa4ConfigurationOptOutRequest": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "FetchAutomatedGa4ConfigurationOptOutResponse": {
+                      "fields": {
+                        "optOut": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GetBigQueryLinkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/BigQueryLink"
+                          }
+                        }
+                      }
+                    },
+                    "ListBigQueryLinksRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/BigQueryLink"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListBigQueryLinksResponse": {
+                      "fields": {
+                        "bigqueryLinks": {
+                          "rule": "repeated",
+                          "type": "BigQueryLink",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "AudienceFilterScope": {
                       "values": {
                         "AUDIENCE_FILTER_SCOPE_UNSPECIFIED": 0,
@@ -3559,8 +3898,7 @@
                                 "BEGINS_WITH": 2,
                                 "ENDS_WITH": 3,
                                 "CONTAINS": 4,
-                                "FULL_REGEXP": 5,
-                                "PARTIAL_REGEXP": 6
+                                "FULL_REGEXP": 5
                               }
                             }
                           }
@@ -3627,9 +3965,7 @@
                                 "OPERATION_UNSPECIFIED": 0,
                                 "EQUAL": 1,
                                 "LESS_THAN": 2,
-                                "LESS_THAN_OR_EQUAL": 3,
-                                "GREATER_THAN": 4,
-                                "GREATER_THAN_OR_EQUAL": 5
+                                "GREATER_THAN": 4
                               }
                             }
                           }
@@ -4002,7 +4338,9 @@
                         "DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL": 15,
                         "SEARCH_ADS_360_LINK": 16,
                         "DATA_STREAM": 18,
-                        "ATTRIBUTION_SETTINGS": 20
+                        "ATTRIBUTION_SETTINGS": 20,
+                        "EXPANDED_DATA_SET": 21,
+                        "CHANNEL_GROUP": 22
                       }
                     },
                     "GoogleSignalsState": {
@@ -4652,8 +4990,11 @@
                                 "customDimension",
                                 "customMetric",
                                 "dataRetentionSettings",
+                                "searchAds_360Link",
                                 "dataStream",
-                                "attributionSettings"
+                                "attributionSettings",
+                                "expandedDataSet",
+                                "bigqueryLink"
                               ]
                             }
                           },
@@ -4706,6 +5047,10 @@
                               "type": "DataRetentionSettings",
                               "id": 15
                             },
+                            "searchAds_360Link": {
+                              "type": "SearchAds360Link",
+                              "id": 16
+                            },
                             "dataStream": {
                               "type": "DataStream",
                               "id": 18
@@ -4713,6 +5058,14 @@
                             "attributionSettings": {
                               "type": "AttributionSettings",
                               "id": 20
+                            },
+                            "expandedDataSet": {
+                              "type": "ExpandedDataSet",
+                              "id": 21
+                            },
+                            "bigqueryLink": {
+                              "type": "BigQueryLink",
+                              "id": 23
                             }
                           }
                         }
@@ -4826,6 +5179,57 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        }
+                      }
+                    },
+                    "SearchAds360Link": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/SearchAds360Link",
+                        "(google.api.resource).pattern": "properties/{property}/searchAds360Links/{search_ads_360_link}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "advertiserId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "campaignDataSharingEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "costDataSharingEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "advertiserDisplayName": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "adsPersonalizationEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 6
+                        },
+                        "siteStatsSharingEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 7
                         }
                       }
                     },
@@ -5166,6 +5570,232 @@
                             "CROSS_CHANNEL_POSITION_BASED": 5,
                             "CROSS_CHANNEL_TIME_DECAY": 6,
                             "ADS_PREFERRED_LAST_CLICK": 7
+                          }
+                        }
+                      }
+                    },
+                    "BigQueryLink": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/BigQueryLink",
+                        "(google.api.resource).pattern": "properties/{property}/bigQueryLinks/{bigquery_link}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dailyExportEnabled": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "streamingExportEnabled": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "includeAdvertisingId": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "exportStreams": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        },
+                        "excludedEvents": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "ExpandedDataSetFilter": {
+                      "oneofs": {
+                        "oneFilter": {
+                          "oneof": [
+                            "stringFilter",
+                            "inListFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "stringFilter": {
+                          "type": "StringFilter",
+                          "id": 2
+                        },
+                        "inListFilter": {
+                          "type": "InListFilter",
+                          "id": 3
+                        },
+                        "fieldName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "StringFilter": {
+                          "fields": {
+                            "matchType": {
+                              "type": "MatchType",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "value": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "caseSensitive": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "MatchType": {
+                              "values": {
+                                "MATCH_TYPE_UNSPECIFIED": 0,
+                                "EXACT": 1,
+                                "CONTAINS": 2
+                              }
+                            }
+                          }
+                        },
+                        "InListFilter": {
+                          "fields": {
+                            "values": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "caseSensitive": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExpandedDataSetFilterExpression": {
+                      "oneofs": {
+                        "expr": {
+                          "oneof": [
+                            "andGroup",
+                            "notExpression",
+                            "filter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "andGroup": {
+                          "type": "ExpandedDataSetFilterExpressionList",
+                          "id": 1
+                        },
+                        "notExpression": {
+                          "type": "ExpandedDataSetFilterExpression",
+                          "id": 2
+                        },
+                        "filter": {
+                          "type": "ExpandedDataSetFilter",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ExpandedDataSetFilterExpressionList": {
+                      "fields": {
+                        "filterExpressions": {
+                          "rule": "repeated",
+                          "type": "ExpandedDataSetFilterExpression",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ExpandedDataSet": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/ExpandedDataSet",
+                        "(google.api.resource).pattern": "properties/{property}/expandedDataSets/{expanded_data_set}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dimensionNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "metricNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "dimensionFilterExpression": {
+                          "type": "ExpandedDataSetFilterExpression",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "dataCollectionStartTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }

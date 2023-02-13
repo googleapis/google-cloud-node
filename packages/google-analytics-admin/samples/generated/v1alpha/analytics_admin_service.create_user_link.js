@@ -33,8 +33,8 @@ function main(parent, userLink) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. If set, then email the new user notifying them that they've been granted
-   *  permissions to the resource.
+   *  Optional. If set, then email the new user notifying them that they've been
+   *  granted permissions to the resource.
    */
   // const notifyNewUser = true
   /**

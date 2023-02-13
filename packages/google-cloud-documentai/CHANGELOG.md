@@ -1,5 +1,16 @@
 # Changelog
 
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v6.3.0...documentai-v7.0.0) (2023-02-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* **gitignore:** The TrainProcessorVersion parent was incorrectly annotated.
+
+### Miscellaneous Chores
+
+* **gitignore:** [documentai] feat: Added EvaluationReference to evaluation.proto ([#3954](https://github.com/googleapis/google-cloud-node/issues/3954)) ([9825fa9](https://github.com/googleapis/google-cloud-node/commit/9825fa99b94aad5cf1c1d6b3a858bc4e3ccfcb15))
+
 ## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v6.2.0...documentai-v6.3.0) (2023-01-28)
 
 

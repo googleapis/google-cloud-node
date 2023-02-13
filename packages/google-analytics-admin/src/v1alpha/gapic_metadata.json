@@ -310,6 +310,26 @@
                 "archiveAudience"
               ]
             },
+            "GetSearchAds360Link": {
+              "methods": [
+                "getSearchAds360Link"
+              ]
+            },
+            "CreateSearchAds360Link": {
+              "methods": [
+                "createSearchAds360Link"
+              ]
+            },
+            "DeleteSearchAds360Link": {
+              "methods": [
+                "deleteSearchAds360Link"
+              ]
+            },
+            "UpdateSearchAds360Link": {
+              "methods": [
+                "updateSearchAds360Link"
+              ]
+            },
             "GetAttributionSettings": {
               "methods": [
                 "getAttributionSettings"
@@ -323,6 +343,21 @@
             "RunAccessReport": {
               "methods": [
                 "runAccessReport"
+              ]
+            },
+            "SetAutomatedGa4ConfigurationOptOut": {
+              "methods": [
+                "setAutomatedGa4ConfigurationOptOut"
+              ]
+            },
+            "FetchAutomatedGa4ConfigurationOptOut": {
+              "methods": [
+                "fetchAutomatedGa4ConfigurationOptOut"
+              ]
+            },
+            "GetBigQueryLink": {
+              "methods": [
+                "getBigQueryLink"
               ]
             },
             "ListAccounts": {
@@ -435,6 +470,20 @@
                 "listAudiences",
                 "listAudiencesStream",
                 "listAudiencesAsync"
+              ]
+            },
+            "ListSearchAds360Links": {
+              "methods": [
+                "listSearchAds360Links",
+                "listSearchAds360LinksStream",
+                "listSearchAds360LinksAsync"
+              ]
+            },
+            "ListBigQueryLinks": {
+              "methods": [
+                "listBigQueryLinks",
+                "listBigQueryLinksStream",
+                "listBigQueryLinksAsync"
               ]
             }
           }
@@ -742,6 +791,26 @@
                 "archiveAudience"
               ]
             },
+            "GetSearchAds360Link": {
+              "methods": [
+                "getSearchAds360Link"
+              ]
+            },
+            "CreateSearchAds360Link": {
+              "methods": [
+                "createSearchAds360Link"
+              ]
+            },
+            "DeleteSearchAds360Link": {
+              "methods": [
+                "deleteSearchAds360Link"
+              ]
+            },
+            "UpdateSearchAds360Link": {
+              "methods": [
+                "updateSearchAds360Link"
+              ]
+            },
             "GetAttributionSettings": {
               "methods": [
                 "getAttributionSettings"
@@ -755,6 +824,21 @@
             "RunAccessReport": {
               "methods": [
                 "runAccessReport"
+              ]
+            },
+            "SetAutomatedGa4ConfigurationOptOut": {
+              "methods": [
+                "setAutomatedGa4ConfigurationOptOut"
+              ]
+            },
+            "FetchAutomatedGa4ConfigurationOptOut": {
+              "methods": [
+                "fetchAutomatedGa4ConfigurationOptOut"
+              ]
+            },
+            "GetBigQueryLink": {
+              "methods": [
+                "getBigQueryLink"
               ]
             },
             "ListAccounts": {
@@ -867,6 +951,20 @@
                 "listAudiences",
                 "listAudiencesStream",
                 "listAudiencesAsync"
+              ]
+            },
+            "ListSearchAds360Links": {
+              "methods": [
+                "listSearchAds360Links",
+                "listSearchAds360LinksStream",
+                "listSearchAds360LinksAsync"
+              ]
+            },
+            "ListBigQueryLinks": {
+              "methods": [
+                "listBigQueryLinks",
+                "listBigQueryLinksStream",
+                "listBigQueryLinksAsync"
               ]
             }
           }
