@@ -20,7 +20,8 @@ import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 
 const ContainerAnalysisClient = v1.ContainerAnalysisClient;
-type ContainerAnalysisClient = v1.ContainerAnalysisClient;const GrafeasClient = v1beta1.GrafeasV1Beta1Client;
+type ContainerAnalysisClient = v1.ContainerAnalysisClient;
+const GrafeasClient = v1beta1.GrafeasV1Beta1Client;
 type GrafeasClient = v1beta1.GrafeasV1Beta1Client;
 
 
