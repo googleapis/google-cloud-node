@@ -69,11 +69,6 @@ node.owlbot_main(relative_dir="packages/google-devtools-containeranalysis",templ
 s.replace('packages/google-devtools-containeranalysis/src/index.ts',
         r"""
 const GrafeasClient = v1.GrafeasClient;
-type GrafeasClient = v1.GrafeasClient;
-
-export \{v1, v1beta1, ContainerAnalysisClient\};
-export default \{v1, v1beta1, ContainerAnalysisClient\};""",
+type GrafeasClient = v1.GrafeasClient;""",
         'const GrafeasClient = v1beta1.GrafeasV1Beta1Client;\n' +
-        'type GrafeasClient = v1beta1.GrafeasV1Beta1Client;\n\n' +
-        'export {v1, v1beta1, ContainerAnalysisClient, GrafeasClient};\n' +
-        'export default {v1, v1beta1, ContainerAnalysisClient, GrafeasClient};')
+        'type GrafeasClient = v1beta1.GrafeasV1Beta1Client;\n\n')
