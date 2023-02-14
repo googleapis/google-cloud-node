@@ -340,8 +340,8 @@ export class TetherClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which is both readable and writable. It accepts objects
-   *   representing [EgressResponse]{@link google.cloud.apigeeconnect.v1.EgressResponse} for write() method, and
-   *   will emit objects representing [EgressRequest]{@link google.cloud.apigeeconnect.v1.EgressRequest} on 'data' event asynchronously.
+   *   representing {@link google.cloud.apigeeconnect.v1.EgressResponse | EgressResponse} for write() method, and
+   *   will emit objects representing {@link google.cloud.apigeeconnect.v1.EgressRequest | EgressRequest} on 'data' event asynchronously.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
    *   for more details and examples.
