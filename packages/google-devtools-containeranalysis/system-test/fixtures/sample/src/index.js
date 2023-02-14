@@ -22,7 +22,6 @@ const containeranalysis = require('@google-cloud/containeranalysis');
 function main() {
   const containerAnalysisClient =
     new containeranalysis.ContainerAnalysisClient();
-  const grafeasClient = new containeranalysis.GrafeasClient();
 }
 
 main();
