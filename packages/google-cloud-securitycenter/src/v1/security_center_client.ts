@@ -568,7 +568,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Source]{@link google.cloud.securitycenter.v1.Source}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.Source | Source}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -668,7 +668,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Finding]{@link google.cloud.securitycenter.v1.Finding}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.Finding | Finding}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -768,7 +768,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [MuteConfig]{@link google.cloud.securitycenter.v1.MuteConfig}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.MuteConfig | MuteConfig}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -876,7 +876,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [NotificationConfig]{@link google.cloud.securitycenter.v1.NotificationConfig}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.NotificationConfig | NotificationConfig}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -980,7 +980,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1080,7 +1080,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1184,7 +1184,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BigQueryExport]{@link google.cloud.securitycenter.v1.BigQueryExport}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.BigQueryExport | BigQueryExport}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1285,7 +1285,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1371,7 +1371,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [MuteConfig]{@link google.cloud.securitycenter.v1.MuteConfig}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.MuteConfig | MuteConfig}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1465,7 +1465,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [NotificationConfig]{@link google.cloud.securitycenter.v1.NotificationConfig}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.NotificationConfig | NotificationConfig}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1563,7 +1563,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [OrganizationSettings]{@link google.cloud.securitycenter.v1.OrganizationSettings}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.OrganizationSettings | OrganizationSettings}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1665,7 +1665,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Source]{@link google.cloud.securitycenter.v1.Source}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.Source | Source}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1765,7 +1765,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Finding]{@link google.cloud.securitycenter.v1.Finding}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.Finding | Finding}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1863,7 +1863,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Finding]{@link google.cloud.securitycenter.v1.Finding}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.Finding | Finding}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1960,7 +1960,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2049,7 +2049,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2136,7 +2136,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ExternalSystem]{@link google.cloud.securitycenter.v1.ExternalSystem}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.ExternalSystem | ExternalSystem}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2247,7 +2247,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Finding]{@link google.cloud.securitycenter.v1.Finding}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.Finding | Finding}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2341,7 +2341,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [MuteConfig]{@link google.cloud.securitycenter.v1.MuteConfig}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.MuteConfig | MuteConfig}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2444,7 +2444,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [NotificationConfig]{@link google.cloud.securitycenter.v1.NotificationConfig}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.NotificationConfig | NotificationConfig}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2549,7 +2549,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [OrganizationSettings]{@link google.cloud.securitycenter.v1.OrganizationSettings}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.OrganizationSettings | OrganizationSettings}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2654,7 +2654,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Source]{@link google.cloud.securitycenter.v1.Source}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.Source | Source}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2756,7 +2756,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SecurityMarks]{@link google.cloud.securitycenter.v1.SecurityMarks}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.SecurityMarks | SecurityMarks}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2862,7 +2862,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BigQueryExport]{@link google.cloud.securitycenter.v1.BigQueryExport}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.BigQueryExport | BigQueryExport}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2962,7 +2962,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -3062,7 +3062,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BigQueryExport]{@link google.cloud.securitycenter.v1.BigQueryExport}.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.BigQueryExport | BigQueryExport}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -3595,7 +3595,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [GroupResult]{@link google.cloud.securitycenter.v1.GroupResult}.
+   *   The first element of the array is Array of {@link google.cloud.securitycenter.v1.GroupResult | GroupResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -3813,7 +3813,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [GroupResult]{@link google.cloud.securitycenter.v1.GroupResult} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.securitycenter.v1.GroupResult | GroupResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `groupAssetsAsync()`
@@ -3981,7 +3981,7 @@ export class SecurityCenterClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [GroupResult]{@link google.cloud.securitycenter.v1.GroupResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.securitycenter.v1.GroupResult | GroupResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4153,7 +4153,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [GroupResult]{@link google.cloud.securitycenter.v1.GroupResult}.
+   *   The first element of the array is Array of {@link google.cloud.securitycenter.v1.GroupResult | GroupResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4374,7 +4374,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [GroupResult]{@link google.cloud.securitycenter.v1.GroupResult} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.securitycenter.v1.GroupResult | GroupResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `groupFindingsAsync()`
@@ -4545,7 +4545,7 @@ export class SecurityCenterClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [GroupResult]{@link google.cloud.securitycenter.v1.GroupResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.securitycenter.v1.GroupResult | GroupResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4714,7 +4714,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ListAssetsResult]{@link google.cloud.securitycenter.v1.ListAssetsResponse.ListAssetsResult}.
+   *   The first element of the array is Array of {@link google.cloud.securitycenter.v1.ListAssetsResponse.ListAssetsResult | ListAssetsResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4938,7 +4938,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [ListAssetsResult]{@link google.cloud.securitycenter.v1.ListAssetsResponse.ListAssetsResult} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.securitycenter.v1.ListAssetsResponse.ListAssetsResult | ListAssetsResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAssetsAsync()`
@@ -5112,7 +5112,7 @@ export class SecurityCenterClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [ListAssetsResult]{@link google.cloud.securitycenter.v1.ListAssetsResponse.ListAssetsResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.securitycenter.v1.ListAssetsResponse.ListAssetsResult | ListAssetsResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -5287,7 +5287,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ListFindingsResult]{@link google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult}.
+   *   The first element of the array is Array of {@link google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult | ListFindingsResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -5514,7 +5514,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [ListFindingsResult]{@link google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult | ListFindingsResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listFindingsAsync()`
@@ -5691,7 +5691,7 @@ export class SecurityCenterClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [ListFindingsResult]{@link google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult | ListFindingsResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -5743,7 +5743,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [MuteConfig]{@link google.cloud.securitycenter.v1.MuteConfig}.
+   *   The first element of the array is Array of {@link google.cloud.securitycenter.v1.MuteConfig | MuteConfig}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -5850,7 +5850,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [MuteConfig]{@link google.cloud.securitycenter.v1.MuteConfig} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.securitycenter.v1.MuteConfig | MuteConfig} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listMuteConfigsAsync()`
@@ -5907,7 +5907,7 @@ export class SecurityCenterClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [MuteConfig]{@link google.cloud.securitycenter.v1.MuteConfig}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.securitycenter.v1.MuteConfig | MuteConfig}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -5955,7 +5955,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [NotificationConfig]{@link google.cloud.securitycenter.v1.NotificationConfig}.
+   *   The first element of the array is Array of {@link google.cloud.securitycenter.v1.NotificationConfig | NotificationConfig}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -6062,7 +6062,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [NotificationConfig]{@link google.cloud.securitycenter.v1.NotificationConfig} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.securitycenter.v1.NotificationConfig | NotificationConfig} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listNotificationConfigsAsync()`
@@ -6115,7 +6115,7 @@ export class SecurityCenterClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [NotificationConfig]{@link google.cloud.securitycenter.v1.NotificationConfig}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.securitycenter.v1.NotificationConfig | NotificationConfig}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -6163,7 +6163,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Source]{@link google.cloud.securitycenter.v1.Source}.
+   *   The first element of the array is Array of {@link google.cloud.securitycenter.v1.Source | Source}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -6266,7 +6266,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Source]{@link google.cloud.securitycenter.v1.Source} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.securitycenter.v1.Source | Source} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSourcesAsync()`
@@ -6319,7 +6319,7 @@ export class SecurityCenterClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Source]{@link google.cloud.securitycenter.v1.Source}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.securitycenter.v1.Source | Source}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -6374,7 +6374,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [BigQueryExport]{@link google.cloud.securitycenter.v1.BigQueryExport}.
+   *   The first element of the array is Array of {@link google.cloud.securitycenter.v1.BigQueryExport | BigQueryExport}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -6480,7 +6480,7 @@ export class SecurityCenterClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [BigQueryExport]{@link google.cloud.securitycenter.v1.BigQueryExport} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.securitycenter.v1.BigQueryExport | BigQueryExport} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listBigQueryExportsAsync()`
@@ -6536,7 +6536,7 @@ export class SecurityCenterClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [BigQueryExport]{@link google.cloud.securitycenter.v1.BigQueryExport}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.securitycenter.v1.BigQueryExport | BigQueryExport}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -6574,20 +6574,18 @@ export class SecurityCenterClient {
    * @param {string} request.name - The name of the operation resource.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   *   details.
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   * [google.longrunning.Operation]{@link
-   * external:"google.longrunning.Operation"}.
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   * [google.longrunning.Operation]{@link
-   * external:"google.longrunning.Operation"}. The promise has a method named
-   * "cancel" which cancels the ongoing API call.
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    * ```
@@ -6631,11 +6629,11 @@ export class SecurityCenterClient {
    *   resources in a page.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
    *   details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
    *
    * @example
    * ```
@@ -6666,8 +6664,8 @@ export class SecurityCenterClient {
    * @param {string} request.name - The name of the operation resource to be cancelled.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
    * details.
    * @param {function(?Error)=} callback
    *   The function which will be called with the result of the API call.
@@ -6709,9 +6707,9 @@ export class SecurityCenterClient {
    * @param {string} request.name - The name of the operation resource to be deleted.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   * details.
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
    * @param {function(?Error)=} callback
    *   The function which will be called with the result of the API call.
    * @return {Promise} - The promise which resolves when API call finishes.

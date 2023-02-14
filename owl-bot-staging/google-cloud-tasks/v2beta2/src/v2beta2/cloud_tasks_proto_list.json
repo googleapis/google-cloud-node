@@ -1,6 +1,0 @@
-[
-  "../../protos/google/cloud/tasks/v2beta2/cloudtasks.proto",
-  "../../protos/google/cloud/tasks/v2beta2/queue.proto",
-  "../../protos/google/cloud/tasks/v2beta2/target.proto",
-  "../../protos/google/cloud/tasks/v2beta2/task.proto"
-]

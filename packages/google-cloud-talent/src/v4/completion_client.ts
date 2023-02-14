@@ -363,7 +363,7 @@ export class CompletionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CompleteQueryResponse]{@link google.cloud.talent.v4.CompleteQueryResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.talent.v4.CompleteQueryResponse | CompleteQueryResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
