@@ -367,7 +367,7 @@ export class PolicyTagManagerSerializationClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Taxonomy]{@link google.cloud.datacatalog.v1.Taxonomy}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.Taxonomy | Taxonomy}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -469,7 +469,7 @@ export class PolicyTagManagerSerializationClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ImportTaxonomiesResponse]{@link google.cloud.datacatalog.v1.ImportTaxonomiesResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.ImportTaxonomiesResponse | ImportTaxonomiesResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -570,7 +570,7 @@ export class PolicyTagManagerSerializationClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ExportTaxonomiesResponse]{@link google.cloud.datacatalog.v1.ExportTaxonomiesResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.ExportTaxonomiesResponse | ExportTaxonomiesResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.

@@ -825,7 +825,7 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Project]{@link google.cloud.compute.v1.Project}.
+   *   The first element of the array is an object representing {@link google.cloud.compute.v1.Project | Project}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -908,7 +908,7 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Project]{@link google.cloud.compute.v1.Project}.
+   *   The first element of the array is an object representing {@link google.cloud.compute.v1.Project | Project}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1604,7 +1604,7 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [XpnResourceId]{@link google.cloud.compute.v1.XpnResourceId}.
+   *   The first element of the array is Array of {@link google.cloud.compute.v1.XpnResourceId | XpnResourceId}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -1708,7 +1708,7 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [XpnResourceId]{@link google.cloud.compute.v1.XpnResourceId} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.compute.v1.XpnResourceId | XpnResourceId} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `getXpnResourcesAsync()`
@@ -1762,7 +1762,7 @@ export class ProjectsClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [XpnResourceId]{@link google.cloud.compute.v1.XpnResourceId}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.compute.v1.XpnResourceId | XpnResourceId}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -1813,7 +1813,7 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Project]{@link google.cloud.compute.v1.Project}.
+   *   The first element of the array is Array of {@link google.cloud.compute.v1.Project | Project}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -1911,7 +1911,7 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Project]{@link google.cloud.compute.v1.Project} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.compute.v1.Project | Project} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listXpnHostsAsync()`
@@ -1967,7 +1967,7 @@ export class ProjectsClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Project]{@link google.cloud.compute.v1.Project}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.compute.v1.Project | Project}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
