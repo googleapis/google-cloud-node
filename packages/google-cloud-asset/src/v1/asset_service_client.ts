@@ -519,7 +519,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchGetAssetsHistoryResponse]{@link google.cloud.asset.v1.BatchGetAssetsHistoryResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.asset.v1.BatchGetAssetsHistoryResponse | BatchGetAssetsHistoryResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -623,7 +623,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Feed]{@link google.cloud.asset.v1.Feed}.
+   *   The first element of the array is an object representing {@link google.cloud.asset.v1.Feed | Feed}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -709,7 +709,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Feed]{@link google.cloud.asset.v1.Feed}.
+   *   The first element of the array is an object representing {@link google.cloud.asset.v1.Feed | Feed}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -794,7 +794,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListFeedsResponse]{@link google.cloud.asset.v1.ListFeedsResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.asset.v1.ListFeedsResponse | ListFeedsResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -885,7 +885,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Feed]{@link google.cloud.asset.v1.Feed}.
+   *   The first element of the array is an object representing {@link google.cloud.asset.v1.Feed | Feed}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -971,7 +971,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1084,7 +1084,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnalyzeIamPolicyResponse]{@link google.cloud.asset.v1.AnalyzeIamPolicyResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.asset.v1.AnalyzeIamPolicyResponse | AnalyzeIamPolicyResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1185,7 +1185,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnalyzeMoveResponse]{@link google.cloud.asset.v1.AnalyzeMoveResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.asset.v1.AnalyzeMoveResponse | AnalyzeMoveResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1335,7 +1335,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [QueryAssetsResponse]{@link google.cloud.asset.v1.QueryAssetsResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.asset.v1.QueryAssetsResponse | QueryAssetsResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1435,7 +1435,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SavedQuery]{@link google.cloud.asset.v1.SavedQuery}.
+   *   The first element of the array is an object representing {@link google.cloud.asset.v1.SavedQuery | SavedQuery}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1524,7 +1524,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SavedQuery]{@link google.cloud.asset.v1.SavedQuery}.
+   *   The first element of the array is an object representing {@link google.cloud.asset.v1.SavedQuery | SavedQuery}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1616,7 +1616,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SavedQuery]{@link google.cloud.asset.v1.SavedQuery}.
+   *   The first element of the array is an object representing {@link google.cloud.asset.v1.SavedQuery | SavedQuery}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1706,7 +1706,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1807,7 +1807,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchGetEffectiveIamPoliciesResponse]{@link google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse | BatchGetEffectiveIamPoliciesResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2334,7 +2334,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Asset]{@link google.cloud.asset.v1.Asset}.
+   *   The first element of the array is Array of {@link google.cloud.asset.v1.Asset | Asset}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2475,7 +2475,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Asset]{@link google.cloud.asset.v1.Asset} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.asset.v1.Asset | Asset} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAssetsAsync()`
@@ -2574,7 +2574,7 @@ export class AssetServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Asset]{@link google.cloud.asset.v1.Asset}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.asset.v1.Asset | Asset}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2762,7 +2762,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ResourceSearchResult]{@link google.cloud.asset.v1.ResourceSearchResult}.
+   *   The first element of the array is Array of {@link google.cloud.asset.v1.ResourceSearchResult | ResourceSearchResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -3002,7 +3002,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [ResourceSearchResult]{@link google.cloud.asset.v1.ResourceSearchResult} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.asset.v1.ResourceSearchResult | ResourceSearchResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchAllResourcesAsync()`
@@ -3192,7 +3192,7 @@ export class AssetServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [ResourceSearchResult]{@link google.cloud.asset.v1.ResourceSearchResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.asset.v1.ResourceSearchResult | ResourceSearchResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -3328,7 +3328,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [IamPolicySearchResult]{@link google.cloud.asset.v1.IamPolicySearchResult}.
+   *   The first element of the array is Array of {@link google.cloud.asset.v1.IamPolicySearchResult | IamPolicySearchResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -3516,7 +3516,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [IamPolicySearchResult]{@link google.cloud.asset.v1.IamPolicySearchResult} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.asset.v1.IamPolicySearchResult | IamPolicySearchResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchAllIamPoliciesAsync()`
@@ -3654,7 +3654,7 @@ export class AssetServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [IamPolicySearchResult]{@link google.cloud.asset.v1.IamPolicySearchResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.asset.v1.IamPolicySearchResult | IamPolicySearchResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -3714,7 +3714,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [SavedQuery]{@link google.cloud.asset.v1.SavedQuery}.
+   *   The first element of the array is Array of {@link google.cloud.asset.v1.SavedQuery | SavedQuery}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -3823,7 +3823,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [SavedQuery]{@link google.cloud.asset.v1.SavedQuery} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.asset.v1.SavedQuery | SavedQuery} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSavedQueriesAsync()`
@@ -3888,7 +3888,7 @@ export class AssetServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [SavedQuery]{@link google.cloud.asset.v1.SavedQuery}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.asset.v1.SavedQuery | SavedQuery}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -3949,7 +3949,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [OrgPolicyResult]{@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult}.
+   *   The first element of the array is Array of {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult | OrgPolicyResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4065,7 +4065,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [OrgPolicyResult]{@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult | OrgPolicyResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `analyzeOrgPoliciesAsync()`
@@ -4131,7 +4131,7 @@ export class AssetServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [OrgPolicyResult]{@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult | OrgPolicyResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4194,7 +4194,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [GovernedContainer]{@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer}.
+   *   The first element of the array is Array of {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer | GovernedContainer}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4315,7 +4315,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [GovernedContainer]{@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer | GovernedContainer} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `analyzeOrgPolicyGovernedContainersAsync()`
@@ -4383,7 +4383,7 @@ export class AssetServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [GovernedContainer]{@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer | GovernedContainer}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4469,7 +4469,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [GovernedAsset]{@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset}.
+   *   The first element of the array is Array of {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset | GovernedAsset}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4595,7 +4595,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [GovernedAsset]{@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset | GovernedAsset} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `analyzeOrgPolicyGovernedAssetsAsync()`
@@ -4668,7 +4668,7 @@ export class AssetServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [GovernedAsset]{@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset | GovernedAsset}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4707,20 +4707,18 @@ export class AssetServiceClient {
    * @param {string} request.name - The name of the operation resource.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   *   details.
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   * [google.longrunning.Operation]{@link
-   * external:"google.longrunning.Operation"}.
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   * [google.longrunning.Operation]{@link
-   * external:"google.longrunning.Operation"}. The promise has a method named
-   * "cancel" which cancels the ongoing API call.
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    * ```
@@ -4764,11 +4762,11 @@ export class AssetServiceClient {
    *   resources in a page.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
    *   details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
    *
    * @example
    * ```
@@ -4799,8 +4797,8 @@ export class AssetServiceClient {
    * @param {string} request.name - The name of the operation resource to be cancelled.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
    * details.
    * @param {function(?Error)=} callback
    *   The function which will be called with the result of the API call.
@@ -4842,9 +4840,9 @@ export class AssetServiceClient {
    * @param {string} request.name - The name of the operation resource to be deleted.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   * details.
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
    * @param {function(?Error)=} callback
    *   The function which will be called with the result of the API call.
    * @return {Promise} - The promise which resolves when API call finishes.

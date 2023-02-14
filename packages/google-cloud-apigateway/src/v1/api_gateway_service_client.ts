@@ -559,7 +559,7 @@ export class ApiGatewayServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Gateway]{@link google.cloud.apigateway.v1.Gateway}.
+   *   The first element of the array is an object representing {@link google.cloud.apigateway.v1.Gateway | Gateway}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -645,7 +645,7 @@ export class ApiGatewayServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Api]{@link google.cloud.apigateway.v1.Api}.
+   *   The first element of the array is an object representing {@link google.cloud.apigateway.v1.Api | Api}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -732,7 +732,7 @@ export class ApiGatewayServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ApiConfig]{@link google.cloud.apigateway.v1.ApiConfig}.
+   *   The first element of the array is an object representing {@link google.cloud.apigateway.v1.ApiConfig | ApiConfig}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2108,7 +2108,7 @@ export class ApiGatewayServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Gateway]{@link google.cloud.apigateway.v1.Gateway}.
+   *   The first element of the array is Array of {@link google.cloud.apigateway.v1.Gateway | Gateway}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2211,7 +2211,7 @@ export class ApiGatewayServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Gateway]{@link google.cloud.apigateway.v1.Gateway} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.apigateway.v1.Gateway | Gateway} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listGatewaysAsync()`
@@ -2264,7 +2264,7 @@ export class ApiGatewayServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Gateway]{@link google.cloud.apigateway.v1.Gateway}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.apigateway.v1.Gateway | Gateway}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2312,7 +2312,7 @@ export class ApiGatewayServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Api]{@link google.cloud.apigateway.v1.Api}.
+   *   The first element of the array is Array of {@link google.cloud.apigateway.v1.Api | Api}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2409,7 +2409,7 @@ export class ApiGatewayServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Api]{@link google.cloud.apigateway.v1.Api} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.apigateway.v1.Api | Api} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listApisAsync()`
@@ -2462,7 +2462,7 @@ export class ApiGatewayServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Api]{@link google.cloud.apigateway.v1.Api}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.apigateway.v1.Api | Api}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2510,7 +2510,7 @@ export class ApiGatewayServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ApiConfig]{@link google.cloud.apigateway.v1.ApiConfig}.
+   *   The first element of the array is Array of {@link google.cloud.apigateway.v1.ApiConfig | ApiConfig}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2613,7 +2613,7 @@ export class ApiGatewayServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [ApiConfig]{@link google.cloud.apigateway.v1.ApiConfig} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.apigateway.v1.ApiConfig | ApiConfig} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listApiConfigsAsync()`
@@ -2666,7 +2666,7 @@ export class ApiGatewayServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [ApiConfig]{@link google.cloud.apigateway.v1.ApiConfig}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.apigateway.v1.ApiConfig | ApiConfig}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
